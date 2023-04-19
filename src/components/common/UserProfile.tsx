@@ -9,6 +9,7 @@ const UserProfileCss = css`
   top: 2.1rem;
   display: flex;
   align-items: center;
+  font-size: 1.2rem;
   & .image {
     background-color: black;
     width: 2.5rem;
@@ -21,7 +22,7 @@ const UserProfile = () => {
   return (
     <div css={UserProfileCss}>
       <div className="image"> </div>
-      <div>chiruchirubangbang</div>
+      <div>한둘셋넷다여일여아열한둘셋넷다여일여아열</div>
     </div>
   );
 };

@@ -20,12 +20,17 @@ const defaultCSS = css`
   overflow: hidden;
 `;
 
+export const path = {
+  home: "/home",
+  profile: "/profile",
+};
+
 function App() {
   return (
     <div css={defaultCSS}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </BrowserRouter>
       <GNB />
