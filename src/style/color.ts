@@ -1,5 +1,5 @@
 const palette = {
-  Primary: "#EE9818",
+  Primary: "#F18721",
   Secondary: "#2A2D37",
   Accept: "#51AB7C",
   Error: "#EE7963",
