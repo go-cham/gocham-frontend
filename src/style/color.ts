@@ -8,8 +8,9 @@ const palette = {
   Text2: "#94969B",
   Text3: "#b7b8bb",
   Gray1: "#6A6C73",
-  Gray2: "#EAEAEB",
-  Gray3: "#F4F4F5",
+  Gray2: "#D4D5D7",
+  Gray3: "#EAEAEB",
+  Gray4: "#F4F4F5",
 };
 
 export default palette;

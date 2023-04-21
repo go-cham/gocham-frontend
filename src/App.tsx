@@ -2,10 +2,13 @@
 
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import { css } from "@emotion/react";
 import GNB from "./components/common/GNB";
+import Login from "./pages/login/Login";
+import GNBHOC from "./components/common/GNBHOC";
+import RegisterTerm from "./pages/login/RegisterTerm";
 
 const defaultCSS = css`
   display: flex;
@@ -26,9 +29,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register/term" element={<RegisterTerm />} />
         </Routes>
+        <GNBHOC />
       </BrowserRouter>
-      <GNB />
     </div>
   );
 }
