@@ -9,6 +9,7 @@ import BackButton from "../../images/Common/back_button.png";
 import DetailArrow from "../../images/Login/detail_arrow.png";
 import CheckBox from "../../components/login/CheckBox";
 import { useNavigate } from "react-router-dom";
+import { RouteURL } from "../../App";
 
 export type AcceptType = {
   gochamTerm: boolean;
@@ -31,6 +32,12 @@ const RegisterTerm = () => {
     }
   }, [accept.allCheck]);
 
+  const handleRegister = () => {
+    //   회원가입 로직
+    //   실패 로직
+    //   성공 로직
+    navigate(RouteURL.onboarding);
+  };
   return (
     <RegisterTermWrap>
       <img
@@ -106,6 +113,7 @@ const RegisterTerm = () => {
           size={1.6}
           backgroundColor={palette.Primary}
           color={palette.Background}
+          onClick={() => handleRegister()}
         >
           회원가입 완료
         </ConfirmCheckButton>

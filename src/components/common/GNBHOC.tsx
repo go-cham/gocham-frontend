@@ -12,7 +12,8 @@ const GNBHOC = () => {
   const HOC = () => {
     if (
       location.pathname === "/login" ||
-      location.pathname.includes("/register")
+      location.pathname.includes("/register") ||
+      location.pathname.includes("/onboarding")
     )
       return <></>;
     else return <GNB />;

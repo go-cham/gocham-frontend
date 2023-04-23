@@ -20,6 +20,8 @@ type ButtonProps = {
   size?: number;
   color?: string;
   backgroundColor?: string;
+  borderRadius?: number;
+  fontWeight?: number;
 };
 export const ButtonStyle = styled.div<ButtonProps>`
   display: flex;
@@ -30,6 +32,8 @@ export const ButtonStyle = styled.div<ButtonProps>`
   width: ${({ width }) => width + "rem"};
   height: ${({ height }) => height + "rem"};
   font-size: ${({ size }) => size + "rem"};
+  border-radius: ${({ borderRadius }) => borderRadius + "rem"};
+  font-weight: ${({ fontWeight }): number | undefined => fontWeight};
 `;
 
 export const FlexRowDiv = styled.div`
