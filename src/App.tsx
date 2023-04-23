@@ -29,6 +29,7 @@ export const RouteURL = {
   register_term: "/register/term",
   onboarding: "/onboarding",
 };
+
 function App() {
   return (
     <div css={defaultCSS}>
