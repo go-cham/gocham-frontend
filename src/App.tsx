@@ -2,10 +2,14 @@
 
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import { css } from "@emotion/react";
 import GNB from "./components/common/GNB";
+import Login from "./pages/login/Login";
+import GNBHOC from "./components/common/GNBHOC";
+import RegisterTerm from "./pages/login/RegisterTerm";
+import Onboarding from "./pages/login/Onboarding";
 
 const defaultCSS = css`
   display: flex;
@@ -19,10 +23,11 @@ const defaultCSS = css`
   /* max-height: 100vh; */
   overflow: hidden;
 `;
-
-export const path = {
-  home: "/home",
-  profile: "/profile",
+export const RouteURL = {
+  home: "/",
+  login: "login",
+  register_term: "/register/term",
+  onboarding: "/onboarding",
 };
 
 function App() {
@@ -30,10 +35,13 @@ function App() {
     <div css={defaultCSS}>
       <BrowserRouter>
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path={RouteURL.home} element={<Home />} />
+          <Route path={RouteURL.login} element={<Login />} />
+          <Route path={RouteURL.register_term} element={<RegisterTerm />} />
+          <Route path={RouteURL.onboarding} element={<Onboarding />} />
         </Routes>
+        <GNBHOC />
       </BrowserRouter>
-      <GNB />
     </div>
   );
 }
