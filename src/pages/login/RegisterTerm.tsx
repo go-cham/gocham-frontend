@@ -39,73 +39,75 @@ const RegisterTerm = () => {
     navigate(RouteURL.onboarding);
   };
   return (
-    <RegisterTermWrap>
-      <img
-        src={BackButton}
-        alt={"뒤로가기"}
-        onClick={() => navigate("/login")}
-      />
-      <div className={"약관문구"}>
-        환영합니다!
-        <br />
-        서비스 이용약관에
-        <br />
-        동의해주세요.
-      </div>
-      <section className={"약관체크"}>
-        <CheckWrap>
-          <CheckBox
-            value={accept.gochamTerm && accept.personalInformation}
-            setValue={(value) =>
-              setAccept({
-                gochamTerm: value,
-                personalInformation: value,
-                olderThan14: value,
-                allCheck: value,
-              })
-            }
-          />
-          모두 동의합니다.
-        </CheckWrap>
-        <hr />
-        <CheckWrap>
-          <CheckBox
-            value={accept.gochamTerm}
-            setValue={(value) => setAccept({ ...accept, gochamTerm: value })}
-          />
-          [필수] 고민의 참견 이용약관 동의
-          <a
-            href={
-              "https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2"
-            }
-          >
-            <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />
-          </a>
-        </CheckWrap>
-        <CheckWrap>
-          <CheckBox
-            value={accept.personalInformation}
-            setValue={(value) =>
-              setAccept({ ...accept, personalInformation: value })
-            }
-          />
-          [필수] 개인정보 수집 및 이용 동의
-          <a
-            href={
-              "https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
-            }
-          >
-            <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />
-          </a>
-        </CheckWrap>
-        <CheckWrap>
-          <CheckBox
-            value={accept.olderThan14}
-            setValue={(value) => setAccept({ ...accept, olderThan14: value })}
-          />
-          [필수] 만 14세 이상 입니다.
-        </CheckWrap>
-      </section>
+    <>
+      <RegisterTermWrap>
+        <img
+          src={BackButton}
+          alt={"뒤로가기"}
+          onClick={() => navigate("/login")}
+        />
+        <div className={"약관문구"}>
+          환영합니다!
+          <br />
+          서비스 이용약관에
+          <br />
+          동의해주세요.
+        </div>
+        <section className={"약관체크"}>
+          <CheckWrap>
+            <CheckBox
+              value={accept.gochamTerm && accept.personalInformation}
+              setValue={(value) =>
+                setAccept({
+                  gochamTerm: value,
+                  personalInformation: value,
+                  olderThan14: value,
+                  allCheck: value,
+                })
+              }
+            />
+            모두 동의합니다.
+          </CheckWrap>
+          <hr />
+          <CheckWrap>
+            <CheckBox
+              value={accept.gochamTerm}
+              setValue={(value) => setAccept({ ...accept, gochamTerm: value })}
+            />
+            [필수] 고민의 참견 이용약관 동의
+            <a
+              href={
+                "https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2"
+              }
+            >
+              <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />
+            </a>
+          </CheckWrap>
+          <CheckWrap>
+            <CheckBox
+              value={accept.personalInformation}
+              setValue={(value) =>
+                setAccept({ ...accept, personalInformation: value })
+              }
+            />
+            [필수] 개인정보 수집 및 이용 동의
+            <a
+              href={
+                "https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
+              }
+            >
+              <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />
+            </a>
+          </CheckWrap>
+          <CheckWrap>
+            <CheckBox
+              value={accept.olderThan14}
+              setValue={(value) => setAccept({ ...accept, olderThan14: value })}
+            />
+            [필수] 만 14세 이상 입니다.
+          </CheckWrap>
+        </section>
+      </RegisterTermWrap>
       {accept.gochamTerm && accept.personalInformation ? (
         <ConfirmCheckButton
           width={34}
@@ -128,7 +130,7 @@ const RegisterTerm = () => {
           회원가입 완료
         </ConfirmCheckButton>
       )}
-    </RegisterTermWrap>
+    </>
   );
 };
 
