@@ -3,7 +3,7 @@
 import { css } from "@emotion/react";
 import React from "react";
 import { MainView } from "../../style/common";
-import VoteComponent from "../../components/vote/VoteComponent";
+import VoteComponent from "../../_components/vote/VoteComponent";
 
 const H1 = css`
   margin-top: 4rem;

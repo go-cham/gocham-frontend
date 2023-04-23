@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 import react from "react";
 import EmptyCheckIcon from "../../images/Login/empty_check_box.png";
 import FillCheckIcon from "../../images/Login/fill_check_box.png";
-import { AcceptType } from "../../pages/login/RegisterTerm";
+import { AcceptType } from "../../_pages/login/RegisterTerm";
 
 type CheckBoxType = {
   value: boolean;

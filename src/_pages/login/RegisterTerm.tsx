@@ -7,7 +7,7 @@ import { ButtonStyle } from "../../style/common";
 import palette from "../../style/color";
 import BackButton from "../../images/Common/back_button.png";
 import DetailArrow from "../../images/Login/detail_arrow.png";
-import CheckBox from "../../components/login/CheckBox";
+import CheckBox from "../../_components/login/CheckBox";
 import { useNavigate } from "react-router-dom";
 import { RouteURL } from "../../App";
 
