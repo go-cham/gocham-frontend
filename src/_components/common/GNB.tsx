@@ -7,12 +7,14 @@ import backgroundImage from "../../images/GNB/GNB_bar_icon.png";
 import AddPostIcon from "../../images/GNB/add_post_icon.png";
 import SelectHomeIcon from "../../images/GNB/selected_home_icon.png";
 import SelectProfileIcon from "../../images/GNB/unselect_profile_icon.png";
+import { useNavigate } from "react-router-dom";
 
 const GNB = () => {
+  const navigate = useNavigate();
   return (
     <GNBBackground image={backgroundImage}>
       <SelectButton image={SelectHomeIcon} />
-      <AddButton image={AddPostIcon} />
+      <AddButton image={AddPostIcon} onClick={() => navigate("write")} />
       <SelectButton image={SelectProfileIcon} />
     </GNBBackground>
   );
