@@ -10,6 +10,7 @@ import Login from "./_pages/login/Login";
 import GNBHOC from "./_components/common/GNBHOC";
 import RegisterTerm from "./_pages/login/RegisterTerm";
 import Onboarding from "./_pages/login/Onboarding";
+import Write from "./_pages/write/Write";
 
 const defaultCSS = css`
   display: flex;
@@ -25,9 +26,10 @@ const defaultCSS = css`
 `;
 export const RouteURL = {
   home: "/",
-  login: "login",
+  login: "/login",
   register_term: "/register/term",
   onboarding: "/onboarding",
+  write: "/write",
 };
 
 function App() {
@@ -39,6 +41,7 @@ function App() {
           <Route path={RouteURL.login} element={<Login />} />
           <Route path={RouteURL.register_term} element={<RegisterTerm />} />
           <Route path={RouteURL.onboarding} element={<Onboarding />} />
+          <Route path={RouteURL.write} element={<Write />} />
         </Routes>
         <GNBHOC />
       </BrowserRouter>
