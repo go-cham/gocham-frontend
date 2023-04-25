@@ -43,7 +43,7 @@ const NextButton = styled(ButtonStyle)`
 `;
 
 const BottomBarWrap = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   box-shadow: 0px 0px 2.5rem rgba(42, 45, 55, 0.1);
