@@ -22,13 +22,20 @@ export async function resizeImage(base64: string): Promise<string> {
     canvas.width = img.width;
     canvas.height = img.height;
     ctx.drawImage(img, 0, 0);
-    let newBase64 = canvas.toDataURL("image/jpeg", 0.8);
-    while (newBase64.length / (1024 * 1024) > 1) {
-      newBase64 = canvas.toDataURL("image/jpeg", 0.8);
+    let quality = 0.8;
+    let newBase64 = canvas.toDataURL("image/jpeg", quality);
+    let resizedByteString = newBase64.split(",")[1];
+    let resizedSizeInBytes = resizedByteString.length * 0.77;
+    let resizedSizeInMB = resizedSizeInBytes / (1024 * 1024);
+
+    while (resizedSizeInMB > 1) {
+      quality = quality - 0.1;
+      newBase64 = canvas.toDataURL("image/jpeg", quality);
+      resizedByteString = newBase64.split(",")[1];
+      resizedSizeInBytes = resizedByteString.length * 0.77;
+      resizedSizeInMB = resizedSizeInBytes / (1024 * 1024);
+      console.log(resizedSizeInMB);
     }
-    const resizedByteString = newBase64.split(",")[1];
-    const resizedSizeInBytes = resizedByteString.length * 0.77;
-    const resizedSizeInMB = resizedSizeInBytes / (1024 * 1024);
 
     console.log(
       `${sizeInMB}로, ${resizeMB}MB를 초과해서 리사이징 진행. ${resizedSizeInMB}로 줄어듬.`
@@ -38,7 +45,3 @@ export async function resizeImage(base64: string): Promise<string> {
     return base64;
   }
 }
-
-// if (!ctx) {
-//   throw new Error("Failed to create canvas context");
-// }
