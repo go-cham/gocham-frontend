@@ -5,9 +5,12 @@ import AppBar from "../../_components/common/AppBar";
 import BottomContinueBar from "../../_components/common/BottomContinueBar";
 import palette from "../../style/color";
 import styled from "@emotion/styled";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import CameraIcon from "../../images/Write/Camera.svg";
+import DeleteIcon from "../../images/Write/delete_icon.svg";
 import Select from "react-select";
+import { uploadFirebase } from "../../dataManager/firebaseManager";
+import { resizeImage } from "../../dataManager/imageResizing";
 
 type WriteContentType = {
   title: string;
@@ -18,6 +21,15 @@ type WriteContentType = {
   cons: string;
 };
 
+type PostWriteContentType = {
+  title: string;
+  content: string;
+  category: string | undefined;
+  deadline: string | undefined;
+  pros: string;
+  cons: string;
+  img?: string;
+};
 type OptionType = {
   value: string;
   label: string;
@@ -54,8 +66,42 @@ const deadlineOptions: OptionType[] = [
 
 const Write = () => {
   const handleUpload = async () => {
-    console.log(votingContent);
-    // api 연동시 pros cons 미설정시 찬성 반대 가 입력되도록 해야함.
+    let postData: PostWriteContentType = {
+      title: votingContent.title,
+      content: votingContent.content,
+      category: votingContent.category?.value,
+      deadline: votingContent.deadline?.value,
+      pros: votingContent.pros,
+      cons: votingContent.cons,
+    };
+    // 이미지 업로드
+    let imgUrl = null;
+    if (imageFile !== "") {
+      try {
+        // 압축과정
+
+        // 업로드 과정
+        imgUrl = await uploadFirebase("userIdx", imageFile, "posting");
+
+        // postData에 끼워넣기
+        postData.img = imgUrl;
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    // pros cons 미 입력시
+    if (votingContent.pros === "") postData.pros = "찬성";
+    if (votingContent.cons === "") postData.cons = "반대";
+
+    // 포스팅 업로드
+
+    try {
+      //
+      console.log(postData);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const [votingContent, setVotingContent] = useState<WriteContentType>({
@@ -67,11 +113,39 @@ const Write = () => {
     cons: "",
   });
 
+  const [imageFile, setImageFile] = useState("");
+  const imgRef = useRef<HTMLInputElement>(null);
+
+  const handleImageClick = () => {
+    imgRef.current?.click();
+  };
+
+  const handleImageRemove = () => {
+    setImageFile("");
+    (imgRef as any).current.value = ""; // 동일한 이미지를 올렸을 때, 같음 value라 onChange가 작동하지 않는 경우를 예방.
+  };
+
+  const onLoadFiles = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    console.log("working");
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files![0]);
+    reader.onload = (event: ProgressEvent<FileReader>): void => {
+      resizeImage(event.target?.result as string).then((result) =>
+        setImageFile(result)
+      );
+      // setImageFile(event.target?.result as string);
+      if (imgRef.current) {
+        imgRef.current.src = event.target?.result as string;
+        // console.log(imgRef.current.src);
+      }
+    };
+  };
+
   useEffect(() => {
     if (
       votingContent.title !== "" &&
       votingContent.content !== "" &&
-      votingContent.category !== null
+      votingContent.category?.value !== ""
     )
       setReadyUpload(true);
   }, [votingContent]);
@@ -140,8 +214,36 @@ const Write = () => {
                 }));
               }}
             />
-            <img src={CameraIcon} alt={"이미지선택"} />
+            <img
+              src={CameraIcon}
+              alt={"이미지선택"}
+              onClick={() => handleImageClick()}
+            />
+            <input
+              type="file"
+              accept="image"
+              style={{ display: "none" }}
+              ref={imgRef}
+              onChange={(e) => onLoadFiles(e)}
+            />
           </div>
+          {imageFile && (
+            <div className={"유저업로드이미지영역"}>
+              <div className={"유저업로드이미지상자"}>
+                <img
+                  src={imageFile}
+                  className={"업로드이미지"}
+                  alt={"업로드 이미지"}
+                />
+                <img
+                  src={DeleteIcon}
+                  className={"삭제버튼"}
+                  alt={"삭제버튼"}
+                  onClick={() => handleImageRemove()}
+                />
+              </div>
+            </div>
+          )}
         </div>
         <div className={"글내용"}>
           <h1>내용</h1>
@@ -245,6 +347,24 @@ export default Write;
 const WriteComponent = styled.div`
   margin: 0 2.5rem;
 
+  & .유저업로드이미지영역 {
+    margin-top: 1.5rem;
+    display: flex;
+    & .유저업로드이미지상자 {
+      position: relative;
+    }
+    & .삭제버튼 {
+      position: absolute;
+      right: -0.8rem;
+      top: -0.8rem;
+    }
+    & .업로드이미지 {
+      max-width: 7rem;
+      border-radius: 0.7rem;
+      filter: drop-shadow(0px 0px 2.5rem rgba(42, 45, 55, 0.1));
+    }
+  }
+
   & h2 {
     font-size: 1.2rem;
     font-weight: 400;
@@ -313,6 +433,7 @@ const WriteComponent = styled.div`
     align-items: center;
     justify-content: space-between;
     position: relative;
+
     & textarea {
       width: 100%;
       height: 4rem;
