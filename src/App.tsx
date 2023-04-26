@@ -33,6 +33,7 @@ export const RouteURL = {
 };
 
 function App() {
+  console.log(process.env.NODE_ENV);
   return (
     <div css={defaultCSS}>
       <BrowserRouter>
