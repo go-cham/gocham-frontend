@@ -2,28 +2,31 @@
 
 import { css } from "@emotion/react";
 import palette from "../../style/color";
-import BigFaceIcon from "../../images/Login/big_face.png";
-import Kakao from "../../images/Login/kakao.png";
-import Google from "../../images/Login/google.png";
+import BigFaceIcon from "../../images/Login/big_face.svg";
+import Kakao from "../../images/Login/kakao.svg";
+import Google from "../../images/Login/google.svg";
 import styled from "@emotion/styled";
 import { ButtonStyle, FlexRowDiv } from "../../style/common";
 import { useNavigate } from "react-router-dom";
+import Logo from "../../images/Common/big_logo.svg";
+import KakaoText from "../../images/Login/카카오계정으로_시작하기.svg";
+import GoogleText from "../../images/Login/구글계정으로_시작하기.svg";
 
 const Login = () => {
   const navigate = useNavigate();
   return (
     <div css={LoginWrap}>
+      <img src={Logo} alt={"로고"} className={"로고"} />
       <div className={"메인"}>
-        <h1>고민의 참견</h1>
         <div>
           <LoginButton width={30.7} height={4.7} size={1.4}>
             <img src={Kakao} alt={"카카오 로그인"} />
-            카카오 계정으로 로그인
+            <img src={KakaoText} alt={"카카오 로그인 텍스트"} />
           </LoginButton>
           <br />
           <LoginButton width={30.7} height={4.7} size={1.4}>
             <img src={Google} alt={"구글 로그인"} />
-            구글 계정으로 로그인
+            <img src={GoogleText} alt={"구글 로그인 텍스트"} />
           </LoginButton>
           <br />
           <RegisterWrap>
@@ -64,6 +67,12 @@ const LoginWrap = css`
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
+  & .로고 {
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+    width: 95%;
+    max-width: 40rem;
+  }
   & > .메인 {
     height: 100%;
     display: flex;
@@ -71,9 +80,7 @@ const LoginWrap = css`
     justify-content: space-around;
   }
   & > .BigFace {
-    //position: absolute;
     bottom: 0;
-    height: 43.8rem;
     width: 100%;
   }
 `;

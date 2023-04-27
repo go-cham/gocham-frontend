@@ -15,6 +15,7 @@ export type AcceptType = {
   gochamTerm: boolean;
   personalInformation: boolean;
   olderThan14: boolean;
+  marketing: boolean;
   allCheck: boolean;
 };
 const RegisterTerm = () => {
@@ -23,11 +24,12 @@ const RegisterTerm = () => {
     gochamTerm: false,
     personalInformation: false,
     olderThan14: false,
+    marketing: false,
     allCheck: false,
   });
 
   useEffect(() => {
-    if (accept.gochamTerm && accept.personalInformation) {
+    if (accept.gochamTerm && accept.personalInformation && accept.olderThan14) {
       setAccept((value) => ({ ...value, allCheck: true }));
     }
   }, [accept.allCheck]);
@@ -56,12 +58,18 @@ const RegisterTerm = () => {
         <section className={"약관체크"}>
           <CheckWrap>
             <CheckBox
-              value={accept.gochamTerm && accept.personalInformation}
+              value={
+                accept.gochamTerm &&
+                accept.personalInformation &&
+                accept.olderThan14 &&
+                accept.marketing
+              }
               setValue={(value) =>
                 setAccept({
                   gochamTerm: value,
                   personalInformation: value,
                   olderThan14: value,
+                  marketing: value,
                   allCheck: value,
                 })
               }
@@ -106,9 +114,23 @@ const RegisterTerm = () => {
             />
             [필수] 만 14세 이상 입니다.
           </CheckWrap>
+          <CheckWrap>
+            <CheckBox
+              value={accept.marketing}
+              setValue={(value) => setAccept({ ...accept, marketing: value })}
+            />
+            [선택] 마케팅 목적 이용 동의
+            <a
+              href={
+                "https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
+              }
+            >
+              <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />
+            </a>
+          </CheckWrap>
         </section>
       </RegisterTermWrap>
-      {accept.gochamTerm && accept.personalInformation ? (
+      {accept.gochamTerm && accept.personalInformation && accept.olderThan14 ? (
         <ConfirmCheckButton
           width={34}
           height={4.7}
