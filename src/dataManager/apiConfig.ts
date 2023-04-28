@@ -1,5 +1,4 @@
 import Axios from "axios";
-import { isEmpty } from "../utils/common/commonFunction";
 import { getJwt } from "./localStorageManager";
 
 export const HttpMethod = {
@@ -10,8 +9,16 @@ export const HttpMethod = {
   PATCH: "patch",
 };
 
+type requestType = {
+  data?: string;
+  query?: { [key: string]: string };
+  path?: string;
+  method: string;
+  url: string;
+};
+
 export default class ApiConfig {
-  static request({ data, query, path, method, url }) {
+  static request({ data, query, path, method, url }: requestType) {
     try {
       if (isEmpty(method) || isEmpty(url)) {
         alert("HTTP Method 와 URL 을 확인해주세요.");
@@ -23,7 +30,7 @@ export default class ApiConfig {
           url = url.replace(`:${key}`, value);
         }
       }
-      if (!isEmpty(query)) {
+      if (query && !isEmpty(query)) {
         url +=
           "?" +
           Object.keys(query)
@@ -51,8 +58,12 @@ export default class ApiConfig {
         default:
           break;
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log("ApiConfig Error : ", error.message);
     }
   }
+}
+
+export function isEmpty(str: any) {
+  return str === "" || str === undefined || str == null || str === "null";
 }
