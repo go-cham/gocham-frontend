@@ -11,15 +11,23 @@ const BottomContinueBar = ({
   fontColor,
   buttonColor,
   boxColor,
+  height,
+  boxShadow,
 }: {
   title: string;
   clickAction?: () => void;
   fontColor?: string;
   buttonColor?: string;
   boxColor?: string;
+  height?: number;
+  boxShadow?: boolean;
 }) => {
   return (
-    <BottomBarWrap boxColor={boxColor}>
+    <BottomBarWrap
+      boxColor={boxColor}
+      height={height ? height : 11.2}
+      boxShadow={boxShadow === undefined ? true : boxShadow}
+    >
       <NextButton
         width={34}
         height={4.7}
@@ -42,13 +50,24 @@ const NextButton = styled(ButtonStyle)`
   margin: 1.7rem auto;
 `;
 
-const BottomBarWrap = styled.div`
+type BottomBarWrapType = {
+  height: number | undefined;
+  boxColor: string | undefined;
+  boxShadow: boolean;
+};
+
+const BottomBarWrap = styled.div<BottomBarWrapType>`
   position: fixed;
   bottom: 0;
   left: 0;
-  box-shadow: 0px 0px 2.5rem rgba(42, 45, 55, 0.1);
+  box-shadow: ${(props) => {
+    if (props.boxShadow === false) {
+      return "";
+    } else {
+      return "0px 0px 2.5rem rgba(42, 45, 55, 0.1)";
+    }
+  }};
   width: 100vw;
-  height: 11.2rem;
-  background-color: ${({ boxColor }: { boxColor: string | undefined }) =>
-    boxColor};
+  height: ${({ height }) => height + "rem"};
+  background-color: ${({ boxColor }) => boxColor};
 `;

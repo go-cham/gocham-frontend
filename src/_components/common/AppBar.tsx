@@ -6,10 +6,16 @@ import BackButton from "../../images/Common/back_button_42X42.svg";
 import palette from "../../style/color";
 import { useNavigate } from "react-router-dom";
 
-const AppBar = ({ title }: { title: string }) => {
+const AppBar = ({
+  title,
+  boxShadow,
+}: {
+  title: string;
+  boxShadow?: boolean;
+}) => {
   const navigate = useNavigate();
   return (
-    <AppBarBox>
+    <AppBarBox boxShadow={boxShadow === undefined ? true : boxShadow}>
       <img
         src={BackButton}
         alt={"뒤로가기"}
@@ -23,14 +29,20 @@ const AppBar = ({ title }: { title: string }) => {
 
 export default AppBar;
 
-const AppBarBox = styled.div`
+const AppBarBox = styled.div<{ boxShadow: boolean }>`
   //position: absolute;
   //left: 0;
   display: flex;
   width: 100%;
   height: 4.5rem;
   align-items: center;
-  box-shadow: 0px 0px 2.5rem rgba(42, 45, 55, 0.1);
+  box-shadow: ${(props) => {
+    if (props.boxShadow === false) {
+      return "";
+    } else {
+      return "0px 0px 2.5rem rgba(42, 45, 55, 0.1)";
+    }
+  }};
   background-color: ${palette.Background};
   & > .뒤로가기 {
     position: absolute;
