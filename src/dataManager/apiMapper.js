@@ -1,17 +1,13 @@
-const API = process.env.REACT_APP_API;
-const NEORDINARY_API = process.env.REACT_APP_NEORDINARY_API;
+const API = process.env.REACT_APP_SERVER_API;
 
 export const EndPoint = {
   login: {
-    post: {
-      ADMIN_AUTH_SIGN_IN: `${API}/admin/auth/sign-in`, // 관리자 로그인 api
+    get: {
+      KAKAO_AUTH: `${API}/auth/kakao`, // 관리자 로그인 api
+      KAKAO_AUTH_CALLBACK: `${API}/auth/kakao-call-back`, // 관리자 로그인 api
     },
   },
-  register: {
-    post: {
-      ADMIN_AUTH_SIGN_UP: `${API}/admin/auth/sign-up`, // 관리자 회원가입 api
-    },
-  },
+
   nerds: {
     get: {
       ADMIN_NERDS: `${API}/admin/nerds`, // 관리자 작업자 리스트 조회 api

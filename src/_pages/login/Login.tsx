@@ -11,15 +11,37 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../images/Common/big_logo.svg";
 import KakaoText from "../../images/Login/카카오계정으로_시작하기.svg";
 import GoogleText from "../../images/Login/구글계정으로_시작하기.svg";
+import { useEffect } from "react";
+import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
+import { EndPoint } from "../../dataManager/apiMapper";
 
 const Login = () => {
   const navigate = useNavigate();
+
+  const KAKAO_API_KEY = process.env.REACT_APP_KAKAO_APP_KEY;
+  const REDIRECT_URI = "http://localhost:3000/login/oauth";
+  const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+  const handleKakaoLogin = async () => {
+    // window.location.href = KAKAO_AUTH_URI;
+    const res = await ApiConfig.request({
+      method: HttpMethod.GET,
+      url: EndPoint.login.get.KAKAO_AUTH,
+    });
+    console.log(res);
+  };
+
   return (
     <div css={LoginWrap}>
       <img src={Logo} alt={"로고"} className={"로고"} />
       <div className={"메인"}>
         <div>
-          <LoginButton width={30.7} height={4.7} size={1.4}>
+          <LoginButton
+            width={30.7}
+            height={4.7}
+            size={1.4}
+            onClick={() => handleKakaoLogin()}
+          >
             <img src={Kakao} alt={"카카오 로그인"} />
             <img src={KakaoText} alt={"카카오 로그인 텍스트"} />
           </LoginButton>

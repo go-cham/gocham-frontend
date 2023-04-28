@@ -27,6 +27,7 @@ const defaultCSS = css`
 export const RouteURL = {
   home: "/",
   login: "/login",
+  login_oauth: "/login/oauth",
   register_term: "/register/term",
   onboarding: "/onboarding",
   write: "/write",
@@ -40,6 +41,7 @@ function App() {
         <Routes>
           <Route path={RouteURL.home} element={<Home />} />
           <Route path={RouteURL.login} element={<Login />} />
+          <Route path={RouteURL.login_oauth} element={<Login />} />
           <Route path={RouteURL.register_term} element={<RegisterTerm />} />
           <Route path={RouteURL.onboarding} element={<Onboarding />} />
           <Route path={RouteURL.write} element={<Write />} />
