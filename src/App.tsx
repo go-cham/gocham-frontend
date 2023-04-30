@@ -11,6 +11,7 @@ import GNBHOC from "./_components/common/GNBHOC";
 import RegisterTerm from "./_pages/login/RegisterTerm";
 import Onboarding from "./_pages/login/Onboarding";
 import Write from "./_pages/write/Write";
+import CollectInformation from "./_pages/collectInformation/CollectInformation";
 
 const defaultCSS = css`
   display: flex;
@@ -31,6 +32,8 @@ export const RouteURL = {
   register_term: "/register/term",
   onboarding: "/onboarding",
   write: "/write",
+  collect_information: "/collect-information",
+  not_found: "/*",
 };
 
 function App() {
@@ -40,11 +43,16 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={RouteURL.home} element={<Home />} />
+          <Route
+            path={RouteURL.collect_information}
+            element={<CollectInformation />}
+          />
           <Route path={RouteURL.login} element={<Login />} />
           <Route path={RouteURL.login_oauth} element={<Login />} />
           <Route path={RouteURL.register_term} element={<RegisterTerm />} />
           <Route path={RouteURL.onboarding} element={<Onboarding />} />
           <Route path={RouteURL.write} element={<Write />} />
+          <Route path={RouteURL.not_found} element={<Navigate to={"/"} />} />
         </Routes>
         <GNBHOC />
       </BrowserRouter>

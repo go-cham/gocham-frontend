@@ -12,10 +12,11 @@ const GNBHOC = () => {
 
   const HOC = () => {
     if (
-      location.pathname === "/login" ||
+      location.pathname.includes("/login") ||
       location.pathname.includes("/register") ||
       location.pathname.includes(RouteURL.onboarding) ||
-      location.pathname.includes(RouteURL.write)
+      location.pathname.includes(RouteURL.write) ||
+      location.pathname.includes(RouteURL.collect_information)
     )
       return <></>;
     else return <GNB />;
