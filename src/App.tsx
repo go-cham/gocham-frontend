@@ -12,6 +12,7 @@ import RegisterTerm from "./_pages/login/RegisterTerm";
 import Onboarding from "./_pages/login/Onboarding";
 import Write from "./_pages/write/Write";
 import CollectInformation from "./_pages/collectInformation/CollectInformation";
+import LoginOauthKakao from "./_pages/login/LoginOauthKakao";
 
 const defaultCSS = css`
   display: flex;
@@ -28,7 +29,7 @@ const defaultCSS = css`
 export const RouteURL = {
   home: "/",
   login: "/login",
-  login_oauth: "/login/oauth",
+  login_oauth_kakao: "/login/oauth/kakao",
   register_term: "/register/term",
   onboarding: "/onboarding",
   write: "/write",
@@ -48,7 +49,10 @@ function App() {
             element={<CollectInformation />}
           />
           <Route path={RouteURL.login} element={<Login />} />
-          <Route path={RouteURL.login_oauth} element={<Login />} />
+          <Route
+            path={RouteURL.login_oauth_kakao}
+            element={<LoginOauthKakao />}
+          />
           <Route path={RouteURL.register_term} element={<RegisterTerm />} />
           <Route path={RouteURL.onboarding} element={<Onboarding />} />
           <Route path={RouteURL.write} element={<Write />} />

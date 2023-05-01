@@ -19,16 +19,12 @@ const Login = () => {
   const navigate = useNavigate();
 
   const KAKAO_API_KEY = process.env.REACT_APP_KAKAO_APP_KEY;
-  const REDIRECT_URI = "http://localhost:3000/login/oauth";
+  const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_API;
   const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const handleKakaoLogin = async () => {
-    // window.location.href = KAKAO_AUTH_URI;
-    const res = await ApiConfig.request({
-      method: HttpMethod.GET,
-      url: EndPoint.login.get.KAKAO_AUTH,
-    });
-    console.log(res);
+    window.location.href = KAKAO_AUTH_URI;
+    // console.log(res);
   };
 
   return (
@@ -51,10 +47,10 @@ const Login = () => {
             <img src={GoogleText} alt={"구글 로그인 텍스트"} />
           </LoginButton>
           <br />
-          <RegisterWrap>
-            <div>아직 회원이 아니신가요?</div>
-            <div onClick={() => navigate("/register/term")}>회원가입</div>
-          </RegisterWrap>
+          {/*<RegisterWrap>*/}
+          {/*  <div>아직 회원이 아니신가요?</div>*/}
+          {/*  <div onClick={() => navigate("/register/term")}>회원가입</div>*/}
+          {/*</RegisterWrap>*/}
         </div>
       </div>
       <img src={BigFaceIcon} className={"BigFace"} alt={"캐릭터"} />
