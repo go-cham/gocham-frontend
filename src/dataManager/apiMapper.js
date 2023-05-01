@@ -1,13 +1,18 @@
 const API = process.env.REACT_APP_SERVER_API;
 
 export const EndPoint = {
+  TEST: `${API}/test`,
   login: {
     get: {
       KAKAO_AUTH: `${API}/auth/kakao`, // 관리자 로그인 api
       KAKAO_AUTH_CALLBACK: `${API}/auth/kakao-call-back`, // 관리자 로그인 api
     },
   },
-
+  user: {
+    get: {
+      USER_ONCE: `${API}/user/once`, // 첫 유저 정보 추가 API
+    },
+  },
   nerds: {
     get: {
       ADMIN_NERDS: `${API}/admin/nerds`, // 관리자 작업자 리스트 조회 api

@@ -11,6 +11,11 @@ import DeleteIcon from "../../images/Write/delete_icon.svg";
 import Select from "react-select";
 import { uploadFirebase } from "../../dataManager/firebaseManager";
 import { resizeImage } from "../../dataManager/imageResizing";
+import {
+  categoryOptions,
+  deadlineOptions,
+  OptionType,
+} from "../../constants/Options";
 
 type WriteContentType = {
   title: string;
@@ -30,39 +35,6 @@ type PostWriteContentType = {
   cons: string;
   img?: string;
 };
-type OptionType = {
-  value: string;
-  label: string;
-};
-
-const categoryOptions: OptionType[] = [
-  { value: "교육, 학문", label: "교육, 학문" },
-  { value: "컴퓨터통신", label: "컴퓨터통신" },
-  { value: "게임", label: "게임" },
-  { value: "엔터테인먼트, 예술", label: "엔터테인먼트, 예술" },
-  { value: "생활", label: "생활" },
-  { value: "건강", label: "건강" },
-  { value: "사회, 정치", label: "사회, 정치" },
-  { value: "경제", label: "경제" },
-  { value: "여행", label: "여행" },
-  { value: "스포츠, 운동", label: "스포츠, 운동" },
-  { value: "쇼핑", label: "쇼핑" },
-  { value: "지역", label: "지역" },
-  { value: "연애, 결혼", label: "연애, 결혼" },
-  { value: "음악, 연주", label: "음악, 연주" },
-  { value: "요리", label: "요리" },
-  { value: "쇼핑", label: "쇼핑" },
-  { value: "방송, 연예인", label: "방송, 연예인" },
-  { value: "피부과", label: "피부과" },
-  { value: "반려동물", label: "반려동물" },
-];
-
-const deadlineOptions: OptionType[] = [
-  { value: "3", label: "3시간 후 마감" },
-  { value: "6", label: "6시간 후 마감" },
-  { value: "12", label: "12시간 후 마감" },
-  { value: "24", label: "24시간 후 마감" },
-];
 
 const Write = () => {
   const handleUpload = async () => {

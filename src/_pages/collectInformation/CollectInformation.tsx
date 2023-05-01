@@ -7,14 +7,19 @@ import palette from "../../style/color";
 import CollectNicknameAgeGender from "../../_components/collectInformation/CollectNicknameAgeGender";
 import react, { useEffect, useState } from "react";
 import BottomContinueBar from "../../_components/common/BottomContinueBar";
+import CollectRegionJobCategory from "../../_components/collectInformation/CollectRegionJobCategory";
+import { OptionType } from "../../constants/Options";
+import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
+import { EndPoint } from "../../dataManager/apiMapper";
+import { useNavigate } from "react-router-dom";
 
 export type userInformationType = {
   nickname: string;
   birthDay: string;
   sex: string;
-  residence: string;
-  job: string;
-  worryCategories: number[];
+  residence: OptionType;
+  job: OptionType;
+  worryCategories: OptionType[];
 };
 
 export type userInformationPropsType = {
@@ -23,6 +28,7 @@ export type userInformationPropsType = {
 };
 
 const CollectInformation = () => {
+  const navigate = useNavigate();
   // 로컬스토리지 조회로 사용자의 정보가 이미 입력되어있는지 확인 후 미입력된 경우에만 수집함.
 
   const [page, setPage] = useState(1);
@@ -31,22 +37,46 @@ const CollectInformation = () => {
     nickname: "",
     birthDay: "",
     sex: "",
-    residence: "",
-    job: "",
+    residence: { value: "", label: "" },
+    job: { value: "", label: "" },
     worryCategories: [],
   });
 
   useEffect(() => {
     if (
+      page === 1 &&
       userInformation.nickname &&
       userInformation.sex &&
-      userInformation.birthDay.split("-")[0] < "2005"
+      userInformation.birthDay &&
+      userInformation.birthDay.split("-")[0] < "2006"
     ) {
       setReadyToNext(true);
     } else {
       setReadyToNext(false);
     }
+    if (
+      page === 2 &&
+      userInformation.residence &&
+      userInformation.job.value !== ""
+    ) {
+      setReadyToNext(true);
+    }
   }, [userInformation]);
+
+  const uploadCollectData = async () => {
+    // 미완성
+    try {
+      const res = await ApiConfig.request({
+        method: HttpMethod.GET,
+        url: EndPoint.TEST,
+      });
+      console.log(res);
+
+      // navigate("/");
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <>
@@ -67,12 +97,13 @@ const CollectInformation = () => {
             />
           )}
           {page === 2 && (
-            <CollectNicknameAgeGender
+            <CollectRegionJobCategory
               userInformation={userInformation}
               setUserInformation={setUserInformation}
             />
           )}
         </section>
+        {/**/}
         {/* 각 페이지 항목 조건비교해서 색상 및 문구 표시 구현 필요 */}
         {page === 1 && !readyToNext && (
           <BottomContinueBar
@@ -90,7 +121,31 @@ const CollectInformation = () => {
             boxShadow={false}
             buttonColor={palette.Primary}
             fontColor={"white"}
-            clickAction={() => setPage(2)}
+            clickAction={() => {
+              setPage(2);
+              setReadyToNext(false);
+            }}
+          />
+        )}
+        {page === 2 && !readyToNext && (
+          <BottomContinueBar
+            title={"완료"}
+            height={11.2}
+            boxShadow={false}
+            buttonColor={"rgba(42, 45, 55, 0.1)"}
+            fontColor={"rgba(42, 45, 55, 0.34)"}
+          />
+        )}
+        {page === 2 && readyToNext && (
+          <BottomContinueBar
+            title={"완료"}
+            height={11.2}
+            boxShadow={false}
+            buttonColor={palette.Primary}
+            fontColor={"white"}
+            clickAction={() => {
+              uploadCollectData();
+            }}
           />
         )}
       </CollectInformationWrap>
@@ -109,6 +164,9 @@ const CollectInformationWrap = styled.div`
     letter-spacing: -0.03rem;
     color: ${palette.Secondary};
     line-height: 3.9rem;
+  }
+  & .정보입력란 {
+    height: 70vh;
   }
 `;
 
