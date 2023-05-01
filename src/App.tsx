@@ -13,6 +13,7 @@ import Onboarding from "./_pages/login/Onboarding";
 import Write from "./_pages/write/Write";
 import CollectInformation from "./_pages/collectInformation/CollectInformation";
 import LoginOauthKakao from "./_pages/login/LoginOauthKakao";
+import Feed from "./_pages/feed/Feed";
 
 const defaultCSS = css`
   display: flex;
@@ -28,12 +29,14 @@ const defaultCSS = css`
 `;
 export const RouteURL = {
   home: "/",
+  post: "/post", // 포스트 상세
   login: "/login",
   login_oauth_kakao: "/login/oauth/kakao",
   register_term: "/register/term",
   onboarding: "/onboarding",
   write: "/write",
   collect_information: "/collect-information",
+  feed: "/feed/*",
   not_found: "/*",
 };
 
@@ -48,6 +51,7 @@ function App() {
             path={RouteURL.collect_information}
             element={<CollectInformation />}
           />
+
           <Route path={RouteURL.login} element={<Login />} />
           <Route
             path={RouteURL.login_oauth_kakao}
@@ -56,6 +60,7 @@ function App() {
           <Route path={RouteURL.register_term} element={<RegisterTerm />} />
           <Route path={RouteURL.onboarding} element={<Onboarding />} />
           <Route path={RouteURL.write} element={<Write />} />
+          <Route path={RouteURL.feed} element={<Feed />} />
           <Route path={RouteURL.not_found} element={<Navigate to={"/"} />} />
         </Routes>
         <GNBHOC />

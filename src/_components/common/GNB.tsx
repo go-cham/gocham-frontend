@@ -2,25 +2,66 @@
 
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import React from "react";
-import backgroundImage from "../../images/GNB/GNB_bar_icon.png";
-import AddPostIcon from "../../images/GNB/add_post_icon.png";
-import SelectHomeIcon from "../../images/GNB/selected_home_icon.png";
-import SelectProfileIcon from "../../images/GNB/unselect_profile_icon.png";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import backgroundImage from "../../images/GNB/GNB_bar_icon.svg";
+import AddPostIcon from "../../images/GNB/add_post_icon.svg";
+import SelectHomeIcon from "../../images/GNB/selected_home_icon.svg";
+import UnselectProfileIcon from "../../images/GNB/unselect_profile_icon.svg";
+import UnselectHomeIcon from "../../images/GNB/unselect_home_icon.svg";
+import SelectProfileIcon from "../../images/GNB/selected_profile_icon.svg";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const GNB = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [selectedMenu, setSelectedMenu] = useState("posting");
+  useEffect(() => {
+    if (location.pathname.includes("/feed")) setSelectedMenu("feed");
+    else {
+      setSelectedMenu("posting");
+    }
+  }, [location.pathname]);
+
+  const handleGoMyFeed = () => {
+    navigate(`/feed/${"내식별번호"}`);
+  };
   return (
-    <GNBBackground image={backgroundImage}>
-      <SelectButton image={SelectHomeIcon} />
-      <AddButton image={AddPostIcon} onClick={() => navigate("write")} />
-      <SelectButton image={SelectProfileIcon} />
-    </GNBBackground>
+    <>
+      {" "}
+      <GNBBackground src={backgroundImage} alt={"배경"} />
+      <GNBBackgroundWrap>
+        {selectedMenu === "posting" ? (
+          <SelectButton image={SelectHomeIcon} />
+        ) : (
+          <SelectButton
+            image={UnselectHomeIcon}
+            onClick={() => navigate("/")}
+          />
+        )}
+        <AddButton image={AddPostIcon} onClick={() => navigate("write")} />
+        {selectedMenu === "feed" ? (
+          <SelectButton image={SelectProfileIcon} />
+        ) : (
+          <SelectButton
+            image={UnselectProfileIcon}
+            onClick={() => handleGoMyFeed()}
+          />
+        )}
+      </GNBBackgroundWrap>
+    </>
   );
 };
 
 export default GNB;
+
+const GNBBackgroundWrap = styled.div`
+  width: 100vw;
+  position: absolute;
+  bottom: 2.8rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: end;
+`;
 
 const AddButton = styled.div<{ image: string }>`
   background-image: url(${(props) => props.image});
@@ -37,18 +78,27 @@ const SelectButton = styled.div<{ image: string }>`
   background-size: contain; /* contain으로 설정합니다. */
 `;
 
-const GNBBackground = styled.div<{ image: string }>`
-  background-image: url(${(props) => props.image});
+const GNBBackground = styled.img`
   width: 100vw;
-  padding-bottom: ${(1 / 15) *
-  100}%; /* 이미지의 가로세로 비율에 맞춰서 padding-bottom 값을 계산합니다. 예를 들어, 16:9 비율의 이미지는 9/16 * 100% = 56.25%가 됩니다. */
-  filter: drop-shadow(0px 0px 25px rgba(42, 45, 55, 0.1));
-  background-repeat: no-repeat;
-  background-size: contain; /* contain으로 설정합니다. */
-  background-position: center;
   position: absolute;
   bottom: 0;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: end;
+  //padding-bottom: ${(1 / 15) *
+  100}%; /* 이미지의 가로세로 비율에 맞춰서 padding-bottom 값을 계산합니다. 예를 들어, 16:9 비율의 이미지는 9/16 * 100% = 56.25%가 됩니다. */
+  filter: drop-shadow(0px 0px 25px rgba(42, 45, 55, 0.1));
 `;
+
+// const GNBBackground = styled.div<{ image: string }>`
+//   background-image: url(${(props) => props.image});
+//   width: 100vw;
+//   //padding-bottom: ${(1 / 15) *
+//   100}%; /* 이미지의 가로세로 비율에 맞춰서 padding-bottom 값을 계산합니다. 예를 들어, 16:9 비율의 이미지는 9/16 * 100% = 56.25%가 됩니다. */
+//   filter: drop-shadow(0px 0px 25px rgba(42, 45, 55, 0.1));
+//   background-repeat: no-repeat;
+//   background-size: contain; /* contain으로 설정합니다. */
+//   background-position: center;
+//   position: absolute;
+//   bottom: 0;
+//   display: flex;
+//   justify-content: space-evenly;
+//   align-items: end;
+// `;
