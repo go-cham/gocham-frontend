@@ -1,5 +1,5 @@
-import Axios from "axios";
-import { getJwt } from "./localStorageManager";
+import Axios, { AxiosResponse } from "axios";
+import { getBearerToken } from "./localStorageManager";
 
 export const HttpMethod = {
   DELETE: "delete",
@@ -10,7 +10,7 @@ export const HttpMethod = {
 };
 
 type requestType = {
-  data?: string;
+  data?: any;
   query?: { [key: string]: string };
   path?: string;
   method: string;
@@ -18,11 +18,17 @@ type requestType = {
 };
 
 export default class ApiConfig {
-  static request({ data, query, path, method, url }: requestType) {
+  static request({
+    data,
+    query,
+    path,
+    method,
+    url,
+  }: requestType): Promise<AxiosResponse<any>> | undefined {
     try {
       if (isEmpty(method) || isEmpty(url)) {
         alert("HTTP Method 와 URL 을 확인해주세요.");
-        return;
+        return undefined;
       }
 
       if (path) {
@@ -41,7 +47,7 @@ export default class ApiConfig {
       const headers = {
         accept: "application/json",
         "Content-Type": "application/json",
-        "x-access-token": getJwt(),
+        Authorization: `Bearer ${getBearerToken()}`,
       };
 
       switch (method) {

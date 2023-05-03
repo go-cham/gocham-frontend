@@ -42,10 +42,10 @@ const Login = () => {
             <img src={KakaoText} alt={"카카오 로그인 텍스트"} />
           </LoginButton>
           <br />
-          <LoginButton width={30.7} height={4.7} size={1.4}>
-            <img src={Google} alt={"구글 로그인"} />
-            <img src={GoogleText} alt={"구글 로그인 텍스트"} />
-          </LoginButton>
+          {/*<LoginButton width={30.7} height={4.7} size={1.4}>*/}
+          {/*  <img src={Google} alt={"구글 로그인"} />*/}
+          {/*  <img src={GoogleText} alt={"구글 로그인 텍스트"} />*/}
+          {/*</LoginButton>*/}
           <br />
           {/*<RegisterWrap>*/}
           {/*  <div>아직 회원이 아니신가요?</div>*/}

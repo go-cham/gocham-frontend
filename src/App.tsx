@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./_pages/home/Home";
@@ -14,6 +14,11 @@ import Write from "./_pages/write/Write";
 import CollectInformation from "./_pages/collectInformation/CollectInformation";
 import LoginOauthKakao from "./_pages/login/LoginOauthKakao";
 import Feed from "./_pages/feed/Feed";
+import ApiConfig, { HttpMethod } from "./dataManager/apiConfig";
+import { EndPoint } from "./dataManager/apiMapper";
+import getUserInfo from "./utils/getUserInfo";
+import { useAtom } from "jotai/index";
+import { userAtom } from "./atom/userData";
 
 const defaultCSS = css`
   display: flex;
@@ -42,6 +47,23 @@ export const RouteURL = {
 
 function App() {
   console.log(process.env.NODE_ENV);
+  const [userData, setUserData] = useAtom(userAtom);
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      // 로그인 여부를 확인하는 함수 호출
+      if (userData.userId === null) {
+        const userInfo = await getUserInfo();
+        setUserData(userInfo);
+      }
+    };
+    checkLoginStatus();
+  }, []);
+  //
+  // const memoizedValue = useMemo(() => {
+  //   // 변화가 없으면 유지되는 값
+  //   return userData;
+  // }, [userData]);
   return (
     <div css={defaultCSS}>
       <BrowserRouter>

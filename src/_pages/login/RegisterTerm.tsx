@@ -10,6 +10,10 @@ import DetailArrow from "../../images/Login/detail_arrow.png";
 import CheckBox from "../../_components/login/CheckBox";
 import { useNavigate } from "react-router-dom";
 import { RouteURL } from "../../App";
+import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
+import { EndPoint } from "../../dataManager/apiMapper";
+import { useAtomValue } from "jotai";
+import { userAtom } from "../../atom/userData";
 
 export type AcceptType = {
   gochamTerm: boolean;
@@ -20,6 +24,7 @@ export type AcceptType = {
 };
 const RegisterTerm = () => {
   const navigate = useNavigate();
+  const userInfo = useAtomValue(userAtom);
   const [accept, setAccept] = useState<AcceptType>({
     gochamTerm: false,
     personalInformation: false,
@@ -34,8 +39,19 @@ const RegisterTerm = () => {
     }
   }, [accept.allCheck]);
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     //   회원가입 로직
+    const res = await ApiConfig.request({
+      method: HttpMethod.PATCH,
+      url: EndPoint.user.patch.USER_ACCEPTANCE_OF_TERMS,
+      data: {
+        userId: userInfo.userId,
+        privacyAcceptedStatus: accept.personalInformation ? 1 : 0,
+        termsOfUseAcceptedStatus: accept.gochamTerm ? 1 : 0,
+        marketingAcceptedStatus: accept.marketing ? 1 : 0,
+      },
+    });
+    console.log(res?.data);
     //   실패 로직
     //   성공 로직
     navigate(RouteURL.onboarding);
