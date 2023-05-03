@@ -16,12 +16,19 @@ import {
   deadlineOptions,
   OptionType,
 } from "../../constants/Options";
+import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
+import { EndPoint } from "../../dataManager/apiMapper";
+import getFutureDateTime from "../../utils/getFutureDateTime";
+import { useAtomValue } from "jotai";
+import { userAtom } from "../../atom/userData";
+import { useNavigate } from "react-router-dom";
+import { alertMessage } from "../../utils/alertMessage";
 
 type WriteContentType = {
   title: string;
   content: string;
   category: OptionType | null;
-  deadline: OptionType | null;
+  deadline: OptionType;
   pros: string;
   cons: string;
 };
@@ -29,32 +36,59 @@ type WriteContentType = {
 type PostWriteContentType = {
   title: string;
   content: string;
-  category: string | undefined;
-  deadline: string | undefined;
-  pros: string;
-  cons: string;
+  worryCategoryId: number | undefined;
   img?: string;
+  expirationTime?: string;
+  userId: number;
+  choices: { label: string; sequenceNumber: number }[];
+  files?: {
+    url: string;
+    contentType: string;
+  }[];
 };
 
 const Write = () => {
+  const userInfo = useAtomValue(userAtom);
+  const navigate = useNavigate();
+  // 유저 정보없을 경우, 강제 리턴. 추후 HOC으로 처리하긴해야함.
+  useEffect(() => {
+    if (!userInfo.userId) navigate("/");
+  }, []);
+
+  //
   const handleUpload = async () => {
+    if (!userInfo.userId) return false;
+    const expirationTime = getFutureDateTime(votingContent.deadline?.value);
+    // pros cons 미 입력시
+    const pros = votingContent.pros === "" ? "찬성" : votingContent.pros;
+    const cons = votingContent.cons === "" ? "반대" : votingContent.cons;
+
     let postData: PostWriteContentType = {
       title: votingContent.title,
+      userId: userInfo.userId,
       content: votingContent.content,
-      category: votingContent.category?.value,
-      deadline: votingContent.deadline?.value,
-      pros: votingContent.pros,
-      cons: votingContent.cons,
+      worryCategoryId: votingContent.category?.value,
+      choices: [
+        {
+          label: pros,
+          sequenceNumber: 1,
+        },
+        {
+          label: cons,
+          sequenceNumber: 2,
+        },
+      ],
     };
+    // expirationTime 이 있으면 추가. (추후 개발에서 null 인 케이스 발생 예정
+    if (expirationTime) {
+      postData.expirationTime = expirationTime;
+    }
     // 이미지 업로드
     let imgUrl = null;
     if (imageFile !== "") {
       try {
-        // 압축과정
-
         // 업로드 과정
         imgUrl = await uploadFirebase("userIdx", imageFile, "posting");
-
         // postData에 끼워넣기
         postData.img = imgUrl;
       } catch (e) {
@@ -62,24 +96,25 @@ const Write = () => {
       }
     }
 
-    // pros cons 미 입력시
-    if (votingContent.pros === "") postData.pros = "찬성";
-    if (votingContent.cons === "") postData.cons = "반대";
-
     // 포스팅 업로드
-
     try {
       //
-      console.log(postData);
+      const res = await ApiConfig.request({
+        method: HttpMethod.POST,
+        url: EndPoint.worry.post.WORRY,
+        data: postData,
+      });
+      console.log(res);
     } catch (e) {
       console.log(e);
+      alert(alertMessage.error.post.noUploadPermission);
     }
   };
 
   const [votingContent, setVotingContent] = useState<WriteContentType>({
     title: "",
     content: "",
-    category: { value: "", label: "" },
+    category: { value: 0, label: "" },
     deadline: deadlineOptions[1],
     pros: "",
     cons: "",
@@ -117,7 +152,7 @@ const Write = () => {
     if (
       votingContent.title !== "" &&
       votingContent.content !== "" &&
-      votingContent.category?.value !== ""
+      votingContent.category?.value !== null
     )
       setReadyUpload(true);
   }, [votingContent]);
@@ -261,7 +296,8 @@ const Write = () => {
                 value={votingContent.deadline}
                 onChange={(e) =>
                   setVotingContent(
-                    (value): WriteContentType => ({ ...value, deadline: e })
+                    (value): WriteContentType =>
+                      ({ ...value, deadline: e } as WriteContentType)
                   )
                 }
               />{" "}

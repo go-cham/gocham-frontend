@@ -12,6 +12,7 @@ import SelectProfileIcon from "../../images/GNB/selected_profile_icon.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { userAtom } from "../../atom/userData";
+import { RouteURL } from "../../App";
 
 const GNB = () => {
   const navigate = useNavigate();
@@ -29,6 +30,20 @@ const GNB = () => {
   const handleGoMyFeed = () => {
     navigate(`/feed/${userData.userId}`);
   };
+
+  const handleGoWrite = () => {
+    console.log(userData);
+    if (userData.userId && userData.userType === "onceUser") {
+      // 모달?
+      alert("여러분들의 정보를 먼저 입력해주세요!");
+      navigate(RouteURL.collect_information);
+    } else if (userData.userId && userData.userType === "activatedUser") {
+      navigate(RouteURL.write);
+    } else {
+      alert("로그인이 필요합니다!");
+      navigate(RouteURL.login);
+    }
+  };
   return (
     <>
       {" "}
@@ -42,7 +57,7 @@ const GNB = () => {
             onClick={() => navigate("/")}
           />
         )}
-        <AddButton image={AddPostIcon} onClick={() => navigate("write")} />
+        <AddButton image={AddPostIcon} onClick={() => handleGoWrite()} />
         {selectedMenu === "feed" ? (
           <SelectButton image={SelectProfileIcon} />
         ) : (
