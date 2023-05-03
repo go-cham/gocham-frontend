@@ -10,10 +10,14 @@ import UnselectProfileIcon from "../../images/GNB/unselect_profile_icon.svg";
 import UnselectHomeIcon from "../../images/GNB/unselect_home_icon.svg";
 import SelectProfileIcon from "../../images/GNB/selected_profile_icon.svg";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAtom } from "jotai";
+import { userAtom } from "../../atom/userData";
 
 const GNB = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [userData, setUserData] = useAtom(userAtom);
+
   const [selectedMenu, setSelectedMenu] = useState("posting");
   useEffect(() => {
     if (location.pathname.includes("/feed")) setSelectedMenu("feed");
@@ -23,7 +27,7 @@ const GNB = () => {
   }, [location.pathname]);
 
   const handleGoMyFeed = () => {
-    navigate(`/feed/${"내식별번호"}`);
+    navigate(`/feed/${userData.userId}`);
   };
   return (
     <>

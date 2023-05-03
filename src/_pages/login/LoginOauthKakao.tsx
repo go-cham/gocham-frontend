@@ -7,7 +7,7 @@ import { EndPoint } from "../../dataManager/apiMapper";
 import getUserInfo from "../../utils/getUserInfo";
 import { RouteURL } from "../../App";
 import { alertMessage } from "../../utils/alertMessage";
-import { useAtom } from "jotai/index";
+import { useAtom } from "jotai";
 import { userAtom } from "../../atom/userData";
 import BackButton from "../../images/Common/back_button.png";
 import styled from "@emotion/styled";

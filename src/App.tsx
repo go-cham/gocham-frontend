@@ -17,7 +17,7 @@ import Feed from "./_pages/feed/Feed";
 import ApiConfig, { HttpMethod } from "./dataManager/apiConfig";
 import { EndPoint } from "./dataManager/apiMapper";
 import getUserInfo from "./utils/getUserInfo";
-import { useAtom } from "jotai/index";
+import { useAtom } from "jotai";
 import { userAtom } from "./atom/userData";
 
 const defaultCSS = css`
