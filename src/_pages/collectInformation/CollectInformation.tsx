@@ -37,8 +37,8 @@ const CollectInformation = () => {
     nickname: "",
     birthDay: "",
     sex: "",
-    residence: { value: "", label: "" },
-    job: { value: "", label: "" },
+    residence: { value: 0, label: "" },
+    job: { value: 0, label: "" },
     worryCategories: [],
   });
 
@@ -57,7 +57,7 @@ const CollectInformation = () => {
     if (
       page === 2 &&
       userInformation.residence &&
-      userInformation.job.value !== ""
+      userInformation.job.value !== 0
     ) {
       setReadyToNext(true);
     }
