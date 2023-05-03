@@ -35,11 +35,13 @@ const LoginOauthKakao = () => {
           const userData = await getUserInfo();
           setUserData(userData);
 
-          if (userData?.userType === "onceUser") {
+          if (userData?.userType === "onceUserWithoutTerms") {
             console.log("약관 미동의 유저");
             navigate(RouteURL.register_term);
-          } else if (userData?.userType === "error") {
-            alert(alertMessage.error.needContantAdmin);
+          } else if (userData?.userType === "deactivatedUser") {
+            alert(alertMessage.error.user.deactivatedUser);
+          } else if (userData?.userType === "dormantUser") {
+            alert(alertMessage.error.user.dormantUser);
           } else {
             console.log("로그인 성공~");
             navigate(RouteURL.home);
