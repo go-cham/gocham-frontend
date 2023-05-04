@@ -12,6 +12,8 @@ import { OptionType } from "../../constants/Options";
 import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
 import { EndPoint } from "../../dataManager/apiMapper";
 import { useNavigate } from "react-router-dom";
+import { useAtomValue } from "jotai";
+import { userAtom } from "../../atom/userData";
 
 export type userInformationType = {
   nickname: string;
@@ -27,9 +29,20 @@ export type userInformationPropsType = {
   setUserInformation: react.Dispatch<any>;
 };
 
+type postUserInformationPropsType = {
+  userId: number;
+  nickname: string; // 제거 예정
+  birthDate: string;
+  sex: string;
+  residence: number | string; // 추후 number로 변경됨.
+  job: number | string; // 추후 number로 변경됨.
+  worryCategories: number[];
+};
+
 const CollectInformation = () => {
   const navigate = useNavigate();
-  // 로컬스토리지 조회로 사용자의 정보가 이미 입력되어있는지 확인 후 미입력된 경우에만 수집함.
+  const userInfo = useAtomValue(userAtom);
+  // 로컬스토리지 조회로 사용자의 정보가 이미 입력되어있는지 확인 후 미입력된 경우에만 수집함. => 이는 로그링 리다이렉트 컴포넌트에서 진행
 
   const [page, setPage] = useState(1);
   const [readyToNext, setReadyToNext] = useState(false);
@@ -64,17 +77,31 @@ const CollectInformation = () => {
   }, [userInformation]);
 
   const uploadCollectData = async () => {
-    // 미완성
-    try {
-      const res = await ApiConfig.request({
-        method: HttpMethod.GET,
-        url: EndPoint.TEST,
-      });
-      console.log(res);
-
-      // navigate("/");
-    } catch (e) {
-      console.error(e);
+    let postUserInformation: postUserInformationPropsType;
+    if (userInfo.userId) {
+      postUserInformation = {
+        userId: userInfo.userId,
+        nickname: userInformation.nickname, // 삭제 예정
+        birthDate: userInformation.birthDay.toString(),
+        sex: userInformation.sex,
+        residence: userInformation.residence.value,
+        job: userInformation.job.value,
+        worryCategories: userInformation.worryCategories.map(
+          (value) => value.value
+        ),
+      };
+      console.log(postUserInformation);
+      try {
+        const res = await ApiConfig.request({
+          method: HttpMethod.GET,
+          url: EndPoint.user.patch.USER_ONCE,
+          data: postUserInformation,
+        });
+        console.log(res);
+        navigate("/");
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
