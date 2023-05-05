@@ -20,6 +20,7 @@ import getUserInfo from "./utils/getUserInfo";
 import { useAtom } from "jotai";
 import { userAtom } from "./atom/userData";
 import Settings from "./_pages/feed/Settings";
+import Auth from "./HOC/Auth";
 
 const defaultCSS = css`
   display: flex;
@@ -77,7 +78,10 @@ function App() {
             element={<CollectInformation />}
           />
 
-          <Route path={RouteURL.login} element={<Login />} />
+          <Route
+            path={RouteURL.login}
+            element={<Auth SpecificComponent={Login} requiredLogin={false} />}
+          />
           <Route
             path={RouteURL.login_oauth_kakao}
             element={<LoginOauthKakao />}
@@ -85,7 +89,10 @@ function App() {
           <Route path={RouteURL.register_term} element={<RegisterTerm />} />
           <Route path={RouteURL.onboarding} element={<Onboarding />} />
           <Route path={RouteURL.write} element={<Write />} />
-          <Route path={RouteURL.feed} element={<Feed />} />
+          <Route
+            path={RouteURL.feed}
+            element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
+          />
           <Route path={RouteURL.settings} element={<Settings />} />
           <Route path={RouteURL.not_found} element={<Navigate to={"/"} />} />
         </Routes>

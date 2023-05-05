@@ -16,7 +16,6 @@ import { RouteURL } from "../../App";
 const Feed = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
   const [isMyFeed, setIsMyFeed] = useState(true);
   const [userData, setUserData] = useAtom(userAtom);
 

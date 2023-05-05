@@ -28,8 +28,7 @@ const GNB = () => {
   }, [location.pathname]);
 
   const handleGoMyFeed = () => {
-    if (userData.userId) navigate(`/feed/${userData.userId}`);
-    else navigate(RouteURL.login);
+    navigate(`/feed/${userData.userId}`);
   };
 
   const handleGoWrite = () => {
