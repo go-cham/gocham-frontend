@@ -19,6 +19,7 @@ import { EndPoint } from "./dataManager/apiMapper";
 import getUserInfo from "./utils/getUserInfo";
 import { useAtom } from "jotai";
 import { userAtom } from "./atom/userData";
+import Settings from "./_components/feed/Settings";
 
 const defaultCSS = css`
   display: flex;
@@ -42,6 +43,7 @@ export const RouteURL = {
   write: "/write",
   collect_information: "/collect-information",
   feed: "/feed/*",
+  settings: "/settings",
   not_found: "/*",
 };
 
@@ -83,6 +85,7 @@ function App() {
           <Route path={RouteURL.onboarding} element={<Onboarding />} />
           <Route path={RouteURL.write} element={<Write />} />
           <Route path={RouteURL.feed} element={<Feed />} />
+          <Route path={RouteURL.settings} element={<Settings />} />
           <Route path={RouteURL.not_found} element={<Navigate to={"/"} />} />
         </Routes>
         <GNBHOC />
