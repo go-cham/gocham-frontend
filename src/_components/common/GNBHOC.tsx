@@ -16,7 +16,8 @@ const GNBHOC = () => {
       location.pathname.includes("/register") ||
       location.pathname.includes(RouteURL.onboarding) ||
       location.pathname.includes(RouteURL.write) ||
-      location.pathname.includes(RouteURL.collect_information)
+      location.pathname.includes(RouteURL.collect_information) ||
+      location.pathname.includes(RouteURL.settings)
     )
       return <></>;
     else return <GNB />;

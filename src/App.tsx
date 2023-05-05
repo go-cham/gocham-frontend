@@ -19,7 +19,7 @@ import { EndPoint } from "./dataManager/apiMapper";
 import getUserInfo from "./utils/getUserInfo";
 import { useAtom } from "jotai";
 import { userAtom } from "./atom/userData";
-import Settings from "./_components/feed/Settings";
+import Settings from "./_pages/feed/Settings";
 
 const defaultCSS = css`
   display: flex;

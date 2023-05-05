@@ -28,7 +28,8 @@ const GNB = () => {
   }, [location.pathname]);
 
   const handleGoMyFeed = () => {
-    navigate(`/feed/${userData.userId}`);
+    if (userData.userId) navigate(`/feed/${userData.userId}`);
+    else navigate(RouteURL.login);
   };
 
   const handleGoWrite = () => {
@@ -40,7 +41,6 @@ const GNB = () => {
     } else if (userData.userId && userData.userType === "activatedUser") {
       navigate(RouteURL.write);
     } else {
-      alert("로그인이 필요합니다!");
       navigate(RouteURL.login);
     }
   };

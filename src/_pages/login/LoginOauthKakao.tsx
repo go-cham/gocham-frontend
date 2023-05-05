@@ -56,22 +56,7 @@ const LoginOauthKakao = () => {
   }, []);
   return (
     <>
-      {" "}
-      <RegisterTermWrap>
-        {" "}
-        <img
-          src={BackButton}
-          alt={"뒤로가기"}
-          onClick={() => navigate("/login")}
-        />
-        <div className={"약관문구"}>
-          환영합니다!
-          <br />
-          서비스 이용약관에
-          <br />
-          동의해주세요.
-        </div>
-      </RegisterTermWrap>
+      <RegisterTermWrap></RegisterTermWrap>
     </>
   );
 };

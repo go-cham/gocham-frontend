@@ -8,6 +8,8 @@ import DefaultUserIcon from "../../images/Profile/defaultUserIcon.svg";
 import { ButtonStyle } from "../../style/common";
 import { userDataAtomType } from "../../atom/userData";
 import palette from "../../style/color";
+import { useNavigate } from "react-router-dom";
+import { RouteURL } from "../../App";
 
 const UserProfile = ({
   isMyFeed,
@@ -17,10 +19,15 @@ const UserProfile = ({
   userData: userDataAtomType;
 }) => {
   //   isMyFeed 는 추후 타인 프로필 접근시 프로필 편집 글자 대신 팔로우/팔로우해제 버튼으로
-
+  const navigate = useNavigate();
   return (
     <>
-      <SettingImg src={SettingIcon} alt={"설정"} className={"설정"} />
+      <SettingImg
+        src={SettingIcon}
+        alt={"설정"}
+        className={"설정"}
+        onClick={() => navigate(RouteURL.settings)}
+      />
       <UserProfileWrap>
         <img
           src={DefaultUserIcon}

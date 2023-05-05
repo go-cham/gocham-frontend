@@ -7,9 +7,11 @@ export type userDataAtomType = {
   userType: string;
 };
 
-export const userAtom = atom<userDataAtomType>({
+export const initialUserData = {
   name: "미설정",
   userId: null,
   vender: "",
   userType: "",
-});
+};
+
+export const userAtom = atom<userDataAtomType>(initialUserData);
