@@ -54,7 +54,7 @@ const RegisterTerm = () => {
     console.log(res?.data);
     //   실패 로직
     //   성공 로직
-    navigate(RouteURL.onboarding);
+    navigate(RouteURL.collect_information);
   };
   return (
     <>
@@ -155,7 +155,7 @@ const RegisterTerm = () => {
           color={palette.Background}
           onClick={() => handleRegister()}
         >
-          회원가입 완료
+          다음 (1/3)
         </ConfirmCheckButton>
       ) : (
         <ConfirmCheckButton
@@ -165,7 +165,7 @@ const RegisterTerm = () => {
           backgroundColor={"rgba(42, 45, 55, 0.1)"}
           color={"rgba(42, 45, 55, 0.34)"}
         >
-          회원가입 완료
+          다음 (1/3)
         </ConfirmCheckButton>
       )}
     </>

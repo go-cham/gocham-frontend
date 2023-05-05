@@ -41,6 +41,7 @@ const CollectNicknameAgeGender = ({
         backgroundColor: null,
         fontSize: "1.2rem",
         color: "rgba(42, 45, 55, 0.7)",
+
         // height: "2rem",
       }),
       control: (provided: any, state: any) => ({
@@ -69,6 +70,8 @@ const CollectNicknameAgeGender = ({
       menu: (provided: any, state: any) => ({
         ...provided,
         borderRadius: "1.2rem",
+        width: "40vw",
+        right: 0,
       }),
 
       menuList: (provided: any, state: any) => ({

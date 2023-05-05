@@ -34,8 +34,8 @@ type postUserInformationPropsType = {
   nickname: string; // 제거 예정
   birthDate: string;
   sex: string;
-  residence: number | string; // 추후 number로 변경됨.
-  job: number | string; // 추후 number로 변경됨.
+  residenceId: number | string; // 추후 number로 변경됨.
+  jobId: number | string; // 추후 number로 변경됨.
   worryCategories: number[];
 };
 
@@ -84,8 +84,8 @@ const CollectInformation = () => {
         nickname: userInformation.nickname, // 삭제 예정
         birthDate: userInformation.birthDay.toString(),
         sex: userInformation.sex,
-        residence: userInformation.residence.value,
-        job: userInformation.job.value,
+        residenceId: userInformation.residence.value,
+        jobId: userInformation.job.value,
         worryCategories: userInformation.worryCategories.map(
           (value) => value.value
         ),
@@ -134,7 +134,7 @@ const CollectInformation = () => {
         {/* 각 페이지 항목 조건비교해서 색상 및 문구 표시 구현 필요 */}
         {page === 1 && !readyToNext && (
           <BottomContinueBar
-            title={"다음"}
+            title={"다음 (2/3)"}
             height={11.2}
             boxShadow={false}
             buttonColor={"rgba(42, 45, 55, 0.1)"}
@@ -143,7 +143,7 @@ const CollectInformation = () => {
         )}
         {page === 1 && readyToNext && (
           <BottomContinueBar
-            title={"다음"}
+            title={"다음 (2/3)"}
             height={11.2}
             boxShadow={false}
             buttonColor={palette.Primary}
@@ -156,7 +156,7 @@ const CollectInformation = () => {
         )}
         {page === 2 && !readyToNext && (
           <BottomContinueBar
-            title={"완료"}
+            title={"고참 시작하기 (3/3)"}
             height={11.2}
             boxShadow={false}
             buttonColor={"rgba(42, 45, 55, 0.1)"}
@@ -165,7 +165,7 @@ const CollectInformation = () => {
         )}
         {page === 2 && readyToNext && (
           <BottomContinueBar
-            title={"완료"}
+            title={"고참 시작하기 (3/3)"}
             height={11.2}
             boxShadow={false}
             buttonColor={palette.Primary}
