@@ -93,7 +93,7 @@ const CollectInformation = () => {
       console.log(postUserInformation);
       try {
         const res = await ApiConfig.request({
-          method: HttpMethod.GET,
+          method: HttpMethod.PATCH,
           url: EndPoint.user.patch.USER_ONCE,
           data: postUserInformation,
         });
