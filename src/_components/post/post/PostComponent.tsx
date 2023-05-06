@@ -10,6 +10,7 @@ import ClockIcon from "../../../images/PostComponent/clock.svg";
 import CheckIcon from "../../../images/PostComponent/check.svg";
 import { RouteURL } from "../../../App";
 import { useState } from "react";
+import ChatBottomSheet from "../../chat/ChatBottomSheet";
 
 const PostComponent = () => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
@@ -21,7 +22,6 @@ const PostComponent = () => {
   };
 
   const handleClickPostChat = () => {
-    console.log(openBottomSheet);
     setOpenBottomSheet((value) => !value);
   };
   const handleClickShare = async () => {
@@ -87,6 +87,10 @@ const PostComponent = () => {
 
         <div className={"chatCount"}>댓글 nn개 모두 보기</div>
       </PostComponentLayer>
+      <ChatBottomSheet
+        openBottomSheet={openBottomSheet}
+        handleClickPostChat={handleClickPostChat}
+      />
     </>
   );
 };
