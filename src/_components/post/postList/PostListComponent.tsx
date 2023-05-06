@@ -7,12 +7,18 @@ import ProfileImg from "../../../images/PostComponent/profileImg.png";
 import CGP from "../../../images/PostComponent/GCP.png";
 import PostProfileBox from "../PostProfileBox";
 import palette from "../../../style/color";
+import { useNavigate } from "react-router-dom";
+import { RouteURL } from "../../../App";
 
 const PostListComponent = () => {
+  const navigate = useNavigate();
   //   포스트 이미지 여부 확인후 처리 필요
 
+  const handleGoPostDetail = () => {
+    navigate(RouteURL.post, { state: 12 });
+  };
   return (
-    <PostListBox>
+    <PostListBox onClick={() => handleGoPostDetail()}>
       <div>
         <PostProfileBox nickname={"닉넹미"} profileImg={null} />
         <PostContentBox>

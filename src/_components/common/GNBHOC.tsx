@@ -17,7 +17,8 @@ const GNBHOC = () => {
       location.pathname.includes(RouteURL.onboarding) ||
       location.pathname.includes(RouteURL.write) ||
       location.pathname.includes(RouteURL.collect_information) ||
-      location.pathname.includes(RouteURL.settings)
+      location.pathname.includes(RouteURL.settings) ||
+      location.pathname.includes(RouteURL.post)
     )
       return <></>;
     else return <GNB />;

@@ -9,13 +9,18 @@ import { useNavigate } from "react-router-dom";
 const AppBar = ({
   title,
   boxShadow,
+  background,
 }: {
   title: string;
   boxShadow?: boolean;
+  background?: string;
 }) => {
   const navigate = useNavigate();
   return (
-    <AppBarBox boxShadow={boxShadow === undefined ? true : boxShadow}>
+    <AppBarBox
+      boxShadow={boxShadow === undefined ? true : boxShadow}
+      background={background ? background : null}
+    >
       <img
         src={BackButton}
         alt={"뒤로가기"}
@@ -29,7 +34,7 @@ const AppBar = ({
 
 export default AppBar;
 
-const AppBarBox = styled.div<{ boxShadow: boolean }>`
+const AppBarBox = styled.div<{ boxShadow: boolean; background: string | null }>`
   //position: absolute;
   //left: 0;
   display: flex;
@@ -43,7 +48,13 @@ const AppBarBox = styled.div<{ boxShadow: boolean }>`
       return "0px 0px 2.5rem rgba(42, 45, 55, 0.1)";
     }
   }};
-  background-color: ${palette.Background};
+  background-color: ${(props) => {
+    if (props.background) {
+      return props.background;
+    } else {
+      return `${palette.Background}`;
+    }
+  }};
   & > .뒤로가기 {
     position: absolute;
   }
@@ -52,4 +63,5 @@ const AppBarBox = styled.div<{ boxShadow: boolean }>`
     font-weight: 700;
     font-size: 1.6rem;
   }
+  border-bottom: 1px solid #eaeaeb;
 `;

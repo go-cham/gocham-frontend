@@ -21,6 +21,7 @@ import { useAtom } from "jotai";
 import { userAtom } from "./atom/userData";
 import Settings from "./_pages/feed/Settings";
 import Auth from "./HOC/Auth";
+import Post from "./_pages/home/Post";
 
 const defaultCSS = css`
   display: flex;
@@ -77,7 +78,10 @@ function App() {
             path={RouteURL.collect_information}
             element={<CollectInformation />}
           />
-
+          <Route // hoc 적용 필요
+            path={RouteURL.post}
+            element={<Post />}
+          />
           <Route
             path={RouteURL.login}
             element={<Auth SpecificComponent={Login} requiredLogin={false} />}
