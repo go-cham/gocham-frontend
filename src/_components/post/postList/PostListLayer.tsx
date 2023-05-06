@@ -9,6 +9,8 @@ import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
 import { EndPoint } from "../../../dataManager/apiMapper";
 import PostListComponent from "./PostListComponent";
 import styled from "@emotion/styled";
+import { useAtomValue } from "jotai";
+import { userAtom } from "../../../atom/userData";
 
 type postingMetaDataType = {
   take: number;
@@ -17,6 +19,7 @@ type postingMetaDataType = {
   nextId?: number;
 };
 const PostListLayer = () => {
+  const userInfo = useAtomValue(userAtom);
   const [postingMetaData, setPostingMetaData] = useState<postingMetaDataType>({
     take: 4,
   });
@@ -55,7 +58,7 @@ const PostListLayer = () => {
       {/*{postingData?.map((value, key) => (*/}
       {/*  <PostListComponent key={key} />*/}
       {/*))}*/}
-      <PostListComponent />
+      <PostListComponent userInfo={userInfo} />
     </PostListLayerStyle>
   );
   // 바닥에 닿을경우 처리할 함수가 필요.

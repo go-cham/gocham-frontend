@@ -16,8 +16,8 @@ const Wrapper = styled(motion.div)`
 
   position: fixed;
   z-index: 1;
-  top: 101%;
-  //top: calc(100% - 20rem); /*시트가 얼마나 높이 위치할지*/
+  //top: 101%;
+  top: calc(100% + 1rem); /*시트가 얼마나 높이 위치할지*/
   left: 0;
   right: 0;
 
@@ -53,7 +53,7 @@ function ChatBottomSheet({
       <HeaderWrapper ref={header}>
         <Handle />
       </HeaderWrapper>
-      <BottomSheetContent style={{ color: "gray" }}>
+      <BottomSheetContent>
         <Content openBottomSheet={openBottomSheet} postId={postId} />
       </BottomSheetContent>
     </Wrapper>

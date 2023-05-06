@@ -1,40 +1,65 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from "@emotion/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import ProfileImg from "../../../images/PostComponent/profileImg.png";
 import CGP from "../../../images/PostComponent/GCP.png";
 import PostProfileBox from "../PostProfileBox";
 import palette from "../../../style/color";
-import { useNavigate } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import { RouteURL } from "../../../App";
+import ChatBottomSheet from "../../chat/ChatBottomSheet";
+import { userInfo } from "os";
+import { userDataAtomType } from "../../../atom/userData";
 
-const PostListComponent = () => {
+const PostListComponent = ({ userInfo }: { userInfo: userDataAtomType }) => {
   const navigate = useNavigate();
+  const postId = 12;
+  const [openBottomSheet, setOpenBottomSheet] = useState(false);
+
   //   포스트 이미지 여부 확인후 처리 필요
 
   const handleGoPostDetail = () => {
-    navigate(RouteURL.post, { state: 12 });
+    navigate(RouteURL.post, { state: postId });
+  };
+  const handleClickPostChat = () => {
+    if (userInfo.userType === "activatedUser") {
+      setOpenBottomSheet((value) => {
+        // console.log(value, "->", !value);
+        return !value;
+      });
+    } else {
+      navigate(RouteURL.auth_check);
+    }
   };
   return (
-    <PostListBox onClick={() => handleGoPostDetail()}>
-      <div>
-        <PostProfileBox nickname={"닉넹미"} profileImg={null} />
-        <PostContentBox>
-          <PostContentText>
-            <h1>제목</h1>
-            <h2>내용</h2>
-          </PostContentText>
-          <img src={CGP} alt={"게시글 이미지"} />
-          {/*    이미지 없으면 표시안하도록 처리 필요*/}
-        </PostContentBox>
-      </div>
-      <PostMetaContent>
-        <div className={"chat"}>댓글 n개 모두 보기</div>
-        <div className={"voteCount"}>현재 투표한 사용자 m명</div>
-      </PostMetaContent>
-    </PostListBox>
+    <>
+      <PostListBox>
+        <div>
+          <PostProfileBox nickname={"닉넹미"} profileImg={null} />
+          <PostContentBox onClick={() => handleGoPostDetail()}>
+            <PostContentText>
+              <h1>제목</h1>
+              <h2>내용</h2>
+            </PostContentText>
+            <img src={CGP} alt={"게시글 이미지"} />
+            {/*    이미지 없으면 표시안하도록 처리 필요*/}
+          </PostContentBox>
+        </div>
+        <PostMetaContent>
+          <div className={"chat"} onClick={() => handleClickPostChat()}>
+            댓글 n개 모두 보기
+          </div>
+          <div className={"voteCount"}>현재 투표한 사용자 m명</div>
+        </PostMetaContent>
+      </PostListBox>
+      <ChatBottomSheet
+        openBottomSheet={openBottomSheet}
+        handleClickPostChat={handleClickPostChat}
+        postId={postId}
+      />
+    </>
   );
 };
 
