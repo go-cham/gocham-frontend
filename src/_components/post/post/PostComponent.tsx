@@ -12,6 +12,21 @@ import { RouteURL } from "../../../App";
 import { useState } from "react";
 import ChatBottomSheet from "../../chat/ChatBottomSheet";
 
+export const handleClickShare = async (postId: number) => {
+  // https 배포에서만 확인 가능.
+  alert("개발자: 모바일에선 https 배포에서만 확인가능. 정상작동시 alert 제거");
+  try {
+    await navigator.share({
+      title: "링크 공유",
+      text: "이 링크를 공유합니다.",
+      url: `${process.env.REACT_APP_BASE_URL}${RouteURL.post}/${postId}`,
+    });
+    console.log("링크가 공유되었습니다.");
+  } catch (error) {
+    console.error("링크 공유 에러", error);
+  }
+};
+
 const PostComponent = () => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
 
@@ -22,24 +37,12 @@ const PostComponent = () => {
   };
 
   const handleClickPostChat = () => {
-    setOpenBottomSheet((value) => !value);
+    setOpenBottomSheet((value) => {
+      // console.log(value, "->", !value);
+      return !value;
+    });
   };
-  const handleClickShare = async () => {
-    // https 배포에서만 확인 가능.
-    alert(
-      "개발자: 모바일에선 https 배포에서만 확인가능. 정상작동시 alert 제거"
-    );
-    try {
-      await navigator.share({
-        title: "링크 공유",
-        text: "이 링크를 공유합니다.",
-        url: `${process.env.REACT_APP_BASE_URL}${RouteURL.post}/${postId}`,
-      });
-      console.log("링크가 공유되었습니다.");
-    } catch (error) {
-      console.error("링크 공유 에러", error);
-    }
-  };
+
   return (
     <>
       <PostComponentLayer>
@@ -81,7 +84,7 @@ const PostComponent = () => {
           <img
             src={ShareIcon}
             alt={"공유"}
-            onClick={() => handleClickShare()}
+            onClick={() => handleClickShare(postId)}
           />
         </div>
 
@@ -90,6 +93,7 @@ const PostComponent = () => {
       <ChatBottomSheet
         openBottomSheet={openBottomSheet}
         handleClickPostChat={handleClickPostChat}
+        postId={postId}
       />
     </>
   );
