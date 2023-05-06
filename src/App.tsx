@@ -22,6 +22,7 @@ import { userAtom } from "./atom/userData";
 import Settings from "./_pages/feed/Settings";
 import Auth from "./HOC/Auth";
 import Post from "./_pages/home/Post";
+import AuthCheckPage from "./_pages/AuthCheckPage";
 
 const defaultCSS = css`
   display: flex;
@@ -47,6 +48,7 @@ export const RouteURL = {
   feed: "/feed/*",
   settings: "/settings",
   not_found: "/*",
+  auth_check: "/auth-check",
 };
 
 function App() {
@@ -99,6 +101,12 @@ function App() {
           />
           <Route path={RouteURL.settings} element={<Settings />} />
           <Route path={RouteURL.not_found} element={<Navigate to={"/"} />} />
+          <Route
+            path={RouteURL.auth_check}
+            element={
+              <Auth SpecificComponent={AuthCheckPage} requiredLogin={true} />
+            }
+          />
         </Routes>
         <GNBHOC />
       </BrowserRouter>
