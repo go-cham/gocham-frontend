@@ -6,23 +6,49 @@ import ChatIcon from "../../images/PostComponent/chat.svg";
 import ShareIcon from "../../images/PostComponent/share.svg";
 import SendIcon from "../../images/PostComponent/send.svg";
 import { handleClickShare } from "../post/post/PostComponent";
+import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
+import { EndPoint } from "../../dataManager/apiMapper";
+import { userDataAtomType } from "../../atom/userData";
 
 export default function Content({
   openBottomSheet,
   postId,
+  userInfo,
 }: {
   openBottomSheet: boolean;
   postId: number;
+  userInfo: userDataAtomType;
 }) {
   useEffect(() => {
-    console.log("모바일 브라우저 상태에서는 하단에 더 값 줘야함.");
     if (openBottomSheet) {
       console.log(postId);
     }
   }, [openBottomSheet]);
+  useEffect(() => {
+    console.log("모바일 브라우저 상태에서는 하단에 더 값 줘야함.");
+  }, []);
 
   const [chatText, setChatText] = useState("");
-  const handlePushChat = () => {};
+  const handlePushChat = async () => {
+    console.log(chatText);
+    try {
+      const res = await ApiConfig.request({
+        method: HttpMethod.POST,
+        url: EndPoint.worry.post.WORRY_REPLY,
+        data: {
+          content: chatText,
+          userId: userInfo.userId,
+          worryId: 5,
+        },
+      });
+      console.log(res);
+      console.log("댓글 리프레시 로직 필요");
+    } catch (e) {
+      console.log(e);
+    }
+
+    setChatText("");
+  };
   return (
     <div>
       <PostChatWrap>
@@ -47,7 +73,7 @@ export default function Content({
             value={chatText}
             onChange={(e) => setChatText(e.target.value)}
           />
-          <img src={SendIcon} alt={"전송"} />
+          <img src={SendIcon} alt={"전송"} onClick={() => handlePushChat()} />
         </InputWrap>
         <UserChatBox>
           <div className={"metaData"}>

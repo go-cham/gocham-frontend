@@ -32,16 +32,7 @@ const GNB = () => {
   };
 
   const handleGoWrite = () => {
-    console.log(userData);
-    if (userData.userId && userData.userType === "onceUser") {
-      // 모달?
-      alert("여러분들의 정보를 먼저 입력해주세요!");
-      navigate(RouteURL.collect_information);
-    } else if (userData.userId && userData.userType === "activatedUser") {
-      navigate(RouteURL.write);
-    } else {
-      navigate(RouteURL.login);
-    }
+    navigate(RouteURL.write);
   };
   return (
     <>

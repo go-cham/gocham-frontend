@@ -94,7 +94,10 @@ function App() {
           />
           <Route path={RouteURL.register_term} element={<RegisterTerm />} />
           <Route path={RouteURL.onboarding} element={<Onboarding />} />
-          <Route path={RouteURL.write} element={<Write />} />
+          <Route
+            path={RouteURL.write}
+            element={<Auth SpecificComponent={Write} requiredLogin={true} />}
+          />
           <Route
             path={RouteURL.feed}
             element={<Auth SpecificComponent={Feed} requiredLogin={true} />}

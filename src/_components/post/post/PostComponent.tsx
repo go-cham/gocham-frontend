@@ -11,6 +11,7 @@ import CheckIcon from "../../../images/PostComponent/check.svg";
 import { RouteURL } from "../../../App";
 import { useState } from "react";
 import ChatBottomSheet from "../../chat/ChatBottomSheet";
+import PostVoteComponent from "./PostVoteComponent";
 
 export const handleClickShare = async (postId: number) => {
   // https 배포에서만 확인 가능.
@@ -31,7 +32,7 @@ const PostComponent = () => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
 
   const imgUrl = "https://via.placeholder.com/200X200";
-  const postId = 123;
+  const postId = 5;
   const handlePostMeatballsMenu = () => {
     console.log("hola");
   };
@@ -60,16 +61,7 @@ const PostComponent = () => {
           <img src={ClockIcon} alt={"마감시간"} />
           <p className={"마감시간"}>마감까지 n일 nn:nn:nn</p>
         </div>
-        <PostVoteComponent>
-          <PostVoteButton>
-            <div>슬랙스</div>
-            <img src={CheckIcon} alt={"체크버튼"} />
-          </PostVoteButton>
-          <PostVoteButton>
-            <div>청바지</div>
-            <img src={CheckIcon} alt={"체크버튼"} />
-          </PostVoteButton>
-        </PostVoteComponent>
+        <PostVoteComponent postId={postId} />
         {/**/}
         <div className={"voting"}>
           <p className={"justResult"}>결과만 볼래요</p>
@@ -88,7 +80,9 @@ const PostComponent = () => {
           />
         </div>
 
-        <div className={"chatCount"}>댓글 nn개 모두 보기</div>
+        <div className={"chatCount"} onClick={() => handleClickPostChat()}>
+          댓글 nn개 모두 보기
+        </div>
       </PostComponentLayer>
       <ChatBottomSheet
         openBottomSheet={openBottomSheet}
@@ -101,26 +95,6 @@ const PostComponent = () => {
 
 export default PostComponent;
 
-const PostVoteButton = styled.div`
-  background-color: ${palette.Gray4};
-  width: 81vw; // 기존 34rem
-  height: 4.3rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 0.9rem;
-  padding-left: 1.3rem;
-  margin: 1.3rem 0 0 0;
-  border-radius: 0.5rem;
-  color: ${palette.Gray1};
-  font-size: 1.4rem;
-  font-weight: 500;
-`;
-
-const PostVoteComponent = styled.div`
-  margin-top: 1.3rem;
-  margin-bottom: 1.7rem;
-`;
 const PostComponentLayer = styled.div`
   padding-left: 2.5rem;
   padding-right: 2.5rem;

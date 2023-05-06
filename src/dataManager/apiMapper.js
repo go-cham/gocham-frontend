@@ -13,7 +13,7 @@ export const EndPoint = {
       USER_TYPE: `${API}/user/type`, // 첫 유저 정보 추가 api
     },
     patch: {
-      USER_ONCE: `${API}/user/once`, // 첫 유저 정보 추가 api
+      USER: `${API}/user`, // 첫 유저 정보 추가 api
       USER_ACCEPTANCE_OF_TERMS: `${API}/user/acceptance-of-terms`, // 첫 유저 정보 추가 api
     },
   },
@@ -26,7 +26,8 @@ export const EndPoint = {
     post: {
       WORRIES_USERID: `${API}/worries`, // 고민 상세 조회 api
       USER_WORRY_CHOICE: `${API}/user-worry-choice`, // 고민 선택지 투표 api
-      WORRY: `${API}/worry`, // 고민 게시글 댓글 작성 api
+      WORRY: `${API}/worry`, // 고민 게시글 작성 api
+      WORRY_REPLY: `${API}/worry-reply`, // 고민 게시글 댓글 작성 api
     },
   },
 };

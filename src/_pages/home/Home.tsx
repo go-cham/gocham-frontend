@@ -16,9 +16,6 @@ const H1 = css`
 `;
 
 const Home = () => {
-  useEffect(() => {
-    AuthenticationCheck(RouteURL.home);
-  }, []);
   return (
     <MainView>
       <div className={"title"}>

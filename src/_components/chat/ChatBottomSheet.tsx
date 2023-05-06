@@ -6,6 +6,8 @@ import useBottomSheet from "../../hooks/useBottomSheet";
 import Header from "./BottomSheetHeader";
 import Content from "./BottomSheetContent";
 import useBottomSheetFix from "../../hooks/useBottomSheetFix";
+import { useAtomValue } from "jotai";
+import { userAtom } from "../../atom/userData";
 
 // 출처
 // https://velog.io/@boris0716/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-Bottom-Sheet-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%9E%91%EC%84%B1%EC%A4%91
@@ -47,6 +49,7 @@ function ChatBottomSheet({
     openBottomSheet,
     handleClickPostChat,
   });
+  const userInfo = useAtomValue(userAtom);
 
   return (
     <Wrapper ref={sheet}>
@@ -54,7 +57,11 @@ function ChatBottomSheet({
         <Handle />
       </HeaderWrapper>
       <BottomSheetContent>
-        <Content openBottomSheet={openBottomSheet} postId={postId} />
+        <Content
+          openBottomSheet={openBottomSheet}
+          postId={postId}
+          userInfo={userInfo}
+        />
       </BottomSheetContent>
     </Wrapper>
   );

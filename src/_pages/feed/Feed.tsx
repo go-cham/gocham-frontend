@@ -23,9 +23,6 @@ const Feed = () => {
   const [postType, setPostType] = useState("내 게시글");
 
   useEffect(() => {
-    if (userData.userType !== "activatedUser") {
-      navigate(RouteURL.login);
-    }
     //   본인 피드인지 확인
     // /user뒤의 파라미터가 있는지 확인. 없으면 본인 피드로 navigate
     // 게시글 조회 + 게시글 수
