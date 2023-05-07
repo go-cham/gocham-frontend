@@ -355,7 +355,7 @@ const Write = () => {
 export default Write;
 
 const WriteComponent = styled.div`
-  margin: 0 2.5rem;
+  margin: 4.6rem 2.5rem 0;
 
   & .유저업로드이미지영역 {
     margin-top: 1.5rem;
