@@ -186,6 +186,7 @@ const CollectInformation = () => {
 export default CollectInformation;
 
 const CollectInformationWrap = styled.div`
+  margin-top: 4.6rem;
   width: 90%;
   & .설명란 {
     margin-top: 3.3rem;
