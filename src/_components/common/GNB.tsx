@@ -65,7 +65,7 @@ export default GNB;
 
 const GNBBackgroundWrap = styled.div`
   width: 100vw;
-  position: absolute;
+  position: fixed;
   bottom: 2.8rem;
   display: flex;
   justify-content: space-evenly;
@@ -89,7 +89,7 @@ const SelectButton = styled.div<{ image: string }>`
 
 const GNBBackground = styled.img`
   width: 100vw;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   //padding-bottom: ${(1 / 15) *
   100}%; /* 이미지의 가로세로 비율에 맞춰서 padding-bottom 값을 계산합니다. 예를 들어, 16:9 비율의 이미지는 9/16 * 100% = 56.25%가 됩니다. */
