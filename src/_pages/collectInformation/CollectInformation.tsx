@@ -14,6 +14,8 @@ import { EndPoint } from "../../dataManager/apiMapper";
 import { useNavigate } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { userAtom } from "../../atom/userData";
+import getUserInfo from "../../utils/getUserInfo";
+import { useAtom } from "jotai";
 
 export type userInformationType = {
   nickname: string;
@@ -42,7 +44,7 @@ type postUserInformationPropsType = {
 const CollectInformation = () => {
   const navigate = useNavigate();
   const userInfo = useAtomValue(userAtom);
-  // 로컬스토리지 조회로 사용자의 정보가 이미 입력되어있는지 확인 후 미입력된 경우에만 수집함. => 이는 로그링 리다이렉트 컴포넌트에서 진행
+  const [userData, setUserData] = useAtom(userAtom);
 
   const [page, setPage] = useState(1);
   const [readyToNext, setReadyToNext] = useState(false);
@@ -97,7 +99,8 @@ const CollectInformation = () => {
           url: EndPoint.user.patch.USER,
           data: postUserInformation,
         });
-        console.log(res);
+        const userInfo = await getUserInfo();
+        setUserData(userInfo);
         navigate("/");
       } catch (e) {
         console.error(e);

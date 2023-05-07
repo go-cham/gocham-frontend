@@ -18,10 +18,7 @@ const PostProfileBox = ({
   return (
     <ProfileBox>
       <div>
-        <img
-          src={profileImg ? profileImg : GrayProfileImg}
-          alt={"프로필 이미지"}
-        />
+        <img src={profileImg ? profileImg : GrayProfileImg} alt={"프로필"} />
         <div className={"nickname"}>{nickname}</div>
       </div>
       {menuFunction && (

@@ -12,6 +12,8 @@ import { RouteURL } from "../../../App";
 import { useState } from "react";
 import ChatBottomSheet from "../../chat/ChatBottomSheet";
 import PostVoteComponent from "./PostVoteComponent";
+import { userDataAtomType } from "../../../atom/userData";
+import { getRemainingTime } from "../../../utils/getRemainingTime";
 
 export const handleClickShare = async (postId: number) => {
   // https 배포에서만 확인 가능.
@@ -28,12 +30,18 @@ export const handleClickShare = async (postId: number) => {
   }
 };
 
-const PostComponent = () => {
+const PostComponent = ({
+  userInfo,
+  postData,
+}: {
+  userInfo: userDataAtomType;
+  postData: any;
+}) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-
+  console.log(postData);
   const imgUrl = "https://via.placeholder.com/200X200";
-  const postId = 5;
-  const handlePostMeatballsMenu = () => {
+  const postId = 6;
+  const handleClickMeatballsMenu = () => {
     console.log("hola");
   };
 
@@ -44,28 +52,38 @@ const PostComponent = () => {
     });
   };
 
+  const handleClickResult = () => {
+    console.log("결과만 볼래용");
+  };
+
   return (
-    <>
+    <PostComponentWrap>
       <PostComponentLayer>
         <div style={{ height: "2.1rem" }}></div>
         <PostProfileBox
           nickname={"닉넹미"}
-          menuFunction={handlePostMeatballsMenu}
+          menuFunction={handleClickMeatballsMenu}
         />
-        <h1>어떤 옷을 입을까용?</h1>
-        <h2>이 윗옷이랑 어울리는 옷이 뭘지 고민되네요.</h2>
+        <h1>{postData.title}</h1>
+        <h2>{postData.content}</h2>
       </PostComponentLayer>
       {/*{imgUrl && <PostImageComponentLayer src={imgUrl} />}*/}
       <PostComponentLayer>
         <div className={"마감"}>
           <img src={ClockIcon} alt={"마감시간"} />
-          <p className={"마감시간"}>마감까지 n일 nn:nn:nn</p>
+          <p className={"마감시간"}>
+            {getRemainingTime(postData.expirationTime)}
+          </p>
         </div>
         <PostVoteComponent postId={postId} />
         {/**/}
         <div className={"voting"}>
-          <p className={"justResult"}>결과만 볼래요</p>
-          <p className={"result"}>현재 투표한 사용자 nnn명</p>
+          <p className={"justResult"} onClick={() => handleClickResult()}>
+            결과만 볼래요
+          </p>
+          <p className={"result"}>
+            현재 투표한 사용자 {postData.userWorryChoiceCount}명
+          </p>
         </div>
         <div className={"toolbar"}>
           <img
@@ -88,12 +106,17 @@ const PostComponent = () => {
         openBottomSheet={openBottomSheet}
         handleClickPostChat={handleClickPostChat}
         postId={postId}
+        postData={postData}
       />
-    </>
+    </PostComponentWrap>
   );
 };
 
 export default PostComponent;
+
+const PostComponentWrap = styled.div`
+  border-bottom: 0.1rem solid ${palette.Gray3};
+`;
 
 const PostComponentLayer = styled.div`
   padding-left: 2.5rem;

@@ -21,11 +21,10 @@ const PostListComponent = ({
   postData: any;
 }) => {
   const navigate = useNavigate();
-  const postId = 12;
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
 
   const handleGoPostDetail = () => {
-    navigate(RouteURL.post, { state: postId });
+    navigate(`${RouteURL.post}/${postData.id}`);
   };
   const handleClickPostChat = () => {
     if (userInfo.userType === "activatedUser") {
@@ -67,7 +66,8 @@ const PostListComponent = ({
       <ChatBottomSheet
         openBottomSheet={openBottomSheet}
         handleClickPostChat={handleClickPostChat}
-        postId={postId}
+        postId={postData.id}
+        postData={postData}
       />
     </>
   );

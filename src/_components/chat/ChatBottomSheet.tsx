@@ -40,10 +40,12 @@ function ChatBottomSheet({
   openBottomSheet,
   handleClickPostChat,
   postId,
+  postData,
 }: {
   openBottomSheet: boolean;
   handleClickPostChat: () => void;
   postId: number;
+  postData: any;
 }) {
   const { sheet, header } = useBottomSheetFix({
     openBottomSheet,
@@ -61,6 +63,7 @@ function ChatBottomSheet({
           openBottomSheet={openBottomSheet}
           postId={postId}
           userInfo={userInfo}
+          postData={postData}
         />
       </BottomSheetContent>
     </Wrapper>

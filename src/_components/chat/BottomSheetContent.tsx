@@ -9,25 +9,50 @@ import { handleClickShare } from "../post/post/PostComponent";
 import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
 import { EndPoint } from "../../dataManager/apiMapper";
 import { userDataAtomType } from "../../atom/userData";
+import { formatDate } from "../../utils/formatDate";
 
 export default function Content({
   openBottomSheet,
   postId,
   userInfo,
+  postData,
 }: {
   openBottomSheet: boolean;
   postId: number;
   userInfo: userDataAtomType;
+  postData: any;
 }) {
+  function getChatData() {
+    try {
+      ApiConfig.request({
+        method: HttpMethod.GET,
+        url: EndPoint.worry.get.WORRY_REPLIES,
+        query: {
+          worryId: postId,
+        },
+      })?.then((res) => {
+        console.log(res.data);
+        setChatData(res?.data);
+        setChatText("");
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  // 댓글 조회 api 필요
   useEffect(() => {
     if (openBottomSheet) {
       console.log(postId);
+      // 댓글 조회 api
+      getChatData();
     }
   }, [openBottomSheet]);
   useEffect(() => {
     console.log("모바일 브라우저 상태에서는 하단에 더 값 줘야함.");
   }, []);
 
+  const [chatData, setChatData] = useState([]);
   const [chatText, setChatText] = useState("");
   const handlePushChat = async () => {
     console.log(chatText);
@@ -38,23 +63,21 @@ export default function Content({
         data: {
           content: chatText,
           userId: userInfo.userId,
-          worryId: 5,
+          worryId: postId,
         },
       });
       console.log(res);
-      console.log("댓글 리프레시 로직 필요");
+      getChatData();
     } catch (e) {
       console.log(e);
     }
-
-    setChatText("");
   };
   return (
-    <div>
-      <PostChatWrap>
+    <PostChatWrap>
+      <PostChatContainer>
         <PostProfileBox nickname={"닉넹미"} />
-        <h1>어떤 옷을 입을까요?</h1>
-        <h2>이 윗옷이랑 어울리는 옷이 뭘지 고민되네요.</h2>
+        <h1>{postData.title}</h1>
+        <h2>{postData.content}</h2>
         <div className={"toolbar"}>
           <img
             src={ShareIcon}
@@ -63,9 +86,9 @@ export default function Content({
           />
           <p className={"result"}>현재 투표한 사용자 nnn명</p>
         </div>
-      </PostChatWrap>
+      </PostChatContainer>
       <GrayBar />
-      <PostChatWrap>
+      <PostChatContainer>
         <InputWrap>
           <input
             className={"댓글입력"}
@@ -75,26 +98,41 @@ export default function Content({
           />
           <img src={SendIcon} alt={"전송"} onClick={() => handlePushChat()} />
         </InputWrap>
-        <UserChatBox>
-          <div className={"metaData"}>
-            <div>
-              <PostProfileBox nickname={"닉넹미"} />
-              {/* 유저 투표값에 따른 이모지 제공 필요*/}
-            </div>
-            <div className={"uploadDate"}>n일 전</div>
-          </div>
-          <p>
-            살? 그런거 고민할거면 팝콘을 애초에 안먹습니다. 카라멜로 가시죠!
-          </p>
-        </UserChatBox>
+        <ChatContentWrap>
+          {" "}
+          {chatData &&
+            chatData.map((chat: any, idx) => {
+              console.log(chat);
+              return (
+                <UserChatBox key={idx}>
+                  <div className={"metaData"}>
+                    <div>
+                      <PostProfileBox
+                        nickname={chat.user.nickname}
+                        profileImg={chat.user.profileImageUrl}
+                      />
+                      {/* 유저 투표값에 따른 이모지 제공 필요*/}
+                    </div>
+                    <div className={"uploadDate"}>
+                      {formatDate(chat.createdAt)}
+                    </div>
+                  </div>
+                  <p>{chat.content}</p>
+                </UserChatBox>
+              );
+            })}
+        </ChatContentWrap>
 
-        <br />
-        <br />
-        <br />
-      </PostChatWrap>
-    </div>
+        {/*<div className={"공간확보용"} style={{ height: "5rem" }} />*/}
+      </PostChatContainer>
+    </PostChatWrap>
   );
 }
+
+const PostChatWrap = styled.div`
+  margin-bottom: 30vh;
+`;
+const ChatContentWrap = styled.div``;
 
 const UserChatBox = styled.div`
   margin-top: 2.1rem;
@@ -127,7 +165,7 @@ const InputWrap = styled.div`
   }
 `;
 
-const PostChatWrap = styled.div`
+const PostChatContainer = styled.div`
   padding: 0 1.7rem 0 1.9rem;
 
   & h1 {

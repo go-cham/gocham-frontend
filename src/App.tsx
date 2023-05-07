@@ -38,7 +38,8 @@ const defaultCSS = css`
 `;
 export const RouteURL = {
   home: "/",
-  post: "/post", // 포스트 상세
+  post: "/post",
+  post_star: "/post/*", // 포스트 상세
   login: "/login",
   login_oauth_kakao: "/login/oauth/kakao",
   register_term: "/register/term",
@@ -81,7 +82,7 @@ function App() {
             element={<CollectInformation />}
           />
           <Route // hoc 적용 필요
-            path={RouteURL.post}
+            path={RouteURL.post_star}
             element={<Post />}
           />
           <Route

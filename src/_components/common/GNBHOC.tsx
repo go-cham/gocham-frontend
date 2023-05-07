@@ -20,7 +20,7 @@ const GNBHOC = () => {
       location.pathname.includes(RouteURL.settings) ||
       location.pathname.includes(RouteURL.post)
     )
-      return <></>;
+      return null;
     else return <GNB />;
   };
   return <>{HOC()}</>;

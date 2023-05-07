@@ -22,6 +22,7 @@ export const EndPoint = {
       WORRIES: `${API}/worries`, // 고민 조회 api (페이지네이션)
       WORRY_CHOICE: `${API}/worry-choice`, // 고민 선택지 조회 api
       USER_WORRY_CHOICE: `${API}/user-worry-choice`, // 고민 선택지 투표 조회 api
+      WORRY_REPLIES: `${API}/worry-replies`,
     },
     post: {
       WORRIES_USERID: `${API}/worries`, // 고민 상세 조회 api

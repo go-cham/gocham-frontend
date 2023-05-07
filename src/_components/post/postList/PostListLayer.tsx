@@ -12,7 +12,7 @@ import styled from "@emotion/styled";
 import { useAtomValue } from "jotai";
 import { userAtom } from "../../../atom/userData";
 
-type postingMetaDataType = {
+export type postingMetaDataType = {
   take: number;
   total?: number;
   hasNextData?: boolean;
