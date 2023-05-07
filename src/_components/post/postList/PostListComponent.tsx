@@ -13,12 +13,16 @@ import ChatBottomSheet from "../../chat/ChatBottomSheet";
 import { userInfo } from "os";
 import { userDataAtomType } from "../../../atom/userData";
 
-const PostListComponent = ({ userInfo }: { userInfo: userDataAtomType }) => {
+const PostListComponent = ({
+  userInfo,
+  postData,
+}: {
+  userInfo: userDataAtomType;
+  postData: any;
+}) => {
   const navigate = useNavigate();
   const postId = 12;
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-
-  //   포스트 이미지 여부 확인후 처리 필요
 
   const handleGoPostDetail = () => {
     navigate(RouteURL.post, { state: postId });
@@ -37,14 +41,20 @@ const PostListComponent = ({ userInfo }: { userInfo: userDataAtomType }) => {
     <>
       <PostListBox>
         <div>
-          <PostProfileBox nickname={"닉넹미"} profileImg={null} />
+          <PostProfileBox
+            nickname={postData.nickname ? postData.nickname : "익명"}
+            profileImg={
+              postData.profileImageUrl ? postData.profileImageUrl : null
+            }
+          />
           <PostContentBox onClick={() => handleGoPostDetail()}>
             <PostContentText>
-              <h1>제목</h1>
-              <h2>내용</h2>
+              <h1>{postData.title}</h1>
+              <h2>{postData.content}</h2>
             </PostContentText>
-            <img src={CGP} alt={"게시글 이미지"} />
-            {/*    이미지 없으면 표시안하도록 처리 필요*/}
+            {postData.worryFiles?.url && (
+              <img src={postData.worryFiles?.url} alt={"게시글 이미지"} />
+            )}
           </PostContentBox>
         </div>
         <PostMetaContent>
@@ -96,6 +106,7 @@ const PostListBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin: 0 0 1.7rem 0;
 `;
 
 const PostContentText = styled.div`

@@ -11,7 +11,7 @@ export const HttpMethod = {
 
 type requestType = {
   data?: any;
-  query?: { [key: string]: string };
+  query?: any;
   path?: string;
   method: string;
   url: string;
