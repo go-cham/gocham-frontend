@@ -22,7 +22,6 @@ const PostListComponent = ({
 }) => {
   const navigate = useNavigate();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-
   const handleGoPostDetail = () => {
     navigate(`${RouteURL.post}/${postData.id}`);
   };
@@ -51,16 +50,22 @@ const PostListComponent = ({
               <h1>{postData.title}</h1>
               <h2>{postData.content}</h2>
             </PostContentText>
-            {postData.worryFiles?.url && (
-              <img src={postData.worryFiles?.url} alt={"게시글 이미지"} />
+            {postData.worryFiles[0]?.url && (
+              <img
+                src={postData.worryFiles[0]?.url}
+                alt={"게시글이미지"}
+                className={"게시글이미지"}
+              />
             )}
           </PostContentBox>
         </div>
         <PostMetaContent>
           <div className={"chat"} onClick={() => handleClickPostChat()}>
-            댓글 n개 모두 보기
+            댓글 {postData.replyCount}개 모두 보기
           </div>
-          <div className={"voteCount"}>현재 투표한 사용자 m명</div>
+          <div className={"voteCount"}>
+            현재 투표한 사용자 {postData.userWorryChoiceCount}명
+          </div>
         </PostMetaContent>
       </PostListBox>
       <ChatBottomSheet
@@ -83,14 +88,12 @@ const PostMetaContent = styled.div`
     font-weight: 500;
     font-size: 1.2rem;
     line-height: 1.4rem;
-    letter-spacing: -0.03rem;
     color: ${palette.Text2};
   }
   & .voteCount {
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.2rem;
-    letter-spacing: -0.03rem;
     color: ${palette.Text3};
   }
 `;
@@ -131,4 +134,9 @@ const PostContentBox = styled.div`
   justify-content: space-between;
 
   margin-top: 1.5rem;
+  & .게시글이미지 {
+    width: 7.2rem;
+    height: 7.2rem;
+    object-fit: cover;
+  }
 `;

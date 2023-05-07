@@ -9,7 +9,7 @@ import palette from "../../../style/color";
 import ClockIcon from "../../../images/PostComponent/clock.svg";
 import CheckIcon from "../../../images/PostComponent/check.svg";
 import { RouteURL } from "../../../App";
-import { useState } from "react";
+import React, { useState } from "react";
 import ChatBottomSheet from "../../chat/ChatBottomSheet";
 import PostVoteComponent from "./PostVoteComponent";
 import { userDataAtomType } from "../../../atom/userData";
@@ -61,13 +61,20 @@ const PostComponent = ({
       <PostComponentLayer>
         <div style={{ height: "2.1rem" }}></div>
         <PostProfileBox
-          nickname={"닉넹미"}
+          nickname={postData.user.nickname}
           menuFunction={handleClickMeatballsMenu}
+          profileImg={postData.user.profileImageUrl}
         />
         <h1>{postData.title}</h1>
         <h2>{postData.content}</h2>
       </PostComponentLayer>
-      {/*{imgUrl && <PostImageComponentLayer src={imgUrl} />}*/}
+      {postData.worryFiles[0]?.url && (
+        <PostImageComponentLayer
+          src={postData.worryFiles[0]?.url}
+          alt={"게시글이미지"}
+          className={"게시글이미지"}
+        />
+      )}{" "}
       <PostComponentLayer>
         <div className={"마감"}>
           <img src={ClockIcon} alt={"마감시간"} />
@@ -99,7 +106,7 @@ const PostComponent = ({
         </div>
 
         <div className={"chatCount"} onClick={() => handleClickPostChat()}>
-          댓글 nn개 모두 보기
+          댓글 {postData.replyCount}개 모두 보기
         </div>
       </PostComponentLayer>
       <ChatBottomSheet
