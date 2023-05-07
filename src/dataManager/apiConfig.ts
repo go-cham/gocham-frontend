@@ -12,7 +12,7 @@ export const HttpMethod = {
 type requestType = {
   data?: any;
   query?: any;
-  path?: string;
+  path?: Record<string, any>;
   method: string;
   url: string;
 };

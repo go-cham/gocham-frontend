@@ -11,6 +11,7 @@ export const EndPoint = {
   user: {
     get: {
       USER_TYPE: `${API}/user/type`, // 첫 유저 정보 추가 api
+      USER: `${API}/user/:id`,
     },
     patch: {
       USER: `${API}/user`, // 첫 유저 정보 추가 api
