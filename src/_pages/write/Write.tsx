@@ -23,6 +23,7 @@ import { useAtomValue } from "jotai";
 import { userAtom } from "../../atom/userData";
 import { useNavigate } from "react-router-dom";
 import { alertMessage } from "../../utils/alertMessage";
+import { RouteURL } from "../../App";
 
 type WriteContentType = {
   title: string;
@@ -37,7 +38,6 @@ type PostWriteContentType = {
   title: string;
   content: string;
   worryCategoryId: number | undefined;
-  img?: string;
   expirationTime?: string;
   userId: number;
   choices: { label: string; sequenceNumber: number }[];
@@ -90,7 +90,7 @@ const Write = () => {
         // 업로드 과정
         imgUrl = await uploadFirebase("userIdx", imageFile, "posting");
         // postData에 끼워넣기
-        postData.img = imgUrl;
+        postData.files = [{ url: imgUrl, contentType: "image" }];
       } catch (e) {
         console.log(e);
       }
@@ -99,12 +99,14 @@ const Write = () => {
     // 포스팅 업로드
     try {
       //
+      // console.log(postData);
       const res = await ApiConfig.request({
         method: HttpMethod.POST,
         url: EndPoint.worry.post.WORRY,
         data: postData,
       });
       console.log(res);
+      navigate(`${RouteURL.post}/${res?.data.id}`);
     } catch (e) {
       console.log(e);
       alert(alertMessage.error.post.noUploadPermission);
@@ -300,7 +302,7 @@ const Write = () => {
                       ({ ...value, deadline: e } as WriteContentType)
                   )
                 }
-              />{" "}
+              />
             </div>
           </div>
         </div>
