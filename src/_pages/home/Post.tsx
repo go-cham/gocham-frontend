@@ -67,12 +67,13 @@ const Post = () => {
   useEffect(() => {
     // IntersectionObserver 등록하기
     observer.current = new IntersectionObserver(handleObserver, {
-      rootMargin: "0px",
+      rootMargin: "0px 0px 0px 0px",
       threshold: 1.0,
     });
 
     // 마지막 요소에 observer 등록하기
-    const lastItem = document.querySelector(".post:last-child");
+    const lastItem = document.querySelector(".PostComponent:last-child");
+    document.querySelector(".post:last-child")?.setAttribute("name", "이거");
     if (lastItem) {
       observer.current.observe(lastItem);
     }
@@ -87,28 +88,35 @@ const Post = () => {
 
   const handleObserver = (entities: IntersectionObserverEntry[]) => {
     const target = entities[0];
+    console.log(target.isIntersecting);
 
     // observer가 타겟 요소와 교차하면 데이터 추가 요청하기
     if (target.isIntersecting && hasMore) {
       setIsLoading(true);
     }
   };
+
   return (
-    <>
+    <PostWrap>
       <AppBar title={"인기 게시물"} background={"white"} />
       <PostLayer>
         {postingData?.map((value, idx) => (
-          <div key={idx} className={"post"}>
+          <div key={idx} className={"PostComponent"}>
             <PostComponent userInfo={userInfo} postData={value} />
           </div>
         ))}
       </PostLayer>
-    </>
+    </PostWrap>
   );
 };
 export default Post;
 
+const PostWrap = styled.div`
+  overflow: hidden;
+`;
+
 const PostLayer = styled.div`
-  height: calc(100vh - 4.6rem);
-  overflow: scroll;
+  margin-top: 4.6rem;
+  //height: calc(100vh - 4.6rem);
+  overflow-y: hidden;
 `;

@@ -21,14 +21,14 @@ const PostProfileBox = ({
         <img src={profileImg ? profileImg : GrayProfileImg} alt={"프로필"} />
         <div className={"nickname"}>{nickname}</div>
       </div>
-      {menuFunction && (
-        <img
-          src={MenuIcon}
-          alt={"메뉴"}
-          onClick={menuFunction}
-          className={"menu"}
-        />
-      )}
+      {/*{menuFunction && (*/}
+      {/*  <img*/}
+      {/*    src={MenuIcon}*/}
+      {/*    alt={"메뉴"}*/}
+      {/*    onClick={menuFunction}*/}
+      {/*    className={"menu"}*/}
+      {/*  />*/}
+      {/*)}*/}
     </ProfileBox>
   );
 };

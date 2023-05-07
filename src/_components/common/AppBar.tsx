@@ -38,6 +38,7 @@ const AppBarBox = styled.div<{ boxShadow: boolean; background: string | null }>`
   //position: absolute;
   //left: 0;
   display: flex;
+  position: fixed;
   width: 100%;
   height: 4.5rem;
   align-items: center;

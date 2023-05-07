@@ -9,11 +9,13 @@ import palette from "../../../style/color";
 import ClockIcon from "../../../images/PostComponent/clock.svg";
 import CheckIcon from "../../../images/PostComponent/check.svg";
 import { RouteURL } from "../../../App";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatBottomSheet from "../../chat/ChatBottomSheet";
 import PostVoteComponent from "./PostVoteComponent";
 import { userDataAtomType } from "../../../atom/userData";
 import { getRemainingTime } from "../../../utils/getRemainingTime";
+import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
+import { EndPoint } from "../../../dataManager/apiMapper";
 
 export const handleClickShare = async (postId: number) => {
   // https 배포에서만 확인 가능.
@@ -38,9 +40,8 @@ const PostComponent = ({
   postData: any;
 }) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-  console.log(postData);
+  // console.log(postData);
   const imgUrl = "https://via.placeholder.com/200X200";
-  const postId = 6;
   const handleClickMeatballsMenu = () => {
     console.log("hola");
   };
@@ -50,10 +51,6 @@ const PostComponent = ({
       // console.log(value, "->", !value);
       return !value;
     });
-  };
-
-  const handleClickResult = () => {
-    console.log("결과만 볼래용");
   };
 
   return (
@@ -82,16 +79,18 @@ const PostComponent = ({
             {getRemainingTime(postData.expirationTime)}
           </p>
         </div>
-        <PostVoteComponent postId={postId} />
+        <PostVoteComponent postData={postData} userId={userInfo.userId} />
+        {/*<PostVoteComponentWrap>*/}
+        {/*  <PostVoteButton>*/}
+        {/*    <div>fsa</div>*/}
+        {/*    <img src={CheckIcon} alt={"체크버튼"} />*/}
+        {/*  </PostVoteButton>{" "}*/}
+        {/*  <PostVoteButton>*/}
+        {/*    <div>fsa</div>*/}
+        {/*    <img src={CheckIcon} alt={"체크버튼"} />*/}
+        {/*  </PostVoteButton>*/}
+        {/*</PostVoteComponentWrap>*/}
         {/**/}
-        <div className={"voting"}>
-          <p className={"justResult"} onClick={() => handleClickResult()}>
-            결과만 볼래요
-          </p>
-          <p className={"result"}>
-            현재 투표한 사용자 {postData.userWorryChoiceCount}명
-          </p>
-        </div>
         <div className={"toolbar"}>
           <img
             src={ChatIcon}
@@ -101,10 +100,9 @@ const PostComponent = ({
           <img
             src={ShareIcon}
             alt={"공유"}
-            onClick={() => handleClickShare(postId)}
+            onClick={() => handleClickShare(postData.id)}
           />
         </div>
-
         <div className={"chatCount"} onClick={() => handleClickPostChat()}>
           댓글 {postData.replyCount}개 모두 보기
         </div>
@@ -112,7 +110,7 @@ const PostComponent = ({
       <ChatBottomSheet
         openBottomSheet={openBottomSheet}
         handleClickPostChat={handleClickPostChat}
-        postId={postId}
+        postId={postData.id}
         postData={postData}
       />
     </PostComponentWrap>
@@ -179,4 +177,25 @@ const PostImageComponentLayer = styled.img`
   width: 100vw;
   max-height: 29.25rem;
   object-fit: contain;
+`;
+
+const PostVoteButton = styled.div`
+  background-color: ${palette.Gray4};
+  width: 81vw; // 기존 34rem
+  height: 4.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 0.9rem;
+  padding-left: 1.3rem;
+  margin: 1.3rem 0 0 0;
+  border-radius: 0.5rem;
+  color: ${palette.Gray1};
+  font-size: 1.4rem;
+  font-weight: 500;
+`;
+
+const PostVoteComponentWrap = styled.div`
+  margin-top: 1.3rem;
+  margin-bottom: 1.7rem;
 `;

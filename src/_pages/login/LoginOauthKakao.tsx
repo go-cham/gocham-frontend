@@ -30,6 +30,8 @@ const LoginOauthKakao = () => {
             url: EndPoint.login.get.KAKAO_AUTH,
             query: { code },
           });
+          console.log("res");
+          console.log(res);
           const data = res && res.data;
           window.localStorage.setItem("token", data.token);
           const userData = await getUserInfo();
