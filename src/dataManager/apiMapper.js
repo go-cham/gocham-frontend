@@ -20,7 +20,7 @@ export const EndPoint = {
   worry: {
     get: {
       WORRIES: `${API}/worries`, // 고민 조회 api (페이지네이션)
-      WORRY_CHOICE: `${API}/worry-choice`, // 고민 선택지 조회 api
+      WORRY_CHOICES: `${API}/worry-choices`, // 고민 선택지 조회 api
       USER_WORRY_CHOICE: `${API}/user-worry-choice`, // 고민 선택지 투표 조회 api
       WORRY_REPLIES: `${API}/worry-replies`,
     },

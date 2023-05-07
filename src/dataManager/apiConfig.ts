@@ -43,12 +43,19 @@ export default class ApiConfig {
             .map((key) => key + "=" + query[key])
             .join("&");
       }
-
-      const headers = {
-        accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getBearerToken()}`,
-      };
+      let headers;
+      if (getBearerToken() !== null) {
+        headers = {
+          accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getBearerToken()}`,
+        };
+      } else {
+        headers = {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        };
+      }
 
       switch (method) {
         case HttpMethod.GET:
