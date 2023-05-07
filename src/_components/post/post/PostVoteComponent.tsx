@@ -1,20 +1,77 @@
 import CheckIcon from "../../../images/PostComponent/check.svg";
 import styled from "@emotion/styled";
 import palette from "../../../style/color";
+import React, { useEffect, useState } from "react";
+import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
+import { EndPoint } from "../../../dataManager/apiMapper";
 
-const PostVoteComponent = ({ postId }: { postId: number }) => {
+const PostVoteComponent = ({
+  postData,
+  userId,
+}: {
+  postData: any;
+  userId: number | null;
+}) => {
+  const handleClickResult = async (choiceId: number) => {
+    console.log(userId, choiceId);
+    const res = await ApiConfig.request({
+      method: HttpMethod.POST,
+      url: EndPoint.worry.post.USER_WORRY_CHOICE,
+      data: {
+        userId: userId,
+        worryChoiceId: choiceId,
+      },
+    });
+
+    console.log(res);
+  };
+
+  const [choiceDate, setChoiceDate] = useState([]);
+
+  useEffect(() => {
+    //   투표값 조회
+    ApiConfig.request({
+      method: HttpMethod.GET,
+      url: EndPoint.worry.get.WORRY_CHOICES,
+      query: { worryId: postData.id },
+    })?.then((res) => {
+      // console.log(res.data);
+      setChoiceDate(res.data);
+    });
+    // setChoiceDate()
+  }, []);
   return (
     <>
       <PostVoteComponentWrap>
-        <PostVoteButton>
-          <div>슬랙스</div>
-          <img src={CheckIcon} alt={"체크버튼"} />
-        </PostVoteButton>
-        <PostVoteButton>
-          <div>청바지</div>
-          <img src={CheckIcon} alt={"체크버튼"} />
-        </PostVoteButton>
+        {choiceDate.slice(0, -1).map((value: any, idx) => (
+          <PostVoteButton key={idx} onClick={() => handleClickResult(value.id)}>
+            <div>{value?.label}</div>
+            <img src={CheckIcon} alt={"체크버튼"} />
+          </PostVoteButton>
+        ))}
       </PostVoteComponentWrap>
+      <div className={"voting"}>
+        {choiceDate?.map((value: any, idx) => {
+          // 배열의 마지막 요소인 경우에만 렌더링
+          if (idx === choiceDate.length - 1) {
+            return (
+              <p
+                className={"justResult"}
+                onClick={() => handleClickResult(value.id)}
+                key={idx}
+              >
+                결과만 볼래요
+              </p>
+            );
+          } else {
+            return null;
+          }
+        })}
+
+        <p className={"result"}>
+          현재 투표한 사용자 {postData.userWorryChoiceCount}명
+        </p>
+      </div>
     </>
   );
 };
