@@ -13,16 +13,17 @@ import Onboarding from "./_pages/login/Onboarding";
 import Write from "./_pages/write/Write";
 import CollectInformation from "./_pages/collectInformation/CollectInformation";
 import LoginOauthKakao from "./_pages/login/LoginOauthKakao";
-import User from "./_pages/User/User";
+import User from "./_pages/user/User";
 import ApiConfig, { HttpMethod } from "./dataManager/apiConfig";
 import { EndPoint } from "./dataManager/apiMapper";
 import getUserInfo from "./utils/getUserInfo";
 import { useAtom } from "jotai";
 import { userAtom } from "./atom/userData";
-import Settings from "./_pages/User/Settings";
+import Settings from "./_pages/user/Settings";
 import Auth from "./HOC/Auth";
 import Feed from "./_pages/home/Feed";
 import AuthCheckPage from "./_pages/AuthCheckPage";
+import EditProfile from "./_pages/user/EditProfile";
 
 const defaultCSS = css`
   display: flex;
@@ -48,6 +49,7 @@ export const RouteURL = {
   collect_information: "/collect-information",
   user: "/user",
   settings: "/settings",
+  edit_profile: "/edit-profile",
   not_found: "/*",
   auth_check: "/auth-check",
 };
@@ -102,6 +104,12 @@ function App() {
           <Route
             path={RouteURL.user}
             element={<Auth SpecificComponent={User} requiredLogin={true} />}
+          />
+          <Route
+            path={RouteURL.edit_profile}
+            element={
+              <Auth SpecificComponent={EditProfile} requiredLogin={true} />
+            }
           />
           <Route path={RouteURL.settings} element={<Settings />} />
           <Route path={RouteURL.not_found} element={<Navigate to={"/"} />} />

@@ -18,7 +18,11 @@ const PostProfileBox = ({
   return (
     <ProfileBox>
       <div>
-        <img src={profileImg ? profileImg : GrayProfileImg} alt={"프로필"} />
+        <img
+          src={profileImg ? profileImg : GrayProfileImg}
+          alt={"프로필"}
+          className={"프로필"}
+        />
         <div className={"nickname"}>{nickname}</div>
       </div>
       {/*{menuFunction && (*/}
@@ -39,6 +43,11 @@ const ProfileBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  & .프로필 {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+  }
   & > img {
     width: 2.5rem;
     height: 2.5rem;

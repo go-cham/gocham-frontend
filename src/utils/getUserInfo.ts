@@ -13,7 +13,7 @@ const getUserInfo = async () => {
       url: EndPoint.user.get.USER_TYPE,
     });
     console.log("isUserRegistered ");
-    console.log(res);
+    console.log(res?.data);
     return res?.data;
   } catch (e) {
     return "error";

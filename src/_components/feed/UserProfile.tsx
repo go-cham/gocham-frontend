@@ -14,12 +14,18 @@ import { RouteURL } from "../../App";
 const UserProfile = ({
   isMyFeed,
   userData,
+  userProfile,
 }: {
   isMyFeed: boolean;
   userData: userDataAtomType;
+  userProfile: any;
 }) => {
   //   isMyFeed 는 추후 타인 프로필 접근시 프로필 편집 글자 대신 팔로우/팔로우해제 버튼으로
   const navigate = useNavigate();
+
+  const handleGoEditProfile = () => {
+    navigate(RouteURL.edit_profile);
+  };
   return (
     <>
       <SettingImg
@@ -42,6 +48,7 @@ const UserProfile = ({
           borderRadius={0.7}
           border={`0.1rem solid ${palette.Secondary}`}
           size={1.2}
+          onClick={() => handleGoEditProfile()}
         >
           프로필 편집
         </ProfileUtilButton>
