@@ -1,25 +1,28 @@
-/**
- *  ISO 8601 타입의 날짜를 프론트에 적절하게 처리하는 함수.
- * @param dateStr  "2023-05-06T18:10:53.000Z"
- */
-export function formatDate(dateStr: string): string {
-  const date = new Date(dateStr);
+export function formatDate(date: string): string {
   const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+  const dateObj = new Date(date);
+  const diff = (now.getTime() - dateObj.getTime()) / 1000; // 초 단위로 시간차 계산
 
-  if (diffHours < 24) {
-    return `${diffHours}시간 전`;
-  } else if (diffDays === 1) {
+  if (diff < 60) {
+    return "방금 전";
+  } else if (diff < 3600) {
+    const minutes = Math.floor(diff / 60);
+    return `${minutes}분 전`;
+  } else if (diff < 86400) {
+    const hours = Math.floor(diff / 3600);
+    return `${hours}시간 전`;
+  } else if (diff < 172800) {
     return "1일 전";
-  } else if (diffDays > 1) {
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    return `${year}년 ${month}월 ${day}일`;
+  } else if (diff < 2592000) {
+    const days = Math.floor(diff / 86400);
+    return `${days}일 전`;
+  } else if (now.getFullYear() === dateObj.getFullYear()) {
+    return dateObj.toLocaleString("ko-KR", { month: "long", day: "numeric" });
   } else {
-    // 이 부분은 날짜가 잘못되었을 경우를 대비한 보충 로직입니다.
-    return "";
+    return dateObj.toLocaleString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
   }
 }
