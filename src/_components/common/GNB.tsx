@@ -21,14 +21,14 @@ const GNB = () => {
 
   const [selectedMenu, setSelectedMenu] = useState("posting");
   useEffect(() => {
-    if (location.pathname.includes("/feed")) setSelectedMenu("feed");
+    if (location.pathname.includes("/user")) setSelectedMenu("user");
     else {
       setSelectedMenu("posting");
     }
   }, [location.pathname]);
 
-  const handleGoMyFeed = () => {
-    navigate(`/feed/${userData.userId}`);
+  const handleGoUserPage = () => {
+    navigate(RouteURL.user);
   };
 
   const handleGoWrite = () => {
@@ -48,12 +48,12 @@ const GNB = () => {
           />
         )}
         <AddButton image={AddPostIcon} onClick={() => handleGoWrite()} />
-        {selectedMenu === "feed" ? (
+        {selectedMenu === "user" ? (
           <SelectButton image={SelectProfileIcon} />
         ) : (
           <SelectButton
             image={UnselectProfileIcon}
-            onClick={() => handleGoMyFeed()}
+            onClick={() => handleGoUserPage()}
           />
         )}
       </GNBBackgroundWrap>

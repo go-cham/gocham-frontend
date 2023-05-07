@@ -23,7 +23,7 @@ const PostListComponent = ({
   const navigate = useNavigate();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const handleGoPostDetail = () => {
-    navigate(`${RouteURL.post}/${postData.id}`);
+    navigate(`${RouteURL.feed}/${postData.id}`);
   };
   const handleClickPostChat = () => {
     if (userInfo.userType === "activatedUser") {

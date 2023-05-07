@@ -1,24 +1,19 @@
 /** @jsxImportSource @emotion/react */
 
-/**
- * 포스트 리스트 레이어
- */
 import { css } from "@emotion/react";
 import React, { useEffect, useRef, useState } from "react";
-import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
-import { EndPoint } from "../../../dataManager/apiMapper";
-import PostListComponent from "./PostListComponent";
+import { useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
+import PostComponent from "../../_components/post/feed/PostComponent";
+import AppBar from "../../_components/common/AppBar";
 import { useAtomValue } from "jotai";
-import { userAtom } from "../../../atom/userData";
+import { userAtom } from "../../atom/userData";
+import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
+import { EndPoint } from "../../dataManager/apiMapper";
+import { postingMetaDataType } from "../../_components/post/list/PostListLayer";
+import palette from "../../style/color";
 
-export type postingMetaDataType = {
-  take: number;
-  total?: number;
-  hasNextData?: boolean;
-  nextId?: number;
-};
-const PostListLayer = () => {
+const Feed = () => {
   const userInfo = useAtomValue(userAtom);
   const [postingData, setPostingData] = useState<any[]>([]);
   const [postingMetaData, setPostingMetaData] = useState<postingMetaDataType>({
@@ -72,12 +67,13 @@ const PostListLayer = () => {
   useEffect(() => {
     // IntersectionObserver 등록하기
     observer.current = new IntersectionObserver(handleObserver, {
-      rootMargin: "0px 0px 100px 0px",
+      rootMargin: "0px 0px 0px 0px",
       threshold: 1.0,
     });
 
     // 마지막 요소에 observer 등록하기
-    const lastItem = document.querySelector(".post:last-child");
+    const lastItem = document.querySelector(".PostComponent:last-child");
+    document.querySelector(".feed:last-child")?.setAttribute("name", "이거");
     if (lastItem) {
       observer.current.observe(lastItem);
     }
@@ -92,6 +88,7 @@ const PostListLayer = () => {
 
   const handleObserver = (entities: IntersectionObserverEntry[]) => {
     const target = entities[0];
+    console.log(target.isIntersecting);
 
     // observer가 타겟 요소와 교차하면 데이터 추가 요청하기
     if (target.isIntersecting && hasMore) {
@@ -100,23 +97,26 @@ const PostListLayer = () => {
   };
 
   return (
-    <PostListLayerStyle>
-      {postingData?.map((value, idx) => (
-        <div key={idx} className={"post"}>
-          <PostListComponent userInfo={userInfo} postData={value} />
-        </div>
-      ))}
-    </PostListLayerStyle>
+    <PostWrap>
+      <AppBar title={"인기 게시물"} background={"white"} />
+      <PostLayer>
+        {postingData?.map((value, idx) => (
+          <div key={idx} className={"PostComponent"}>
+            <PostComponent userInfo={userInfo} postData={value} />
+          </div>
+        ))}
+      </PostLayer>
+    </PostWrap>
   );
 };
-export default PostListLayer;
+export default Feed;
 
-const PostListLayerStyle = styled.div`
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2.2rem 0 10rem;
-  justify-content: center;
-  overflow: scroll;
+const PostWrap = styled.div`
+  overflow: hidden;
+`;
+
+const PostLayer = styled.div`
+  margin-top: 4.6rem;
+  //height: calc(100vh - 4.6rem);
+  overflow-y: hidden;
 `;

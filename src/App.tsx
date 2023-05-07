@@ -13,15 +13,15 @@ import Onboarding from "./_pages/login/Onboarding";
 import Write from "./_pages/write/Write";
 import CollectInformation from "./_pages/collectInformation/CollectInformation";
 import LoginOauthKakao from "./_pages/login/LoginOauthKakao";
-import Feed from "./_pages/feed/Feed";
+import User from "./_pages/User/User";
 import ApiConfig, { HttpMethod } from "./dataManager/apiConfig";
 import { EndPoint } from "./dataManager/apiMapper";
 import getUserInfo from "./utils/getUserInfo";
 import { useAtom } from "jotai";
 import { userAtom } from "./atom/userData";
-import Settings from "./_pages/feed/Settings";
+import Settings from "./_pages/User/Settings";
 import Auth from "./HOC/Auth";
-import Post from "./_pages/home/Post";
+import Feed from "./_pages/home/Feed";
 import AuthCheckPage from "./_pages/AuthCheckPage";
 
 const defaultCSS = css`
@@ -38,15 +38,15 @@ const defaultCSS = css`
 `;
 export const RouteURL = {
   home: "/",
-  post: "/post",
-  post_star: "/post/*", // 포스트 상세
+  feed: "/feed",
+  feed_star: "/feed/*", // 포스트 상세
   login: "/login",
   login_oauth_kakao: "/login/oauth/kakao",
   register_term: "/register/term",
   onboarding: "/onboarding",
   write: "/write",
   collect_information: "/collect-information",
-  feed: "/feed/*",
+  user: "/user",
   settings: "/settings",
   not_found: "/*",
   auth_check: "/auth-check",
@@ -82,8 +82,8 @@ function App() {
             element={<CollectInformation />}
           />
           <Route // hoc 적용 필요
-            path={RouteURL.post_star}
-            element={<Post />}
+            path={RouteURL.feed_star}
+            element={<Feed />}
           />
           <Route
             path={RouteURL.login}
@@ -100,8 +100,8 @@ function App() {
             element={<Auth SpecificComponent={Write} requiredLogin={true} />}
           />
           <Route
-            path={RouteURL.feed}
-            element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
+            path={RouteURL.user}
+            element={<Auth SpecificComponent={User} requiredLogin={true} />}
           />
           <Route path={RouteURL.settings} element={<Settings />} />
           <Route path={RouteURL.not_found} element={<Navigate to={"/"} />} />

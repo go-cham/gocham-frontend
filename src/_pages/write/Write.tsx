@@ -106,7 +106,7 @@ const Write = () => {
         data: postData,
       });
       console.log(res);
-      navigate(`${RouteURL.post}/${res?.data.id}`);
+      navigate(`${RouteURL.feed}/${res?.data.id}`);
     } catch (e) {
       console.log(e);
       alert(alertMessage.error.post.noUploadPermission);

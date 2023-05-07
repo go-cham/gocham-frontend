@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import VoteComponent from "../../_components/vote/VoteComponent";
 import { RouteURL } from "../../App";
 import AuthenticationCheck from "../../utils/AuthenticationCheck";
-import PostListLayer from "../../_components/post/postList/PostListLayer";
+import PostListLayer from "../../_components/post/list/PostListLayer";
 import styled from "@emotion/styled";
 import palette from "../../style/color";
 
@@ -32,6 +32,9 @@ export default Home;
 const MainView = styled.div`
   width: 100%;
   & .title {
+    width: 100vw;
+    position: fixed;
+    background-color: white;
     padding-left: 3rem;
     padding-bottom: 1.5rem;
     border-bottom: 0.1rem solid ${palette.Gray3};

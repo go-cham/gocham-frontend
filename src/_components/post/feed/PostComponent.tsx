@@ -24,7 +24,7 @@ export const handleClickShare = async (postId: number) => {
     await navigator.share({
       title: "링크 공유",
       text: "이 링크를 공유합니다.",
-      url: `${process.env.REACT_APP_BASE_URL}${RouteURL.post}/${postId}`,
+      url: `${process.env.REACT_APP_BASE_URL}${RouteURL.feed}/${postId}`,
     });
     console.log("링크가 공유되었습니다.");
   } catch (error) {

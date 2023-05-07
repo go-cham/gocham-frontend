@@ -5,7 +5,7 @@ import palette from "../../style/color";
 import ChatIcon from "../../images/PostComponent/chat.svg";
 import ShareIcon from "../../images/PostComponent/share.svg";
 import SendIcon from "../../images/PostComponent/send.svg";
-import { handleClickShare } from "../post/post/PostComponent";
+import { handleClickShare } from "../post/feed/PostComponent";
 import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
 import { EndPoint } from "../../dataManager/apiMapper";
 import { userDataAtomType } from "../../atom/userData";
