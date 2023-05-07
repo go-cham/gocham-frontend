@@ -39,8 +39,8 @@ const defaultCSS = css`
 `;
 export const RouteURL = {
   home: "/",
-  feed: "/feed",
-  feed_star: "/feed/*", // 포스트 상세
+  feed: "/user",
+  feed_star: "/user/*", // 포스트 상세
   login: "/login",
   login_oauth_kakao: "/login/oauth/kakao",
   register_term: "/register/term",

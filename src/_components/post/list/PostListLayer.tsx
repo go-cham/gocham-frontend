@@ -77,7 +77,7 @@ const PostListLayer = () => {
     });
 
     // 마지막 요소에 observer 등록하기
-    const lastItem = document.querySelector(".feed:last-child");
+    const lastItem = document.querySelector(".user:last-child");
     if (lastItem) {
       observer.current.observe(lastItem);
     }
@@ -102,7 +102,7 @@ const PostListLayer = () => {
   return (
     <PostListLayerStyle>
       {postingData?.map((value, idx) => (
-        <div key={idx} className={"feed"}>
+        <div key={idx} className={"user"}>
           <PostListComponent userInfo={userInfo} postData={value} />
         </div>
       ))}

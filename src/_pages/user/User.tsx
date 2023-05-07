@@ -3,8 +3,8 @@
 import { css } from "@emotion/react";
 import react, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import SelectMyPostType from "../../_components/feed/SelectMyPostType";
-import UserProfile from "../../_components/feed/UserProfile";
+import SelectMyPostType from "../../_components/user/SelectMyPostType";
+import UserProfile from "../../_components/user/UserProfile";
 import { userAtom } from "../../atom/userData";
 import { useAtom } from "jotai";
 import { RouteURL } from "../../App";
@@ -106,7 +106,7 @@ const User = () => {
     });
 
     // 마지막 요소에 observer 등록하기
-    const lastItem = document.querySelector(".feed:last-child");
+    const lastItem = document.querySelector(".user:last-child");
     if (lastItem) {
       observer.current.observe(lastItem);
     }
@@ -145,7 +145,7 @@ const User = () => {
 
       <PostListLayerStyle>
         {postingData?.map((value, idx) => (
-          <div key={idx} className={"feed"}>
+          <div key={idx} className={"user"}>
             <PostListComponent userInfo={userInfo} postData={value} />
           </div>
         ))}

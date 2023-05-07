@@ -73,7 +73,7 @@ const Feed = () => {
 
     // 마지막 요소에 observer 등록하기
     const lastItem = document.querySelector(".PostComponent:last-child");
-    document.querySelector(".feed:last-child")?.setAttribute("name", "이거");
+    document.querySelector(".user:last-child")?.setAttribute("name", "이거");
     if (lastItem) {
       observer.current.observe(lastItem);
     }
