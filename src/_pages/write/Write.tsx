@@ -493,8 +493,11 @@ const WriteComponent = styled.div`
 
 const WriteWrap = styled.div`
   width: 100vw;
-  height: 100vh;
+  //height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-bottom: 15rem;
   //justify-content: space-between;
 `;
