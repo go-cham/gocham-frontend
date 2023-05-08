@@ -10,6 +10,7 @@ import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
 import { EndPoint } from "../../dataManager/apiMapper";
 import { userDataAtomType } from "../../atom/userData";
 import { formatDate } from "../../utils/formatDate";
+import { formatText } from "../../utils/formatText";
 
 export default function Content({
   openBottomSheet,
@@ -77,14 +78,16 @@ export default function Content({
       <PostChatContainer>
         <PostProfileBox nickname={"닉넹미"} />
         <h1>{postData.title}</h1>
-        <h2>{postData.content}</h2>
+        <h2>{formatText(postData.content)}</h2>
         <div className={"toolbar"}>
           <img
             src={ShareIcon}
             alt={"공유"}
             onClick={() => handleClickShare(postId)}
           />
-          <p className={"result"}>현재 투표한 사용자 nnn명</p>
+          <p className={"result"}>
+            현재 투표한 사용자 {postData.userWorryChoiceCount}명
+          </p>
         </div>
       </PostChatContainer>
       <GrayBar />
@@ -177,6 +180,7 @@ const PostChatContainer = styled.div`
     margin-top: 1.3rem;
     font-weight: 400;
     font-size: 1.4rem;
+    line-height: 2.1rem;
     padding-bottom: 1.7rem;
   }
   & .toolbar {

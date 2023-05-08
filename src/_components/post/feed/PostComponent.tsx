@@ -16,6 +16,7 @@ import { userDataAtomType } from "../../../atom/userData";
 import { getRemainingTime } from "../../../utils/getRemainingTime";
 import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
 import { EndPoint } from "../../../dataManager/apiMapper";
+import { formatText } from "../../../utils/formatText";
 
 export const handleClickShare = async (postId: number) => {
   // https 배포에서만 확인 가능.
@@ -63,7 +64,7 @@ const PostComponent = ({
           profileImg={postData.user.profileImageUrl}
         />
         <h1>{postData.title}</h1>
-        <h2>{postData.content}</h2>
+        <h2>{formatText(postData.content)}</h2>
       </PostComponentLayer>
       {postData.worryFiles[0]?.url && (
         <PostImageComponentLayer
@@ -170,6 +171,7 @@ const PostComponentLayer = styled.div`
     font-weight: 400;
     font-size: 1.4rem;
     padding-bottom: 1.7rem;
+    line-height: 2.1rem;
   }
 `;
 

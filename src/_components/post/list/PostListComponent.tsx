@@ -12,6 +12,7 @@ import { RouteURL } from "../../../App";
 import ChatBottomSheet from "../../chat/ChatBottomSheet";
 import { userInfo } from "os";
 import { userDataAtomType } from "../../../atom/userData";
+import { formatText } from "../../../utils/formatText";
 
 const PostListComponent = ({
   userInfo,
@@ -22,7 +23,6 @@ const PostListComponent = ({
   postData: any;
   routeUrl?: string;
 }) => {
-  console.log(postData);
   const navigate = useNavigate();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const handleGoPostDetail = () => {
@@ -57,7 +57,7 @@ const PostListComponent = ({
           <PostContentBox onClick={() => handleGoPostDetail()}>
             <PostContentText haveImage={!!postData.worryFiles[0]?.url}>
               <h1>{postData.title}</h1>
-              <div className={"content"}>{postData.content}</div>
+              <div className={"content"}>{formatText(postData.content)}</div>
             </PostContentText>
             {postData.worryFiles[0]?.url && (
               <img
