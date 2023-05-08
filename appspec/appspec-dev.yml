@@ -15,5 +15,4 @@ hooks:
   ApplicationStart:
     - location: ./deploy-dev.sh # ApplicationStart 단계에서 deploy.sh 실행
       timeout: 300
-      runas: root
-#      runas: ec2-user
+      runas: ubuntu
