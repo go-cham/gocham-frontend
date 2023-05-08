@@ -39,8 +39,8 @@ const defaultCSS = css`
 `;
 export const RouteURL = {
   home: "/",
-  feed: "/user",
-  feed_star: "/user/*", // 포스트 상세
+  feed: "/feed",
+  feed_star: "/feed/:id", // 포스트 상세
   login: "/login",
   login_oauth_kakao: "/login/oauth/kakao",
   register_term: "/register/term",
@@ -83,9 +83,9 @@ function App() {
             path={RouteURL.collect_information}
             element={<CollectInformation />}
           />
-          <Route // hoc 적용 필요
+          <Route
             path={RouteURL.feed_star}
-            element={<Feed />}
+            element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
           />
           <Route
             path={RouteURL.login}

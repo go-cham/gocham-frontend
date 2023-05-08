@@ -16,14 +16,20 @@ import { userDataAtomType } from "../../../atom/userData";
 const PostListComponent = ({
   userInfo,
   postData,
+  routeUrl,
 }: {
   userInfo: userDataAtomType;
   postData: any;
+  routeUrl?: string;
 }) => {
   const navigate = useNavigate();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const handleGoPostDetail = () => {
-    navigate(`${RouteURL.feed}/${postData.id}`);
+    if (routeUrl) {
+      navigate(`${RouteURL.feed}/my`);
+    } else {
+      navigate(`${RouteURL.feed}/${postData.id}`);
+    }
   };
   const handleClickPostChat = () => {
     if (userInfo.userType === "activatedUser") {

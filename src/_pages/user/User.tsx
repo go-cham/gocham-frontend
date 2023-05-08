@@ -146,7 +146,11 @@ const User = () => {
       <PostListLayerStyle>
         {postingData?.map((value, idx) => (
           <div key={idx} className={"user"}>
-            <PostListComponent userInfo={userInfo} postData={value} />
+            <PostListComponent
+              userInfo={userInfo}
+              postData={value}
+              routeUrl={"my"}
+            />
           </div>
         ))}
       </PostListLayerStyle>

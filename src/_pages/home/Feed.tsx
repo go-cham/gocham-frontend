@@ -2,7 +2,7 @@
 
 import { css } from "@emotion/react";
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import PostComponent from "../../_components/post/feed/PostComponent";
 import AppBar from "../../_components/common/AppBar";
@@ -14,6 +14,9 @@ import { postingMetaDataType } from "../../_components/post/list/PostListLayer";
 import palette from "../../style/color";
 
 const Feed = () => {
+  const params = useParams();
+  console.log("params");
+  console.log(params);
   const userInfo = useAtomValue(userAtom);
   const [postingData, setPostingData] = useState<any[]>([]);
   const [postingMetaData, setPostingMetaData] = useState<postingMetaDataType>({
@@ -24,6 +27,7 @@ const Feed = () => {
   const [hasMore, setHasMore] = useState(true);
   const observer = useRef<IntersectionObserver | null>(null);
 
+  const [routeUrl, setRouteUrl] = useState("");
   useEffect(() => {
     // 처음 페이지 로딩 시에만 데이터 가져오기
     if (isLoading) {
@@ -32,16 +36,23 @@ const Feed = () => {
   }, [isLoading]);
 
   const fatchData = async () => {
-    let reqData;
-
+    let reqData = {};
+    if (params.id === "my") {
+      reqData = { authorId: userInfo.userId };
+    } else if (params.id === "participated") {
+    } else {
+      reqData = { nextCursorId: Number(params.id) + 1 };
+    }
     if (postingMetaData.nextId) {
       reqData = {
+        ...reqData,
         sort: "DESC",
         take: 5,
         nextCursorId: postingMetaData.nextId,
       };
     } else {
       reqData = {
+        ...reqData,
         sort: "DESC",
         take: 5,
       };
@@ -98,7 +109,16 @@ const Feed = () => {
 
   return (
     <PostWrap>
-      <AppBar title={"인기 게시물"} background={"white"} />
+      <AppBar
+        title={
+          params.id === "my"
+            ? "내 게시글"
+            : params.id === "participated"
+            ? "참여한 게시글"
+            : "인기 게시물"
+        }
+        background={"white"}
+      />
       <PostLayer>
         {postingData?.map((value, idx) => (
           <div key={idx} className={"PostComponent"}>
@@ -113,10 +133,12 @@ export default Feed;
 
 const PostWrap = styled.div`
   overflow: hidden;
+  position: absolute;
+  left: 0;
 `;
 
 const PostLayer = styled.div`
   margin-top: 4.6rem;
-  //height: calc(100vh - 4.6rem);
-  overflow-y: hidden;
+  height: calc(100vh - 4.6rem);
+  overflow-y: scroll;
 `;
