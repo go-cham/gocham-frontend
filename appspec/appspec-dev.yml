@@ -7,12 +7,12 @@ files:
 
 permissions:
   - object: /usr/share/nginx/gocham-service-web-react-typescript/build-dev
-    pattern: '**'
     owner: ubuntu
     group: ubuntu
+    mode: 755
 
 hooks:
   ApplicationStart:
-    - location: ./deploy-dev.sh # ApplicationStart 단계에서 deploy.sh 실행
+    - location: deploy-dev.sh # ApplicationStart 단계에서 deploy.sh 실행
       timeout: 300
       runas: ubuntu
