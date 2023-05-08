@@ -78,8 +78,8 @@ const Feed = () => {
   useEffect(() => {
     // IntersectionObserver 등록하기
     observer.current = new IntersectionObserver(handleObserver, {
-      rootMargin: "0px 0px 0px 0px",
-      threshold: 1.0,
+      rootMargin: "0px 0px 200px 0px",
+      threshold: 0.5,
     });
 
     // 마지막 요소에 observer 등록하기
@@ -141,4 +141,9 @@ const PostLayer = styled.div`
   margin-top: 4.6rem;
   height: calc(100vh - 4.6rem);
   overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+
+  & .PostComponent {
+    scroll-snap-align: start;
+  }
 `;

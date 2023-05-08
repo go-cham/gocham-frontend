@@ -85,7 +85,7 @@ function App() {
           />
           <Route
             path={RouteURL.feed_star}
-            element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
+            element={<Auth SpecificComponent={Feed} requiredLogin={null} />}
           />
           <Route
             path={RouteURL.login}
