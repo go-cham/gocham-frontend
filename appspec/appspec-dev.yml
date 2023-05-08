@@ -7,9 +7,9 @@ files:
 
 permissions:
   - object: /usr/share/nginx/gocham-service-web-react-typescript/dev
+    pattern: '**'
     owner: ubuntu
     group: ubuntu
-    mode: 755
 
 hooks:
   ApplicationStart:
