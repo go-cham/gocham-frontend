@@ -100,22 +100,30 @@ const PostListLayer = () => {
   };
 
   return (
-    <PostListLayerStyle>
-      {postingData?.map((value, idx) => (
-        <div key={idx} className={"user"}>
-          <PostListComponent userInfo={userInfo} postData={value} />
-        </div>
-      ))}
-    </PostListLayerStyle>
+    <PostListLayerWrap>
+      <PostListLayerStyle>
+        {postingData?.map((value, idx) => (
+          <div key={idx} className={"user"}>
+            <PostListComponent userInfo={userInfo} postData={value} />
+          </div>
+        ))}
+      </PostListLayerStyle>
+    </PostListLayerWrap>
   );
 };
 export default PostListLayer;
+
+const PostListLayerWrap = styled.div`
+  overflow-y: scroll;
+  height: 100%;
+`;
 
 const PostListLayerStyle = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10.5rem 0 10rem;
+  margin: 2rem 0 10rem;
   justify-content: center;
+  //height: calc(100vh - 8rem);
 `;

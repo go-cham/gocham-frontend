@@ -21,6 +21,7 @@ const Home = () => {
       <div className={"title"}>
         <h1 css={H1}>고민의 참견</h1>
       </div>
+      <div style={{ height: "8.6rem" }} />
       <PostListLayer />
       {/*<VoteComponent />*/}
     </MainView>
@@ -31,6 +32,8 @@ export default Home;
 
 const MainView = styled.div`
   width: 100%;
+  overflow-y: hidden;
+  height: 100vh;
   & .title {
     width: 100vw;
     position: fixed;
