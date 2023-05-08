@@ -22,6 +22,7 @@ const PostListComponent = ({
   postData: any;
   routeUrl?: string;
 }) => {
+  console.log(postData);
   const navigate = useNavigate();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const handleGoPostDetail = () => {
@@ -46,9 +47,11 @@ const PostListComponent = ({
       <PostListBox>
         <div>
           <PostProfileBox
-            nickname={postData.nickname ? postData.nickname : "익명"}
+            nickname={postData.user.nickname ? postData.user.nickname : "익명"}
             profileImg={
-              postData.profileImageUrl ? postData.profileImageUrl : null
+              postData.user.profileImageUrl
+                ? postData.user.profileImageUrl
+                : null
             }
           />
           <PostContentBox onClick={() => handleGoPostDetail()}>
