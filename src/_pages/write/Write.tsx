@@ -88,7 +88,7 @@ const Write = () => {
     if (imageFile !== "") {
       try {
         // 업로드 과정
-        imgUrl = await uploadFirebase("userIdx", imageFile, "posting");
+        imgUrl = await uploadFirebase(userInfo.userId, imageFile, "posting");
         // postData에 끼워넣기
         postData.files = [{ url: imgUrl, contentType: "image" }];
       } catch (e) {
