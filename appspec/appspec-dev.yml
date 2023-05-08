@@ -2,11 +2,11 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /usr/share/nginx/gocham-service-web-react-typescript/build-dev # 배포될 위치
+    destination: /usr/share/nginx/gocham-service-web-react-typescript/dev # 배포될 위치
     overwrite: yes
 
 permissions:
-  - object: /usr/share/nginx/gocham-service-web-react-typescript/build-dev
+  - object: /usr/share/nginx/gocham-service-web-react-typescript/dev
     owner: ubuntu
     group: ubuntu
     mode: 755

@@ -43,7 +43,7 @@ jobs:
         working-directory: ./
         run: npm run build-${{env.NODE_ENV}}
         env:
-          CI: false
+          CI: ""
 
       # appspec 파일 복사
       - name: Copy appspec.yml to match the environment variable
@@ -58,7 +58,7 @@ jobs:
       # 레포지토리를 압축시킵니다.
       # 다만 불필요한 node_module, coverage, src, test, readme, .git* 등의 파일은 제외시킵니다.
       - name: Make a zip file
-        run: zip -r build.zip ./build-${{env.NODE_ENV}} -x "node_modules/*" "coverage/*" "src/*" "test/*" "README.md" "*.git*"
+        run: zip -r build.zip . -x "node_modules/*" "coverage/*" "src/*" "test/*" "README.md" "*.git*"
         shell: bash
 
       # 위에서 생성한 IAM 사용자 정보를 넣어 자격 증명을 수행합니다.
