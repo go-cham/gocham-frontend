@@ -2,7 +2,7 @@
 
 import { css } from "@emotion/react";
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "@emotion/styled";
 import PostComponent from "../../_components/post/feed/PostComponent";
 import AppBar from "../../_components/common/AppBar";
@@ -12,11 +12,11 @@ import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
 import { EndPoint } from "../../dataManager/apiMapper";
 import { postingMetaDataType } from "../../_components/post/list/PostListLayer";
 import palette from "../../style/color";
+import { RouteURL } from "../../App";
 
 const Feed = () => {
   const params = useParams();
-  console.log("params");
-  console.log(params);
+  const navigate = useNavigate();
   const userInfo = useAtomValue(userAtom);
   const [postingData, setPostingData] = useState<any[]>([]);
   const [postingMetaData, setPostingMetaData] = useState<postingMetaDataType>({
@@ -30,6 +30,9 @@ const Feed = () => {
   const [routeUrl, setRouteUrl] = useState("");
   useEffect(() => {
     // 처음 페이지 로딩 시에만 데이터 가져오기
+    if (!userInfo.userId) {
+      navigate(RouteURL.home);
+    }
     if (isLoading) {
       fatchData();
     }
@@ -37,9 +40,9 @@ const Feed = () => {
 
   const fatchData = async () => {
     let reqData = {};
-    if (params.id === "my") {
+    if (params.route === "my") {
       reqData = { authorId: userInfo.userId };
-    } else if (params.id === "participated") {
+    } else if (params.route === "participated") {
     } else {
       reqData = { nextCursorId: Number(params.id) + 1 };
     }
@@ -111,9 +114,9 @@ const Feed = () => {
     <PostWrap>
       <AppBar
         title={
-          params.id === "my"
+          params.route === "my"
             ? "내 게시글"
-            : params.id === "participated"
+            : params.route === "participated"
             ? "참여한 게시글"
             : "인기 게시물"
         }

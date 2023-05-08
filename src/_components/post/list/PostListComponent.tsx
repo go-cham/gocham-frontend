@@ -27,7 +27,7 @@ const PostListComponent = ({
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const handleGoPostDetail = () => {
     if (routeUrl) {
-      navigate(`${RouteURL.feed}/my`);
+      navigate(`${RouteURL.feed}/${postData.id}/${routeUrl}`);
     } else {
       navigate(`${RouteURL.feed}/${postData.id}`);
     }

@@ -40,7 +40,7 @@ const defaultCSS = css`
 export const RouteURL = {
   home: "/",
   feed: "/feed",
-  feed_star: "/feed/:id", // 포스트 상세
+  feed_star: "/feed/:id/:route", // 포스트 상세
   login: "/login",
   login_oauth_kakao: "/login/oauth/kakao",
   register_term: "/register/term",
