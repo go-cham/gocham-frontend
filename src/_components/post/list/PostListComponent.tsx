@@ -55,9 +55,9 @@ const PostListComponent = ({
             }
           />
           <PostContentBox onClick={() => handleGoPostDetail()}>
-            <PostContentText>
+            <PostContentText haveImage={!!postData.worryFiles[0]?.url}>
               <h1>{postData.title}</h1>
-              <h2>{postData.content}</h2>
+              <div className={"content"}>{postData.content}</div>
             </PostContentText>
             {postData.worryFiles[0]?.url && (
               <img
@@ -119,9 +119,12 @@ const PostListBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: 0 0 1.7rem 0;
+  position: relative;
 `;
 
-const PostContentText = styled.div`
+const PostContentText = styled.div<{ haveImage: boolean }>`
+  width: ${({ haveImage }) => (haveImage ? "calc(100% - 7.2rem)" : "100%")};
+
   & h1 {
     font-weight: 700;
     font-size: 1.6rem;
@@ -129,19 +132,23 @@ const PostContentText = styled.div`
     line-height: 1.9rem;
     color: ${palette.Text1};
   }
-  & h2 {
+  & .content {
     margin-top: 0.5rem;
     font-weight: 400;
     font-size: 1.2rem;
     line-height: 1.9rem;
     color: ${palette.Text2};
+    height: 1.6rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
 
 const PostContentBox = styled.div`
   display: flex;
   justify-content: space-between;
-
+  position: relative;
   margin-top: 1.5rem;
   & .게시글이미지 {
     width: 7.2rem;

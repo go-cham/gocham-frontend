@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
-import React, { useEffect } from "react";
+import React from "react";
 import AppBar from "../../_components/common/AppBar";
 import styled from "@emotion/styled";
 import { ButtonStyle } from "../../style/common";
