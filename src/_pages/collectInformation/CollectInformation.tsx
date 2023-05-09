@@ -31,7 +31,7 @@ export type userInformationPropsType = {
   setUserInformation: react.Dispatch<any>;
 };
 
-type postUserInformationPropsType = {
+export type postUserInformationPropsType = {
   userId: number;
   nickname: string; // 제거 예정
   birthDate: string;

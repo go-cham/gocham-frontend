@@ -175,7 +175,7 @@ const CollectNicknameAgeGender = ({
         isMulti
         closeMenuOnSelect={false}
         isSearchable={false}
-        styles={customMultiStyles}
+        styles={customStyles}
         options={categoryOptions}
         value={userInformation.worryCategories}
         onChange={(e) => handleInputValue(e, "worryCategories")}
