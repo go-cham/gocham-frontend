@@ -6,16 +6,18 @@ import { EndPoint } from "../dataManager/apiMapper";
  *
  */
 const getUserInfo = async () => {
-  console.log("확인작업 들어갑니다");
+  // console.log("확인작업 들어갑니다");
   try {
     const res = await ApiConfig.request({
       method: HttpMethod.GET,
       url: EndPoint.user.get.USER_TYPE,
     });
-    console.log("isUserRegistered ");
-    console.log(res?.data);
+    // console.log("isUserRegistered ");
+    // console.log(res?.data);
+    // console.log("성공");
     return res?.data;
   } catch (e) {
+    // console.log("실패");
     return "error";
   }
 };

@@ -3,6 +3,7 @@ import { userAtom } from "../atom/userData";
 import { useAtom } from "jotai";
 import { RouteURL } from "../App";
 import { useNavigate } from "react-router-dom";
+import getUserInfo from "../utils/getUserInfo";
 
 type AuthProps = {
   SpecificComponent: React.ComponentType<any>;
@@ -15,19 +16,37 @@ type AuthProps = {
  * @constructor
  */
 const Auth = ({ SpecificComponent, requiredLogin = null }: AuthProps) => {
-  console.log("auth 실행중");
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useAtom(userAtom);
   useEffect(() => {
-    if (userInfo.userType === "onceUser")
-      navigate(RouteURL.collect_information);
-    else if (userInfo.userType === "onceUserWithoutTerms")
-      navigate(RouteURL.register_term);
-    else if (requiredLogin === false) {
-      if (userInfo.userType === "activatedUser") navigate(RouteURL.home);
-    } else if (requiredLogin === true) {
-      if (userInfo.userType !== "activatedUser") navigate(RouteURL.login);
-    }
+    console.log("auth 실행중");
+    let newUserInfo = userInfo;
+
+    const checkIsLogin = async () => {
+      if (!userInfo.userId) {
+        newUserInfo = await getUserInfo();
+        console.log("newUserInfo");
+        console.log(newUserInfo);
+        setUserInfo(newUserInfo);
+      }
+
+      if (newUserInfo.userType === "onceUser")
+        navigate(RouteURL.collect_information);
+      else if (newUserInfo.userType === "onceUserWithoutTerms")
+        navigate(RouteURL.register_term);
+      else if (requiredLogin === false) {
+        if (newUserInfo.userType === "activatedUser") navigate(RouteURL.home);
+      } else if (requiredLogin === true) {
+        if (newUserInfo.userType !== "activatedUser") {
+          console.log("여기에 걸림");
+          console.log(newUserInfo);
+
+          navigate(RouteURL.login);
+        }
+      }
+    };
+
+    checkIsLogin();
   }, []);
 
   return <SpecificComponent />;
