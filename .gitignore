@@ -16,9 +16,8 @@ build-stage/*
 # misc
 .DS_Store
 .env.local
-.env.development
 .env.test
-.env.production
+.env.production.local
 
 npm-debug.log*
 yarn-debug.log*
@@ -27,6 +26,4 @@ yarn-error.log*
 /.idea
 
 Project_Default.xml
-.env.production
-.env.production.local
 .idea/inspectionProfiles/Project_Default.xml
