@@ -25,3 +25,8 @@ yarn-debug.log*
 yarn-error.log*
 
 /.idea
+
+Project_Default.xml
+.env.production
+.env.production.local
+.idea/inspectionProfiles/Project_Default.xml
