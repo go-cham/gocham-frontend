@@ -11,6 +11,7 @@ import { EndPoint } from "../../dataManager/apiMapper";
 import { userDataAtomType } from "../../atom/userData";
 import { formatDate } from "../../utils/formatDate";
 import { formatText } from "../../utils/formatText";
+import { debounce } from 'lodash';
 
 export default function Content({
   openBottomSheet,
@@ -55,8 +56,8 @@ export default function Content({
 
   const [chatData, setChatData] = useState([]);
   const [chatText, setChatText] = useState("");
-  const handlePushChat = async () => {
-    console.log(chatText);
+
+  const handleChat = async () => {
     try {
       const res = await ApiConfig.request({
         method: HttpMethod.POST,
@@ -67,12 +68,19 @@ export default function Content({
           worryId: postId,
         },
       });
-      console.log(res);
+      // console.log(res);
       getChatData();
+
     } catch (e) {
       console.log(e);
     }
   };
+
+  const handlePushChat = () =>{
+    debouncedHandlePushChat();
+  }
+  const debouncedHandlePushChat = debounce(handleChat, 1000);
+
   return (
     <PostChatWrap>
       <PostChatContainer>
@@ -105,7 +113,6 @@ export default function Content({
           {" "}
           {chatData &&
             chatData.map((chat: any, idx) => {
-              console.log(chat);
               return (
                 <UserChatBox key={idx}>
                   <div className={"metaData"}>
