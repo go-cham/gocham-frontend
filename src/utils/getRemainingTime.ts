@@ -1,4 +1,7 @@
-export function getRemainingTime(deadline: string): string {
+export function getRemainingTime(deadline: string | any): string {
+  if (typeof deadline !== "string") {
+    return "";
+  }
   const deadlineDate = new Date(deadline);
   const now = new Date();
 

@@ -30,9 +30,7 @@ const Feed = () => {
   const [routeUrl, setRouteUrl] = useState("");
   useEffect(() => {
     // 처음 페이지 로딩 시에만 데이터 가져오기
-    if (!userInfo.userId) {
-      navigate(RouteURL.home);
-    }
+
     if (isLoading) {
       fatchData();
     }

@@ -11,7 +11,9 @@ import { EndPoint } from "../../dataManager/apiMapper";
 import { userDataAtomType } from "../../atom/userData";
 import { formatDate } from "../../utils/formatDate";
 import { formatText } from "../../utils/formatText";
-import { debounce } from 'lodash';
+import { debounce } from "lodash";
+import { useAtom } from "jotai/index";
+import { refreshChatAtom } from "../../atom/postRefreshRequest";
 
 export default function Content({
   openBottomSheet,
@@ -33,9 +35,8 @@ export default function Content({
           worryId: postId,
         },
       })?.then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setChatData(res?.data);
-        setChatText("");
       });
     } catch (e) {
       console.log(e);
@@ -45,7 +46,6 @@ export default function Content({
   // 댓글 조회 api 필요
   useEffect(() => {
     if (openBottomSheet) {
-      console.log(postId);
       // 댓글 조회 api
       getChatData();
     }
@@ -56,8 +56,9 @@ export default function Content({
 
   const [chatData, setChatData] = useState([]);
   const [chatText, setChatText] = useState("");
+  const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
 
-  const handleChat = async () => {
+  const handleChatPost = async () => {
     try {
       const res = await ApiConfig.request({
         method: HttpMethod.POST,
@@ -69,17 +70,21 @@ export default function Content({
         },
       });
       // console.log(res);
+      setNeedRefresh({
+        worryIdx: postId,
+        updateObject: "chat",
+      });
+      setChatText("");
       getChatData();
-
     } catch (e) {
       console.log(e);
     }
   };
 
-  const handlePushChat = () =>{
+  const handlePushChat = () => {
     debouncedHandlePushChat();
-  }
-  const debouncedHandlePushChat = debounce(handleChat, 1000);
+  };
+  const debouncedHandlePushChat = debounce(handleChatPost, 1000);
 
   return (
     <PostChatWrap>

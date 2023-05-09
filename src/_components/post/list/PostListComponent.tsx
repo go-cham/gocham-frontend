@@ -13,6 +13,12 @@ import ChatBottomSheet from "../../chat/ChatBottomSheet";
 import { userInfo } from "os";
 import { userDataAtomType } from "../../../atom/userData";
 import { formatText } from "../../../utils/formatText";
+import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
+import { EndPoint } from "../../../dataManager/apiMapper";
+import { postDataType } from "../../../type/postDataType";
+import { useAtom } from "jotai/index";
+import { refreshChatAtom } from "../../../atom/postRefreshRequest";
+import { handleRefreshPostData } from "../../../utils/handleRefreshPostData";
 
 const PostListComponent = ({
   userInfo,
@@ -27,9 +33,9 @@ const PostListComponent = ({
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const handleGoPostDetail = () => {
     if (routeUrl) {
-      navigate(`${RouteURL.feed}/${postData.id}/${routeUrl}`);
+      navigate(`${RouteURL.feed}/${thisPostData.id}/${routeUrl}`);
     } else {
-      navigate(`${RouteURL.feed}/${postData.id}`);
+      navigate(`${RouteURL.feed}/${thisPostData.id}`);
     }
   };
   const handleClickPostChat = () => {
@@ -42,26 +48,46 @@ const PostListComponent = ({
       navigate(RouteURL.auth_check);
     }
   };
+  const [thisPostData, setThisPostData] = useState<postDataType>(postData);
+  useEffect(() => {
+    setThisPostData(postData);
+  }, []);
+
+  const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
+  // 댓글이나 투표할 경우 해당 컨텐츠만 리프레시.
+  useEffect(() => {
+    if (needRefresh.worryIdx === postData.id) {
+      console.log("needRefresh 작동중");
+      setThisPostData(
+        handleRefreshPostData(thisPostData, needRefresh.updateObject)
+      );
+      setNeedRefresh({ worryIdx: null, updateObject: "" });
+    }
+  }, [needRefresh]);
   return (
     <>
       <PostListBox>
         <div>
           <PostProfileBox
-            nickname={postData.user.nickname ? postData.user.nickname : "익명"}
+            nickname={
+              thisPostData.user.nickname ? thisPostData.user.nickname : "익명"
+            }
             profileImg={
-              postData.user.profileImageUrl
-                ? postData.user.profileImageUrl
+              thisPostData.user.profileImageUrl
+                ? thisPostData.user.profileImageUrl
                 : null
             }
           />
           <PostContentBox onClick={() => handleGoPostDetail()}>
-            <PostContentText haveImage={!!postData.worryFiles[0]?.url}>
-              <h1>{postData.title}</h1>
-              <div className={"content"}>{formatText(postData.content)}</div>
+            <PostContentText haveImage={!!thisPostData.worryFiles[0]?.url}>
+              <h1>{thisPostData.title}</h1>
+              <div className={"content"}>
+                {formatText(thisPostData.content)}
+              </div>
             </PostContentText>
-            {postData.worryFiles[0]?.url && (
+            {thisPostData.worryFiles[0]?.url && (
               <img
-                src={postData.worryFiles[0]?.url}
+                src={thisPostData.worryFiles[0]?.url}
                 alt={"게시글이미지"}
                 className={"게시글이미지"}
               />
@@ -70,18 +96,18 @@ const PostListComponent = ({
         </div>
         <PostMetaContent>
           <div className={"chat"} onClick={() => handleClickPostChat()}>
-            댓글 {postData.replyCount}개 모두 보기
+            댓글 {thisPostData.replyCount}개 모두 보기
           </div>
           <div className={"voteCount"}>
-            현재 투표한 사용자 {postData.userWorryChoiceCount}명
+            현재 투표한 사용자 {thisPostData.userWorryChoiceCount}명
           </div>
         </PostMetaContent>
       </PostListBox>
       <ChatBottomSheet
         openBottomSheet={openBottomSheet}
         handleClickPostChat={handleClickPostChat}
-        postId={postData.id}
-        postData={postData}
+        postId={thisPostData.id}
+        postData={thisPostData}
       />
     </>
   );

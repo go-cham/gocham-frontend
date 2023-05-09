@@ -25,8 +25,8 @@ const Auth = ({ SpecificComponent, requiredLogin = null }: AuthProps) => {
     const checkIsLogin = async () => {
       if (!userInfo.userId) {
         newUserInfo = await getUserInfo();
-        console.log("newUserInfo");
-        console.log(newUserInfo);
+        // console.log("newUserInfo");
+        // console.log(newUserInfo);
         setUserInfo(newUserInfo);
       }
 
@@ -38,9 +38,6 @@ const Auth = ({ SpecificComponent, requiredLogin = null }: AuthProps) => {
         if (newUserInfo.userType === "activatedUser") navigate(RouteURL.home);
       } else if (requiredLogin === true) {
         if (newUserInfo.userType !== "activatedUser") {
-          console.log("여기에 걸림");
-          console.log(newUserInfo);
-
           navigate(RouteURL.login);
         }
       }

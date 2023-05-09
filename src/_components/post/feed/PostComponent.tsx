@@ -17,6 +17,10 @@ import { getRemainingTime } from "../../../utils/getRemainingTime";
 import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
 import { EndPoint } from "../../../dataManager/apiMapper";
 import { formatText } from "../../../utils/formatText";
+import { refreshChatAtom } from "../../../atom/postRefreshRequest";
+import { useAtom } from "jotai";
+import { postDataType } from "../../../type/postDataType";
+import { handleRefreshPostData } from "../../../utils/handleRefreshPostData";
 
 export const handleClickShare = async (postId: number) => {
   // https 배포에서만 확인 가능.
@@ -38,7 +42,7 @@ const PostComponent = ({
   postData,
 }: {
   userInfo: userDataAtomType;
-  postData: any;
+  postData: postDataType;
 }) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   // console.log(postData);
@@ -46,7 +50,6 @@ const PostComponent = ({
   const handleClickMeatballsMenu = () => {
     console.log("hola");
   };
-
   const handleClickPostChat = () => {
     setOpenBottomSheet((value) => {
       // console.log(value, "->", !value);
@@ -54,67 +57,91 @@ const PostComponent = ({
     });
   };
 
+  const [thisPostData, setThisPostData] = useState<postDataType>(postData);
+  useEffect(() => {
+    setThisPostData(postData);
+  }, []);
+
+  const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
+  // 댓글이나 투표할 경우 해당 컨텐츠만 리프레시.
+  useEffect(() => {
+    if (needRefresh.worryIdx === postData.id) {
+      console.log("needRefresh 작동중");
+      setThisPostData(
+        handleRefreshPostData(thisPostData, needRefresh.updateObject)
+      );
+      setNeedRefresh({ worryIdx: null, updateObject: "" });
+    }
+  }, [needRefresh]);
+
   return (
-    <PostComponentWrap>
-      <PostComponentLayer>
-        <div style={{ height: "2.1rem" }}></div>
-        <PostProfileBox
-          nickname={postData.user.nickname}
-          menuFunction={handleClickMeatballsMenu}
-          profileImg={postData.user.profileImageUrl}
-        />
-        <h1>{postData.title}</h1>
-        <h2>{formatText(postData.content)}</h2>
-      </PostComponentLayer>
-      {postData.worryFiles[0]?.url && (
-        <PostImageComponentLayer
-          src={postData.worryFiles[0]?.url}
-          alt={"게시글이미지"}
-          className={"게시글이미지"}
-        />
-      )}{" "}
-      <PostComponentLayer>
-        <div className={"마감"}>
-          <img src={ClockIcon} alt={"마감시간"} />
-          <p className={"마감시간"}>
-            {getRemainingTime(postData.expirationTime)}
-          </p>
-        </div>
-        <PostVoteComponent postData={postData} userId={userInfo.userId} />
-        {/*<PostVoteComponentWrap>*/}
-        {/*  <PostVoteButton>*/}
-        {/*    <div>fsa</div>*/}
-        {/*    <img src={CheckIcon} alt={"체크버튼"} />*/}
-        {/*  </PostVoteButton>{" "}*/}
-        {/*  <PostVoteButton>*/}
-        {/*    <div>fsa</div>*/}
-        {/*    <img src={CheckIcon} alt={"체크버튼"} />*/}
-        {/*  </PostVoteButton>*/}
-        {/*</PostVoteComponentWrap>*/}
-        {/**/}
-        <div className={"toolbar"}>
-          <img
-            src={ChatIcon}
-            alt={"댓글"}
-            onClick={() => handleClickPostChat()}
+    <>
+      {thisPostData.content !== undefined && (
+        <PostComponentWrap>
+          <PostComponentLayer>
+            <div style={{ height: "2.1rem" }}></div>
+            <PostProfileBox
+              nickname={thisPostData.user.nickname}
+              menuFunction={handleClickMeatballsMenu}
+              profileImg={thisPostData.user.profileImageUrl}
+            />
+            <h1>{thisPostData.title}</h1>
+            <h2>{formatText(thisPostData.content)}</h2>
+          </PostComponentLayer>
+          {thisPostData.worryFiles[0]?.url && (
+            <PostImageComponentLayer
+              src={thisPostData.worryFiles[0]?.url}
+              alt={"게시글이미지"}
+              className={"게시글이미지"}
+            />
+          )}{" "}
+          <PostComponentLayer>
+            <div className={"마감"}>
+              <img src={ClockIcon} alt={"마감시간"} />
+              <p className={"마감시간"}>
+                {getRemainingTime(thisPostData.expirationTime)}
+              </p>
+            </div>
+            <PostVoteComponent
+              postData={thisPostData}
+              userId={userInfo.userId}
+            />
+            {/*<PostVoteComponentWrap>*/}
+            {/*  <PostVoteButton>*/}
+            {/*    <div>fsa</div>*/}
+            {/*    <img src={CheckIcon} alt={"체크버튼"} />*/}
+            {/*  </PostVoteButton>{" "}*/}
+            {/*  <PostVoteButton>*/}
+            {/*    <div>fsa</div>*/}
+            {/*    <img src={CheckIcon} alt={"체크버튼"} />*/}
+            {/*  </PostVoteButton>*/}
+            {/*</PostVoteComponentWrap>*/}
+            {/**/}
+            <div className={"toolbar"}>
+              <img
+                src={ChatIcon}
+                alt={"댓글"}
+                onClick={() => handleClickPostChat()}
+              />
+              <img
+                src={ShareIcon}
+                alt={"공유"}
+                onClick={() => handleClickShare(thisPostData.id)}
+              />
+            </div>
+            <div className={"chatCount"} onClick={() => handleClickPostChat()}>
+              댓글 {thisPostData.replyCount}개 모두 보기
+            </div>
+          </PostComponentLayer>
+          <ChatBottomSheet
+            openBottomSheet={openBottomSheet}
+            handleClickPostChat={handleClickPostChat}
+            postId={thisPostData.id}
+            postData={thisPostData}
           />
-          <img
-            src={ShareIcon}
-            alt={"공유"}
-            onClick={() => handleClickShare(postData.id)}
-          />
-        </div>
-        <div className={"chatCount"} onClick={() => handleClickPostChat()}>
-          댓글 {postData.replyCount}개 모두 보기
-        </div>
-      </PostComponentLayer>
-      <ChatBottomSheet
-        openBottomSheet={openBottomSheet}
-        handleClickPostChat={handleClickPostChat}
-        postId={postData.id}
-        postData={postData}
-      />
-    </PostComponentWrap>
+        </PostComponentWrap>
+      )}
+    </>
   );
 };
 
