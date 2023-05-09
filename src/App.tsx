@@ -56,10 +56,11 @@ export const RouteURL = {
 };
 
 function App() {
-  console.log(process.env.NODE_ENV);
   const [userData, setUserData] = useAtom(userAtom);
 
   useEffect(() => {
+    console.log(process.env.NODE_ENV);
+
     const checkLoginStatus = async () => {
       // 로그인 여부를 확인하는 함수 호출
       if (userData.userId === null) {
