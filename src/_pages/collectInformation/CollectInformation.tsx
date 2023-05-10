@@ -79,6 +79,7 @@ const CollectInformation = () => {
   }, [userInformation]);
 
   const uploadCollectData = async () => {
+    console.log("gg");
     let postUserInformation: postUserInformationPropsType;
     if (userInfo.userId) {
       postUserInformation = {
@@ -173,9 +174,7 @@ const CollectInformation = () => {
             boxShadow={false}
             buttonColor={palette.Primary}
             fontColor={"white"}
-            clickAction={() => {
-              uploadCollectData();
-            }}
+            clickAction={() => uploadCollectData()}
           />
         )}
       </CollectInformationWrap>

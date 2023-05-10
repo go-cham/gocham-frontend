@@ -80,7 +80,7 @@ export default PostVoteComponent;
 
 const PostVoteButton = styled.div`
   background-color: ${palette.Gray4};
-  width: 81vw; // 기존 34rem
+  //width: 81vw; // 기존 34rem
   height: 4.3rem;
   display: flex;
   align-items: center;

@@ -150,11 +150,20 @@ body {
   "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
+
+
+@media screen and (min-width: 641px) {
+  html {
+    font-size: 62.5%; /* 1rem = 10px */
+  }
+}
+
 @media screen and (max-width: 640px) {
   html {
     font-size: 62.5%; /* 1rem = 10px */
   }
 }
+
 @media screen and (max-width: 376px) {
   html {
     font-size: 52%; /* 1rem = 10px */

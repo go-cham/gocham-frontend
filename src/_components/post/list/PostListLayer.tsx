@@ -119,7 +119,7 @@ const PostListLayerWrap = styled.div`
 `;
 
 const PostListLayerStyle = styled.div`
-  width: 100vw;
+  //width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
