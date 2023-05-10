@@ -77,7 +77,8 @@ const LoginButton = styled(ButtonStyle)`
 `;
 
 const LoginWrap = css`
-  width: 100vw;
+  position: relative;
+  width: 100%;
   height: 100vh;
   background-color: ${palette.Primary};
   display: flex;

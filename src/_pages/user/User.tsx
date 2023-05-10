@@ -129,7 +129,7 @@ const User = () => {
   };
 
   return (
-    <>
+    <UserWrap>
       {/*프로필 부분*/}
       <UserProfile
         isMyFeed={isMyFeed}
@@ -154,14 +154,20 @@ const User = () => {
           </div>
         ))}
       </PostListLayerStyle>
-    </>
+    </UserWrap>
   );
 };
 
 export default User;
 
+const UserWrap = styled.div`
+  height: 100vh;
+  position: relative;
+  width: 100%;
+`;
+
 const PostListLayerStyle = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

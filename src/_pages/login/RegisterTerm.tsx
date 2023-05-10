@@ -14,6 +14,8 @@ import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
 import { EndPoint } from "../../dataManager/apiMapper";
 import { useAtomValue } from "jotai";
 import { userAtom } from "../../atom/userData";
+import AppBar from "../../_components/common/AppBar";
+import BottomContinueBar from "../../_components/common/BottomContinueBar";
 
 export type AcceptType = {
   gochamTerm: boolean;
@@ -58,12 +60,8 @@ const RegisterTerm = () => {
   };
   return (
     <>
+      <AppBar title={""} boxShadow={false} />
       <RegisterTermWrap>
-        <img
-          src={BackButton}
-          alt={"뒤로가기"}
-          onClick={() => navigate("/login")}
-        />
         <div className={"약관문구"}>
           환영합니다!
           <br />
@@ -147,26 +145,22 @@ const RegisterTerm = () => {
         </section>
       </RegisterTermWrap>
       {accept.gochamTerm && accept.personalInformation && accept.olderThan14 ? (
-        <ConfirmCheckButton
-          width={34}
-          height={4.7}
-          size={1.6}
-          backgroundColor={palette.Primary}
-          color={palette.Background}
-          onClick={() => handleRegister()}
-        >
-          다음 (1/3)
-        </ConfirmCheckButton>
+        <BottomContinueBar
+          title={"다음 (1/3)"}
+          height={11.2}
+          boxShadow={false}
+          buttonColor={palette.Primary}
+          fontColor={"white"}
+          clickAction={() => handleRegister()}
+        />
       ) : (
-        <ConfirmCheckButton
-          width={34}
-          height={4.7}
-          size={1.6}
-          backgroundColor={"rgba(42, 45, 55, 0.1)"}
-          color={"rgba(42, 45, 55, 0.34)"}
-        >
-          다음 (1/3)
-        </ConfirmCheckButton>
+        <BottomContinueBar
+          title={"다음 (1/3)"}
+          height={11.2}
+          boxShadow={false}
+          buttonColor={"rgba(42, 45, 55, 0.1)"}
+          fontColor={"rgba(42, 45, 55, 0.34)"}
+        />
       )}
     </>
   );
@@ -189,8 +183,9 @@ const CheckWrap = styled.div`
 `;
 
 const RegisterTermWrap = styled.div`
-  width: 80vw;
-  margin-top: 2.4rem;
+  width: 90%;
+  position: relative;
+  height: 90vh;
   & > .약관문구 {
     margin-top: 3.9rem;
     margin-bottom: 3rem;
