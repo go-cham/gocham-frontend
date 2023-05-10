@@ -21,8 +21,6 @@ import { useAtomValue } from "jotai";
  * @constructor
  */
 const User = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
   const userInfo = useAtomValue(userAtom);
 
   // isMyFeed는 미사용. 추후 타인의 프로필에 접근하는 기능이 생기면 디밸롭.
@@ -31,22 +29,63 @@ const User = () => {
   const [userProfile, setUserProfile] = useState({});
   // 내 게시글 | 참여한 게시글 스위칭
   const [postType, setPostType] = useState("내 게시글");
+  const [needSiwtchPostList, setNeedSiwtchPostList] = useState(false);
 
+  const switchPostType = (type: string) => {
+    setPostType(type);
+    setNeedSiwtchPostList(true);
+    setIsLoading(true);
+  };
+  const [postingCount, setPostingCount] = useState({
+    written: 0,
+    participated: 0,
+  });
   useEffect(() => {
-    //   본인 피드인지 확인
+    //   유저 정보 조회
+    if (userData.userId) {
+      ApiConfig.request({
+        method: HttpMethod.GET,
+        url: EndPoint.user.get.USER,
+        // url: `${EndPoint.user.get.USER}/${userData.userId}`,
+        path: { id: userData.userId },
+      })?.then((res) => {
+        console.log(res);
+        setUserProfile(res?.data);
+      });
+      ApiConfig.request({
+        method: HttpMethod.GET,
+        url: EndPoint.worry.get.WORRIES,
+        query: {
+          sort: "DESC",
+          take: 5,
+          authorId: userInfo.userId,
+        },
+      })?.then((res) => {
+        setPostingCount((value) => ({
+          ...value,
+          written: res?.data.meta.total,
+        }));
+      });
+    }
+
+    // 참여한 게시글 카운트
+
     ApiConfig.request({
       method: HttpMethod.GET,
-      url: EndPoint.user.get.USER,
-      // url: `${EndPoint.user.get.USER}/${userData.userId}`,
-      path: { id: userData.userId },
+      url: EndPoint.worry.get.WORRIES,
+      query: {
+        sort: "DESC",
+        take: 5,
+        participatingUserId: userInfo.userId,
+      },
     })?.then((res) => {
-      console.log(res);
-      setUserProfile(res?.data);
+      setPostingCount((value) => ({
+        ...value,
+        participated: res?.data.meta.total,
+      }));
     });
+  }, [userData]);
 
-    // /user뒤의 파라미터가 있는지 확인. 없으면 본인 피드로 navigate
-    // 게시글 조회 + 게시글 수
-  }, []);
   const [postingData, setPostingData] = useState<any[]>([]);
   const [postingMetaData, setPostingMetaData] = useState<postingMetaDataType>({
     take: 5,
@@ -61,39 +100,72 @@ const User = () => {
     if (isLoading) {
       fetchData();
     }
-  }, [isLoading]);
+  }, [userData, isLoading]);
 
   const fetchData = async () => {
+    console.log("쉿 패치중");
     let reqData;
+    if (postType === "내 게시글") {
+      console.log("내 게시글ㅇㅁ");
 
-    if (postingMetaData.nextId) {
-      reqData = {
-        sort: "DESC",
-        take: 5,
-        nextCursorId: postingMetaData.nextId,
-        authorId: userInfo.userId,
-      };
-    } else {
-      reqData = {
-        sort: "DESC",
-        take: 5,
-        authorId: userInfo.userId,
-      };
+      if (!needSiwtchPostList && postingMetaData.nextId) {
+        reqData = {
+          sort: "DESC",
+          take: 5,
+          nextCursorId: postingMetaData.nextId,
+          authorId: userInfo.userId,
+        };
+      } else {
+        reqData = {
+          sort: "DESC",
+          take: 5,
+          authorId: userInfo.userId,
+        };
+      }
+    } else if (postType === "참여한 게시글") {
+      console.log("참여한 게시글ㅇㅁ");
+
+      if (!needSiwtchPostList && postingMetaData.nextId) {
+        reqData = {
+          sort: "DESC",
+          take: 5,
+          nextCursorId: postingMetaData.nextId,
+          participatingUserId: userInfo.userId,
+        };
+      } else {
+        reqData = {
+          sort: "DESC",
+          take: 5,
+          participatingUserId: userInfo.userId,
+        };
+      }
     }
-    try {
-      console.log(reqData);
-      const res = await ApiConfig.request({
-        method: HttpMethod.GET,
-        url: EndPoint.worry.get.WORRIES,
-        query: reqData,
-      });
-      // 새로 가져온 데이터와 기존 데이터 합치기
-      setPostingData((prevPosts) => [...prevPosts, ...res?.data.data]);
-      setPostingMetaData(res?.data.meta);
-      setHasMore(res?.data.meta.hasNextData);
-      setIsLoading(false);
-    } catch (e) {
-      console.log(e);
+
+    if (userData.userId) {
+      try {
+        console.log(reqData);
+        const res = await ApiConfig.request({
+          method: HttpMethod.GET,
+          url: EndPoint.worry.get.WORRIES,
+          query: reqData,
+        });
+        // 새로 가져온 데이터와 기존 데이터 합치기
+        if (needSiwtchPostList) {
+          setPostingData(res?.data.data);
+          setNeedSiwtchPostList(false);
+          setPostingMetaData({
+            take: 5,
+          });
+        } else {
+          setPostingData((prevPosts) => [...prevPosts, ...res?.data.data]);
+        }
+        setPostingMetaData(res?.data.meta);
+        setHasMore(res?.data.meta.hasNextData);
+
+        setIsLoading(false);
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -138,7 +210,11 @@ const User = () => {
       />
 
       {/*내 게시글 & 참여한 게시글 선택 부분*/}
-      <SelectMyPostType postType={postType} setPostType={setPostType} />
+      <SelectMyPostType
+        postType={postType}
+        switchPostType={switchPostType}
+        postingCount={postingCount}
+      />
 
       {/*피드 부분*/}
       {/*  여긴 홈 페이지 만드는걸로 적용 */}

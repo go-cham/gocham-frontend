@@ -8,32 +8,32 @@ import palette from "../../style/color";
 
 const SelectMyPostType = ({
   postType,
-  setPostType,
+  switchPostType,
+  postingCount,
 }: {
   postType: string;
-  setPostType: React.Dispatch<any>;
+  switchPostType: (type: string) => void;
+  postingCount: { written: number; participated: number };
 }) => {
-  console.log(postType);
-  const TempPostCount = 12;
   return (
     <SelectMyPostTypeWrap>
       <SelectMyPostTypeBar>
         {postType === "내 게시글" ? (
           <SelectMyPostTypeBox selected={true}>
-            내 게시글 {TempPostCount}
+            내 게시글 {postingCount.written}
           </SelectMyPostTypeBox>
         ) : (
-          <SelectMyPostTypeBox onClick={() => setPostType("내 게시글")}>
-            내 게시글 {TempPostCount}
+          <SelectMyPostTypeBox onClick={() => switchPostType("내 게시글")}>
+            내 게시글 {postingCount.written}
           </SelectMyPostTypeBox>
         )}
         {postType === "참여한 게시글" ? (
           <SelectMyPostTypeBox selected={true}>
-            참여한 게시글 {TempPostCount}
+            참여한 게시글 {postingCount.participated}
           </SelectMyPostTypeBox>
         ) : (
-          <SelectMyPostTypeBox onClick={() => setPostType("참여한 게시글")}>
-            참여한 게시글 {TempPostCount}
+          <SelectMyPostTypeBox onClick={() => switchPostType("참여한 게시글")}>
+            참여한 게시글 {postingCount.participated}
           </SelectMyPostTypeBox>
         )}
       </SelectMyPostTypeBar>
