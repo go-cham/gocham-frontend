@@ -89,7 +89,10 @@ export default function Content({
   return (
     <PostChatWrap>
       <PostChatContainer>
-        <PostProfileBox nickname={"닉넹미"} />
+        <PostProfileBox
+          nickname={postData.user.nickname}
+          profileImg={postData.user.profileImageUrl}
+        />
         <h1>{postData.title}</h1>
         <h2>{formatText(postData.content)}</h2>
         <div className={"toolbar"}>
