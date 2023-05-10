@@ -70,7 +70,7 @@ const CollectNicknameAgeGender = ({
       menu: (provided: any, state: any) => ({
         ...provided,
         borderRadius: "1.2rem",
-        width: "40vw",
+        width: "15.5rem",
         right: 0,
       }),
 
