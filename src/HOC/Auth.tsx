@@ -36,6 +36,11 @@ const Auth = ({ SpecificComponent, requiredLogin = null }: AuthProps) => {
         navigate(RouteURL.register_term);
       else if (requiredLogin === false) {
         if (newUserInfo.userType === "activatedUser") navigate(RouteURL.home);
+        else if (newUserInfo.userType === "onceUser")
+          navigate(RouteURL.collect_information);
+        else if (newUserInfo.userType === "onceUserWithoutTerms")
+          navigate(RouteURL.register_term);
+        else navigate(RouteURL.login);
       } else if (requiredLogin === true) {
         if (newUserInfo.userType !== "activatedUser") {
           navigate(RouteURL.login);

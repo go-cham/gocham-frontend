@@ -74,8 +74,6 @@ function App() {
 
   useEffect(() => {
     console.log(process.env.NODE_ENV);
-    console.log("앱에 접속하면 이 로그 뜸 ㅇㅇ");
-
     const checkLoginStatus = async () => {
       // 로그인 여부를 확인하는 함수 호출
       if (userData.userId === null) {
@@ -99,7 +97,12 @@ function App() {
             <Route path={RouteURL.home} element={<Home />} />
             <Route
               path={RouteURL.collect_information}
-              element={<CollectInformation />}
+              element={
+                <Auth
+                  SpecificComponent={CollectInformation}
+                  requiredLogin={true}
+                />
+              }
             />
             <Route
               path={RouteURL.feed_star}

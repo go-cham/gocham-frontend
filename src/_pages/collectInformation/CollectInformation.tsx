@@ -43,8 +43,7 @@ export type postUserInformationPropsType = {
 
 const CollectInformation = () => {
   const navigate = useNavigate();
-  const userInfo = useAtomValue(userAtom);
-  const [userData, setUserData] = useAtom(userAtom);
+  const [userInfo, setUserInfo] = useAtom(userAtom);
 
   const [page, setPage] = useState(1);
   const [readyToNext, setReadyToNext] = useState(false);
@@ -56,9 +55,6 @@ const CollectInformation = () => {
     job: { value: 0, label: "" },
     worryCategories: [],
   });
-  useEffect(() => {
-    console.log("여기에 접속함");
-  }, []);
 
   useEffect(() => {
     if (
@@ -96,19 +92,33 @@ const CollectInformation = () => {
           (value) => value.value
         ),
       };
-      console.log(postUserInformation);
-      try {
-        const res = await ApiConfig.request({
-          method: HttpMethod.PATCH,
-          url: EndPoint.user.patch.USER,
-          data: postUserInformation,
-        });
-        const userInfo = await getUserInfo();
-        setUserData(userInfo);
-        navigate("/");
-      } catch (e) {
-        console.error(e);
-      }
+    } else {
+      console.log("유저정보를 새롭게 조회합니다.");
+      const newUserInfo = await getUserInfo();
+      postUserInformation = {
+        userId: newUserInfo.userId,
+        nickname: userInformation.nickname, // 삭제 예정
+        birthDate: userInformation.birthDay.toString(),
+        sex: userInformation.sex,
+        residenceId: userInformation.residence.value,
+        jobId: userInformation.job.value,
+        worryCategories: userInformation.worryCategories.map(
+          (value) => value.value
+        ),
+      };
+    }
+    console.log(postUserInformation);
+    try {
+      const res = await ApiConfig.request({
+        method: HttpMethod.PATCH,
+        url: EndPoint.user.patch.USER,
+        data: postUserInformation,
+      });
+      const userInfo = await getUserInfo();
+      setUserInfo(userInfo);
+      navigate("/");
+    } catch (e) {
+      console.error(e);
     }
   };
 
