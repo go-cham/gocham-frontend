@@ -102,7 +102,7 @@ const User = () => {
     // IntersectionObserver 등록하기
     observer.current = new IntersectionObserver(handleObserver, {
       rootMargin: "0px 0px 100px 0px",
-      threshold: 0.5,
+      threshold: 1,
     });
 
     // 마지막 요소에 observer 등록하기
@@ -143,22 +143,29 @@ const User = () => {
       {/*피드 부분*/}
       {/*  여긴 홈 페이지 만드는걸로 적용 */}
 
-      <PostListLayerStyle>
-        {postingData?.map((value, idx) => (
-          <div key={idx} className={"user"}>
-            <PostListComponent
-              userInfo={userInfo}
-              postData={value}
-              routeUrl={"my"}
-            />
-          </div>
-        ))}
-      </PostListLayerStyle>
+      <PostListLayerWrap>
+        <PostListLayerStyle>
+          {postingData?.map((value, idx) => (
+            <div key={idx} className={"user"}>
+              <PostListComponent
+                userInfo={userInfo}
+                postData={value}
+                routeUrl={"my"}
+              />
+            </div>
+          ))}
+        </PostListLayerStyle>
+      </PostListLayerWrap>
     </UserWrap>
   );
 };
 
 export default User;
+
+const PostListLayerWrap = styled.div`
+  overflow-y: scroll;
+  height: calc(100vh - 38rem);
+`;
 
 const UserWrap = styled.div`
   height: 100vh;
