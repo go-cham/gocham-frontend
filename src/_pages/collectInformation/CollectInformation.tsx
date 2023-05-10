@@ -56,6 +56,9 @@ const CollectInformation = () => {
     job: { value: 0, label: "" },
     worryCategories: [],
   });
+  useEffect(() => {
+    console.log("여기에 접속함");
+  }, []);
 
   useEffect(() => {
     if (
@@ -79,6 +82,7 @@ const CollectInformation = () => {
   }, [userInformation]);
 
   const uploadCollectData = async () => {
+    console.log("시작하기!");
     let postUserInformation: postUserInformationPropsType;
     if (userInfo.userId) {
       postUserInformation = {
