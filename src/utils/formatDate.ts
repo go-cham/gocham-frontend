@@ -1,3 +1,7 @@
+/**
+ * 시간을 입력해주면 유저들이 알아보기 편하게 가까운 시간은 적절한 텍스트로 전환하는 함수
+ * @param date
+ */
 export function formatDate(date: string): string {
   const now = new Date();
   const dateObj = new Date(date);

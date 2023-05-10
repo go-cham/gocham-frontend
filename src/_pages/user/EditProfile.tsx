@@ -17,6 +17,7 @@ import getUserInfo from "../../utils/getUserInfo";
 import { useAtomValue } from "jotai";
 import { userAtom } from "../../atom/userData";
 import { useNavigate } from "react-router-dom";
+import { formatISO8601ToNormal } from "../../utils/formatISO8601ToNormal";
 
 const EditProfile = () => {
   const userInfo = useAtomValue(userAtom);
@@ -44,15 +45,20 @@ const EditProfile = () => {
 
       console.log(data);
       const worryCategories = data.userWorryCategories.map((item: any) => ({
-        id: item.worryCategory.id,
+        value: item.worryCategory.id,
         label: item.worryCategory.label,
       }));
 
+      const residence = {
+        value: data.residence.id,
+        label: data.residence.label,
+      };
+
       setUserInformation({
         nickname: data.nickname,
-        birthDay: "",
-        sex: "",
-        residence: { value: 0, label: "" },
+        birthDay: formatISO8601ToNormal(data.birthDate),
+        sex: data.sex,
+        residence: residence,
         job: { value: data.job.id, label: data.job.label },
         worryCategories: worryCategories,
       });
