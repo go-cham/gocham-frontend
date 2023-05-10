@@ -173,9 +173,7 @@ const CollectInformation = () => {
             boxShadow={false}
             buttonColor={palette.Primary}
             fontColor={"white"}
-            clickAction={() => {
-              uploadCollectData();
-            }}
+            clickAction={() => uploadCollectData()}
           />
         )}
       </CollectInformationWrap>
