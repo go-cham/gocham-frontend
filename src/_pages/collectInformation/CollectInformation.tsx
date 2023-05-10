@@ -137,50 +137,50 @@ const CollectInformation = () => {
             />
           )}
         </section>
-        {/**/}
-        {/* 각 페이지 항목 조건비교해서 색상 및 문구 표시 구현 필요 */}
-        {page === 1 && !readyToNext && (
-          <BottomContinueBar
-            title={"다음 (2/3)"}
-            height={11.2}
-            boxShadow={false}
-            buttonColor={"rgba(42, 45, 55, 0.1)"}
-            fontColor={"rgba(42, 45, 55, 0.34)"}
-          />
-        )}
-        {page === 1 && readyToNext && (
-          <BottomContinueBar
-            title={"다음 (2/3)"}
-            height={11.2}
-            boxShadow={false}
-            buttonColor={palette.Primary}
-            fontColor={"white"}
-            clickAction={() => {
-              setPage(2);
-              setReadyToNext(false);
-            }}
-          />
-        )}
-        {page === 2 && !readyToNext && (
-          <BottomContinueBar
-            title={"고참 시작하기 (3/3)"}
-            height={11.2}
-            boxShadow={false}
-            buttonColor={"rgba(42, 45, 55, 0.1)"}
-            fontColor={"rgba(42, 45, 55, 0.34)"}
-          />
-        )}
-        {page === 2 && readyToNext && (
-          <BottomContinueBar
-            title={"고참 시작하기 (3/3)"}
-            height={11.2}
-            boxShadow={false}
-            buttonColor={palette.Primary}
-            fontColor={"white"}
-            clickAction={() => uploadCollectData()}
-          />
-        )}
       </CollectInformationWrap>
+      {/**/}
+      {/* 각 페이지 항목 조건비교해서 색상 및 문구 표시 구현 필요 */}
+      {page === 1 && !readyToNext && (
+        <BottomContinueBar
+          title={"다음 (2/3)"}
+          height={11.2}
+          boxShadow={false}
+          buttonColor={"rgba(42, 45, 55, 0.1)"}
+          fontColor={"rgba(42, 45, 55, 0.34)"}
+        />
+      )}
+      {page === 1 && readyToNext && (
+        <BottomContinueBar
+          title={"다음 (2/3)"}
+          height={11.2}
+          boxShadow={false}
+          buttonColor={palette.Primary}
+          fontColor={"white"}
+          clickAction={() => {
+            setPage(2);
+            setReadyToNext(false);
+          }}
+        />
+      )}
+      {page === 2 && !readyToNext && (
+        <BottomContinueBar
+          title={"고참 시작하기 (3/3)"}
+          height={11.2}
+          boxShadow={false}
+          buttonColor={"rgba(42, 45, 55, 0.1)"}
+          fontColor={"rgba(42, 45, 55, 0.34)"}
+        />
+      )}
+      {page === 2 && readyToNext && (
+        <BottomContinueBar
+          title={"고참 시작하기 (3/3)"}
+          height={11.2}
+          boxShadow={false}
+          buttonColor={palette.Primary}
+          fontColor={"white"}
+          clickAction={() => uploadCollectData()}
+        />
+      )}
     </>
   );
 };
@@ -188,6 +188,8 @@ const CollectInformation = () => {
 export default CollectInformation;
 
 const CollectInformationWrap = styled.div`
+  position: relative;
+  height: 100vh;
   margin-top: 4.6rem;
   width: 90%;
   & .설명란 {

@@ -1,10 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from "@emotion/react";
-import React, { useEffect } from "react";
-import VoteComponent from "../../_components/vote/VoteComponent";
-import { RouteURL } from "../../App";
-import AuthenticationCheck from "../../utils/AuthenticationCheck";
+import React from "react";
 import PostListLayer from "../../_components/post/list/PostListLayer";
 import styled from "@emotion/styled";
 import palette from "../../style/color";
@@ -31,14 +28,19 @@ const Home = () => {
 export default Home;
 
 const MainView = styled.div`
-  width: 100%;
+  //width: 100%;
   overflow-y: hidden;
   height: 100vh;
+  width: 100%;
+  position: relative;
   & .title {
-    width: 100vw;
-    position: fixed;
+    box-sizing: border-box;
+    width: 100%;
+    position: absolute;
     background-color: white;
+    //margin: 0 auto;
     padding-left: 3rem;
+
     padding-bottom: 1.5rem;
     border-bottom: 0.1rem solid ${palette.Gray3};
     filter: drop-shadow(0px 0px 4px rgba(42, 45, 55, 0.1));

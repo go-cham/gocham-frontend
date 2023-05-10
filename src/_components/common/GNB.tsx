@@ -13,6 +13,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { userAtom } from "../../atom/userData";
 import { RouteURL } from "../../App";
+import { MAX_WIDTH } from "../../constants/viewSize";
 
 const GNB = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const GNB = () => {
     navigate(RouteURL.write);
   };
   return (
-    <>
+    <GNBComponent>
       {" "}
       <GNBBackground src={backgroundImage} alt={"배경"} />
       <GNBBackgroundWrap>
@@ -57,19 +58,26 @@ const GNB = () => {
           />
         )}
       </GNBBackgroundWrap>
-    </>
+    </GNBComponent>
   );
 };
 
 export default GNB;
 
-const GNBBackgroundWrap = styled.div`
-  width: 100vw;
+const GNBComponent = styled.div`
   position: fixed;
+  margin: 0 auto;
+  max-width: ${MAX_WIDTH};
+  bottom: -0.5rem;
+`;
+
+const GNBBackgroundWrap = styled.div`
+  width: 100%;
   bottom: 2.8rem;
   display: flex;
   justify-content: space-evenly;
   align-items: end;
+  position: absolute;
 `;
 
 const AddButton = styled.div<{ image: string }>`
@@ -88,8 +96,9 @@ const SelectButton = styled.div<{ image: string }>`
 `;
 
 const GNBBackground = styled.img`
-  width: 100vw;
-  position: fixed;
+  //width: 100%;
+  width: ${MAX_WIDTH};
+  position: relative;
   bottom: 0;
   //padding-bottom: ${(1 / 15) *
   100}%; /* 이미지의 가로세로 비율에 맞춰서 padding-bottom 값을 계산합니다. 예를 들어, 16:9 비율의 이미지는 9/16 * 100% = 56.25%가 됩니다. */

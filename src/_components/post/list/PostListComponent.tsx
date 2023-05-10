@@ -41,7 +41,7 @@ const PostListComponent = ({
   const handleClickPostChat = () => {
     if (userInfo.userType === "activatedUser") {
       setOpenBottomSheet((value) => {
-        // console.log(value, "->", !value);
+        console.log(value, "->", !value);
         return !value;
       });
     } else {

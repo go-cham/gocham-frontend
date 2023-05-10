@@ -134,16 +134,17 @@ export default Feed;
 
 const PostWrap = styled.div`
   overflow: hidden;
-  position: absolute;
+  position: relative;
   left: 0;
+  width: 100%;
+  //height: calc(100vh - 4.6rem);
+  height: 100vh;
 `;
 
 const PostLayer = styled.div`
-  margin-top: 4.6rem;
-  height: calc(100vh - 4.6rem);
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
-
+  height: 100vh;
   & .PostComponent {
     scroll-snap-align: start;
   }

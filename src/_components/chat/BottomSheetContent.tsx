@@ -210,6 +210,6 @@ const PostChatContainer = styled.div`
 
 const GrayBar = styled.div`
   background-color: ${palette.Gray3};
-  width: 100vw;
+  width: 100%;
   height: 0.1rem;
 `;

@@ -113,8 +113,9 @@ const EditProfile = () => {
 export default EditProfile;
 
 const EditProfileWrap = styled.div`
-  width: 90vw;
-  margin-top: 4.6rem;
+  position: relative;
+  width: 85%;
+  //margin-top: 4.6rem;
   height: 90vh;
 `;
 

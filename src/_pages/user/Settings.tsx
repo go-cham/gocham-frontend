@@ -39,7 +39,7 @@ const Settings = () => {
       <AppBar title={"설정"} />
       <div className={"wrap"}>
         <Button
-          width={"100vw"}
+          width={"100%"}
           height={7.4}
           onClick={() => handleButtonClick("notice")}
           style={{ borderTop: `0.1rem solid ${palette.Gray2}` }}
@@ -47,42 +47,42 @@ const Settings = () => {
           공지사항
         </Button>
         <Button
-          width={"100vw"}
+          width={"100%"}
           height={7.4}
           onClick={() => handleButtonClick("terms")}
         >
           이용약관
         </Button>
         <Button
-          width={"100vw"}
+          width={"100%"}
           height={7.4}
           onClick={() => handleButtonClick("informationTerm")}
         >
           개인정보 처리방침
         </Button>
         <Button
-          width={"100vw"}
+          width={"100%"}
           height={7.4}
           onClick={() => handleButtonClick("question")}
         >
           문의하기
         </Button>
         <Button
-          width={"100vw"}
+          width={"100%"}
           height={7.4}
           onClick={() => handleButtonClick("faq")}
         >
           FAQ
         </Button>
         <Button
-          width={"100vw"}
+          width={"100%"}
           height={7.4}
           onClick={() => handleButtonClick("logout")}
         >
           로그아웃
         </Button>
         <Button
-          width={"100vw"}
+          width={"100%"}
           height={7.4}
           onClick={() => handleButtonClick("deleteAccount")}
         >
@@ -97,9 +97,9 @@ export default Settings;
 
 const SettingsWrap = styled.div`
   //background-color: ${palette.Gray3};
-  & .wrap {
-    margin-top: 4.6rem;
-  }
+  position: relative;
+  width: 100%;
+  height: 100vh;
 `;
 
 const Button = styled(ButtonStyle)`

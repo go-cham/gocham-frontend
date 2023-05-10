@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import palette from "../../style/color";
 import { ButtonStyle } from "../../style/common";
 import styled from "@emotion/styled";
+import { MAX_WIDTH } from "../../constants/viewSize";
 
 const BottomContinueBar = ({
   title,
@@ -58,8 +59,9 @@ type BottomBarWrapType = {
 
 const BottomBarWrap = styled.div<BottomBarWrapType>`
   position: fixed;
-  bottom: 0;
-  left: 0;
+  margin: 0 auto;
+  max-width: ${MAX_WIDTH};
+  bottom: -0.5rem;
   box-shadow: ${(props) => {
     if (props.boxShadow === false) {
       return "";
@@ -67,7 +69,7 @@ const BottomBarWrap = styled.div<BottomBarWrapType>`
       return "0px 0px 2.5rem rgba(42, 45, 55, 0.1)";
     }
   }};
-  width: 100vw;
+  width: 100%;
   height: ${({ height }) => height + "rem"};
-  background-color: ${({ boxColor }) => boxColor};
+  background-color: ${({ boxColor }) => (boxColor ? boxColor : "white")};
 `;

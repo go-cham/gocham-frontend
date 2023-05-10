@@ -42,7 +42,12 @@ export default function useBottomSheetFix({
         "transform",
         `translateY(${MIN_Y - MAX_Y}px)`
       );
-      handleClickPostChat(false);
+      // handleClickPostChat(false);
+    }
+    if (!openBottomSheet) {
+      sheet.current!.style.setProperty("transform", "translateY(0)");
+
+      // handleClickPostChat(false);
     }
   }, [openBottomSheet]);
 
@@ -130,6 +135,7 @@ export default function useBottomSheetFix({
         if (currentSheetY !== MIN_Y) {
           if (touchMove.movingDirection === "down") {
             sheet.current!.style.setProperty("transform", "translateY(0)");
+            handleClickPostChat(false);
           }
 
           if (touchMove.movingDirection === "up") {

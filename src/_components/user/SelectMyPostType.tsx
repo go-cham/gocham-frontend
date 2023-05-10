@@ -47,7 +47,7 @@ const SelectMyPostTypeWrap = styled.div`
   margin-top: 1.9rem;
   border-top: 0.1rem solid ${palette.Gray3};
   height: 7.7rem;
-  width: 100vw;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

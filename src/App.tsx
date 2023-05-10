@@ -24,19 +24,33 @@ import Auth from "./HOC/Auth";
 import Feed from "./_pages/home/Feed";
 import AuthCheckPage from "./_pages/AuthCheckPage";
 import EditProfile from "./_pages/user/EditProfile";
+import styled from "@emotion/styled";
+import { MAX_WIDTH } from "./constants/viewSize";
+
+// 모바일 크기 처리
+const OuterWrap = styled.div`
+  background-image: url("https://img.freepik.com/free-vector/cute-celebration-background-cute-grid-pattern-with-colorful-bokeh-vector_53876-146719.jpg?w=900&t=st=1683705079~exp=1683705679~hmac=11a850de1c50be14338dc8c280f21a47802f63bc1a63df7aa154bdd240725ea1");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  //width: 100vw;
+  position: relative;
+`;
 
 const defaultCSS = css`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* height: 84.4rem;
-  max-width: 39rem; */
-  width: 100%;
+  max-width: ${MAX_WIDTH};
+  //padding-left: 470px;
   height: calc(var(--vh, 1vh) * 100);
-  max-width: 100vw;
+
   /* max-height: 100vh; */
   overflow: hidden;
+  background-color: white;
+  margin: 0 auto;
 `;
+
 export const RouteURL = {
   home: "/",
   feed: "/feed",
@@ -78,58 +92,60 @@ function App() {
   // }, [userData]);
 
   return (
-    <div css={defaultCSS}>
-      <BrowserRouter>
-        <Routes>
-          <Route path={RouteURL.home} element={<Home />} />
-          <Route
-            path={RouteURL.collect_information}
-            element={<CollectInformation />}
-          />
-          <Route
-            path={RouteURL.feed_star}
-            element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
-          />{" "}
-          <Route
-            path={RouteURL.feed_route_star}
-            element={<Auth SpecificComponent={Feed} requiredLogin={null} />}
-          />
-          <Route
-            path={RouteURL.login}
-            element={<Auth SpecificComponent={Login} requiredLogin={false} />}
-          />
-          <Route
-            path={RouteURL.login_oauth_kakao}
-            element={<LoginOauthKakao />}
-          />
-          <Route path={RouteURL.register_term} element={<RegisterTerm />} />
-          <Route path={RouteURL.onboarding} element={<Onboarding />} />
-          <Route
-            path={RouteURL.write}
-            element={<Auth SpecificComponent={Write} requiredLogin={true} />}
-          />
-          <Route
-            path={RouteURL.user}
-            element={<Auth SpecificComponent={User} requiredLogin={true} />}
-          />
-          <Route
-            path={RouteURL.edit_profile}
-            element={
-              <Auth SpecificComponent={EditProfile} requiredLogin={true} />
-            }
-          />
-          <Route path={RouteURL.settings} element={<Settings />} />
-          <Route path={RouteURL.not_found} element={<Navigate to={"/"} />} />
-          <Route
-            path={RouteURL.auth_check}
-            element={
-              <Auth SpecificComponent={AuthCheckPage} requiredLogin={true} />
-            }
-          />
-        </Routes>
-        <GNBHOC />
-      </BrowserRouter>
-    </div>
+    <OuterWrap>
+      <div css={defaultCSS}>
+        <BrowserRouter>
+          <Routes>
+            <Route path={RouteURL.home} element={<Home />} />
+            <Route
+              path={RouteURL.collect_information}
+              element={<CollectInformation />}
+            />
+            <Route
+              path={RouteURL.feed_star}
+              element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
+            />{" "}
+            <Route
+              path={RouteURL.feed_route_star}
+              element={<Auth SpecificComponent={Feed} requiredLogin={null} />}
+            />
+            <Route
+              path={RouteURL.login}
+              element={<Auth SpecificComponent={Login} requiredLogin={false} />}
+            />
+            <Route
+              path={RouteURL.login_oauth_kakao}
+              element={<LoginOauthKakao />}
+            />
+            <Route path={RouteURL.register_term} element={<RegisterTerm />} />
+            <Route path={RouteURL.onboarding} element={<Onboarding />} />
+            <Route
+              path={RouteURL.write}
+              element={<Auth SpecificComponent={Write} requiredLogin={true} />}
+            />
+            <Route
+              path={RouteURL.user}
+              element={<Auth SpecificComponent={User} requiredLogin={true} />}
+            />
+            <Route
+              path={RouteURL.edit_profile}
+              element={
+                <Auth SpecificComponent={EditProfile} requiredLogin={true} />
+              }
+            />
+            <Route path={RouteURL.settings} element={<Settings />} />
+            <Route path={RouteURL.not_found} element={<Navigate to={"/"} />} />
+            <Route
+              path={RouteURL.auth_check}
+              element={
+                <Auth SpecificComponent={AuthCheckPage} requiredLogin={true} />
+              }
+            />
+          </Routes>
+          <GNBHOC />
+        </BrowserRouter>
+      </div>
+    </OuterWrap>
   );
 }
 
