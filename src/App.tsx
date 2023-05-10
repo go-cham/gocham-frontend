@@ -124,7 +124,7 @@ function App() {
             <Route path={RouteURL.onboarding} element={<Onboarding />} />
             <Route
               path={RouteURL.write}
-              element={<Auth SpecificComponent={Write} requiredLogin={true} />}
+              element={<Auth SpecificComponent={Write} requiredLogin={false} />}
             />
             <Route
               path={RouteURL.user}

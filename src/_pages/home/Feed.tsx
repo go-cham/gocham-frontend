@@ -139,6 +139,9 @@ const PostWrap = styled.div`
   width: 100%;
   //height: calc(100vh - 4.6rem);
   height: 100vh;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
 `;
 
 const PostLayer = styled.div`

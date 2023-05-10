@@ -494,6 +494,9 @@ const WriteComponent = styled.div`
 const WriteWrap = styled.div`
   position: relative;
   height: 100vh;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
   width: 100%;
   //height: 100vh;
   display: flex;

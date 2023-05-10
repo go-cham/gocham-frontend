@@ -245,6 +245,9 @@ const PostListLayerWrap = styled.div`
 
 const UserWrap = styled.div`
   height: 100vh;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
   position: relative;
   width: 100%;
 `;

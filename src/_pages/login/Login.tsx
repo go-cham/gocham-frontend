@@ -84,6 +84,9 @@ const LoginWrap = css`
   position: relative;
   width: 100%;
   height: 100vh;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
   background-color: ${palette.Primary};
   display: flex;
   flex-direction: column;
