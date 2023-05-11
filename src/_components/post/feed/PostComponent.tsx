@@ -94,7 +94,7 @@ const PostComponent = ({
               alt={"게시글이미지"}
               className={"게시글이미지"}
             />
-          )}{" "}
+          )}
           <PostComponentLayer>
             <div className={"마감"}>
               <img src={ClockIcon} alt={"마감시간"} />
@@ -106,7 +106,6 @@ const PostComponent = ({
               postData={thisPostData}
               userId={userInfo.userId}
             />
-
             <div className={"toolbar"}>
               <img
                 src={ChatIcon}
@@ -139,6 +138,7 @@ export default PostComponent;
 
 const PostComponentWrap = styled.div`
   border-bottom: 0.1rem solid ${palette.Gray3};
+  position: relative;
 `;
 
 const PostComponentLayer = styled.div`

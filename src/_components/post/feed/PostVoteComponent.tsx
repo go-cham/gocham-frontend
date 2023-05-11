@@ -15,8 +15,8 @@ const PostVoteComponent = ({
   userId: number | null;
 }) => {
   const handleClickResult = async (choiceId: number) => {
-    console.log(choosedData);
-    if (choosedData === 0) {
+    console.log(choseData);
+    if (choseData === 0) {
       const res = await ApiConfig.request({
         method: HttpMethod.POST,
         url: EndPoint.worry.post.USER_WORRY_CHOICE,
@@ -33,9 +33,12 @@ const PostVoteComponent = ({
   // 선택할 수 있는 값
   const [choiceData, setChoiceData] = useState([]);
   // 내가 선택한 값
-  const [choosedData, setChoosedData] = useState(0);
-  // 투표된 값의 전체를 가져감.
+  const [choseData, setChoseData] = useState(0);
+  // 투표된 값의 전체
   const [voteTotal, setVoteTotal] = useState(0);
+  // 특정 투표값을 클릭했는지 여부
+  const [selectVoteButton, setSelectVoteButton] = useState(0);
+
   useEffect(() => {
     //   투표값 조회
     ApiConfig.request({
@@ -63,7 +66,7 @@ const PostVoteComponent = ({
       if (res?.data.worryChoice.id) {
         // 내가 투표한 케이스가 있는 경우
         // console.log("chooseData", res?.data.worryChoice.id);
-        setChoosedData(res?.data.worryChoice.id);
+        setChoseData(res?.data.worryChoice.id);
         // 투표 통계 확인. worryId 인자 넣으면 투표 통계 리턴됨
         ApiConfig.request({
           method: HttpMethod.GET,
@@ -83,27 +86,34 @@ const PostVoteComponent = ({
   return (
     <>
       <PostVoteComponentWrap>
-        {choiceData.slice(0, -1).map((value: any, idx) => (
-          <PostVoteButton
-            isChoice={choosedData === value?.id}
-            key={idx}
-            onClick={() => handleClickResult(value.id)}
-          >
-            <div className={"content"}>
-              <div>{value?.label}</div>
-              {choosedData === value?.id ? (
-                <img src={FillCheckIcon} alt={"체크버튼"} />
-              ) : (
-                <img src={CheckIcon} alt={"체크버튼"} />
+        {choiceData.slice(0, -1).map((value: any, idx) => {
+          const percentage = (value.userWorryChoiceCount / voteTotal) * 100;
+          return (
+            <PostVoteButton
+              isChoice={choseData === value?.id}
+              percentage={percentage}
+              key={idx}
+              onClick={() => handleClickResult(value.id)}
+            >
+              <div className={"content"}>
+                <div>
+                  {value?.label} {percentage !== 0 && `(${percentage}%)`}
+                </div>
+                {choseData === value?.id ? (
+                  <img src={FillCheckIcon} alt={"체크버튼"} />
+                ) : (
+                  <img src={CheckIcon} alt={"체크버튼"} />
+                )}
+              </div>
+              {voteTotal > 0 && (
+                <VotePercentage
+                  percentage={percentage}
+                  isChoice={choseData === value?.id}
+                ></VotePercentage>
               )}
-            </div>
-            {voteTotal > 0 && (
-              <VotePercentage
-                percentage={value.userWorryChoiceCount / voteTotal}
-              ></VotePercentage>
-            )}
-          </PostVoteButton>
-        ))}
+            </PostVoteButton>
+          );
+        })}
       </PostVoteComponentWrap>
       <div className={"voting"}>
         {choiceData?.map((value: any, idx) => {
@@ -127,36 +137,60 @@ const PostVoteComponent = ({
           현재 투표한 사용자 {postData.userWorryChoiceCount}명
         </p>
       </div>
+      {selectVoteButton > 0 && <ClickVoteButton>투표하기</ClickVoteButton>}
     </>
   );
 };
 
 export default PostVoteComponent;
 
-const VotePercentage = styled.div<{ percentage: number }>`
-  width: ${({ percentage }) => `${percentage * 100}%`};
-  background-color: ${palette.Primary};
+const ClickVoteButton = styled.div`
+  width: 34rem;
+  height: 4.7rem;
+  background-color: ${palette.Secondary};
+  margin: 0 auto;
+  position: absolute;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 10rem;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: white;
+  //bottom: 0.5rem;
+`;
+
+const VotePercentage = styled.div<{ percentage: number; isChoice: boolean }>`
+  width: ${({ percentage }) => `${percentage}%`};
+  background-color: ${({ isChoice }) => {
+    if (isChoice) {
+      return `${palette.Primary}`;
+    } else {
+      return `${palette.Text2}`;
+    }
+  }};
   height: 4.3rem;
   border-radius: 0.5rem;
   transition: width 0.5s;
 `;
 
-const PostVoteButton = styled.div<{ isChoice: boolean }>`
+const PostVoteButton = styled.div<{ percentage: number; isChoice: boolean }>`
   background-color: ${palette.Gray4};
   //width: 81vw; // 기존 34rem
   width: 100%;
   height: 4.3rem;
-
   margin: 1.3rem 0 0 0;
   border-radius: 0.5rem;
-  color: ${({ isChoice }) => {
-    if (isChoice) {
+  color: ${({ isChoice, percentage }) => {
+    if (isChoice || percentage > 0) {
       return "white";
     } else {
       return `${palette.Gray1}`;
     }
   }};
-
   font-size: 1.4rem;
   font-weight: 500;
   box-sizing: border-box;
