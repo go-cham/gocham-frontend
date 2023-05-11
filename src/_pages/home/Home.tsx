@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <MainView>
       <div className={"title"}>
-        <h1 css={H1}>고민의 참견 0511/22:30</h1>
+        <h1 css={H1}>고민의 참견 0512/12:14</h1>
       </div>
       <div style={{ height: "8.6rem" }} />
       <PostListLayer />
