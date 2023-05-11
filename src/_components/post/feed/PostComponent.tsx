@@ -70,8 +70,7 @@ const PostComponent = ({
     // https 배포에서만 확인 가능.
     try {
       await navigator.share({
-        title: "링크 공유",
-        text: "이 링크를 공유합니다.",
+        title: "고민의 참견",
         url: `${process.env.REACT_APP_BASE_URL}${RouteURL.feed}/${postId}`,
       });
       console.log("링크가 공유되었습니다.");
