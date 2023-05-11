@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
 import { EndPoint } from "../../../dataManager/apiMapper";
 import { userInfo } from "os";
+import { formatRoundedNumber } from "../../../utils/formatRoundedNumber";
 
 const PostVoteComponent = ({
   postData,
@@ -98,7 +99,9 @@ const PostVoteComponent = ({
               <div className={"content"}>
                 <div>
                   {value?.label}
-                  {percentage !== 0 && !isNaN(percentage) && `(${percentage}%)`}
+                  {percentage !== 0 &&
+                    !isNaN(percentage) &&
+                    `(${formatRoundedNumber(percentage)}%)`}
                 </div>
                 {choseData === value?.id ? (
                   <img src={FillCheckIcon} alt={"체크버튼"} />
