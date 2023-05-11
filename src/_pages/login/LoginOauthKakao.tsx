@@ -23,39 +23,45 @@ const LoginOauthKakao = () => {
 
     console.log(`code: ${code}`);
     (async () => {
-      try {
-        if (code) {
-          const res = await ApiConfig.request({
-            method: HttpMethod.GET,
-            url: EndPoint.login.get.KAKAO_AUTH,
-            query: { code },
-          });
-          console.log("res");
-          console.log(res);
-          const data = res && res.data;
-          window.localStorage.setItem("token", data.token);
-          const userData = await getUserInfo();
-          setUserData(userData);
+      if (userData.userId === null) {
+        try {
+          if (code) {
+            const res = await ApiConfig.request({
+              method: HttpMethod.GET,
+              url: EndPoint.login.get.KAKAO_AUTH,
+              query: { code },
+            });
+            console.log("res");
+            console.log(res);
+            const data = res && res.data;
+            window.localStorage.setItem("token", data.token);
+            const userData = await getUserInfo();
+            setUserData(userData);
 
-          if (userData?.userType === "onceUserWithoutTerms") {
-            navigate(RouteURL.register_term);
-          } else if (userData?.userType === "onceUser") {
-            navigate(RouteURL.collect_information);
-          } else if (userData?.userType === "deactivatedUser") {
-            alert(alertMessage.error.user.deactivatedUser);
-            navigate(RouteURL.login);
-          } else if (userData?.userType === "dormantUser") {
-            alert(alertMessage.error.user.dormantUser);
-            navigate(RouteURL.login);
-          } else {
-            console.log("로그인 성공~");
-            navigate(RouteURL.home);
+            if (userData?.userType === "onceUserWithoutTerms") {
+              navigate(RouteURL.register_term);
+            } else if (userData?.userType === "onceUser") {
+              navigate(RouteURL.collect_information);
+            } else if (userData?.userType === "deactivatedUser") {
+              alert(alertMessage.error.user.deactivatedUser);
+              navigate(RouteURL.login);
+            } else if (userData?.userType === "dormantUser") {
+              alert(alertMessage.error.user.dormantUser);
+              navigate(RouteURL.login);
+            } else {
+              console.log("로그인 성공~");
+              navigate(RouteURL.home);
+            }
           }
+        } catch (e) {
+          console.error(e);
+          alert(
+            "로그인 과정에서 에러가 발생했습니다. 개발자에게 문의해주세요."
+          );
+          navigate("/login");
         }
-      } catch (e) {
-        console.error(e);
-        alert("로그인 과정에서 에러가 발생했습니다. 개발자에게 문의해주세요.");
-        navigate("/login");
+      } else {
+        navigate(RouteURL.home);
       }
     })();
   }, []);
