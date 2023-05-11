@@ -97,7 +97,8 @@ const PostVoteComponent = ({
             >
               <div className={"content"}>
                 <div>
-                  {value?.label} {percentage !== 0 && `(${percentage}%)`}
+                  {value?.label}
+                  {percentage !== 0 && !isNaN(percentage) && `(${percentage}%)`}
                 </div>
                 {choseData === value?.id ? (
                   <img src={FillCheckIcon} alt={"체크버튼"} />
