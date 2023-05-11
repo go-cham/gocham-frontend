@@ -5,7 +5,6 @@ import palette from "../../style/color";
 import ChatIcon from "../../images/PostComponent/chat.svg";
 import ShareIcon from "../../images/PostComponent/share.svg";
 import SendIcon from "../../images/PostComponent/send.svg";
-import { handleClickShare } from "../post/feed/PostComponent";
 import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
 import { EndPoint } from "../../dataManager/apiMapper";
 import { userDataAtomType } from "../../atom/userData";
@@ -107,11 +106,11 @@ export default function Content({
         <h1>{postData.title}</h1>
         <h2>{formatText(postData.content)}</h2>
         <div className={"toolbar"}>
-          <img
-            src={ShareIcon}
-            alt={"공유"}
-            onClick={() => handleClickShare(postId)}
-          />
+          {/*<img*/}
+          {/*  src={ShareIcon}*/}
+          {/*  alt={"공유"}*/}
+          {/*  onClick={() => handleClickShare(postId)}*/}
+          {/*/>*/}
           <p className={"result"}>
             현재 투표한 사용자 {postData.userWorryChoiceCount}명
           </p>
@@ -213,7 +212,7 @@ const PostChatContainer = styled.div`
   & .toolbar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: end;
     margin-top: 1.7rem;
     margin-bottom: 1.3rem;
   }

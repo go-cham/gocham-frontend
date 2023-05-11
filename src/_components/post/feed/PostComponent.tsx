@@ -7,7 +7,7 @@ import ChatIcon from "../../../images/PostComponent/chat.svg";
 import ShareIcon from "../../../images/PostComponent/share.svg";
 import palette from "../../../style/color";
 import ClockIcon from "../../../images/PostComponent/clock.svg";
-import CheckIcon from "../../../images/PostComponent/check.svg";
+import ChatAlertImage from "../../../images/PostComponent/share_image.svg";
 import { RouteURL } from "../../../App";
 import React, { useEffect, useState } from "react";
 import ChatBottomSheet from "../../chat/ChatBottomSheet";
@@ -22,20 +22,6 @@ import { useAtom } from "jotai";
 import { postDataType } from "../../../type/postDataType";
 import { handleRefreshPostData } from "../../../utils/handleRefreshPostData";
 import { chatInputFocusAtom } from "../../../atom/chatInputFocus";
-
-export const handleClickShare = async (postId: number) => {
-  // https 배포에서만 확인 가능.
-  try {
-    await navigator.share({
-      title: "링크 공유",
-      text: "이 링크를 공유합니다.",
-      url: `${process.env.REACT_APP_BASE_URL}${RouteURL.feed}/${postId}`,
-    });
-    console.log("링크가 공유되었습니다.");
-  } catch (error) {
-    console.error("링크 공유 에러", error);
-  }
-};
 
 const PostComponent = ({
   userInfo,
@@ -77,6 +63,37 @@ const PostComponent = ({
       setNeedRefresh({ worryIdx: null, updateObject: "" });
     }
   }, [needRefresh]);
+
+  const [alertShare, setAlertShare] = useState(false);
+  const [display, setDisplay] = useState("none");
+  const handleClickShare = async (postId: number) => {
+    // https 배포에서만 확인 가능.
+    try {
+      await navigator.share({
+        title: "링크 공유",
+        text: "이 링크를 공유합니다.",
+        url: `${process.env.REACT_APP_BASE_URL}${RouteURL.feed}/${postId}`,
+      });
+      console.log("링크가 공유되었습니다.");
+      setAlertShare(true);
+      setTimeout(() => {
+        setAlertShare(false);
+      }, 3000);
+    } catch (error) {
+      console.error("링크 공유 에러", error);
+    }
+  };
+
+  useEffect(() => {
+    if (alertShare) {
+      setDisplay("flex");
+    } else {
+      const timeoutId = setTimeout(() => {
+        setDisplay("none");
+      }, 500); // transition의 시간과 일치해야 합니다.
+      return () => clearTimeout(timeoutId);
+    }
+  }, [alertShare]);
 
   return (
     <>
@@ -121,6 +138,10 @@ const PostComponent = ({
                 alt={"공유"}
                 onClick={() => handleClickShare(thisPostData.id)}
               />
+              <SharePostAlert alertShare={alertShare} display={display}>
+                <img src={ChatAlertImage} alt={"모달"} />
+                <p>게시물 링크가 복사되었어요!</p>
+              </SharePostAlert>
             </div>
             <div className={"chatCount"} onClick={() => handleClickPostChat()}>
               댓글 {thisPostData.replyCount}개 모두 보기
@@ -140,6 +161,30 @@ const PostComponent = ({
 
 export default PostComponent;
 
+const SharePostAlert = styled.div<{ alertShare: boolean; display: string }>`
+  display: ${({ display }) => display};
+  opacity: ${({ alertShare }) => (alertShare ? "1" : "0")};
+
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  top: -3rem;
+  left: 3.5rem;
+  justify-content: center;
+  align-items: center;
+  & img {
+    position: absolute;
+  }
+  & p {
+    z-index: 10;
+    margin-bottom: 0.8rem;
+    //width: 16.2rem;
+    //height: 4.4rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: white;
+  }
+`;
+
 const PostComponentWrap = styled.div`
   border-bottom: 0.1rem solid ${palette.Gray3};
   position: relative;
@@ -152,6 +197,7 @@ const PostComponentLayer = styled.div`
   & .toolbar {
     margin-top: 1.7rem;
     margin-bottom: 1.3rem;
+    position: relative;
   }
   & .chatCount {
     font-size: 1.2rem;
