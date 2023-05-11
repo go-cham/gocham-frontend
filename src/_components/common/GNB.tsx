@@ -73,7 +73,7 @@ const GNBComponent = styled.div`
 
 const GNBBackgroundWrap = styled.div`
   width: 100%;
-  bottom: 2.8rem;
+  bottom: 3.3rem;
   display: flex;
   justify-content: space-evenly;
   align-items: end;
