@@ -24,6 +24,7 @@ export type userInformationType = {
   residence: OptionType;
   job: OptionType;
   worryCategories: OptionType[];
+  profileImageUrl?: string;
 };
 
 export type userInformationPropsType = {

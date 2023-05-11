@@ -10,6 +10,10 @@ import { userDataAtomType } from "../../atom/userData";
 import palette from "../../style/color";
 import { useNavigate } from "react-router-dom";
 import { RouteURL } from "../../App";
+import { userInformationType } from "../../_pages/collectInformation/CollectInformation";
+import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
+import { EndPoint } from "../../dataManager/apiMapper";
+import { formatISO8601ToNormal } from "../../utils/formatISO8601ToNormal";
 
 const UserProfile = ({
   isMyFeed,
@@ -22,6 +26,50 @@ const UserProfile = ({
 }) => {
   //   isMyFeed 는 추후 타인 프로필 접근시 프로필 편집 글자 대신 팔로우/팔로우해제 버튼으로
   const navigate = useNavigate();
+
+  const [userInformation, setUserInformation] = useState<userInformationType>({
+    nickname: "",
+    birthDay: "",
+    sex: "",
+    residence: { value: 0, label: "" },
+    job: { value: 0, label: "" },
+    worryCategories: [],
+    profileImageUrl: "",
+  });
+
+  useEffect(() => {
+    //     프로필 조회 api
+    ApiConfig.request({
+      method: HttpMethod.GET,
+      url: EndPoint.user.get.USER,
+      path: {
+        id: userData.userId,
+      },
+    })?.then((profileData) => {
+      let data = profileData.data;
+
+      console.log(data);
+      const worryCategories = data.userWorryCategories.map((item: any) => ({
+        value: item.worryCategory.id,
+        label: item.worryCategory.label,
+      }));
+
+      const residence = {
+        value: data.residence.id,
+        label: data.residence.label,
+      };
+
+      setUserInformation({
+        nickname: data.nickname,
+        birthDay: formatISO8601ToNormal(data.birthDate),
+        sex: data.sex,
+        residence: residence,
+        job: { value: data.job.id, label: data.job.label },
+        worryCategories: worryCategories,
+        profileImageUrl: data.profileImageUrl,
+      });
+    });
+  }, []);
 
   const handleGoEditProfile = () => {
     navigate(RouteURL.edit_profile);
@@ -36,11 +84,15 @@ const UserProfile = ({
       />
       <UserProfileWrap>
         <img
-          src={DefaultUserIcon}
+          src={
+            userInformation.profileImageUrl
+              ? userInformation.profileImageUrl
+              : DefaultUserIcon
+          }
           alt={"유저이미지"}
           className={"유저이미지"}
         />
-        <div className={"유저이름"}>{userData.name}</div>
+        <div className={"유저이름"}>{userInformation.nickname}</div>
 
         <ProfileUtilButton
           width={8.3}
