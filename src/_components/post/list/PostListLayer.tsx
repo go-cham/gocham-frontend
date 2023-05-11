@@ -52,7 +52,7 @@ const PostListLayer = () => {
       };
     }
     try {
-      console.log(reqData);
+      // console.log(reqData);
       const res = await ApiConfig.request({
         method: HttpMethod.GET,
         url: EndPoint.worry.get.WORRIES,

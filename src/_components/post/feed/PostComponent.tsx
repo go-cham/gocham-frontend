@@ -106,17 +106,7 @@ const PostComponent = ({
               postData={thisPostData}
               userId={userInfo.userId}
             />
-            {/*<PostVoteComponentWrap>*/}
-            {/*  <PostVoteButton>*/}
-            {/*    <div>fsa</div>*/}
-            {/*    <img src={CheckIcon} alt={"체크버튼"} />*/}
-            {/*  </PostVoteButton>{" "}*/}
-            {/*  <PostVoteButton>*/}
-            {/*    <div>fsa</div>*/}
-            {/*    <img src={CheckIcon} alt={"체크버튼"} />*/}
-            {/*  </PostVoteButton>*/}
-            {/*</PostVoteComponentWrap>*/}
-            {/**/}
+
             <div className={"toolbar"}>
               <img
                 src={ChatIcon}

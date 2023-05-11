@@ -58,7 +58,7 @@ function ChatBottomSheet({
       <HeaderWrapper
         ref={header}
         onClick={() => {
-          console.log("hloa");
+          // console.log("hloa");
           handleClickPostChat();
         }}
       >

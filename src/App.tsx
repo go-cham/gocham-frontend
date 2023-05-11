@@ -73,7 +73,7 @@ function App() {
   const [userData, setUserData] = useAtom(userAtom);
 
   useEffect(() => {
-    console.log(process.env.NODE_ENV);
+    // console.log(process.env.NODE_ENV);
     const checkLoginStatus = async () => {
       // 로그인 여부를 확인하는 함수 호출
       if (userData.userId === null) {
@@ -124,7 +124,7 @@ function App() {
             <Route path={RouteURL.onboarding} element={<Onboarding />} />
             <Route
               path={RouteURL.write}
-              element={<Auth SpecificComponent={Write} requiredLogin={false} />}
+              element={<Auth SpecificComponent={Write} requiredLogin={true} />}
             />
             <Route
               path={RouteURL.user}
