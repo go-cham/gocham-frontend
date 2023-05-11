@@ -54,7 +54,7 @@ export default function Content({
     }
   }, [openBottomSheet]);
   useEffect(() => {
-    console.log("모바일 브라우저 상태에서는 하단에 더 값 줘야함.");
+    // console.log("모바일 브라우저 상태에서는 하단에 더 값 줘야함.");
   }, []);
 
   const [chatData, setChatData] = useState([]);
@@ -62,7 +62,7 @@ export default function Content({
   const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
 
   useEffect(() => {
-    console.log(chatInputFocus.worryId, postId);
+    // console.log(chatInputFocus.worryId, postId);
     if (chatInputFocus.worryId === postId) {
       chatRef.current?.focus();
     }
