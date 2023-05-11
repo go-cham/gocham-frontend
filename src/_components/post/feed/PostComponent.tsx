@@ -32,7 +32,6 @@ const PostComponent = ({
 }) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   // console.log(postData);
-  const [chatInputFocus, setChatInputFocus] = useAtom(chatInputFocusAtom);
   const handleClickMeatballsMenu = () => {
     console.log("hola");
   };
@@ -41,10 +40,6 @@ const PostComponent = ({
       // console.log(value, "->", !value);
       return !value;
     });
-  };
-  const handleClickPostChatWithFocus = () => {
-    setChatInputFocus({ worryId: postData.id });
-    handleClickPostChat();
   };
 
   const [thisPostData, setThisPostData] = useState<postDataType>(postData);
@@ -63,36 +58,6 @@ const PostComponent = ({
       setNeedRefresh({ worryIdx: null, updateObject: "" });
     }
   }, [needRefresh]);
-
-  const [alertShare, setAlertShare] = useState(false);
-  const [display, setDisplay] = useState("none");
-  const handleClickShare = async (postId: number) => {
-    // https 배포에서만 확인 가능.
-    try {
-      await navigator.share({
-        title: "고민의 참견",
-        url: `${process.env.REACT_APP_BASE_URL}${RouteURL.feed}/${postId}`,
-      });
-      console.log("링크가 공유되었습니다.");
-      setAlertShare(true);
-      setTimeout(() => {
-        setAlertShare(false);
-      }, 3000);
-    } catch (error) {
-      console.error("링크 공유 에러", error);
-    }
-  };
-
-  useEffect(() => {
-    if (alertShare) {
-      setDisplay("flex");
-    } else {
-      const timeoutId = setTimeout(() => {
-        setDisplay("none");
-      }, 500); // transition의 시간과 일치해야 합니다.
-      return () => clearTimeout(timeoutId);
-    }
-  }, [alertShare]);
 
   return (
     <>
@@ -125,25 +90,18 @@ const PostComponent = ({
             <PostVoteComponent
               postData={thisPostData}
               userId={userInfo.userId}
+              handleClickPostChat={handleClickPostChat}
             />
-            <div className={"toolbar"}>
-              <img
-                src={ChatIcon}
-                alt={"댓글"}
-                onClick={() => handleClickPostChatWithFocus()}
-              />
-              <img
-                src={ShareIcon}
-                alt={"공유"}
-                onClick={() => handleClickShare(thisPostData.id)}
-              />
-              <SharePostAlert alertShare={alertShare} display={display}>
-                <img src={ChatAlertImage} alt={"모달"} />
-                <p>게시물 링크가 복사되었어요!</p>
-              </SharePostAlert>
-            </div>
-            <div className={"chatCount"} onClick={() => handleClickPostChat()}>
-              댓글 {thisPostData.replyCount}개 모두 보기
+            <div className={"chatAndVotedUser"}>
+              <div
+                className={"chatCount"}
+                onClick={() => handleClickPostChat()}
+              >
+                댓글 {thisPostData.replyCount}개 모두 보기
+              </div>
+              <p className={"result"}>
+                현재 투표한 사용자 {postData.userWorryChoiceCount}명
+              </p>
             </div>
           </PostComponentLayer>
           <ChatBottomSheet
@@ -160,30 +118,6 @@ const PostComponent = ({
 
 export default PostComponent;
 
-const SharePostAlert = styled.div<{ alertShare: boolean; display: string }>`
-  display: ${({ display }) => display};
-  opacity: ${({ alertShare }) => (alertShare ? "1" : "0")};
-
-  transition: all 0.5s ease-in-out;
-  position: absolute;
-  top: -3rem;
-  left: 3.5rem;
-  justify-content: center;
-  align-items: center;
-  & img {
-    position: absolute;
-  }
-  & p {
-    z-index: 10;
-    margin-bottom: 0.8rem;
-    //width: 16.2rem;
-    //height: 4.4rem;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: white;
-  }
-`;
-
 const PostComponentWrap = styled.div`
   border-bottom: 0.1rem solid ${palette.Gray3};
   position: relative;
@@ -193,27 +127,19 @@ const PostComponentLayer = styled.div`
   padding-left: 2.5rem;
   padding-right: 2.5rem;
   background-color: white;
-  & .toolbar {
-    margin-top: 1.7rem;
-    margin-bottom: 1.3rem;
-    position: relative;
+  & .chatAndVotedUser {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
   }
   & .chatCount {
     font-size: 1.2rem;
     padding-bottom: 1.7rem;
+    color: ${palette.Text3};
   }
-  & .voting {
-    display: flex;
-    justify-content: space-between;
-    & .justResult {
-      text-decoration-line: underline;
-      font-size: 1.2rem;
-      color: ${palette.Text2};
-    }
-    & .result {
-      font-size: 1.2rem;
-      color: ${palette.Text3};
-    }
+  & .result {
+    font-size: 1.2rem;
+    color: ${palette.Text3};
   }
 
   & .마감 {
@@ -224,6 +150,7 @@ const PostComponentLayer = styled.div`
       margin-left: 0.6rem;
       font-weight: 500;
       font-size: 1.2rem;
+      color: ${palette.Primary};
       line-height: 1.4rem;
     }
   }
