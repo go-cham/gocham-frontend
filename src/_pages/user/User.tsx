@@ -29,11 +29,11 @@ const User = () => {
   const [userProfile, setUserProfile] = useState({});
   // 내 게시글 | 참여한 게시글 스위칭
   const [postType, setPostType] = useState("내 게시글");
-  const [needSiwtchPostList, setNeedSiwtchPostList] = useState(false);
+  const [needSwitchPostList, setNeedSwitchPostList] = useState(false);
 
   const switchPostType = (type: string) => {
     setPostType(type);
-    setNeedSiwtchPostList(true);
+    setNeedSwitchPostList(true);
     setIsLoading(true);
   };
   const [postingCount, setPostingCount] = useState({
@@ -49,7 +49,7 @@ const User = () => {
         // url: `${EndPoint.user.get.USER}/${userData.userId}`,
         path: { id: userData.userId },
       })?.then((res) => {
-        console.log(res);
+        // console.log(res);
         setUserProfile(res?.data);
       });
       ApiConfig.request({
@@ -106,9 +106,9 @@ const User = () => {
     console.log("쉿 패치중");
     let reqData;
     if (postType === "내 게시글") {
-      console.log("내 게시글ㅇㅁ");
+      // console.log("내 게시글ㅇㅁ");
 
-      if (!needSiwtchPostList && postingMetaData.nextId) {
+      if (!needSwitchPostList && postingMetaData.nextId) {
         reqData = {
           sort: "DESC",
           take: 5,
@@ -123,9 +123,9 @@ const User = () => {
         };
       }
     } else if (postType === "참여한 게시글") {
-      console.log("참여한 게시글ㅇㅁ");
+      // console.log("참여한 게시글ㅇㅁ");
 
-      if (!needSiwtchPostList && postingMetaData.nextId) {
+      if (!needSwitchPostList && postingMetaData.nextId) {
         reqData = {
           sort: "DESC",
           take: 5,
@@ -150,9 +150,9 @@ const User = () => {
           query: reqData,
         });
         // 새로 가져온 데이터와 기존 데이터 합치기
-        if (needSiwtchPostList) {
+        if (needSwitchPostList) {
           setPostingData(res?.data.data);
-          setNeedSiwtchPostList(false);
+          setNeedSwitchPostList(false);
           setPostingMetaData({
             take: 5,
           });
@@ -226,7 +226,7 @@ const User = () => {
               <PostListComponent
                 userInfo={userInfo}
                 postData={value}
-                routeUrl={"my"}
+                routeUrl={postType === "내 게시물" ? "my" : "participated"}
               />
             </div>
           ))}

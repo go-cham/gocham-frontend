@@ -19,7 +19,7 @@ const Auth = ({ SpecificComponent, requiredLogin = null }: AuthProps) => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useAtom(userAtom);
   useEffect(() => {
-    console.log("auth 실행중");
+    // console.log("auth 실행중");
     let newUserInfo = userInfo;
 
     const checkIsLogin = async () => {

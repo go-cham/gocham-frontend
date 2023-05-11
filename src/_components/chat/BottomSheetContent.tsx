@@ -38,7 +38,7 @@ export default function Content({
           worryId: postId,
         },
       })?.then((res) => {
-        // console.log(res.data);
+        // console.log(res?.data);
         setChatData(res?.data);
       });
     } catch (e) {
@@ -129,17 +129,23 @@ export default function Content({
           <img src={SendIcon} alt={"전송"} onClick={() => handlePushChat()} />
         </InputWrap>
         <ChatContentWrap>
-          {" "}
           {chatData &&
             chatData.map((chat: any, idx) => {
+              // console.log(chat.user.worryChoice);
               return (
                 <UserChatBox key={idx}>
                   <div className={"metaData"}>
-                    <div>
+                    <div className={"userAttribute"}>
                       <PostProfileBox
                         nickname={chat.user.nickname}
                         profileImg={chat.user.profileImageUrl}
                       />
+                      {chat.user.worryChoice?.label && (
+                        <div className={"worryLabel"}>
+                          {chat.user.worryChoice.label}
+                        </div>
+                      )}
+
                       {/* 유저 투표값에 따른 이모지 제공 필요*/}
                     </div>
                     <div className={"uploadDate"}>
@@ -165,6 +171,24 @@ const ChatContentWrap = styled.div``;
 
 const UserChatBox = styled.div`
   margin-top: 2.1rem;
+
+  & .userAttribute {
+    display: flex;
+    align-items: center;
+    & .worryLabel {
+      margin-left: 0.7rem;
+      width: 4.1rem;
+      height: 2.2rem;
+      border-radius: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+      font-size: 1rem;
+      color: ${palette.Primary};
+      border: 1px solid ${palette.Primary};
+    }
+  }
   & .uploadDate {
     font-size: 1.2rem;
   }
