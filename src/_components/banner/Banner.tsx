@@ -8,7 +8,7 @@ interface BannerProps {
 export const Banner = (props: BannerProps) => {
   const { show, applyUpdate } = props;
 
-  if (true) {
+  if (show) {
     return (
       <BannerWrap>
         새 버전으로 업데이트합니다.
@@ -18,6 +18,7 @@ export const Banner = (props: BannerProps) => {
       </BannerWrap>
     );
   }
+  return <></>;
 };
 
 const BannerWrap = styled.div`
