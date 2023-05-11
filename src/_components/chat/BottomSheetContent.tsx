@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PostProfileBox from "../post/PostProfileBox";
 import styled from "@emotion/styled";
 import palette from "../../style/color";
@@ -14,6 +14,7 @@ import { formatText } from "../../utils/formatText";
 import { debounce } from "lodash";
 import { useAtom } from "jotai/index";
 import { refreshChatAtom } from "../../atom/postRefreshRequest";
+import { chatInputFocusAtom } from "../../atom/chatInputFocus";
 
 export default function Content({
   openBottomSheet,
@@ -26,6 +27,9 @@ export default function Content({
   userInfo: userDataAtomType;
   postData: any;
 }) {
+  const chatRef = useRef<HTMLInputElement>(null);
+  const [chatInputFocus, setChatInputFocus] = useAtom(chatInputFocusAtom);
+
   function getChatData() {
     try {
       ApiConfig.request({
@@ -57,6 +61,13 @@ export default function Content({
   const [chatData, setChatData] = useState([]);
   const [chatText, setChatText] = useState("");
   const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
+
+  useEffect(() => {
+    console.log(chatInputFocus.worryId, postId);
+    if (chatInputFocus.worryId === postId) {
+      chatRef.current?.focus();
+    }
+  }, [chatInputFocus]);
 
   const handleChatPost = async () => {
     try {
@@ -110,6 +121,7 @@ export default function Content({
       <PostChatContainer>
         <InputWrap>
           <input
+            ref={chatRef}
             className={"댓글입력"}
             placeholder={"여러분들의 의견을 자유롭게 남겨주세요!"}
             value={chatText}

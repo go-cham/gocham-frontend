@@ -21,6 +21,7 @@ import { refreshChatAtom } from "../../../atom/postRefreshRequest";
 import { useAtom } from "jotai";
 import { postDataType } from "../../../type/postDataType";
 import { handleRefreshPostData } from "../../../utils/handleRefreshPostData";
+import { chatInputFocusAtom } from "../../../atom/chatInputFocus";
 
 export const handleClickShare = async (postId: number) => {
   // https 배포에서만 확인 가능.
@@ -45,7 +46,7 @@ const PostComponent = ({
 }) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   // console.log(postData);
-  const imgUrl = "https://via.placeholder.com/200X200";
+  const [chatInputFocus, setChatInputFocus] = useAtom(chatInputFocusAtom);
   const handleClickMeatballsMenu = () => {
     console.log("hola");
   };
@@ -54,6 +55,10 @@ const PostComponent = ({
       // console.log(value, "->", !value);
       return !value;
     });
+  };
+  const handleClickPostChatWithFocus = () => {
+    setChatInputFocus({ worryId: postData.id });
+    handleClickPostChat();
   };
 
   const [thisPostData, setThisPostData] = useState<postDataType>(postData);
@@ -109,7 +114,7 @@ const PostComponent = ({
               <img
                 src={ChatIcon}
                 alt={"댓글"}
-                onClick={() => handleClickPostChat()}
+                onClick={() => handleClickPostChatWithFocus()}
               />
               <img
                 src={ShareIcon}
