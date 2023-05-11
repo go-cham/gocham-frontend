@@ -76,8 +76,8 @@ function App() {
     // console.log(process.env.NODE_ENV);
     const checkLoginStatus = async () => {
       // 로그인 여부를 확인하는 함수 호출
-      if (userData.userId === null) {
-        const userInfo = await getUserInfo();
+      const userInfo = await getUserInfo();
+      if (userInfo !== "null") {
         setUserData(userInfo);
       }
     };
