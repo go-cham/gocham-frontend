@@ -24,7 +24,6 @@ import { handleRefreshPostData } from "../../../utils/handleRefreshPostData";
 
 export const handleClickShare = async (postId: number) => {
   // https 배포에서만 확인 가능.
-  alert("개발자: 모바일에선 https 배포에서만 확인가능. 정상작동시 alert 제거");
   try {
     await navigator.share({
       title: "링크 공유",
