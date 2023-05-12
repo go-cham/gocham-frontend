@@ -12,10 +12,11 @@ const RouteChangeTracker = () => {
 
   // localhost는 기록하지 않음
   useEffect(() => {
-    if (!window.location.href.includes("localhost")) {
-      ReactGA.initialize(process.env.REACT_APP_FIREBASE_MEASUREMENT_ID);
-      setInitialized(true);
-    }
+    console.log("실행중");
+    // if (!window.location.href.includes("localhost")) {
+    ReactGA.initialize(process.env.REACT_APP_FIREBASE_MEASUREMENT_ID);
+    setInitialized(true);
+    // }
   }, []);
 
   // location 변경 감지시 pageview 이벤트 전송
@@ -26,12 +27,14 @@ const RouteChangeTracker = () => {
     }
   }, [initialized, location]);
 
-  // 개발용
-  useEffect(() => {
-    ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRAKING_ID);
-    ReactGA.set({ page: location.pathname });
-    ReactGA.send("pageview");
-  }, [location]);
+  // // 개발용
+  // useEffect(() => {
+  //   ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRAKING_ID);
+  //   ReactGA.set({ page: location.pathname });
+  //   ReactGA.send("pageview");
+  // }, [location]);
+
+  return <></>;
 };
 
 export default RouteChangeTracker;

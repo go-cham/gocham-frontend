@@ -26,6 +26,7 @@ import AuthCheckPage from "./_pages/AuthCheckPage";
 import EditProfile from "./_pages/user/EditProfile";
 import styled from "@emotion/styled";
 import { MAX_WIDTH } from "./constants/viewSize";
+import RouteChangeTracker from "./utils/RouteChangeTracker";
 
 // 모바일 크기 처리
 const OuterWrap = styled.div`
@@ -93,6 +94,7 @@ function App() {
     <OuterWrap>
       <div css={defaultCSS}>
         <BrowserRouter>
+          <RouteChangeTracker />
           <Routes>
             <Route path={RouteURL.home} element={<Home />} />
             <Route
