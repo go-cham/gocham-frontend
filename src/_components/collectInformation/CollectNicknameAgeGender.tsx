@@ -45,6 +45,7 @@ const CollectNicknameAgeGender = ({
         value={userInformation.birthDay}
         onChange={(e) => handleInputValue(e, "birthDay")}
         max={"2005-01-01"}
+        min={"1900-01-01"}
       />
       <h2>성별</h2>
       <SelectGenderWrap>
