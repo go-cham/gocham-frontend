@@ -14,6 +14,7 @@ import { useAtom } from "jotai";
 import { chatInputFocusAtom } from "../../../atom/chatInputFocus";
 import { RouteURL } from "../../../App";
 import { refreshChatAtom } from "../../../atom/postRefreshRequest";
+import { getRemainingTime } from "../../../utils/getRemainingTime";
 
 const PostVoteComponent = ({
   postData,
@@ -27,24 +28,29 @@ const PostVoteComponent = ({
   const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
 
   const handleClickResult = async (choiceId: number) => {
-    // console.log(choseData);
-    if (choseData === 0) {
-      const res = await ApiConfig.request({
-        method: HttpMethod.POST,
-        url: EndPoint.worry.post.USER_WORRY_CHOICE,
-        data: {
-          userId: userId,
-          worryChoiceId: choiceId,
-        },
-      });
-      refreshVotingData();
-      // 투표후 투표한 사용자수 리프레시
-      setNeedRefresh({
-        worryIdx: postData.id,
-        updateObject: "vote",
-      });
+    // 마감된 투표글인지 확인 필요
+    if (getRemainingTime(postData.expirationTime) !== "마감됨") {
+      // console.log(choseData);
+      if (choseData === 0) {
+        const res = await ApiConfig.request({
+          method: HttpMethod.POST,
+          url: EndPoint.worry.post.USER_WORRY_CHOICE,
+          data: {
+            userId: userId,
+            worryChoiceId: choiceId,
+          },
+        });
+        refreshVotingData();
+        // 투표후 투표한 사용자수 리프레시
+        setNeedRefresh({
+          worryIdx: postData.id,
+          updateObject: "vote",
+        });
+      } else {
+        alert("재투표가 불가능합니다!");
+      }
     } else {
-      alert("재투표가 불가능합니다!");
+      alert("마감된 게시글은 투표가 불가능합니다!");
     }
   };
   // 선택할 수 있는 값
