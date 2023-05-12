@@ -12,5 +12,5 @@ export type postDataType = {
     profileImageUrl: string;
   };
   replyCount: number;
-  userWorryChoiceCount?: number;
+  userWorryChoiceCount: number;
 };

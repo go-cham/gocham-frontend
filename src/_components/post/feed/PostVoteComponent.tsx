@@ -13,6 +13,7 @@ import ChatAlertImage from "../../../images/PostComponent/share_image.svg";
 import { useAtom } from "jotai";
 import { chatInputFocusAtom } from "../../../atom/chatInputFocus";
 import { RouteURL } from "../../../App";
+import { refreshChatAtom } from "../../../atom/postRefreshRequest";
 
 const PostVoteComponent = ({
   postData,
@@ -23,8 +24,10 @@ const PostVoteComponent = ({
   userId: number | null;
   handleClickPostChat: () => void;
 }) => {
+  const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
+
   const handleClickResult = async (choiceId: number) => {
-    console.log(choseData);
+    // console.log(choseData);
     if (choseData === 0) {
       const res = await ApiConfig.request({
         method: HttpMethod.POST,
@@ -35,6 +38,11 @@ const PostVoteComponent = ({
         },
       });
       refreshVotingData();
+      // 투표후 투표한 사용자수 리프레시
+      setNeedRefresh({
+        worryIdx: postData.id,
+        updateObject: "vote",
+      });
     } else {
       alert("재투표가 불가능합니다!");
     }
@@ -95,6 +103,8 @@ const PostVoteComponent = ({
             }, 0)
           );
         });
+
+        // 새로고침 로직 필요
       }
     });
   };

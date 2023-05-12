@@ -11,7 +11,7 @@ export const handleRefreshPostData = (
     });
   } else if (updateObject === "vote") {
     return Object.assign({}, thisPostData, {
-      userWorryChoiceCount: thisPostData.replyCount + 1,
+      userWorryChoiceCount: thisPostData.userWorryChoiceCount + 1,
     });
   }
   return thisPostData;

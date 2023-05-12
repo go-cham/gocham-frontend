@@ -100,7 +100,7 @@ const PostComponent = ({
                 댓글 {thisPostData.replyCount}개 모두 보기
               </div>
               <p className={"result"}>
-                현재 투표한 사용자 {postData.userWorryChoiceCount}명
+                현재 투표한 사용자 {thisPostData.userWorryChoiceCount}명
               </p>
             </div>
           </PostComponentLayer>
