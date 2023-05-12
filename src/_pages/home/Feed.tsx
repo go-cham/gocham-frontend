@@ -28,6 +28,12 @@ const Feed = () => {
   const observer = useRef<IntersectionObserver | null>(null);
 
   const [routeUrl, setRouteUrl] = useState("");
+
+  useEffect(() => {
+    // HOC로 안잡히는 부분 잡기위함
+    if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
+  }, []);
+
   useEffect(() => {
     // 처음 페이지 로딩 시에만 데이터 가져오기
 

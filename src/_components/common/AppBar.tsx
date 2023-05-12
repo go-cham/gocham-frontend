@@ -10,12 +10,22 @@ const AppBar = ({
   title,
   boxShadow,
   background,
+  navigateRoute,
 }: {
   title: string;
   boxShadow?: boolean;
   background?: string;
+  navigateRoute?: string;
 }) => {
   const navigate = useNavigate();
+
+  const handleClickBackButton = () => {
+    if (navigateRoute) {
+      navigate(navigateRoute);
+    } else {
+      navigate(-1);
+    }
+  };
   return (
     <AppBarBox
       boxShadow={boxShadow === undefined ? true : boxShadow}
@@ -25,7 +35,7 @@ const AppBar = ({
         src={BackButton}
         alt={"뒤로가기"}
         className={"뒤로가기"}
-        onClick={() => navigate(-1)}
+        onClick={() => handleClickBackButton()}
       />
       <h1>{title}</h1>
     </AppBarBox>

@@ -51,6 +51,11 @@ const Write = () => {
   const userInfo = useAtomValue(userAtom);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // HOC로 안잡히는 부분 잡기위함
+    if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
+  }, []);
+
   const handleUpload = async () => {
     if (!userInfo.userId) return false;
     const expirationTime = getFutureDateTime(votingContent.deadline?.value);

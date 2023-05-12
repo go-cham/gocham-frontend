@@ -7,7 +7,7 @@ export const alertMessage = {
       onceUser: `개인정보를 아직 입력하지 않으셨군요! 해당 페이지로 이동합니다.`,
     },
     post: {
-      noUploadPermission: `업르드 권한이 없는 유저입니다. ${defaultErrorMessage}`, //denyUploadWithWrongPermissionBecauseWithoutTerms
+      noUploadPermission: `업로드 권한이 없는 유저입니다. ${defaultErrorMessage}`, //denyUploadWithWrongPermissionBecauseWithoutTerms
     },
   },
   report: {

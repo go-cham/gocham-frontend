@@ -109,10 +109,10 @@ function App() {
             <Route
               path={RouteURL.feed_star}
               element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
-            />{" "}
+            />
             <Route
               path={RouteURL.feed_route_star}
-              element={<Auth SpecificComponent={Feed} requiredLogin={null} />}
+              element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
             />
             <Route
               path={RouteURL.login}
