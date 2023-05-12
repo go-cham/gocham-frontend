@@ -15,8 +15,17 @@ import { useEffect } from "react";
 import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
 import { EndPoint } from "../../dataManager/apiMapper";
 
+declare global {
+  interface Window {
+    Kakao: any;
+    naver: any;
+  }
+}
 const Login = () => {
   const navigate = useNavigate();
+  if (!window.Kakao.isInitialized()) {
+    window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
+  }
 
   const KAKAO_API_KEY = process.env.REACT_APP_KAKAO_APP_KEY;
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_API;
@@ -27,7 +36,10 @@ const Login = () => {
       console.log("플랫폼 확인후 iOS에서만 켜지도록 설정필요");
       alert("iOS의 비공개 릴레이가 켜져있다면 로그인이 되지않습니다.");
     }
-    window.location.href = KAKAO_AUTH_URI;
+    // window.location.href = KAKAO_AUTH_URI;
+    window.Kakao.Auth.authorize({
+      redirectUri: REDIRECT_URI,
+    });
     // console.log(res);
   };
 
