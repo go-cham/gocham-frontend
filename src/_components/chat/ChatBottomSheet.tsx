@@ -17,7 +17,7 @@ const Wrapper = styled(motion.div)`
   max-width: ${MAX_WIDTH};
   margin: 0 auto;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   //top: 101%;
   top: calc(100% + 1rem); /*시트가 얼마나 높이 위치할지*/
   left: 0;
