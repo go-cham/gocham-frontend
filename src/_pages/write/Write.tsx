@@ -159,7 +159,7 @@ const Write = () => {
     if (
       votingContent.title !== "" &&
       votingContent.content !== "" &&
-      votingContent.category?.value !== null
+      votingContent.category?.value !== 0
     )
       setReadyUpload(true);
   }, [votingContent]);
