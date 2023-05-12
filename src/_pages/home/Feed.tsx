@@ -125,6 +125,7 @@ const Feed = () => {
             : "인기 게시물"
         }
         background={"white"}
+        navigateRoute={RouteURL.home}
       />
       <PostLayer>
         {postingData?.map((value, idx) => (
