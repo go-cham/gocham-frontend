@@ -69,7 +69,7 @@ const UserProfile = ({
         profileImageUrl: data.profileImageUrl,
       });
     });
-  }, []);
+  }, [userData]);
 
   const handleGoEditProfile = () => {
     navigate(RouteURL.edit_profile);
