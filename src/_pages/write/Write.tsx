@@ -50,12 +50,7 @@ type PostWriteContentType = {
 const Write = () => {
   const userInfo = useAtomValue(userAtom);
   const navigate = useNavigate();
-  // 유저 정보없을 경우, 강제 리턴. 추후 HOC으로 처리하긴해야함.
-  useEffect(() => {
-    if (!userInfo.userId) navigate("/");
-  }, []);
 
-  //
   const handleUpload = async () => {
     if (!userInfo.userId) return false;
     const expirationTime = getFutureDateTime(votingContent.deadline?.value);
@@ -230,7 +225,7 @@ const Write = () => {
             />
             <input
               type="file"
-              accept="image"
+              accept="image/*"
               style={{ display: "none" }}
               ref={imgRef}
               onChange={(e) => onLoadFiles(e)}
