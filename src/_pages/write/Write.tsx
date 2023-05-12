@@ -24,6 +24,7 @@ import { userAtom } from "../../atom/userData";
 import { useNavigate } from "react-router-dom";
 import { alertMessage } from "../../utils/alertMessage";
 import { RouteURL } from "../../App";
+import { debounce } from "lodash";
 
 type WriteContentType = {
   title: string;
@@ -56,7 +57,7 @@ const Write = () => {
     if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
   }, []);
 
-  const handleUpload = async () => {
+  const handlePostUpload = async () => {
     if (!userInfo.userId) return false;
     const expirationTime = getFutureDateTime(votingContent.deadline?.value);
     // pros cons 미 입력시
@@ -111,6 +112,10 @@ const Write = () => {
       console.log(e);
       alert(alertMessage.error.post.noUploadPermission);
     }
+  };
+  const debouncedHandlePushPost = debounce(handlePostUpload, 1000);
+  const handlePushPost = () => {
+    debouncedHandlePushPost();
   };
 
   const [votingContent, setVotingContent] = useState<WriteContentType>({
@@ -343,7 +348,7 @@ const Write = () => {
       </WriteComponent>
       <BottomContinueBar
         title={"작성 완료"}
-        clickAction={readyUpload ? handleUpload : undefined}
+        clickAction={readyUpload ? handlePushPost : undefined}
         fontColor={readyUpload ? palette.Background : palette.Gray1}
         buttonColor={readyUpload ? palette.Primary : palette.Gray2}
         boxColor={palette.Background}
