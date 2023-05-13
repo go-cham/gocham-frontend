@@ -16,6 +16,7 @@ import { useAtomValue } from "jotai";
 import { userAtom } from "../../atom/userData";
 import AppBar from "../../_components/common/AppBar";
 import BottomContinueBar from "../../_components/common/BottomContinueBar";
+import { alertMessage } from "../../utils/alertMessage";
 
 export type AcceptType = {
   gochamTerm: boolean;
@@ -43,20 +44,28 @@ const RegisterTerm = () => {
 
   const handleRegister = async () => {
     //   회원가입 로직
-    const res = await ApiConfig.request({
-      method: HttpMethod.PATCH,
-      url: EndPoint.user.patch.USER_ACCEPTANCE_OF_TERMS,
-      data: {
-        userId: userInfo.userId,
-        privacyAcceptedStatus: accept.personalInformation ? 1 : 0,
-        termsOfUseAcceptedStatus: accept.gochamTerm ? 1 : 0,
-        marketingAcceptedStatus: accept.marketing ? 1 : 0,
-      },
-    });
-    console.log(res?.data);
-    //   실패 로직
-    //   성공 로직
-    navigate(RouteURL.collect_information);
+    try {
+      const res = await ApiConfig.request({
+        method: HttpMethod.PATCH,
+        url: EndPoint.user.patch.USER_ACCEPTANCE_OF_TERMS,
+        data: {
+          userId: userInfo.userId,
+          privacyAcceptedStatus: accept.personalInformation ? 1 : 0,
+          termsOfUseAcceptedStatus: accept.gochamTerm ? 1 : 0,
+          marketingAcceptedStatus: accept.marketing ? 1 : 0,
+        },
+      });
+      console.log(res?.data);
+      if (res?.data.id) {
+        console.log("동의완료");
+        navigate(RouteURL.collect_information);
+      } else {
+        alert(alertMessage.error.register.didntAgreeTerm);
+        navigate(RouteURL.home);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <>
