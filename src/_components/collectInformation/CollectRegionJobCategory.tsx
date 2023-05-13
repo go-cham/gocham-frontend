@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 import palette from "../../style/color";
 import {
   CollectInformationBox,
+  InputWrap,
   userInformationPropsType,
   userInformationType,
 } from "../../_pages/collectInformation/CollectInformation";
@@ -154,22 +155,26 @@ const CollectNicknameAgeGender = ({
 
   return (
     <CollectInformationBox>
-      <h2>거주지역</h2>
-      <Select
-        isSearchable={false}
-        styles={customStyles}
-        options={residenceOptions}
-        value={userInformation.residence}
-        onChange={(e) => handleInputValue(e, "residence")}
-      />
-      <h2>직업</h2>
-      <Select
-        isSearchable={false}
-        styles={customStyles}
-        options={jobOptions}
-        value={userInformation.job}
-        onChange={(e) => handleInputValue(e, "job")}
-      />
+      <OverflowInputWrap>
+        <h2>거주지역</h2>
+        <Select
+          isSearchable={false}
+          styles={customStyles}
+          options={residenceOptions}
+          value={userInformation.residence}
+          onChange={(e) => handleInputValue(e, "residence")}
+        />
+      </OverflowInputWrap>
+      <OverflowInputWrap>
+        <h2>직업</h2>
+        <Select
+          isSearchable={false}
+          styles={customStyles}
+          options={jobOptions}
+          value={userInformation.job}
+          onChange={(e) => handleInputValue(e, "job")}
+        />
+      </OverflowInputWrap>
       <h2 style={{ marginBottom: "2rem" }}>관심 카테고리</h2>
       <Select
         isMulti
@@ -185,3 +190,8 @@ const CollectNicknameAgeGender = ({
 };
 
 export default CollectNicknameAgeGender;
+
+const OverflowInputWrap = styled.div`
+  height: 7.5rem;
+  overflow-y: visible;
+`;

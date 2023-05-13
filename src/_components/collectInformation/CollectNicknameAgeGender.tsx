@@ -10,43 +10,58 @@ import {
 } from "../../_pages/collectInformation/CollectInformation";
 import React from "react";
 import { ButtonStyle } from "../../style/common";
+import BirthdateForm from "./BirthDateForm";
+import NicknameForm from "./NicknameForm";
 
 const CollectNicknameAgeGender = ({
   userInformation,
   setUserInformation,
 }: userInformationPropsType) => {
-  const handleInputValue = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    key: string
-  ) => {
-    setUserInformation((value: userInformationType) => ({
-      ...value,
-      [key]: e.target.value,
-    }));
-  };
-
   const handleSelectGender = (sex: string) => {
     setUserInformation((value: userInformationType) => ({
       ...value,
       sex,
     }));
   };
+
+  //생년월일 관련
+  const handleBirthDateInputChange = (
+    year: string,
+    month: string,
+    day: string
+  ) => {
+    // 입력값을 이용한 로직 처리
+    const monthValue = month.length === 1 ? "0" + month : month;
+    console.log(year, monthValue, day);
+    const dayValue = day.length === 1 ? "0" + day : day;
+
+    setUserInformation((value: userInformationType) => ({
+      ...value,
+      birthDay: `${year}-${monthValue}-${dayValue}`,
+    }));
+  };
+
+  const handleNicknameInputChange = (nickname: string) => {
+    setUserInformation((value: userInformationType) => ({
+      ...value,
+      nickname: nickname,
+    }));
+  };
+
   return (
     <CollectInformationBox>
-      <h2>닉네임</h2>
-      <input
-        placeholder={"최대 10자 입력"}
-        value={userInformation.nickname}
-        onChange={(e) => handleInputValue(e, "nickname")}
-      />
-      <h2>생년월일</h2>
-      <input
-        type={"date"}
-        value={userInformation.birthDay}
-        onChange={(e) => handleInputValue(e, "birthDay")}
-        max={"2005-01-01"}
-        min={"1900-01-01"}
-      />
+      {/*<InputWrap>*/}
+      <NicknameForm onInputChange={handleNicknameInputChange} />
+      {/*</InputWrap>*/}
+      {/*<input*/}
+      {/*  type={"date"}*/}
+      {/*  value={userInformation.birthDay}*/}
+      {/*  onChange={(e) => handleInputValue(e, "birthDay")}*/}
+      {/*  max={"2005-01-01"}*/}
+      {/*  min={"1900-01-01"}*/}
+      {/*/>*/}
+      <BirthdateForm onInputChange={handleBirthDateInputChange} />
+
       <h2>성별</h2>
       <SelectGenderWrap>
         <SelectGenderBox
@@ -87,6 +102,13 @@ const CollectNicknameAgeGender = ({
 };
 
 export default CollectNicknameAgeGender;
+export const ErrorMessage = styled.div`
+  margin-top: 1rem;
+  text-align: right;
+  font-size: 1.2rem;
+  color: ${palette.Error};
+  font-weight: 400;
+`;
 
 const SelectGenderBox = styled(ButtonStyle)`
   border: 0.1rem solid ${palette.Gray2};

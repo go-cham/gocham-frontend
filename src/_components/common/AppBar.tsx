@@ -11,19 +11,27 @@ const AppBar = ({
   boxShadow,
   background,
   navigateRoute,
+  navigateAction,
 }: {
   title: string;
   boxShadow?: boolean;
   background?: string;
   navigateRoute?: string;
+  navigateAction?: () => void;
 }) => {
   const navigate = useNavigate();
 
   const handleClickBackButton = () => {
-    if (navigateRoute) {
-      navigate(navigateRoute);
+    if (navigateAction) {
+      // navigateAction 이 있을경우
+      navigateAction();
     } else {
-      navigate(-1);
+      // navigateAction 이 없을 경우
+      if (navigateRoute) {
+        navigate(navigateRoute);
+      } else {
+        navigate(-1);
+      }
     }
   };
   return (

@@ -63,7 +63,12 @@ const CollectInformation = () => {
       userInformation.nickname &&
       userInformation.sex &&
       userInformation.birthDay &&
-      userInformation.birthDay.split("-")[0] < "2006"
+      Number(userInformation.birthDay.split("-")[0]) > 1900 &&
+      Number(userInformation.birthDay.split("-")[0]) < 2006 &&
+      Number(userInformation.birthDay.split("-")[1]) >= 1 &&
+      Number(userInformation.birthDay.split("-")[1]) <= 12 &&
+      Number(userInformation.birthDay.split("-")[2]) >= 1 &&
+      Number(userInformation.birthDay.split("-")[2]) <= 31
     ) {
       setReadyToNext(true);
     } else {
@@ -123,9 +128,22 @@ const CollectInformation = () => {
     }
   };
 
+  const navigateBack = () => {
+    //   page 1인 경우
+    if (page === 1) {
+      navigate(-1);
+    }
+    if (page === 2) {
+      setPage(1);
+    }
+  };
   return (
     <>
-      <AppBar title={""} boxShadow={false} />
+      <AppBar
+        title={""}
+        boxShadow={false}
+        navigateAction={() => navigateBack()}
+      />
       <CollectInformationWrap>
         <section className={"설명란"}>
           <h1>
@@ -203,6 +221,9 @@ const CollectInformationWrap = styled.div`
   height: 100vh;
   margin-top: 4.6rem;
   width: 90%;
+  & h1 {
+    margin-bottom: 2.9rem;
+  }
   & .설명란 {
     margin-top: 3.3rem;
     font-weight: 700;
@@ -218,24 +239,30 @@ const CollectInformationWrap = styled.div`
 
 export const CollectInformationBox = styled.div`
   & h2 {
-    margin-top: 2.9rem;
+    // 마진 탑 대신 width를 고정으로.
+    //margin-top: 2.9rem;
   }
   & input,
   textarea {
     height: 4rem;
     width: 100%;
     font-size: 1.4rem;
-    border-bottom: 0.2rem solid ${palette.Gray1};
+    //border-bottom: 0.2rem solid ${palette.Gray1};
     transition: border-width 0.1s ease-in-out;
-    margin-top: 1.3rem;
+    //margin-top: 1.3rem;
     text-align: left;
     color: ${palette.Secondary};
   }
   & input:focus,
   textarea:focus {
-    border-bottom: 0.4rem solid ${palette.Gray1};
+    //border-bottom: 0.4rem solid ${palette.Gray1};
   }
   input::-webkit-date-and-time-value {
     text-align: left;
   }
+`;
+
+export const InputWrap = styled.div`
+  height: 7.5rem;
+  overflow-y: hidden;
 `;
