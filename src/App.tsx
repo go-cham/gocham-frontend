@@ -27,18 +27,28 @@ import EditProfile from "./_pages/user/EditProfile";
 import styled from "@emotion/styled";
 import { MAX_WIDTH } from "./constants/viewSize";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
+import BackgroundImage from "./images/background.png";
+import BackgroundNoCharImage from "./images/background_nocharVer.png";
 
 // 모바일 크기 처리
 const OuterWrap = styled.div`
-  background-image: url("https://img.freepik.com/free-vector/cute-celebration-background-cute-grid-pattern-with-colorful-bokeh-vector_53876-146719.jpg?w=900&t=st=1683705079~exp=1683705679~hmac=11a850de1c50be14338dc8c280f21a47802f63bc1a63df7aa154bdd240725ea1");
+  @media screen and (min-width: 1000px) {
+    background-image: url(${BackgroundImage});
+  }
+
+  @media screen and (max-width: 1000px) {
+    background-image: url(${BackgroundNoCharImage});
+  }
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center center;
   //width: 100vw;
   position: relative;
+  //display: flex;
+  //justify-content: center;
 `;
 
-const defaultCSS = css`
+const DefaultCSS = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,8 +58,22 @@ const defaultCSS = css`
 
   /* max-height: 100vh; */
   overflow: hidden;
-  background-color: white;
+  //background-color: white;
   margin: 0 auto;
+  //margin-left: 70rem;
+
+  @media screen and (min-width: 1000px) {
+    padding-left: 50rem;
+  }
+
+  @media screen and (max-width: 1000px) {
+    padding-left: 0;
+  }
+`;
+
+const BackgroundColor = styled.div`
+  width: 100%;
+  background-color: white;
 `;
 
 export const RouteURL = {
@@ -94,64 +118,76 @@ function App() {
 
   return (
     <OuterWrap>
-      <div css={defaultCSS}>
-        <BrowserRouter>
-          <RouteChangeTracker />
-          <Routes>
-            <Route path={RouteURL.home} element={<Home />} />
-            <Route
-              path={RouteURL.collect_information}
-              element={
-                <Auth
-                  SpecificComponent={CollectInformation}
-                  requiredLogin={true}
-                />
-              }
-            />
-            <Route
-              path={RouteURL.feed_star}
-              element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
-            />
-            <Route
-              path={RouteURL.feed_route_star}
-              element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
-            />
-            <Route
-              path={RouteURL.login}
-              element={<Auth SpecificComponent={Login} requiredLogin={false} />}
-            />
-            <Route
-              path={RouteURL.login_oauth_kakao}
-              element={<LoginOauthKakao />}
-            />
-            <Route path={RouteURL.register_term} element={<RegisterTerm />} />
-            <Route path={RouteURL.onboarding} element={<Onboarding />} />
-            <Route
-              path={RouteURL.write}
-              element={<Auth SpecificComponent={Write} requiredLogin={true} />}
-            />
-            <Route
-              path={RouteURL.user}
-              element={<Auth SpecificComponent={User} requiredLogin={true} />}
-            />
-            <Route
-              path={RouteURL.edit_profile}
-              element={
-                <Auth SpecificComponent={EditProfile} requiredLogin={true} />
-              }
-            />
-            <Route path={RouteURL.settings} element={<Settings />} />
-            <Route path={RouteURL.not_found} element={<Navigate to={"/"} />} />
-            <Route
-              path={RouteURL.auth_check}
-              element={
-                <Auth SpecificComponent={AuthCheckPage} requiredLogin={true} />
-              }
-            />
-          </Routes>
-          <GNBHOC />
-        </BrowserRouter>
-      </div>
+      <DefaultCSS>
+        <BackgroundColor>
+          <BrowserRouter>
+            <RouteChangeTracker />
+            <Routes>
+              <Route path={RouteURL.home} element={<Home />} />
+              <Route
+                path={RouteURL.collect_information}
+                element={
+                  <Auth
+                    SpecificComponent={CollectInformation}
+                    requiredLogin={true}
+                  />
+                }
+              />
+              <Route
+                path={RouteURL.feed_star}
+                element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
+              />
+              <Route
+                path={RouteURL.feed_route_star}
+                element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
+              />
+              <Route
+                path={RouteURL.login}
+                element={
+                  <Auth SpecificComponent={Login} requiredLogin={false} />
+                }
+              />
+              <Route
+                path={RouteURL.login_oauth_kakao}
+                element={<LoginOauthKakao />}
+              />
+              <Route path={RouteURL.register_term} element={<RegisterTerm />} />
+              <Route path={RouteURL.onboarding} element={<Onboarding />} />
+              <Route
+                path={RouteURL.write}
+                element={
+                  <Auth SpecificComponent={Write} requiredLogin={true} />
+                }
+              />
+              <Route
+                path={RouteURL.user}
+                element={<Auth SpecificComponent={User} requiredLogin={true} />}
+              />
+              <Route
+                path={RouteURL.edit_profile}
+                element={
+                  <Auth SpecificComponent={EditProfile} requiredLogin={true} />
+                }
+              />
+              <Route path={RouteURL.settings} element={<Settings />} />
+              <Route
+                path={RouteURL.not_found}
+                element={<Navigate to={"/"} />}
+              />
+              <Route
+                path={RouteURL.auth_check}
+                element={
+                  <Auth
+                    SpecificComponent={AuthCheckPage}
+                    requiredLogin={true}
+                  />
+                }
+              />
+            </Routes>
+            <GNBHOC />
+          </BrowserRouter>
+        </BackgroundColor>
+      </DefaultCSS>
     </OuterWrap>
   );
 }
