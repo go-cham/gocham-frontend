@@ -171,7 +171,7 @@ const CollectInformation = () => {
       {/* 각 페이지 항목 조건비교해서 색상 및 문구 표시 구현 필요 */}
       {page === 1 && !readyToNext && (
         <BottomContinueBar
-          title={"다음 (2/3)"}
+          title={"다음"}
           height={11.2}
           boxShadow={false}
           buttonColor={"rgba(42, 45, 55, 0.1)"}
@@ -180,7 +180,7 @@ const CollectInformation = () => {
       )}
       {page === 1 && readyToNext && (
         <BottomContinueBar
-          title={"다음 (2/3)"}
+          title={"다음"}
           height={11.2}
           boxShadow={false}
           buttonColor={palette.Primary}
@@ -193,7 +193,7 @@ const CollectInformation = () => {
       )}
       {page === 2 && !readyToNext && (
         <BottomContinueBar
-          title={"고참 시작하기 (3/3)"}
+          title={"고참 시작하기"}
           height={11.2}
           boxShadow={false}
           buttonColor={"rgba(42, 45, 55, 0.1)"}
@@ -202,7 +202,7 @@ const CollectInformation = () => {
       )}
       {page === 2 && readyToNext && (
         <BottomContinueBar
-          title={"고참 시작하기 (3/3)"}
+          title={"고참 시작하기"}
           height={11.2}
           boxShadow={false}
           buttonColor={palette.Primary}

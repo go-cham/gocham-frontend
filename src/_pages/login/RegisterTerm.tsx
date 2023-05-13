@@ -155,7 +155,7 @@ const RegisterTerm = () => {
       </RegisterTermWrap>
       {accept.gochamTerm && accept.personalInformation && accept.olderThan14 ? (
         <BottomContinueBar
-          title={"다음 (1/3)"}
+          title={"다음"}
           height={11.2}
           boxShadow={false}
           buttonColor={palette.Primary}
@@ -164,7 +164,7 @@ const RegisterTerm = () => {
         />
       ) : (
         <BottomContinueBar
-          title={"다음 (1/3)"}
+          title={"다음"}
           height={11.2}
           boxShadow={false}
           buttonColor={"rgba(42, 45, 55, 0.1)"}
