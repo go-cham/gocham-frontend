@@ -80,6 +80,8 @@ function App() {
       const userInfo = await getUserInfo();
       if (userInfo !== "null") {
         setUserData(userInfo);
+      } else {
+        setUserData((value) => ({ ...value, userId: 0 }));
       }
     };
     checkLoginStatus();
