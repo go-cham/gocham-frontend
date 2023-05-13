@@ -25,6 +25,7 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({ onInputChange }) => {
   const [errorCase, setErrorCase] = useState({
     younger1900: false,
     older2005: false,
+    notInputLength4: false,
     errorMonth: false,
     errorDay: false,
   });
@@ -85,6 +86,20 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({ onInputChange }) => {
     onInputChange(birthDate.year, birthDate.month, birthDate.day);
   }, [birthDate]);
 
+  const checkYearLength = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (value.length !== 4) {
+      setErrorCase((data) => ({
+        ...data,
+        notInputLength4: true,
+      }));
+    } else {
+      setErrorCase((data) => ({
+        ...data,
+        notInputLength4: false,
+      }));
+    }
+  };
   return (
     <InputWrap>
       <h2>생년월일</h2>
@@ -98,7 +113,10 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({ onInputChange }) => {
           value={birthDate.year}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
+          onBlur={(e) => {
+            handleInputBlur();
+            checkYearLength(e);
+          }}
         />
         <label className={"year"} htmlFor="year">
           년
@@ -132,6 +150,9 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({ onInputChange }) => {
           일
         </label>
       </BirthInputBox>
+      {errorCase.notInputLength4 && (
+        <ErrorMessage>태어난 년도는 4자리를 입력해주세요.</ErrorMessage>
+      )}
       {errorCase.older2005 && (
         <ErrorMessage>14세 이상만 가입할 수 있습니다.</ErrorMessage>
       )}
