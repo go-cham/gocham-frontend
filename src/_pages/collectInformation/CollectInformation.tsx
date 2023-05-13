@@ -219,7 +219,7 @@ export default CollectInformation;
 const CollectInformationWrap = styled.div`
   position: relative;
   height: 100vh;
-  margin-top: 4.6rem;
+  margin: 4.6rem auto 0;
   width: 90%;
   & h1 {
     margin-bottom: 2.9rem;

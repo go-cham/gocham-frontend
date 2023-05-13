@@ -32,17 +32,18 @@ import BackgroundNoCharImage from "./images/background_nocharVer.png";
 
 // 모바일 크기 처리
 const OuterWrap = styled.div`
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1300px) {
     background-image: url(${BackgroundImage});
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1300px) {
     background-image: url(${BackgroundNoCharImage});
   }
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  //width: 100vw;
+  width: 100vw;
+  height: 100vh;
   position: relative;
   //display: flex;
   //justify-content: center;
@@ -54,19 +55,21 @@ const DefaultCSS = styled.div`
   align-items: center;
   max-width: ${MAX_WIDTH};
   //padding-left: 470px;
-  height: calc(var(--vh, 1vh) * 100);
-
+  //height: calc(var(--vh, 1vh) * 100);
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
   /* max-height: 100vh; */
   overflow: hidden;
   //background-color: white;
   margin: 0 auto;
   //margin-left: 70rem;
 
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1300px) {
     padding-left: 50rem;
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1300px) {
     padding-left: 0;
   }
 `;

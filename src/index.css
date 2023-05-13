@@ -164,9 +164,9 @@ body {
   }
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (max-width: 396px) {
   html {
-    font-size: 52%; /* 1rem = 10px */
+    font-size: 55%; /* 1rem = 10px */
   }
 }
 

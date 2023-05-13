@@ -213,139 +213,143 @@ const Write = () => {
   return (
     <WriteWrap>
       <AppBar title={"글 작성"} />
-      <WriteComponent>
-        <div className={"글제목"}>
-          <h1>글 제목</h1>
-          <div className={"제목입력박스 입력박스"}>
-            <textarea
-              maxLength={16}
-              placeholder={"제목 작성 또는 이미지 선택"}
-              value={votingContent.title}
-              onChange={(e) => {
-                setVotingContent((value) => ({
-                  ...value,
-                  title: e.target.value,
-                }));
-              }}
-            />
-            <img
-              src={CameraIcon}
-              alt={"이미지선택"}
-              onClick={() => handleImageClick()}
-            />
-            <input
-              type="file"
-              accept="image/*"
-              style={{ display: "none" }}
-              ref={imgRef}
-              onChange={(e) => onLoadFiles(e)}
-            />
+      <WriteBox>
+        <WriteComponent>
+          <div className={"글제목"}>
+            <h1>글 제목</h1>
+            <div className={"제목입력박스 입력박스"}>
+              <textarea
+                maxLength={16}
+                placeholder={"제목 작성 또는 이미지 선택"}
+                value={votingContent.title}
+                onChange={(e) => {
+                  setVotingContent((value) => ({
+                    ...value,
+                    title: e.target.value,
+                  }));
+                }}
+              />
+              <img
+                src={CameraIcon}
+                alt={"이미지선택"}
+                onClick={() => handleImageClick()}
+              />
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                ref={imgRef}
+                onChange={(e) => onLoadFiles(e)}
+              />
+            </div>
+            {imageFile && (
+              <div className={"유저업로드이미지영역"}>
+                <div className={"유저업로드이미지상자"}>
+                  <img
+                    src={imageFile}
+                    className={"업로드이미지"}
+                    alt={"업로드 이미지"}
+                  />
+                  <img
+                    src={DeleteIcon}
+                    className={"삭제버튼"}
+                    alt={"삭제버튼"}
+                    onClick={() => handleImageRemove()}
+                  />
+                </div>
+              </div>
+            )}
           </div>
-          {imageFile && (
-            <div className={"유저업로드이미지영역"}>
-              <div className={"유저업로드이미지상자"}>
-                <img
-                  src={imageFile}
-                  className={"업로드이미지"}
-                  alt={"업로드 이미지"}
-                />
-                <img
-                  src={DeleteIcon}
-                  className={"삭제버튼"}
-                  alt={"삭제버튼"}
-                  onClick={() => handleImageRemove()}
+          <div className={"글내용"}>
+            <h1>내용</h1>
+            <div className={"내용입력박스 입력박스"}>
+              <textarea
+                maxLength={280}
+                placeholder={"최대 280자 입력"}
+                value={votingContent.content}
+                onChange={(e) => {
+                  setVotingContent((value) => ({
+                    ...value,
+                    content: e.target.value,
+                  }));
+                }}
+              />
+            </div>
+            <div className={"내용글자수"}>
+              {votingContent.content.length}/280
+            </div>
+          </div>
+          <div className={"카테고리_투표마감시간"}>
+            <div>
+              <h1>카테고리</h1>
+              <div className={"입력박스"}>
+                <Select
+                  isSearchable={false}
+                  styles={customStyles}
+                  options={categoryOptions}
+                  value={votingContent.category}
+                  onChange={(e) =>
+                    setVotingContent(
+                      (value): WriteContentType => ({ ...value, category: e })
+                    )
+                  }
                 />
               </div>
             </div>
-          )}
-        </div>
-        <div className={"글내용"}>
-          <h1>내용</h1>
-          <div className={"내용입력박스 입력박스"}>
-            <textarea
-              maxLength={280}
-              placeholder={"최대 280자 입력"}
-              value={votingContent.content}
-              onChange={(e) => {
-                setVotingContent((value) => ({
-                  ...value,
-                  content: e.target.value,
-                }));
-              }}
-            />
-          </div>
-          <div className={"내용글자수"}>{votingContent.content.length}/280</div>
-        </div>
-        <div className={"카테고리_투표마감시간"}>
-          <div>
-            <h1>카테고리</h1>
-            <div className={"입력박스"}>
-              <Select
-                isSearchable={false}
-                styles={customStyles}
-                options={categoryOptions}
-                value={votingContent.category}
-                onChange={(e) =>
-                  setVotingContent(
-                    (value): WriteContentType => ({ ...value, category: e })
-                  )
-                }
-              />
+            <div>
+              <h1>투표 마감 시간</h1>
+              <div className={"입력박스"}>
+                <Select
+                  isSearchable={false}
+                  styles={customStyles}
+                  options={deadlineOptions}
+                  value={votingContent.deadline}
+                  onChange={(e) =>
+                    setVotingContent(
+                      (value): WriteContentType =>
+                        ({ ...value, deadline: e } as WriteContentType)
+                    )
+                  }
+                />
+              </div>
             </div>
           </div>
           <div>
-            <h1>투표 마감 시간</h1>
-            <div className={"입력박스"}>
-              <Select
-                isSearchable={false}
-                styles={customStyles}
-                options={deadlineOptions}
-                value={votingContent.deadline}
-                onChange={(e) =>
-                  setVotingContent(
-                    (value): WriteContentType =>
-                      ({ ...value, deadline: e } as WriteContentType)
-                  )
-                }
-              />
+            <h1>옵션 수정</h1>
+            <br />
+            <h2>아래의 옵션을 눌러서 원하는 텍스트로 변경할 수 있어요.</h2>
+            <br />
+            <div className={"의견입력박스"}>
+              <div className={"pros"}>
+                <input
+                  placeholder={"찬성"}
+                  maxLength={6}
+                  value={votingContent.pros}
+                  onChange={(e) => {
+                    setVotingContent((value) => ({
+                      ...value,
+                      pros: e.target.value,
+                    }));
+                  }}
+                />
+              </div>
+              <div className={"cons"}>
+                <input
+                  placeholder={"반대"}
+                  maxLength={6}
+                  value={votingContent.cons}
+                  onChange={(e) => {
+                    setVotingContent((value) => ({
+                      ...value,
+                      cons: e.target.value,
+                    }));
+                  }}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <h1>옵션 수정</h1>
-          <br />
-          <h2>아래의 옵션을 눌러서 원하는 텍스트로 변경할 수 있어요.</h2>
-          <br />
-          <div className={"의견입력박스"}>
-            <div className={"pros"}>
-              <input
-                placeholder={"찬성"}
-                maxLength={6}
-                value={votingContent.pros}
-                onChange={(e) => {
-                  setVotingContent((value) => ({
-                    ...value,
-                    pros: e.target.value,
-                  }));
-                }}
-              />
-            </div>
-            <div className={"cons"}>
-              <input
-                placeholder={"반대"}
-                maxLength={6}
-                value={votingContent.cons}
-                onChange={(e) => {
-                  setVotingContent((value) => ({
-                    ...value,
-                    cons: e.target.value,
-                  }));
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      </WriteComponent>
+        </WriteComponent>
+      </WriteBox>
       <BottomContinueBar
         title={"작성 완료"}
         clickAction={readyUpload ? handlePushPost : undefined}
@@ -358,6 +362,8 @@ const Write = () => {
 };
 
 export default Write;
+
+const WriteBox = styled.div``;
 
 const WriteComponent = styled.div`
   margin: 4.6rem 2.5rem 0;
@@ -508,6 +514,6 @@ const WriteWrap = styled.div`
   flex-direction: column;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding-bottom: 15rem;
+  //padding-bottom: 15rem;
   //justify-content: space-between;
 `;

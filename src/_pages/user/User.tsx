@@ -253,6 +253,7 @@ const UserWrap = styled.div`
   @supports (-webkit-touch-callout: none) {
     height: -webkit-fill-available;
   }
+  overflow-y: hidden;
   position: relative;
   width: 100%;
 `;

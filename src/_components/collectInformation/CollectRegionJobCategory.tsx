@@ -175,16 +175,18 @@ const CollectNicknameAgeGender = ({
           onChange={(e) => handleInputValue(e, "job")}
         />
       </OverflowInputWrap>
-      <h2 style={{ marginBottom: "2rem" }}>관심 카테고리</h2>
-      <Select
-        isMulti
-        closeMenuOnSelect={false}
-        isSearchable={false}
-        styles={customStyles}
-        options={categoryOptions}
-        value={userInformation.worryCategories}
-        onChange={(e) => handleInputValue(e, "worryCategories")}
-      />
+      <OverflowInputWrap>
+        <h2>관심 카테고리</h2>
+        <Select
+          isMulti
+          closeMenuOnSelect={false}
+          isSearchable={false}
+          styles={customStyles}
+          options={categoryOptions}
+          value={userInformation.worryCategories}
+          onChange={(e) => handleInputValue(e, "worryCategories")}
+        />
+      </OverflowInputWrap>
     </CollectInformationBox>
   );
 };

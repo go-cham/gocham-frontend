@@ -119,10 +119,16 @@ const EditProfile = () => {
 export default EditProfile;
 
 const EditProfileWrap = styled.div`
+  //display: flex;
+  //flex-direction: column;
+  //align-items: center;
   position: relative;
-  width: 85%;
-  //margin-top: 4.6rem;
-  height: 90vh;
+  //width: 85%;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  height: 85vh;
+  margin: 4.6rem auto 0;
+  overflow-y: scroll;
 `;
 
 const EditConfirmBottomBar = styled(BottomContinueBar)`

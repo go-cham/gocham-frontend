@@ -97,9 +97,11 @@ const SelectButton = styled.div<{ image: string }>`
 
 const GNBBackground = styled.img`
   //width: 100%;
+  //width: 100%;
   width: ${MAX_WIDTH};
   position: relative;
   bottom: 0;
+  margin: 0 auto;
   //padding-bottom: ${(1 / 15) *
   100}%; /* 이미지의 가로세로 비율에 맞춰서 padding-bottom 값을 계산합니다. 예를 들어, 16:9 비율의 이미지는 9/16 * 100% = 56.25%가 됩니다. */
   filter: drop-shadow(0px 0px 25px rgba(42, 45, 55, 0.1));
