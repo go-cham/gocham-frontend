@@ -61,6 +61,7 @@ const CollectInformation = () => {
     if (
       page === 1 &&
       userInformation.nickname &&
+      userInformation.nickname.length <= 10 &&
       userInformation.sex &&
       userInformation.birthDay &&
       Number(userInformation.birthDay.split("-")[0]) > 1900 &&
