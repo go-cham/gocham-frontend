@@ -165,7 +165,7 @@ export default function Content({
 }
 
 const PostChatWrap = styled.div`
-  margin-bottom: 30vh;
+  margin-bottom: 10rem;
 `;
 const ChatContentWrap = styled.div``;
 

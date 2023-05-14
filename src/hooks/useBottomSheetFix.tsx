@@ -38,10 +38,7 @@ export default function useBottomSheetFix({
 
   useEffect(() => {
     if (openBottomSheet) {
-      sheet.current!.style.setProperty(
-        "transform",
-        `translateY(${MIN_Y - MAX_Y}px)`
-      );
+      sheet.current!.style.setProperty("transform", `translateY(-600px)`);
       // handleClickPostChat(false);
     }
     if (!openBottomSheet) {

@@ -11,6 +11,16 @@ import { MAX_WIDTH } from "../../constants/viewSize";
 // 출처
 // https://velog.io/@boris0716/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-Bottom-Sheet-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%9E%91%EC%84%B1%EC%A4%91
 
+const BackgroundColor = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: white;
+
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.6);
+`;
+
 const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
@@ -22,7 +32,7 @@ const Wrapper = styled(motion.div)`
   top: calc(100% + 1rem); /*시트가 얼마나 높이 위치할지*/
   left: 0;
   right: 0;
-  height: ${BOTTOM_SHEET_HEIGHT}px;
+  height: 600px;
   //background: white;
   transition: transform 400ms ease-out; /*바텀시트 애니메이션 속도*/
 
@@ -34,16 +44,9 @@ const Wrapper = styled(motion.div)`
   }
 `;
 
-const BackgroundColor = styled.div`
-  background-color: white;
-
-  border-top-left-radius: 1.2rem;
-  border-top-right-radius: 1.2rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.6);
-`;
-
 const BottomSheetContent = styled.div`
   overflow: scroll;
+  height: 600px;
   -webkit-overflow-scrolling: touch;
 `;
 
