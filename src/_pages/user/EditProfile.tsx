@@ -102,9 +102,10 @@ const EditProfile = () => {
   return (
     <>
       <AppBar title={"프로필 편집"} boxShadow={false} />
-      {userInformation.nickname && (
-        <>
-          <EditProfileWrap>
+
+      <EditProfileWrap>
+        {userInformation.nickname && (
+          <>
             <CollectNicknameAgeGender
               userInformation={userInformation}
               setUserInformation={setUserInformation}
@@ -116,9 +117,9 @@ const EditProfile = () => {
               userInformation={userInformation}
               setUserInformation={setUserInformation}
             />
-          </EditProfileWrap>
-        </>
-      )}
+          </>
+        )}
+      </EditProfileWrap>
 
       <EditConfirmBottomBar
         title={"변경 완료"}
