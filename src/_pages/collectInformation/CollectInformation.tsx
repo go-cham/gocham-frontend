@@ -78,7 +78,8 @@ const CollectInformation = () => {
     if (
       page === 2 &&
       userInformation.residence &&
-      userInformation.job.value !== 0
+      userInformation.job.value !== 0 &&
+      userInformation.worryCategories.length !== 0
     ) {
       setReadyToNext(true);
     }
@@ -148,7 +149,7 @@ const CollectInformation = () => {
       <CollectInformationWrap>
         <section className={"설명란"}>
           <h1>
-            수많은 고민들이👀
+            수많은 고민들이 👀
             <br />
             당신을 기다리고 있어요!
           </h1>
