@@ -50,7 +50,7 @@ const CollectInformation = () => {
   const [readyToNext, setReadyToNext] = useState(false);
   const [userInformation, setUserInformation] = useState<userInformationType>({
     nickname: "",
-    birthDay: "",
+    birthDay: "--",
     sex: "",
     residence: { value: 0, label: "" },
     job: { value: 0, label: "" },

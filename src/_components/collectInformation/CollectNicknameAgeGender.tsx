@@ -49,17 +49,15 @@ const CollectNicknameAgeGender = ({
 
   return (
     <CollectInformationBox>
-      {/*<InputWrap>*/}
-      <NicknameForm onInputChange={handleNicknameInputChange} />
-      {/*</InputWrap>*/}
-      {/*<input*/}
-      {/*  type={"date"}*/}
-      {/*  value={userInformation.birthDay}*/}
-      {/*  onChange={(e) => handleInputValue(e, "birthDay")}*/}
-      {/*  max={"2005-01-01"}*/}
-      {/*  min={"1900-01-01"}*/}
-      {/*/>*/}
-      <BirthdateForm onInputChange={handleBirthDateInputChange} />
+      <NicknameForm
+        onInputChange={handleNicknameInputChange}
+        userInformation={userInformation}
+      />
+
+      <BirthdateForm
+        onInputChange={handleBirthDateInputChange}
+        userInformation={userInformation}
+      />
 
       <h2>성별</h2>
       <SelectGenderWrap>

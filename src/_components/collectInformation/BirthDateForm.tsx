@@ -2,10 +2,14 @@ import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import palette from "../../style/color";
 import { ErrorMessage } from "./CollectNicknameAgeGender";
-import { InputWrap } from "../../_pages/collectInformation/CollectInformation";
+import {
+  InputWrap,
+  userInformationType,
+} from "../../_pages/collectInformation/CollectInformation";
 
 interface BirthdateFormProps {
   onInputChange: (year: string, month: string, day: string) => void;
+  userInformation: userInformationType;
 }
 
 type BirthDateType = {
@@ -14,7 +18,10 @@ type BirthDateType = {
   day: string;
 };
 
-const BirthdateForm: React.FC<BirthdateFormProps> = ({ onInputChange }) => {
+const BirthdateForm: React.FC<BirthdateFormProps> = ({
+  onInputChange,
+  userInformation,
+}) => {
   const yearRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLInputElement>(null);
   const dayRef = useRef<HTMLInputElement>(null);
@@ -28,9 +35,9 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({ onInputChange }) => {
     setIsInputFocused(false);
   };
   const [birthDate, setBirthDate] = useState<BirthDateType>({
-    year: "",
-    month: "",
-    day: "",
+    year: userInformation.birthDay.split("-")[0],
+    month: userInformation.birthDay.split("-")[1],
+    day: userInformation.birthDay.split("-")[2],
   });
   const [errorCase, setErrorCase] = useState({
     younger1900: false,

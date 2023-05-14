@@ -2,14 +2,21 @@ import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import palette from "../../style/color";
 import { ErrorMessage } from "./CollectNicknameAgeGender";
-import { InputWrap } from "../../_pages/collectInformation/CollectInformation";
+import {
+  InputWrap,
+  userInformationType,
+} from "../../_pages/collectInformation/CollectInformation";
 
 interface NicknameFormProps {
   onInputChange: (nickname: string) => void;
+  userInformation: userInformationType;
 }
 
-const NicknameForm: React.FC<NicknameFormProps> = ({ onInputChange }) => {
-  const [nickname, setNickname] = useState("");
+const NicknameForm: React.FC<NicknameFormProps> = ({
+  onInputChange,
+  userInformation,
+}) => {
+  const [nickname, setNickname] = useState(userInformation.nickname);
   const [errorCase, setErrorCase] = useState({
     over10letter: false,
   });
