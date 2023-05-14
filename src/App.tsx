@@ -114,12 +114,7 @@ function App() {
               <Route path={RouteURL.home} element={<Home />} />
               <Route
                 path={RouteURL.collect_information}
-                element={
-                  <Auth
-                    SpecificComponent={CollectInformation}
-                    requiredLogin={true}
-                  />
-                }
+                element={<CollectInformation />}
               />
               <Route
                 path={RouteURL.feed_star}

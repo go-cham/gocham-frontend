@@ -34,6 +34,11 @@ const RegisterTerm = () => {
   });
 
   useEffect(() => {
+    // HOC로 안잡히는 부분 잡기위함
+    if (userInfo.userType === "activatedUser") navigate(RouteURL.home);
+  }, []);
+
+  useEffect(() => {
     if (accept.gochamTerm && accept.personalInformation && accept.olderThan14) {
       setAccept((value) => ({ ...value, allCheck: true }));
     }
