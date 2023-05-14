@@ -76,7 +76,7 @@ const GNBBackgroundWrap = styled.div`
   bottom: 3.3rem;
   display: flex;
   justify-content: space-evenly;
-  align-items: end;
+  align-items: baseline;
   position: absolute;
 `;
 
