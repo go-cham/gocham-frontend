@@ -243,6 +243,7 @@ const ToolWrap = styled.div`
 const SharePostAlert = styled.div<{ alertShare: boolean; display: string }>`
   display: ${({ display }) => display};
   opacity: ${({ alertShare }) => (alertShare ? "1" : "0")};
+  z-index: 10;
 
   transition: all 0.5s ease-in-out;
   position: absolute;
@@ -254,7 +255,7 @@ const SharePostAlert = styled.div<{ alertShare: boolean; display: string }>`
     position: absolute;
   }
   & p {
-    z-index: 10;
+    z-index: 11;
     margin-bottom: 0.8rem;
     //width: 16.2rem;
     //height: 4.4rem;
