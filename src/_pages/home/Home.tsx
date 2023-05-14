@@ -5,6 +5,7 @@ import React from "react";
 import PostListLayer from "../../_components/post/list/PostListLayer";
 import styled from "@emotion/styled";
 import palette from "../../style/color";
+import { appVersion } from "../../version";
 
 const H1 = css`
   margin-top: 4rem;
@@ -16,7 +17,7 @@ const Home = () => {
   return (
     <MainView>
       <div className={"title"}>
-        <h1 css={H1}>고민의 참견 0514/14:18 QC-28</h1>
+        <h1 css={H1}>고민의 참견 {appVersion}</h1>
       </div>
       <div style={{ height: "8.6rem" }} />
       <PostListLayer />

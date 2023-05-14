@@ -8,6 +8,7 @@ import palette from "../../style/color";
 import { useNavigate } from "react-router-dom";
 import { useSetAtom } from "jotai";
 import { initialUserData, userAtom } from "../../atom/userData";
+import { appVersion } from "../../version";
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -87,6 +88,9 @@ const Settings = () => {
           onClick={() => handleButtonClick("deleteAccount")}
         >
           탈퇴하기
+        </Button>
+        <Button width={"100%"} height={7.4}>
+          버전: {appVersion}
         </Button>
       </div>
     </SettingsWrap>
