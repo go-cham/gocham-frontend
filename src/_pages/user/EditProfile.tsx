@@ -18,7 +18,7 @@ import { useAtomValue } from "jotai";
 import { userAtom } from "../../atom/userData";
 import { useNavigate } from "react-router-dom";
 import { formatISO8601ToNormal } from "../../utils/formatISO8601ToNormal";
-import {RouteURL} from "../../App";
+import { RouteURL } from "../../App";
 
 const EditProfile = () => {
   const userInfo = useAtomValue(userAtom);
@@ -102,16 +102,24 @@ const EditProfile = () => {
   return (
     <>
       <AppBar title={"프로필 편집"} boxShadow={false} />
-      <EditProfileWrap>
-        <CollectNicknameAgeGender
-          userInformation={userInformation}
-          setUserInformation={setUserInformation}
-        />
-        <CollectRegionJobCategory
-          userInformation={userInformation}
-          setUserInformation={setUserInformation}
-        />
-      </EditProfileWrap>
+      {userInformation.nickname && (
+        <>
+          <EditProfileWrap>
+            <CollectNicknameAgeGender
+              userInformation={userInformation}
+              setUserInformation={setUserInformation}
+            />
+            <br />
+            <br />
+            <br />
+            <CollectRegionJobCategory
+              userInformation={userInformation}
+              setUserInformation={setUserInformation}
+            />
+          </EditProfileWrap>
+        </>
+      )}
+
       <EditConfirmBottomBar
         title={"변경 완료"}
         clickAction={handleClickProfileChange}

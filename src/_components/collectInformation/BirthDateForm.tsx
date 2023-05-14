@@ -35,20 +35,10 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({
     setIsInputFocused(false);
   };
   const [birthDate, setBirthDate] = useState<BirthDateType>({
-    year: "",
-    month: "",
-    day: "",
+    year: userInformation.birthDay.split("-")[0],
+    month: userInformation.birthDay.split("-")[1],
+    day: userInformation.birthDay.split("-")[2],
   });
-
-  useEffect(() => {
-      setBirthDate({
-        year: userInformation.birthDay.split("-")[0],
-        month: userInformation.birthDay.split("-")[1],
-        day: userInformation.birthDay.split("-")[2],
-      })
-
-
-  }, [userInformation.birthDay]);
 
   const [errorCase, setErrorCase] = useState({
     younger1900: false,
