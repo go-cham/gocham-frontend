@@ -120,8 +120,8 @@ const Write = () => {
     content: "",
     category: { value: 0, label: "" },
     deadline: deadlineOptions[1],
-    pros: "",
-    cons: "",
+    pros: "찬성",
+    cons: "반대",
   });
 
   const [imageFile, setImageFile] = useState("");
@@ -154,9 +154,14 @@ const Write = () => {
     if (
       votingContent.title !== "" &&
       votingContent.content !== "" &&
-      votingContent.category?.value !== 0
+      votingContent.category?.value !== 0 &&
+      votingContent.pros !== "" &&
+      votingContent.cons !== ""
     )
       setReadyUpload(true);
+    else {
+      setReadyUpload(false);
+    }
   }, [votingContent]);
 
   const customStyles = useMemo(
@@ -317,7 +322,7 @@ const Write = () => {
             <div className={"의견입력박스"}>
               <div className={"pros"}>
                 <input
-                  placeholder={"찬성"}
+                  // placeholder={"찬성"}
                   maxLength={6}
                   value={votingContent.pros}
                   onChange={(e) => {
@@ -330,7 +335,7 @@ const Write = () => {
               </div>
               <div className={"cons"}>
                 <input
-                  placeholder={"반대"}
+                  // placeholder={"반대"}
                   maxLength={6}
                   value={votingContent.cons}
                   onChange={(e) => {
