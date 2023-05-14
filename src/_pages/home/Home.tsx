@@ -9,7 +9,7 @@ import { appVersion } from "../../version";
 import LogoAndTitle from "../../images/Common/LogoAndTitle.svg";
 
 const H1 = css`
-  margin-top: 4rem;
+  margin-top: 1.8rem;
   font-weight: 700;
   font-size: 2.7rem;
 `;
@@ -45,7 +45,7 @@ const MainView = styled.div`
     //margin: 0 auto;
     padding-left: 3rem;
 
-    padding-bottom: 1.5rem;
+    padding-bottom: 2rem;
     border-bottom: 0.1rem solid ${palette.Gray3};
     filter: drop-shadow(0px 0px 4px rgba(42, 45, 55, 0.1));
   }
