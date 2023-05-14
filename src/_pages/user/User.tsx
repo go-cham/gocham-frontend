@@ -223,7 +223,7 @@ const User = () => {
               <PostListComponent
                 userInfo={userInfo}
                 postData={value}
-                routeUrl={postType === "내 게시물" ? "my" : "participated"}
+                routeUrl={postType === "내 게시글" ? "my" : "participated"}
               />
             </div>
           ))}
