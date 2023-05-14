@@ -31,7 +31,7 @@ const EditProfile = () => {
 
   const [userInformation, setUserInformation] = useState<userInformationType>({
     nickname: "",
-    birthDay: "",
+    birthDay: "--",
     sex: "",
     residence: { value: 0, label: "" },
     job: { value: 0, label: "" },
@@ -77,7 +77,7 @@ const EditProfile = () => {
       postUserInformation = {
         userId: userInfo.userId,
         nickname: userInformation.nickname, // 삭제 예정
-        birthDate: userInformation.birthDay.toString(),
+        birthDate: userInformation.birthDay,
         sex: userInformation.sex,
         residenceId: userInformation.residence.value,
         jobId: userInformation.job.value,

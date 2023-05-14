@@ -16,7 +16,7 @@ const NicknameForm: React.FC<NicknameFormProps> = ({
   onInputChange,
   userInformation,
 }) => {
-  const [nickname, setNickname] = useState(userInformation.nickname);
+  const [nickname, setNickname] = useState("");
   const [errorCase, setErrorCase] = useState({
     over10letter: false,
   });
@@ -31,7 +31,12 @@ const NicknameForm: React.FC<NicknameFormProps> = ({
   };
 
   useEffect(() => {
-    onInputChange(nickname);
+    setNickname(userInformation?.nickname);
+  }, [userInformation.nickname]);
+
+
+  useEffect(() => {
+      onInputChange(nickname);
   }, [nickname]);
 
   return (
