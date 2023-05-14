@@ -222,15 +222,15 @@ const BirthInputBox = styled.form<{ isInputFocused: boolean; errorCase: any }>`
     //margin-right: 0.2rem;
   }
   & #year {
-    width: 3.8rem;
+    width: 4.5rem;
     border-bottom: 0;
   }
   & #month {
-    width: 2.1rem;
+    width: 2.9rem;
     border-bottom: 0;
   }
   & #day {
-    width: 2.1rem;
+    width: 2.9rem;
     border-bottom: 0;
   }
 `;
