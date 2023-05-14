@@ -170,6 +170,6 @@ const PostComponentLayer = styled.div`
 
 const PostImageComponentLayer = styled.img`
   width: 100%;
-  max-height: 29.25rem;
+  max-height: 20.25rem;
   object-fit: contain;
 `;

@@ -153,7 +153,7 @@ const PostWrap = styled.div`
 
 const PostLayer = styled.div`
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   height: 100vh;
   & .PostComponent {
     scroll-snap-align: start;
