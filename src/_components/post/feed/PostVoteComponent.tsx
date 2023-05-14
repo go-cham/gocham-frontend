@@ -100,8 +100,6 @@ const PostVoteComponent = ({
             }, 0)
           );
         });
-
-        // 새로고침 로직 필요
       }
     });
   };
@@ -135,6 +133,13 @@ const PostVoteComponent = ({
       console.error("링크 공유 에러", error);
     }
   };
+
+  const handleClickResultWithoutVote = (choiceId:number)=>{
+
+    //  모달 표시.
+    // 그래도 볼게요 누르면 handleClickResult(choiceId) 실행
+
+  }
 
   return (
     <>
@@ -198,7 +203,7 @@ const PostVoteComponent = ({
                 return (
                   <p
                     className={"justResult"}
-                    onClick={() => handleClickResult(value.id)}
+                    onClick={() => handleClickResultWithoutVote(value.id)}
                     key={idx}
                   >
                     결과만 볼래요

@@ -44,10 +44,12 @@ const Feed = () => {
 
   const fatchData = async () => {
     let reqData = {};
+    // route가 있다면 무조건 postId도 있다.
     if (params.route === "my") {
-      reqData = { authorId: userInfo.userId };
+      reqData = { authorId: userInfo.userId, nextCursorId: Number(params.id) + 1 };
     } else if (params.route === "participated") {
-    } else {
+      reqData = { participatingUserId: userInfo.userId, nextCursorId: Number(params.id) + 1 };
+    } else if(params.id) {
       reqData = { nextCursorId: Number(params.id) + 1 };
     }
     if (postingMetaData.nextId) {
@@ -125,7 +127,7 @@ const Feed = () => {
             : "인기 게시물"
         }
         background={"white"}
-        navigateRoute={RouteURL.home}
+        navigateRoute={params.route ? RouteURL.user : RouteURL.home }
       />
       <PostLayer>
         {postingData?.map((value, idx) => (
