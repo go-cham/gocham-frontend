@@ -200,22 +200,23 @@ const PostVoteComponent = ({
               <p>게시물 링크가 복사되었어요!</p>
             </SharePostAlert>
           </div>
-          {choiceData?.map((value: any, idx) => {
-            // 배열의 마지막 요소인 경우에만 렌더링
-            if (idx === choiceData.length - 1) {
-              return (
-                <p
-                  className={"justResult"}
-                  onClick={() => handleClickResult(value.id)}
-                  key={idx}
-                >
-                  결과만 볼래요
-                </p>
-              );
-            } else {
-              return null;
-            }
-          })}
+          {choseData === 0 &&
+            choiceData?.map((value: any, idx) => {
+              // 배열의 마지막 요소인 경우에만 렌더링
+              if (idx === choiceData.length - 1) {
+                return (
+                  <p
+                    className={"justResult"}
+                    onClick={() => handleClickResult(value.id)}
+                    key={idx}
+                  >
+                    결과만 볼래요
+                  </p>
+                );
+              } else {
+                return null;
+              }
+            })}
         </div>
       </ToolWrap>
       {selectVoteButton > 0 && <ClickVoteButton>투표하기</ClickVoteButton>}
