@@ -48,7 +48,6 @@ const UserProfile = ({
     })?.then((profileData) => {
       let data = profileData.data;
 
-      // console.log(data);
       const worryCategories = data.userWorryCategories.map((item: any) => ({
         value: item.worryCategory.id,
         label: item.worryCategory.label,

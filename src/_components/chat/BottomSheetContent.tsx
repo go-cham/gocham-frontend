@@ -38,7 +38,6 @@ export default function Content({
           worryId: postId,
         },
       })?.then((res) => {
-        // console.log(res?.data);
         setChatData(res?.data);
       });
     } catch (e) {
@@ -53,16 +52,12 @@ export default function Content({
       getChatData();
     }
   }, [openBottomSheet]);
-  useEffect(() => {
-    // console.log("모바일 브라우저 상태에서는 하단에 더 값 줘야함.");
-  }, []);
 
   const [chatData, setChatData] = useState([]);
   const [chatText, setChatText] = useState("");
   const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
 
   useEffect(() => {
-    // console.log(chatInputFocus.worryId, postId);
     if (chatInputFocus.worryId === postId) {
       chatRef.current?.focus();
     }
@@ -79,7 +74,6 @@ export default function Content({
           worryId: postId,
         },
       });
-      // console.log(res);
       setNeedRefresh({
         worryIdx: postId,
         updateObject: "chat",
@@ -106,11 +100,6 @@ export default function Content({
         <h1>{postData.title}</h1>
         <h2>{formatText(postData.content)}</h2>
         <div className={"toolbar"}>
-          {/*<img*/}
-          {/*  src={ShareIcon}*/}
-          {/*  alt={"공유"}*/}
-          {/*  onClick={() => handleClickShare(postId)}*/}
-          {/*/>*/}
           <p className={"result"}>
             현재 투표한 사용자 {postData.userWorryChoiceCount}명
           </p>
@@ -131,7 +120,6 @@ export default function Content({
         <ChatContentWrap>
           {chatData &&
             chatData.map((chat: any, idx) => {
-              // console.log(chat.user.worryChoice);
               return (
                 <UserChatBox key={idx}>
                   <div className={"metaData"}>
@@ -157,8 +145,6 @@ export default function Content({
               );
             })}
         </ChatContentWrap>
-
-        {/*<div className={"공간확보용"} style={{ height: "5rem" }} />*/}
       </PostChatContainer>
     </PostChatWrap>
   );
@@ -177,7 +163,6 @@ const UserChatBox = styled.div`
     align-items: center;
     & .worryLabel {
       margin-left: 0.7rem;
-      //width: 4.1rem;
       padding: 0 1rem;
       height: 2.2rem;
       border-radius: 1.5rem;

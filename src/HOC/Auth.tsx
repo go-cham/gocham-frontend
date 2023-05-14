@@ -19,14 +19,11 @@ const Auth = ({ SpecificComponent, requiredLogin = null }: AuthProps) => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useAtom(userAtom);
   useEffect(() => {
-    // console.log("auth 실행중");
     let newUserInfo = userInfo;
 
     const checkIsLogin = async () => {
       if (!userInfo.userId) {
         newUserInfo = await getUserInfo();
-        // console.log("newUserInfo");
-        // console.log(newUserInfo);
         setUserInfo(newUserInfo);
       }
 

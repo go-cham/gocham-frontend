@@ -14,8 +14,6 @@ import Write from "./_pages/write/Write";
 import CollectInformation from "./_pages/collectInformation/CollectInformation";
 import LoginOauthKakao from "./_pages/login/LoginOauthKakao";
 import User from "./_pages/user/User";
-import ApiConfig, { HttpMethod } from "./dataManager/apiConfig";
-import { EndPoint } from "./dataManager/apiMapper";
 import getUserInfo from "./utils/getUserInfo";
 import { useAtom } from "jotai";
 import { userAtom } from "./atom/userData";
@@ -45,8 +43,6 @@ const OuterWrap = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
-  //display: flex;
-  //justify-content: center;
 `;
 
 const DefaultCSS = styled.div`
@@ -54,16 +50,11 @@ const DefaultCSS = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: ${MAX_WIDTH};
-  //padding-left: 470px;
-  //height: calc(var(--vh, 1vh) * 100);
   @supports (-webkit-touch-callout: none) {
     height: -webkit-fill-available;
   }
-  /* max-height: 100vh; */
   overflow: hidden;
-  //background-color: white;
   margin: 0 auto;
-  //margin-left: 70rem;
 
   @media screen and (min-width: 1300px) {
     padding-left: 50rem;
@@ -101,7 +92,6 @@ function App() {
   const [userData, setUserData] = useAtom(userAtom);
 
   useEffect(() => {
-    // console.log(process.env.NODE_ENV);
     const checkLoginStatus = async () => {
       // 로그인 여부를 확인하는 함수 호출
       const userInfo = await getUserInfo();
@@ -113,11 +103,6 @@ function App() {
     };
     checkLoginStatus();
   }, []);
-  //
-  // const memoizedValue = useMemo(() => {
-  //   // 변화가 없으면 유지되는 값
-  //   return userData;
-  // }, [userData]);
 
   return (
     <OuterWrap>

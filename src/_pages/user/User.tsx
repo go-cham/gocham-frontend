@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
 import react, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SelectMyPostType from "../../_components/user/SelectMyPostType";
 import UserProfile from "../../_components/user/UserProfile";
 import { userAtom } from "../../atom/userData";
@@ -51,10 +50,8 @@ const User = () => {
       ApiConfig.request({
         method: HttpMethod.GET,
         url: EndPoint.user.get.USER,
-        // url: `${EndPoint.user.get.USER}/${userData.userId}`,
         path: { id: userData.userId },
       })?.then((res) => {
-        // console.log(res);
         setUserProfile(res?.data);
       });
       ApiConfig.request({
@@ -111,8 +108,6 @@ const User = () => {
     console.log("쉿 패치중");
     let reqData;
     if (postType === "내 게시글") {
-      // console.log("내 게시글ㅇㅁ");
-
       if (!needSwitchPostList && postingMetaData.nextId) {
         reqData = {
           sort: "DESC",
@@ -128,8 +123,6 @@ const User = () => {
         };
       }
     } else if (postType === "참여한 게시글") {
-      // console.log("참여한 게시글ㅇㅁ");
-
       if (!needSwitchPostList && postingMetaData.nextId) {
         reqData = {
           sort: "DESC",
@@ -154,7 +147,6 @@ const User = () => {
           url: EndPoint.worry.get.WORRIES,
           query: reqData,
         });
-        // 새로 가져온 데이터와 기존 데이터 합치기
         if (needSwitchPostList) {
           setPostingData(res?.data.data);
           setNeedSwitchPostList(false);

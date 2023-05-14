@@ -1,11 +1,9 @@
-import CheckIcon from "../../../images/PostComponent/check.svg";
 import FillCheckIcon from "../../../images/PostComponent/fill_check.svg";
 import styled from "@emotion/styled";
 import palette from "../../../style/color";
 import React, { useEffect, useState } from "react";
 import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
 import { EndPoint } from "../../../dataManager/apiMapper";
-import { userInfo } from "os";
 import { formatRoundedNumber } from "../../../utils/formatRoundedNumber";
 import ChatIcon from "../../../images/PostComponent/chat.svg";
 import ShareIcon from "../../../images/PostComponent/share.svg";
@@ -30,7 +28,6 @@ const PostVoteComponent = ({
   const handleClickResult = async (choiceId: number) => {
     // 마감된 투표글인지 확인 필요
     if (getRemainingTime(postData.expirationTime) !== "마감됨") {
-      // console.log(choseData);
       if (choseData === 0) {
         const res = await ApiConfig.request({
           method: HttpMethod.POST,
@@ -69,13 +66,9 @@ const PostVoteComponent = ({
       url: EndPoint.worry.get.WORRY_CHOICES,
       query: { worryId: postData.id },
     })?.then((res) => {
-      // console.log(res.data);
       setChoiceData(res.data);
     });
     refreshVotingData();
-    // if
-    // 투표 한 사람이라면, 투표 통계 보여주기
-    // 본인이 투표한 값 표시하기
   }, []);
 
   const [chatInputFocus, setChatInputFocus] = useAtom(chatInputFocusAtom);
@@ -91,10 +84,8 @@ const PostVoteComponent = ({
       url: EndPoint.worry.get.USER_WORRY_CHOICE,
       query: { worryId: postData.id, userId: userId },
     })?.then((res) => {
-      // console.log(res?.data.worryChoice);
       if (res?.data.worryChoice.id) {
         // 내가 투표한 케이스가 있는 경우
-        // console.log("chooseData", res?.data.worryChoice.id);
         setChoseData(res?.data.worryChoice.id);
         // 투표 통계 확인. worryId 인자 넣으면 투표 통계 리턴됨
         ApiConfig.request({

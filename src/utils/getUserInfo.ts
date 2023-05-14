@@ -10,7 +10,6 @@ import {
  *
  */
 const getUserInfo = async () => {
-  // console.log("확인작업 들어갑니다");
   // 만약 로컬스토리지에 없으면 "null"리턴
   if (getBearerToken()) {
     try {
@@ -18,9 +17,6 @@ const getUserInfo = async () => {
         method: HttpMethod.GET,
         url: EndPoint.user.get.USER_TYPE,
       });
-      // console.log("isUserRegistered ");
-      // console.log(res?.data);
-      // console.log("성공");
       return res?.data;
     } catch (e) {
       console.log("만료된 jwt.");

@@ -1,11 +1,8 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import react, { useEffect, useState } from "react";
-import { ButtonStyle } from "../../style/common";
 import palette from "../../style/color";
-import BackButton from "../../images/Common/back_button.png";
 import DetailArrow from "../../images/Login/detail_arrow.png";
 import CheckBox from "../../_components/login/CheckBox";
 import { useNavigate } from "react-router-dom";
@@ -203,11 +200,4 @@ const RegisterTermWrap = styled.div`
     font-size: 2.7rem;
     line-height: 3.9rem;
   }
-`;
-const ConfirmCheckButton = styled(ButtonStyle)`
-  position: absolute;
-  bottom: 4.8rem;
-  border-radius: 0.5rem;
-  font-weight: 700;
-  font-size: 1.6rem;
 `;

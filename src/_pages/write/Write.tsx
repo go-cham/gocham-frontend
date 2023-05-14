@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
 import AppBar from "../../_components/common/AppBar";
 import BottomContinueBar from "../../_components/common/BottomContinueBar";
 import palette from "../../style/color";
@@ -99,8 +98,6 @@ const Write = () => {
 
     // 포스팅 업로드
     try {
-      //
-      // console.log(postData);
       const res = await ApiConfig.request({
         method: HttpMethod.POST,
         url: EndPoint.worry.post.WORRY,
@@ -147,10 +144,8 @@ const Write = () => {
       resizeImage(event.target?.result as string).then((result) =>
         setImageFile(result)
       );
-      // setImageFile(event.target?.result as string);
       if (imgRef.current) {
         imgRef.current.src = event.target?.result as string;
-        // console.log(imgRef.current.src);
       }
     };
   };
@@ -445,7 +440,6 @@ const WriteComponent = styled.div`
     justify-content: space-between;
     & > div {
       width: 45%;
-      //box-sizing: border-box;
       height: 10rem;
     }
   }
@@ -459,7 +453,6 @@ const WriteComponent = styled.div`
       width: 100%;
       height: 4rem;
       box-sizing: border-box;
-      //vertical-align: middle;
       line-height: 3rem;
     }
     & img {

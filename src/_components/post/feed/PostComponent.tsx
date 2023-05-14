@@ -1,27 +1,19 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import PostProfileBox from "../PostProfileBox";
-import ChatIcon from "../../../images/PostComponent/chat.svg";
-import ShareIcon from "../../../images/PostComponent/share.svg";
 import palette from "../../../style/color";
 import ClockIcon from "../../../images/PostComponent/clock.svg";
-import ChatAlertImage from "../../../images/PostComponent/share_image.svg";
-import { RouteURL } from "../../../App";
 import React, { useEffect, useState } from "react";
 import ChatBottomSheet from "../../chat/ChatBottomSheet";
 import PostVoteComponent from "./PostVoteComponent";
 import { userDataAtomType } from "../../../atom/userData";
 import { getRemainingTime } from "../../../utils/getRemainingTime";
-import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
-import { EndPoint } from "../../../dataManager/apiMapper";
 import { formatText } from "../../../utils/formatText";
 import { refreshChatAtom } from "../../../atom/postRefreshRequest";
 import { useAtom } from "jotai";
 import { postDataType } from "../../../type/postDataType";
 import { handleRefreshPostData } from "../../../utils/handleRefreshPostData";
-import { chatInputFocusAtom } from "../../../atom/chatInputFocus";
 
 const PostComponent = ({
   userInfo,
@@ -31,13 +23,9 @@ const PostComponent = ({
   postData: postDataType;
 }) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-  // console.log(postData);
-  const handleClickMeatballsMenu = () => {
-    console.log("hola");
-  };
+  const handleClickMeatballsMenu = () => {};
   const handleClickPostChat = () => {
     setOpenBottomSheet((value) => {
-      // console.log(value, "->", !value);
       return !value;
     });
   };
@@ -51,7 +39,6 @@ const PostComponent = ({
   // 댓글이나 투표할 경우 해당 컨텐츠만 리프레시.
   useEffect(() => {
     if (needRefresh.worryIdx === postData.id) {
-      console.log("needRefresh 작동중");
       setThisPostData(
         handleRefreshPostData(thisPostData, needRefresh.updateObject)
       );
