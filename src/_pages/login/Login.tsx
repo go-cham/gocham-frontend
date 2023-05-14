@@ -45,15 +45,19 @@ const Login = () => {
       <img src={Logo} alt={"로고"} className={"로고"} />
       <div className={"메인"}>
         <div>
-          <LoginButton
-            width={30.7}
-            height={4.7}
-            size={1.4}
+          {/*<LoginButton*/}
+          {/*  width={30.7}*/}
+          {/*  height={4.7}*/}
+          {/*  size={1.4}*/}
+          {/*  onClick={() => handleKakaoLogin()}*/}
+          {/*>*/}
+          {/*<img src={Kakao} alt={"카카오 로그인"} />*/}
+          <img
+            src={KakaoText}
+            alt={"카카오 로그인 텍스트"}
             onClick={() => handleKakaoLogin()}
-          >
-            <img src={Kakao} alt={"카카오 로그인"} />
-            <img src={KakaoText} alt={"카카오 로그인 텍스트"} />
-          </LoginButton>
+          />
+          {/*</LoginButton>*/}
           <br />
           {/*<LoginButton width={30.7} height={4.7} size={1.4}>*/}
           {/*  <img src={Google} alt={"구글 로그인"} />*/}

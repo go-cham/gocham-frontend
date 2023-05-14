@@ -195,6 +195,7 @@ const RegisterTermWrap = styled.div`
   width: 90%;
   position: relative;
   height: 90vh;
+  margin: 0 auto;
   & > .약관문구 {
     margin-top: 3.9rem;
     margin-bottom: 3rem;
