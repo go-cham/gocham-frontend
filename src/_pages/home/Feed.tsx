@@ -32,7 +32,7 @@ const Feed = () => {
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
     if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
-  }, []);
+  }, [userInfo]);
 
   useEffect(() => {
     // 처음 페이지 로딩 시에만 데이터 가져오기
@@ -46,10 +46,16 @@ const Feed = () => {
     let reqData = {};
     // route가 있다면 무조건 postId도 있다.
     if (params.route === "my") {
-      reqData = { authorId: userInfo.userId, nextCursorId: Number(params.id) + 1 };
+      reqData = {
+        authorId: userInfo.userId,
+        nextCursorId: Number(params.id) + 1,
+      };
     } else if (params.route === "participated") {
-      reqData = { participatingUserId: userInfo.userId, nextCursorId: Number(params.id) + 1 };
-    } else if(params.id) {
+      reqData = {
+        participatingUserId: userInfo.userId,
+        nextCursorId: Number(params.id) + 1,
+      };
+    } else if (params.id) {
       reqData = { nextCursorId: Number(params.id) + 1 };
     }
     if (postingMetaData.nextId) {
@@ -127,7 +133,7 @@ const Feed = () => {
             : "인기 게시물"
         }
         background={"white"}
-        navigateRoute={params.route ? RouteURL.user : RouteURL.home }
+        navigateRoute={params.route ? RouteURL.user : RouteURL.home}
       />
       <PostLayer>
         {postingData?.map((value, idx) => (

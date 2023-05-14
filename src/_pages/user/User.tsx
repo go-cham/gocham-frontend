@@ -25,7 +25,7 @@ const User = () => {
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
     if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
-  }, []);
+  }, [userInfo]);
 
   // isMyFeed는 미사용. 추후 타인의 프로필에 접근하는 기능이 생기면 디밸롭.
   const [isMyFeed, setIsMyFeed] = useState(true);

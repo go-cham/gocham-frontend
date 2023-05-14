@@ -54,7 +54,7 @@ const Write = () => {
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
     if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
-  }, []);
+  }, [userInfo]);
 
   const handlePostUpload = async () => {
     if (!userInfo.userId) return false;
