@@ -134,12 +134,10 @@ const PostVoteComponent = ({
     }
   };
 
-  const handleClickResultWithoutVote = (choiceId:number)=>{
-
+  const handleClickResultWithoutVote = (choiceId: number) => {
     //  모달 표시.
     // 그래도 볼게요 누르면 handleClickResult(choiceId) 실행
-
-  }
+  };
 
   return (
     <>
@@ -147,11 +145,10 @@ const PostVoteComponent = ({
         {choiceData.slice(0, -1).map((value: any, idx) => {
           const percentage = (value.userWorryChoiceCount / voteTotal) * 100;
           return (
-            <PostVoteButtonWrap>
+            <PostVoteButtonWrap key={idx}>
               <PostVoteButton
                 isChoice={choseData === value?.id}
                 percentage={percentage}
-                key={idx}
                 onClick={() => handleClickResult(value.id)}
               >
                 <div className={"content"}>
