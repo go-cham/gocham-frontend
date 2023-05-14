@@ -90,11 +90,18 @@ export default function Content({
   };
   const debouncedHandlePushChat = debounce(handleChatPost, 1000);
 
+  // 엔터 입력시
+  const handleOnKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handlePushChat(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
+
   return (
     <PostChatWrap>
       <PostChatContainer>
         <PostProfileBox
-          nickname={postData.user?.nickname ? postData.user?.nickname : "익명" }
+          nickname={postData.user?.nickname ? postData.user?.nickname : "익명"}
           profileImg={postData.user?.profileImageUrl}
         />
         <h1>{postData.title}</h1>
@@ -114,6 +121,7 @@ export default function Content({
             placeholder={"여러분들의 의견을 자유롭게 남겨주세요!"}
             value={chatText}
             onChange={(e) => setChatText(e.target.value)}
+            onKeyDown={handleOnKeyPress} // Enter 입력 이벤트 함수
           />
           <img src={SendIcon} alt={"전송"} onClick={() => handlePushChat()} />
         </InputWrap>
