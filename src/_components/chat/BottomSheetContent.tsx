@@ -122,6 +122,7 @@ export default function Content({
             value={chatText}
             onChange={(e) => setChatText(e.target.value)}
             onKeyDown={handleOnKeyPress} // Enter 입력 이벤트 함수
+            maxLength={200}
           />
           <img src={SendIcon} alt={"전송"} onClick={() => handlePushChat()} />
         </InputWrap>
@@ -197,6 +198,7 @@ const UserChatBox = styled.div`
     margin-left: 3.3rem;
     margin-top: 0.9rem;
     width: 28rem;
+    word-wrap: break-word;
   }
 `;
 
