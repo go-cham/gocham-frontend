@@ -18,10 +18,16 @@ import { useAtomValue } from "jotai";
 import { userAtom } from "../../atom/userData";
 import { useNavigate } from "react-router-dom";
 import { formatISO8601ToNormal } from "../../utils/formatISO8601ToNormal";
+import {RouteURL} from "../../App";
 
 const EditProfile = () => {
   const userInfo = useAtomValue(userAtom);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // HOC로 안잡히는 부분 잡기위함
+    if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
+  }, []);
 
   const [userInformation, setUserInformation] = useState<userInformationType>({
     nickname: "",
