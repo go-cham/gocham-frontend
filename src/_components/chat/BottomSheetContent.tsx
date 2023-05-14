@@ -94,8 +94,8 @@ export default function Content({
     <PostChatWrap>
       <PostChatContainer>
         <PostProfileBox
-          nickname={postData.user.nickname}
-          profileImg={postData.user.profileImageUrl}
+          nickname={postData.user?.nickname ? postData.user?.nickname : "익명" }
+          profileImg={postData.user?.profileImageUrl}
         />
         <h1>{postData.title}</h1>
         <h2>{formatText(postData.content)}</h2>

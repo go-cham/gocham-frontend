@@ -70,10 +70,10 @@ const PostListComponent = ({
         <div>
           <PostProfileBox
             nickname={
-              thisPostData.user.nickname ? thisPostData.user.nickname : "익명"
+              thisPostData.user?.nickname ? thisPostData.user.nickname : "익명"
             }
             profileImg={
-              thisPostData.user.profileImageUrl
+              thisPostData.user?.profileImageUrl
                 ? thisPostData.user.profileImageUrl
                 : null
             }
