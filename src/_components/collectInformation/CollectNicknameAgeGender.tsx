@@ -32,7 +32,6 @@ const CollectNicknameAgeGender = ({
   ) => {
     // 입력값을 이용한 로직 처리
     const monthValue = month.length === 1 ? "0" + month : month;
-    console.log(year, monthValue, day);
     const dayValue = day.length === 1 ? "0" + day : day;
 
     setUserInformation((value: userInformationType) => ({

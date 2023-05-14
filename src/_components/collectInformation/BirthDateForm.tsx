@@ -8,6 +8,12 @@ interface BirthdateFormProps {
   onInputChange: (year: string, month: string, day: string) => void;
 }
 
+type BirthDateType = {
+  year: string;
+  month: string;
+  day: string;
+};
+
 const BirthdateForm: React.FC<BirthdateFormProps> = ({ onInputChange }) => {
   const yearRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLInputElement>(null);
@@ -21,7 +27,11 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({ onInputChange }) => {
   const handleInputBlur = () => {
     setIsInputFocused(false);
   };
-  const [birthDate, setBirthDate] = useState({ year: "", month: "", day: "" });
+  const [birthDate, setBirthDate] = useState<BirthDateType>({
+    year: "",
+    month: "",
+    day: "",
+  });
   const [errorCase, setErrorCase] = useState({
     younger1900: false,
     older2005: false,
@@ -31,23 +41,19 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({ onInputChange }) => {
   });
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (isNaN(parseInt(value))) {
+    if (value !== "" && isNaN(parseInt(value))) {
       return;
     }
     if (name === "year" && value.length === 4) {
       monthRef.current?.focus();
     } else if (name === "month") {
-      if (value.length === 1 && Number(value) > 2) {
+      if (value.length === 1 && Number(value) >= 2) {
         dayRef.current?.focus();
       } else if (value.length === 2) {
         dayRef.current?.focus();
       }
     }
-    //
-    // if (name === "year" && Number(value) > 1900 && Number(value) < 2005) {
-    // } else if (name === "month") {
-    // } else {
-    // }
+
     if (name === "year" && value.length === 4 && Number(value) <= 1900) {
       setErrorCase((data) => ({ ...data, younger1900: true }));
     } else if (name === "year" && value.length === 4 && Number(value) > 2005) {
@@ -100,6 +106,7 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({ onInputChange }) => {
       }));
     }
   };
+
   return (
     <InputWrap>
       <h2>생년월일</h2>
