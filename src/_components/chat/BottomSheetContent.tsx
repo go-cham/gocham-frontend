@@ -177,7 +177,8 @@ const UserChatBox = styled.div`
     align-items: center;
     & .worryLabel {
       margin-left: 0.7rem;
-      width: 4.1rem;
+      //width: 4.1rem;
+      padding: 0 1rem;
       height: 2.2rem;
       border-radius: 1.5rem;
       display: flex;
@@ -185,8 +186,9 @@ const UserChatBox = styled.div`
       align-items: center;
       font-weight: 500;
       font-size: 1rem;
-      color: ${palette.Primary};
-      border: 1px solid ${palette.Primary};
+      color: black;
+      border: 1px solid black;
+      background-color: white;
     }
   }
   & .uploadDate {
