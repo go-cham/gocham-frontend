@@ -10,10 +10,7 @@ import { ButtonStyle, FlexRowDiv } from "../../style/common";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../images/Common/big_logo.svg";
 import KakaoText from "../../images/Login/카카오계정으로_시작하기.svg";
-import GoogleText from "../../images/Login/구글계정으로_시작하기.svg";
-import { useEffect } from "react";
-import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
-import { EndPoint } from "../../dataManager/apiMapper";
+import GochamCharacter from "../../images/Login/GochamCharacter.svg";
 
 declare global {
   interface Window {
@@ -69,7 +66,7 @@ const Login = () => {
           {/*</RegisterWrap>*/}
         </div>
       </div>
-      <img src={BigFaceIcon} className={"BigFace"} alt={"캐릭터"} />
+      <img src={GochamCharacter} className={"BigFace"} alt={"캐릭터"} />
     </div>
   );
 };
@@ -119,6 +116,7 @@ const LoginWrap = css`
   }
   & > .BigFace {
     bottom: 0;
-    width: 100%;
+    margin-bottom: 7.5rem;
+    //width: 100%;
   }
 `;
