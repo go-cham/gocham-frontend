@@ -169,6 +169,11 @@ body {
     font-size: 55%; /* 1rem = 10px */
   }
 }
+  @media screen and (max-width: 360px) {
+    html {
+      font-size: 45%; /* 1rem = 10px */
+    }
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
