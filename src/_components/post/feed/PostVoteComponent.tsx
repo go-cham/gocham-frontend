@@ -104,7 +104,7 @@ const PostVoteComponent = ({
         })?.then((statusData) => {
           setChoiceData(statusData.data);
           setVoteTotal(
-            statusData.data.reduce((total: number, item: any) => {
+            statusData.data.slice(0, -1).reduce((total: number, item: any) => {
               return total + item.userWorryChoiceCount;
             }, 0)
           );
