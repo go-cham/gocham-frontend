@@ -22,13 +22,24 @@ const Wrapper = styled(motion.div)`
   top: calc(100% + 1rem); /*시트가 얼마나 높이 위치할지*/
   left: 0;
   right: 0;
+  height: ${BOTTOM_SHEET_HEIGHT}px;
+  //background: white;
+  transition: transform 400ms ease-out; /*바텀시트 애니메이션 속도*/
+
+  @media screen and (min-width: 1300px) {
+    padding-left: 50rem;
+  }
+  @media screen and (max-width: 1300px) {
+    padding-left: 0;
+  }
+`;
+
+const BackgroundColor = styled.div`
+  background-color: white;
 
   border-top-left-radius: 1.2rem;
   border-top-right-radius: 1.2rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.6);
-  height: ${BOTTOM_SHEET_HEIGHT}px;
-  background: white;
-  transition: transform 400ms ease-out; /*바텀시트 애니메이션 속도*/
 `;
 
 const BottomSheetContent = styled.div`
@@ -55,23 +66,25 @@ function ChatBottomSheet({
 
   return (
     <Wrapper ref={sheet}>
-      <HeaderWrapper
-        ref={header}
-        onClick={() => {
-          // console.log("hloa");
-          handleClickPostChat();
-        }}
-      >
-        <Handle />
-      </HeaderWrapper>
-      <BottomSheetContent>
-        <Content
-          openBottomSheet={openBottomSheet}
-          postId={postId}
-          userInfo={userInfo}
-          postData={postData}
-        />
-      </BottomSheetContent>
+      <BackgroundColor>
+        <HeaderWrapper
+          ref={header}
+          onClick={() => {
+            // console.log("hloa");
+            handleClickPostChat();
+          }}
+        >
+          <Handle />
+        </HeaderWrapper>
+        <BottomSheetContent>
+          <Content
+            openBottomSheet={openBottomSheet}
+            postId={postId}
+            userInfo={userInfo}
+            postData={postData}
+          />
+        </BottomSheetContent>
+      </BackgroundColor>
     </Wrapper>
   );
 }
