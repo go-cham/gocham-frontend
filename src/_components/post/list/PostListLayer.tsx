@@ -31,7 +31,10 @@ const PostListLayer = () => {
 
   useEffect(() => {
     // 처음 페이지 로딩 시에만 데이터 가져오기
-    if (isLoading && userInfo.userId) {
+    if (
+      (isLoading && userInfo.userId) ||
+      (isLoading && userInfo.userId === 0)
+    ) {
       fatchData();
     }
   }, [isLoading, userInfo]);
