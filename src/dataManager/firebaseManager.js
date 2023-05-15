@@ -4,8 +4,10 @@ import {
   uploadString,
 } from "firebase/storage";
 import { firebaseStorage } from "./firebaseConfig";
+import { ErrorMessage } from "../_components/collectInformation/CollectNicknameAgeGender";
+import { alertMessage } from "../utils/alertMessage";
 
-export const uploadFirebase = async (dataIdx, file, dir) => {
+export const uploadFirebase = async (userId, file, dir) => {
   let storageRef;
   const date = new Date();
   const year = date.getFullYear();
@@ -16,7 +18,12 @@ export const uploadFirebase = async (dataIdx, file, dir) => {
   const seconds = ("0" + date.getSeconds()).slice(-2);
   const now = year + month + day + hours + minutes + seconds;
 
-  storageRef = firebaseRef(firebaseStorage, `${dir}/${dataIdx}_${now}`); // 나중엔 뒤에 파일이름 붙여야함.
-  const snapshot = await uploadString(storageRef, file, "data_url");
-  return getDownloadURL(snapshot.ref);
+  storageRef = firebaseRef(firebaseStorage, `${dir}/${userId}_${now}`);
+  try {
+    const snapshot = await uploadString(storageRef, file, "data_url");
+    return getDownloadURL(snapshot.ref);
+  } catch (e) {
+    alert(alertMessage.error.post.failedUploadImage);
+    return "";
+  }
 };
