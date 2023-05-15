@@ -92,6 +92,7 @@ const Settings = () => {
         <Button width={"100%"} height={7.4}>
           버전: {appVersion}
         </Button>
+        Copyright © go-cham Team. All rights reserved.
       </div>
     </SettingsWrap>
   );
