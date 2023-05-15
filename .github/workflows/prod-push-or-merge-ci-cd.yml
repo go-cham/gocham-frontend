@@ -5,7 +5,7 @@ name: prod CI/CD by Push/Merge
 on:
   push:
     branches:
-      - prod
+      - main
 
 env:
   NODE_ENV: prod # 환경에 맞춰서 변경해주기
