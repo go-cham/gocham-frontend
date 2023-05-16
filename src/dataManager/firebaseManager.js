@@ -4,7 +4,6 @@ import {
   uploadString,
 } from "firebase/storage";
 import { firebaseStorage } from "./firebaseConfig";
-import { alertMessage } from "../utils/alertMessage";
 
 export const uploadFirebase = async (dataIdx, file, dir) => {
   let storageRef;
@@ -17,14 +16,7 @@ export const uploadFirebase = async (dataIdx, file, dir) => {
   const seconds = ("0" + date.getSeconds()).slice(-2);
   const now = year + month + day + hours + minutes + seconds;
 
-  storageRef = firebaseRef(firebaseStorage, `${dir}/${dataIdx}_${now}`);
-  try{
-    const snapshot = await uploadString(storageRef, file, "data_url");
-    return getDownloadURL(snapshot.ref);
-  }
-  catch(e){
-    // console.log(e);
-    alert(alertMessage.error.post.failedUploadImage);
-    return "";
-  }
+  storageRef = firebaseRef(firebaseStorage, `${dir}/${dataIdx}_${now}`); // 나중엔 뒤에 파일이름 붙여야함.
+  const snapshot = await uploadString(storageRef, file, "data_url");
+  return getDownloadURL(snapshot.ref);
 };
