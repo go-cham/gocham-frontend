@@ -208,7 +208,7 @@ const InputWrap = styled.div`
   align-items: center;
   justify-content: space-between;
   & .댓글입력 {
-    width: 80%;
+    width: 88%;
     height: 4.1rem;
     border: 0.1rem solid ${palette.Gray2};
     border-radius: 0.5rem;
