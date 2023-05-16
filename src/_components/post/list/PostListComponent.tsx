@@ -168,6 +168,7 @@ const PostContentText = styled.div<{ haveImage: boolean }>`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    letter-spacing: -0.03em;
   }
 `;
 

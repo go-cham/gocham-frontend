@@ -137,6 +137,7 @@ const PostVoteComponent = ({
   const handleClickResultWithoutVote = (choiceId: number) => {
     //  모달 표시.
     // 그래도 볼게요 누르면 handleClickResult(choiceId) 실행
+    handleClickResult(choiceId);
   };
 
   return (

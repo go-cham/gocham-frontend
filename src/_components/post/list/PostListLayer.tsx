@@ -110,6 +110,8 @@ const PostListLayer = () => {
           </div>
         ))}
       </PostListLayerStyle>
+      <div style={{ height: "10rem" }} />
+
     </PostListLayerWrap>
   );
 };

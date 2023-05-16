@@ -141,7 +141,10 @@ const Feed = () => {
             <PostComponent userInfo={userInfo} postData={value} />
           </div>
         ))}
+              <div style={{ height: "10rem" }} />
+
       </PostLayer>
+      
     </PostWrap>
   );
 };
