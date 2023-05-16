@@ -11,6 +11,7 @@ export const alertMessage = {
     },
     post: {
       noUploadPermission: `업로드 권한이 없는 유저입니다. ${defaultErrorMessage}`, //denyUploadWithWrongPermissionBecauseWithoutTerms
+      failedUploadImage: `이미지 업로드를 실패했습니다. ${defaultErrorMessage}`, //denyUploadWithWrongPermissionBecauseWithoutTerms
     },
   },
   report: {
