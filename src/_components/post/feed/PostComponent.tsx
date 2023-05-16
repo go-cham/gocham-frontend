@@ -145,6 +145,7 @@ const PostComponentLayer = styled.div`
     margin-top: 2.1rem;
     font-weight: 700;
     font-size: 1.8rem;
+    letter-spacing: -0.03em;
   }
   & h2 {
     margin-top: 1.3rem;
@@ -152,6 +153,7 @@ const PostComponentLayer = styled.div`
     font-size: 1.4rem;
     padding-bottom: 1.7rem;
     line-height: 2.1rem;
+    letter-spacing: -0.03em;
   }
 `;
 

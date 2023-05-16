@@ -459,6 +459,7 @@ const WriteComponent = styled.div`
       height: 4rem;
       box-sizing: border-box;
       line-height: 3rem;
+      letter-spacing: -0.03em;
     }
     & img {
       position: absolute;

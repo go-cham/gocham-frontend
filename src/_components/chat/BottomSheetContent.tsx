@@ -199,6 +199,8 @@ const UserChatBox = styled.div`
     margin-top: 0.9rem;
     width: 28rem;
     word-wrap: break-word;
+    letter-spacing: -0.03em;
+    line-height: 2.1rem;
   }
 `;
 
@@ -212,6 +214,12 @@ const InputWrap = styled.div`
     height: 4.1rem;
     border: 0.1rem solid ${palette.Gray2};
     border-radius: 0.5rem;
+    padding: 0 1rem;
+    letter-spacing: -0.03em;
+  }
+  & .댓글입력:: placeholder{
+    color: ${palette.Text4};
+    letter-spacing: -0.03em;
   }
 `;
 
@@ -222,6 +230,7 @@ const PostChatContainer = styled.div`
     margin-top: 2.1rem;
     font-weight: 700;
     font-size: 1.8rem;
+    letter-spacing: -0.03em;
   }
   & h2 {
     margin-top: 1.3rem;
@@ -229,6 +238,7 @@ const PostChatContainer = styled.div`
     font-size: 1.4rem;
     line-height: 2.1rem;
     padding-bottom: 1.7rem;
+    letter-spacing: -0.03em;
   }
   & .toolbar {
     display: flex;
