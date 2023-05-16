@@ -2,68 +2,73 @@
 
 import { css } from "@emotion/react";
 import palette from "../../style/color";
-import BigFaceIcon from "../../images/Login/big_face.png";
-import Kakao from "../../images/Login/kakao.png";
-import Google from "../../images/Login/google.png";
-import styled from "@emotion/styled";
-import { ButtonStyle, FlexRowDiv } from "../../style/common";
-import { useNavigate } from "react-router-dom";
+import Logo from "../../images/Common/big_logo.svg";
+import KakaoText from "../../images/Login/카카오계정으로_시작하기.svg";
+import GochamCharacter from "../../images/Login/GochamCharacter.svg";
 
+declare global {
+  interface Window {
+    Kakao: any;
+    naver: any;
+  }
+}
 const Login = () => {
-  const navigate = useNavigate();
+  if (!window.Kakao.isInitialized()) {
+    window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
+  }
+
+  const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_API;
+
+  const handleKakaoLogin = async () => {
+    if (navigator.userAgent.indexOf("iPhone") > -1) {
+      console.log("플랫폼 확인후 iOS에서만 켜지도록 설정필요");
+      alert("iOS의 비공개 릴레이가 켜져있다면 로그인이 되지않습니다.");
+    }
+    window.Kakao.Auth.authorize({
+      redirectUri: REDIRECT_URI,
+    });
+  };
+
   return (
     <div css={LoginWrap}>
+      <img src={Logo} alt={"로고"} className={"로고"} />
       <div className={"메인"}>
-        <h1>고민의 참견</h1>
         <div>
-          <LoginButton width={30.7} height={4.7} size={1.4}>
-            <img src={Kakao} alt={"카카오 로그인"} />
-            카카오 계정으로 로그인
-          </LoginButton>
+          <img
+            src={KakaoText}
+            alt={"카카오 로그인 텍스트"}
+            onClick={() => handleKakaoLogin()}
+          />
           <br />
-          <LoginButton width={30.7} height={4.7} size={1.4}>
-            <img src={Google} alt={"구글 로그인"} />
-            구글 계정으로 로그인
-          </LoginButton>
           <br />
-          <RegisterWrap>
-            <div>아직 회원이 아니신가요?</div>
-            <div onClick={() => navigate("/register/term")}>회원가입</div>
-          </RegisterWrap>
         </div>
       </div>
-      <img src={BigFaceIcon} className={"BigFace"} alt={"캐릭터"} />
+      <img src={GochamCharacter} className={"BigFace"} alt={"캐릭터"} />
     </div>
   );
 };
 
 export default Login;
 
-const RegisterWrap = styled(FlexRowDiv)`
-  font-size: 1.2rem;
-  color: ${palette.Gray4};
-  & > :nth-child(1) {
-    margin-right: 2.3rem;
-  }
-`;
-
-const LoginButton = styled(ButtonStyle)`
-  background-color: ${palette.Background};
-  border-radius: 0.5rem;
-  & > img {
-    margin-right: 1.1rem;
-  }
-`;
-
 const LoginWrap = css`
-  width: 100vw;
+  position: relative;
+  width: 100%;
   height: 100vh;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
   background-color: ${palette.Primary};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
+  & .로고 {
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+    width: 95%;
+    max-width: 40rem;
+  }
   & > .메인 {
     height: 100%;
     display: flex;
@@ -71,9 +76,7 @@ const LoginWrap = css`
     justify-content: space-around;
   }
   & > .BigFace {
-    //position: absolute;
     bottom: 0;
-    height: 43.8rem;
-    width: 100%;
+    margin-bottom: 7.5rem;
   }
 `;

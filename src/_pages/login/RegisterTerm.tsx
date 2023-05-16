@@ -1,51 +1,78 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import react, { useEffect, useState } from "react";
-import { ButtonStyle } from "../../style/common";
 import palette from "../../style/color";
-import BackButton from "../../images/Common/back_button.png";
 import DetailArrow from "../../images/Login/detail_arrow.png";
 import CheckBox from "../../_components/login/CheckBox";
 import { useNavigate } from "react-router-dom";
 import { RouteURL } from "../../App";
+import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
+import { EndPoint } from "../../dataManager/apiMapper";
+import { useAtomValue } from "jotai";
+import { userAtom } from "../../atom/userData";
+import AppBar from "../../_components/common/AppBar";
+import BottomContinueBar from "../../_components/common/BottomContinueBar";
+import { alertMessage } from "../../utils/alertMessage";
 
 export type AcceptType = {
   gochamTerm: boolean;
   personalInformation: boolean;
   olderThan14: boolean;
+  marketing: boolean;
   allCheck: boolean;
 };
 const RegisterTerm = () => {
   const navigate = useNavigate();
+  const userInfo = useAtomValue(userAtom);
   const [accept, setAccept] = useState<AcceptType>({
     gochamTerm: false,
     personalInformation: false,
     olderThan14: false,
+    marketing: false,
     allCheck: false,
   });
 
   useEffect(() => {
-    if (accept.gochamTerm && accept.personalInformation) {
+    // HOC로 안잡히는 부분 잡기위함
+    if (userInfo.userType === "activatedUser") navigate(RouteURL.home);
+  }, [userInfo]);
+
+  useEffect(() => {
+    if (accept.gochamTerm && accept.personalInformation && accept.olderThan14) {
       setAccept((value) => ({ ...value, allCheck: true }));
     }
   }, [accept.allCheck]);
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     //   회원가입 로직
-    //   실패 로직
-    //   성공 로직
-    navigate(RouteURL.onboarding);
+    try {
+      const res = await ApiConfig.request({
+        method: HttpMethod.PATCH,
+        url: EndPoint.user.patch.USER_ACCEPTANCE_OF_TERMS,
+        data: {
+          userId: userInfo.userId,
+          privacyAcceptedStatus: accept.personalInformation ? 1 : 0,
+          termsOfUseAcceptedStatus: accept.gochamTerm ? 1 : 0,
+          marketingAcceptedStatus: accept.marketing ? 1 : 0,
+        },
+      });
+      console.log(res?.data);
+      if (res?.data.id) {
+        console.log("동의완료");
+        navigate(RouteURL.collect_information);
+      } else {
+        alert(alertMessage.error.register.didntAgreeTerm);
+        navigate(RouteURL.home);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <>
+      <AppBar title={""} boxShadow={false} />
       <RegisterTermWrap>
-        <img
-          src={BackButton}
-          alt={"뒤로가기"}
-          onClick={() => navigate("/login")}
-        />
         <div className={"약관문구"}>
           환영합니다!
           <br />
@@ -56,12 +83,18 @@ const RegisterTerm = () => {
         <section className={"약관체크"}>
           <CheckWrap>
             <CheckBox
-              value={accept.gochamTerm && accept.personalInformation}
+              value={
+                accept.gochamTerm &&
+                accept.personalInformation &&
+                accept.olderThan14 &&
+                accept.marketing
+              }
               setValue={(value) =>
                 setAccept({
                   gochamTerm: value,
                   personalInformation: value,
                   olderThan14: value,
+                  marketing: value,
                   allCheck: value,
                 })
               }
@@ -106,29 +139,39 @@ const RegisterTerm = () => {
             />
             [필수] 만 14세 이상 입니다.
           </CheckWrap>
+          <CheckWrap>
+            <CheckBox
+              value={accept.marketing}
+              setValue={(value) => setAccept({ ...accept, marketing: value })}
+            />
+            [선택] 마케팅 목적 이용 동의
+            <a
+              href={
+                "https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
+              }
+            >
+              <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />
+            </a>
+          </CheckWrap>
         </section>
       </RegisterTermWrap>
-      {accept.gochamTerm && accept.personalInformation ? (
-        <ConfirmCheckButton
-          width={34}
-          height={4.7}
-          size={1.6}
-          backgroundColor={palette.Primary}
-          color={palette.Background}
-          onClick={() => handleRegister()}
-        >
-          회원가입 완료
-        </ConfirmCheckButton>
+      {accept.gochamTerm && accept.personalInformation && accept.olderThan14 ? (
+        <BottomContinueBar
+          title={"다음"}
+          height={11.2}
+          boxShadow={false}
+          buttonColor={palette.Primary}
+          fontColor={"white"}
+          clickAction={() => handleRegister()}
+        />
       ) : (
-        <ConfirmCheckButton
-          width={34}
-          height={4.7}
-          size={1.6}
-          backgroundColor={"rgba(42, 45, 55, 0.1)"}
-          color={"rgba(42, 45, 55, 0.34)"}
-        >
-          회원가입 완료
-        </ConfirmCheckButton>
+        <BottomContinueBar
+          title={"다음"}
+          height={11.2}
+          boxShadow={false}
+          buttonColor={"rgba(42, 45, 55, 0.1)"}
+          fontColor={"rgba(42, 45, 55, 0.34)"}
+        />
       )}
     </>
   );
@@ -151,8 +194,10 @@ const CheckWrap = styled.div`
 `;
 
 const RegisterTermWrap = styled.div`
-  width: 80vw;
-  margin-top: 2.4rem;
+  width: 90%;
+  position: relative;
+  height: 90vh;
+  margin: 0 auto;
   & > .약관문구 {
     margin-top: 3.9rem;
     margin-bottom: 3rem;
@@ -160,11 +205,4 @@ const RegisterTermWrap = styled.div`
     font-size: 2.7rem;
     line-height: 3.9rem;
   }
-`;
-const ConfirmCheckButton = styled(ButtonStyle)`
-  position: absolute;
-  bottom: 4.8rem;
-  border-radius: 0.5rem;
-  font-weight: 700;
-  font-size: 1.6rem;
 `;
