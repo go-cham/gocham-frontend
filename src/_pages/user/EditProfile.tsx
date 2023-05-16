@@ -104,7 +104,7 @@ const EditProfile = () => {
       <AppBar title={"프로필 편집"} boxShadow={false} />
 
       <EditProfileWrap>
-        {userInformation.nickname && (
+        {userInformation.birthDay !=="--" && (
           <>
             <CollectNicknameAgeGender
               userInformation={userInformation}
