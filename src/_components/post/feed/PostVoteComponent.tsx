@@ -124,7 +124,7 @@ const PostVoteComponent = ({
         title: "고민의 참견",
         url: `${process.env.REACT_APP_BASE_URL}${RouteURL.feed}/${postId}`,
       });
-      console.log("링크가 공유되었습니다.");
+      // console.log("링크가 공유되었습니다.");
       setAlertShare(true);
       setTimeout(() => {
         setAlertShare(false);

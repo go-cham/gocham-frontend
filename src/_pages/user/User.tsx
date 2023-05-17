@@ -105,7 +105,7 @@ const User = () => {
   }, [userData, isLoading]);
 
   const fetchData = async () => {
-    console.log("쉿 패치중");
+    // console.log("쉿 패치중");
     let reqData;
     if (postType === "내 게시글") {
       if (!needSwitchPostList && postingMetaData.nextId) {
@@ -141,7 +141,7 @@ const User = () => {
 
     if (userData.userId) {
       try {
-        console.log(reqData);
+        // console.log(reqData);
         const res = await ApiConfig.request({
           method: HttpMethod.GET,
           url: EndPoint.worry.get.WORRIES,

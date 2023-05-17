@@ -58,7 +58,6 @@ const RegisterTerm = () => {
           // marketingAcceptedStatus: accept.marketing ? 1 : 0,
         },
       });
-      console.log(res?.data);
       if (res?.data.id) {
         console.log("동의완료");
         navigate(RouteURL.collect_information);

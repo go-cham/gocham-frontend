@@ -33,10 +33,10 @@ const VoteComponent = () => {
   }, []);
   const isActivePWA = (): boolean => {
     if (window.matchMedia("(display-mode: standalone)").matches) {
-      console.log("PWA 모드");
+      // console.log("PWA 모드");
       return true;
     } else {
-      console.log("브라우저 모드. 컴퓨터로 들어가면 이상함");
+      // console.log("브라우저 모드. 컴퓨터로 들어가면 이상함");
       return false;
     }
   };

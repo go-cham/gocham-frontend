@@ -73,7 +73,7 @@ const Feed = () => {
       };
     }
     try {
-      console.log(reqData);
+      // console.log(reqData);
       const res = await ApiConfig.request({
         method: HttpMethod.GET,
         url: EndPoint.worry.get.WORRIES,
@@ -114,7 +114,7 @@ const Feed = () => {
 
   const handleObserver = (entities: IntersectionObserverEntry[]) => {
     const target = entities[0];
-    console.log(target.isIntersecting);
+    // console.log(target.isIntersecting);
 
     // observer가 타겟 요소와 교차하면 데이터 추가 요청하기
     if (target.isIntersecting && hasMore) {

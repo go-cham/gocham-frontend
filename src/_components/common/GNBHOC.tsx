@@ -8,7 +8,7 @@ import { RouteURL } from "../../App";
 
 const GNBHOC = () => {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
 
   const HOC = () => {
     if (

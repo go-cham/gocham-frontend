@@ -49,7 +49,7 @@ const EditProfile = () => {
     })?.then((profileData) => {
       let data = profileData.data;
 
-      console.log(data);
+      // console.log(data);
       const worryCategories = data.userWorryCategories.map((item: any) => ({
         value: item.worryCategory.id,
         label: item.worryCategory.label,
@@ -85,7 +85,7 @@ const EditProfile = () => {
           (value) => value.value
         ),
       };
-      console.log(postUserInformation);
+      // console.log(postUserInformation);
       try {
         const res = await ApiConfig.request({
           method: HttpMethod.PATCH,

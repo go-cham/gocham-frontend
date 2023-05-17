@@ -103,7 +103,7 @@ const Write = () => {
         url: EndPoint.worry.post.WORRY,
         data: postData,
       });
-      console.log(res);
+      // console.log(res);
       navigate(`${RouteURL.feed}/${res?.data.id}`);
     } catch (e) {
       console.log(e);
@@ -137,7 +137,7 @@ const Write = () => {
   };
 
   const onLoadFiles = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log("working");
+    // console.log("working");
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files![0]);
     reader.onload = (event: ProgressEvent<FileReader>): void => {
