@@ -27,6 +27,7 @@ import { MAX_WIDTH } from "./constants/viewSize";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import BackgroundImage from "./images/background.png";
 import BackgroundNoCharImage from "./images/background_nocharVer.png";
+import ModalController from "./_pages/modal/ModalController";
 
 // 모바일 크기 처리
 const OuterWrap = styled.div`
@@ -108,6 +109,7 @@ function App() {
     <OuterWrap>
       <DefaultCSS>
         <BackgroundColor>
+          <ModalController />
           <BrowserRouter>
             <RouteChangeTracker />
             <Routes>
