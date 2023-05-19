@@ -93,13 +93,16 @@ const Feed = () => {
   useEffect(() => {
     // IntersectionObserver 등록하기
     observer.current = new IntersectionObserver(handleObserver, {
-      rootMargin: "0px 0px 200px 0px",
+      rootMargin: "0px 0px 100px 0px",
       threshold: 0.5,
     });
 
     // 마지막 요소에 observer 등록하기
-    const lastItem = document.querySelector(".PostComponent:last-child");
-    document.querySelector(".user:last-child")?.setAttribute("name", "이거");
+    const lastItem = document.querySelector(".postComponent:last-child");
+    // document
+    //   .querySelector(".postComponent:last-child")
+    //   ?.setAttribute("name", "이거");
+
     if (lastItem) {
       observer.current.observe(lastItem);
     }
@@ -137,14 +140,12 @@ const Feed = () => {
       />
       <PostLayer>
         {postingData?.map((value, idx) => (
-          <div key={idx} className={"PostComponent"}>
+          <div key={idx} className={"postComponent"}>
             <PostComponent userInfo={userInfo} postData={value} />
           </div>
         ))}
-              <div style={{ height: "10rem" }} />
-
       </PostLayer>
-      
+      <div style={{ height: "10rem" }} />
     </PostWrap>
   );
 };
