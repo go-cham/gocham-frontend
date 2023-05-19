@@ -13,6 +13,9 @@ import { chatInputFocusAtom } from "../../../atom/chatInputFocus";
 import { RouteURL } from "../../../App";
 import { refreshChatAtom } from "../../../atom/postRefreshRequest";
 import { getRemainingTime } from "../../../utils/getRemainingTime";
+import { justResultWorryHandlerAtom } from "../../../atom/justResultAtom";
+import { ModalHanlderAtom } from "../../../atom/ModalAtom";
+import { ModalCase } from "../../../constants/modalEnum";
 
 const PostVoteComponent = ({
   postData,
@@ -134,11 +137,33 @@ const PostVoteComponent = ({
     }
   };
 
+  const [ModalStatusHanlder, setModalStatusHanlder] = useAtom(ModalHanlderAtom);
+
+  const [justResultWorryStatus, setJustResultWorryStatus] = useAtom(
+    justResultWorryHandlerAtom
+  );
+
+  // case. 결과만 볼게요 클릭
   const handleClickResultWithoutVote = (choiceId: number) => {
     //  모달 표시.
-    // 그래도 볼게요 누르면 handleClickResult(choiceId) 실행
-    handleClickResult(choiceId);
+
+    setJustResultWorryStatus((value) => ({
+      ...value,
+      worryChoiceId: choiceId,
+      worryId: postData.id,
+    }));
+    setModalStatusHanlder(ModalCase.ResultWithoutVote);
   };
+
+  useEffect(() => {
+    if (justResultWorryStatus.worryId === postData.id) {
+      if (justResultWorryStatus.confirm) {
+        // 그래도 볼게요 누르면 handleClickResult(choiceId) 실행
+        handleClickResult(justResultWorryStatus.worryChoiceId);
+        setJustResultWorryStatus((value) => ({ ...value, confirm: false }));
+      }
+    }
+  }, [justResultWorryStatus]);
 
   return (
     <>
