@@ -119,7 +119,7 @@ const Write = () => {
     title: "",
     content: "",
     category: { value: 0, label: "" },
-    deadline: deadlineOptions[1],
+    deadline: deadlineOptions[0],
     pros: "찬성",
     cons: "반대",
   });

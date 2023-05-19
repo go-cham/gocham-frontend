@@ -87,7 +87,7 @@ const PostVoteComponent = ({
       url: EndPoint.worry.get.USER_WORRY_CHOICE,
       query: { worryId: postData.id, userId: userId },
     })?.then((res) => {
-      if (res?.data.worryChoice.id) {
+      if (res?.data.worryChoice?.id) {
         // 내가 투표한 케이스가 있는 경우
         setChoseData(res?.data.worryChoice.id);
         // 투표 통계 확인. worryId 인자 넣으면 투표 통계 리턴됨
