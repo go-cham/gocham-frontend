@@ -110,7 +110,7 @@ const Write = () => {
       alert(alertMessage.error.post.noUploadPermission);
     }
   };
-  const debouncedHandlePushPost = debounce(handlePostUpload, 1000);
+  const debouncedHandlePushPost = debounce(handlePostUpload, 3000);
   const handlePushPost = () => {
     debouncedHandlePushPost();
   };
