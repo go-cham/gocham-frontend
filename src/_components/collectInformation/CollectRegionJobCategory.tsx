@@ -22,6 +22,7 @@ import {
   OptionType,
   residenceOptions,
 } from "../../constants/Options";
+import MultiPickerComponent from "./MultiPickerComponent";
 
 const CollectNicknameAgeGender = ({
   userInformation,
@@ -31,6 +32,13 @@ const CollectNicknameAgeGender = ({
     setUserInformation((value: userInformationType) => ({
       ...value,
       [key]: e,
+    }));
+  };
+  const handleInputValueWithCustomComponent = (item: number, key: string) => {
+    // 이코드는 item이 리스트여야함
+    setUserInformation((value: userInformationType) => ({
+      ...value,
+      [key]: item,
     }));
   };
   const customStyles = useMemo(
@@ -177,15 +185,22 @@ const CollectNicknameAgeGender = ({
       </OverflowInputWrap>
       <OverflowInputWrap>
         <h2>관심 카테고리</h2>
-        <Select
-          isMulti
-          closeMenuOnSelect={false}
-          isSearchable={false}
-          styles={customStyles}
-          options={categoryOptions}
-          value={userInformation.worryCategories}
-          onChange={(e) => handleInputValue(e, "worryCategories")}
+        <MultiPickerComponent
+          categoryOptions={categoryOptions}
+          selectedValue={userInformation.worryCategories}
+          clickAction={(item) =>
+            handleInputValueWithCustomComponent(item, "worryCategories")
+          }
         />
+        {/*<Select*/}
+        {/*  isMulti*/}
+        {/*  closeMenuOnSelect={false}*/}
+        {/*  isSearchable={false}*/}
+        {/*  styles={customStyles}*/}
+        {/*  options={categoryOptions}*/}
+        {/*  value={userInformation.worryCategories}*/}
+        {/*  onChange={(e) => handleInputValue(e, "worryCategories")}*/}
+        {/*/>*/}
       </OverflowInputWrap>
     </CollectInformationBox>
   );
