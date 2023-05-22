@@ -5,32 +5,30 @@ import { ModalHanlderAtom } from "../../atom/ModalAtom";
 import { useEffect } from "react";
 import { ModalCase } from "../../constants/modalEnum";
 import ResultWithoutVote from "../../_components/modal/ResultWithoutVote";
+import Survay from "../../_components/modal/Survay";
+
 
 const ModalController = () => {
   const [modalType, setModalType] = useAtom(ModalHanlderAtom);
+
   const modalHanlder = () => {
     if (modalType === ModalCase.None) return null;
-    if (modalType === ModalCase.Survey) {
-      return (
-        <>
-          <ModalBackground />
-        </>
-      );
-    }
     if (modalType === ModalCase.ResultWithoutVote) {
-      console.log("이거");
-
       return (
         <>
-          <ResultWithoutVote />
-          <ModalBackground />
+          <ModalControllerWrap>
+            <ResultWithoutVote />
+            <ModalBackground />
+          </ModalControllerWrap>
         </>
       );
     }
     if (modalType === ModalCase.Survey) {
       return (
         <>
-          <ModalBackground />
+          <ModalControllerWrap>
+            <Survay />
+          </ModalControllerWrap>
         </>
       );
     }
@@ -40,11 +38,8 @@ const ModalController = () => {
     modalHanlder();
   }, [modalType]);
 
-  return (
-    <>
-      <ModalControllerWrap>{modalHanlder()}</ModalControllerWrap>
-    </>
-  );
+  return <>{modalHanlder()}</>;
+
 };
 
 export default ModalController;

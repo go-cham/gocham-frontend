@@ -58,7 +58,6 @@ const RegisterTerm = () => {
           // marketingAcceptedStatus: accept.marketing ? 1 : 0,
         },
       });
-      console.log(res?.data);
       if (res?.data.id) {
         console.log("동의완료");
         navigate(RouteURL.collect_information);
@@ -140,7 +139,7 @@ const RegisterTerm = () => {
             />
             [필수] 만 14세 이상 입니다.
           </CheckWrap>
-          {/* <CheckWrap>
+          <CheckWrap>
             <CheckBox
               value={accept.marketing}
               setValue={(value) => setAccept({ ...accept, marketing: value })}
@@ -153,7 +152,7 @@ const RegisterTerm = () => {
             >
               <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />
             </a>
-          </CheckWrap> */}
+          </CheckWrap>
         </section>
       </RegisterTermWrap>
       {accept.gochamTerm && accept.personalInformation && accept.olderThan14 ? (

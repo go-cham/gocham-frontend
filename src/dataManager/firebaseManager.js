@@ -6,7 +6,7 @@ import {
 import { firebaseStorage } from "./firebaseConfig";
 import { alertMessage } from "../utils/alertMessage";
 
-export const uploadFirebase = async (dataIdx, file, dir) => {
+export const uploadFirebase = async (userId, file, dir) => {
   let storageRef;
   const date = new Date();
   const year = date.getFullYear();
@@ -17,13 +17,11 @@ export const uploadFirebase = async (dataIdx, file, dir) => {
   const seconds = ("0" + date.getSeconds()).slice(-2);
   const now = year + month + day + hours + minutes + seconds;
 
-  storageRef = firebaseRef(firebaseStorage, `${dir}/${dataIdx}_${now}`);
-  try{
+  storageRef = firebaseRef(firebaseStorage, `${dir}/${userId}_${now}`);
+  try {
     const snapshot = await uploadString(storageRef, file, "data_url");
     return getDownloadURL(snapshot.ref);
-  }
-  catch(e){
-    // console.log(e);
+  } catch (e) {
     alert(alertMessage.error.post.failedUploadImage);
     return "";
   }

@@ -21,7 +21,6 @@ const Login = () => {
 
   const handleKakaoLogin = async () => {
     if (navigator.userAgent.indexOf("iPhone") > -1) {
-      console.log("플랫폼 확인후 iOS에서만 켜지도록 설정필요");
       alert("iOS의 비공개 릴레이가 켜져있다면 로그인이 되지않습니다.");
     }
     window.Kakao.Auth.authorize({

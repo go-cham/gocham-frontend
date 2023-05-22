@@ -1,22 +1,54 @@
 import styled from "@emotion/styled";
 import palette from "../../style/color";
 import XIcon from "../../images/Modal/x_button.svg";
+import { useAtom } from "jotai";
+import { justResultWorryHandlerAtom } from "../../atom/justResultAtom";
+import { ModalHanlderAtom } from "../../atom/ModalAtom";
+import { ModalCase } from "../../constants/modalEnum";
+
 const ResultWithoutVote = () => {
+  const [justResultWorryStatus, setJustResultWorryStatus] = useAtom(
+    justResultWorryHandlerAtom
+  );
+  const [ModalStatusHanlder, setModalStatusHanlder] = useAtom(ModalHanlderAtom);
+
+  const handleJustResult = () => {
+    setModalStatusHanlder(ModalCase.None);
+    setJustResultWorryStatus((value) => ({ ...value, confirm: true }));
+  };
+
+  const closeModal = () => {
+    setModalStatusHanlder(ModalCase.None);
+  };
+
   return (
     <ModalWrap>
-      <img src={XIcon} className="X" />
+      <img src={XIcon} className="X" onClick={() => closeModal()} />
+
       <h1>
         결과를 열람하시면
         <br />
         투표에 참여하실 수 없습니다.
       </h1>
-      <div className="button">그래도 볼게요</div>
+      <div className="button" onClick={() => handleJustResult()}>
+        그래도 볼게요
+      </div>
+
     </ModalWrap>
   );
 };
 export default ResultWithoutVote;
 
 const ModalWrap = styled.div`
+  @media screen and (min-width: 1300px) {
+    margin-left: 25rem;
+  }
+
+  @media screen and (max-width: 1300px) {
+    padding-left: 0;
+  }
+
+
   & .X {
     position: absolute;
     right: 1.3rem;

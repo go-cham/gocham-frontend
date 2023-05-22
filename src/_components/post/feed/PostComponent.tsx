@@ -68,12 +68,14 @@ const PostComponent = ({
             />
           )}
           <PostComponentLayer>
+            {/*{thisPostData.expirationTime && (*/}
             <div className={"마감"}>
               <img src={ClockIcon} alt={"마감시간"} />
               <p className={"마감시간"}>
                 {getRemainingTime(thisPostData.expirationTime)}
               </p>
             </div>
+            {/*)}*/}
             <PostVoteComponent
               postData={thisPostData}
               userId={userInfo.userId}
@@ -108,12 +110,12 @@ export default PostComponent;
 const PostComponentWrap = styled.div`
   border-bottom: 0.1rem solid ${palette.Gray3};
   position: relative;
+  background-color: ${palette.White};
 `;
 
 const PostComponentLayer = styled.div`
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  background-color: white;
   & .chatAndVotedUser {
     margin-top: 1.5rem;
     display: flex;

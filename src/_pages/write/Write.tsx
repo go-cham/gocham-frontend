@@ -103,14 +103,14 @@ const Write = () => {
         url: EndPoint.worry.post.WORRY,
         data: postData,
       });
-      console.log(res);
+      // console.log(res);
       navigate(`${RouteURL.feed}/${res?.data.id}`);
     } catch (e) {
       console.log(e);
       alert(alertMessage.error.post.noUploadPermission);
     }
   };
-  const debouncedHandlePushPost = debounce(handlePostUpload, 1000);
+  const debouncedHandlePushPost = debounce(handlePostUpload, 3000);
   const handlePushPost = () => {
     debouncedHandlePushPost();
   };
@@ -119,7 +119,7 @@ const Write = () => {
     title: "",
     content: "",
     category: { value: 0, label: "" },
-    deadline: deadlineOptions[1],
+    deadline: deadlineOptions[0],
     pros: "찬성",
     cons: "반대",
   });
@@ -137,7 +137,7 @@ const Write = () => {
   };
 
   const onLoadFiles = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log("working");
+    // console.log("working");
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files![0]);
     reader.onload = (event: ProgressEvent<FileReader>): void => {

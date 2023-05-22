@@ -13,6 +13,9 @@ import { chatInputFocusAtom } from "../../../atom/chatInputFocus";
 import { RouteURL } from "../../../App";
 import { refreshChatAtom } from "../../../atom/postRefreshRequest";
 import { getRemainingTime } from "../../../utils/getRemainingTime";
+import { justResultWorryHandlerAtom } from "../../../atom/justResultAtom";
+import { ModalHanlderAtom } from "../../../atom/ModalAtom";
+import { ModalCase } from "../../../constants/modalEnum";
 
 const PostVoteComponent = ({
   postData,
@@ -84,7 +87,7 @@ const PostVoteComponent = ({
       url: EndPoint.worry.get.USER_WORRY_CHOICE,
       query: { worryId: postData.id, userId: userId },
     })?.then((res) => {
-      if (res?.data.worryChoice.id) {
+      if (res?.data.worryChoice?.id) {
         // 내가 투표한 케이스가 있는 경우
         setChoseData(res?.data.worryChoice.id);
         // 투표 통계 확인. worryId 인자 넣으면 투표 통계 리턴됨
@@ -124,7 +127,7 @@ const PostVoteComponent = ({
         title: "고민의 참견",
         url: `${process.env.REACT_APP_BASE_URL}${RouteURL.feed}/${postId}`,
       });
-      console.log("링크가 공유되었습니다.");
+      // console.log("링크가 공유되었습니다.");
       setAlertShare(true);
       setTimeout(() => {
         setAlertShare(false);
@@ -134,11 +137,39 @@ const PostVoteComponent = ({
     }
   };
 
+  const [ModalStatusHanlder, setModalStatusHanlder] = useAtom(ModalHanlderAtom);
+
+  const [justResultWorryStatus, setJustResultWorryStatus] = useAtom(
+    justResultWorryHandlerAtom
+  );
+
+  // case. 결과만 볼게요 클릭
   const handleClickResultWithoutVote = (choiceId: number) => {
     //  모달 표시.
-    // 그래도 볼게요 누르면 handleClickResult(choiceId) 실행
-    handleClickResult(choiceId);
+    if (getRemainingTime(postData.expirationTime) !== "마감됨") {
+      if (choseData === 0) {
+        setJustResultWorryStatus((value) => ({
+          ...value,
+          worryChoiceId: choiceId,
+          worryId: postData.id,
+        }));
+        setModalStatusHanlder(ModalCase.ResultWithoutVote);
+      } else {
+        alert("재투표가 불가능합니다!");
+      }
+    } else {
+      alert("마감된 게시글은 투표가 불가능합니다!");
+    }
   };
+  useEffect(() => {
+    if (justResultWorryStatus.worryId === postData.id) {
+      if (justResultWorryStatus.confirm) {
+        // 그래도 볼게요 누르면 handleClickResult(choiceId) 실행
+        handleClickResult(justResultWorryStatus.worryChoiceId);
+        setJustResultWorryStatus((value) => ({ ...value, confirm: false }));
+      }
+    }
+  }, [justResultWorryStatus]);
 
   return (
     <>
