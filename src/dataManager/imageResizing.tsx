@@ -34,12 +34,12 @@ export async function resizeImage(base64: string): Promise<string> {
       resizedByteString = newBase64.split(",")[1];
       resizedSizeInBytes = resizedByteString.length * 0.77;
       resizedSizeInMB = resizedSizeInBytes / (1024 * 1024);
-      console.log(resizedSizeInMB);
+      // console.log(resizedSizeInMB);
     }
 
-    console.log(
-      `${sizeInMB}로, ${resizeMB}MB를 초과해서 리사이징 진행. ${resizedSizeInMB}로 줄어듬.`
-    );
+    // console.log(
+    //   `${sizeInMB}로, ${resizeMB}MB를 초과해서 리사이징 진행. ${resizedSizeInMB}로 줄어듬.`
+    // );
     return newBase64;
   } else {
     return base64;

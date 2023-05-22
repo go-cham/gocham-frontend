@@ -1,14 +1,14 @@
-name: dev CI/CD by Push/Merge
+name: prod CI/CD by Push/Merge
 
 # dev 브랜치로 push 혹은 pr이 날라와서 merge되면 workflow가 작동합니다.
 # workflow_dispatch는 수동으로 workflow를 작동시키도록 할 수 있도록 합니다.
 on:
   push:
     branches:
-      - dev
+      - main
 
 env:
-  NODE_ENV: dev # 환경에 맞춰서 변경해주기
+  NODE_ENV: prod # 환경에 맞춰서 변경해주기
 
 jobs:
   integration-and-deploy:
@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest # 어떤 OS 에서 실행될지 지정하는 것
     
     env:
-      S3_BUCKET_NAME: gocham-dev-files # S3 버킷 이름입니다.
-      PROJECT_NAME: dev-gocham-service-web-react # S3 버킷 내 폴더 이름입니다. 임의로 정하면 알아서 생성해줍니다.
-      AWS_CODEDEPLOY_APPLICATION_NAME: dev-service-web-codedeploy # CodeDeploy 애플리케이션 이름입니다.
-      AWS_CODEDEPLOY_DEPLOYMENT_GROUP_NAME: dev-service-web-group # CodeDeploy 배포 그룹 이름입니다.
+      S3_BUCKET_NAME: gocham-files # S3 버킷 이름입니다.
+      PROJECT_NAME: prod-gocham-service-web-react # S3 버킷 내 폴더 이름입니다. 임의로 정하면 알아서 생성해줍니다.
+      AWS_CODEDEPLOY_APPLICATION_NAME: prod-service-web-codedeploy # CodeDeploy 애플리케이션 이름입니다.
+      AWS_CODEDEPLOY_DEPLOYMENT_GROUP_NAME: prod-service-web-group # CodeDeploy 배포 그룹 이름입니다.
     
     strategy:
       matrix:
@@ -65,8 +65,8 @@ jobs:
       - name: Configure AWS credentials
         uses:   aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Get current time
@@ -92,5 +92,5 @@ jobs:
           fields: repo, ref, workflow, message, author
           author_name: Github Actions 서비스 웹
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_DEV }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_PROD }}
         if: always()

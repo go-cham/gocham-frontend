@@ -21,7 +21,7 @@ const LoginOauthKakao = () => {
     // const code = new URL(window.location.href).searchParams.get("code");
     const code = new URLSearchParams(location.search).get("code") as string;
 
-    console.log(`code: ${code}`);
+    // console.log(`code: ${code}`);
     (async () => {
       if (userData.userId === null) {
         try {
@@ -31,8 +31,6 @@ const LoginOauthKakao = () => {
               url: EndPoint.login.get.KAKAO_AUTH,
               query: { code },
             });
-            console.log("res");
-            console.log(res);
             const data = res && res.data;
             window.localStorage.setItem("token", data.token);
             const userData = await getUserInfo();
@@ -49,7 +47,7 @@ const LoginOauthKakao = () => {
               alert(alertMessage.error.user.dormantUser);
               navigate(RouteURL.login);
             } else {
-              console.log("로그인 성공~");
+              // console.log("로그인 성공~");
               navigate(RouteURL.home);
             }
           }

@@ -1,6 +1,6 @@
 export function getRemainingTime(deadline: string | any): string {
   if (typeof deadline !== "string") {
-    return "";
+    return "마감시간 없음";
   }
   const deadlineDate = new Date(deadline.replace("Z", ""));
   const now = new Date();

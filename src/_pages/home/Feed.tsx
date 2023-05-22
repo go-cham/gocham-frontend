@@ -73,7 +73,7 @@ const Feed = () => {
       };
     }
     try {
-      console.log(reqData);
+      // console.log(reqData);
       const res = await ApiConfig.request({
         method: HttpMethod.GET,
         url: EndPoint.worry.get.WORRIES,
@@ -93,13 +93,16 @@ const Feed = () => {
   useEffect(() => {
     // IntersectionObserver 등록하기
     observer.current = new IntersectionObserver(handleObserver, {
-      rootMargin: "0px 0px 200px 0px",
+      rootMargin: "0px 0px 100px 0px",
       threshold: 0.5,
     });
 
     // 마지막 요소에 observer 등록하기
-    const lastItem = document.querySelector(".PostComponent:last-child");
-    document.querySelector(".user:last-child")?.setAttribute("name", "이거");
+    const lastItem = document.querySelector(".postComponent:last-child");
+    // document
+    //   .querySelector(".postComponent:last-child")
+    //   ?.setAttribute("name", "이거");
+
     if (lastItem) {
       observer.current.observe(lastItem);
     }
@@ -114,7 +117,7 @@ const Feed = () => {
 
   const handleObserver = (entities: IntersectionObserverEntry[]) => {
     const target = entities[0];
-    console.log(target.isIntersecting);
+    // console.log(target.isIntersecting);
 
     // observer가 타겟 요소와 교차하면 데이터 추가 요청하기
     if (target.isIntersecting && hasMore) {
@@ -137,11 +140,12 @@ const Feed = () => {
       />
       <PostLayer>
         {postingData?.map((value, idx) => (
-          <div key={idx} className={"PostComponent"}>
+          <div key={idx} className={"postComponent"}>
             <PostComponent userInfo={userInfo} postData={value} />
           </div>
         ))}
       </PostLayer>
+      <div style={{ height: "10rem" }} />
     </PostWrap>
   );
 };

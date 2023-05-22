@@ -54,11 +54,10 @@ const RegisterTerm = () => {
           userId: userInfo.userId,
           privacyAcceptedStatus: accept.personalInformation ? 1 : 0,
           termsOfUseAcceptedStatus: accept.gochamTerm ? 1 : 0,
+          marketingAcceptedStatus: 0, // 우선 무조건 0으로
           // marketingAcceptedStatus: accept.marketing ? 1 : 0,
-          marketingAcceptedStatus: 0, // 우선 마케팅은 0으로 설정
         },
       });
-      console.log(res?.data);
       if (res?.data.id) {
         console.log("동의완료");
         navigate(RouteURL.collect_information);
@@ -140,20 +139,20 @@ const RegisterTerm = () => {
             />
             [필수] 만 14세 이상 입니다.
           </CheckWrap>
-          {/*<CheckWrap>*/}
-          {/*  <CheckBox*/}
-          {/*    value={accept.marketing}*/}
-          {/*    setValue={(value) => setAccept({ ...accept, marketing: value })}*/}
-          {/*  />*/}
-          {/*  [선택] 마케팅 목적 이용 동의*/}
-          {/*  <a*/}
-          {/*    href={*/}
-          {/*      "https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"*/}
-          {/*    }*/}
-          {/*  >*/}
-          {/*    <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />*/}
-          {/*  </a>*/}
-          {/*</CheckWrap>*/}
+          <CheckWrap>
+            <CheckBox
+              value={accept.marketing}
+              setValue={(value) => setAccept({ ...accept, marketing: value })}
+            />
+            [선택] 마케팅 목적 이용 동의
+            <a
+              href={
+                "https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
+              }
+            >
+              <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />
+            </a>
+          </CheckWrap>
         </section>
       </RegisterTermWrap>
       {accept.gochamTerm && accept.personalInformation && accept.olderThan14 ? (

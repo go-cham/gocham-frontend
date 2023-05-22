@@ -49,7 +49,7 @@ const EditProfile = () => {
     })?.then((profileData) => {
       let data = profileData.data;
 
-      console.log(data);
+      // console.log(data);
       const worryCategories = data.userWorryCategories.map((item: any) => ({
         value: item.worryCategory.id,
         label: item.worryCategory.label,
@@ -104,7 +104,7 @@ const EditProfile = () => {
       <AppBar title={"프로필 편집"} boxShadow={false} />
 
       <EditProfileWrap>
-        {userInformation.birthDay !== "--" && (
+        {userInformation.nickname && (
           <>
             <CollectNicknameAgeGender
               userInformation={userInformation}

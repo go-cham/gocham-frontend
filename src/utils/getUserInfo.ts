@@ -19,12 +19,12 @@ const getUserInfo = async () => {
       });
       return res?.data;
     } catch (e) {
-      console.log("만료된 jwt.");
+      // console.log("만료된 jwt.");
       deleteBearerToken();
       return "null";
     }
   } else {
-    console.log("토큰이 없음");
+    // console.log("토큰이 없음");
     return "null";
   }
 };

@@ -57,7 +57,7 @@ const PostListComponent = ({
   // 댓글이나 투표할 경우 해당 컨텐츠만 리프레시.
   useEffect(() => {
     if (needRefresh.worryIdx === postData.id) {
-      console.log("needRefresh 작동중");
+      // console.log("needRefresh 작동중");
       setThisPostData(
         handleRefreshPostData(thisPostData, needRefresh.updateObject)
       );
@@ -168,6 +168,7 @@ const PostContentText = styled.div<{ haveImage: boolean }>`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    letter-spacing: -0.03em;
   }
 `;
 

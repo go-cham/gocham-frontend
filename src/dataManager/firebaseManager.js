@@ -4,7 +4,6 @@ import {
   uploadString,
 } from "firebase/storage";
 import { firebaseStorage } from "./firebaseConfig";
-import { ErrorMessage } from "../_components/collectInformation/CollectNicknameAgeGender";
 import { alertMessage } from "../utils/alertMessage";
 
 export const uploadFirebase = async (userId, file, dir) => {

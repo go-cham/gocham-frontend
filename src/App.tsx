@@ -27,6 +27,8 @@ import { MAX_WIDTH } from "./constants/viewSize";
 import RouteChangeTracker from "./utils/RouteChangeTracker";
 import BackgroundImage from "./images/background.png";
 import BackgroundNoCharImage from "./images/background_nocharVer.png";
+import ModalController from "./_pages/modal/ModalController";
+import palette from "./style/color";
 
 // 모바일 크기 처리
 const OuterWrap = styled.div`
@@ -67,7 +69,7 @@ const DefaultCSS = styled.div`
 
 const BackgroundColor = styled.div`
   width: 100%;
-  background-color: white;
+  background-color: ${palette.Background};
 `;
 
 export const RouteURL = {
@@ -108,6 +110,7 @@ function App() {
     <OuterWrap>
       <DefaultCSS>
         <BackgroundColor>
+          <ModalController />
           <BrowserRouter>
             <RouteChangeTracker />
             <Routes>

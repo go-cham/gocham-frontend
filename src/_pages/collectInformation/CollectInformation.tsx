@@ -92,7 +92,7 @@ const CollectInformation = () => {
   }, [userInformation]);
 
   const uploadCollectData = async () => {
-    console.log("시작하기!");
+    // console.log("시작하기!");
     let postUserInformation: postUserInformationPropsType;
     if (userInfo.userId) {
       postUserInformation = {
@@ -107,7 +107,7 @@ const CollectInformation = () => {
         ),
       };
     } else {
-      console.log("유저정보를 새롭게 조회합니다.");
+      // console.log("유저정보를 새롭게 조회합니다.");
       const newUserInfo = await getUserInfo();
       postUserInformation = {
         userId: newUserInfo.userId,
@@ -121,7 +121,7 @@ const CollectInformation = () => {
         ),
       };
     }
-    console.log(postUserInformation);
+    // console.log(postUserInformation);
     try {
       const res = await ApiConfig.request({
         method: HttpMethod.PATCH,
