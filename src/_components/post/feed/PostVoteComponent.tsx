@@ -146,15 +146,21 @@ const PostVoteComponent = ({
   // case. 결과만 볼게요 클릭
   const handleClickResultWithoutVote = (choiceId: number) => {
     //  모달 표시.
-
-    setJustResultWorryStatus((value) => ({
-      ...value,
-      worryChoiceId: choiceId,
-      worryId: postData.id,
-    }));
-    setModalStatusHanlder(ModalCase.ResultWithoutVote);
+    if (getRemainingTime(postData.expirationTime) !== "마감됨") {
+      if (choseData === 0) {
+        setJustResultWorryStatus((value) => ({
+          ...value,
+          worryChoiceId: choiceId,
+          worryId: postData.id,
+        }));
+        setModalStatusHanlder(ModalCase.ResultWithoutVote);
+      } else {
+        alert("재투표가 불가능합니다!");
+      }
+    } else {
+      alert("마감된 게시글은 투표가 불가능합니다!");
+    }
   };
-
   useEffect(() => {
     if (justResultWorryStatus.worryId === postData.id) {
       if (justResultWorryStatus.confirm) {
