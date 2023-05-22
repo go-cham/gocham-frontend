@@ -7,8 +7,10 @@ import { ModalCase } from "../../constants/modalEnum";
 import ResultWithoutVote from "../../_components/modal/ResultWithoutVote";
 import Survay from "../../_components/modal/Survay";
 
+
 const ModalController = () => {
   const [modalType, setModalType] = useAtom(ModalHanlderAtom);
+
   const modalHanlder = () => {
     if (modalType === ModalCase.None) return null;
     if (modalType === ModalCase.ResultWithoutVote) {
@@ -37,6 +39,7 @@ const ModalController = () => {
   }, [modalType]);
 
   return <>{modalHanlder()}</>;
+
 };
 
 export default ModalController;

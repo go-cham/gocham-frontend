@@ -24,6 +24,7 @@ const ResultWithoutVote = () => {
   return (
     <ModalWrap>
       <img src={XIcon} className="X" onClick={() => closeModal()} />
+
       <h1>
         결과를 열람하시면
         <br />
@@ -32,6 +33,7 @@ const ResultWithoutVote = () => {
       <div className="button" onClick={() => handleJustResult()}>
         그래도 볼게요
       </div>
+
     </ModalWrap>
   );
 };
@@ -45,6 +47,7 @@ const ModalWrap = styled.div`
   @media screen and (max-width: 1300px) {
     padding-left: 0;
   }
+
 
   & .X {
     position: absolute;
