@@ -68,14 +68,14 @@ const PostComponent = ({
             />
           )}
           <PostComponentLayer>
-            {thisPostData.expirationTime && (
-              <div className={"마감"}>
-                <img src={ClockIcon} alt={"마감시간"} />
-                <p className={"마감시간"}>
-                  {getRemainingTime(thisPostData.expirationTime)}
-                </p>
-              </div>
-            )}
+            {/*{thisPostData.expirationTime && (*/}
+            <div className={"마감"}>
+              <img src={ClockIcon} alt={"마감시간"} />
+              <p className={"마감시간"}>
+                {getRemainingTime(thisPostData.expirationTime)}
+              </p>
+            </div>
+            {/*)}*/}
             <PostVoteComponent
               postData={thisPostData}
               userId={userInfo.userId}
