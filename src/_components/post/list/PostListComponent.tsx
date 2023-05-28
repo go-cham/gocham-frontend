@@ -19,6 +19,7 @@ import { postDataType } from "../../../type/postDataType";
 import { useAtom } from "jotai/index";
 import { refreshChatAtom } from "../../../atom/postRefreshRequest";
 import { handleRefreshPostData } from "../../../utils/handleRefreshPostData";
+import { userType } from "../../../constants/userTypeEnum";
 
 const PostListComponent = ({
   userInfo,
@@ -39,7 +40,7 @@ const PostListComponent = ({
     }
   };
   const handleClickPostChat = () => {
-    if (userInfo.userType === "activatedUser") {
+    if (userInfo.userType === userType.activatedUser) {
       setOpenBottomSheet((value) => {
         // console.log(value, "->", !value);
         return !value;

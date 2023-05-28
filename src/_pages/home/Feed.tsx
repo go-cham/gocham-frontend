@@ -13,6 +13,7 @@ import { EndPoint } from "../../dataManager/apiMapper";
 import { postingMetaDataType } from "../../_components/post/list/PostListLayer";
 import palette from "../../style/color";
 import { RouteURL } from "../../App";
+import { userType } from "../../constants/userTypeEnum";
 
 const Feed = () => {
   const params = useParams();
@@ -32,7 +33,7 @@ const Feed = () => {
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
     if (userInfo.userId === 0) {
-      if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
+      if (userInfo.userType !== userType.activatedUser) navigate(RouteURL.home);
     }
   }, [userInfo]);
 

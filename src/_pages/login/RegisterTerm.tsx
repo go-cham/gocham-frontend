@@ -14,6 +14,7 @@ import { userAtom } from "../../atom/userData";
 import AppBar from "../../_components/common/AppBar";
 import BottomContinueBar from "../../_components/common/BottomContinueBar";
 import { alertMessage } from "../../utils/alertMessage";
+import { userType } from "../../constants/userTypeEnum";
 
 export type AcceptType = {
   gochamTerm: boolean;
@@ -35,7 +36,7 @@ const RegisterTerm = () => {
 
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
-    if (userInfo.userType === "activatedUser") navigate(RouteURL.home);
+    if (userInfo.userType === userType.activatedUser) navigate(RouteURL.home);
   }, [userInfo]);
 
   useEffect(() => {

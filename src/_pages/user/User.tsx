@@ -14,6 +14,7 @@ import PostListComponent from "../../_components/post/list/PostListComponent";
 import React from "react";
 import styled from "@emotion/styled";
 import { useAtomValue } from "jotai";
+import { userType } from "../../constants/userTypeEnum";
 
 /**
  * 본인의 피드인지 확인하여 MyFeed 컴포넌트를 올릴지, user 컴포넌트를 올릴지 선택
@@ -24,7 +25,7 @@ const User = () => {
   const navigate = useNavigate();
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
-    if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
+    if (userInfo.userType !== userType.activatedUser) navigate(RouteURL.home);
   }, [userInfo]);
 
   // isMyFeed는 미사용. 추후 타인의 프로필에 접근하는 기능이 생기면 디밸롭.

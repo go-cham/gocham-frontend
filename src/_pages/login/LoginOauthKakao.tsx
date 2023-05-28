@@ -11,6 +11,7 @@ import { useAtom } from "jotai";
 import { userAtom } from "../../atom/userData";
 import BackButton from "../../images/Common/back_button.png";
 import styled from "@emotion/styled";
+import { userType } from "../../constants/userTypeEnum";
 
 const LoginOauthKakao = () => {
   const navigate = useNavigate();
@@ -36,14 +37,14 @@ const LoginOauthKakao = () => {
             const userData = await getUserInfo();
             setUserData(userData);
 
-            if (userData?.userType === "onceUserWithoutTerms") {
+            if (userData?.userType === userType.onceUserWithoutTerms) {
               navigate(RouteURL.register_term);
-            } else if (userData?.userType === "onceUser") {
+            } else if (userData?.userType === userType.onceUser) {
               navigate(RouteURL.collect_information);
-            } else if (userData?.userType === "deactivatedUser") {
+            } else if (userData?.userType === userType.deactivatedUser) {
               alert(alertMessage.error.user.deactivatedUser);
               navigate(RouteURL.login);
-            } else if (userData?.userType === "dormantUser") {
+            } else if (userData?.userType === userType.dormantUser) {
               alert(alertMessage.error.user.dormantUser);
               navigate(RouteURL.login);
             } else {

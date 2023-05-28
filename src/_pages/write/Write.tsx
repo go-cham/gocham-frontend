@@ -24,6 +24,7 @@ import { useNavigate } from "react-router-dom";
 import { alertMessage } from "../../utils/alertMessage";
 import { RouteURL } from "../../App";
 import { debounce } from "lodash";
+import { userType } from "../../constants/userTypeEnum";
 
 type WriteContentType = {
   title: string;
@@ -53,7 +54,7 @@ const Write = () => {
 
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
-    if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
+    if (userInfo.userType !== userType.activatedUser) navigate(RouteURL.home);
   }, [userInfo]);
 
   const handlePostUpload = async () => {

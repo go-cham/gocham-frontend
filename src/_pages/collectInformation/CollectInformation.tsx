@@ -17,6 +17,7 @@ import { userAtom } from "../../atom/userData";
 import getUserInfo from "../../utils/getUserInfo";
 import { useAtom } from "jotai";
 import { RouteURL } from "../../App";
+import { userType } from "../../constants/userTypeEnum";
 
 export type userInformationType = {
   nickname: string;
@@ -60,7 +61,7 @@ const CollectInformation = () => {
 
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
-    if (userInfo.userType === "activatedUser") navigate(RouteURL.home);
+    if (userInfo.userType === userType.activatedUser) navigate(RouteURL.home);
   }, [userInfo]);
 
   useEffect(() => {

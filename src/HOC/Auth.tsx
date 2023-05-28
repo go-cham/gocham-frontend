@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import { RouteURL } from "../App";
 import { useNavigate } from "react-router-dom";
 import getUserInfo from "../utils/getUserInfo";
+import { userType } from "../constants/userTypeEnum";
 
 type AuthProps = {
   SpecificComponent: React.ComponentType<any>;
@@ -27,19 +28,20 @@ const Auth = ({ SpecificComponent, requiredLogin = null }: AuthProps) => {
         setUserInfo(newUserInfo);
       }
 
-      if (newUserInfo.userType === "onceUser")
+      if (newUserInfo.userType === userType.onceUser)
         navigate(RouteURL.collect_information);
-      else if (newUserInfo.userType === "onceUserWithoutTerms")
+      else if (newUserInfo.userType === userType.onceUserWithoutTerms)
         navigate(RouteURL.register_term);
       else if (requiredLogin === false) {
-        if (newUserInfo.userType === "activatedUser") navigate(RouteURL.home);
-        else if (newUserInfo.userType === "onceUser")
+        if (newUserInfo.userType === userType.activatedUser)
+          navigate(RouteURL.home);
+        else if (newUserInfo.userType === userType.onceUser)
           navigate(RouteURL.collect_information);
-        else if (newUserInfo.userType === "onceUserWithoutTerms")
+        else if (newUserInfo.userType === userType.onceUserWithoutTerms)
           navigate(RouteURL.register_term);
         else navigate(RouteURL.login);
       } else if (requiredLogin === true) {
-        if (newUserInfo.userType !== "activatedUser") {
+        if (newUserInfo.userType !== userType.activatedUser) {
           navigate(RouteURL.login);
         }
       }

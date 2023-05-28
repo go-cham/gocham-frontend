@@ -19,6 +19,7 @@ import { userAtom } from "../../atom/userData";
 import { useNavigate } from "react-router-dom";
 import { formatISO8601ToNormal } from "../../utils/formatISO8601ToNormal";
 import { RouteURL } from "../../App";
+import { userType } from "../../constants/userTypeEnum";
 
 const EditProfile = () => {
   const userInfo = useAtomValue(userAtom);
@@ -26,7 +27,7 @@ const EditProfile = () => {
 
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
-    if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
+    if (userInfo.userType !== userType.activatedUser) navigate(RouteURL.home);
   }, [userInfo]);
 
   const [userInformation, setUserInformation] = useState<userInformationType>({
