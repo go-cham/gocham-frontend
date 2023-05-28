@@ -31,7 +31,9 @@ const Feed = () => {
 
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
-    if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
+    if (userInfo.userId === 0) {
+      if (userInfo.userType !== "activatedUser") navigate(RouteURL.home);
+    }
   }, [userInfo]);
 
   useEffect(() => {

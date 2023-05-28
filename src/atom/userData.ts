@@ -9,7 +9,7 @@ export type userDataAtomType = {
 
 export const initialUserData = {
   name: "미설정",
-  userId: null,
+  userId: null, // null이면 아직 로그인 로직 미작동, 0이면 로그인 로직 작동 됨.
   vender: "",
   userType: "",
 };
