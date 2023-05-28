@@ -73,7 +73,7 @@ dev 브랜치에서 src/version.js 의 버전을 수정하고,
 ### 6. QC
 QC 노션을 참고하여 수정작업 진행 후  dev에 푸시.
 
-### 6. origin/main에 PR open
+### 7. origin/main에 PR open
 스프린트 중 개발기간이 끝나가거나, 핫픽스가 
 dev->main 방향으로 `Version 0.0.0.0`과 같은 형식의 PR을 오픈. <br/>
 코드리뷰등 중간과정을 모두 거친 후,
