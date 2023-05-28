@@ -128,10 +128,17 @@ const PostVoteComponent = ({
         url: `${process.env.REACT_APP_BASE_URL}${RouteURL.feed}/${postId}`,
       });
       // console.log("링크가 공유되었습니다.");
-      setAlertShare(true);
-      setTimeout(() => {
-        setAlertShare(false);
-      }, 3000);
+      // 모바일 경우에만 처리 (pc는 브라우저 자체에서 카피관련 모달이 뜸.
+      if (
+        navigator.userAgent.indexOf("iPhone") > -1 ||
+        navigator.userAgent.indexOf("Android") > -1
+      ) {
+        console.log(navigator.userAgent);
+        setAlertShare(true);
+        setTimeout(() => {
+          setAlertShare(false);
+        }, 3000);
+      }
     } catch (error) {
       console.error("링크 공유 에러", error);
     }
