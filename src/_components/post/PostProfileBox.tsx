@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
-import GrayProfileImg from "../../images/PostComponent/gray_profileImg.png";
-import MenuIcon from "../../images/PostComponent/menu.svg";
-import React from "react";
-import styled from "@emotion/styled";
+import { css } from '@emotion/react';
+import GrayProfileImg from '../../images/PostComponent/gray_profileImg.png';
+import MenuIcon from '../../images/PostComponent/menu.svg';
+import React from 'react';
+import styled from '@emotion/styled';
 
 const PostProfileBox = ({
   nickname,
@@ -20,10 +20,10 @@ const PostProfileBox = ({
       <div>
         <img
           src={profileImg ? profileImg : GrayProfileImg}
-          alt={"프로필"}
-          className={"프로필"}
+          alt={'프로필'}
+          className={'프로필'}
         />
-        <div className={"nickname"}>{nickname}</div>
+        <div className={'nickname'}>{nickname}</div>
       </div>
       {/*{menuFunction && (*/}
       {/*  <img*/}

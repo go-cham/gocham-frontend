@@ -1,20 +1,20 @@
 /** @jsxImportSource @emotion/react */
 
-import styled from "@emotion/styled";
-import react, { useEffect, useState } from "react";
-import palette from "../../style/color";
-import DetailArrow from "../../images/Login/detail_arrow.png";
-import CheckBox from "../../_components/login/CheckBox";
-import { useNavigate } from "react-router-dom";
-import { RouteURL } from "../../App";
-import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
-import { EndPoint } from "../../dataManager/apiMapper";
-import { useAtomValue } from "jotai";
-import { userAtom } from "../../atom/userData";
-import AppBar from "../../_components/common/AppBar";
-import BottomContinueBar from "../../_components/common/BottomContinueBar";
-import { alertMessage } from "../../utils/alertMessage";
-import { userType } from "../../constants/userTypeEnum";
+import styled from '@emotion/styled';
+import react, { useEffect, useState } from 'react';
+import palette from '../../style/color';
+import DetailArrow from '../../images/Login/detail_arrow.png';
+import CheckBox from '../../_components/login/CheckBox';
+import { useNavigate } from 'react-router-dom';
+import { RouteURL } from '../../App';
+import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
+import { EndPoint } from '../../dataManager/apiMapper';
+import { useAtomValue } from 'jotai';
+import { userAtom } from '../../atom/userData';
+import AppBar from '../../_components/common/AppBar';
+import BottomContinueBar from '../../_components/common/BottomContinueBar';
+import { alertMessage } from '../../utils/alertMessage';
+import { userType } from '../../constants/userTypeEnum';
 
 export type AcceptType = {
   gochamTerm: boolean;
@@ -60,7 +60,7 @@ const RegisterTerm = () => {
         },
       });
       if (res?.data.id) {
-        console.log("동의완료");
+        console.log('동의완료');
         navigate(RouteURL.collect_information);
       } else {
         alert(alertMessage.error.register.didntAgreeTerm);
@@ -72,16 +72,16 @@ const RegisterTerm = () => {
   };
   return (
     <>
-      <AppBar title={""} boxShadow={false} />
+      <AppBar title={''} boxShadow={false} />
       <RegisterTermWrap>
-        <div className={"약관문구"}>
+        <div className={'약관문구'}>
           환영합니다!
           <br />
           서비스 이용약관에
           <br />
           동의해주세요.
         </div>
-        <section className={"약관체크"}>
+        <section className={'약관체크'}>
           <CheckWrap>
             <CheckBox
               value={
@@ -111,10 +111,10 @@ const RegisterTerm = () => {
             [필수] 고민의 참견 이용약관 동의
             <a
               href={
-                "https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2"
+                'https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2'
               }
             >
-              <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />
+              <img src={DetailArrow} alt={'약관 상세'} className={'화살표'} />
             </a>
           </CheckWrap>
           <CheckWrap>
@@ -127,10 +127,10 @@ const RegisterTerm = () => {
             [필수] 개인정보 수집 및 이용 동의
             <a
               href={
-                "https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
+                'https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097'
               }
             >
-              <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />
+              <img src={DetailArrow} alt={'약관 상세'} className={'화살표'} />
             </a>
           </CheckWrap>
           <CheckWrap>
@@ -148,30 +148,30 @@ const RegisterTerm = () => {
             [선택] 마케팅 목적 이용 동의
             <a
               href={
-                "https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
+                'https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097'
               }
             >
-              <img src={DetailArrow} alt={"약관 상세"} className={"화살표"} />
+              <img src={DetailArrow} alt={'약관 상세'} className={'화살표'} />
             </a>
           </CheckWrap>
         </section>
       </RegisterTermWrap>
       {accept.gochamTerm && accept.personalInformation && accept.olderThan14 ? (
         <BottomContinueBar
-          title={"다음"}
+          title={'다음'}
           height={11.2}
           boxShadow={false}
           buttonColor={palette.Primary}
-          fontColor={"white"}
+          fontColor={'white'}
           clickAction={() => handleRegister()}
         />
       ) : (
         <BottomContinueBar
-          title={"다음"}
+          title={'다음'}
           height={11.2}
           boxShadow={false}
-          buttonColor={"rgba(42, 45, 55, 0.1)"}
-          fontColor={"rgba(42, 45, 55, 0.34)"}
+          buttonColor={'rgba(42, 45, 55, 0.1)'}
+          fontColor={'rgba(42, 45, 55, 0.34)'}
         />
       )}
     </>

@@ -1,10 +1,10 @@
-import styled from "@emotion/styled";
-import palette from "../../style/color";
-import { MAX_WIDTH } from "../../constants/viewSize";
-import RightArrowButton from "../../images/Modal/right_arrow_icon.svg";
-import { useAtom } from "jotai";
-import { ModalHanlderAtom } from "../../atom/ModalAtom";
-import { ModalCase } from "../../constants/modalEnum";
+import styled from '@emotion/styled';
+import palette from '../../style/color';
+import { MAX_WIDTH } from '../../constants/viewSize';
+import RightArrowButton from '../../images/Modal/right_arrow_icon.svg';
+import { useAtom } from 'jotai';
+import { ModalHanlderAtom } from '../../atom/ModalAtom';
+import { ModalCase } from '../../constants/modalEnum';
 
 const Survay = () => {
   const [ModalStatusHanlder, setModalStatusHanlder] = useAtom(ModalHanlderAtom);
@@ -25,7 +25,7 @@ const Survay = () => {
           <br />
           자유롭게 남겨주세요 ! 고참을 이용해주셔서 감사합니다 😊
         </h2>
-        <a href={"https://forms.gle/2aAifxSauxcbwKsA7"} className="버튼">
+        <a href={'https://forms.gle/2aAifxSauxcbwKsA7'} className="버튼">
           <p>설문조사 페이지로 이동</p>
           <img src={RightArrowButton} alt="화살표" />
         </a>

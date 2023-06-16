@@ -1,11 +1,11 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-import styled from "@emotion/styled";
-import palette from "../../style/color";
-import { ErrorMessage } from "./CollectNicknameAgeGender";
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import styled from '@emotion/styled';
+import palette from '../../style/color';
+import { ErrorMessage } from './CollectNicknameAgeGender';
 import {
   InputWrap,
   userInformationType,
-} from "../../_pages/collectInformation/CollectInformation";
+} from '../../_pages/collectInformation/CollectInformation';
 
 interface NicknameFormProps {
   onInputChange: (nickname: string) => void;
@@ -38,7 +38,7 @@ const NicknameForm: React.FC<NicknameFormProps> = ({
     <InputWrap>
       <h2>닉네임</h2>
       <NicknameInput
-        placeholder={"최대 10자 입력"}
+        placeholder={'최대 10자 입력'}
         value={nickname}
         onChange={handleInputChange}
         errorCase={errorCase}

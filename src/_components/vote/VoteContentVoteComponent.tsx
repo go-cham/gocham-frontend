@@ -1,19 +1,19 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
-import palette from "../../style/color";
-import styled from "@emotion/styled";
-import { CenterAlignDiv } from "../../style/common";
+import { css } from '@emotion/react';
+import palette from '../../style/color';
+import styled from '@emotion/styled';
+import { CenterAlignDiv } from '../../style/common';
 
 const VoteContentVoteComponent = () => {
   return (
     <section css={VoteSection}>
-      <VoteBox option={"YES"}>
+      <VoteBox option={'YES'}>
         <>찬성</>
       </VoteBox>
-      <VoteBox option={"NO"}>
+      <VoteBox option={'NO'}>
         <>반대</>
-      </VoteBox>{" "}
+      </VoteBox>{' '}
       <WantResultBox>
         <>
           결과만
@@ -47,7 +47,7 @@ const VoteBox = styled(CenterAlignDiv)<{ option: string }>`
   font-size: 1.8rem;
   height: 5.9rem;
   width: 12.5rem;
-  background: ${({ option }) => (option == "YES" ? palette.Primary : "black")};
+  background: ${({ option }) => (option == 'YES' ? palette.Primary : 'black')};
 `;
 
 const VoteSection = css`

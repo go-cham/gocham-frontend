@@ -1,11 +1,11 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-import styled from "@emotion/styled";
-import palette from "../../style/color";
-import { ErrorMessage } from "./CollectNicknameAgeGender";
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import styled from '@emotion/styled';
+import palette from '../../style/color';
+import { ErrorMessage } from './CollectNicknameAgeGender';
 import {
   InputWrap,
   userInformationType,
-} from "../../_pages/collectInformation/CollectInformation";
+} from '../../_pages/collectInformation/CollectInformation';
 
 interface BirthdateFormProps {
   onInputChange: (year: string, month: string, day: string) => void;
@@ -35,9 +35,9 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({
     setIsInputFocused(false);
   };
   const [birthDate, setBirthDate] = useState<BirthDateType>({
-    year: userInformation.birthDay.split("-")[0],
-    month: userInformation.birthDay.split("-")[1],
-    day: userInformation.birthDay.split("-")[2],
+    year: userInformation.birthDay.split('-')[0],
+    month: userInformation.birthDay.split('-')[1],
+    day: userInformation.birthDay.split('-')[2],
   });
 
   const [errorCase, setErrorCase] = useState({
@@ -49,12 +49,12 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({
   });
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (value !== "" && isNaN(parseInt(value))) {
+    if (value !== '' && isNaN(parseInt(value))) {
       return;
     }
-    if (name === "year" && value.length === 4) {
+    if (name === 'year' && value.length === 4) {
       monthRef.current?.focus();
-    } else if (name === "month") {
+    } else if (name === 'month') {
       if (value.length === 1 && Number(value) >= 2) {
         dayRef.current?.focus();
       } else if (value.length === 2) {
@@ -62,19 +62,19 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({
       }
     }
 
-    if (name === "year" && value.length === 4 && Number(value) <= 1900) {
+    if (name === 'year' && value.length === 4 && Number(value) <= 1900) {
       setErrorCase((data) => ({ ...data, younger1900: true }));
-    } else if (name === "year" && value.length === 4 && Number(value) > 2005) {
+    } else if (name === 'year' && value.length === 4 && Number(value) > 2005) {
       setErrorCase((data) => ({ ...data, older2005: true }));
-    } else if (name === "month" && (Number(value) > 12 || Number(value) < 1)) {
+    } else if (name === 'month' && (Number(value) > 12 || Number(value) < 1)) {
       setErrorCase((data) => ({ ...data, errorMonth: true }));
-    } else if (name === "day" && (Number(value) > 31 || Number(value) < 1)) {
+    } else if (name === 'day' && (Number(value) > 31 || Number(value) < 1)) {
       setErrorCase((data) => ({ ...data, errorDay: true }));
     }
 
     // ok case
     if (
-      name === "year" &&
+      name === 'year' &&
       value.length === 4 &&
       Number(value) > 1900 &&
       Number(value) < 2005
@@ -84,9 +84,9 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({
         younger1900: false,
         older2005: false,
       }));
-    } else if (name === "month" && Number(value) <= 12 && Number(value) >= 1) {
+    } else if (name === 'month' && Number(value) <= 12 && Number(value) >= 1) {
       setErrorCase((data) => ({ ...data, errorMonth: false }));
-    } else if (name === "day" && Number(value) <= 31 && Number(value) >= 1) {
+    } else if (name === 'day' && Number(value) <= 31 && Number(value) >= 1) {
       setErrorCase((data) => ({ ...data, errorDay: false }));
     }
 
@@ -133,7 +133,7 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({
             checkYearLength(e);
           }}
         />
-        <label className={"year"} htmlFor="year">
+        <label className={'year'} htmlFor="year">
           년
         </label>
         <input
@@ -147,7 +147,7 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
         />
-        <label className={"month"} htmlFor="month">
+        <label className={'month'} htmlFor="month">
           월
         </label>
         <input
@@ -161,7 +161,7 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
         />
-        <label className={"day"} htmlFor="day">
+        <label className={'day'} htmlFor="day">
           일
         </label>
       </BirthInputBox>
@@ -178,7 +178,7 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({
       )}
       {errorCase.errorMonth && (
         <ErrorMessage>1~12월 사이의 값만 입력해주세요.</ErrorMessage>
-      )}{" "}
+      )}{' '}
       {errorCase.errorDay && (
         <ErrorMessage>1~31일 사이의 값만 입력해주세요.</ErrorMessage>
       )}

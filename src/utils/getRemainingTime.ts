@@ -1,12 +1,12 @@
 export function getRemainingTime(deadline: string | any): string {
-  if (typeof deadline !== "string") {
-    return "마감시간 없음";
+  if (typeof deadline !== 'string') {
+    return '마감시간 없음';
   }
-  const deadlineDate = new Date(deadline.replace("Z", ""));
+  const deadlineDate = new Date(deadline.replace('Z', ''));
   const now = new Date();
 
   if (deadlineDate < now) {
-    return "마감됨";
+    return '마감됨';
   }
 
   const remainingTime = Math.abs(deadlineDate.getTime() - now.getTime());
@@ -14,8 +14,8 @@ export function getRemainingTime(deadline: string | any): string {
   const hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((remainingTime / (1000 * 60)) % 60);
 
-  return `마감까지 ${days}일 ${hours < 10 ? "0" + hours : hours}:${
-    minutes < 10 ? "0" + minutes : minutes
+  return `마감까지 ${days}일 ${hours < 10 ? '0' + hours : hours}:${
+    minutes < 10 ? '0' + minutes : minutes
   }`;
 }
 

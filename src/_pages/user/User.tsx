@@ -1,20 +1,20 @@
 /** @jsxImportSource @emotion/react */
 
-import react, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import SelectMyPostType from "../../_components/user/SelectMyPostType";
-import UserProfile from "../../_components/user/UserProfile";
-import { userAtom } from "../../atom/userData";
-import { useAtom } from "jotai";
-import { RouteURL } from "../../App";
-import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
-import { EndPoint } from "../../dataManager/apiMapper";
-import { postingMetaDataType } from "../../_components/post/list/PostListLayer";
-import PostListComponent from "../../_components/post/list/PostListComponent";
-import React from "react";
-import styled from "@emotion/styled";
-import { useAtomValue } from "jotai";
-import { userType } from "../../constants/userTypeEnum";
+import react, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import SelectMyPostType from '../../_components/user/SelectMyPostType';
+import UserProfile from '../../_components/user/UserProfile';
+import { userAtom } from '../../atom/userData';
+import { useAtom } from 'jotai';
+import { RouteURL } from '../../App';
+import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
+import { EndPoint } from '../../dataManager/apiMapper';
+import { postingMetaDataType } from '../../_components/post/list/PostListLayer';
+import PostListComponent from '../../_components/post/list/PostListComponent';
+import React from 'react';
+import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+import { userType } from '../../constants/userTypeEnum';
 
 /**
  * 본인의 피드인지 확인하여 MyFeed 컴포넌트를 올릴지, user 컴포넌트를 올릴지 선택
@@ -33,7 +33,7 @@ const User = () => {
   const [userData, setUserData] = useAtom(userAtom);
   const [userProfile, setUserProfile] = useState({});
   // 내 게시글 | 참여한 게시글 스위칭
-  const [postType, setPostType] = useState("내 게시글");
+  const [postType, setPostType] = useState('내 게시글');
   const [needSwitchPostList, setNeedSwitchPostList] = useState(false);
 
   const switchPostType = (type: string) => {
@@ -59,7 +59,7 @@ const User = () => {
         method: HttpMethod.GET,
         url: EndPoint.worry.get.WORRIES,
         query: {
-          sort: "DESC",
+          sort: 'DESC',
           take: 5,
           authorId: userInfo.userId,
         },
@@ -77,7 +77,7 @@ const User = () => {
       method: HttpMethod.GET,
       url: EndPoint.worry.get.WORRIES,
       query: {
-        sort: "DESC",
+        sort: 'DESC',
         take: 5,
         participatingUserId: userInfo.userId,
       },
@@ -108,32 +108,32 @@ const User = () => {
   const fetchData = async () => {
     // console.log("쉿 패치중");
     let reqData;
-    if (postType === "내 게시글") {
+    if (postType === '내 게시글') {
       if (!needSwitchPostList && postingMetaData.nextId) {
         reqData = {
-          sort: "DESC",
+          sort: 'DESC',
           take: 5,
           nextCursorId: postingMetaData.nextId,
           authorId: userInfo.userId,
         };
       } else {
         reqData = {
-          sort: "DESC",
+          sort: 'DESC',
           take: 5,
           authorId: userInfo.userId,
         };
       }
-    } else if (postType === "참여한 게시글") {
+    } else if (postType === '참여한 게시글') {
       if (!needSwitchPostList && postingMetaData.nextId) {
         reqData = {
-          sort: "DESC",
+          sort: 'DESC',
           take: 5,
           nextCursorId: postingMetaData.nextId,
           participatingUserId: userInfo.userId,
         };
       } else {
         reqData = {
-          sort: "DESC",
+          sort: 'DESC',
           take: 5,
           participatingUserId: userInfo.userId,
         };
@@ -171,12 +171,12 @@ const User = () => {
   useEffect(() => {
     // IntersectionObserver 등록하기
     observer.current = new IntersectionObserver(handleObserver, {
-      rootMargin: "0px 0px 100px 0px",
+      rootMargin: '0px 0px 100px 0px',
       threshold: 1,
     });
 
     // 마지막 요소에 observer 등록하기
-    const lastItem = document.querySelector(".user:last-child");
+    const lastItem = document.querySelector('.user:last-child');
     if (lastItem) {
       observer.current.observe(lastItem);
     }
@@ -220,11 +220,11 @@ const User = () => {
       <PostListLayerWrap>
         <PostListLayerStyle>
           {postingData?.map((value, idx) => (
-            <div key={idx} className={"user"}>
+            <div key={idx} className={'user'}>
               <PostListComponent
                 userInfo={userInfo}
                 postData={value}
-                routeUrl={postType === "내 게시글" ? "my" : "participated"}
+                routeUrl={postType === '내 게시글' ? 'my' : 'participated'}
               />
             </div>
           ))}

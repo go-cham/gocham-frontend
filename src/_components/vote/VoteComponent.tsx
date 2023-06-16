@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
-import React, { useEffect } from "react";
-import VoteTitle from "./VoteTitle";
-import VoteContentComponent from "./VoteContentComponent";
-import styled from "@emotion/styled";
+import { css } from '@emotion/react';
+import React, { useEffect } from 'react';
+import VoteTitle from './VoteTitle';
+import VoteContentComponent from './VoteContentComponent';
+import styled from '@emotion/styled';
 
 type VoteComponentProps = {
   isActivePWA: boolean;
@@ -17,7 +17,7 @@ const VoteComponentCss = styled.div<VoteComponentProps>`
   //top: 15vh;
   // 세로 길이가 작은 폰때문에 vh로 조정
 
-  top: ${(props) => (props.isActivePWA ? "15vh" : "10vh")};
+  top: ${(props) => (props.isActivePWA ? '15vh' : '10vh')};
 
   background: #ffffff;
   /* Drop Shadow */
@@ -32,7 +32,7 @@ const VoteComponent = () => {
     activePwa = isActivePWA();
   }, []);
   const isActivePWA = (): boolean => {
-    if (window.matchMedia("(display-mode: standalone)").matches) {
+    if (window.matchMedia('(display-mode: standalone)').matches) {
       // console.log("PWA 모드");
       return true;
     } else {
@@ -42,7 +42,7 @@ const VoteComponent = () => {
   };
   return (
     <VoteComponentCss isActivePWA={activePwa}>
-      {activePwa ? "PWA" : "브라우저"}
+      {activePwa ? 'PWA' : '브라우저'}
       <VoteTitle />
       <VoteContentComponent />
     </VoteComponentCss>

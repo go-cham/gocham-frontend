@@ -1,23 +1,23 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import AppBar from "../../_components/common/AppBar";
-import palette from "../../style/color";
-import CollectNicknameAgeGender from "../../_components/collectInformation/CollectNicknameAgeGender";
-import react, { useEffect, useState } from "react";
-import BottomContinueBar from "../../_components/common/BottomContinueBar";
-import CollectRegionJobCategory from "../../_components/collectInformation/CollectRegionJobCategory";
-import { OptionType } from "../../constants/Options";
-import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
-import { EndPoint } from "../../dataManager/apiMapper";
-import { useNavigate } from "react-router-dom";
-import { useAtomValue } from "jotai";
-import { userAtom } from "../../atom/userData";
-import getUserInfo from "../../utils/getUserInfo";
-import { useAtom } from "jotai";
-import { RouteURL } from "../../App";
-import { userType } from "../../constants/userTypeEnum";
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import AppBar from '../../_components/common/AppBar';
+import palette from '../../style/color';
+import CollectNicknameAgeGender from '../../_components/collectInformation/CollectNicknameAgeGender';
+import react, { useEffect, useState } from 'react';
+import BottomContinueBar from '../../_components/common/BottomContinueBar';
+import CollectRegionJobCategory from '../../_components/collectInformation/CollectRegionJobCategory';
+import { OptionType } from '../../constants/Options';
+import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
+import { EndPoint } from '../../dataManager/apiMapper';
+import { useNavigate } from 'react-router-dom';
+import { useAtomValue } from 'jotai';
+import { userAtom } from '../../atom/userData';
+import getUserInfo from '../../utils/getUserInfo';
+import { useAtom } from 'jotai';
+import { RouteURL } from '../../App';
+import { userType } from '../../constants/userTypeEnum';
 
 export type userInformationType = {
   nickname: string;
@@ -51,11 +51,11 @@ const CollectInformation = () => {
   const [page, setPage] = useState(1);
   const [readyToNext, setReadyToNext] = useState(false);
   const [userInformation, setUserInformation] = useState<userInformationType>({
-    nickname: "",
-    birthDay: "--",
-    sex: "",
-    residence: { value: 0, label: "" },
-    job: { value: 0, label: "" },
+    nickname: '',
+    birthDay: '--',
+    sex: '',
+    residence: { value: 0, label: '' },
+    job: { value: 0, label: '' },
     worryCategories: [],
   });
 
@@ -71,12 +71,12 @@ const CollectInformation = () => {
       userInformation.nickname.length <= 10 &&
       userInformation.sex &&
       userInformation.birthDay &&
-      Number(userInformation.birthDay.split("-")[0]) > 1900 &&
-      Number(userInformation.birthDay.split("-")[0]) < 2006 &&
-      Number(userInformation.birthDay.split("-")[1]) >= 1 &&
-      Number(userInformation.birthDay.split("-")[1]) <= 12 &&
-      Number(userInformation.birthDay.split("-")[2]) >= 1 &&
-      Number(userInformation.birthDay.split("-")[2]) <= 31
+      Number(userInformation.birthDay.split('-')[0]) > 1900 &&
+      Number(userInformation.birthDay.split('-')[0]) < 2006 &&
+      Number(userInformation.birthDay.split('-')[1]) >= 1 &&
+      Number(userInformation.birthDay.split('-')[1]) <= 12 &&
+      Number(userInformation.birthDay.split('-')[2]) >= 1 &&
+      Number(userInformation.birthDay.split('-')[2]) <= 31
     ) {
       setReadyToNext(true);
     } else {
@@ -131,7 +131,7 @@ const CollectInformation = () => {
       });
       const userInfo = await getUserInfo();
       setUserInfo(userInfo);
-      navigate("/");
+      navigate('/');
     } catch (e) {
       console.error(e);
     }
@@ -149,19 +149,19 @@ const CollectInformation = () => {
   return (
     <>
       <AppBar
-        title={""}
+        title={''}
         boxShadow={false}
         navigateAction={() => navigateBack()}
       />
       <CollectInformationWrap>
-        <section className={"설명란"}>
+        <section className={'설명란'}>
           <h1>
             수많은 고민들이 👀
             <br />
             당신을 기다리고 있어요!
           </h1>
         </section>
-        <section className={"정보입력란"}>
+        <section className={'정보입력란'}>
           {page === 1 && (
             <CollectNicknameAgeGender
               userInformation={userInformation}
@@ -180,20 +180,20 @@ const CollectInformation = () => {
       {/* 각 페이지 항목 조건비교해서 색상 및 문구 표시 구현 필요 */}
       {page === 1 && !readyToNext && (
         <BottomContinueBar
-          title={"다음"}
+          title={'다음'}
           height={11.2}
           boxShadow={false}
-          buttonColor={"rgba(42, 45, 55, 0.1)"}
-          fontColor={"rgba(42, 45, 55, 0.34)"}
+          buttonColor={'rgba(42, 45, 55, 0.1)'}
+          fontColor={'rgba(42, 45, 55, 0.34)'}
         />
       )}
       {page === 1 && readyToNext && (
         <BottomContinueBar
-          title={"다음"}
+          title={'다음'}
           height={11.2}
           boxShadow={false}
           buttonColor={palette.Primary}
-          fontColor={"white"}
+          fontColor={'white'}
           clickAction={() => {
             setPage(2);
             setReadyToNext(false);
@@ -202,20 +202,20 @@ const CollectInformation = () => {
       )}
       {page === 2 && !readyToNext && (
         <BottomContinueBar
-          title={"고참 시작하기"}
+          title={'고참 시작하기'}
           height={11.2}
           boxShadow={false}
-          buttonColor={"rgba(42, 45, 55, 0.1)"}
-          fontColor={"rgba(42, 45, 55, 0.34)"}
+          buttonColor={'rgba(42, 45, 55, 0.1)'}
+          fontColor={'rgba(42, 45, 55, 0.34)'}
         />
       )}
       {page === 2 && readyToNext && (
         <BottomContinueBar
-          title={"고참 시작하기"}
+          title={'고참 시작하기'}
           height={11.2}
           boxShadow={false}
           buttonColor={palette.Primary}
-          fontColor={"white"}
+          fontColor={'white'}
           clickAction={() => uploadCollectData()}
         />
       )}

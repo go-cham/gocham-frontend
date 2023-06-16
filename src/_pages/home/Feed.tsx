@@ -1,19 +1,19 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
-import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import styled from "@emotion/styled";
-import PostComponent from "../../_components/post/feed/PostComponent";
-import AppBar from "../../_components/common/AppBar";
-import { useAtomValue } from "jotai";
-import { userAtom } from "../../atom/userData";
-import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
-import { EndPoint } from "../../dataManager/apiMapper";
-import { postingMetaDataType } from "../../_components/post/list/PostListLayer";
-import palette from "../../style/color";
-import { RouteURL } from "../../App";
-import { userType } from "../../constants/userTypeEnum";
+import { css } from '@emotion/react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import styled from '@emotion/styled';
+import PostComponent from '../../_components/post/feed/PostComponent';
+import AppBar from '../../_components/common/AppBar';
+import { useAtomValue } from 'jotai';
+import { userAtom } from '../../atom/userData';
+import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
+import { EndPoint } from '../../dataManager/apiMapper';
+import { postingMetaDataType } from '../../_components/post/list/PostListLayer';
+import palette from '../../style/color';
+import { RouteURL } from '../../App';
+import { userType } from '../../constants/userTypeEnum';
 
 const Feed = () => {
   const params = useParams();
@@ -28,7 +28,7 @@ const Feed = () => {
   const [hasMore, setHasMore] = useState(true);
   const observer = useRef<IntersectionObserver | null>(null);
 
-  const [routeUrl, setRouteUrl] = useState("");
+  const [routeUrl, setRouteUrl] = useState('');
 
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
@@ -48,12 +48,12 @@ const Feed = () => {
   const fatchData = async () => {
     let reqData = {};
     // route가 있다면 무조건 postId도 있다.
-    if (params.route === "my") {
+    if (params.route === 'my') {
       reqData = {
         authorId: userInfo.userId,
         nextCursorId: Number(params.id) + 1,
       };
-    } else if (params.route === "participated") {
+    } else if (params.route === 'participated') {
       reqData = {
         participatingUserId: userInfo.userId,
         nextCursorId: Number(params.id) + 1,
@@ -64,14 +64,14 @@ const Feed = () => {
     if (postingMetaData.nextId) {
       reqData = {
         ...reqData,
-        sort: "DESC",
+        sort: 'DESC',
         take: 5,
         nextCursorId: postingMetaData.nextId,
       };
     } else {
       reqData = {
         ...reqData,
-        sort: "DESC",
+        sort: 'DESC',
         take: 5,
       };
     }
@@ -96,12 +96,12 @@ const Feed = () => {
   useEffect(() => {
     // IntersectionObserver 등록하기
     observer.current = new IntersectionObserver(handleObserver, {
-      rootMargin: "0px 0px 100px 0px",
+      rootMargin: '0px 0px 100px 0px',
       threshold: 0.5,
     });
 
     // 마지막 요소에 observer 등록하기
-    const lastItem = document.querySelector(".postComponent:last-child");
+    const lastItem = document.querySelector('.postComponent:last-child');
     // document
     //   .querySelector(".postComponent:last-child")
     //   ?.setAttribute("name", "이거");
@@ -132,23 +132,23 @@ const Feed = () => {
     <PostWrap>
       <AppBar
         title={
-          params.route === "my"
-            ? "내 게시글"
-            : params.route === "participated"
-            ? "참여한 게시글"
-            : "인기 게시물"
+          params.route === 'my'
+            ? '내 게시글'
+            : params.route === 'participated'
+            ? '참여한 게시글'
+            : '인기 게시물'
         }
-        background={"white"}
+        background={'white'}
         navigateRoute={params.route ? RouteURL.user : RouteURL.home}
       />
       <PostLayer>
         {postingData?.map((value, idx) => (
-          <div key={idx} className={"postComponent"}>
+          <div key={idx} className={'postComponent'}>
             <PostComponent userInfo={userInfo} postData={value} />
           </div>
         ))}
       </PostLayer>
-      <div style={{ height: "10rem" }} />
+      <div style={{ height: '10rem' }} />
     </PostWrap>
   );
 };

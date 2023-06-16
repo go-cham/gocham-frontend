@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import { RouteURL } from "../App";
-import { useAtomValue } from "jotai/index";
-import { userAtom } from "../atom/userData";
-import { useNavigate } from "react-router-dom";
-import { userType } from "../constants/userTypeEnum";
+import { useEffect } from 'react';
+import { RouteURL } from '../App';
+import { useAtomValue } from 'jotai/index';
+import { userAtom } from '../atom/userData';
+import { useNavigate } from 'react-router-dom';
+import { userType } from '../constants/userTypeEnum';
 
 /**
  * 검증이 필요한 부분이 컴포넌트라서 AuthHoc를 이용할 수 없을때 이 페이지로 라우팅

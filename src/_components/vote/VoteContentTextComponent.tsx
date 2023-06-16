@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
-import react from "react";
+import { css } from '@emotion/react';
+import react from 'react';
 
 const VoteContentTextComponent = () => {
   return (

@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
-import { css, keyframes } from "@emotion/react";
-import react, { useEffect, useState } from "react";
-import React from "react";
-import styled from "@emotion/styled";
-import palette from "../../style/color";
+import { css, keyframes } from '@emotion/react';
+import react, { useEffect, useState } from 'react';
+import React from 'react';
+import styled from '@emotion/styled';
+import palette from '../../style/color';
 
 const SelectMyPostType = ({
   postType,
@@ -18,21 +18,21 @@ const SelectMyPostType = ({
   return (
     <SelectMyPostTypeWrap>
       <SelectMyPostTypeBar>
-        {postType === "내 게시글" ? (
+        {postType === '내 게시글' ? (
           <SelectMyPostTypeBox selected={true}>
             내 게시글 {postingCount.written}
           </SelectMyPostTypeBox>
         ) : (
-          <SelectMyPostTypeBox onClick={() => switchPostType("내 게시글")}>
+          <SelectMyPostTypeBox onClick={() => switchPostType('내 게시글')}>
             내 게시글 {postingCount.written}
           </SelectMyPostTypeBox>
         )}
-        {postType === "참여한 게시글" ? (
+        {postType === '참여한 게시글' ? (
           <SelectMyPostTypeBox selected={true}>
             참여한 게시글 {postingCount.participated}
           </SelectMyPostTypeBox>
         ) : (
-          <SelectMyPostTypeBox onClick={() => switchPostType("참여한 게시글")}>
+          <SelectMyPostTypeBox onClick={() => switchPostType('참여한 게시글')}>
             참여한 게시글 {postingCount.participated}
           </SelectMyPostTypeBox>
         )}
@@ -77,11 +77,11 @@ const SelectMyPostTypeBox = styled.div<{ selected?: boolean }>`
   justify-content: center;
   font-weight: ${({ selected }) => (selected ? 700 : 400)};
   font-size: 1.4rem;
-  color: ${({ selected }) => (selected ? "white" : palette.Text3)};
-  border-radius: ${({ selected }) => (selected ? "2.35rem" : "0")};
+  color: ${({ selected }) => (selected ? 'white' : palette.Text3)};
+  border-radius: ${({ selected }) => (selected ? '2.35rem' : '0')};
   background-color: ${({ selected }) =>
-    selected ? palette.Secondary : "rgba(0, 0, 0, 0)"};
-  animation: ${({ selected }) => (selected ? `fadeIn .3s linear` : "")};
+    selected ? palette.Secondary : 'rgba(0, 0, 0, 0)'};
+  animation: ${({ selected }) => (selected ? `fadeIn .3s linear` : '')};
 
   @keyframes fadeIn {
     from {

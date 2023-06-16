@@ -1,5 +1,5 @@
-import { useRef, useEffect } from "react";
-import { MIN_Y, MAX_Y } from "../constants/BottomSheetOption";
+import { useRef, useEffect } from 'react';
+import { MIN_Y, MAX_Y } from '../constants/BottomSheetOption';
 
 interface BottomSheetMetrics {
   touchStart: {
@@ -8,7 +8,7 @@ interface BottomSheetMetrics {
   };
   touchMove: {
     prevTouchY?: number;
-    movingDirection: "none" | "down" | "up";
+    movingDirection: 'none' | 'down' | 'up';
   };
   isContentAreaTouched: boolean;
 }
@@ -31,18 +31,18 @@ export default function useBottomSheetFix({
     },
     touchMove: {
       prevTouchY: 0,
-      movingDirection: "none",
+      movingDirection: 'none',
     },
     isContentAreaTouched: false,
   });
 
   useEffect(() => {
     if (openBottomSheet) {
-      sheet.current!.style.setProperty("transform", `translateY(-600px)`);
+      sheet.current!.style.setProperty('transform', `translateY(-600px)`);
       // handleClickPostChat(false);
     }
     if (!openBottomSheet) {
-      sheet.current!.style.setProperty("transform", "translateY(0)");
+      sheet.current!.style.setProperty('transform', 'translateY(0)');
 
       // handleClickPostChat(false);
     }
@@ -60,7 +60,7 @@ export default function useBottomSheetFix({
         return true;
       }
 
-      if (touchMove.movingDirection === "down") {
+      if (touchMove.movingDirection === 'down') {
         return header.current!.scrollTop <= 0;
       }
       return false;
@@ -91,11 +91,11 @@ export default function useBottomSheetFix({
         }
 
         if (touchMove.prevTouchY < currentTouch.clientY) {
-          touchMove.movingDirection = "down";
+          touchMove.movingDirection = 'down';
         }
 
         if (touchMove.prevTouchY > currentTouch.clientY) {
-          touchMove.movingDirection = "up";
+          touchMove.movingDirection = 'up';
         }
 
         if (canUserMoveBottomSheet()) {
@@ -113,31 +113,31 @@ export default function useBottomSheetFix({
           }
 
           sheet.current!.style.setProperty(
-            "transform",
+            'transform',
             `translateY(${nextSheetY - MAX_Y}px)`
           ); //바닥 만큼은 빼야쥬...
         } else {
-          document.body.style.overflowY = "hidden";
+          document.body.style.overflowY = 'hidden';
         }
       }
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      document.body.style.overflowY = "auto";
+      document.body.style.overflowY = 'auto';
       const { isContentAreaTouched, touchMove } = metrics.current;
       if (!isContentAreaTouched) {
         // Snap Animation
         const currentSheetY = sheet.current!.getBoundingClientRect().y;
 
         if (currentSheetY !== MIN_Y) {
-          if (touchMove.movingDirection === "down") {
-            sheet.current!.style.setProperty("transform", "translateY(0)");
+          if (touchMove.movingDirection === 'down') {
+            sheet.current!.style.setProperty('transform', 'translateY(0)');
             handleClickPostChat(false);
           }
 
-          if (touchMove.movingDirection === "up") {
+          if (touchMove.movingDirection === 'up') {
             sheet.current!.style.setProperty(
-              "transform",
+              'transform',
               `translateY(${MIN_Y - MAX_Y}px)`
             );
           }
@@ -151,16 +151,16 @@ export default function useBottomSheetFix({
           },
           touchMove: {
             prevTouchY: 0,
-            movingDirection: "none",
+            movingDirection: 'none',
           },
           isContentAreaTouched: false,
         };
       }
     };
 
-    header.current!.addEventListener("touchstart", handleTouchStart);
-    header.current!.addEventListener("touchmove", handleTouchMove);
-    header.current!.addEventListener("touchend", handleTouchEnd);
+    header.current!.addEventListener('touchstart', handleTouchStart);
+    header.current!.addEventListener('touchmove', handleTouchMove);
+    header.current!.addEventListener('touchend', handleTouchEnd);
   }, []);
 
   // // content 영역을 터치하는 것을 기록합니다.

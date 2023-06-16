@@ -1,30 +1,30 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
-import backgroundImage from "../../images/GNB/GNB_bar_icon.svg";
-import AddPostIcon from "../../images/GNB/add_post_icon.svg";
-import SelectHomeIcon from "../../images/GNB/selected_home_icon.svg";
-import UnselectProfileIcon from "../../images/GNB/unselect_profile_icon.svg";
-import UnselectHomeIcon from "../../images/GNB/unselect_home_icon.svg";
-import SelectProfileIcon from "../../images/GNB/selected_profile_icon.svg";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useAtom } from "jotai";
-import { userAtom } from "../../atom/userData";
-import { RouteURL } from "../../App";
-import { MAX_WIDTH } from "../../constants/viewSize";
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import React, { useEffect, useState } from 'react';
+import backgroundImage from '../../images/GNB/GNB_bar_icon.svg';
+import AddPostIcon from '../../images/GNB/add_post_icon.svg';
+import SelectHomeIcon from '../../images/GNB/selected_home_icon.svg';
+import UnselectProfileIcon from '../../images/GNB/unselect_profile_icon.svg';
+import UnselectHomeIcon from '../../images/GNB/unselect_home_icon.svg';
+import SelectProfileIcon from '../../images/GNB/selected_profile_icon.svg';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { userAtom } from '../../atom/userData';
+import { RouteURL } from '../../App';
+import { MAX_WIDTH } from '../../constants/viewSize';
 
 const GNB = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [userData, setUserData] = useAtom(userAtom);
 
-  const [selectedMenu, setSelectedMenu] = useState("posting");
+  const [selectedMenu, setSelectedMenu] = useState('posting');
   useEffect(() => {
-    if (location.pathname.includes("/user")) setSelectedMenu("user");
+    if (location.pathname.includes('/user')) setSelectedMenu('user');
     else {
-      setSelectedMenu("posting");
+      setSelectedMenu('posting');
     }
   }, [location.pathname]);
 
@@ -37,19 +37,19 @@ const GNB = () => {
   };
   return (
     <GNBComponent>
-      {" "}
-      <GNBBackground src={backgroundImage} alt={"배경"} />
+      {' '}
+      <GNBBackground src={backgroundImage} alt={'배경'} />
       <GNBBackgroundWrap>
-        {selectedMenu === "posting" ? (
+        {selectedMenu === 'posting' ? (
           <SelectButton image={SelectHomeIcon} />
         ) : (
           <SelectButton
             image={UnselectHomeIcon}
-            onClick={() => navigate("/")}
+            onClick={() => navigate('/')}
           />
         )}
         <AddButton image={AddPostIcon} onClick={() => handleGoWrite()} />
-        {selectedMenu === "user" ? (
+        {selectedMenu === 'user' ? (
           <SelectButton image={SelectProfileIcon} />
         ) : (
           <SelectButton

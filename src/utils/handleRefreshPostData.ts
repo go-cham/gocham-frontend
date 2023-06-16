@@ -1,15 +1,15 @@
-import { postDataType } from "../type/postDataType";
+import { postDataType } from '../type/postDataType';
 
 export const handleRefreshPostData = (
   thisPostData: postDataType,
   updateObject: string
 ): postDataType => {
   //
-  if (updateObject === "chat") {
+  if (updateObject === 'chat') {
     return Object.assign({}, thisPostData, {
       replyCount: thisPostData.replyCount + 1,
     });
-  } else if (updateObject === "vote") {
+  } else if (updateObject === 'vote') {
     return Object.assign({}, thisPostData, {
       userWorryChoiceCount: thisPostData.userWorryChoiceCount + 1,
     });

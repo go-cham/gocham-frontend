@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import { useState } from "react";
-import { ButtonStyle } from "../../style/common";
-import palette from "../../style/color";
-import { useNavigate } from "react-router-dom";
-import { RouteURL } from "../../App";
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import { useState } from 'react';
+import { ButtonStyle } from '../../style/common';
+import palette from '../../style/color';
+import { useNavigate } from 'react-router-dom';
+import { RouteURL } from '../../App';
 
 const Onboarding = () => {
   const navigate = useNavigate();
@@ -34,9 +34,9 @@ const Onboarding = () => {
           fontWeight={700}
           onClick={handleOnboardingPage}
         >
-          {page === 1 ? "다음(1/3)" : null}
-          {page === 2 ? "다음(2/3)" : null}
-          {page === 3 ? "홈으로 이동" : null}
+          {page === 1 ? '다음(1/3)' : null}
+          {page === 2 ? '다음(2/3)' : null}
+          {page === 3 ? '홈으로 이동' : null}
         </NextButton>
       </BottomBarWrap>
     </>

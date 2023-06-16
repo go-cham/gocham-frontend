@@ -1,12 +1,12 @@
-import Axios, { AxiosResponse } from "axios";
-import { getBearerToken } from "./localStorageManager";
+import Axios, { AxiosResponse } from 'axios';
+import { getBearerToken } from './localStorageManager';
 
 export const HttpMethod = {
-  DELETE: "delete",
-  GET: "get",
-  POST: "post",
-  PUT: "put",
-  PATCH: "patch",
+  DELETE: 'delete',
+  GET: 'get',
+  POST: 'post',
+  PUT: 'put',
+  PATCH: 'patch',
 };
 
 type requestType = {
@@ -27,7 +27,7 @@ export default class ApiConfig {
   }: requestType): Promise<AxiosResponse<any>> | undefined {
     try {
       if (isEmpty(method) || isEmpty(url)) {
-        alert("HTTP Method 와 URL 을 확인해주세요.");
+        alert('HTTP Method 와 URL 을 확인해주세요.');
         return undefined;
       }
 
@@ -38,22 +38,22 @@ export default class ApiConfig {
       }
       if (query && !isEmpty(query)) {
         url +=
-          "?" +
+          '?' +
           Object.keys(query)
-            .map((key) => key + "=" + query[key])
-            .join("&");
+            .map((key) => key + '=' + query[key])
+            .join('&');
       }
       let headers;
       if (getBearerToken() !== null) {
         headers = {
-          accept: "application/json",
-          "Content-Type": "application/json",
+          accept: 'application/json',
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${getBearerToken()}`,
         };
       } else {
         headers = {
-          accept: "application/json",
-          "Content-Type": "application/json",
+          accept: 'application/json',
+          'Content-Type': 'application/json',
         };
       }
 
@@ -72,11 +72,11 @@ export default class ApiConfig {
           break;
       }
     } catch (error: any) {
-      console.log("ApiConfig Error : ", error.message);
+      console.log('ApiConfig Error : ', error.message);
     }
   }
 }
 
 export function isEmpty(str: any) {
-  return str === "" || str === undefined || str == null || str === "null";
+  return str === '' || str === undefined || str == null || str === 'null';
 }

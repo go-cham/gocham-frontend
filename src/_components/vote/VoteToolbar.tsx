@@ -1,21 +1,21 @@
 /** @jsxImportSource @emotion/react */
 
-import { css, Theme, useTheme } from "@emotion/react";
-import react from "react";
-import EmptyHeartIcon from "../../images/VoteComponent/empty_heart_icon.png";
-import EmptyChatIcon from "../../images/VoteComponent/empty_chat_icon.png";
-import EmptyShareIcon from "../../images/VoteComponent/empty_share_icon.png";
-import palette from "../../style/color";
+import { css, Theme, useTheme } from '@emotion/react';
+import react from 'react';
+import EmptyHeartIcon from '../../images/VoteComponent/empty_heart_icon.png';
+import EmptyChatIcon from '../../images/VoteComponent/empty_chat_icon.png';
+import EmptyShareIcon from '../../images/VoteComponent/empty_share_icon.png';
+import palette from '../../style/color';
 
 const VoteToolbar = () => {
   return (
     <section css={VoteToolBarCss}>
       <div>
-        <img src={EmptyHeartIcon} alt={"공감"} />
-        <img src={EmptyChatIcon} alt={"채팅"} />
-        <img src={EmptyShareIcon} alt={"공유"} />
+        <img src={EmptyHeartIcon} alt={'공감'} />
+        <img src={EmptyChatIcon} alt={'채팅'} />
+        <img src={EmptyShareIcon} alt={'공유'} />
       </div>
-      <div className={"voteCount"}>현재 투표한 사용자 1,000명</div>
+      <div className={'voteCount'}>현재 투표한 사용자 1,000명</div>
     </section>
   );
 };
