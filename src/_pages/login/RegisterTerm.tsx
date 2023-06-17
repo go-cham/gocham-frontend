@@ -1,20 +1,20 @@
 /** @jsxImportSource @emotion/react */
-
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
-import palette from '@/style/color';
-import DetailArrow from '@/images/Login/detail_arrow.png';
-import CheckBox from '@/_components/login/CheckBox';
-import { useNavigate } from 'react-router-dom';
-import { RouteURL } from '@/App';
-import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
-import { EndPoint } from '@/dataManager/apiMapper';
 import { useAtomValue } from 'jotai';
-import { userAtom } from '@/atom/userData';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { RouteURL } from '@/App';
 import AppBar from '@/_components/common/AppBar';
 import BottomContinueBar from '@/_components/common/BottomContinueBar';
-import { alertMessage } from '@/utils/alertMessage';
+import CheckBox from '@/_components/login/CheckBox';
+import { userAtom } from '@/atom/userData';
 import { userType } from '@/constants/userTypeEnum';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import DetailArrow from '@/images/Login/detail_arrow.png';
+import palette from '@/style/color';
+import { alertMessage } from '@/utils/alertMessage';
 
 export type AcceptType = {
   gochamTerm: boolean;

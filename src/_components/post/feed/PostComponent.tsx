@@ -1,19 +1,21 @@
 /** @jsxImportSource @emotion/react */
-
 import styled from '@emotion/styled';
-import PostProfileBox from '../PostProfileBox';
-import palette from '@/style/color';
-import ClockIcon from '@/images/PostComponent/clock.svg';
-import React, { useEffect, useState } from 'react';
-import ChatBottomSheet from '@/_components/chat/ChatBottomSheet';
-import PostVoteComponent from './PostVoteComponent';
-import { userDataAtomType } from '@/atom/userData';
-import { getRemainingTime } from '@/utils/getRemainingTime';
-import { formatText } from '@/utils/formatText';
-import { refreshChatAtom } from '@/atom/postRefreshRequest';
 import { useAtom } from 'jotai';
+import React, { useEffect, useState } from 'react';
+
+import ChatBottomSheet from '@/_components/chat/ChatBottomSheet';
+import { refreshChatAtom } from '@/atom/postRefreshRequest';
+import { userDataAtomType } from '@/atom/userData';
+import ClockIcon from '@/images/PostComponent/clock.svg';
+import palette from '@/style/color';
 import { postDataType } from '@/type/postDataType';
+import { formatText } from '@/utils/formatText';
+import { getRemainingTime } from '@/utils/getRemainingTime';
 import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
+
+import PostVoteComponent from './PostVoteComponent';
+
+import PostProfileBox from '../PostProfileBox';
 
 const PostComponent = ({
   userInfo,

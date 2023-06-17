@@ -1,17 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-import PostProfileBox from '../post/PostProfileBox';
 import styled from '@emotion/styled';
-import palette from '@/style/color';
-import SendIcon from '@/images/PostComponent/send.svg';
+import { useAtom } from 'jotai';
+import { debounce } from 'lodash';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { chatInputFocusAtom } from '@/atom/chatInputFocus';
+import { refreshChatAtom } from '@/atom/postRefreshRequest';
+import { userDataAtomType } from '@/atom/userData';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import { userDataAtomType } from '@/atom/userData';
+import SendIcon from '@/images/PostComponent/send.svg';
+import palette from '@/style/color';
 import { formatDate } from '@/utils/formatDate';
 import { formatText } from '@/utils/formatText';
-import { debounce } from 'lodash';
-import { useAtom } from 'jotai';
-import { refreshChatAtom } from '@/atom/postRefreshRequest';
-import { chatInputFocusAtom } from '@/atom/chatInputFocus';
+
+import PostProfileBox from '../post/PostProfileBox';
 
 export default function Content({
   openBottomSheet,

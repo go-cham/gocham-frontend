@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
-import palette from '@/style/color';
-import { MAX_WIDTH } from '@/constants/viewSize';
-import RightArrowButton from '@/images/Modal/right_arrow_icon.svg';
 import { useAtom } from 'jotai';
+
 import { ModalHanlderAtom } from '@/atom/ModalAtom';
 import { ModalCase } from '@/constants/modalEnum';
+import { MAX_WIDTH } from '@/constants/viewSize';
+import RightArrowButton from '@/images/Modal/right_arrow_icon.svg';
+import palette from '@/style/color';
 
 const Survay = () => {
   const [ModalStatusHanlder, setModalStatusHanlder] = useAtom(ModalHanlderAtom);

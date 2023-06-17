@@ -1,10 +1,11 @@
+import { Provider } from 'jotai';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
-import { Provider } from 'jotai';
+
 import { AppWrapper } from './AppWrapper';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-
-import React, { useEffect } from 'react';
-import VoteTitle from './VoteTitle';
-import VoteContentComponent from './VoteContentComponent';
 import styled from '@emotion/styled';
+import React, { useEffect } from 'react';
+
+import VoteContentComponent from './VoteContentComponent';
+import VoteTitle from './VoteTitle';
 
 type VoteComponentProps = {
   isActivePWA: boolean;

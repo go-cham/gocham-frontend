@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
-import { RouteURL } from '@/App';
 import { useAtomValue } from 'jotai';
-import { userAtom } from '@/atom/userData';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { RouteURL } from '@/App';
+import { userAtom } from '@/atom/userData';
 import { userType } from '@/constants/userTypeEnum';
 
 /**

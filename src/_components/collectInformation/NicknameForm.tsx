@@ -1,11 +1,13 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import palette from '@/style/color';
-import { ErrorMessage } from './CollectNicknameAgeGender';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+
 import {
   InputWrap,
   userInformationType,
 } from '@/_pages/collectInformation/CollectInformation';
+import palette from '@/style/color';
+
+import { ErrorMessage } from './CollectNicknameAgeGender';
 
 interface NicknameFormProps {
   onInputChange: (nickname: string) => void;

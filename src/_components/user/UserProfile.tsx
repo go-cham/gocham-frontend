@@ -1,17 +1,17 @@
 /** @jsxImportSource @emotion/react */
-
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import SettingIcon from '@/images/Profile/settings.svg';
-import DefaultUserIcon from '@/images/Profile/defaultUserIcon.svg';
-import { ButtonStyle } from '@/style/common';
-import { userDataAtomType } from '@/atom/userData';
-import palette from '@/style/color';
 import { useNavigate } from 'react-router-dom';
+
 import { RouteURL } from '@/App';
 import { userInformationType } from '@/_pages/collectInformation/CollectInformation';
+import { userDataAtomType } from '@/atom/userData';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
+import DefaultUserIcon from '@/images/Profile/defaultUserIcon.svg';
+import SettingIcon from '@/images/Profile/settings.svg';
+import palette from '@/style/color';
+import { ButtonStyle } from '@/style/common';
 import { formatISO8601ToNormal } from '@/utils/formatISO8601ToNormal';
 
 const UserProfile = ({

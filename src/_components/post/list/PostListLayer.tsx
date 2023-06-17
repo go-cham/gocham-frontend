@@ -3,13 +3,15 @@
 /**
  * 포스트 리스트 레이어
  */
-import React, { useEffect, useRef, useState } from 'react';
-import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
-import { EndPoint } from '@/dataManager/apiMapper';
-import PostListComponent from './PostListComponent';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
+import React, { useEffect, useRef, useState } from 'react';
+
 import { userAtom } from '@/atom/userData';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+
+import PostListComponent from './PostListComponent';
 
 export type postingMetaDataType = {
   take: number;

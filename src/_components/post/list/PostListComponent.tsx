@@ -1,19 +1,20 @@
 /** @jsxImportSource @emotion/react */
-
-import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import PostProfileBox from '../PostProfileBox';
-import palette from '@/style/color';
+import { useAtom } from 'jotai';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { RouteURL } from '@/App';
 import ChatBottomSheet from '@/_components/chat/ChatBottomSheet';
-import { userDataAtomType } from '@/atom/userData';
-import { formatText } from '@/utils/formatText';
-import { postDataType } from '@/type/postDataType';
-import { useAtom } from 'jotai';
 import { refreshChatAtom } from '@/atom/postRefreshRequest';
-import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
+import { userDataAtomType } from '@/atom/userData';
 import { userType } from '@/constants/userTypeEnum';
+import palette from '@/style/color';
+import { postDataType } from '@/type/postDataType';
+import { formatText } from '@/utils/formatText';
+import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
+
+import PostProfileBox from '../PostProfileBox';
 
 const PostListComponent = ({
   userInfo,

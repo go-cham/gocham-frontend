@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
-
 import { useLocation } from 'react-router-dom';
-import GNB from './GNB';
+
 import { RouteURL } from '@/App';
+
+import GNB from './GNB';
 
 const GNBHOC = () => {
   const location = useLocation();

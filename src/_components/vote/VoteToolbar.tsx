@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-
 import { css } from '@emotion/react';
-import EmptyHeartIcon from '@/images/VoteComponent/empty_heart_icon.png';
+
 import EmptyChatIcon from '@/images/VoteComponent/empty_chat_icon.png';
+import EmptyHeartIcon from '@/images/VoteComponent/empty_heart_icon.png';
 import EmptyShareIcon from '@/images/VoteComponent/empty_share_icon.png';
 import palette from '@/style/color';
 

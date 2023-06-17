@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-
 import { css } from '@emotion/react';
-import palette from '@/style/color';
 import styled from '@emotion/styled';
+
+import palette from '@/style/color';
 import { CenterAlignDiv } from '@/style/common';
 
 const VoteContentVoteComponent = () => {

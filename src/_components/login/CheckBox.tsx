@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-
 import { css } from '@emotion/react';
 import react from 'react';
+
 import EmptyCheckIcon from '@/images/Login/empty_check_box.png';
 import FillCheckIcon from '@/images/Login/fill_check_box.png';
 

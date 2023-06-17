@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled';
+import React from 'react';
 
 import GrayProfileImg from '@/images/PostComponent/gray_profileImg.png';
-import React from 'react';
-import styled from '@emotion/styled';
 
 const PostProfileBox = ({
   nickname,

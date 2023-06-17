@@ -1,32 +1,32 @@
 /** @jsxImportSource @emotion/react */
-
+import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
 import React, { useEffect } from 'react';
-import './App.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
+import './App.css';
+import Auth from './HOC/Auth';
+import GNBHOC from './_components/common/GNBHOC';
+import AuthCheckPage from './_pages/AuthCheckPage';
+import CollectInformation from './_pages/collectInformation/CollectInformation';
+import Feed from './_pages/home/Feed';
 import Home from './_pages/home/Home';
 import Login from './_pages/login/Login';
-import GNBHOC from './_components/common/GNBHOC';
-import RegisterTerm from './_pages/login/RegisterTerm';
-import Onboarding from './_pages/login/Onboarding';
-import Write from './_pages/write/Write';
-import CollectInformation from './_pages/collectInformation/CollectInformation';
 import LoginOauthKakao from './_pages/login/LoginOauthKakao';
-import User from './_pages/user/User';
-import getUserInfo from './utils/getUserInfo';
-import { useAtom } from 'jotai';
-import { userAtom } from './atom/userData';
-import Settings from './_pages/user/Settings';
-import Auth from './HOC/Auth';
-import Feed from './_pages/home/Feed';
-import AuthCheckPage from './_pages/AuthCheckPage';
+import Onboarding from './_pages/login/Onboarding';
+import RegisterTerm from './_pages/login/RegisterTerm';
+import ModalController from './_pages/modal/ModalController';
 import EditProfile from './_pages/user/EditProfile';
-import styled from '@emotion/styled';
+import Settings from './_pages/user/Settings';
+import User from './_pages/user/User';
+import Write from './_pages/write/Write';
+import { userAtom } from './atom/userData';
 import { MAX_WIDTH } from './constants/viewSize';
-import RouteChangeTracker from './utils/RouteChangeTracker';
 import BackgroundImage from './images/background.png';
 import BackgroundNoCharImage from './images/background_nocharVer.png';
-import ModalController from './_pages/modal/ModalController';
 import palette from './style/color';
+import RouteChangeTracker from './utils/RouteChangeTracker';
+import getUserInfo from './utils/getUserInfo';
 
 // 모바일 크기 처리
 const OuterWrap = styled.div`

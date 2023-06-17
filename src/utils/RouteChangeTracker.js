@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga4';
+import { useLocation } from 'react-router-dom';
 
 /**
  * uri 변경 추적 컴포넌트

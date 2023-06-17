@@ -1,4 +1,5 @@
 import Axios, { AxiosResponse } from 'axios';
+
 import { getBearerToken } from './localStorageManager';
 
 export const HttpMethod = {

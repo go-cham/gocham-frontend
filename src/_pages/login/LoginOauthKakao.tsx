@@ -1,16 +1,16 @@
 // 리다이렉트될 화면
-
+import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+import { RouteURL } from '@/App';
+import { userAtom } from '@/atom/userData';
+import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import getUserInfo from '@/utils/getUserInfo';
-import { RouteURL } from '@/App';
 import { alertMessage } from '@/utils/alertMessage';
-import { useAtom } from 'jotai';
-import { userAtom } from '@/atom/userData';
-import styled from '@emotion/styled';
-import { userType } from '@/constants/userTypeEnum';
+import getUserInfo from '@/utils/getUserInfo';
 
 const LoginOauthKakao = () => {
   const navigate = useNavigate();

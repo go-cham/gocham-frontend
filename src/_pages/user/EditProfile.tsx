@@ -1,25 +1,26 @@
 /** @jsxImportSource @emotion/react */
-
-import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { RouteURL } from '@/App';
+import CollectNicknameAgeGender from '@/_components/collectInformation/CollectNicknameAgeGender';
+import CollectRegionJobCategory from '@/_components/collectInformation/CollectRegionJobCategory';
 import AppBar from '@/_components/common/AppBar';
 import BottomContinueBar from '@/_components/common/BottomContinueBar';
+import { userAtom } from '@/atom/userData';
+import { userType } from '@/constants/userTypeEnum';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
 import palette from '@/style/color';
+import { formatISO8601ToNormal } from '@/utils/formatISO8601ToNormal';
+import getUserInfo from '@/utils/getUserInfo';
+
 import {
   postUserInformationPropsType,
   userInformationType,
 } from '../collectInformation/CollectInformation';
-import CollectNicknameAgeGender from '@/_components/collectInformation/CollectNicknameAgeGender';
-import CollectRegionJobCategory from '@/_components/collectInformation/CollectRegionJobCategory';
-import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
-import { EndPoint } from '@/dataManager/apiMapper';
-import getUserInfo from '@/utils/getUserInfo';
-import { useAtomValue } from 'jotai';
-import { userAtom } from '@/atom/userData';
-import { useNavigate } from 'react-router-dom';
-import { formatISO8601ToNormal } from '@/utils/formatISO8601ToNormal';
-import { RouteURL } from '@/App';
-import { userType } from '@/constants/userTypeEnum';
 
 const EditProfile = () => {
   const userInfo = useAtomValue(userAtom);

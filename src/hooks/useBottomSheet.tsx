@@ -1,5 +1,6 @@
-import { useRef, useEffect } from 'react';
-import { MIN_Y, MAX_Y } from '@/constants/BottomSheetOption';
+import { useEffect, useRef } from 'react';
+
+import { MAX_Y, MIN_Y } from '@/constants/BottomSheetOption';
 
 interface BottomSheetMetrics {
   touchStart: {

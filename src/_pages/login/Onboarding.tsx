@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import { ButtonStyle } from '@/style/common';
-import palette from '@/style/color';
 import { useNavigate } from 'react-router-dom';
+
 import { RouteURL } from '@/App';
+import palette from '@/style/color';
+import { ButtonStyle } from '@/style/common';
 
 const Onboarding = () => {
   const navigate = useNavigate();

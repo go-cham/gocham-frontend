@@ -1,21 +1,21 @@
 /** @jsxImportSource @emotion/react */
-
 import styled from '@emotion/styled';
-import AppBar from '@/_components/common/AppBar';
-import palette from '@/style/color';
-import CollectNicknameAgeGender from '@/_components/collectInformation/CollectNicknameAgeGender';
+import { useAtom } from 'jotai';
 import react, { useEffect, useState } from 'react';
-import BottomContinueBar from '@/_components/common/BottomContinueBar';
+import { useNavigate } from 'react-router-dom';
+
+import { RouteURL } from '@/App';
+import CollectNicknameAgeGender from '@/_components/collectInformation/CollectNicknameAgeGender';
 import CollectRegionJobCategory from '@/_components/collectInformation/CollectRegionJobCategory';
+import AppBar from '@/_components/common/AppBar';
+import BottomContinueBar from '@/_components/common/BottomContinueBar';
+import { userAtom } from '@/atom/userData';
 import { OptionType } from '@/constants/Options';
+import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import { useNavigate } from 'react-router-dom';
-import { userAtom } from '@/atom/userData';
+import palette from '@/style/color';
 import getUserInfo from '@/utils/getUserInfo';
-import { useAtom } from 'jotai';
-import { RouteURL } from '@/App';
-import { userType } from '@/constants/userTypeEnum';
 
 export type userInformationType = {
   nickname: string;

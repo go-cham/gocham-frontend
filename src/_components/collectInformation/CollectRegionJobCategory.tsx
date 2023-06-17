@@ -1,20 +1,21 @@
 /** @jsxImportSource @emotion/react */
-
 import styled from '@emotion/styled';
-import palette from '@/style/color';
+import React, { useMemo } from 'react';
+import Select, { OnChangeValue } from 'react-select';
+
 import {
   CollectInformationBox,
   userInformationPropsType,
   userInformationType,
 } from '@/_pages/collectInformation/CollectInformation';
-import React, { useMemo } from 'react';
-import Select, { OnChangeValue } from 'react-select';
 import {
+  OptionType,
   categoryOptions,
   jobOptions,
-  OptionType,
   residenceOptions,
 } from '@/constants/Options';
+import palette from '@/style/color';
+
 import MultiPickerComponent from './MultiPickerComponent';
 
 const CollectNicknameAgeGender = ({

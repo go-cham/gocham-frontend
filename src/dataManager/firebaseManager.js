@@ -1,10 +1,12 @@
 import {
-  getDownloadURL,
   ref as firebaseRef,
+  getDownloadURL,
   uploadString,
 } from 'firebase/storage';
-import { firebaseStorage } from './firebaseConfig';
+
 import { alertMessage } from '@/utils/alertMessage';
+
+import { firebaseStorage } from './firebaseConfig';
 
 export const uploadFirebase = async (userId, file, dir) => {
   let storageRef;

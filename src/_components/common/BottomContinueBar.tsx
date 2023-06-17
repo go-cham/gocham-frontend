@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-
-import { ButtonStyle } from '@/style/common';
 import styled from '@emotion/styled';
+
 import { MAX_WIDTH } from '@/constants/viewSize';
+import { ButtonStyle } from '@/style/common';
 
 const BottomContinueBar = ({
   title,

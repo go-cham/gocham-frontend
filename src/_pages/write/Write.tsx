@@ -1,30 +1,30 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+import { debounce } from 'lodash';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 
+import { RouteURL } from '@/App';
 import AppBar from '@/_components/common/AppBar';
 import BottomContinueBar from '@/_components/common/BottomContinueBar';
-import palette from '@/style/color';
-import styled from '@emotion/styled';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import CameraIcon from '@/images/Write/Camera.svg';
-import DeleteIcon from '@/images/Write/delete_icon.svg';
-import Select from 'react-select';
-import { uploadFirebase } from '@/dataManager/firebaseManager';
-import { resizeImage } from '@/dataManager/imageResizing';
+import { userAtom } from '@/atom/userData';
 import {
+  OptionType,
   categoryOptions,
   deadlineOptions,
-  OptionType,
 } from '@/constants/Options';
+import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import getFutureDateTime from '@/utils/getFutureDateTime';
-import { useAtomValue } from 'jotai';
-import { userAtom } from '@/atom/userData';
-import { useNavigate } from 'react-router-dom';
+import { uploadFirebase } from '@/dataManager/firebaseManager';
+import { resizeImage } from '@/dataManager/imageResizing';
+import CameraIcon from '@/images/Write/Camera.svg';
+import DeleteIcon from '@/images/Write/delete_icon.svg';
+import palette from '@/style/color';
 import { alertMessage } from '@/utils/alertMessage';
-import { RouteURL } from '@/App';
-import { debounce } from 'lodash';
-import { userType } from '@/constants/userTypeEnum';
+import getFutureDateTime from '@/utils/getFutureDateTime';
 
 type WriteContentType = {
   title: string;
