@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import react, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import AppBar from '../../_components/common/AppBar';
 import BottomContinueBar from '../../_components/common/BottomContinueBar';
@@ -48,7 +48,7 @@ const EditProfile = () => {
         id: userInfo.userId,
       },
     })?.then((profileData) => {
-      let data = profileData.data;
+      const data = profileData.data;
 
       // console.log(data);
       const worryCategories = data.userWorryCategories.map((item: any) => ({

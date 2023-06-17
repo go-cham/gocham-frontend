@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { type } from 'os';
 
 export const CenterAlignDiv = styled.div`
   display: flex;

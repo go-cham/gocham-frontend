@@ -64,7 +64,7 @@ const Write = () => {
     const pros = votingContent.pros === '' ? '찬성' : votingContent.pros;
     const cons = votingContent.cons === '' ? '반대' : votingContent.cons;
 
-    let postData: PostWriteContentType = {
+    const postData: PostWriteContentType = {
       title: votingContent.title,
       userId: userInfo.userId,
       content: votingContent.content,

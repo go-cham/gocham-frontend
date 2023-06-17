@@ -27,7 +27,7 @@ const VoteComponentCss = styled.div<VoteComponentProps>`
 `;
 
 const VoteComponent = () => {
-  let activePwa: boolean = false;
+  let activePwa = false;
   useEffect(() => {
     activePwa = isActivePWA();
   }, []);

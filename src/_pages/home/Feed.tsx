@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from '@emotion/react';
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import PostComponent from '../../_components/post/feed/PostComponent';
 import AppBar from '../../_components/common/AppBar';
@@ -11,7 +10,6 @@ import { userAtom } from '../../atom/userData';
 import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
 import { EndPoint } from '../../dataManager/apiMapper';
 import { postingMetaDataType } from '../../_components/post/list/PostListLayer';
-import palette from '../../style/color';
 import { RouteURL } from '../../App';
 import { userType } from '../../constants/userTypeEnum';
 
@@ -28,7 +26,7 @@ const Feed = () => {
   const [hasMore, setHasMore] = useState(true);
   const observer = useRef<IntersectionObserver | null>(null);
 
-  const [routeUrl, setRouteUrl] = useState('');
+  // const [routeUrl, setRouteUrl] = useState('');
 
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
@@ -83,7 +81,7 @@ const Feed = () => {
         query: reqData,
       });
       // 새로 가져온 데이터와 기존 데이터 합치기
-      setPostingData((prevPosts) => [...prevPosts, ...res?.data.data]);
+      setPostingData((prevPosts) => [...prevPosts, ...(res?.data.data || [])]);
       setPostingMetaData(res?.data.meta);
       setHasMore(res?.data.meta.hasNextData);
       setIsLoading(false);

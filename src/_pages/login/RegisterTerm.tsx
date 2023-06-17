@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import styled from '@emotion/styled';
-import react, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import palette from '../../style/color';
 import DetailArrow from '../../images/Login/detail_arrow.png';
 import CheckBox from '../../_components/login/CheckBox';

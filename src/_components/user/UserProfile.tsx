@@ -46,7 +46,7 @@ const UserProfile = ({
         id: userData.userId,
       },
     })?.then((profileData) => {
-      let data = profileData.data;
+      const data = profileData.data;
 
       const worryCategories = data.userWorryCategories.map((item: any) => ({
         value: item.worryCategory.id,

@@ -1,11 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Home from './_pages/home/Home';
-import { css } from '@emotion/react';
-import GNB from './_components/common/GNB';
 import Login from './_pages/login/Login';
 import GNBHOC from './_components/common/GNBHOC';
 import RegisterTerm from './_pages/login/RegisterTerm';

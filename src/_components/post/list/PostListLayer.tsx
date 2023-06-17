@@ -3,7 +3,6 @@
 /**
  * 포스트 리스트 레이어
  */
-import { css } from '@emotion/react';
 import React, { useEffect, useRef, useState } from 'react';
 import ApiConfig, { HttpMethod } from '../../../dataManager/apiConfig';
 import { EndPoint } from '../../../dataManager/apiMapper';
@@ -61,7 +60,7 @@ const PostListLayer = () => {
         query: reqData,
       });
       // 새로 가져온 데이터와 기존 데이터 합치기
-      setPostingData((prevPosts) => [...prevPosts, ...res?.data.data]);
+      setPostingData((prevPosts) => [...prevPosts, ...(res?.data.data || [])]);
       setPostingMetaData(res?.data.meta);
       setHasMore(res?.data.meta.hasNextData);
       setIsLoading(false);

@@ -23,7 +23,9 @@ const PostComponent = ({
   postData: postDataType;
 }) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-  const handleClickMeatballsMenu = () => {};
+  const handleClickMeatballsMenu = () => {
+    //
+  };
   const handleClickPostChat = () => {
     setOpenBottomSheet((value) => {
       return !value;

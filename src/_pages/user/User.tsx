@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import react, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SelectMyPostType from '../../_components/user/SelectMyPostType';
 import UserProfile from '../../_components/user/UserProfile';
@@ -155,7 +155,10 @@ const User = () => {
             take: 5,
           });
         } else {
-          setPostingData((prevPosts) => [...prevPosts, ...res?.data.data]);
+          setPostingData((prevPosts) => [
+            ...prevPosts,
+            ...(res?.data.data || []),
+          ]);
         }
         setPostingMetaData(res?.data.meta);
         setHasMore(res?.data.meta.hasNextData);
