@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
-import { MAX_WIDTH } from '../../constants/viewSize';
+import { MAX_WIDTH } from '@/constants/viewSize';
 import { useAtom } from 'jotai';
-import { ModalHanlderAtom } from '../../atom/ModalAtom';
+import { ModalHanlderAtom } from '@/atom/ModalAtom';
 import { useEffect } from 'react';
-import { ModalCase } from '../../constants/modalEnum';
-import ResultWithoutVote from '../../_components/modal/ResultWithoutVote';
-import Survay from '../../_components/modal/Survay';
+import { ModalCase } from '@/constants/modalEnum';
+import ResultWithoutVote from '@/_components/modal/ResultWithoutVote';
+import Survay from '@/_components/modal/Survay';
 
 const ModalController = () => {
   const [modalType, setModalType] = useAtom(ModalHanlderAtom);

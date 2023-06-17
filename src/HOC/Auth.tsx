@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { userAtom } from '../atom/userData';
+import { userAtom } from '@/atom/userData';
 import { useAtom } from 'jotai';
-import { RouteURL } from '../App';
+import { RouteURL } from '@/App';
 import { useNavigate } from 'react-router-dom';
-import getUserInfo from '../utils/getUserInfo';
-import { userType } from '../constants/userTypeEnum';
+import getUserInfo from '@/utils/getUserInfo';
+import { userType } from '@/constants/userTypeEnum';
 
 type AuthProps = {
   SpecificComponent: React.ComponentType<any>;

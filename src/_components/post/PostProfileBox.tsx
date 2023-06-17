@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from '@emotion/react';
-import GrayProfileImg from '../../images/PostComponent/gray_profileImg.png';
-import MenuIcon from '../../images/PostComponent/menu.svg';
+import GrayProfileImg from '@/images/PostComponent/gray_profileImg.png';
 import React from 'react';
 import styled from '@emotion/styled';
 

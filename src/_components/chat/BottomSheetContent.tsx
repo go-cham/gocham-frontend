@@ -1,19 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PostProfileBox from '../post/PostProfileBox';
 import styled from '@emotion/styled';
-import palette from '../../style/color';
-import ChatIcon from '../../images/PostComponent/chat.svg';
-import ShareIcon from '../../images/PostComponent/share.svg';
-import SendIcon from '../../images/PostComponent/send.svg';
-import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
-import { EndPoint } from '../../dataManager/apiMapper';
-import { userDataAtomType } from '../../atom/userData';
-import { formatDate } from '../../utils/formatDate';
-import { formatText } from '../../utils/formatText';
+import palette from '@/style/color';
+import SendIcon from '@/images/PostComponent/send.svg';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import { userDataAtomType } from '@/atom/userData';
+import { formatDate } from '@/utils/formatDate';
+import { formatText } from '@/utils/formatText';
 import { debounce } from 'lodash';
-import { useAtom } from 'jotai/index';
-import { refreshChatAtom } from '../../atom/postRefreshRequest';
-import { chatInputFocusAtom } from '../../atom/chatInputFocus';
+import { useAtom } from 'jotai';
+import { refreshChatAtom } from '@/atom/postRefreshRequest';
+import { chatInputFocusAtom } from '@/atom/chatInputFocus';
 
 export default function Content({
   openBottomSheet,

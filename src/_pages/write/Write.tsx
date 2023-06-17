@@ -1,30 +1,30 @@
 /** @jsxImportSource @emotion/react */
 
-import AppBar from '../../_components/common/AppBar';
-import BottomContinueBar from '../../_components/common/BottomContinueBar';
-import palette from '../../style/color';
+import AppBar from '@/_components/common/AppBar';
+import BottomContinueBar from '@/_components/common/BottomContinueBar';
+import palette from '@/style/color';
 import styled from '@emotion/styled';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import CameraIcon from '../../images/Write/Camera.svg';
-import DeleteIcon from '../../images/Write/delete_icon.svg';
+import CameraIcon from '@/images/Write/Camera.svg';
+import DeleteIcon from '@/images/Write/delete_icon.svg';
 import Select from 'react-select';
-import { uploadFirebase } from '../../dataManager/firebaseManager';
-import { resizeImage } from '../../dataManager/imageResizing';
+import { uploadFirebase } from '@/dataManager/firebaseManager';
+import { resizeImage } from '@/dataManager/imageResizing';
 import {
   categoryOptions,
   deadlineOptions,
   OptionType,
-} from '../../constants/Options';
-import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
-import { EndPoint } from '../../dataManager/apiMapper';
-import getFutureDateTime from '../../utils/getFutureDateTime';
+} from '@/constants/Options';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import getFutureDateTime from '@/utils/getFutureDateTime';
 import { useAtomValue } from 'jotai';
-import { userAtom } from '../../atom/userData';
+import { userAtom } from '@/atom/userData';
 import { useNavigate } from 'react-router-dom';
-import { alertMessage } from '../../utils/alertMessage';
-import { RouteURL } from '../../App';
+import { alertMessage } from '@/utils/alertMessage';
+import { RouteURL } from '@/App';
 import { debounce } from 'lodash';
-import { userType } from '../../constants/userTypeEnum';
+import { userType } from '@/constants/userTypeEnum';
 
 type WriteContentType = {
   title: string;

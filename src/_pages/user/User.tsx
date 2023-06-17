@@ -2,19 +2,19 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SelectMyPostType from '../../_components/user/SelectMyPostType';
-import UserProfile from '../../_components/user/UserProfile';
-import { userAtom } from '../../atom/userData';
+import SelectMyPostType from '@/_components/user/SelectMyPostType';
+import UserProfile from '@/_components/user/UserProfile';
+import { userAtom } from '@/atom/userData';
 import { useAtom } from 'jotai';
-import { RouteURL } from '../../App';
-import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
-import { EndPoint } from '../../dataManager/apiMapper';
-import { postingMetaDataType } from '../../_components/post/list/PostListLayer';
-import PostListComponent from '../../_components/post/list/PostListComponent';
+import { RouteURL } from '@/App';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import { postingMetaDataType } from '@/_components/post/list/PostListLayer';
+import PostListComponent from '@/_components/post/list/PostListComponent';
 import React from 'react';
 import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
-import { userType } from '../../constants/userTypeEnum';
+import { userType } from '@/constants/userTypeEnum';
 
 /**
  * 본인의 피드인지 확인하여 MyFeed 컴포넌트를 올릴지, user 컴포넌트를 올릴지 선택

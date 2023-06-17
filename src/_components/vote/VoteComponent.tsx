@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from '@emotion/react';
 import React, { useEffect } from 'react';
 import VoteTitle from './VoteTitle';
 import VoteContentComponent from './VoteContentComponent';

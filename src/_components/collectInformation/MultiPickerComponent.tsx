@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import Dropdown from '../../images/Common/dropdown.svg';
-import XButton from '../../images/Common/x_button.svg';
+import Dropdown from '@/images/Common/dropdown.svg';
+import XButton from '@/images/Common/x_button.svg';
 import styled from '@emotion/styled';
-import palette from '../../style/color';
-import {  OptionType } from '../../constants/Options';
+import palette from '@/style/color';
+import { OptionType } from '@/constants/Options';
+
 const MultiPickerComponent = ({
   categoryOptions,
   selectedValue,
@@ -51,7 +52,10 @@ const MultiPickerComponent = ({
         <OptionListMenuWrap>
           {categoryOptions?.map((item) => {
             return (
-              <OptionBox key={item.value} onClick={() => handleOption(item, 'add')}>
+              <OptionBox
+                key={item.value}
+                onClick={() => handleOption(item, 'add')}
+              >
                 {item.label}
               </OptionBox>
             );

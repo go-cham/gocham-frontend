@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from '@emotion/react';
-import palette from '../../style/color';
-import Logo from '../../images/Common/big_logo.svg';
-import KakaoText from '../../images/Login/카카오계정으로_시작하기.svg';
-import GochamCharacter from '../../images/Login/GochamCharacter.svg';
+import palette from '@/style/color';
+import Logo from '@/images/Common/big_logo.svg';
+import KakaoText from '@/images/Login/카카오계정으로_시작하기.svg';
+import GochamCharacter from '@/images/Login/GochamCharacter.svg';
 
 declare global {
   interface Window {

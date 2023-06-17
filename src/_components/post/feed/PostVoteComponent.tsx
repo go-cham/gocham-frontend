@@ -1,21 +1,21 @@
-import FillCheckIcon from '../../../images/PostComponent/fill_check.svg';
+import FillCheckIcon from '@/images/PostComponent/fill_check.svg';
 import styled from '@emotion/styled';
-import palette from '../../../style/color';
+import palette from '@/style/color';
 import React, { useEffect, useState } from 'react';
-import ApiConfig, { HttpMethod } from '../../../dataManager/apiConfig';
-import { EndPoint } from '../../../dataManager/apiMapper';
-import { formatRoundedNumber } from '../../../utils/formatRoundedNumber';
-import ChatIcon from '../../../images/PostComponent/chat.svg';
-import ShareIcon from '../../../images/PostComponent/share.svg';
-import ChatAlertImage from '../../../images/PostComponent/share_image.svg';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import { formatRoundedNumber } from '@/utils/formatRoundedNumber';
+import ChatIcon from '@/images/PostComponent/chat.svg';
+import ShareIcon from '@/images/PostComponent/share.svg';
+import ChatAlertImage from '@/images/PostComponent/share_image.svg';
 import { useAtom } from 'jotai';
-import { chatInputFocusAtom } from '../../../atom/chatInputFocus';
-import { RouteURL } from '../../../App';
-import { refreshChatAtom } from '../../../atom/postRefreshRequest';
-import { getRemainingTime } from '../../../utils/getRemainingTime';
-import { justResultWorryHandlerAtom } from '../../../atom/justResultAtom';
-import { ModalHanlderAtom } from '../../../atom/ModalAtom';
-import { ModalCase } from '../../../constants/modalEnum';
+import { chatInputFocusAtom } from '@/atom/chatInputFocus';
+import { RouteURL } from '@/App';
+import { refreshChatAtom } from '@/atom/postRefreshRequest';
+import { getRemainingTime } from '@/utils/getRemainingTime';
+import { justResultWorryHandlerAtom } from '@/atom/justResultAtom';
+import { ModalHanlderAtom } from '@/atom/ModalAtom';
+import { ModalCase } from '@/constants/modalEnum';
 
 const PostVoteComponent = ({
   postData,

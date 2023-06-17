@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import palette from '../../style/color';
-import XIcon from '../../images/Modal/x_button.svg';
+import palette from '@/style/color';
+import XIcon from '@/images/Modal/x_button.svg';
 import { useAtom } from 'jotai';
-import { justResultWorryHandlerAtom } from '../../atom/justResultAtom';
-import { ModalHanlderAtom } from '../../atom/ModalAtom';
-import { ModalCase } from '../../constants/modalEnum';
+import { justResultWorryHandlerAtom } from '@/atom/justResultAtom';
+import { ModalHanlderAtom } from '@/atom/ModalAtom';
+import { ModalCase } from '@/constants/modalEnum';
 
 const ResultWithoutVote = () => {
   const [justResultWorryStatus, setJustResultWorryStatus] = useAtom(

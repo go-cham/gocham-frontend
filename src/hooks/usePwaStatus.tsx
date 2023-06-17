@@ -1,1 +1,3 @@
-import react from 'react';
+export default function UsePwaStatus() {
+  return;
+}

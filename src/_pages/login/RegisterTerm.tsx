@@ -2,19 +2,19 @@
 
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
-import palette from '../../style/color';
-import DetailArrow from '../../images/Login/detail_arrow.png';
-import CheckBox from '../../_components/login/CheckBox';
+import palette from '@/style/color';
+import DetailArrow from '@/images/Login/detail_arrow.png';
+import CheckBox from '@/_components/login/CheckBox';
 import { useNavigate } from 'react-router-dom';
-import { RouteURL } from '../../App';
-import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
-import { EndPoint } from '../../dataManager/apiMapper';
+import { RouteURL } from '@/App';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
 import { useAtomValue } from 'jotai';
-import { userAtom } from '../../atom/userData';
-import AppBar from '../../_components/common/AppBar';
-import BottomContinueBar from '../../_components/common/BottomContinueBar';
-import { alertMessage } from '../../utils/alertMessage';
-import { userType } from '../../constants/userTypeEnum';
+import { userAtom } from '@/atom/userData';
+import AppBar from '@/_components/common/AppBar';
+import BottomContinueBar from '@/_components/common/BottomContinueBar';
+import { alertMessage } from '@/utils/alertMessage';
+import { userType } from '@/constants/userTypeEnum';
 
 export type AcceptType = {
   gochamTerm: boolean;

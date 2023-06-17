@@ -7,6 +7,7 @@
   },
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@testing-library/jest-dom": "^5.16.5",
@@ -48,13 +49,13 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "build-dev": "BUILD_PATH='./build-dev' dotenv -e .env.development react-scripts build",
-    "build-dev-window": "set BUILD_PATH=./build-dev&& dotenv -e .env.development react-scripts build",
-    "build-stage": "BUILD_PATH='./build-stage' dotenv -e .env.stage react-scripts build",
-    "build-prod": "react-scripts build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build-dev": "BUILD_PATH='./build-dev' dotenv -e .env.development craco build",
+    "build-dev-window": "set BUILD_PATH=./build-dev&& dotenv -e .env.development craco build",
+    "build-stage": "BUILD_PATH='./build-stage' dotenv -e .env.stage craco build",
+    "build-prod": "craco build",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "format": "prettier --write src",
     "lint": "eslint --fix src --ext .js,.ts,.jsx,.tsx"

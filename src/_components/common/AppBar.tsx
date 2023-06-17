@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import BackButton from '../../images/Common/back_button_42X42.svg';
-import palette from '../../style/color';
+import BackButton from '@/images/Common/back_button_42X42.svg';
+import palette from '@/style/color';
 import { useNavigate } from 'react-router-dom';
 
 const AppBar = ({

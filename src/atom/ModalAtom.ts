@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { ModalCase } from '../constants/modalEnum';
+import { ModalCase } from '@/constants/modalEnum';
 
 const initialUserData = ModalCase.None;
 

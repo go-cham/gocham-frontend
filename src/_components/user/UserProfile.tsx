@@ -1,19 +1,18 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import react, { useEffect, useState } from 'react';
-import SettingIcon from '../../images/Profile/settings.svg';
-import DefaultUserIcon from '../../images/Profile/defaultUserIcon.svg';
-import { ButtonStyle } from '../../style/common';
-import { userDataAtomType } from '../../atom/userData';
-import palette from '../../style/color';
+import { useEffect, useState } from 'react';
+import SettingIcon from '@/images/Profile/settings.svg';
+import DefaultUserIcon from '@/images/Profile/defaultUserIcon.svg';
+import { ButtonStyle } from '@/style/common';
+import { userDataAtomType } from '@/atom/userData';
+import palette from '@/style/color';
 import { useNavigate } from 'react-router-dom';
-import { RouteURL } from '../../App';
-import { userInformationType } from '../../_pages/collectInformation/CollectInformation';
-import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
-import { EndPoint } from '../../dataManager/apiMapper';
-import { formatISO8601ToNormal } from '../../utils/formatISO8601ToNormal';
+import { RouteURL } from '@/App';
+import { userInformationType } from '@/_pages/collectInformation/CollectInformation';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import { formatISO8601ToNormal } from '@/utils/formatISO8601ToNormal';
 
 const UserProfile = ({
   isMyFeed,

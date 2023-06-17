@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
-import { css, keyframes } from '@emotion/react';
-import react, { useEffect, useState } from 'react';
+import { keyframes } from '@emotion/react';
 import React from 'react';
 import styled from '@emotion/styled';
-import palette from '../../style/color';
+import palette from '@/style/color';
 
 const SelectMyPostType = ({
   postType,

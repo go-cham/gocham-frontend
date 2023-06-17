@@ -2,16 +2,15 @@
 
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
-import { EndPoint } from '../../dataManager/apiMapper';
-import getUserInfo from '../../utils/getUserInfo';
-import { RouteURL } from '../../App';
-import { alertMessage } from '../../utils/alertMessage';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import getUserInfo from '@/utils/getUserInfo';
+import { RouteURL } from '@/App';
+import { alertMessage } from '@/utils/alertMessage';
 import { useAtom } from 'jotai';
-import { userAtom } from '../../atom/userData';
-import BackButton from '../../images/Common/back_button.png';
+import { userAtom } from '@/atom/userData';
 import styled from '@emotion/styled';
-import { userType } from '../../constants/userTypeEnum';
+import { userType } from '@/constants/userTypeEnum';
 
 const LoginOauthKakao = () => {
   const navigate = useNavigate();

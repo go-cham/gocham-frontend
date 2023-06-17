@@ -1,17 +1,17 @@
 /** @jsxImportSource @emotion/react */
 
 import React, { useEffect, useRef, useState } from 'react';
-import {  useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
-import PostComponent from '../../_components/post/feed/PostComponent';
-import AppBar from '../../_components/common/AppBar';
+import PostComponent from '@/_components/post/feed/PostComponent';
+import AppBar from '@/_components/common/AppBar';
 import { useAtomValue } from 'jotai';
-import { userAtom } from '../../atom/userData';
-import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
-import { EndPoint } from '../../dataManager/apiMapper';
-import { postingMetaDataType } from '../../_components/post/list/PostListLayer';
-import { RouteURL } from '../../App';
-import { userType } from '../../constants/userTypeEnum';
+import { userAtom } from '@/atom/userData';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import { postingMetaDataType } from '@/_components/post/list/PostListLayer';
+import { RouteURL } from '@/App';
+import { userType } from '@/constants/userTypeEnum';
 
 const Feed = () => {
   const params = useParams();

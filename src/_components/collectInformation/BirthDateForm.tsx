@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import palette from '../../style/color';
+import palette from '@/style/color';
 import { ErrorMessage } from './CollectNicknameAgeGender';
 import {
   InputWrap,
   userInformationType,
-} from '../../_pages/collectInformation/CollectInformation';
+} from '@/_pages/collectInformation/CollectInformation';
 
 interface BirthdateFormProps {
   onInputChange: (year: string, month: string, day: string) => void;

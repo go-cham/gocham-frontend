@@ -1,25 +1,19 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from '@emotion/react';
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import ProfileImg from '../../../images/PostComponent/profileImg.png';
-import CGP from '../../../images/PostComponent/GCP.png';
 import PostProfileBox from '../PostProfileBox';
-import palette from '../../../style/color';
-import { Route, useNavigate } from 'react-router-dom';
-import { RouteURL } from '../../../App';
-import ChatBottomSheet from '../../chat/ChatBottomSheet';
-import { userInfo } from 'os';
-import { userDataAtomType } from '../../../atom/userData';
-import { formatText } from '../../../utils/formatText';
-import ApiConfig, { HttpMethod } from '../../../dataManager/apiConfig';
-import { EndPoint } from '../../../dataManager/apiMapper';
-import { postDataType } from '../../../type/postDataType';
-import { useAtom } from 'jotai/index';
-import { refreshChatAtom } from '../../../atom/postRefreshRequest';
-import { handleRefreshPostData } from '../../../utils/handleRefreshPostData';
-import { userType } from '../../../constants/userTypeEnum';
+import palette from '@/style/color';
+import { useNavigate } from 'react-router-dom';
+import { RouteURL } from '@/App';
+import ChatBottomSheet from '@/_components/chat/ChatBottomSheet';
+import { userDataAtomType } from '@/atom/userData';
+import { formatText } from '@/utils/formatText';
+import { postDataType } from '@/type/postDataType';
+import { useAtom } from 'jotai';
+import { refreshChatAtom } from '@/atom/postRefreshRequest';
+import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
+import { userType } from '@/constants/userTypeEnum';
 
 const PostListComponent = ({
   userInfo,

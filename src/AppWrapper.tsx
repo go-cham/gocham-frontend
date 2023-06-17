@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import App from './App';
 import { Banner } from './_components/banner/Banner';
+
 export const AppWrapper = () => {
   const [showUpdate, setShowUpdate] = useState(false);
 

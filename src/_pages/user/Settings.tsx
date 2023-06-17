@@ -1,14 +1,14 @@
 /** @jsxImportSource @emotion/react */
 
 import React from 'react';
-import AppBar from '../../_components/common/AppBar';
+import AppBar from '@/_components/common/AppBar';
 import styled from '@emotion/styled';
-import { ButtonStyle } from '../../style/common';
-import palette from '../../style/color';
+import { ButtonStyle } from '@/style/common';
+import palette from '@/style/color';
 import { useNavigate } from 'react-router-dom';
 import { useSetAtom } from 'jotai';
-import { initialUserData, userAtom } from '../../atom/userData';
-import { appVersion } from '../../version';
+import { initialUserData, userAtom } from '@/atom/userData';
+import { appVersion } from '@/version';
 
 const Settings = () => {
   const navigate = useNavigate();

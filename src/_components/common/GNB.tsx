@@ -1,24 +1,20 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
-import backgroundImage from '../../images/GNB/GNB_bar_icon.svg';
-import AddPostIcon from '../../images/GNB/add_post_icon.svg';
-import SelectHomeIcon from '../../images/GNB/selected_home_icon.svg';
-import UnselectProfileIcon from '../../images/GNB/unselect_profile_icon.svg';
-import UnselectHomeIcon from '../../images/GNB/unselect_home_icon.svg';
-import SelectProfileIcon from '../../images/GNB/selected_profile_icon.svg';
+import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
+import AddPostIcon from '@/images/GNB/add_post_icon.svg';
+import SelectHomeIcon from '@/images/GNB/selected_home_icon.svg';
+import UnselectProfileIcon from '@/images/GNB/unselect_profile_icon.svg';
+import UnselectHomeIcon from '@/images/GNB/unselect_home_icon.svg';
+import SelectProfileIcon from '@/images/GNB/selected_profile_icon.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAtom } from 'jotai';
-import { userAtom } from '../../atom/userData';
-import { RouteURL } from '../../App';
-import { MAX_WIDTH } from '../../constants/viewSize';
+import { RouteURL } from '@/App';
+import { MAX_WIDTH } from '@/constants/viewSize';
 
 const GNB = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [userData, setUserData] = useAtom(userAtom);
 
   const [selectedMenu, setSelectedMenu] = useState('posting');
   useEffect(() => {

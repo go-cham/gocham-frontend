@@ -1,23 +1,21 @@
 /** @jsxImportSource @emotion/react */
 
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import AppBar from '../../_components/common/AppBar';
-import palette from '../../style/color';
-import CollectNicknameAgeGender from '../../_components/collectInformation/CollectNicknameAgeGender';
+import AppBar from '@/_components/common/AppBar';
+import palette from '@/style/color';
+import CollectNicknameAgeGender from '@/_components/collectInformation/CollectNicknameAgeGender';
 import react, { useEffect, useState } from 'react';
-import BottomContinueBar from '../../_components/common/BottomContinueBar';
-import CollectRegionJobCategory from '../../_components/collectInformation/CollectRegionJobCategory';
-import { OptionType } from '../../constants/Options';
-import ApiConfig, { HttpMethod } from '../../dataManager/apiConfig';
-import { EndPoint } from '../../dataManager/apiMapper';
+import BottomContinueBar from '@/_components/common/BottomContinueBar';
+import CollectRegionJobCategory from '@/_components/collectInformation/CollectRegionJobCategory';
+import { OptionType } from '@/constants/Options';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
 import { useNavigate } from 'react-router-dom';
-import { useAtomValue } from 'jotai';
-import { userAtom } from '../../atom/userData';
-import getUserInfo from '../../utils/getUserInfo';
+import { userAtom } from '@/atom/userData';
+import getUserInfo from '@/utils/getUserInfo';
 import { useAtom } from 'jotai';
-import { RouteURL } from '../../App';
-import { userType } from '../../constants/userTypeEnum';
+import { RouteURL } from '@/App';
+import { userType } from '@/constants/userTypeEnum';
 
 export type userInformationType = {
   nickname: string;
