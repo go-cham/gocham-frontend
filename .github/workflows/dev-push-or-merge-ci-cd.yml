@@ -8,7 +8,7 @@ on:
       - dev
 
 env:
-  NODE_ENV: dev # 환경에 맞춰서 변경해주기
+  NODE_ENV: production
 
 jobs:
   integration-and-deploy:
@@ -41,19 +41,19 @@ jobs:
       # 빌드합니다.
       - name: Build React
         working-directory: ./
-        run: npm run build-${{env.NODE_ENV}}
+        run: npm run build-dev
         env:
           CI: ""
 
       # appspec 파일 복사
       - name: Copy appspec.yml to match the environment variable
-        run: \cp -f ./appspec/appspec-${{env.NODE_ENV}}.yml ./appspec.yml
+        run: \cp -f ./appspec/appspec-dev.yml ./appspec.yml
 
       - name: Remove appspec folder
         run: rm -rf ./appspec
 
       - name: Copy Deploy.sh
-        run: \cp -f ./deploy/deploy-${{env.NODE_ENV}}.sh ./deploy-${{env.NODE_ENV}}.sh
+        run: \cp -f ./deploy/deploy-dev.sh ./deploy-dev.sh
 
       # 레포지토리를 압축시킵니다.
       # 다만 불필요한 node_module, coverage, src, test, readme, .git* 등의 파일은 제외시킵니다.
