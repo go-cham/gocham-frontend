@@ -1,19 +1,18 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import react, { useEffect, useState } from "react";
-import SettingIcon from "../../images/Profile/settings.svg";
-import DefaultUserIcon from "../../images/Profile/defaultUserIcon.svg";
-import { ButtonStyle } from "../../style/common";
-import { userDataAtomType } from "../../atom/userData";
-import palette from "../../style/color";
-import { useNavigate } from "react-router-dom";
-import { RouteURL } from "../../App";
-import { userInformationType } from "../../_pages/collectInformation/CollectInformation";
-import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
-import { EndPoint } from "../../dataManager/apiMapper";
-import { formatISO8601ToNormal } from "../../utils/formatISO8601ToNormal";
+import { RouteURL } from '@/App';
+import { userInformationType } from '@/_pages/collectInformation/CollectInformation';
+import { userDataAtomType } from '@/atom/userData';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import DefaultUserIcon from '@/images/Profile/defaultUserIcon.svg';
+import SettingIcon from '@/images/Profile/settings.svg';
+import palette from '@/style/color';
+import { ButtonStyle } from '@/style/common';
+import { formatISO8601ToNormal } from '@/utils/formatISO8601ToNormal';
 
 const UserProfile = ({
   isMyFeed,
@@ -28,13 +27,13 @@ const UserProfile = ({
   const navigate = useNavigate();
 
   const [userInformation, setUserInformation] = useState<userInformationType>({
-    nickname: "",
-    birthDay: "",
-    sex: "",
-    residence: { value: 0, label: "" },
-    job: { value: 0, label: "" },
+    nickname: '',
+    birthDay: '',
+    sex: '',
+    residence: { value: 0, label: '' },
+    job: { value: 0, label: '' },
     worryCategories: [],
-    profileImageUrl: "",
+    profileImageUrl: '',
   });
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const UserProfile = ({
         id: userData.userId,
       },
     })?.then((profileData) => {
-      let data = profileData.data;
+      const data = profileData.data;
 
       const worryCategories = data.userWorryCategories.map((item: any) => ({
         value: item.worryCategory.id,
@@ -77,8 +76,8 @@ const UserProfile = ({
     <>
       <SettingImg
         src={SettingIcon}
-        alt={"설정"}
-        className={"설정"}
+        alt={'설정'}
+        className={'설정'}
         onClick={() => navigate(RouteURL.settings)}
       />
       <UserProfileWrap>
@@ -88,10 +87,10 @@ const UserProfile = ({
               ? userInformation.profileImageUrl
               : DefaultUserIcon
           }
-          alt={"유저이미지"}
-          className={"유저이미지"}
+          alt={'유저이미지'}
+          className={'유저이미지'}
         />
-        <div className={"유저이름"}>{userInformation.nickname}</div>
+        <div className={'유저이름'}>{userInformation.nickname}</div>
 
         <ProfileUtilButton
           width={8.3}

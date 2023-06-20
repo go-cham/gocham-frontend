@@ -1,21 +1,22 @@
-import FillCheckIcon from "../../../images/PostComponent/fill_check.svg";
-import styled from "@emotion/styled";
-import palette from "../../../style/color";
-import React, { useEffect, useState } from "react";
-import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
-import { EndPoint } from "../../../dataManager/apiMapper";
-import { formatRoundedNumber } from "../../../utils/formatRoundedNumber";
-import ChatIcon from "../../../images/PostComponent/chat.svg";
-import ShareIcon from "../../../images/PostComponent/share.svg";
-import ChatAlertImage from "../../../images/PostComponent/share_image.svg";
-import { useAtom } from "jotai";
-import { chatInputFocusAtom } from "../../../atom/chatInputFocus";
-import { RouteURL } from "../../../App";
-import { refreshChatAtom } from "../../../atom/postRefreshRequest";
-import { getRemainingTime } from "../../../utils/getRemainingTime";
-import { justResultWorryHandlerAtom } from "../../../atom/justResultAtom";
-import { ModalHanlderAtom } from "../../../atom/ModalAtom";
-import { ModalCase } from "../../../constants/modalEnum";
+import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
+import React, { useEffect, useState } from 'react';
+
+import { RouteURL } from '@/App';
+import { ModalHanlderAtom } from '@/atom/ModalAtom';
+import { chatInputFocusAtom } from '@/atom/chatInputFocus';
+import { justResultWorryHandlerAtom } from '@/atom/justResultAtom';
+import { refreshChatAtom } from '@/atom/postRefreshRequest';
+import { ModalCase } from '@/constants/modalEnum';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import ChatIcon from '@/images/PostComponent/chat.svg';
+import FillCheckIcon from '@/images/PostComponent/fill_check.svg';
+import ShareIcon from '@/images/PostComponent/share.svg';
+import ChatAlertImage from '@/images/PostComponent/share_image.svg';
+import palette from '@/style/color';
+import { formatRoundedNumber } from '@/utils/formatRoundedNumber';
+import { getRemainingTime } from '@/utils/getRemainingTime';
 
 const PostVoteComponent = ({
   postData,
@@ -30,7 +31,7 @@ const PostVoteComponent = ({
 
   const handleClickResult = async (choiceId: number) => {
     // 마감된 투표글인지 확인 필요
-    if (getRemainingTime(postData.expirationTime) !== "마감됨") {
+    if (getRemainingTime(postData.expirationTime) !== '마감됨') {
       if (choseData === 0) {
         const res = await ApiConfig.request({
           method: HttpMethod.POST,
@@ -44,13 +45,13 @@ const PostVoteComponent = ({
         // 투표후 투표한 사용자수 리프레시
         setNeedRefresh({
           worryIdx: postData.id,
-          updateObject: "vote",
+          updateObject: 'vote',
         });
       } else {
-        alert("재투표가 불가능합니다!");
+        alert('재투표가 불가능합니다!');
       }
     } else {
-      alert("마감된 게시글은 투표가 불가능합니다!");
+      alert('마감된 게시글은 투표가 불가능합니다!');
     }
   };
   // 선택할 수 있는 값
@@ -108,14 +109,14 @@ const PostVoteComponent = ({
   };
   const [alertShare, setAlertShare] = useState(false);
 
-  const [display, setDisplay] = useState("none");
+  const [display, setDisplay] = useState('none');
 
   useEffect(() => {
     if (alertShare) {
-      setDisplay("flex");
+      setDisplay('flex');
     } else {
       const timeoutId = setTimeout(() => {
-        setDisplay("none");
+        setDisplay('none');
       }, 500); // transition의 시간과 일치해야 합니다.
       return () => clearTimeout(timeoutId);
     }
@@ -124,14 +125,14 @@ const PostVoteComponent = ({
     // https 배포에서만 확인 가능.
     try {
       await navigator.share({
-        title: "고민의 참견",
+        title: '고민의 참견',
         url: `${process.env.REACT_APP_BASE_URL}${RouteURL.feed}/${postId}`,
       });
       // console.log("링크가 공유되었습니다.");
       // 모바일 경우에만 처리 (pc는 브라우저 자체에서 카피관련 모달이 뜸.
       if (
-        navigator.userAgent.indexOf("iPhone") > -1 ||
-        navigator.userAgent.indexOf("Android") > -1
+        navigator.userAgent.indexOf('iPhone') > -1 ||
+        navigator.userAgent.indexOf('Android') > -1
       ) {
         console.log(navigator.userAgent);
         setAlertShare(true);
@@ -140,7 +141,7 @@ const PostVoteComponent = ({
         }, 3000);
       }
     } catch (error) {
-      console.error("링크 공유 에러", error);
+      console.error('링크 공유 에러', error);
     }
   };
 
@@ -153,7 +154,7 @@ const PostVoteComponent = ({
   // case. 결과만 볼게요 클릭
   const handleClickResultWithoutVote = (choiceId: number) => {
     //  모달 표시.
-    if (getRemainingTime(postData.expirationTime) !== "마감됨") {
+    if (getRemainingTime(postData.expirationTime) !== '마감됨') {
       if (choseData === 0) {
         setJustResultWorryStatus((value) => ({
           ...value,
@@ -162,10 +163,10 @@ const PostVoteComponent = ({
         }));
         setModalStatusHanlder(ModalCase.ResultWithoutVote);
       } else {
-        alert("재투표가 불가능합니다!");
+        alert('재투표가 불가능합니다!');
       }
     } else {
-      alert("마감된 게시글은 투표가 불가능합니다!");
+      alert('마감된 게시글은 투표가 불가능합니다!');
     }
   };
   useEffect(() => {
@@ -190,7 +191,7 @@ const PostVoteComponent = ({
                 percentage={percentage}
                 onClick={() => handleClickResult(value.id)}
               >
-                <div className={"content"}>
+                <div className={'content'}>
                   <div>
                     {value?.label}
                     {percentage !== 0 &&
@@ -198,7 +199,7 @@ const PostVoteComponent = ({
                       `(${formatRoundedNumber(percentage)}%)`}
                   </div>
                   {choseData === value?.id ? (
-                    <img src={FillCheckIcon} alt={"체크버튼"} />
+                    <img src={FillCheckIcon} alt={'체크버튼'} />
                   ) : (
                     <></>
                   )}
@@ -215,20 +216,20 @@ const PostVoteComponent = ({
         })}
       </PostVoteComponentWrap>
       <ToolWrap>
-        <div className={"voting"}>
-          <div className={"toolbar"}>
+        <div className={'voting'}>
+          <div className={'toolbar'}>
             <img
               src={ChatIcon}
-              alt={"댓글"}
+              alt={'댓글'}
               onClick={() => handleClickPostChatWithFocus()}
             />
             <img
               src={ShareIcon}
-              alt={"공유"}
+              alt={'공유'}
               onClick={() => handleClickShare(postData.id)}
             />
             <SharePostAlert alertShare={alertShare} display={display}>
-              <img src={ChatAlertImage} alt={"모달"} />
+              <img src={ChatAlertImage} alt={'모달'} />
               <p>게시물 링크가 복사되었어요!</p>
             </SharePostAlert>
           </div>
@@ -238,7 +239,7 @@ const PostVoteComponent = ({
               if (idx === choiceData.length - 1) {
                 return (
                   <p
-                    className={"justResult"}
+                    className={'justResult'}
                     onClick={() => handleClickResultWithoutVote(value.id)}
                     key={idx}
                   >
@@ -275,7 +276,7 @@ const ToolWrap = styled.div`
 
 const SharePostAlert = styled.div<{ alertShare: boolean; display: string }>`
   display: ${({ display }) => display};
-  opacity: ${({ alertShare }) => (alertShare ? "1" : "0")};
+  opacity: ${({ alertShare }) => (alertShare ? '1' : '0')};
   z-index: 10;
 
   transition: all 0.5s ease-in-out;
@@ -341,9 +342,9 @@ const PostVoteButton = styled.div<{ percentage: number; isChoice: boolean }>`
   border-radius: 0.5rem;
   color: ${({ isChoice, percentage }) => {
     if (isChoice || percentage > 0) {
-      return "white";
+      return 'white';
     } else {
-      return "black";
+      return 'black';
     }
   }};
   font-size: 1.4rem;

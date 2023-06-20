@@ -7,6 +7,7 @@
   },
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@testing-library/jest-dom": "^5.16.5",
@@ -24,6 +25,7 @@
     "framer-motion": "^10.12.8",
     "jotai": "^2.0.4",
     "lodash": "^4.17.21",
+    "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-ga4": "^2.1.0",
@@ -47,14 +49,16 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "build-dev": "BUILD_PATH='./build-dev' dotenv -e .env.development react-scripts build",
-    "build-dev-window": "set BUILD_PATH=./build-dev&& dotenv -e .env.development react-scripts build",
-    "build-stage": "BUILD_PATH='./build-stage' dotenv -e .env.stage react-scripts build",
-    "build-prod": "react-scripts build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build-dev": "BUILD_PATH='./build-dev' dotenv -e .env.development craco build",
+    "build-dev-window": "set BUILD_PATH=./build-dev&& dotenv -e .env.development craco build",
+    "build-stage": "BUILD_PATH='./build-stage' dotenv -e .env.stage craco build",
+    "build-prod": "craco build",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "format": "prettier --write src",
+    "lint": "eslint --fix src --ext .js,.ts,.jsx,.tsx"
   },
   "eslintConfig": {
     "extends": [
@@ -73,5 +77,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.11",
+    "@typescript-eslint/parser": "^5.59.11",
+    "eslint": "^8.42.0",
+    "eslint-plugin-react": "^7.32.2"
   }
 }

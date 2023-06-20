@@ -1,10 +1,8 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled';
 
-import { css } from "@emotion/react";
-import palette from "../../style/color";
-import { ButtonStyle } from "../../style/common";
-import styled from "@emotion/styled";
-import { MAX_WIDTH } from "../../constants/viewSize";
+import { MAX_WIDTH } from '@/constants/viewSize';
+import { ButtonStyle } from '@/style/common';
 
 const BottomContinueBar = ({
   title,
@@ -64,12 +62,12 @@ const BottomBarWrap = styled.div<BottomBarWrapType>`
   bottom: -0.5rem;
   box-shadow: ${(props) => {
     if (props.boxShadow === false) {
-      return "";
+      return '';
     } else {
-      return "0px 0px 2.5rem rgba(42, 45, 55, 0.1)";
+      return '0px 0px 2.5rem rgba(42, 45, 55, 0.1)';
     }
   }};
   width: 100%;
-  height: ${({ height }) => height + "rem"};
-  background-color: ${({ boxColor }) => (boxColor ? boxColor : "white")};
+  height: ${({ height }) => height + 'rem'};
+  background-color: ${({ boxColor }) => (boxColor ? boxColor : 'white')};
 `;

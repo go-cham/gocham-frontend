@@ -1,8 +1,8 @@
-import { atom } from "jotai";
+import { atom } from 'jotai';
 
 const initialUserData = {
   worryIdx: 0,
-  updateObject: "",
+  updateObject: '',
 };
 
 export const refreshChatAtom = atom<{

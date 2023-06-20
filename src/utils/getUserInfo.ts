@@ -1,9 +1,9 @@
-import ApiConfig, { HttpMethod } from "../dataManager/apiConfig";
-import { EndPoint } from "../dataManager/apiMapper";
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
 import {
   deleteBearerToken,
   getBearerToken,
-} from "../dataManager/localStorageManager";
+} from '@/dataManager/localStorageManager';
 
 /**
  * 소셜로그인 후, 해당 사용자가 약관을 동의한 유저인지 확인하는 함수
@@ -21,11 +21,11 @@ const getUserInfo = async () => {
     } catch (e) {
       // console.log("만료된 jwt.");
       deleteBearerToken();
-      return "null";
+      return 'null';
     }
   } else {
     // console.log("토큰이 없음");
-    return "null";
+    return 'null';
   }
 };
 

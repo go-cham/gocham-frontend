@@ -1,14 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import reportWebVitals from "./reportWebVitals";
-import { Provider } from "jotai";
-import { AppWrapper } from "./AppWrapper";
+import { Provider } from 'jotai';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+import { AppWrapper } from './AppWrapper';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
 root.render(
   // <React.StrictMode>
@@ -30,9 +30,9 @@ reportWebVitals();
 
 serviceWorkerRegistration.register({
   onUpdate: () => {
-    console.log("onUpdate");
+    console.log('onUpdate');
   },
   onSuccess: () => {
-    console.log("onSuccess");
+    console.log('onSuccess');
   },
 });

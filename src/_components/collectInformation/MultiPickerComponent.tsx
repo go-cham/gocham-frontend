@@ -1,9 +1,11 @@
-import { useState } from "react";
-import Dropdown from "../../images/Common/dropdown.svg";
-import XButton from "../../images/Common/x_button.svg";
-import styled from "@emotion/styled";
-import palette from "../../style/color";
-import { categoryOptions, OptionType } from "../../constants/Options";
+import styled from '@emotion/styled';
+import { useState } from 'react';
+
+import { OptionType } from '@/constants/Options';
+import Dropdown from '@/images/Common/dropdown.svg';
+import XButton from '@/images/Common/x_button.svg';
+import palette from '@/style/color';
+
 const MultiPickerComponent = ({
   categoryOptions,
   selectedValue,
@@ -16,7 +18,7 @@ const MultiPickerComponent = ({
   // console.log(categoryOptions);
   const [openOptionListMenu, setOpenOptionListMenu] = useState(false);
   const handleOption = (value: any, type: string) => {
-    if (type === "add") {
+    if (type === 'add') {
       // 4개까지 선택가능임.
       if (selectedValue.length < 4) {
         // 이미 있는거면 중복안되도록 처리
@@ -29,7 +31,7 @@ const MultiPickerComponent = ({
           clickAction(newItems);
         }
       }
-    } else if (type === "remove") {
+    } else if (type === 'remove') {
       const newItems = selectedValue.filter(
         (element) => element.value !== value.value
       );
@@ -44,14 +46,17 @@ const MultiPickerComponent = ({
         onClick={() => setOpenOptionListMenu(!openOptionListMenu)}
       >
         <p>최대 4개 선택가능</p>
-        <img src={Dropdown} alt={"드롭다운"} />
+        <img src={Dropdown} alt={'드롭다운'} />
       </MultiPickerBox>
       {/*  옵션리스트 메뉴  */}
       {openOptionListMenu && (
         <OptionListMenuWrap>
           {categoryOptions?.map((item) => {
             return (
-              <OptionBox onClick={() => handleOption(item, "add")}>
+              <OptionBox
+                key={item.value}
+                onClick={() => handleOption(item, 'add')}
+              >
                 {item.label}
               </OptionBox>
             );
@@ -62,12 +67,12 @@ const MultiPickerComponent = ({
       <SelectedOptionWrap>
         {selectedValue?.map((item) => {
           return (
-            <SelectedOptionBox>
+            <SelectedOptionBox key={item.value}>
               {item.label}
               <img
                 src={XButton}
-                alt={"X"}
-                onClick={() => handleOption(item, "remove")}
+                alt={'X'}
+                onClick={() => handleOption(item, 'remove')}
               />
             </SelectedOptionBox>
           );

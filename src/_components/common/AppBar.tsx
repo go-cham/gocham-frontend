@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import BackButton from "../../images/Common/back_button_42X42.svg";
-import palette from "../../style/color";
-import { useNavigate } from "react-router-dom";
+import BackButton from '@/images/Common/back_button_42X42.svg';
+import palette from '@/style/color';
 
 const AppBar = ({
   title,
@@ -41,8 +40,8 @@ const AppBar = ({
     >
       <img
         src={BackButton}
-        alt={"뒤로가기"}
-        className={"뒤로가기"}
+        alt={'뒤로가기'}
+        className={'뒤로가기'}
         onClick={() => handleClickBackButton()}
       />
       <h1>{title}</h1>
@@ -62,9 +61,9 @@ const AppBarBox = styled.div<{ boxShadow: boolean; background: string | null }>`
   align-items: center;
   box-shadow: ${(props) => {
     if (props.boxShadow === false) {
-      return "";
+      return '';
     } else {
-      return "0px 0px 2.5rem rgba(42, 45, 55, 0.1)";
+      return '0px 0px 2.5rem rgba(42, 45, 55, 0.1)';
     }
   }};
   background-color: ${(props) => {

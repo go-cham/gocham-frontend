@@ -1,10 +1,11 @@
-import styled from "@emotion/styled";
-import palette from "../../style/color";
-import XIcon from "../../images/Modal/x_button.svg";
-import { useAtom } from "jotai";
-import { justResultWorryHandlerAtom } from "../../atom/justResultAtom";
-import { ModalHanlderAtom } from "../../atom/ModalAtom";
-import { ModalCase } from "../../constants/modalEnum";
+import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
+
+import { ModalHanlderAtom } from '@/atom/ModalAtom';
+import { justResultWorryHandlerAtom } from '@/atom/justResultAtom';
+import { ModalCase } from '@/constants/modalEnum';
+import XIcon from '@/images/Modal/x_button.svg';
+import palette from '@/style/color';
 
 const ResultWithoutVote = () => {
   const [justResultWorryStatus, setJustResultWorryStatus] = useAtom(
@@ -33,7 +34,6 @@ const ResultWithoutVote = () => {
       <div className="button" onClick={() => handleJustResult()}>
         그래도 볼게요
       </div>
-
     </ModalWrap>
   );
 };
@@ -47,7 +47,6 @@ const ModalWrap = styled.div`
   @media screen and (max-width: 1300px) {
     padding-left: 0;
   }
-
 
   & .X {
     position: absolute;

@@ -3,14 +3,15 @@
 /**
  * 포스트 리스트 레이어
  */
-import { css } from "@emotion/react";
-import React, { useEffect, useRef, useState } from "react";
-import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
-import { EndPoint } from "../../../dataManager/apiMapper";
-import PostListComponent from "./PostListComponent";
-import styled from "@emotion/styled";
-import { useAtomValue } from "jotai";
-import { userAtom } from "../../../atom/userData";
+import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { userAtom } from '@/atom/userData';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+
+import PostListComponent from './PostListComponent';
 
 export type postingMetaDataType = {
   take: number;
@@ -44,13 +45,13 @@ const PostListLayer = () => {
 
     if (postingMetaData.nextId) {
       reqData = {
-        sort: "DESC",
+        sort: 'DESC',
         take: 5,
         nextCursorId: postingMetaData.nextId,
       };
     } else {
       reqData = {
-        sort: "DESC",
+        sort: 'DESC',
         take: 5,
       };
     }
@@ -61,7 +62,7 @@ const PostListLayer = () => {
         query: reqData,
       });
       // 새로 가져온 데이터와 기존 데이터 합치기
-      setPostingData((prevPosts) => [...prevPosts, ...res?.data.data]);
+      setPostingData((prevPosts) => [...prevPosts, ...(res?.data.data || [])]);
       setPostingMetaData(res?.data.meta);
       setHasMore(res?.data.meta.hasNextData);
       setIsLoading(false);
@@ -74,12 +75,12 @@ const PostListLayer = () => {
   useEffect(() => {
     // IntersectionObserver 등록하기
     observer.current = new IntersectionObserver(handleObserver, {
-      rootMargin: "0px 0px 100px 0px",
+      rootMargin: '0px 0px 100px 0px',
       threshold: 0.5,
     });
 
     // 마지막 요소에 observer 등록하기
-    const lastItem = document.querySelector(".user:last-child");
+    const lastItem = document.querySelector('.user:last-child');
     if (lastItem) {
       observer.current.observe(lastItem);
     }
@@ -105,13 +106,12 @@ const PostListLayer = () => {
     <PostListLayerWrap>
       <PostListLayerStyle>
         {postingData?.map((value, idx) => (
-          <div key={idx} className={"user"}>
+          <div key={idx} className={'user'}>
             <PostListComponent userInfo={userInfo} postData={value} />
           </div>
         ))}
       </PostListLayerStyle>
-      <div style={{ height: "10rem" }} />
-
+      <div style={{ height: '10rem' }} />
     </PostListLayerWrap>
   );
 };

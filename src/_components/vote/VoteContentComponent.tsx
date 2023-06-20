@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import React from 'react';
 
-import { css } from "@emotion/react";
-import React from "react";
-import VoteToolbar from "./VoteToolbar";
-import VoteContentTextComponent from "./VoteContentTextComponent";
-import VoteContentVoteComponent from "./VoteContentVoteComponent";
+import VoteContentTextComponent from './VoteContentTextComponent';
+import VoteContentVoteComponent from './VoteContentVoteComponent';
+import VoteToolbar from './VoteToolbar';
 
 const VoteContentCss = css`
   height: 22.6rem;
@@ -16,7 +16,7 @@ const VoteContentCss = css`
 const VoteContentComponent = () => {
   return (
     <div css={VoteContentCss}>
-      <div className={"Content"}>
+      <div className={'Content'}>
         <VoteToolbar />
         <VoteContentTextComponent />
       </div>

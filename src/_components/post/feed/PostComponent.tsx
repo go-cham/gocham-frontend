@@ -1,19 +1,21 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
+import React, { useEffect, useState } from 'react';
 
-import styled from "@emotion/styled";
-import PostProfileBox from "../PostProfileBox";
-import palette from "../../../style/color";
-import ClockIcon from "../../../images/PostComponent/clock.svg";
-import React, { useEffect, useState } from "react";
-import ChatBottomSheet from "../../chat/ChatBottomSheet";
-import PostVoteComponent from "./PostVoteComponent";
-import { userDataAtomType } from "../../../atom/userData";
-import { getRemainingTime } from "../../../utils/getRemainingTime";
-import { formatText } from "../../../utils/formatText";
-import { refreshChatAtom } from "../../../atom/postRefreshRequest";
-import { useAtom } from "jotai";
-import { postDataType } from "../../../type/postDataType";
-import { handleRefreshPostData } from "../../../utils/handleRefreshPostData";
+import ChatBottomSheet from '@/_components/chat/ChatBottomSheet';
+import { refreshChatAtom } from '@/atom/postRefreshRequest';
+import { userDataAtomType } from '@/atom/userData';
+import ClockIcon from '@/images/PostComponent/clock.svg';
+import palette from '@/style/color';
+import { postDataType } from '@/type/postDataType';
+import { formatText } from '@/utils/formatText';
+import { getRemainingTime } from '@/utils/getRemainingTime';
+import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
+
+import PostVoteComponent from './PostVoteComponent';
+
+import PostProfileBox from '../PostProfileBox';
 
 const PostComponent = ({
   userInfo,
@@ -23,7 +25,9 @@ const PostComponent = ({
   postData: postDataType;
 }) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-  const handleClickMeatballsMenu = () => {};
+  const handleClickMeatballsMenu = () => {
+    //
+  };
   const handleClickPostChat = () => {
     setOpenBottomSheet((value) => {
       return !value;
@@ -42,7 +46,7 @@ const PostComponent = ({
       setThisPostData(
         handleRefreshPostData(thisPostData, needRefresh.updateObject)
       );
-      setNeedRefresh({ worryIdx: null, updateObject: "" });
+      setNeedRefresh({ worryIdx: null, updateObject: '' });
     }
   }, [needRefresh]);
 
@@ -51,7 +55,7 @@ const PostComponent = ({
       {thisPostData.content !== undefined && (
         <PostComponentWrap>
           <PostComponentLayer>
-            <div style={{ height: "2.1rem" }}></div>
+            <div style={{ height: '2.1rem' }}></div>
             <PostProfileBox
               nickname={thisPostData.user.nickname}
               menuFunction={handleClickMeatballsMenu}
@@ -63,15 +67,15 @@ const PostComponent = ({
           {thisPostData.worryFiles[0]?.url && (
             <PostImageComponentLayer
               src={thisPostData.worryFiles[0]?.url}
-              alt={"게시글이미지"}
-              className={"게시글이미지"}
+              alt={'게시글이미지'}
+              className={'게시글이미지'}
             />
           )}
           <PostComponentLayer>
             {/*{thisPostData.expirationTime && (*/}
-            <div className={"마감"}>
-              <img src={ClockIcon} alt={"마감시간"} />
-              <p className={"마감시간"}>
+            <div className={'마감'}>
+              <img src={ClockIcon} alt={'마감시간'} />
+              <p className={'마감시간'}>
                 {getRemainingTime(thisPostData.expirationTime)}
               </p>
             </div>
@@ -81,14 +85,14 @@ const PostComponent = ({
               userId={userInfo.userId}
               handleClickPostChat={handleClickPostChat}
             />
-            <div className={"chatAndVotedUser"}>
+            <div className={'chatAndVotedUser'}>
               <div
-                className={"chatCount"}
+                className={'chatCount'}
                 onClick={() => handleClickPostChat()}
               >
                 댓글 {thisPostData.replyCount}개 모두 보기
               </div>
-              <p className={"result"}>
+              <p className={'result'}>
                 현재 투표한 사용자 {thisPostData.userWorryChoiceCount}명
               </p>
             </div>

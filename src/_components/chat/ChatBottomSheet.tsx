@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { BOTTOM_SHEET_HEIGHT } from "../../constants/BottomSheetOption";
-import styled from "@emotion/styled";
-import { motion } from "framer-motion";
-import Content from "./BottomSheetContent";
-import useBottomSheetFix from "../../hooks/useBottomSheetFix";
-import { useAtomValue } from "jotai";
-import { userAtom } from "../../atom/userData";
-import { MAX_WIDTH } from "../../constants/viewSize";
+import styled from '@emotion/styled';
+import { motion } from 'framer-motion';
+import { useAtomValue } from 'jotai';
+import React from 'react';
+
+import { userAtom } from '@/atom/userData';
+import { MAX_WIDTH } from '@/constants/viewSize';
+import useBottomSheetFix from '@/hooks/useBottomSheetFix';
+
+import Content from './BottomSheetContent';
 
 // 출처
 // https://velog.io/@boris0716/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-Bottom-Sheet-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%9E%91%EC%84%B1%EC%A4%91

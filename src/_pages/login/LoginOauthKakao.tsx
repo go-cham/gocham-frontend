@@ -1,17 +1,16 @@
 // 리다이렉트될 화면
+import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
-import { EndPoint } from "../../dataManager/apiMapper";
-import getUserInfo from "../../utils/getUserInfo";
-import { RouteURL } from "../../App";
-import { alertMessage } from "../../utils/alertMessage";
-import { useAtom } from "jotai";
-import { userAtom } from "../../atom/userData";
-import BackButton from "../../images/Common/back_button.png";
-import styled from "@emotion/styled";
-import { userType } from "../../constants/userTypeEnum";
+import { RouteURL } from '@/App';
+import { userAtom } from '@/atom/userData';
+import { userType } from '@/constants/userTypeEnum';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import { alertMessage } from '@/utils/alertMessage';
+import getUserInfo from '@/utils/getUserInfo';
 
 const LoginOauthKakao = () => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const LoginOauthKakao = () => {
 
   useEffect(() => {
     // const code = new URL(window.location.href).searchParams.get("code");
-    const code = new URLSearchParams(location.search).get("code") as string;
+    const code = new URLSearchParams(location.search).get('code') as string;
 
     // console.log(`code: ${code}`);
     (async () => {
@@ -33,7 +32,7 @@ const LoginOauthKakao = () => {
               query: { code },
             });
             const data = res && res.data;
-            window.localStorage.setItem("token", data.token);
+            window.localStorage.setItem('token', data.token);
             const userData = await getUserInfo();
             setUserData(userData);
 
@@ -55,9 +54,9 @@ const LoginOauthKakao = () => {
         } catch (e) {
           console.error(e);
           alert(
-            "로그인 과정에서 에러가 발생했습니다. 개발자에게 문의해주세요."
+            '로그인 과정에서 에러가 발생했습니다. 개발자에게 문의해주세요.'
           );
-          navigate("/login");
+          navigate('/login');
         }
       } else {
         navigate(RouteURL.home);

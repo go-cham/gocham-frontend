@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import React from 'react';
 
-import { css } from "@emotion/react";
-import React from "react";
-import UserProfile from "../common/UserProfile";
+import UserProfile from '../common/UserProfile';
 
 const VoteTitleCss = css`
   height: 30.7rem;

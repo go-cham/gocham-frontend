@@ -1,25 +1,26 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled';
+import { useAtomValue } from 'jotai';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import react, { useEffect, useState } from "react";
-import styled from "@emotion/styled";
-import AppBar from "../../_components/common/AppBar";
-import BottomContinueBar from "../../_components/common/BottomContinueBar";
-import palette from "../../style/color";
+import { RouteURL } from '@/App';
+import CollectNicknameAgeGender from '@/_components/collectInformation/CollectNicknameAgeGender';
+import CollectRegionJobCategory from '@/_components/collectInformation/CollectRegionJobCategory';
+import AppBar from '@/_components/common/AppBar';
+import BottomContinueBar from '@/_components/common/BottomContinueBar';
+import { userAtom } from '@/atom/userData';
+import { userType } from '@/constants/userTypeEnum';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import palette from '@/style/color';
+import { formatISO8601ToNormal } from '@/utils/formatISO8601ToNormal';
+import getUserInfo from '@/utils/getUserInfo';
+
 import {
   postUserInformationPropsType,
   userInformationType,
-} from "../collectInformation/CollectInformation";
-import CollectNicknameAgeGender from "../../_components/collectInformation/CollectNicknameAgeGender";
-import CollectRegionJobCategory from "../../_components/collectInformation/CollectRegionJobCategory";
-import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
-import { EndPoint } from "../../dataManager/apiMapper";
-import getUserInfo from "../../utils/getUserInfo";
-import { useAtomValue } from "jotai";
-import { userAtom } from "../../atom/userData";
-import { useNavigate } from "react-router-dom";
-import { formatISO8601ToNormal } from "../../utils/formatISO8601ToNormal";
-import { RouteURL } from "../../App";
-import { userType } from "../../constants/userTypeEnum";
+} from '../collectInformation/CollectInformation';
 
 const EditProfile = () => {
   const userInfo = useAtomValue(userAtom);
@@ -31,11 +32,11 @@ const EditProfile = () => {
   }, [userInfo]);
 
   const [userInformation, setUserInformation] = useState<userInformationType>({
-    nickname: "",
-    birthDay: "--",
-    sex: "",
-    residence: { value: 0, label: "" },
-    job: { value: 0, label: "" },
+    nickname: '',
+    birthDay: '--',
+    sex: '',
+    residence: { value: 0, label: '' },
+    job: { value: 0, label: '' },
     worryCategories: [],
   });
 
@@ -48,7 +49,7 @@ const EditProfile = () => {
         id: userInfo.userId,
       },
     })?.then((profileData) => {
-      let data = profileData.data;
+      const data = profileData.data;
 
       // console.log(data);
       const worryCategories = data.userWorryCategories.map((item: any) => ({
@@ -94,7 +95,7 @@ const EditProfile = () => {
           data: postUserInformation,
         });
         const userInfo = await getUserInfo();
-        navigate("/");
+        navigate('/');
       } catch (e) {
         console.error(e);
       }
@@ -102,10 +103,10 @@ const EditProfile = () => {
   };
   return (
     <>
-      <AppBar title={"프로필 편집"} boxShadow={false} />
+      <AppBar title={'프로필 편집'} boxShadow={false} />
 
       <EditProfileWrap>
-        {userInformation.birthDay !== "--" && (
+        {userInformation.birthDay !== '--' && (
           <>
             <CollectNicknameAgeGender
               userInformation={userInformation}
@@ -123,10 +124,10 @@ const EditProfile = () => {
       </EditProfileWrap>
 
       <EditConfirmBottomBar
-        title={"변경 완료"}
+        title={'변경 완료'}
         clickAction={handleClickProfileChange}
         buttonColor={palette.Primary}
-        fontColor={"white"}
+        fontColor={'white'}
       />
     </>
   );

@@ -1,4 +1,4 @@
-export const defaultErrorMessage = "관리자에게 문의하세요.";
+export const defaultErrorMessage = '관리자에게 문의하세요.';
 export const alertMessage = {
   error: {
     user: {
@@ -15,6 +15,6 @@ export const alertMessage = {
     },
   },
   report: {
-    post: "포스팅이 정상적으로 신고되었습니다.",
+    post: '포스팅이 정상적으로 신고되었습니다.',
   },
 };

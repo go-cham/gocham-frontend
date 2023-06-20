@@ -1,8 +1,5 @@
 /** @jsxImportSource @emotion/react */
-
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import { type } from "os";
+import styled from '@emotion/styled';
 
 export const CenterAlignDiv = styled.div`
   display: flex;
@@ -25,14 +22,14 @@ export const ButtonStyle = styled.div<ButtonProps>`
   justify-content: center;
   align-items: center;
   background-color: ${({ backgroundColor }) => backgroundColor};
-  color: ${({ color }) => (color ? color : "black")};
+  color: ${({ color }) => (color ? color : 'black')};
   width: ${({ width }) => {
-    if (typeof width == "number") return width + "rem";
-    if (typeof width == "string") return width;
+    if (typeof width == 'number') return width + 'rem';
+    if (typeof width == 'string') return width;
   }};
-  height: ${({ height }) => height + "rem"};
-  font-size: ${({ size }) => size + "rem"};
-  border-radius: ${({ borderRadius }) => borderRadius + "rem"};
+  height: ${({ height }) => height + 'rem'};
+  font-size: ${({ size }) => size + 'rem'};
+  border-radius: ${({ borderRadius }) => borderRadius + 'rem'};
   font-weight: ${({ fontWeight }): number | undefined => fontWeight};
   border: ${({ border }): string | undefined => border};
 `;

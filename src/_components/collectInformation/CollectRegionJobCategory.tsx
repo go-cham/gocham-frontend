@@ -1,28 +1,22 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled';
+import React, { useMemo } from 'react';
+import Select, { OnChangeValue } from 'react-select';
 
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import palette from "../../style/color";
 import {
   CollectInformationBox,
-  InputWrap,
   userInformationPropsType,
   userInformationType,
-} from "../../_pages/collectInformation/CollectInformation";
-import React, { useMemo } from "react";
-import { ButtonStyle } from "../../style/common";
-import Select, {
-  OnChangeValue,
-  IndicatorSeparatorProps,
-  StylesConfig,
-} from "react-select";
+} from '@/_pages/collectInformation/CollectInformation';
 import {
+  OptionType,
   categoryOptions,
   jobOptions,
-  OptionType,
   residenceOptions,
-} from "../../constants/Options";
-import MultiPickerComponent from "./MultiPickerComponent";
+} from '@/constants/Options';
+import palette from '@/style/color';
+
+import MultiPickerComponent from './MultiPickerComponent';
 
 const CollectNicknameAgeGender = ({
   userInformation,
@@ -46,26 +40,26 @@ const CollectNicknameAgeGender = ({
       option: (provided: any, state: any) => ({
         ...provided,
         // border: "5px dotted red",
-        textAlign: "left",
+        textAlign: 'left',
         backgroundColor: null,
-        fontSize: "1.2rem",
-        color: "rgba(42, 45, 55, 0.7)",
+        fontSize: '1.2rem',
+        color: 'rgba(42, 45, 55, 0.7)',
 
         // height: "2rem",
       }),
       control: (provided: any, state: any) => ({
         ...provided,
         // width: 200,
-        background: "rgba(0,0,0,0)",
+        background: 'rgba(0,0,0,0)',
         border: 0,
-        boxSizing: "border-box",
+        boxSizing: 'border-box',
         boxShadow: null,
         borderColor: null,
-        height: "5.5rem",
-        fontSize: "1.2rem",
-        color: "rgba(42, 45, 55, 0.7)",
+        height: '5.5rem',
+        fontSize: '1.2rem',
+        color: 'rgba(42, 45, 55, 0.7)',
         borderRadius: 0,
-        transition: "border-width 0.1s ease-in-out",
+        transition: 'border-width 0.1s ease-in-out',
         borderBottom: state.isFocused
           ? `0.4rem solid ${palette.Gray1}`
           : `0.2rem solid ${palette.Gray1}`,
@@ -73,13 +67,13 @@ const CollectNicknameAgeGender = ({
       singleValue: (provided: any, state: any) => ({
         ...provided,
         color: palette.Secondary,
-        fontSize: "1.2rem",
-        fontWeight: "500",
+        fontSize: '1.2rem',
+        fontWeight: '500',
       }),
       menu: (provided: any, state: any) => ({
         ...provided,
-        borderRadius: "1.2rem",
-        width: "15.5rem",
+        borderRadius: '1.2rem',
+        width: '15.5rem',
         right: 0,
       }),
 
@@ -87,7 +81,7 @@ const CollectNicknameAgeGender = ({
         ...provided,
         // maxHeight: "15rem",
       }),
-      indicatorSeparator: () => ({ display: "none" }),
+      indicatorSeparator: () => ({ display: 'none' }),
     }),
     []
   );
@@ -96,66 +90,66 @@ const CollectNicknameAgeGender = ({
       option: (provided: any, state: any) => ({
         ...provided,
         // border: "5px dotted red",
-        textAlign: "left",
+        textAlign: 'left',
         backgroundColor: null,
-        fontSize: "1.2rem",
-        color: "rgba(42, 45, 55, 0.7)",
+        fontSize: '1.2rem',
+        color: 'rgba(42, 45, 55, 0.7)',
         // height: "2rem",
       }),
       control: (provided: any, state: any) => ({
         ...provided,
         // width: 200,
-        background: "rgba(0,0,0,0)",
+        background: 'rgba(0,0,0,0)',
         border: 0,
-        boxSizing: "border-box",
+        boxSizing: 'border-box',
         boxShadow: null,
         borderColor: null,
-        height: "4rem",
-        fontSize: "1.2rem",
-        color: "rgba(42, 45, 55, 0.7)",
+        height: '4rem',
+        fontSize: '1.2rem',
+        color: 'rgba(42, 45, 55, 0.7)',
         borderRadius: 0,
-        transition: "border-width 0.1s ease-in-out",
+        transition: 'border-width 0.1s ease-in-out',
         borderBottom: state.isFocused
           ? `0.4rem solid ${palette.Gray1}`
           : `0.2rem solid ${palette.Gray1}`,
       }),
       ValueContainer: (provided: any, state: any) => ({
         ...provided,
-        height: "2.5rem",
+        height: '2.5rem',
       }),
       singleValue: (provided: any, state: any) => ({
         ...provided,
         color: palette.Secondary,
-        fontSize: "1.2rem",
-        fontWeight: "500",
+        fontSize: '1.2rem',
+        fontWeight: '500',
       }),
       multiValue: (provided: any, state: any) => ({
         ...provided,
         color: palette.Secondary,
-        fontSize: "1.28rem",
-        fontWeight: "500",
+        fontSize: '1.28rem',
+        fontWeight: '500',
       }),
       menu: (provided: any, state: any) => ({
         ...provided,
-        borderRadius: "1.2rem",
+        borderRadius: '1.2rem',
       }),
 
       menuList: (provided: any, state: any) => ({
         ...provided,
         // maxHeight: "15rem",
       }),
-      indicatorSeparator: () => ({ display: "none" }),
+      indicatorSeparator: () => ({ display: 'none' }),
       dropdownIndicator: (provided: any, state: any) => ({
         ...provided,
-        display: "none",
+        display: 'none',
       }),
       clearIndicator: (provided: any, state: any) => ({
         ...provided,
-        display: "none",
+        display: 'none',
       }),
       valueContainer: (provided: any, state: any) => ({
         ...provided,
-        height: "rem",
+        height: 'rem',
       }),
     }),
     []
@@ -170,7 +164,7 @@ const CollectNicknameAgeGender = ({
           styles={customStyles}
           options={residenceOptions}
           value={userInformation.residence}
-          onChange={(e) => handleInputValue(e, "residence")}
+          onChange={(e) => handleInputValue(e, 'residence')}
         />
       </OverflowInputWrap>
       <OverflowInputWrap>
@@ -180,7 +174,7 @@ const CollectNicknameAgeGender = ({
           styles={customStyles}
           options={jobOptions}
           value={userInformation.job}
-          onChange={(e) => handleInputValue(e, "job")}
+          onChange={(e) => handleInputValue(e, 'job')}
         />
       </OverflowInputWrap>
       <OverflowInputWrap>
@@ -189,7 +183,7 @@ const CollectNicknameAgeGender = ({
           categoryOptions={categoryOptions}
           selectedValue={userInformation.worryCategories}
           clickAction={(item) =>
-            handleInputValueWithCustomComponent(item, "worryCategories")
+            handleInputValueWithCustomComponent(item, 'worryCategories')
           }
         />
         {/*<Select*/}

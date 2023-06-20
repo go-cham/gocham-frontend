@@ -1,19 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
-import PostProfileBox from "../post/PostProfileBox";
-import styled from "@emotion/styled";
-import palette from "../../style/color";
-import ChatIcon from "../../images/PostComponent/chat.svg";
-import ShareIcon from "../../images/PostComponent/share.svg";
-import SendIcon from "../../images/PostComponent/send.svg";
-import ApiConfig, { HttpMethod } from "../../dataManager/apiConfig";
-import { EndPoint } from "../../dataManager/apiMapper";
-import { userDataAtomType } from "../../atom/userData";
-import { formatDate } from "../../utils/formatDate";
-import { formatText } from "../../utils/formatText";
-import { debounce } from "lodash";
-import { useAtom } from "jotai/index";
-import { refreshChatAtom } from "../../atom/postRefreshRequest";
-import { chatInputFocusAtom } from "../../atom/chatInputFocus";
+import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
+import { debounce } from 'lodash';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { chatInputFocusAtom } from '@/atom/chatInputFocus';
+import { refreshChatAtom } from '@/atom/postRefreshRequest';
+import { userDataAtomType } from '@/atom/userData';
+import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
+import { EndPoint } from '@/dataManager/apiMapper';
+import SendIcon from '@/images/PostComponent/send.svg';
+import palette from '@/style/color';
+import { formatDate } from '@/utils/formatDate';
+import { formatText } from '@/utils/formatText';
+
+import PostProfileBox from '../post/PostProfileBox';
 
 export default function Content({
   openBottomSheet,
@@ -54,7 +54,7 @@ export default function Content({
   }, [openBottomSheet]);
 
   const [chatData, setChatData] = useState([]);
-  const [chatText, setChatText] = useState("");
+  const [chatText, setChatText] = useState('');
   const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
 
   useEffect(() => {
@@ -76,9 +76,9 @@ export default function Content({
       });
       setNeedRefresh({
         worryIdx: postId,
-        updateObject: "chat",
+        updateObject: 'chat',
       });
-      setChatText("");
+      setChatText('');
       getChatData();
     } catch (e) {
       console.log(e);
@@ -92,7 +92,7 @@ export default function Content({
 
   // 엔터 입력시
   const handleOnKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handlePushChat(); // Enter 입력이 되면 클릭 이벤트 실행
     }
   };
@@ -101,13 +101,13 @@ export default function Content({
     <PostChatWrap>
       <PostChatContainer>
         <PostProfileBox
-          nickname={postData.user?.nickname ? postData.user?.nickname : "익명"}
+          nickname={postData.user?.nickname ? postData.user?.nickname : '익명'}
           profileImg={postData.user?.profileImageUrl}
         />
         <h1>{postData.title}</h1>
         <h2>{formatText(postData.content)}</h2>
-        <div className={"toolbar"}>
-          <p className={"result"}>
+        <div className={'toolbar'}>
+          <p className={'result'}>
             현재 투표한 사용자 {postData.userWorryChoiceCount}명
           </p>
         </div>
@@ -117,35 +117,35 @@ export default function Content({
         <InputWrap>
           <input
             ref={chatRef}
-            className={"댓글입력"}
-            placeholder={"여러분들의 의견을 자유롭게 남겨주세요!"}
+            className={'댓글입력'}
+            placeholder={'여러분들의 의견을 자유롭게 남겨주세요!'}
             value={chatText}
             onChange={(e) => setChatText(e.target.value)}
             onKeyDown={handleOnKeyPress} // Enter 입력 이벤트 함수
             maxLength={200}
           />
-          <img src={SendIcon} alt={"전송"} onClick={() => handlePushChat()} />
+          <img src={SendIcon} alt={'전송'} onClick={() => handlePushChat()} />
         </InputWrap>
         <ChatContentWrap>
           {chatData &&
             chatData.map((chat: any, idx) => {
               return (
                 <UserChatBox key={idx}>
-                  <div className={"metaData"}>
-                    <div className={"userAttribute"}>
+                  <div className={'metaData'}>
+                    <div className={'userAttribute'}>
                       <PostProfileBox
                         nickname={chat.user.nickname}
                         profileImg={chat.user.profileImageUrl}
                       />
                       {chat.user.worryChoice?.label && (
-                        <div className={"worryLabel"}>
+                        <div className={'worryLabel'}>
                           {chat.user.worryChoice.label}
                         </div>
                       )}
 
                       {/* 유저 투표값에 따른 이모지 제공 필요*/}
                     </div>
-                    <div className={"uploadDate"}>
+                    <div className={'uploadDate'}>
                       {formatDate(chat.createdAt)}
                     </div>
                   </div>
@@ -217,7 +217,7 @@ const InputWrap = styled.div`
     padding: 0 1rem;
     letter-spacing: -0.03em;
   }
-  & .댓글입력:: placeholder{
+  & .댓글입력:: placeholder {
     color: ${palette.Text4};
     letter-spacing: -0.03em;
   }

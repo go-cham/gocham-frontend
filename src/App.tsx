@@ -1,34 +1,32 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import React, { useEffect, useMemo } from "react";
-import "./App.css";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Home from "./_pages/home/Home";
-import { css } from "@emotion/react";
-import GNB from "./_components/common/GNB";
-import Login from "./_pages/login/Login";
-import GNBHOC from "./_components/common/GNBHOC";
-import RegisterTerm from "./_pages/login/RegisterTerm";
-import Onboarding from "./_pages/login/Onboarding";
-import Write from "./_pages/write/Write";
-import CollectInformation from "./_pages/collectInformation/CollectInformation";
-import LoginOauthKakao from "./_pages/login/LoginOauthKakao";
-import User from "./_pages/user/User";
-import getUserInfo from "./utils/getUserInfo";
-import { useAtom } from "jotai";
-import { userAtom } from "./atom/userData";
-import Settings from "./_pages/user/Settings";
-import Auth from "./HOC/Auth";
-import Feed from "./_pages/home/Feed";
-import AuthCheckPage from "./_pages/AuthCheckPage";
-import EditProfile from "./_pages/user/EditProfile";
-import styled from "@emotion/styled";
-import { MAX_WIDTH } from "./constants/viewSize";
-import RouteChangeTracker from "./utils/RouteChangeTracker";
-import BackgroundImage from "./images/background.png";
-import BackgroundNoCharImage from "./images/background_nocharVer.png";
-import ModalController from "./_pages/modal/ModalController";
-import palette from "./style/color";
+import './App.css';
+import Auth from './HOC/Auth';
+import GNBHOC from './_components/common/GNBHOC';
+import AuthCheckPage from './_pages/AuthCheckPage';
+import CollectInformation from './_pages/collectInformation/CollectInformation';
+import Feed from './_pages/home/Feed';
+import Home from './_pages/home/Home';
+import Login from './_pages/login/Login';
+import LoginOauthKakao from './_pages/login/LoginOauthKakao';
+import Onboarding from './_pages/login/Onboarding';
+import RegisterTerm from './_pages/login/RegisterTerm';
+import ModalController from './_pages/modal/ModalController';
+import EditProfile from './_pages/user/EditProfile';
+import Settings from './_pages/user/Settings';
+import User from './_pages/user/User';
+import Write from './_pages/write/Write';
+import { userAtom } from './atom/userData';
+import { MAX_WIDTH } from './constants/viewSize';
+import BackgroundImage from './images/background.png';
+import BackgroundNoCharImage from './images/background_nocharVer.png';
+import palette from './style/color';
+import RouteChangeTracker from './utils/RouteChangeTracker';
+import getUserInfo from './utils/getUserInfo';
 
 // 모바일 크기 처리
 const OuterWrap = styled.div`
@@ -73,21 +71,21 @@ const BackgroundColor = styled.div`
 `;
 
 export const RouteURL = {
-  home: "/",
-  feed: "/feed",
-  feed_star: "/feed/:id", // 포스트 상세
-  feed_route_star: "/feed/:id/:route", // 포스트 상세
-  login: "/login",
-  login_oauth_kakao: "/login/oauth/kakao",
-  register_term: "/register/term",
-  onboarding: "/onboarding",
-  write: "/write",
-  collect_information: "/collect-information",
-  user: "/user",
-  settings: "/settings",
-  edit_profile: "/edit-profile",
-  not_found: "/*",
-  auth_check: "/auth-check",
+  home: '/',
+  feed: '/feed',
+  feed_star: '/feed/:id', // 포스트 상세
+  feed_route_star: '/feed/:id/:route', // 포스트 상세
+  login: '/login',
+  login_oauth_kakao: '/login/oauth/kakao',
+  register_term: '/register/term',
+  onboarding: '/onboarding',
+  write: '/write',
+  collect_information: '/collect-information',
+  user: '/user',
+  settings: '/settings',
+  edit_profile: '/edit-profile',
+  not_found: '/*',
+  auth_check: '/auth-check',
 };
 
 function App() {
@@ -97,7 +95,7 @@ function App() {
     const checkLoginStatus = async () => {
       // 로그인 여부를 확인하는 함수 호출
       const userInfo = await getUserInfo();
-      if (userInfo !== "null") {
+      if (userInfo !== 'null') {
         setUserData(userInfo);
       } else {
         setUserData((value) => ({ ...value, userId: 0 }));
@@ -158,7 +156,7 @@ function App() {
               <Route path={RouteURL.settings} element={<Settings />} />
               <Route
                 path={RouteURL.not_found}
-                element={<Navigate to={"/"} />}
+                element={<Navigate to={'/'} />}
               />
               <Route
                 path={RouteURL.auth_check}

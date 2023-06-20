@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 
-import { css } from "@emotion/react";
-import palette from "../../style/color";
-import Logo from "../../images/Common/big_logo.svg";
-import KakaoText from "../../images/Login/카카오계정으로_시작하기.svg";
-import GochamCharacter from "../../images/Login/GochamCharacter.svg";
+import Logo from '@/images/Common/big_logo.svg';
+import GochamCharacter from '@/images/Login/GochamCharacter.svg';
+import KakaoText from '@/images/Login/카카오계정으로_시작하기.svg';
+import palette from '@/style/color';
 
 declare global {
   interface Window {
@@ -20,8 +20,8 @@ const Login = () => {
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_API;
 
   const handleKakaoLogin = async () => {
-    if (navigator.userAgent.indexOf("iPhone") > -1) {
-      alert("iOS의 비공개 릴레이가 켜져있다면 로그인이 되지않습니다.");
+    if (navigator.userAgent.indexOf('iPhone') > -1) {
+      alert('iOS의 비공개 릴레이가 켜져있다면 로그인이 되지않습니다.');
     }
     window.Kakao.Auth.authorize({
       redirectUri: REDIRECT_URI,
@@ -30,19 +30,19 @@ const Login = () => {
 
   return (
     <div css={LoginWrap}>
-      <img src={Logo} alt={"로고"} className={"로고"} />
-      <div className={"메인"}>
+      <img src={Logo} alt={'로고'} className={'로고'} />
+      <div className={'메인'}>
         <div>
           <img
             src={KakaoText}
-            alt={"카카오 로그인 텍스트"}
+            alt={'카카오 로그인 텍스트'}
             onClick={() => handleKakaoLogin()}
           />
           <br />
           <br />
         </div>
       </div>
-      <img src={GochamCharacter} className={"BigFace"} alt={"캐릭터"} />
+      <img src={GochamCharacter} className={'BigFace'} alt={'캐릭터'} />
     </div>
   );
 };

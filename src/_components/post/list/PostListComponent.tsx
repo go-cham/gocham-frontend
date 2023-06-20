@@ -1,25 +1,20 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled';
+import { useAtom } from 'jotai';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { css } from "@emotion/react";
-import React, { useEffect, useState } from "react";
-import styled from "@emotion/styled";
-import ProfileImg from "../../../images/PostComponent/profileImg.png";
-import CGP from "../../../images/PostComponent/GCP.png";
-import PostProfileBox from "../PostProfileBox";
-import palette from "../../../style/color";
-import { Route, useNavigate } from "react-router-dom";
-import { RouteURL } from "../../../App";
-import ChatBottomSheet from "../../chat/ChatBottomSheet";
-import { userInfo } from "os";
-import { userDataAtomType } from "../../../atom/userData";
-import { formatText } from "../../../utils/formatText";
-import ApiConfig, { HttpMethod } from "../../../dataManager/apiConfig";
-import { EndPoint } from "../../../dataManager/apiMapper";
-import { postDataType } from "../../../type/postDataType";
-import { useAtom } from "jotai/index";
-import { refreshChatAtom } from "../../../atom/postRefreshRequest";
-import { handleRefreshPostData } from "../../../utils/handleRefreshPostData";
-import { userType } from "../../../constants/userTypeEnum";
+import { RouteURL } from '@/App';
+import ChatBottomSheet from '@/_components/chat/ChatBottomSheet';
+import { refreshChatAtom } from '@/atom/postRefreshRequest';
+import { userDataAtomType } from '@/atom/userData';
+import { userType } from '@/constants/userTypeEnum';
+import palette from '@/style/color';
+import { postDataType } from '@/type/postDataType';
+import { formatText } from '@/utils/formatText';
+import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
+
+import PostProfileBox from '../PostProfileBox';
 
 const PostListComponent = ({
   userInfo,
@@ -62,7 +57,7 @@ const PostListComponent = ({
       setThisPostData(
         handleRefreshPostData(thisPostData, needRefresh.updateObject)
       );
-      setNeedRefresh({ worryIdx: null, updateObject: "" });
+      setNeedRefresh({ worryIdx: null, updateObject: '' });
     }
   }, [needRefresh]);
   return (
@@ -71,7 +66,7 @@ const PostListComponent = ({
         <div>
           <PostProfileBox
             nickname={
-              thisPostData.user?.nickname ? thisPostData.user.nickname : "익명"
+              thisPostData.user?.nickname ? thisPostData.user.nickname : '익명'
             }
             profileImg={
               thisPostData.user?.profileImageUrl
@@ -82,24 +77,24 @@ const PostListComponent = ({
           <PostContentBox onClick={() => handleGoPostDetail()}>
             <PostContentText haveImage={!!thisPostData.worryFiles[0]?.url}>
               <h1>{thisPostData.title}</h1>
-              <div className={"content"}>
+              <div className={'content'}>
                 {formatText(thisPostData.content)}
               </div>
             </PostContentText>
             {thisPostData.worryFiles[0]?.url && (
               <img
                 src={thisPostData.worryFiles[0]?.url}
-                alt={"게시글이미지"}
-                className={"게시글이미지"}
+                alt={'게시글이미지'}
+                className={'게시글이미지'}
               />
             )}
           </PostContentBox>
         </div>
         <PostMetaContent>
-          <div className={"chat"} onClick={() => handleClickPostChat()}>
+          <div className={'chat'} onClick={() => handleClickPostChat()}>
             댓글 {thisPostData.replyCount}개 모두 보기
           </div>
-          <div className={"voteCount"}>
+          <div className={'voteCount'}>
             현재 투표한 사용자 {thisPostData.userWorryChoiceCount}명
           </div>
         </PostMetaContent>
@@ -150,7 +145,7 @@ const PostListBox = styled.div`
 `;
 
 const PostContentText = styled.div<{ haveImage: boolean }>`
-  width: ${({ haveImage }) => (haveImage ? "calc(100% - 7.2rem)" : "100%")};
+  width: ${({ haveImage }) => (haveImage ? 'calc(100% - 7.2rem)' : '100%')};
 
   & h1 {
     font-weight: 700;

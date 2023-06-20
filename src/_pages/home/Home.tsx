@@ -1,16 +1,16 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled';
+import React from 'react';
 
-import React from "react";
-import PostListLayer from "../../_components/post/list/PostListLayer";
-import styled from "@emotion/styled";
-import palette from "../../style/color";
-import LogoAndTitle from "../../images/Common/LogoAndTitle.svg";
+import PostListLayer from '@/_components/post/list/PostListLayer';
+import LogoAndTitle from '@/images/Common/LogoAndTitle.svg';
+import palette from '@/style/color';
 
 const Home = () => {
   return (
     <MainView>
-      <div className={"title"}>
-        <img src={LogoAndTitle} alt={"로고와타이틀"} />
+      <div className={'title'}>
+        <img src={LogoAndTitle} alt={'로고와타이틀'} />
       </div>
       <PostListLayer />
     </MainView>

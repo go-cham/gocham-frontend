@@ -1,11 +1,13 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-import styled from "@emotion/styled";
-import palette from "../../style/color";
-import { ErrorMessage } from "./CollectNicknameAgeGender";
+import styled from '@emotion/styled';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+
 import {
   InputWrap,
   userInformationType,
-} from "../../_pages/collectInformation/CollectInformation";
+} from '@/_pages/collectInformation/CollectInformation';
+import palette from '@/style/color';
+
+import { ErrorMessage } from './CollectNicknameAgeGender';
 
 interface NicknameFormProps {
   onInputChange: (nickname: string) => void;
@@ -38,7 +40,7 @@ const NicknameForm: React.FC<NicknameFormProps> = ({
     <InputWrap>
       <h2>닉네임</h2>
       <NicknameInput
-        placeholder={"최대 10자 입력"}
+        placeholder={'최대 10자 입력'}
         value={nickname}
         onChange={handleInputChange}
         errorCase={errorCase}

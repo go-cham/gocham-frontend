@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
-import App from "./App";
-import { Banner } from "./_components/banner/Banner";
+import React, { useEffect, useState } from 'react';
+
+import App from './App';
+import { Banner } from './_components/banner/Banner';
+
 export const AppWrapper = () => {
   const [showUpdate, setShowUpdate] = useState(false);
 
   const applyUpdate = () => {
-    console.log("새롭게 받아오기");
+    console.log('새롭게 받아오기');
     navigator.serviceWorker.getRegistrations().then((regs) =>
       regs.forEach((reg) => {
-        reg.waiting?.postMessage({ type: "SKIP_WAITING" });
+        reg.waiting?.postMessage({ type: 'SKIP_WAITING' });
       })
     );
   };
