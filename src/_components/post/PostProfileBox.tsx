@@ -23,14 +23,6 @@ const PostProfileBox = ({
         />
         <div className={'nickname'}>{nickname}</div>
       </div>
-      {/*{menuFunction && (*/}
-      {/*  <img*/}
-      {/*    src={MenuIcon}*/}
-      {/*    alt={"메뉴"}*/}
-      {/*    onClick={menuFunction}*/}
-      {/*    className={"menu"}*/}
-      {/*  />*/}
-      {/*)}*/}
     </ProfileBox>
   );
 };

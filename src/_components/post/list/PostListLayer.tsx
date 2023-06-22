@@ -97,7 +97,7 @@ const PostListLayer = () => {
   };
 
   return (
-    <ul className="flex flex-col items-center pb-[10rem] pt-[2rem]">
+    <ul className="flex flex-col items-center space-y-[1.7rem] pb-[10rem] pt-[2rem]">
       {postingData?.map((value, idx) => (
         <li key={idx} className={'user'}>
           <PostListComponent userInfo={userInfo} postData={value} />

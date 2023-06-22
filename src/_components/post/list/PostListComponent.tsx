@@ -1,7 +1,5 @@
-/** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RouteURL } from '@/App';
@@ -9,12 +7,10 @@ import ChatBottomSheet from '@/_components/chat/ChatBottomSheet';
 import { refreshChatAtom } from '@/atom/postRefreshRequest';
 import { userDataAtomType } from '@/atom/userData';
 import { userType } from '@/constants/userTypeEnum';
-import palette from '@/styles/color';
+import GrayProfileImg from '@/images/PostComponent/gray_profileImg.png';
 import { postDataType } from '@/type/postDataType';
 import { formatText } from '@/utils/formatText';
 import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
-
-import PostProfileBox from '../PostProfileBox';
 
 const PostListComponent = ({
   userInfo,
@@ -62,43 +58,48 @@ const PostListComponent = ({
   }, [needRefresh]);
   return (
     <>
-      <PostListBox>
+      <section className="flex h-[16.5rem] w-[34rem] flex-col justify-between rounded-[1.2rem] bg-white p-[1.7rem] shadow-[0_0_0.4rem_rgba(42,45,55,0.1)]">
         <div>
-          <PostProfileBox
-            nickname={
-              thisPostData.user?.nickname ? thisPostData.user.nickname : '익명'
-            }
-            profileImg={
-              thisPostData.user?.profileImageUrl
-                ? thisPostData.user.profileImageUrl
-                : null
-            }
-          />
-          <PostContentBox onClick={() => handleGoPostDetail()}>
-            <PostContentText haveImage={!!thisPostData.worryFiles[0]?.url}>
-              <h1>{thisPostData.title}</h1>
-              <div className={'content'}>
+          <div className="flex items-center space-x-2">
+            <img
+              src={thisPostData.user?.profileImageUrl || GrayProfileImg}
+              alt="프로필"
+              className="h-[2.5rem] w-[2.5rem] rounded-full"
+            />
+            <span className="text-[1.2rem]">
+              {thisPostData.user.nickname || '익명'}
+            </span>
+          </div>
+          <div className="mt-[1.5rem] flex" onClick={handleGoPostDetail}>
+            <div className="flex-1 space-y-[0.5rem]">
+              <h1 className="line-clamp-1 text-[1.6rem] font-bold text-text1">
+                {thisPostData.title}
+              </h1>
+              <p className="line-clamp-1 h-[1.6rem] text-[1.2rem] text-text2">
                 {formatText(thisPostData.content)}
-              </div>
-            </PostContentText>
+              </p>
+            </div>
             {thisPostData.worryFiles[0]?.url && (
               <img
                 src={thisPostData.worryFiles[0]?.url}
-                alt={'게시글이미지'}
-                className={'게시글이미지'}
+                alt={'게시글 이미지'}
+                className="h-[7.2rem] w-[7.2rem] object-cover"
               />
             )}
-          </PostContentBox>
+          </div>
         </div>
-        <PostMetaContent>
-          <div className={'chat'} onClick={() => handleClickPostChat()}>
+        <div className="flex items-end justify-between">
+          <span
+            className="text-[1.2rem] font-medium text-text2"
+            onClick={() => handleClickPostChat()}
+          >
             댓글 {thisPostData.replyCount}개 모두 보기
-          </div>
-          <div className={'voteCount'}>
+          </span>
+          <span className="text-[1rem] font-medium text-text3">
             현재 투표한 사용자 {thisPostData.userWorryChoiceCount}명
-          </div>
-        </PostMetaContent>
-      </PostListBox>
+          </span>
+        </div>
+      </section>
       <ChatBottomSheet
         openBottomSheet={openBottomSheet}
         handleClickPostChat={handleClickPostChat}
@@ -110,72 +111,3 @@ const PostListComponent = ({
 };
 
 export default PostListComponent;
-
-const PostMetaContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  & .chat {
-    font-weight: 500;
-    font-size: 1.2rem;
-    line-height: 1.4rem;
-    color: ${palette.Text2};
-  }
-  & .voteCount {
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 1.2rem;
-    color: ${palette.Text3};
-  }
-`;
-
-const PostListBox = styled.div`
-  box-sizing: border-box;
-  width: 34rem;
-  height: 16.5rem;
-  padding: 1.7rem;
-  background-color: white;
-  box-shadow: 0px 0px 0.4rem rgba(42, 45, 55, 0.1);
-  border-radius: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 0 0 1.7rem 0;
-  position: relative;
-`;
-
-const PostContentText = styled.div<{ haveImage: boolean }>`
-  width: ${({ haveImage }) => (haveImage ? 'calc(100% - 7.2rem)' : '100%')};
-
-  & h1 {
-    font-weight: 700;
-    font-size: 1.6rem;
-    letter-spacing: -0.03rem;
-    line-height: 1.9rem;
-    color: ${palette.Text1};
-  }
-  & .content {
-    margin-top: 0.5rem;
-    font-weight: 400;
-    font-size: 1.2rem;
-    line-height: 1.9rem;
-    color: ${palette.Text2};
-    height: 1.6rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    letter-spacing: -0.03em;
-  }
-`;
-
-const PostContentBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  margin-top: 1.5rem;
-  & .게시글이미지 {
-    width: 7.2rem;
-    height: 7.2rem;
-    object-fit: cover;
-  }
-`;
