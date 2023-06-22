@@ -1,3 +1,7 @@
 @import 'font.css';
 @import 'responsive.css';
 @import 'tailwind.css';
+
+img[alt] {
+  font-size: 1rem;
+}

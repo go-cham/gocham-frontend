@@ -1,11 +1,5 @@
-/** @jsxImportSource @emotion/react */
-
-/**
- * 포스트 리스트 레이어
- */
-import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { userAtom } from '@/atom/userData';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
@@ -103,31 +97,13 @@ const PostListLayer = () => {
   };
 
   return (
-    <PostListLayerWrap>
-      <PostListLayerStyle>
-        {postingData?.map((value, idx) => (
-          <div key={idx} className={'user'}>
-            <PostListComponent userInfo={userInfo} postData={value} />
-          </div>
-        ))}
-      </PostListLayerStyle>
-      <div style={{ height: '10rem' }} />
-    </PostListLayerWrap>
+    <ul className="flex flex-col items-center pb-[10rem] pt-[2rem]">
+      {postingData?.map((value, idx) => (
+        <li key={idx} className={'user'}>
+          <PostListComponent userInfo={userInfo} postData={value} />
+        </li>
+      ))}
+    </ul>
   );
 };
 export default PostListLayer;
-
-const PostListLayerWrap = styled.div`
-  overflow-y: scroll;
-  height: 100%;
-`;
-
-const PostListLayerStyle = styled.div`
-  //width: 100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem 0 10rem;
-  justify-content: center;
-  //height: calc(100vh - 8rem);
-`;

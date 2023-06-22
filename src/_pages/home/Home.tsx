@@ -1,35 +1,17 @@
-/** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
-import React from 'react';
-
 import PostListLayer from '@/_components/post/list/PostListLayer';
 import LogoAndTitle from '@/images/Common/LogoAndTitle.svg';
-import palette from '@/styles/color';
 
 const Home = () => {
   return (
-    <MainView>
-      <div className={'title'}>
+    <div className="flex h-full flex-col">
+      <header className="border border-gray3 bg-white py-[2rem] pl-[3rem] drop-shadow-[0_0_4px_rgba(42,45,55,0.1)]">
         <img src={LogoAndTitle} alt={'로고와타이틀'} />
-      </div>
-      <PostListLayer />
-    </MainView>
+      </header>
+      <main className="flex-1 overflow-y-scroll">
+        <PostListLayer />
+      </main>
+    </div>
   );
 };
 
 export default Home;
-
-const MainView = styled.div`
-  overflow-y: hidden;
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  & .title {
-    box-sizing: border-box;
-    width: 100%;
-    background-color: white;
-    padding: 2rem 0 2rem 3rem;
-    border-bottom: 0.1rem solid ${palette.Gray3};
-    filter: drop-shadow(0px 0px 4px rgba(42, 45, 55, 0.1));
-  }
-`;
