@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RouteURL } from '@/App';
-import palette from '@/style/color';
-import { ButtonStyle } from '@/style/common';
+import palette from '@/styles/color';
+import { ButtonStyle } from '@/styles/common';
 
 const Onboarding = () => {
   const navigate = useNavigate();

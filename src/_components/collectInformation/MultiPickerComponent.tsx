@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { OptionType } from '@/constants/Options';
 import Dropdown from '@/images/Common/dropdown.svg';
 import XButton from '@/images/Common/x_button.svg';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 
 const MultiPickerComponent = ({
   categoryOptions,

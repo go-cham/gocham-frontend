@@ -9,7 +9,7 @@ import ChatBottomSheet from '@/_components/chat/ChatBottomSheet';
 import { refreshChatAtom } from '@/atom/postRefreshRequest';
 import { userDataAtomType } from '@/atom/userData';
 import { userType } from '@/constants/userTypeEnum';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 import { postDataType } from '@/type/postDataType';
 import { formatText } from '@/utils/formatText';
 import { handleRefreshPostData } from '@/utils/handleRefreshPostData';

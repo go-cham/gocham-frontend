@@ -5,7 +5,7 @@ import { ModalHanlderAtom } from '@/atom/ModalAtom';
 import { ModalCase } from '@/constants/modalEnum';
 import { MAX_WIDTH } from '@/constants/viewSize';
 import RightArrowButton from '@/images/Modal/right_arrow_icon.svg';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 
 const Survay = () => {
   const [ModalStatusHanlder, setModalStatusHanlder] = useAtom(ModalHanlderAtom);

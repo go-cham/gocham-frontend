@@ -4,6 +4,8 @@ import { useAtom } from 'jotai';
 import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
+import palette from '@/styles/color';
+
 import './App.css';
 import Auth from './HOC/Auth';
 import GNBHOC from './_components/common/GNBHOC';
@@ -24,7 +26,6 @@ import { userAtom } from './atom/userData';
 import { MAX_WIDTH } from './constants/viewSize';
 import BackgroundImage from './images/background.png';
 import BackgroundNoCharImage from './images/background_nocharVer.png';
-import palette from './style/color';
 import RouteChangeTracker from './utils/RouteChangeTracker';
 import getUserInfo from './utils/getUserInfo';
 

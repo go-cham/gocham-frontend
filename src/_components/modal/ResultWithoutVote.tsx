@@ -5,7 +5,7 @@ import { ModalHanlderAtom } from '@/atom/ModalAtom';
 import { justResultWorryHandlerAtom } from '@/atom/justResultAtom';
 import { ModalCase } from '@/constants/modalEnum';
 import XIcon from '@/images/Modal/x_button.svg';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 
 const ResultWithoutVote = () => {
   const [justResultWorryStatus, setJustResultWorryStatus] = useAtom(

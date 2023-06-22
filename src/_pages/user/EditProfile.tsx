@@ -13,7 +13,7 @@ import { userAtom } from '@/atom/userData';
 import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 import { formatISO8601ToNormal } from '@/utils/formatISO8601ToNormal';
 import getUserInfo from '@/utils/getUserInfo';
 

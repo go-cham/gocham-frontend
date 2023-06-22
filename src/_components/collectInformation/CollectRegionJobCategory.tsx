@@ -14,7 +14,7 @@ import {
   jobOptions,
   residenceOptions,
 } from '@/constants/Options';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 
 import MultiPickerComponent from './MultiPickerComponent';
 

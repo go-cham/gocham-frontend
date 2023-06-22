@@ -14,7 +14,7 @@ import ChatIcon from '@/images/PostComponent/chat.svg';
 import FillCheckIcon from '@/images/PostComponent/fill_check.svg';
 import ShareIcon from '@/images/PostComponent/share.svg';
 import ChatAlertImage from '@/images/PostComponent/share_image.svg';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 import { formatRoundedNumber } from '@/utils/formatRoundedNumber';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 

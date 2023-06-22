@@ -3,7 +3,7 @@ import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import React from 'react';
 
-import palette from '@/style/color';
+import palette from '@/styles/color';
 
 const SelectMyPostType = ({
   postType,

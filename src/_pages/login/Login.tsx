@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import Logo from '@/images/Common/big_logo.svg';
 import GochamCharacter from '@/images/Login/GochamCharacter.svg';
 import KakaoText from '@/images/Login/카카오계정으로_시작하기.svg';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 
 declare global {
   interface Window {

@@ -2,8 +2,9 @@ import { Provider } from 'jotai';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import '@/styles/global.css';
+
 import { AppWrapper } from './AppWrapper';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 

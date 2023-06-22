@@ -7,8 +7,8 @@ import {
   userInformationPropsType,
   userInformationType,
 } from '@/_pages/collectInformation/CollectInformation';
-import palette from '@/style/color';
-import { ButtonStyle } from '@/style/common';
+import palette from '@/styles/color';
+import { ButtonStyle } from '@/styles/common';
 
 import BirthdateForm from './BirthDateForm';
 import NicknameForm from './NicknameForm';

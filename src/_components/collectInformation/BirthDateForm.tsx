@@ -5,7 +5,7 @@ import {
   InputWrap,
   userInformationType,
 } from '@/_pages/collectInformation/CollectInformation';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 
 import { ErrorMessage } from './CollectNicknameAgeGender';
 

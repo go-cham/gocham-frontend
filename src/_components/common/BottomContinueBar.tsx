@@ -2,7 +2,7 @@
 import styled from '@emotion/styled';
 
 import { MAX_WIDTH } from '@/constants/viewSize';
-import { ButtonStyle } from '@/style/common';
+import { ButtonStyle } from '@/styles/common';
 
 const BottomContinueBar = ({
   title,

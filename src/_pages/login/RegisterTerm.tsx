@@ -13,7 +13,7 @@ import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
 import DetailArrow from '@/images/Login/detail_arrow.png';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 import { alertMessage } from '@/utils/alertMessage';
 
 export type AcceptType = {

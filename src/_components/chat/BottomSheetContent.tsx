@@ -9,7 +9,7 @@ import { userDataAtomType } from '@/atom/userData';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
 import SendIcon from '@/images/PostComponent/send.svg';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 import { formatDate } from '@/utils/formatDate';
 import { formatText } from '@/utils/formatText';
 

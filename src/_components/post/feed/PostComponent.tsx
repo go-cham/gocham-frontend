@@ -7,7 +7,7 @@ import ChatBottomSheet from '@/_components/chat/ChatBottomSheet';
 import { refreshChatAtom } from '@/atom/postRefreshRequest';
 import { userDataAtomType } from '@/atom/userData';
 import ClockIcon from '@/images/PostComponent/clock.svg';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 import { postDataType } from '@/type/postDataType';
 import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';

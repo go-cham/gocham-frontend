@@ -22,7 +22,7 @@ import { uploadFirebase } from '@/dataManager/firebaseManager';
 import { resizeImage } from '@/dataManager/imageResizing';
 import CameraIcon from '@/images/Write/Camera.svg';
 import DeleteIcon from '@/images/Write/delete_icon.svg';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 import { alertMessage } from '@/utils/alertMessage';
 import getFutureDateTime from '@/utils/getFutureDateTime';
 

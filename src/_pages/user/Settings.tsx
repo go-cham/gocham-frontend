@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 import AppBar from '@/_components/common/AppBar';
 import { initialUserData, userAtom } from '@/atom/userData';
-import palette from '@/style/color';
-import { ButtonStyle } from '@/style/common';
+import palette from '@/styles/color';
+import { ButtonStyle } from '@/styles/common';
 import { appVersion } from '@/version';
 
 const Settings = () => {

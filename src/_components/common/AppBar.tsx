@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
 import BackButton from '@/images/Common/back_button_42X42.svg';
-import palette from '@/style/color';
+import palette from '@/styles/color';
 
 const AppBar = ({
   title,
