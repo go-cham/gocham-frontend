@@ -6,7 +6,6 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import palette from '@/styles/color';
 
-import './App.css';
 import Auth from './HOC/Auth';
 import GNBHOC from './_components/common/GNBHOC';
 import AuthCheckPage from './_pages/AuthCheckPage';
