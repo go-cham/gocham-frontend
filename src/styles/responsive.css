@@ -1,22 +1,7 @@
-@media screen and (min-width: 641px) {
-    html {
-        font-size: 62.5%; /* 1rem = 10px */
-    }
+html {
+  font-size: 10px;
 }
 
-@media screen and (max-width: 640px) {
-    html {
-        font-size: 62.5%; /* 1rem = 10px */
-    }
-}
-
-@media screen and (max-width: 396px) {
-    html {
-        font-size: 55%; /* 1rem = 10px */
-    }
-}
-@media screen and (max-width: 360px) {
-    html {
-        font-size: 45%; /* 1rem = 10px */
-    }
+body {
+  font-size: 1.6rem;
 }
