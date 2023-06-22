@@ -1,10 +1,8 @@
-/** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import palette from '@/styles/color';
+import Layout from '@/_components/layout/Layout';
 
 import Auth from './HOC/Auth';
 import GNBHOC from './_components/common/GNBHOC';
@@ -22,53 +20,8 @@ import Settings from './_pages/user/Settings';
 import User from './_pages/user/User';
 import Write from './_pages/write/Write';
 import { userAtom } from './atom/userData';
-import { MAX_WIDTH } from './constants/viewSize';
-import BackgroundImage from './images/background.png';
-import BackgroundNoCharImage from './images/background_nocharVer.png';
 import RouteChangeTracker from './utils/RouteChangeTracker';
 import getUserInfo from './utils/getUserInfo';
-
-// 모바일 크기 처리
-const OuterWrap = styled.div`
-  @media screen and (min-width: 1300px) {
-    background-image: url(${BackgroundImage});
-  }
-
-  @media screen and (max-width: 1300px) {
-    background-image: url(${BackgroundNoCharImage});
-  }
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-`;
-
-const DefaultCSS = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: ${MAX_WIDTH};
-  @supports (-webkit-touch-callout: none) {
-    height: -webkit-fill-available;
-  }
-  overflow: hidden;
-  margin: 0 auto;
-
-  @media screen and (min-width: 1300px) {
-    padding-left: 50rem;
-  }
-
-  @media screen and (max-width: 1300px) {
-    padding-left: 0;
-  }
-`;
-
-const BackgroundColor = styled.div`
-  width: 100%;
-  background-color: ${palette.Background};
-`;
 
 export const RouteURL = {
   home: '/',
@@ -105,74 +58,60 @@ function App() {
   }, []);
 
   return (
-    <OuterWrap>
-      <DefaultCSS>
-        <BackgroundColor>
-          <ModalController />
-          <BrowserRouter>
-            <RouteChangeTracker />
-            <Routes>
-              <Route path={RouteURL.home} element={<Home />} />
-              <Route
-                path={RouteURL.collect_information}
-                element={<CollectInformation />}
-              />
-              <Route
-                path={RouteURL.feed_star}
-                element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
-              />
-              <Route
-                path={RouteURL.feed_route_star}
-                element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
-              />
-              <Route
-                path={RouteURL.login}
-                element={
-                  <Auth SpecificComponent={Login} requiredLogin={false} />
-                }
-              />
-              <Route
-                path={RouteURL.login_oauth_kakao}
-                element={<LoginOauthKakao />}
-              />
-              <Route path={RouteURL.register_term} element={<RegisterTerm />} />
-              <Route path={RouteURL.onboarding} element={<Onboarding />} />
-              <Route
-                path={RouteURL.write}
-                element={
-                  <Auth SpecificComponent={Write} requiredLogin={true} />
-                }
-              />
-              <Route
-                path={RouteURL.user}
-                element={<Auth SpecificComponent={User} requiredLogin={true} />}
-              />
-              <Route
-                path={RouteURL.edit_profile}
-                element={
-                  <Auth SpecificComponent={EditProfile} requiredLogin={true} />
-                }
-              />
-              <Route path={RouteURL.settings} element={<Settings />} />
-              <Route
-                path={RouteURL.not_found}
-                element={<Navigate to={'/'} />}
-              />
-              <Route
-                path={RouteURL.auth_check}
-                element={
-                  <Auth
-                    SpecificComponent={AuthCheckPage}
-                    requiredLogin={true}
-                  />
-                }
-              />
-            </Routes>
-            <GNBHOC />
-          </BrowserRouter>
-        </BackgroundColor>
-      </DefaultCSS>
-    </OuterWrap>
+    <Layout>
+      <ModalController />
+      <BrowserRouter>
+        <RouteChangeTracker />
+        <Routes>
+          <Route path={RouteURL.home} element={<Home />} />
+          <Route
+            path={RouteURL.collect_information}
+            element={<CollectInformation />}
+          />
+          <Route
+            path={RouteURL.feed_star}
+            element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
+          />
+          <Route
+            path={RouteURL.feed_route_star}
+            element={<Auth SpecificComponent={Feed} requiredLogin={true} />}
+          />
+          <Route
+            path={RouteURL.login}
+            element={<Auth SpecificComponent={Login} requiredLogin={false} />}
+          />
+          <Route
+            path={RouteURL.login_oauth_kakao}
+            element={<LoginOauthKakao />}
+          />
+          <Route path={RouteURL.register_term} element={<RegisterTerm />} />
+          <Route path={RouteURL.onboarding} element={<Onboarding />} />
+          <Route
+            path={RouteURL.write}
+            element={<Auth SpecificComponent={Write} requiredLogin={true} />}
+          />
+          <Route
+            path={RouteURL.user}
+            element={<Auth SpecificComponent={User} requiredLogin={true} />}
+          />
+          <Route
+            path={RouteURL.edit_profile}
+            element={
+              <Auth SpecificComponent={EditProfile} requiredLogin={true} />
+            }
+          />
+          <Route path={RouteURL.settings} element={<Settings />} />
+          <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
+          <Route
+            path={RouteURL.auth_check}
+            element={
+              <Auth SpecificComponent={AuthCheckPage} requiredLogin={true} />
+            }
+          />
+        </Routes>
+        <GNBHOC />
+      </BrowserRouter>
+    </Layout>
   );
 }
 

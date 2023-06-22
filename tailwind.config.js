@@ -2,6 +2,9 @@
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    screens: {
+      xl: '1300px',
+    },
     fontSize: {
       xs: '1.2rem',
       sm: '1.4rem',
@@ -24,6 +27,10 @@ module.exports = {
         gray1: '#CCCFD4',
         gray2: '#E1E3E7',
         gray3: '#F4F4F5',
+      },
+      backgroundImage: {
+        'with-character': "url('src/images/background.png')",
+        'without-character': "url('src/images/background_nocharVer.png')",
       },
     },
   },
