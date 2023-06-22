@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { RouteURL } from '@/App';
 import AppBar from '@/_components/common/AppBar';
 import PostComponent from '@/_components/post/feed/PostComponent';
-import { postingMetaDataType } from '@/_components/post/list/PostListLayer';
+import { postingMetaDataType } from '@/_components/post/list/PostCardList';
 import { userAtom } from '@/atom/userData';
 import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';

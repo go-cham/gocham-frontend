@@ -13,7 +13,7 @@ import palette from '@/styles/color';
 import { formatDate } from '@/utils/formatDate';
 import { formatText } from '@/utils/formatText';
 
-import PostProfileBox from '../post/PostProfileBox';
+import PostUserProfile from '../post/PostUserProfile';
 
 export default function Content({
   openBottomSheet,
@@ -100,9 +100,9 @@ export default function Content({
   return (
     <PostChatWrap>
       <PostChatContainer>
-        <PostProfileBox
+        <PostUserProfile
           nickname={postData.user?.nickname ? postData.user?.nickname : '익명'}
-          profileImg={postData.user?.profileImageUrl}
+          profileImage={postData.user?.profileImageUrl}
         />
         <h1>{postData.title}</h1>
         <h2>{formatText(postData.content)}</h2>
@@ -133,9 +133,9 @@ export default function Content({
                 <UserChatBox key={idx}>
                   <div className={'metaData'}>
                     <div className={'userAttribute'}>
-                      <PostProfileBox
+                      <PostUserProfile
                         nickname={chat.user.nickname}
-                        profileImg={chat.user.profileImageUrl}
+                        profileImage={chat.user.profileImageUrl}
                       />
                       {chat.user.worryChoice?.label && (
                         <div className={'worryLabel'}>

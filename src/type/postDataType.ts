@@ -2,8 +2,8 @@ export type postDataType = {
   id: number;
   createdAt?: string;
   updatedAt?: string | null;
-  title?: string;
-  content?: string;
+  title: string;
+  content: string;
   expirationTime?: string;
   worryFiles?: any;
   user: {

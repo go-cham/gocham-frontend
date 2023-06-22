@@ -7,8 +7,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RouteURL } from '@/App';
-import PostListComponent from '@/_components/post/list/PostListComponent';
-import { postingMetaDataType } from '@/_components/post/list/PostListLayer';
+import PostCard from '@/_components/post/list/PostCard';
+import { postingMetaDataType } from '@/_components/post/list/PostCardList';
 import SelectMyPostType from '@/_components/user/SelectMyPostType';
 import UserProfile from '@/_components/user/UserProfile';
 import { userAtom } from '@/atom/userData';
@@ -224,7 +224,7 @@ const User = () => {
         <PostListLayerStyle>
           {postingData?.map((value, idx) => (
             <div key={idx} className={'user'}>
-              <PostListComponent
+              <PostCard
                 userInfo={userInfo}
                 postData={value}
                 routeUrl={postType === '내 게시글' ? 'my' : 'participated'}

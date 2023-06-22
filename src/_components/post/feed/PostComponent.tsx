@@ -15,7 +15,7 @@ import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
 
 import PostVoteComponent from './PostVoteComponent';
 
-import PostProfileBox from '../PostProfileBox';
+import PostUserProfile from '../PostUserProfile';
 
 const PostComponent = ({
   userInfo,
@@ -56,10 +56,10 @@ const PostComponent = ({
         <PostComponentWrap>
           <PostComponentLayer>
             <div style={{ height: '2.1rem' }}></div>
-            <PostProfileBox
+            <PostUserProfile
               nickname={thisPostData.user.nickname}
-              menuFunction={handleClickMeatballsMenu}
-              profileImg={thisPostData.user.profileImageUrl}
+              profileImage={thisPostData.user.profileImageUrl}
+              // menuFunction={handleClickMeatballsMenu}
             />
             <h1>{thisPostData.title}</h1>
             <h2>{formatText(thisPostData.content)}</h2>

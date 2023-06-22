@@ -146,7 +146,7 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┃ ┃ ┣ 📜BottomContinueBar.tsx # 하단 컨티뉴 바
 ┃ ┃ ┃ ┣ 📜GNB.tsx # 하단 메뉴바
 ┃ ┃ ┃ ┣ 📜GNBHOC.tsx # 하단 메뉴바의 HOC 관리 컴포넌트
-┃ ┃ ┃ ┗ 📜UserProfile.tsx #유저 프로필(게시글, 댓글등에 사용)
+┃ ┃ ┃ ┗ 📜PostUserProfile.tsx #유저 프로필(게시글, 댓글등에 사용)
 ┃ ┃ ┣ 📂login # 로그인
 ┃ ┃ ┃ ┗ 📜CheckBox.tsx
 ┃ ┃ ┣ 📂modal # 모달 각자
@@ -160,12 +160,12 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┃ ┃ ┃ ┣ 📜PostComponent.tsx
 ┃ ┃ ┃ ┃ ┗ 📜PostVoteComponent.tsx
 ┃ ┃ ┃ ┣ 📂list #리스트형
-┃ ┃ ┃ ┃ ┣ 📜PostListComponent.tsx
-┃ ┃ ┃ ┃ ┗ 📜PostListLayer.tsx
-┃ ┃ ┃ ┗ 📜PostProfileBox.tsx
+┃ ┃ ┃ ┃ ┣ 📜PostCard.tsx
+┃ ┃ ┃ ┃ ┗ 📜PostCardList.tsx
+┃ ┃ ┃ ┗ 📜PostUserProfile.tsx
 ┃ ┃ ┣ 📂user # 유저, 프로필
 ┃ ┃ ┃ ┣ 📜SelectMyPostType.tsx
-┃ ┃ ┃ ┗ 📜UserProfile.tsx
+┃ ┃ ┃ ┗ 📜PostUserProfile.tsx
 ┃ ┃ ┗ 📂vote # 투표 컴포넌트
 ┃ ┃ ┃ ┣ 📜VoteComponent.tsx
 ┃ ┃ ┃ ┣ 📜VoteContentComponent.tsx

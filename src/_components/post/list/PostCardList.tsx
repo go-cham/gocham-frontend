@@ -5,7 +5,7 @@ import { userAtom } from '@/atom/userData';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
 
-import PostListComponent from './PostListComponent';
+import PostCard from './PostCard';
 
 export type postingMetaDataType = {
   take: number;
@@ -13,7 +13,7 @@ export type postingMetaDataType = {
   hasNextData?: boolean;
   nextId?: number;
 };
-const PostListLayer = () => {
+const PostCardList = () => {
   const userInfo = useAtomValue(userAtom);
   const [postingData, setPostingData] = useState<any[]>([]);
   const [postingMetaData, setPostingMetaData] = useState<postingMetaDataType>({
@@ -74,7 +74,7 @@ const PostListLayer = () => {
     });
 
     // 마지막 요소에 observer 등록하기
-    const lastItem = document.querySelector('.user:last-child');
+    const lastItem = document.querySelector('#post-card:last-child');
     if (lastItem) {
       observer.current.observe(lastItem);
     }
@@ -99,11 +99,11 @@ const PostListLayer = () => {
   return (
     <ul className="flex flex-col items-center space-y-[1.7rem] pb-[10rem] pt-[2rem]">
       {postingData?.map((value, idx) => (
-        <li key={idx} className={'user'}>
-          <PostListComponent userInfo={userInfo} postData={value} />
+        <li id="post-card" key={idx}>
+          <PostCard userInfo={userInfo} postData={value} />
         </li>
       ))}
     </ul>
   );
 };
-export default PostListLayer;
+export default PostCardList;

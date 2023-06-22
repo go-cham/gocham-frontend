@@ -1,4 +1,4 @@
-import PostListLayer from '@/_components/post/list/PostListLayer';
+import PostCardList from '@/_components/post/list/PostCardList';
 import LogoAndTitle from '@/images/Common/LogoAndTitle.svg';
 
 const Home = () => {
@@ -8,7 +8,7 @@ const Home = () => {
         <img src={LogoAndTitle} alt={'로고와타이틀'} />
       </header>
       <main className="flex-1 overflow-y-scroll">
-        <PostListLayer />
+        <PostCardList />
       </main>
     </div>
   );
