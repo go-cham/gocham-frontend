@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import React, { useEffect, useState } from 'react';
 
@@ -13,8 +12,6 @@ import { EndPoint } from '@/dataManager/apiMapper';
 import ChatIcon from '@/images/PostComponent/chat.svg';
 import FillCheckIcon from '@/images/PostComponent/fill_check.svg';
 import ShareIcon from '@/images/PostComponent/share.svg';
-import ChatAlertImage from '@/images/PostComponent/share_image.svg';
-import palette from '@/styles/color';
 import { formatRoundedNumber } from '@/utils/formatRoundedNumber';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 
@@ -60,8 +57,6 @@ const PostVoteComponent = ({
   const [choseData, setChoseData] = useState(0);
   // 투표된 값의 전체
   const [voteTotal, setVoteTotal] = useState(0);
-  // 특정 투표값을 클릭했는지 여부
-  const [selectVoteButton, setSelectVoteButton] = useState(0);
 
   useEffect(() => {
     //   투표값 조회
@@ -181,193 +176,72 @@ const PostVoteComponent = ({
 
   return (
     <>
-      <PostVoteComponentWrap>
+      <div className="mt-4 space-y-6">
         {choiceData.slice(0, -1).map((value: any, idx) => {
           const percentage = (value.userWorryChoiceCount / voteTotal) * 100;
           return (
-            <PostVoteButtonWrap key={idx}>
-              <PostVoteButton
-                isChoice={choseData === value?.id}
-                percentage={percentage}
-                onClick={() => handleClickResult(value.id)}
+            <div
+              className="relative flex h-[4.3rem] items-center justify-between overflow-hidden rounded-[0.5rem] border border-secondary px-[1.3rem]"
+              key={idx}
+            >
+              <p
+                className={`z-10 text-[1.4rem] font-medium ${
+                  (choiceData === value.id || percentage) && 'text-white'
+                }`}
               >
-                <div className={'content'}>
-                  <div>
-                    {value?.label}
-                    {percentage !== 0 &&
-                      !isNaN(percentage) &&
-                      `(${formatRoundedNumber(percentage)}%)`}
-                  </div>
-                  {choseData === value?.id ? (
-                    <img src={FillCheckIcon} alt={'체크버튼'} />
-                  ) : (
-                    <></>
-                  )}
-                </div>
-              </PostVoteButton>
-              {voteTotal > 0 && (
-                <VotePercentage
-                  percentage={percentage}
-                  isChoice={choseData === value?.id}
-                ></VotePercentage>
+                <span>{value?.label}</span>
+                <span>
+                  {percentage !== 0 &&
+                    !isNaN(percentage) &&
+                    `(${formatRoundedNumber(percentage)}%)`}
+                </span>
+              </p>
+              {choseData === value?.id && (
+                <img className="z-10" src={FillCheckIcon} alt={'체크버튼'} />
               )}
-            </PostVoteButtonWrap>
+              {voteTotal > 0 && (
+                <div
+                  className={`absolute left-0 top-0 h-full bg-secondary`}
+                  style={{ width: `${percentage}%` }}
+                />
+              )}
+            </div>
           );
         })}
-      </PostVoteComponentWrap>
-      <ToolWrap>
-        <div className={'voting'}>
-          <div className={'toolbar'}>
-            <img
-              src={ChatIcon}
-              alt={'댓글'}
-              onClick={() => handleClickPostChatWithFocus()}
-            />
-            <img
-              src={ShareIcon}
-              alt={'공유'}
-              onClick={() => handleClickShare(postData.id)}
-            />
-            <SharePostAlert alertShare={alertShare} display={display}>
-              <img src={ChatAlertImage} alt={'모달'} />
-              <p>게시물 링크가 복사되었어요!</p>
-            </SharePostAlert>
-          </div>
-          {choseData === 0 &&
-            choiceData?.map((value: any, idx) => {
-              // 배열의 마지막 요소인 경우에만 렌더링
-              if (idx === choiceData.length - 1) {
-                return (
-                  <p
-                    className={'justResult'}
-                    onClick={() => handleClickResultWithoutVote(value.id)}
-                    key={idx}
-                  >
-                    결과만 볼래요
-                  </p>
-                );
-              } else {
-                return null;
-              }
-            })}
+      </div>
+      <div className="relative">
+        <div className="my-6 flex">
+          <img
+            src={ChatIcon}
+            alt={'댓글'}
+            onClick={handleClickPostChatWithFocus}
+          />
+          <img
+            src={ShareIcon}
+            alt={'공유'}
+            onClick={() => handleClickShare(postData.id)}
+          />
         </div>
-      </ToolWrap>
-      {selectVoteButton > 0 && <ClickVoteButton>투표하기</ClickVoteButton>}
+        {choseData === 0 &&
+          choiceData?.map((value: any, idx) => {
+            // 배열의 마지막 요소인 경우에만 렌더링
+            if (idx === choiceData.length - 1) {
+              return (
+                <span
+                  className="absolute right-0 top-1/2 -translate-y-1/2 text-[1.2rem] text-text2 underline"
+                  onClick={() => handleClickResultWithoutVote(value.id)}
+                  key={idx}
+                >
+                  결과만 볼래요
+                </span>
+              );
+            } else {
+              return null;
+            }
+          })}
+      </div>
     </>
   );
 };
 
 export default PostVoteComponent;
-
-const ToolWrap = styled.div`
-  & .voting {
-    display: flex;
-    align-items: center;
-    position: relative;
-    & .justResult {
-      text-decoration-line: underline;
-      font-size: 1.2rem;
-      position: absolute;
-      right: 0;
-      color: ${palette.Text2};
-    }
-  }
-`;
-
-const SharePostAlert = styled.div<{ alertShare: boolean; display: string }>`
-  display: ${({ display }) => display};
-  opacity: ${({ alertShare }) => (alertShare ? '1' : '0')};
-  z-index: 10;
-
-  transition: all 0.5s ease-in-out;
-  position: absolute;
-  top: -3rem;
-  left: 3.5rem;
-  justify-content: center;
-  align-items: center;
-  & img {
-    position: absolute;
-  }
-  & p {
-    z-index: 11;
-    margin-bottom: 0.8rem;
-    //width: 16.2rem;
-    //height: 4.4rem;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: white;
-  }
-`;
-
-const ClickVoteButton = styled.div`
-  width: 34rem;
-  height: 4.7rem;
-  background-color: ${palette.Secondary};
-  margin: 0 auto;
-  position: absolute;
-  bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  left: 50%;
-  transform: translate(-50%, 0);
-  border-radius: 10rem;
-  font-weight: 700;
-  font-size: 1.6rem;
-  color: white;
-  //bottom: 0.5rem;
-`;
-
-const PostVoteButtonWrap = styled.div`
-  position: relative;
-  height: 4.3rem;
-  margin: 1.3rem 0 0 0;
-`;
-
-const VotePercentage = styled.div<{ percentage: number; isChoice: boolean }>`
-  position: absolute;
-  top: 0;
-  width: ${({ percentage }) => `${percentage}%`};
-  background-color: ${palette.Secondary};
-  height: 4.3rem;
-  border-radius: 0.5rem;
-  transition: width 0.5s;
-`;
-
-const PostVoteButton = styled.div<{ percentage: number; isChoice: boolean }>`
-  background-color: white;
-  //width: 81vw; // 기존 34rem
-  width: 100%;
-  height: 4.3rem;
-  border-radius: 0.5rem;
-  color: ${({ isChoice, percentage }) => {
-    if (isChoice || percentage > 0) {
-      return 'white';
-    } else {
-      return 'black';
-    }
-  }};
-  font-size: 1.4rem;
-  font-weight: 500;
-  box-sizing: border-box;
-  border: 0.1rem solid ${palette.Secondary};
-  & .content {
-    z-index: 5;
-    padding-right: 0.9rem;
-    padding-left: 1.3rem;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 4.3rem;
-    width: 98%;
-    box-sizing: border-box;
-  }
-`;
-
-const PostVoteComponentWrap = styled.div`
-  margin-top: 1.3rem;
-  margin-bottom: 1.7rem;
-  position: relative;
-  width: 100%;
-`;

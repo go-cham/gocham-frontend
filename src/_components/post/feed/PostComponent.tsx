@@ -1,13 +1,10 @@
-/** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ChatBottomSheet from '@/_components/chat/ChatBottomSheet';
 import { refreshChatAtom } from '@/atom/postRefreshRequest';
 import { userDataAtomType } from '@/atom/userData';
 import ClockIcon from '@/images/PostComponent/clock.svg';
-import palette from '@/styles/color';
 import { postDataType } from '@/type/postDataType';
 import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
@@ -25,21 +22,19 @@ const PostComponent = ({
   postData: postDataType;
 }) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-  const handleClickMeatballsMenu = () => {
-    //
-  };
+  const [thisPostData, setThisPostData] = useState<postDataType>(postData);
+  const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
+
   const handleClickPostChat = () => {
     setOpenBottomSheet((value) => {
       return !value;
     });
   };
 
-  const [thisPostData, setThisPostData] = useState<postDataType>(postData);
   useEffect(() => {
     setThisPostData(postData);
   }, []);
 
-  const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
   // 댓글이나 투표할 경우 해당 컨텐츠만 리프레시.
   useEffect(() => {
     if (needRefresh.worryIdx === postData.id) {
@@ -51,120 +46,54 @@ const PostComponent = ({
   }, [needRefresh]);
 
   return (
-    <>
-      {thisPostData.content !== undefined && (
-        <PostComponentWrap>
-          <PostComponentLayer>
-            <div style={{ height: '2.1rem' }}></div>
-            <PostUserProfile
-              nickname={thisPostData.user.nickname}
-              profileImage={thisPostData.user.profileImageUrl}
-              // menuFunction={handleClickMeatballsMenu}
-            />
-            <h1>{thisPostData.title}</h1>
-            <h2>{formatText(thisPostData.content)}</h2>
-          </PostComponentLayer>
-          {thisPostData.worryFiles[0]?.url && (
-            <PostImageComponentLayer
-              src={thisPostData.worryFiles[0]?.url}
-              alt={'게시글이미지'}
-              className={'게시글이미지'}
-            />
-          )}
-          <PostComponentLayer>
-            {/*{thisPostData.expirationTime && (*/}
-            <div className={'마감'}>
-              <img src={ClockIcon} alt={'마감시간'} />
-              <p className={'마감시간'}>
-                {getRemainingTime(thisPostData.expirationTime)}
-              </p>
-            </div>
-            {/*)}*/}
-            <PostVoteComponent
-              postData={thisPostData}
-              userId={userInfo.userId}
-              handleClickPostChat={handleClickPostChat}
-            />
-            <div className={'chatAndVotedUser'}>
-              <div
-                className={'chatCount'}
-                onClick={() => handleClickPostChat()}
-              >
-                댓글 {thisPostData.replyCount}개 모두 보기
-              </div>
-              <p className={'result'}>
-                현재 투표한 사용자 {thisPostData.userWorryChoiceCount}명
-              </p>
-            </div>
-          </PostComponentLayer>
-          <ChatBottomSheet
-            openBottomSheet={openBottomSheet}
-            handleClickPostChat={handleClickPostChat}
-            postId={thisPostData.id}
-            postData={thisPostData}
-          />
-        </PostComponentWrap>
+    <div className="flex flex-col border-b border-gray3 bg-white px-[2.5rem] py-[1.5rem]">
+      <PostUserProfile
+        nickname={thisPostData.user.nickname}
+        profileImage={thisPostData.user.profileImageUrl}
+      />
+      <h1 className="mt-[2.1rem] text-[1.8rem] font-bold">
+        {thisPostData.title}
+      </h1>
+      <p className="mt-[1.3rem] text-[1.4rem]">
+        {formatText(thisPostData.content)}
+      </p>
+      {thisPostData.worryFiles[0]?.url && (
+        <img
+          src={thisPostData.worryFiles[0]?.url}
+          alt={'게시글이미지'}
+          className="mx-auto mt-[1.7rem] max-h-[20.25rem] object-contain"
+        />
       )}
-    </>
+      <div className="mt-[1.9rem] flex space-x-2">
+        <img src={ClockIcon} alt={'마감시간'} />
+        <span className="text-[1.2rem] font-medium text-primary">
+          {getRemainingTime(thisPostData.expirationTime)}
+        </span>
+      </div>
+      <PostVoteComponent
+        postData={thisPostData}
+        userId={userInfo.userId}
+        handleClickPostChat={handleClickPostChat}
+      />
+      <div className="flex justify-between">
+        <span
+          className="text-[1.2rem] text-text3"
+          onClick={handleClickPostChat}
+        >
+          댓글 {thisPostData.replyCount}개 모두 보기
+        </span>
+        <span className="text-[1.2rem] text-text3">
+          현재 투표한 사용자 {thisPostData.userWorryChoiceCount}명
+        </span>
+      </div>
+      <ChatBottomSheet
+        openBottomSheet={openBottomSheet}
+        handleClickPostChat={handleClickPostChat}
+        postId={thisPostData.id}
+        postData={thisPostData}
+      />
+    </div>
   );
 };
 
 export default PostComponent;
-
-const PostComponentWrap = styled.div`
-  border-bottom: 0.1rem solid ${palette.Gray3};
-  position: relative;
-  background-color: ${palette.White};
-`;
-
-const PostComponentLayer = styled.div`
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-  & .chatAndVotedUser {
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-  }
-  & .chatCount {
-    font-size: 1.2rem;
-    padding-bottom: 1.7rem;
-    color: ${palette.Text3};
-  }
-  & .result {
-    font-size: 1.2rem;
-    color: ${palette.Text3};
-  }
-
-  & .마감 {
-    padding-top: 1.9rem;
-    display: flex;
-    align-items: center;
-    & .마감시간 {
-      margin-left: 0.6rem;
-      font-weight: 500;
-      font-size: 1.2rem;
-      color: ${palette.Primary};
-      line-height: 1.4rem;
-    }
-  }
-  & h1 {
-    margin-top: 2.1rem;
-    font-weight: 700;
-    font-size: 1.8rem;
-    letter-spacing: -0.03em;
-  }
-  & h2 {
-    margin-top: 1.3rem;
-    font-weight: 400;
-    font-size: 1.4rem;
-    padding-bottom: 1.7rem;
-    line-height: 2.1rem;
-    letter-spacing: -0.03em;
-  }
-`;
-
-const PostImageComponentLayer = styled.img`
-  width: 100%;
-  max-height: 20.25rem;
-  object-fit: contain;
-`;
