@@ -5,3 +5,8 @@
 img[alt] {
   font-size: 1rem;
 }
+
+input:focus,
+textarea:focus {
+  outline: none;
+}

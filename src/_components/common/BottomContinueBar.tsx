@@ -24,7 +24,7 @@ const BottomContinueBar = ({
   return (
     <BottomBarWrap
       boxColor={boxColor}
-      height={height ? height : 11.2}
+      height={height ? height : 10.8}
       boxShadow={boxShadow === undefined ? true : boxShadow}
     >
       <NextButton
@@ -56,10 +56,10 @@ type BottomBarWrapType = {
 };
 
 const BottomBarWrap = styled.div<BottomBarWrapType>`
-  position: fixed;
+  //position: fixed;
+  //bottom: -0.5rem;
   margin: 0 auto;
-  max-width: ${MAX_WIDTH};
-  bottom: -0.5rem;
+  //max-width: ${MAX_WIDTH};
   box-shadow: ${(props) => {
     if (props.boxShadow === false) {
       return '';
