@@ -1,50 +1,14 @@
-import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
 import React from 'react';
 
 import { userAtom } from '@/atom/userData';
-import { MAX_WIDTH } from '@/constants/viewSize';
 import useBottomSheetFix from '@/hooks/useBottomSheetFix';
 
 import Content from './BottomSheetContent';
 
 // 출처
 // https://velog.io/@boris0716/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-Bottom-Sheet-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%9E%91%EC%84%B1%EC%A4%91
-
-const BackgroundColor = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: white;
-
-  border-top-left-radius: 1.2rem;
-  border-top-right-radius: 1.2rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.6);
-`;
-
-const Wrapper = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  //max-width: ${MAX_WIDTH};
-  margin: 0 auto;
-  width: 100%;
-  //position: fixed;
-  position: absolute;
-  z-index: 10;
-  //top: 101%;
-  top: calc(100% + 1rem); /*시트가 얼마나 높이 위치할지*/
-  left: 0;
-  right: 0;
-  height: 600px;
-  background: white;
-  transition: transform 400ms ease-out; /*바텀시트 애니메이션 속도*/
-`;
-
-const BottomSheetContent = styled.div`
-  overflow: scroll;
-  height: 600px;
-  -webkit-overflow-scrolling: touch;
-`;
 
 function ChatBottomSheet({
   openBottomSheet,
@@ -64,39 +28,33 @@ function ChatBottomSheet({
   const userInfo = useAtomValue(userAtom);
 
   return (
-    <Wrapper ref={sheet}>
-      <BackgroundColor>
-        <HeaderWrapper ref={header} onClick={handleClickPostChat}>
-          <Handle />
-        </HeaderWrapper>
-        <BottomSheetContent>
-          <Content
-            openBottomSheet={openBottomSheet}
-            postId={postId}
-            userInfo={userInfo}
-            postData={postData}
-          />
-        </BottomSheetContent>
-      </BackgroundColor>
-    </Wrapper>
+    <motion.div
+      className="absolute left-0 top-[calc(100%+1rem)] z-20 flex h-[600px] w-full flex-col rounded-t-[1.2rem] bg-white shadow-[0_0_1rem_rgba(0,0,0,0.6)] duration-[400ms] ease-out"
+      ref={sheet}
+    >
+      <div
+        ref={header}
+        onClick={handleClickPostChat}
+        className="h-[2.4rem] pb-[2.8rem] pt-[1.2rem]"
+      >
+        <Handle />
+      </div>
+      <div className="h-[600px] overflow-y-auto">
+        <Content
+          openBottomSheet={openBottomSheet}
+          postId={postId}
+          userInfo={userInfo}
+          postData={postData}
+        />
+      </div>
+    </motion.div>
   );
 }
 
 export default ChatBottomSheet;
 
-const HeaderWrapper = styled.div`
-  height: 24px;
-  border-top-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  position: relative;
-  padding-top: 12px;
-  padding-bottom: 4px;
-`;
-
-const Handle = styled.div`
-  width: 40px;
-  height: 4px;
-  border-radius: 2px;
-  background-color: #2a2d37;
-  margin: auto;
-`;
+function Handle() {
+  return (
+    <div className="mx-auto h-[0.4rem] w-[4rem] rounded-[2px] bg-[#2a2d37]" />
+  );
+}

@@ -1,15 +1,6 @@
-/** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { debounce } from 'lodash';
-import React, {
-  ChangeEvent,
-  TextareaHTMLAttributes,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Select, { StylesConfig } from 'react-select';
 

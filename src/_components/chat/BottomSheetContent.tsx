@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { debounce } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
@@ -9,7 +8,6 @@ import { userDataAtomType } from '@/atom/userData';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
 import SendIcon from '@/images/PostComponent/send.svg';
-import palette from '@/styles/color';
 import { formatDate } from '@/utils/formatDate';
 import { formatText } from '@/utils/formatText';
 
@@ -98,163 +96,67 @@ export default function Content({
   };
 
   return (
-    <PostChatWrap>
-      <PostChatContainer>
+    <div className="divide-y-[1px] divide-gray3 pb-[10rem]">
+      <div className="px-[1.9rem]">
         <PostUserProfile
           nickname={postData.user?.nickname ? postData.user?.nickname : '익명'}
           profileImage={postData.user?.profileImageUrl}
         />
-        <h1>{postData.title}</h1>
-        <h2>{formatText(postData.content)}</h2>
-        <div className={'toolbar'}>
-          <p className={'result'}>
+        <h1 className="mt-[2.1rem] text-[1.8rem] font-bold">
+          {postData.title}
+        </h1>
+        <p className="mt-[1.3rem] text-[1.4rem]">
+          {formatText(postData.content)}
+        </p>
+        <div className="mb-[1.3rem] mt-[1.7rem] text-end">
+          <span className="text-[1.2rem] text-text3">
             현재 투표한 사용자 {postData.userWorryChoiceCount}명
-          </p>
+          </span>
         </div>
-      </PostChatContainer>
-      <GrayBar />
-      <PostChatContainer>
-        <InputWrap>
+      </div>
+      <div className="px-[1.9rem]">
+        <div className="mt-[1.7rem] flex items-center justify-between">
           <input
             ref={chatRef}
-            className={'댓글입력'}
+            className="h-[4.1rem] w-[88%] rounded-[0.5rem] border border-gray2 px-[1rem] text-[1.4rem] placeholder-text4"
             placeholder={'여러분들의 의견을 자유롭게 남겨주세요!'}
             value={chatText}
             onChange={(e) => setChatText(e.target.value)}
             onKeyDown={handleOnKeyPress} // Enter 입력 이벤트 함수
             maxLength={200}
           />
-          <img src={SendIcon} alt={'전송'} onClick={() => handlePushChat()} />
-        </InputWrap>
-        <ChatContentWrap>
+          <img src={SendIcon} alt={'전송'} onClick={handlePushChat} />
+        </div>
+        <div>
           {chatData &&
             chatData.map((chat: any, idx) => {
               return (
-                <UserChatBox key={idx}>
-                  <div className={'metaData'}>
-                    <div className={'userAttribute'}>
+                <div key={idx} className="mt-[2.1rem]">
+                  <div className="flex items-center justify-between">
+                    <div className="flex">
                       <PostUserProfile
                         nickname={chat.user.nickname}
                         profileImage={chat.user.profileImageUrl}
                       />
                       {chat.user.worryChoice?.label && (
-                        <div className={'worryLabel'}>
+                        <span className="ml-[0.7rem] flex h-[2.2rem] items-center justify-center rounded-[1.5rem] border px-[1rem] text-[1rem] font-medium">
                           {chat.user.worryChoice.label}
-                        </div>
+                        </span>
                       )}
-
                       {/* 유저 투표값에 따른 이모지 제공 필요*/}
                     </div>
-                    <div className={'uploadDate'}>
+                    <div className="text-[1.2rem]">
                       {formatDate(chat.createdAt)}
                     </div>
                   </div>
-                  <p>{chat.content}</p>
-                </UserChatBox>
+                  <p className="mt-[0.9rem] break-all px-[3.3rem] text-[1.4rem]">
+                    {chat.content}
+                  </p>
+                </div>
               );
             })}
-        </ChatContentWrap>
-      </PostChatContainer>
-    </PostChatWrap>
+        </div>
+      </div>
+    </div>
   );
 }
-
-const PostChatWrap = styled.div`
-  margin-bottom: 10rem;
-`;
-const ChatContentWrap = styled.div``;
-
-const UserChatBox = styled.div`
-  margin-top: 2.1rem;
-
-  & .userAttribute {
-    display: flex;
-    align-items: center;
-    & .worryLabel {
-      margin-left: 0.7rem;
-      padding: 0 1rem;
-      height: 2.2rem;
-      border-radius: 1.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: 500;
-      font-size: 1rem;
-      color: black;
-      border: 1px solid black;
-      background-color: white;
-    }
-  }
-  & .uploadDate {
-    font-size: 1.2rem;
-  }
-  & .metaData {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  & p {
-    font-size: 1.4rem;
-    margin-left: 3.3rem;
-    margin-top: 0.9rem;
-    width: 28rem;
-    word-wrap: break-word;
-    letter-spacing: -0.03em;
-    line-height: 2.1rem;
-  }
-`;
-
-const InputWrap = styled.div`
-  margin-top: 1.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  & .댓글입력 {
-    width: 88%;
-    height: 4.1rem;
-    border: 0.1rem solid ${palette.Gray2};
-    border-radius: 0.5rem;
-    padding: 0 1rem;
-    letter-spacing: -0.03em;
-  }
-  & .댓글입력:: placeholder {
-    color: ${palette.Text4};
-    letter-spacing: -0.03em;
-  }
-`;
-
-const PostChatContainer = styled.div`
-  padding: 0 1.7rem 0 1.9rem;
-
-  & h1 {
-    margin-top: 2.1rem;
-    font-weight: 700;
-    font-size: 1.8rem;
-    letter-spacing: -0.03em;
-  }
-  & h2 {
-    margin-top: 1.3rem;
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 2.1rem;
-    padding-bottom: 1.7rem;
-    letter-spacing: -0.03em;
-  }
-  & .toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    margin-top: 1.7rem;
-    margin-bottom: 1.3rem;
-  }
-  & .result {
-    font-size: 1.2rem;
-    color: ${palette.Text3};
-  }
-`;
-
-const GrayBar = styled.div`
-  background-color: ${palette.Gray3};
-  width: 100%;
-  height: 0.1rem;
-`;
