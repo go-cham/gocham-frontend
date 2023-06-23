@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { RouteURL } from '@/App';
 import AppBar from '@/_components/common/AppBar';
-import PostComponent from '@/_components/post/feed/PostComponent';
+import PostDetail from '@/_components/post/feed/PostDetail';
 import { postingMetaDataType } from '@/_components/post/list/PostCardList';
 import { userAtom } from '@/atom/userData';
 import { userType } from '@/constants/userTypeEnum';
@@ -142,7 +142,7 @@ const Feed = () => {
       <PostLayer>
         {postingData?.map((value, idx) => (
           <div key={idx} className={'postComponent'}>
-            <PostComponent userInfo={userInfo} postData={value} />
+            <PostDetail userInfo={userInfo} postData={value} />
           </div>
         ))}
       </PostLayer>

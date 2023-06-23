@@ -15,7 +15,7 @@ import ShareIcon from '@/images/PostComponent/share.svg';
 import { formatRoundedNumber } from '@/utils/formatRoundedNumber';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 
-const PostVoteComponent = ({
+const PostVote = ({
   postData,
   userId,
   handleClickPostChat,
@@ -244,4 +244,4 @@ const PostVoteComponent = ({
   );
 };
 
-export default PostVoteComponent;
+export default PostVote;

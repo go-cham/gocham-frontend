@@ -6,15 +6,14 @@ import { refreshChatAtom } from '@/atom/postRefreshRequest';
 import { userDataAtomType } from '@/atom/userData';
 import ClockIcon from '@/images/PostComponent/clock.svg';
 import { postDataType } from '@/type/postDataType';
-import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
 
-import PostVoteComponent from './PostVoteComponent';
+import PostVote from './PostVote';
 
 import PostUserProfile from '../PostUserProfile';
 
-const PostComponent = ({
+const PostDetail = ({
   userInfo,
   postData,
 }: {
@@ -51,26 +50,13 @@ const PostComponent = ({
         nickname={thisPostData.user.nickname}
         profileImage={thisPostData.user.profileImageUrl}
       />
-      <h1 className="mt-[2.1rem] text-[1.8rem] font-bold">
-        {thisPostData.title}
-      </h1>
-      <p className="mt-[1.3rem] text-[1.4rem]">
-        {formatText(thisPostData.content)}
-      </p>
-      {thisPostData.worryFiles[0]?.url && (
-        <img
-          src={thisPostData.worryFiles[0]?.url}
-          alt={'게시글이미지'}
-          className="mx-auto mt-[1.7rem] max-h-[20.25rem] object-contain"
-        />
-      )}
-      <div className="mt-[1.9rem] flex space-x-2">
-        <img src={ClockIcon} alt={'마감시간'} />
-        <span className="text-[1.2rem] font-medium text-primary">
-          {getRemainingTime(thisPostData.expirationTime)}
-        </span>
-      </div>
-      <PostVoteComponent
+      <PostDetailContent
+        title={thisPostData.title}
+        content={thisPostData.content}
+        image={thisPostData.worryFiles[0]?.url}
+      />
+      <PostExpiration expirationTime={thisPostData.expirationTime} />
+      <PostVote
         postData={thisPostData}
         userId={userInfo.userId}
         handleClickPostChat={handleClickPostChat}
@@ -96,4 +82,39 @@ const PostComponent = ({
   );
 };
 
-export default PostComponent;
+export default PostDetail;
+
+function PostDetailContent({
+  title,
+  content,
+  image,
+}: {
+  title: string;
+  content: string;
+  image?: string | null;
+}) {
+  return (
+    <div>
+      <h1 className="mt-[2.1rem] text-[1.8rem] font-bold">{title}</h1>
+      <p className="mt-[1.3rem] text-[1.4rem]">{content}</p>
+      {image && (
+        <img
+          src={image}
+          alt={'게시글이미지'}
+          className="mx-auto mt-[1.7rem] max-h-[20.25rem] object-contain"
+        />
+      )}
+    </div>
+  );
+}
+
+function PostExpiration({ expirationTime }: { expirationTime?: string }) {
+  return (
+    <div className="mt-[1.9rem] flex space-x-2">
+      <img src={ClockIcon} alt={'마감시간'} />
+      <span className="text-[1.2rem] font-medium text-primary">
+        {getRemainingTime(expirationTime)}
+      </span>
+    </div>
+  );
+}

@@ -157,8 +157,8 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┃ ┃ ┗ 📜Survay.tsx
 ┃ ┃ ┣ 📂post # 포스트
 ┃ ┃ ┃ ┣ 📂feed # 피드형
-┃ ┃ ┃ ┃ ┣ 📜PostComponent.tsx
-┃ ┃ ┃ ┃ ┗ 📜PostVoteComponent.tsx
+┃ ┃ ┃ ┃ ┣ 📜PostDetail.tsx
+┃ ┃ ┃ ┃ ┗ 📜PostVote.tsx
 ┃ ┃ ┃ ┣ 📂list #리스트형
 ┃ ┃ ┃ ┃ ┣ 📜PostCard.tsx
 ┃ ┃ ┃ ┃ ┗ 📜PostCardList.tsx
