@@ -25,24 +25,19 @@ const BackgroundColor = styled.div`
 const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  max-width: ${MAX_WIDTH};
+  //max-width: ${MAX_WIDTH};
   margin: 0 auto;
-  position: fixed;
+  width: 100%;
+  //position: fixed;
+  position: absolute;
   z-index: 10;
   //top: 101%;
   top: calc(100% + 1rem); /*시트가 얼마나 높이 위치할지*/
   left: 0;
   right: 0;
   height: 600px;
-  //background: white;
+  background: white;
   transition: transform 400ms ease-out; /*바텀시트 애니메이션 속도*/
-
-  @media screen and (min-width: 1300px) {
-    padding-left: 50rem;
-  }
-  @media screen and (max-width: 1300px) {
-    padding-left: 0;
-  }
 `;
 
 const BottomSheetContent = styled.div`
@@ -71,12 +66,7 @@ function ChatBottomSheet({
   return (
     <Wrapper ref={sheet}>
       <BackgroundColor>
-        <HeaderWrapper
-          ref={header}
-          onClick={() => {
-            handleClickPostChat();
-          }}
-        >
+        <HeaderWrapper ref={header} onClick={handleClickPostChat}>
           <Handle />
         </HeaderWrapper>
         <BottomSheetContent>
