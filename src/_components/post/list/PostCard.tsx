@@ -58,17 +58,19 @@ const PostCard = ({
   }, [needRefresh]);
 
   return (
-    <section className="flex h-[16.5rem] w-[34rem] flex-col justify-between rounded-[1.2rem] bg-white p-[1.7rem] shadow-[0_0_0.4rem_rgba(42,45,55,0.1)]">
-      <PostUserProfile
-        nickname={thisPostData.user.nickname}
-        profileImage={thisPostData.user.profileImageUrl}
-      />
-      <PostCardContent
-        title={thisPostData.title}
-        content={thisPostData.content}
-        image={thisPostData.worryFiles[0]?.url || null}
-        onClick={handleGoPostDetail}
-      />
+    <section className="flex h-[16.5rem] w-[34rem] flex-col justify-between rounded-[1.2rem] bg-white px-[1.7rem] py-[1.4rem] shadow-[0_0_0.4rem_rgba(42,45,55,0.1)]">
+      <div>
+        <PostUserProfile
+          nickname={thisPostData.user.nickname}
+          profileImage={thisPostData.user.profileImageUrl}
+        />
+        <PostCardContent
+          title={thisPostData.title}
+          content={thisPostData.content}
+          image={thisPostData.worryFiles[0]?.url || null}
+          onClick={handleGoPostDetail}
+        />
+      </div>
       <PostCardMeta
         numComment={thisPostData.replyCount}
         numVotes={thisPostData.userWorryChoiceCount}
