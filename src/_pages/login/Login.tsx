@@ -1,10 +1,6 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-
 import Logo from '@/images/Common/big_logo.svg';
 import GochamCharacter from '@/images/Login/GochamCharacter.svg';
 import KakaoText from '@/images/Login/카카오계정으로_시작하기.svg';
-import palette from '@/styles/color';
 
 declare global {
   interface Window {
@@ -29,53 +25,17 @@ const Login = () => {
   };
 
   return (
-    <div css={LoginWrap}>
-      <img src={Logo} alt={'로고'} className={'로고'} />
-      <div className={'메인'}>
-        <div>
-          <img
-            src={KakaoText}
-            alt={'카카오 로그인 텍스트'}
-            onClick={() => handleKakaoLogin()}
-          />
-          <br />
-          <br />
-        </div>
-      </div>
-      <img src={GochamCharacter} className={'BigFace'} alt={'캐릭터'} />
+    <div className="flex h-full w-full flex-col items-center bg-primary pt-[5rem]">
+      <img src={Logo} alt={'로고'} />
+      <img
+        src={KakaoText}
+        alt={'카카오 로그인 텍스트'}
+        onClick={handleKakaoLogin}
+        className="mt-[6.4rem]"
+      />
+      <img src={GochamCharacter} className="mt-[6.6rem]" alt={'캐릭터'} />
     </div>
   );
 };
 
 export default Login;
-
-const LoginWrap = css`
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  @supports (-webkit-touch-callout: none) {
-    height: -webkit-fill-available;
-  }
-  background-color: ${palette.Primary};
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  overflow: hidden;
-  & .로고 {
-    margin-top: 5rem;
-    margin-bottom: 1rem;
-    width: 95%;
-    max-width: 40rem;
-  }
-  & > .메인 {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-  & > .BigFace {
-    bottom: 0;
-    margin-bottom: 7.5rem;
-  }
-`;
