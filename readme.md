@@ -175,23 +175,23 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┃ ┃ ┗ 📜VoteToolbar.tsx
 ┃ ┣ 📂_pages # 페이지
 ┃ ┃ ┣ 📂collectInformation
-┃ ┃ ┃ ┗ 📜CollectInformation.tsx
+┃ ┃ ┃ ┗ 📜CollectInformationPage.tsx
 ┃ ┃ ┣ 📂home # 메인
-┃ ┃ ┃ ┣ 📜Feed.tsx # 피드형
-┃ ┃ ┃ ┗ 📜Home.tsx # 리스트형
+┃ ┃ ┃ ┣ 📜FeedPage.tsx # 피드형
+┃ ┃ ┃ ┗ 📜HomePage.tsx # 리스트형
 ┃ ┃ ┣ 📂login # 로그인, 회원가입 관련
-┃ ┃ ┃ ┣ 📜Login.tsx
-┃ ┃ ┃ ┣ 📜LoginOauthKakao.tsx
-┃ ┃ ┃ ┣ 📜Onboarding.tsx
-┃ ┃ ┃ ┗ 📜RegisterTerm.tsx
+┃ ┃ ┃ ┣ 📜LoginPage.tsx
+┃ ┃ ┃ ┣ 📜LoginOauthKakaoPage.tsx
+┃ ┃ ┃ ┣ 📜OnboardingPage.tsx
+┃ ┃ ┃ ┗ 📜RegisterTermPage.tsx
 ┃ ┃ ┣ 📂modal # 모달 컨트롤러 (내부 구성은 컴포넌트 폴더에)
 ┃ ┃ ┃ ┗ 📜ModalController.tsx
 ┃ ┃ ┣ 📂user # 유저, 프로필
-┃ ┃ ┃ ┣ 📜EditProfile.tsx
-┃ ┃ ┃ ┣ 📜Settings.tsx
-┃ ┃ ┃ ┗ 📜User.tsx
+┃ ┃ ┃ ┣ 📜EditProfilePage.tsx
+┃ ┃ ┃ ┣ 📜SettingsPage.tsx
+┃ ┃ ┃ ┗ 📜UserPage.tsx
 ┃ ┃ ┣ 📂write # 글쓰기 페이지
-┃ ┃ ┃ ┗ 📜Write.tsx
+┃ ┃ ┃ ┗ 📜WritePage.tsx
 ┃ ┃ ┗ 📜AuthCheckPage.tsx
 ┃ ┣ 📜App.css
 ┃ ┣ 📜App.test.tsx # 미사용

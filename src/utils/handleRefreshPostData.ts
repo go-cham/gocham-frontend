@@ -1,4 +1,4 @@
-import { postDataType } from '@/type/postDataType';
+import { postDataType } from '@/types/postDataType';
 
 export const handleRefreshPostData = (
   thisPostData: postDataType,
