@@ -32,9 +32,9 @@ const GNB = () => {
     navigate(RouteURL.write);
   };
   return (
-    <footer className="absolute -bottom-[0.4rem] w-full">
+    <footer className="absolute -bottom-[0.4rem] mx-auto w-full">
       <img
-        className="w-full drop-shadow-[0_0_25px_rgba(42,45,55,0.1)]"
+        className="mx-auto w-full max-w-[43rem] drop-shadow-[0_0_25px_rgba(42,45,55,0.1)]"
         src={backgroundImage}
         alt="gnb-background"
       />
