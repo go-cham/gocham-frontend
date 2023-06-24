@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -199,33 +197,3 @@ const CollectInformationPage = () => {
 };
 
 export default CollectInformationPage;
-
-export const CollectInformationBox = styled.div`
-  & h2 {
-    // 마진 탑 대신 width를 고정으로.
-    //margin-top: 2.9rem;
-  }
-  & input,
-  textarea {
-    height: 4rem;
-    width: 100%;
-    font-size: 1.4rem;
-    //border-bottom: 0.2rem solid ${palette.Gray1};
-    transition: border-width 0.1s ease-in-out;
-    //margin-top: 1.3rem;
-    text-align: left;
-    color: ${palette.Secondary};
-  }
-  & input:focus,
-  textarea:focus {
-    //border-bottom: 0.4rem solid ${palette.Gray1};
-  }
-  input::-webkit-date-and-time-value {
-    text-align: left;
-  }
-`;
-
-export const InputWrap = styled.div`
-  height: 7.5rem;
-  overflow-y: hidden;
-`;

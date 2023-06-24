@@ -90,6 +90,7 @@ const SelectedOptionBox = styled.p`
   padding: 0.7rem 0.6rem 0.7rem 1rem;
   background-color: ${palette.Secondary};
   border-radius: 0.7rem;
+  font-size: 1.2rem;
   color: white;
   & img {
     margin-left: 0.2rem;
@@ -140,10 +141,6 @@ const MultiPickerBox = styled.div<{ openOptionListMenu: boolean }>`
   color: rgba(42, 45, 55, 0.7);
   border-radius: 0;
   transition: border-width 0.1s ease-in-out;
-  border-bottom: ${({ openOptionListMenu }) =>
-    openOptionListMenu
-      ? `0.4rem solid ${palette.Gray1}`
-      : `0.2rem solid ${palette.Gray1}`}}
 `;
 
 // { {

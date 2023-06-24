@@ -1,8 +1,6 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import InputLayout from '@/components/input/InputLayout';
-import { InputWrap } from '@/pages/collect-information/CollectInformationPage';
-import palette from '@/styles/color';
 import { userInformationType } from '@/types/user';
 
 interface BirthdateFormProps {

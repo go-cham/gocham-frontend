@@ -16,7 +16,7 @@ export default function InputLayout({
           error ? 'border-error' : 'border-gray1'
         }`}
       >
-        <label className="mb-[0.8rem] text-[1rem]">{label}</label>
+        <label className="mb-[0.8rem] text-[1.2rem]">{label}</label>
         {children}
       </div>
       <div className="text-right">
