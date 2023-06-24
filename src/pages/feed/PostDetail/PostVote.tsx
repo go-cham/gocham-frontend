@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { RouteURL } from '@/App';
 import { ModalCase } from '@/constants/modalEnum';

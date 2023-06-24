@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
-import React from 'react';
 
 import useBottomSheetFix from '@/hooks/useBottomSheetFix';
 import { userAtom } from '@/states/userData';

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import {
   InputWrap,

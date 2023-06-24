@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RouteURL } from '@/App';

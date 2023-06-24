@@ -1,7 +1,7 @@
 // 리다이렉트될 화면
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { RouteURL } from '@/App';

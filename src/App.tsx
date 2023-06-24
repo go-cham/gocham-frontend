@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import GNBHOC from '@/components/layout/GNBHOC';

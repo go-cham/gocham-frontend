@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import { useSetAtom } from 'jotai';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import AppBar from '@/components/layout/AppBar';

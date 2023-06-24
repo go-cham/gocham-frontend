@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { debounce } from 'lodash';
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Select, { StylesConfig } from 'react-select';
 

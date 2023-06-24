@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 
 /**
  * 서버에서 입력받는 값의 \n을 정상 띄어쓰기로 치횐해줌.
@@ -7,9 +7,9 @@ import React from 'react';
 export function formatText(text: string | undefined) {
   if (text === undefined) return '';
   return text.split('\n').map((line, idx) => (
-    <React.Fragment key={idx}>
+    <Fragment key={idx}>
       {line}
       <br />
-    </React.Fragment>
+    </Fragment>
   ));
 }

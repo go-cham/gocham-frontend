@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import Select, { OnChangeValue } from 'react-select';
 
 import {

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import {
   InputWrap,
@@ -20,10 +20,7 @@ type BirthDateType = {
   day: string;
 };
 
-const BirthdateForm: React.FC<BirthdateFormProps> = ({
-  onInputChange,
-  userInformation,
-}) => {
+function BirthdateForm({ onInputChange, userInformation }: BirthdateFormProps) {
   const yearRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLInputElement>(null);
   const dayRef = useRef<HTMLInputElement>(null);
@@ -186,7 +183,7 @@ const BirthdateForm: React.FC<BirthdateFormProps> = ({
       )}
     </InputWrap>
   );
-};
+}
 
 export default BirthdateForm;
 
