@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -100,7 +98,7 @@ const FeedPage = () => {
     });
 
     // 마지막 요소에 observer 등록하기
-    const lastItem = document.querySelector('.postComponent:last-child');
+    const lastItem = document.querySelector('#post-item:last-child');
     // document
     //   .querySelector(".postComponent:last-child")
     //   ?.setAttribute("name", "이거");
@@ -128,7 +126,7 @@ const FeedPage = () => {
   };
 
   return (
-    <PostWrap>
+    <div className="flex h-full flex-col">
       <AppBar
         title={
           params.route === 'my'
@@ -140,36 +138,18 @@ const FeedPage = () => {
         background={'white'}
         navigateRoute={params.route ? RouteURL.user : RouteURL.home}
       />
-      <PostLayer>
+      <ul
+        className="flex-1 overflow-y-scroll"
+        style={{ scrollSnapType: 'y proximity', scrollSnapAlign: 'start' }}
+      >
         {postingData?.map((value, idx) => (
-          <div key={idx} className={'postComponent'}>
+          <li key={idx} id="post-item">
             <PostDetail userInfo={userInfo} postData={value} />
-          </div>
+          </li>
         ))}
-      </PostLayer>
-      <div style={{ height: '10rem' }} />
-    </PostWrap>
+      </ul>
+    </div>
   );
 };
+
 export default FeedPage;
-
-const PostWrap = styled.div`
-  overflow: hidden;
-  position: relative;
-  left: 0;
-  width: 100%;
-  //height: calc(100vh - 4.6rem);
-  height: 100vh;
-  @supports (-webkit-touch-callout: none) {
-    height: -webkit-fill-available;
-  }
-`;
-
-const PostLayer = styled.div`
-  overflow-y: scroll;
-  scroll-snap-type: y proximity;
-  height: 100vh;
-  & .PostComponent {
-    scroll-snap-align: start;
-  }
-`;
