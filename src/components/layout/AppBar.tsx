@@ -1,12 +1,9 @@
-/** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
 import BackButton from '@/images/Common/back_button_42X42.svg';
-import palette from '@/styles/color';
 
 const AppBar = ({
-  title = '',
+  title,
   boxShadow,
   background,
   navigateRoute,
@@ -33,53 +30,24 @@ const AppBar = ({
       }
     }
   };
+
   return (
-    <AppBarBox
-      boxShadow={boxShadow === undefined ? true : boxShadow}
-      background={background ? background : null}
+    <header
+      className="relative flex h-[4.5rem] items-center justify-center border-b border-[#eaeaeb] bg-background"
+      style={{
+        boxShadow: boxShadow ? '0 0 2.5rem rgba(42,45,55,0.1)' : undefined,
+        backgroundColor: background,
+      }}
     >
       <img
         src={BackButton}
         alt={'뒤로가기'}
-        className={'뒤로가기'}
-        onClick={() => handleClickBackButton()}
+        onClick={handleClickBackButton}
+        className="absolute left-0"
       />
-      <h1>{title}</h1>
-    </AppBarBox>
+      {title && <h1 className="text-[1.6rem] font-bold">{title}</h1>}
+    </header>
   );
 };
 
 export default AppBar;
-
-const AppBarBox = styled.div<{ boxShadow: boolean; background: string | null }>`
-  //position: absolute;
-  //left: 0;
-  display: flex;
-  position: relative;
-  width: 100%;
-  height: 4.5rem;
-  align-items: center;
-  box-shadow: ${(props) => {
-    if (props.boxShadow === false) {
-      return '';
-    } else {
-      return '0px 0px 2.5rem rgba(42, 45, 55, 0.1)';
-    }
-  }};
-  background-color: ${(props) => {
-    if (props.background) {
-      return props.background;
-    } else {
-      return `${palette.Background}`;
-    }
-  }};
-  & > .뒤로가기 {
-    position: absolute;
-  }
-  & > h1 {
-    margin: 0 auto;
-    font-weight: 700;
-    font-size: 1.6rem;
-  }
-  border-bottom: 1px solid #eaeaeb;
-`;
