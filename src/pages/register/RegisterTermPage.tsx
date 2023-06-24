@@ -8,11 +8,11 @@ import BottomContinueBar from '@/components/layout/BottomContinueBar';
 import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import DetailArrow from '@/images/Login/detail_arrow.png';
-import CheckBox from '@/pages/register/CheckBox';
 import { userAtom } from '@/states/userData';
 import palette from '@/styles/color';
 import { alertMessage } from '@/utils/alertMessage';
+
+import TermCheckBox from './TermCheckBox';
 
 export type AcceptType = {
   gochamTerm: boolean;
@@ -142,27 +142,3 @@ const RegisterTermPage = () => {
 };
 
 export default RegisterTermPage;
-
-function TermCheckBox({
-  text,
-  checked,
-  onCheck,
-  link,
-}: {
-  text: string;
-  checked: boolean;
-  onCheck: (value: boolean) => void;
-  link?: string;
-}) {
-  return (
-    <div className="relative flex items-center">
-      <CheckBox value={checked} setValue={onCheck} />
-      <span className="text-[1.4rem] font-medium">{text}</span>
-      {link && (
-        <a href={link} className="absolute right-0">
-          <img src={DetailArrow} alt={'약관 상세'} />
-        </a>
-      )}
-    </div>
-  );
-}

@@ -1,18 +1,16 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import react from 'react';
+import { Dispatch } from 'react';
 
 import EmptyCheckIcon from '@/images/Login/empty_check_box.png';
 import FillCheckIcon from '@/images/Login/fill_check_box.png';
 
 type CheckBoxType = {
   value: boolean;
-  setValue: react.Dispatch<any>;
+  setValue: Dispatch<any>;
 };
 
 const CheckBox = ({ value, setValue }: CheckBoxType) => {
   return (
-    <div css={CheckBoxStyle}>
+    <div>
       {value ? (
         <img
           src={FillCheckIcon}
@@ -30,7 +28,3 @@ const CheckBox = ({ value, setValue }: CheckBoxType) => {
   );
 };
 export default CheckBox;
-
-const CheckBoxStyle = css`
-  margin-right: 1rem;
-`;
