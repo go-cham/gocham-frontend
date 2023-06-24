@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
-import {
-  InputWrap,
-  userInformationType,
-} from '@/pages/collect-information/CollectInformationPage';
+import { InputWrap } from '@/pages/collect-information/CollectInformationPage';
 import palette from '@/styles/color';
+import { userInformationType } from '@/types/user';
 
 import { ErrorMessage } from './CollectNicknameAgeGender';
 

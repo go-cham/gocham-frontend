@@ -5,7 +5,7 @@ import ChatBottomSheet from '@/components/post/ChatBottomSheet';
 import ClockIcon from '@/images/PostComponent/clock.svg';
 import { refreshChatAtom } from '@/states/postRefreshRequest';
 import { userDataAtomType } from '@/states/userData';
-import { postDataType } from '@/types/postDataType';
+import { PostDataType } from '@/types/post';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
 
@@ -18,10 +18,10 @@ const PostDetail = ({
   postData,
 }: {
   userInfo: userDataAtomType;
-  postData: postDataType;
+  postData: PostDataType;
 }) => {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
-  const [thisPostData, setThisPostData] = useState<postDataType>(postData);
+  const [thisPostData, setThisPostData] = useState<PostDataType>(postData);
   const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
 
   const handleClickPostChat = () => {

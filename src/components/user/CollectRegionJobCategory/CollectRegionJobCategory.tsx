@@ -9,12 +9,9 @@ import {
   jobOptions,
   residenceOptions,
 } from '@/constants/Options';
-import {
-  CollectInformationBox,
-  userInformationPropsType,
-  userInformationType,
-} from '@/pages/collect-information/CollectInformationPage';
+import { CollectInformationBox } from '@/pages/collect-information/CollectInformationPage';
 import palette from '@/styles/color';
+import { userInformationPropsType, userInformationType } from '@/types/user';
 
 import MultiPickerComponent from './MultiPickerComponent';
 

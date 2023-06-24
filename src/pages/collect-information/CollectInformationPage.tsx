@@ -1,46 +1,24 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
-import react, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RouteURL } from '@/App';
 import AppBar from '@/components/layout/AppBar';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
-import { OptionType } from '@/constants/Options';
+import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender/CollectNicknameAgeGender';
+import CollectRegionJobCategory from '@/components/user/CollectRegionJobCategory/CollectRegionJobCategory';
 import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import CollectNicknameAgeGender from '@/pages/collect-information/CollectNicknameAgeGender/CollectNicknameAgeGender';
-import CollectRegionJobCategory from '@/pages/collect-information/CollectRegionJobCategory/CollectRegionJobCategory';
 import { userAtom } from '@/states/userData';
 import palette from '@/styles/color';
+import {
+  postUserInformationPropsType,
+  userInformationType,
+} from '@/types/user';
 import getUserInfo from '@/utils/getUserInfo';
-
-export type userInformationType = {
-  nickname: string;
-  birthDay: string;
-  sex: string;
-  residence: OptionType;
-  job: OptionType;
-  worryCategories: OptionType[];
-  profileImageUrl?: string;
-};
-
-export type userInformationPropsType = {
-  userInformation: userInformationType;
-  setUserInformation: react.Dispatch<any>;
-};
-
-export type postUserInformationPropsType = {
-  userId: number;
-  nickname: string; // 제거 예정
-  birthDate: string;
-  sex: string;
-  residenceId: number | string; // 추후 number로 변경됨.
-  jobId: number | string; // 추후 number로 변경됨.
-  worryCategories: number[];
-};
 
 const CollectInformationPage = () => {
   const navigate = useNavigate();

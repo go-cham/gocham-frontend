@@ -1,19 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import { useAtom } from 'jotai';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RouteURL } from '@/App';
+import PostCard from '@/components/post/PostCard';
 import SelectMyPostType from '@/components/user/SelectMyPostType';
 import UserProfile from '@/components/user/UserProfile';
 import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import PostCard from '@/pages/home/PostCardList/PostCard';
-import { postingMetaDataType } from '@/pages/home/PostCardList/PostCardList';
 import { userAtom } from '@/states/userData';
+import { PostingMetaDataType } from '@/types/post';
 
 /**
  * 본인의 피드인지 확인하여 MyFeed 컴포넌트를 올릴지, user 컴포넌트를 올릴지 선택
@@ -89,7 +88,7 @@ const UserPage = () => {
   }, [userData]);
 
   const [postingData, setPostingData] = useState<any[]>([]);
-  const [postingMetaData, setPostingMetaData] = useState<postingMetaDataType>({
+  const [postingMetaData, setPostingMetaData] = useState<PostingMetaDataType>({
     take: 5,
   });
   // 무한스크롤

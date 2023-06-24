@@ -1,9 +1,9 @@
-import { postDataType } from '@/types/postDataType';
+import { PostDataType } from '@/types/post';
 
 export const handleRefreshPostData = (
-  thisPostData: postDataType,
+  thisPostData: PostDataType,
   updateObject: string
-): postDataType => {
+): PostDataType => {
   //
   if (updateObject === 'chat') {
     return Object.assign({}, thisPostData, {

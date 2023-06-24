@@ -1,4 +1,4 @@
-export type postDataType = {
+export type PostDataType = {
   id: number;
   createdAt?: string;
   updatedAt?: string | null;
@@ -13,4 +13,11 @@ export type postDataType = {
   };
   replyCount: number;
   userWorryChoiceCount: number;
+};
+
+export type PostingMetaDataType = {
+  take: number;
+  total?: number;
+  hasNextData?: boolean;
+  nextId?: number;
 };

@@ -1,13 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 
-import {
-  CollectInformationBox,
-  userInformationPropsType,
-  userInformationType,
-} from '@/pages/collect-information/CollectInformationPage';
+import { CollectInformationBox } from '@/pages/collect-information/CollectInformationPage';
 import palette from '@/styles/color';
 import { ButtonStyle } from '@/styles/common';
+import { userInformationPropsType, userInformationType } from '@/types/user';
 
 import BirthdateForm from './BirthDateForm';
 import NicknameForm from './NicknameForm';

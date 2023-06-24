@@ -8,7 +8,7 @@ import PostUserProfile from '@/components/post/PostUserProfile';
 import { userType } from '@/constants/userTypeEnum';
 import { refreshChatAtom } from '@/states/postRefreshRequest';
 import { userDataAtomType } from '@/states/userData';
-import { postDataType } from '@/types/postDataType';
+import { PostDataType } from '@/types/post';
 import { formatText } from '@/utils/formatText';
 import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
 
@@ -40,7 +40,7 @@ const PostCard = ({
       navigate(RouteURL.auth_check);
     }
   };
-  const [thisPostData, setThisPostData] = useState<postDataType>(postData);
+  const [thisPostData, setThisPostData] = useState<PostDataType>(postData);
   useEffect(() => {
     setThisPostData(postData);
   }, []);

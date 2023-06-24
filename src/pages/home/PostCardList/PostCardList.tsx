@@ -4,19 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
 import { userAtom } from '@/states/userData';
+import { PostingMetaDataType } from '@/types/post';
 
-import PostCard from './PostCard';
+import PostCard from '../../../components/post/PostCard';
 
-export type postingMetaDataType = {
-  take: number;
-  total?: number;
-  hasNextData?: boolean;
-  nextId?: number;
-};
 const PostCardList = () => {
   const userInfo = useAtomValue(userAtom);
   const [postingData, setPostingData] = useState<any[]>([]);
-  const [postingMetaData, setPostingMetaData] = useState<postingMetaDataType>({
+  const [postingMetaData, setPostingMetaData] = useState<PostingMetaDataType>({
     take: 5,
   });
   // 무한스크롤

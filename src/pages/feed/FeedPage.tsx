@@ -9,8 +9,8 @@ import AppBar from '@/components/layout/AppBar';
 import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import { postingMetaDataType } from '@/pages/home/PostCardList/PostCardList';
 import { userAtom } from '@/states/userData';
+import { PostingMetaDataType } from '@/types/post';
 
 import PostDetail from './PostDetail';
 
@@ -19,7 +19,7 @@ const FeedPage = () => {
   const navigate = useNavigate();
   const userInfo = useAtomValue(userAtom);
   const [postingData, setPostingData] = useState<any[]>([]);
-  const [postingMetaData, setPostingMetaData] = useState<postingMetaDataType>({
+  const [postingMetaData, setPostingMetaData] = useState<PostingMetaDataType>({
     take: 5,
   });
   // 무한스크롤

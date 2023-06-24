@@ -8,10 +8,10 @@ import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
 import DefaultUserIcon from '@/images/Profile/defaultUserIcon.svg';
 import SettingIcon from '@/images/Profile/settings.svg';
-import { userInformationType } from '@/pages/collect-information/CollectInformationPage';
 import { userDataAtomType } from '@/states/userData';
 import palette from '@/styles/color';
 import { ButtonStyle } from '@/styles/common';
+import { userInformationType } from '@/types/user';
 import { formatISO8601ToNormal } from '@/utils/formatISO8601ToNormal';
 
 const UserProfile = ({
