@@ -136,7 +136,7 @@ const CollectInformationPage = () => {
           <br />
           당신을 기다리고 있어요!
         </h1>
-        <section className="mt-[2rem]">
+        <section className="mt-[2.9rem]">
           {page === 1 && (
             <CollectNicknameAgeGender
               userInformation={userInformation}
@@ -199,27 +199,6 @@ const CollectInformationPage = () => {
 };
 
 export default CollectInformationPage;
-
-const CollectInformationWrap = styled.div`
-  position: relative;
-  height: 100vh;
-  margin: 4.6rem auto 0;
-  width: 90%;
-  & h1 {
-    margin-bottom: 2.9rem;
-  }
-  & .설명란 {
-    margin-top: 3.3rem;
-    font-weight: 700;
-    font-size: 2.7rem;
-    letter-spacing: -0.03rem;
-    color: ${palette.Secondary};
-    line-height: 3.9rem;
-  }
-  & .정보입력란 {
-    height: 70vh;
-  }
-`;
 
 export const CollectInformationBox = styled.div`
   & h2 {

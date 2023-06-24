@@ -1,11 +1,9 @@
-import styled from '@emotion/styled';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
+import InputLayout from '@/components/input/InputLayout';
 import { InputWrap } from '@/pages/collect-information/CollectInformationPage';
 import palette from '@/styles/color';
 import { userInformationType } from '@/types/user';
-
-import { ErrorMessage } from './CollectNicknameAgeGender';
 
 interface BirthdateFormProps {
   onInputChange: (year: string, month: string, day: string) => void;
@@ -112,10 +110,26 @@ function BirthdateForm({ onInputChange, userInformation }: BirthdateFormProps) {
     }
   };
 
+  let error = '';
+  if (errorCase.notInputLength4) {
+    error = '태어난 년도는 4자리를 입력해주세요.';
+  }
+  if (errorCase.older2005) {
+    error = '14세 이상만 가입할 수 있습니다.';
+  }
+  if (errorCase.younger1900) {
+    error = '죄송해요🙏 20세기 사람들부터 이용 가능합니다.';
+  }
+  if (errorCase.errorMonth) {
+    error = '1~12월 사이의 값만 입력해주세요.';
+  }
+  if (errorCase.errorDay) {
+    error = '1~31일 사이의 값만 입력해주세요.';
+  }
+
   return (
-    <InputWrap>
-      <h2>생년월일</h2>
-      <BirthInputBox isInputFocused={isInputFocused} errorCase={errorCase}>
+    <InputLayout label="생년월일" error={error}>
+      <div className="flex space-x-[0.2rem] text-[1.4rem]">
         <input
           type="text"
           id="year"
@@ -129,10 +143,9 @@ function BirthdateForm({ onInputChange, userInformation }: BirthdateFormProps) {
             handleInputBlur();
             checkYearLength(e);
           }}
+          className="w-[4.5rem] bg-transparent text-right"
         />
-        <label className={'year'} htmlFor="year">
-          년
-        </label>
+        <span>년</span>
         <input
           type="text"
           id="month"
@@ -143,10 +156,9 @@ function BirthdateForm({ onInputChange, userInformation }: BirthdateFormProps) {
           onChange={handleInputChange}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
+          className="w-[2.9rem] bg-transparent text-right"
         />
-        <label className={'month'} htmlFor="month">
-          월
-        </label>
+        <span>월</span>
         <input
           type="text"
           id="day"
@@ -157,78 +169,12 @@ function BirthdateForm({ onInputChange, userInformation }: BirthdateFormProps) {
           onChange={handleInputChange}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
+          className="w-[2.9rem] bg-transparent text-right"
         />
-        <label className={'day'} htmlFor="day">
-          일
-        </label>
-      </BirthInputBox>
-      {errorCase.notInputLength4 && (
-        <ErrorMessage>태어난 년도는 4자리를 입력해주세요.</ErrorMessage>
-      )}
-      {errorCase.older2005 && (
-        <ErrorMessage>14세 이상만 가입할 수 있습니다.</ErrorMessage>
-      )}
-      {errorCase.younger1900 && (
-        <ErrorMessage>
-          죄송해요🙏 20세기 사람들부터 이용 가능합니다.
-        </ErrorMessage>
-      )}
-      {errorCase.errorMonth && (
-        <ErrorMessage>1~12월 사이의 값만 입력해주세요.</ErrorMessage>
-      )}{' '}
-      {errorCase.errorDay && (
-        <ErrorMessage>1~31일 사이의 값만 입력해주세요.</ErrorMessage>
-      )}
-    </InputWrap>
+        <span>일</span>
+      </div>
+    </InputLayout>
   );
 }
 
 export default BirthdateForm;
-
-const BirthInputBox = styled.form<{ isInputFocused: boolean; errorCase: any }>`
-  display: flex;
-  height: 4rem;
-  align-items: center;
-  transition: border-width 0.1s ease-in-out;
-  box-sizing: border-box;
-  border-bottom-style: solid;
-  border-bottom-color: ${({ errorCase }) => {
-    if (
-      errorCase.older2005 ||
-      errorCase.younger1900 ||
-      errorCase.errorDay ||
-      errorCase.errorMonth
-    ) {
-      return `${palette.Error}`;
-    } else {
-      return `${palette.Gray1}`;
-    }
-  }};
-  border-bottom-width: ${({ isInputFocused }) => {
-    if (isInputFocused) {
-      return `0.4rem`;
-    } else {
-      return `0.2rem`;
-    }
-  }};
-  & input {
-    text-align: right;
-  }
-  & label {
-    //margin-top: 1.3rem;
-    font-size: 1.4rem;
-    //margin-right: 0.2rem;
-  }
-  & #year {
-    width: 4.5rem;
-    border-bottom: 0;
-  }
-  & #month {
-    width: 2.9rem;
-    border-bottom: 0;
-  }
-  & #day {
-    width: 2.9rem;
-    border-bottom: 0;
-  }
-`;

@@ -1,21 +1,19 @@
-import styled from '@emotion/styled';
 import { ChangeEvent, useEffect, useState } from 'react';
 
-import { InputWrap } from '@/pages/collect-information/CollectInformationPage';
-import palette from '@/styles/color';
+import InputLayout from '@/components/input/InputLayout';
 import { userInformationType } from '@/types/user';
 
-import { ErrorMessage } from './CollectNicknameAgeGender';
+import ErrorMessage from '../../input/ErrorMessage';
 
 interface NicknameFormProps {
   onInputChange: (nickname: string) => void;
   userInformation: userInformationType;
 }
 
-const NicknameForm: React.FC<NicknameFormProps> = ({
+export default function NicknameForm({
   onInputChange,
   userInformation,
-}) => {
+}: NicknameFormProps) {
   const [nickname, setNickname] = useState(userInformation.nickname);
   const [errorCase, setErrorCase] = useState({
     over10letter: false,
@@ -34,35 +32,16 @@ const NicknameForm: React.FC<NicknameFormProps> = ({
     onInputChange(nickname);
   }, [nickname]);
 
+  const error = errorCase.over10letter ? '10글자까지만 입력이 가능합니다.' : '';
+
   return (
-    <InputWrap>
-      <h2>닉네임</h2>
-      <NicknameInput
-        placeholder={'최대 10자 입력'}
-        value={nickname}
+    <InputLayout label="닉네임" error={error}>
+      <input
+        id="nickname-input"
+        className={`bg-transparent text-[1.4rem]`}
+        placeholder="최대 10자 입력"
         onChange={handleInputChange}
-        errorCase={errorCase}
       />
-      {errorCase.over10letter && (
-        <ErrorMessage>10글자까지만 입력이 가능합니다.</ErrorMessage>
-      )}
-    </InputWrap>
+    </InputLayout>
   );
-};
-
-export default NicknameForm;
-
-const NicknameInput = styled.input<{ errorCase: any }>`
-  border-bottom-style: solid;
-  border-bottom-color: ${({ errorCase }) => {
-    if (errorCase.over10letter) {
-      return `${palette.Error}`;
-    } else {
-      return `${palette.Gray1}`;
-    }
-  }};
-  border-bottom-width: 0.2rem;
-  :focus {
-    border-bottom-width: 0.4rem;
-  }
-`;
+}

@@ -1,9 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
-
-import { CollectInformationBox } from '@/pages/collect-information/CollectInformationPage';
-import palette from '@/styles/color';
-import { ButtonStyle } from '@/styles/common';
 import { userInformationPropsType, userInformationType } from '@/types/user';
 
 import BirthdateForm from './BirthDateForm';
@@ -44,73 +38,35 @@ const CollectNicknameAgeGender = ({
   };
 
   return (
-    <CollectInformationBox>
+    <div className="space-y-[2.4rem]">
       <NicknameForm
         onInputChange={handleNicknameInputChange}
         userInformation={userInformation}
       />
-
       <BirthdateForm
         onInputChange={handleBirthDateInputChange}
         userInformation={userInformation}
       />
-
-      <h2>성별</h2>
-      <SelectGenderWrap>
-        <SelectGenderBox
-          height={3.9}
-          width={'48%'}
-          borderRadius={0.5}
-          size={1.4}
-          color={
-            userInformation.sex === 'male' ? 'white' : 'rgba(42, 45, 55, 0.5)'
-          }
-          onClick={() => handleSelectGender('male')}
-          backgroundColor={
-            userInformation.sex === 'male' ? palette.Secondary : 'rgba(0,0,0,0)'
-          }
-        >
-          남자
-        </SelectGenderBox>
-        <SelectGenderBox
-          height={3.9}
-          width={'48%'}
-          borderRadius={0.5}
-          size={1.4}
-          color={
-            userInformation.sex === 'female' ? 'white' : 'rgba(42, 45, 55, 0.5)'
-          }
-          onClick={() => handleSelectGender('female')}
-          backgroundColor={
-            userInformation.sex === 'female'
-              ? palette.Secondary
-              : 'rgba(0,0,0,0)'
-          }
-        >
-          여자
-        </SelectGenderBox>
-      </SelectGenderWrap>
-    </CollectInformationBox>
+      <div>
+        <span className="text-[1rem]">성별</span>
+        <div className="mt-[1.3rem] flex justify-between">
+          {(['male', 'female'] as const).map((gender) => (
+            <button
+              key={gender}
+              className={`h-[3.9rem] w-[48%] rounded-[0.5rem] border-[1px] text-[1.4rem] ${
+                userInformation.sex === gender
+                  ? 'bg-secondary text-white'
+                  : 'bg-black] text-[rgba(42,45,55,0.5)]'
+              }`}
+              onClick={() => handleSelectGender(gender)}
+            >
+              {gender === 'male' ? '남자' : '여자'}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default CollectNicknameAgeGender;
-export const ErrorMessage = styled.div`
-  margin-top: 1rem;
-  text-align: right;
-  font-size: 1.2rem;
-  color: ${palette.Error};
-  font-weight: 400;
-`;
-
-const SelectGenderBox = styled(ButtonStyle)`
-  border: 0.1rem solid ${palette.Gray2};
-  border-radius: 0.5rem;
-  font-weight: 500;
-`;
-
-const SelectGenderWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1.3rem;
-`;
