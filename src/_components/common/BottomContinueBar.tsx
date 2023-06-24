@@ -1,9 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
-
-import { MAX_WIDTH } from '@/constants/viewSize';
-import { ButtonStyle } from '@/styles/common';
-
 const BottomContinueBar = ({
   title,
   clickAction,
@@ -22,52 +16,23 @@ const BottomContinueBar = ({
   boxShadow?: boolean;
 }) => {
   return (
-    <BottomBarWrap
-      boxColor={boxColor}
-      height={height ? height : 10.8}
-      boxShadow={boxShadow === undefined ? true : boxShadow}
+    <div
+      className="w-full"
+      style={{
+        boxShadow: boxShadow ? '0 0 2.5rem rgba(42,45,55,0.1)' : undefined,
+        height: height + 'rem' || '10.8rem',
+        backgroundColor: boxColor || 'white',
+      }}
     >
-      <NextButton
-        width={34}
-        height={4.7}
-        backgroundColor={buttonColor}
-        borderRadius={0.5}
-        color={fontColor}
-        size={1.6}
-        fontWeight={700}
+      <button
         onClick={clickAction}
+        className="mx-auto mt-[1.7rem] flex h-[4.7rem] w-[34rem] items-center justify-center rounded-[0.5rem] text-[1.6rem] font-bold"
+        style={{ color: fontColor || 'white', backgroundColor: buttonColor }}
       >
         {title}
-      </NextButton>
-    </BottomBarWrap>
+      </button>
+    </div>
   );
 };
 
 export default BottomContinueBar;
-
-const NextButton = styled(ButtonStyle)`
-  margin: 1.7rem auto;
-`;
-
-type BottomBarWrapType = {
-  height: number | undefined;
-  boxColor: string | undefined;
-  boxShadow: boolean;
-};
-
-const BottomBarWrap = styled.div<BottomBarWrapType>`
-  //position: fixed;
-  //bottom: -0.5rem;
-  margin: 0 auto;
-  //max-width: ${MAX_WIDTH};
-  box-shadow: ${(props) => {
-    if (props.boxShadow === false) {
-      return '';
-    } else {
-      return '0px 0px 2.5rem rgba(42, 45, 55, 0.1)';
-    }
-  }};
-  width: 100%;
-  height: ${({ height }) => height + 'rem'};
-  background-color: ${({ boxColor }) => (boxColor ? boxColor : 'white')};
-`;

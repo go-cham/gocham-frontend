@@ -6,13 +6,13 @@ import BackButton from '@/images/Common/back_button_42X42.svg';
 import palette from '@/styles/color';
 
 const AppBar = ({
-  title,
+  title = '',
   boxShadow,
   background,
   navigateRoute,
   navigateAction,
 }: {
-  title: string;
+  title?: string;
   boxShadow?: boolean;
   background?: string;
   navigateRoute?: string;

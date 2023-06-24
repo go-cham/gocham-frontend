@@ -144,22 +144,21 @@ const CollectInformation = () => {
       setPage(1);
     }
   };
+
   return (
-    <>
+    <div className="flex h-full flex-col">
       <AppBar
         title={''}
         boxShadow={false}
         navigateAction={() => navigateBack()}
       />
-      <CollectInformationWrap>
-        <section className={'설명란'}>
-          <h1>
-            수많은 고민들이 👀
-            <br />
-            당신을 기다리고 있어요!
-          </h1>
-        </section>
-        <section className={'정보입력란'}>
+      <div className="mx-auto w-[90%] flex-1">
+        <h1 className="mt-[4.2rem] text-[2.7rem] font-bold text-secondary">
+          수많은 고민들이 👀
+          <br />
+          당신을 기다리고 있어요!
+        </h1>
+        <section className="mt-[2rem]">
           {page === 1 && (
             <CollectNicknameAgeGender
               userInformation={userInformation}
@@ -173,7 +172,7 @@ const CollectInformation = () => {
             />
           )}
         </section>
-      </CollectInformationWrap>
+      </div>
       {/**/}
       {/* 각 페이지 항목 조건비교해서 색상 및 문구 표시 구현 필요 */}
       {page === 1 && !readyToNext && (
@@ -214,10 +213,10 @@ const CollectInformation = () => {
           boxShadow={false}
           buttonColor={palette.Primary}
           fontColor={'white'}
-          clickAction={() => uploadCollectData()}
+          clickAction={uploadCollectData}
         />
       )}
-    </>
+    </div>
   );
 };
 

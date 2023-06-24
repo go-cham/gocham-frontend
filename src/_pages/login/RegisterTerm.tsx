@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -23,6 +21,7 @@ export type AcceptType = {
   marketing: boolean;
   allCheck: boolean;
 };
+
 const RegisterTerm = () => {
   const navigate = useNavigate();
   const userInfo = useAtomValue(userAtom);
@@ -70,140 +69,100 @@ const RegisterTerm = () => {
       console.log(e);
     }
   };
+
+  const nextEnabled =
+    accept.gochamTerm && accept.personalInformation && accept.olderThan14;
+
   return (
-    <>
-      <AppBar title={''} boxShadow={false} />
-      <RegisterTermWrap>
-        <div className={'약관문구'}>
-          환영합니다!
-          <br />
-          서비스 이용약관에
-          <br />
-          동의해주세요.
+    <div className="flex h-full flex-col items-center">
+      <AppBar boxShadow={false} />
+      <div className="mx-auto w-[90%] flex-1">
+        <div className="mt-[3.9rem] text-[2.7rem] font-bold leading-[3.9rem]">
+          <p>환영합니다!</p>
+          <p>서비스 이용약관에</p>
+          <p>동의해주세요.</p>
         </div>
-        <section className={'약관체크'}>
-          <CheckWrap>
-            <CheckBox
-              value={
-                accept.gochamTerm &&
-                accept.personalInformation &&
-                accept.olderThan14 &&
-                accept.marketing
-              }
-              setValue={(value) =>
-                setAccept({
-                  gochamTerm: value,
-                  personalInformation: value,
-                  olderThan14: value,
-                  marketing: value,
-                  allCheck: value,
-                })
-              }
-            />
-            모두 동의합니다.
-          </CheckWrap>
-          <hr />
-          <CheckWrap>
-            <CheckBox
-              value={accept.gochamTerm}
-              setValue={(value) => setAccept({ ...accept, gochamTerm: value })}
-            />
-            [필수] 고민의 참견 이용약관 동의
-            <a
-              href={
-                'https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2'
-              }
-            >
-              <img src={DetailArrow} alt={'약관 상세'} className={'화살표'} />
-            </a>
-          </CheckWrap>
-          <CheckWrap>
-            <CheckBox
-              value={accept.personalInformation}
-              setValue={(value) =>
-                setAccept({ ...accept, personalInformation: value })
-              }
-            />
-            [필수] 개인정보 수집 및 이용 동의
-            <a
-              href={
-                'https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097'
-              }
-            >
-              <img src={DetailArrow} alt={'약관 상세'} className={'화살표'} />
-            </a>
-          </CheckWrap>
-          <CheckWrap>
-            <CheckBox
-              value={accept.olderThan14}
-              setValue={(value) => setAccept({ ...accept, olderThan14: value })}
-            />
-            [필수] 만 14세 이상 입니다.
-          </CheckWrap>
-          <CheckWrap>
-            <CheckBox
-              value={accept.marketing}
-              setValue={(value) => setAccept({ ...accept, marketing: value })}
-            />
-            [선택] 마케팅 목적 이용 동의
-            <a
-              href={
-                'https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097'
-              }
-            >
-              <img src={DetailArrow} alt={'약관 상세'} className={'화살표'} />
-            </a>
-          </CheckWrap>
+        <section className="mt-[3.9rem] space-y-[0.7rem]">
+          <TermCheckBox
+            text="모두 동의합니다."
+            checked={
+              accept.gochamTerm &&
+              accept.personalInformation &&
+              accept.olderThan14 &&
+              accept.marketing
+            }
+            onCheck={(value) =>
+              setAccept({
+                gochamTerm: value,
+                personalInformation: value,
+                olderThan14: value,
+                marketing: value,
+                allCheck: value,
+              })
+            }
+          />
+          <div className="h-[1px] w-full bg-black" />
+          <TermCheckBox
+            text="[필수] 고민의 참견 이용약관 동의"
+            link="https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2"
+            checked={accept.gochamTerm}
+            onCheck={(value) => setAccept({ ...accept, gochamTerm: value })}
+          />
+          <TermCheckBox
+            text="[필수] 개인정보 수집 및 이용 동의"
+            link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
+            checked={accept.personalInformation}
+            onCheck={(value) =>
+              setAccept({ ...accept, personalInformation: value })
+            }
+          />
+          <TermCheckBox
+            text="[필수] 만 14세 이상 입니다."
+            checked={accept.olderThan14}
+            onCheck={(value) => setAccept({ ...accept, olderThan14: value })}
+          />
+          <TermCheckBox
+            text="[선택] 마케팅 목적 이용 동의"
+            link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
+            checked={accept.marketing}
+            onCheck={(value) => setAccept({ ...accept, marketing: value })}
+          />
         </section>
-      </RegisterTermWrap>
-      {accept.gochamTerm && accept.personalInformation && accept.olderThan14 ? (
-        <BottomContinueBar
-          title={'다음'}
-          height={11.2}
-          boxShadow={false}
-          buttonColor={palette.Primary}
-          fontColor={'white'}
-          clickAction={() => handleRegister()}
-        />
-      ) : (
-        <BottomContinueBar
-          title={'다음'}
-          height={11.2}
-          boxShadow={false}
-          buttonColor={'rgba(42, 45, 55, 0.1)'}
-          fontColor={'rgba(42, 45, 55, 0.34)'}
-        />
-      )}
-    </>
+      </div>
+      <BottomContinueBar
+        title={'다음'}
+        height={11.2}
+        boxShadow={false}
+        buttonColor={nextEnabled ? palette.Primary : 'rgba(42, 45, 55, 0.1)'}
+        fontColor={nextEnabled ? 'white' : 'rgba(42, 45, 55, 0.34)'}
+        clickAction={nextEnabled ? handleRegister : undefined}
+      />
+    </div>
   );
 };
 
 export default RegisterTerm;
 
-const CheckWrap = styled.div`
-  position: relative;
-  height: 3.4rem;
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  font-size: 1.4rem;
-
-  & a {
-    position: absolute;
-    right: 0;
-  }
-`;
-
-const RegisterTermWrap = styled.div`
-  width: 90%;
-  position: relative;
-  height: 90vh;
-  margin: 0 auto;
-  & > .약관문구 {
-    margin-top: 3.9rem;
-    margin-bottom: 3rem;
-    font-weight: 700;
-    font-size: 2.7rem;
-    line-height: 3.9rem;
-  }
-`;
+function TermCheckBox({
+  text,
+  checked,
+  onCheck,
+  link,
+}: {
+  text: string;
+  checked: boolean;
+  onCheck: (value: boolean) => void;
+  link?: string;
+}) {
+  return (
+    <div className="relative flex items-center">
+      <CheckBox value={checked} setValue={onCheck} />
+      <span className="text-[1.4rem] font-medium">{text}</span>
+      {link && (
+        <a href={link} className="absolute right-0">
+          <img src={DetailArrow} alt={'약관 상세'} />
+        </a>
+      )}
+    </div>
+  );
+}
