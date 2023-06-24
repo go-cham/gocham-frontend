@@ -1,5 +1,3 @@
-import styled from '@emotion/styled';
-
 interface BannerProps {
   show: boolean;
   applyUpdate: () => void;
@@ -8,52 +6,21 @@ interface BannerProps {
 export const Banner = (props: BannerProps) => {
   const { show, applyUpdate } = props;
 
-  if (show) {
-    return (
-      <BannerWrap>
+  if (!show) {
+    return null;
+  }
+
+  return (
+    <div className="absolute left-1/2 top-[8rem] z-[100] mx-auto flex h-[4rem] w-[30rem] -translate-x-1/2 items-center justify-between rounded-[6px] bg-black px-[1.5rem] py-[1rem]">
+      <span className="text-[0.9em] text-white">
         새 버전으로 업데이트합니다.
-        <button className="btn" onClick={applyUpdate}>
-          확인
-        </button>
-      </BannerWrap>
-    );
-  }
-  return <></>;
+      </span>
+      <button
+        className="cursor-pointer text-[0.9em] font-bold text-[rgb(249,160,160)] hover:text-[rgb(237,144,144)]"
+        onClick={applyUpdate}
+      >
+        확인
+      </button>
+    </div>
+  );
 };
-
-const BannerWrap = styled.div`
-  z-index: 100;
-  width: 300px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 15px 10px 20px;
-  border-radius: 6px;
-  position: absolute;
-  left: 50%;
-  top: 8rem;
-  transform: translateX(-50%);
-  background-color: rgb(0, 0, 0);
-  color: white;
-  height: 40px;
-  font-size: 0.9em;
-  align-items: center;
-  box-sizing: border-box;
-
-  & .btn {
-    border-radius: 6px;
-    font-size: 0.9em;
-    display: flex;
-    align-items: center;
-    color: rgb(249, 160, 160);
-    border: none;
-    height: 24px;
-    font-weight: bold;
-    background: none;
-    cursor: pointer;
-  }
-
-  & .btn:hover {
-    color: rgb(237, 144, 144);
-  }
-`;
