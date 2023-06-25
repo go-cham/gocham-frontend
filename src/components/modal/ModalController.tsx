@@ -1,11 +1,9 @@
-import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 
 import ResultWithoutVote from '@/components/modal/ResultWithoutVote';
 import Survey from '@/components/modal/Survey';
 import { ModalCase } from '@/constants/modalEnum';
-import { MAX_WIDTH } from '@/constants/viewSize';
 import { ModalHanlderAtom } from '@/states/ModalAtom';
 
 const ModalController = () => {
@@ -15,22 +13,14 @@ const ModalController = () => {
     if (modalType === ModalCase.None) return null;
     if (modalType === ModalCase.ResultWithoutVote) {
       return (
-        <>
-          <ModalControllerWrap>
-            <ResultWithoutVote />
-            <ModalBackground />
-          </ModalControllerWrap>
-        </>
+        <div>
+          <ResultWithoutVote />
+          <BackDrop />
+        </div>
       );
     }
     if (modalType === ModalCase.Survey) {
-      return (
-        <>
-          <ModalControllerWrap>
-            <Survey />
-          </ModalControllerWrap>
-        </>
-      );
+      return <Survey />;
     }
   };
 
@@ -43,15 +33,8 @@ const ModalController = () => {
 
 export default ModalController;
 
-const ModalBackground = styled.div`
-  background: rgba(42, 45, 55, 0.5);
-  height: 100vh;
-`;
-
-const ModalControllerWrap = styled.div`
-  width: ${MAX_WIDTH};
-
-  height: 100%;
-  position: fixed;
-  z-index: 100;
-`;
+const BackDrop = () => {
+  return (
+    <div className="absolute left-0 top-0 z-30 h-full w-full bg-[rgba(42,45,55,0.5)]" />
+  );
+};

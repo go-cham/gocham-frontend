@@ -12,7 +12,7 @@ const Survey = () => {
   };
 
   return (
-    <div className="absolute bottom-0 w-full rounded-t-[1.2rem] bg-white shadow-[0_-1.2rem_2.5rem_rgba(42,45,55,0.1)]">
+    <div className="absolute bottom-0 z-[100] w-full rounded-t-[1.2rem] bg-white shadow-[0_-1.2rem_2.5rem_rgba(42,45,55,0.1)]">
       <div className="p-[2.5rem] pt-[2.5rem]">
         <h1 className="mb-[0.8rem] text-[2.2rem] font-bold">
           이용에 불편함은 없으신가요?

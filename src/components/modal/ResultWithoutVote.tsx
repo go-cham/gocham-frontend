@@ -40,14 +40,7 @@ const ResultWithoutVote = () => {
 export default ResultWithoutVote;
 
 const ModalWrap = styled.div`
-  @media screen and (min-width: 1300px) {
-    margin-left: 25rem;
-  }
-
-  @media screen and (max-width: 1300px) {
-    padding-left: 0;
-  }
-
+  z-index: 100;
   & .X {
     position: absolute;
     right: 1.3rem;
