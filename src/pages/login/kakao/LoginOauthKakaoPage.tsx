@@ -1,5 +1,4 @@
 // 리다이렉트될 화면
-import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -63,23 +62,8 @@ const LoginOauthKakaoPage = () => {
       }
     })();
   }, []);
-  return (
-    <>
-      <RegisterTermWrap></RegisterTermWrap>
-    </>
-  );
+
+  return null;
 };
 
 export default LoginOauthKakaoPage;
-
-const RegisterTermWrap = styled.div`
-  width: 80vw;
-  margin-top: 2.4rem;
-  & > .약관문구 {
-    margin-top: 3.9rem;
-    margin-bottom: 3rem;
-    font-weight: 700;
-    font-size: 2.7rem;
-    line-height: 3.9rem;
-  }
-`;
