@@ -1,11 +1,9 @@
-import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 
 import { ModalCase } from '@/constants/modalEnum';
 import XIcon from '@/images/Modal/x_button.svg';
 import { ModalHanlderAtom } from '@/states/ModalAtom';
 import { justResultWorryHandlerAtom } from '@/states/justResultAtom';
-import palette from '@/styles/color';
 
 const ResultWithoutVote = () => {
   const [justResultWorryStatus, setJustResultWorryStatus] = useAtom(
@@ -23,61 +21,27 @@ const ResultWithoutVote = () => {
   };
 
   return (
-    <ModalWrap>
-      <img src={XIcon} className="X" onClick={() => closeModal()} />
-
-      <h1>
-        결과를 열람하시면
-        <br />
-        투표에 참여하실 수 없습니다.
-      </h1>
-      <div className="button" onClick={() => handleJustResult()}>
-        그래도 볼게요
+    <div className="absolute left-1/2 top-1/2 z-[100] h-[22.4rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-[1.2rem] bg-white px-[1.6rem] pb-[1.4rem]">
+      <img
+        src={XIcon}
+        alt="close"
+        className="absolute right-[1.3rem] top-[1.3rem]"
+        onClick={closeModal}
+      />
+      <div className="flex h-full flex-col items-center justify-between">
+        <p className="mt-[6rem] text-center text-[2.2rem] font-bold">
+          결과를 열람하시면
+          <br />
+          투표에 참여하실 수 없습니다.
+        </p>
+        <button
+          className="flex h-[4.7rem] w-full items-center justify-center rounded-[0.5rem] bg-primary text-[1.6rem] font-bold text-white"
+          onClick={handleJustResult}
+        >
+          그래도 볼게요
+        </button>
       </div>
-    </ModalWrap>
+    </div>
   );
 };
 export default ResultWithoutVote;
-
-const ModalWrap = styled.div`
-  z-index: 100;
-  & .X {
-    position: absolute;
-    right: 1.3rem;
-    top: 1.3rem;
-  }
-  & > h1 {
-    margin-top: 6rem;
-    text-align: center;
-    font-weight: 700;
-    font-size: 2.2rem;
-    line-height: 3.2rem;
-    letter-spacing: -0.03em;
-  }
-
-  & .button {
-    width: 30.7rem;
-    height: 4.7rem;
-    background-color: ${palette.Primary};
-    border-radius: 0.5rem;
-    color: ${palette.White};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-    font-size: 1.6rem;
-    letter-spacing: -0.03em;
-    margin: 0 1.6rem 1.3rem 1.6rem;
-    position: absolute;
-    bottom: 0;
-  }
-  width: 34rem;
-  height: 22.4rem;
-  margin: 0;
-  background-color: ${palette.White};
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  border-radius: 1.2rem;
-  transform: translate(-50%, -50%);
-`;
