@@ -154,7 +154,7 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┃ ┃ ┣ 📜index.tsx
 ┃ ┃ ┃ ┣ 📜ResultWithoutVote.tsx
 ┃ ┃ ┃ ┣ 📜styles.js
-┃ ┃ ┃ ┗ 📜Survay.tsx
+┃ ┃ ┃ ┗ 📜Survey.tsx
 ┃ ┃ ┣ 📂post # 포스트
 ┃ ┃ ┃ ┣ 📂feed # 피드형
 ┃ ┃ ┃ ┃ ┣ 📜PostDetail.tsx

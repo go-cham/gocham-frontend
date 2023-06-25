@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 
 import ResultWithoutVote from '@/components/modal/ResultWithoutVote';
-import Survay from '@/components/modal/Survay';
+import Survey from '@/components/modal/Survey';
 import { ModalCase } from '@/constants/modalEnum';
 import { MAX_WIDTH } from '@/constants/viewSize';
 import { ModalHanlderAtom } from '@/states/ModalAtom';
@@ -27,7 +27,7 @@ const ModalController = () => {
       return (
         <>
           <ModalControllerWrap>
-            <Survay />
+            <Survey />
           </ModalControllerWrap>
         </>
       );
