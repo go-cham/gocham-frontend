@@ -203,9 +203,9 @@ const UserPage = () => {
     <UserWrap>
       {/*프로필 부분*/}
       <UserProfile
-        isMyFeed={isMyFeed}
-        userData={userData}
-        userProfile={userProfile}
+      // isMyFeed={isMyFeed}
+      // userData={userData}
+      // userProfile={userProfile}
       />
 
       {/*내 게시글 & 참여한 게시글 선택 부분*/}

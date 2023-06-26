@@ -39,12 +39,13 @@ function ChatBottomSheet({
         <Handle />
       </div>
       <div className="h-[600px] overflow-y-auto">
-        <BottomSheetContent
-          openBottomSheet={openBottomSheet}
-          postId={postId}
-          userInfo={userInfo}
-          postData={postData}
-        />
+        {openBottomSheet && (
+          <BottomSheetContent
+            postId={postId}
+            userInfo={userInfo}
+            postData={postData}
+          />
+        )}
       </div>
     </motion.div>
   );

@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { RouteURL } from '@/App';
+import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import AppBar from '@/components/layout/AppBar';
 import { userType } from '@/constants/userTypeEnum';
-import usePostsWithInfiniteScroll from '@/hooks/usePostsWithInfiniteScroll';
 import { userAtom } from '@/states/userData';
 
 import PostDetail from './PostDetail';
@@ -14,7 +14,7 @@ const FeedPage = () => {
   const params = useParams();
   const navigate = useNavigate();
   const userInfo = useAtomValue(userAtom);
-  const { posts, error, ref, isLoading } = usePostsWithInfiniteScroll({
+  const { posts, error, ref, isLoading } = useGetPosts({
     initialPostId: params?.id ? Number(params.id) + 1 : undefined,
   });
 

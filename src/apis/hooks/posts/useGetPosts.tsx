@@ -1,16 +1,14 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { useAtomValue } from 'jotai';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useParams } from 'react-router-dom';
 
-import { GetWorriesResponse } from '@/apis/dto/worries/get-worries';
-import { EndPoint } from '@/dataManager/apiMapper';
-import { getBearerToken } from '@/dataManager/localStorageManager';
+import { GetPostsResponse } from '@/apis/dto/posts/get-posts';
+import { axiosInstance } from '@/libs/axios';
 import { userAtom } from '@/states/userData';
 
-export default function usePostsWithInfiniteScroll({
+export default function useGetPosts({
   initialPostId,
 }: {
   initialPostId?: number;
@@ -22,23 +20,17 @@ export default function usePostsWithInfiniteScroll({
     route === 'participated' ? userInfo.userId : undefined;
 
   const { data, isLoading, error, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['worries', initialPostId, authorId, participatingUserId],
+    queryKey: ['posts', initialPostId, authorId, participatingUserId],
     queryFn: async ({ pageParam }) => {
-      const res = await axios.get<GetWorriesResponse>(
-        EndPoint.worry.get.WORRIES,
-        {
-          params: {
-            sort: 'DESC',
-            take: 5,
-            nextCursorId: pageParam || initialPostId,
-            authorId,
-            participatingUserId,
-          },
-          headers: {
-            Authorization: `Bearer ${getBearerToken()}`,
-          },
-        }
-      );
+      const res = await axiosInstance.get<GetPostsResponse>('/worries', {
+        params: {
+          sort: 'DESC',
+          take: 5,
+          nextCursorId: pageParam || initialPostId,
+          authorId,
+          participatingUserId,
+        },
+      });
       return res.data;
     },
     getNextPageParam: (lastPage) => lastPage.meta.nextId || undefined,
@@ -50,7 +42,7 @@ export default function usePostsWithInfiniteScroll({
 
   useEffect(() => {
     if (inView) {
-      void fetchNextPage();
+      fetchNextPage();
     }
   }, [inView]);
 

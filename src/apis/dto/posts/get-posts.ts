@@ -1,4 +1,4 @@
-export interface GetWorriesResponse {
+export interface GetPostsResponse {
   data: {
     expirationTime: string;
     user: {
