@@ -45,6 +45,7 @@ export default function useGetPosts({
 
   return {
     posts,
+    totalCount: data?.pages[0].meta.total || 0,
     ref,
     isLoading,
     error,

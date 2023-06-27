@@ -19,20 +19,26 @@ const UserPage = () => {
   const navigate = useNavigate();
 
   const [postType, setPostType] = useState<PostType>('my');
-  const { posts: myPosts, ref: myPostsRef } = useGetPosts({
+  const {
+    posts: myPosts,
+    totalCount: myPostsTotal,
+    ref: myPostsRef,
+  } = useGetPosts({
     authorId: userInfo.userId,
   });
-  const { posts: participatingPosts, ref: participatingPostsRef } = useGetPosts(
-    {
-      participatingUserId: userInfo.userId,
-    }
-  );
+  const {
+    posts: participatingPosts,
+    totalCount: participatingPostsTotal,
+    ref: participatingPostsRef,
+  } = useGetPosts({
+    participatingUserId: userInfo.userId,
+  });
   const posts = postType === 'my' ? myPosts : participatingPosts;
   const ref = postType === 'my' ? myPostsRef : participatingPostsRef;
 
   const postingCount = {
-    written: myPosts?.length || 0,
-    participated: participatingPosts?.length || 0,
+    written: myPostsTotal,
+    participated: participatingPostsTotal,
   };
 
   const switchPostType = (postType: PostType) => {
