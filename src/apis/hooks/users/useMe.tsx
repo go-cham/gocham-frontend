@@ -23,11 +23,9 @@ export default function useMe() {
   } = useQuery({
     queryKey: ['user', data?.userId],
     queryFn: async () => {
-      const res = await axiosInstance.get<GetUserResponse>('/user', {
-        params: {
-          id: data?.userId,
-        },
-      });
+      const res = await axiosInstance.get<GetUserResponse>(
+        `/user/${data?.userId}`
+      );
       return res.data;
     },
     enabled: !!data?.userId,

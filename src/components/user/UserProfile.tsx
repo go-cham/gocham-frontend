@@ -17,6 +17,8 @@ const UserProfile = () => {
     navigate(RouteURL.edit_profile);
   };
 
+  console.log(user);
+
   return (
     <>
       <SettingImg
