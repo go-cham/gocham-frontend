@@ -81,6 +81,7 @@ const EditProfilePage = () => {
     if (userInfo.userType !== userType.activatedUser) navigate(RouteURL.home);
   }, [userInfo]);
 
+  console.log(userInformation);
   return (
     <>
       <AppBar title={'프로필 편집'} boxShadow={false} />
