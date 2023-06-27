@@ -1,24 +1,19 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useAtomValue } from 'jotai';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useParams } from 'react-router-dom';
 
 import { GetPostsResponse } from '@/apis/dto/posts/get-posts';
 import { axiosInstance } from '@/libs/axios';
-import { userAtom } from '@/states/userData';
 
 export default function useGetPosts({
+  authorId,
+  participatingUserId,
   initialPostId,
 }: {
+  authorId?: number | null;
+  participatingUserId?: number | null;
   initialPostId?: number;
 } = {}) {
-  const { route } = useParams();
-  const userInfo = useAtomValue(userAtom);
-  const authorId = route === 'my' ? userInfo.userId : undefined;
-  const participatingUserId =
-    route === 'participated' ? userInfo.userId : undefined;
-
   const { data, isLoading, error, fetchNextPage } = useInfiniteQuery({
     queryKey: ['posts', initialPostId, authorId, participatingUserId],
     queryFn: async ({ pageParam }) => {

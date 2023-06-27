@@ -14,8 +14,12 @@ const FeedPage = () => {
   const params = useParams();
   const navigate = useNavigate();
   const userInfo = useAtomValue(userAtom);
+  const { route } = useParams();
   const { posts, error, ref, isLoading } = useGetPosts({
     initialPostId: params?.id ? Number(params.id) + 1 : undefined,
+    authorId: route === 'my' ? userInfo.userId : undefined,
+    participatingUserId:
+      route === 'participating' ? userInfo.userId : undefined,
   });
 
   useEffect(() => {
