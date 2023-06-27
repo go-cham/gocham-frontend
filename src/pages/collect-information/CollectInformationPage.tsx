@@ -13,7 +13,7 @@ import { EndPoint } from '@/dataManager/apiMapper';
 import { userAtom } from '@/states/userData';
 import palette from '@/styles/color';
 import {
-  postUserInformationPropsType,
+  PostUserInformationPropsType,
   userInformationType,
 } from '@/types/user';
 import getUserInfo from '@/utils/getUserInfo';
@@ -68,7 +68,7 @@ const CollectInformationPage = () => {
 
   const uploadCollectData = async () => {
     // console.log("시작하기!");
-    let postUserInformation: postUserInformationPropsType;
+    let postUserInformation: PostUserInformationPropsType;
     if (userInfo.userId) {
       postUserInformation = {
         userId: userInfo.userId,

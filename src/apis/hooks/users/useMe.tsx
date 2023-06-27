@@ -6,7 +6,7 @@ import { axiosInstance } from '@/libs/axios';
 
 export default function useMe() {
   const { data } = useQuery({
-    queryKey: ['user'],
+    queryKey: ['userType'],
     queryFn: async () => {
       const res = await axiosInstance.get<GetUserTypeResponse>(
         '/user/type',
