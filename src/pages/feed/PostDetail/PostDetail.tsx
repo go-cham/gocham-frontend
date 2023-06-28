@@ -2,6 +2,7 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
 import ChatBottomSheet from '@/components/post/ChatBottomSheet';
+import PostUserProfile from '@/components/post/PostUserProfile';
 import ClockIcon from '@/images/PostComponent/clock.svg';
 import { refreshChatAtom } from '@/states/postRefreshRequest';
 import { userDataAtomType } from '@/states/userData';
@@ -10,8 +11,6 @@ import { getRemainingTime } from '@/utils/getRemainingTime';
 import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
 
 import PostVote from './PostVote';
-
-import PostUserProfile from '../../../components/post/PostUserProfile';
 
 const PostDetail = ({
   userInfo,

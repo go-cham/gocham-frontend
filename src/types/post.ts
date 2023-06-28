@@ -9,7 +9,7 @@ export type PostDataType = {
   user: {
     id: number;
     nickname: string;
-    profileImageUrl: string;
+    profileImageUrl: string | null;
   };
   replyCount: number;
   userWorryChoiceCount: number;

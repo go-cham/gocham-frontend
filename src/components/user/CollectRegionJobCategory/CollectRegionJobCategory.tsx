@@ -8,14 +8,14 @@ import {
   residenceOptions,
 } from '@/constants/Options';
 import palette from '@/styles/color';
-import { userInformationPropsType, userInformationType } from '@/types/user';
+import { UserInformationPropsType, userInformationType } from '@/types/user';
 
 import MultiPickerComponent from './MultiPickerComponent';
 
 const CollectNicknameAgeGender = ({
   userInformation,
   setUserInformation,
-}: userInformationPropsType) => {
+}: UserInformationPropsType) => {
   const handleInputValue = (e: OnChangeValue<OptionType, any>, key: string) => {
     setUserInformation((value: userInformationType) => ({
       ...value,

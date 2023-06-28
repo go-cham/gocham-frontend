@@ -1,4 +1,4 @@
-import { userInformationPropsType, userInformationType } from '@/types/user';
+import { UserInformationPropsType, userInformationType } from '@/types/user';
 
 import BirthdateForm from './BirthDateForm';
 import NicknameForm from './NicknameForm';
@@ -6,7 +6,7 @@ import NicknameForm from './NicknameForm';
 const CollectNicknameAgeGender = ({
   userInformation,
   setUserInformation,
-}: userInformationPropsType) => {
+}: UserInformationPropsType) => {
   const handleSelectGender = (sex: string) => {
     setUserInformation((value: userInformationType) => ({
       ...value,

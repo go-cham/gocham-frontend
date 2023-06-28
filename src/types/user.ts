@@ -12,17 +12,17 @@ export type userInformationType = {
   profileImageUrl?: string;
 };
 
-export type userInformationPropsType = {
+export type UserInformationPropsType = {
   userInformation: userInformationType;
   setUserInformation: Dispatch<any>;
 };
 
-export type postUserInformationPropsType = {
+export type PostUserInformationPropsType = {
   userId: number;
   nickname: string; // 제거 예정
   birthDate: string;
   sex: string;
-  residenceId: number | string; // 추후 number로 변경됨.
-  jobId: number | string; // 추후 number로 변경됨.
+  residenceId: number;
+  jobId: number;
   worryCategories: number[];
 };

@@ -1,4 +1,6 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Provider } from 'jotai';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -8,17 +10,29 @@ import { AppWrapper } from './AppWrapper';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      staleTime: 5 * 1000,
+    },
+  },
+});
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  // <React.StrictMode>
-  <Provider>
-    <BrowserRouter>
-      <AppWrapper />
-    </BrowserRouter>
-  </Provider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <Provider>
+        <BrowserRouter>
+          <AppWrapper />
+        </BrowserRouter>
+      </Provider>
+    </QueryClientProvider>
+  </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change

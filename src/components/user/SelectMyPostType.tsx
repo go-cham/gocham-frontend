@@ -2,6 +2,7 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
+import { PostType } from '@/pages/user/UserPage';
 import palette from '@/styles/color';
 
 const SelectMyPostType = ({
@@ -9,28 +10,28 @@ const SelectMyPostType = ({
   switchPostType,
   postingCount,
 }: {
-  postType: string;
-  switchPostType: (type: string) => void;
+  postType: PostType;
+  switchPostType: (postType: PostType) => void;
   postingCount: { written: number; participated: number };
 }) => {
   return (
     <SelectMyPostTypeWrap>
       <SelectMyPostTypeBar>
-        {postType === '내 게시글' ? (
+        {postType === 'my' ? (
           <SelectMyPostTypeBox selected={true}>
             내 게시글 {postingCount.written}
           </SelectMyPostTypeBox>
         ) : (
-          <SelectMyPostTypeBox onClick={() => switchPostType('내 게시글')}>
+          <SelectMyPostTypeBox onClick={() => switchPostType('my')}>
             내 게시글 {postingCount.written}
           </SelectMyPostTypeBox>
         )}
-        {postType === '참여한 게시글' ? (
+        {postType === 'participating' ? (
           <SelectMyPostTypeBox selected={true}>
             참여한 게시글 {postingCount.participated}
           </SelectMyPostTypeBox>
         ) : (
-          <SelectMyPostTypeBox onClick={() => switchPostType('참여한 게시글')}>
+          <SelectMyPostTypeBox onClick={() => switchPostType('participating')}>
             참여한 게시글 {postingCount.participated}
           </SelectMyPostTypeBox>
         )}

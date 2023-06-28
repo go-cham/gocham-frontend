@@ -40,6 +40,7 @@ export default function NicknameForm({
         id="nickname-input"
         className={`bg-transparent text-[1.4rem]`}
         placeholder="최대 10자 입력"
+        value={nickname}
         onChange={handleInputChange}
       />
     </InputLayout>

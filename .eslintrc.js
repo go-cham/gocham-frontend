@@ -8,6 +8,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@tanstack/eslint-plugin-query/recommended',
   ],
   settings: {
     react: {
@@ -20,9 +21,9 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react', '@typescript-eslint', '@tanstack/query'],
   rules: {
     'react/react-in-jsx-scope': 'off',
-    'react/no-unknown-property': ["error", { "ignore": ["css"] }]
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
   },
 };

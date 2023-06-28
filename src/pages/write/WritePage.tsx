@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Select, { StylesConfig } from 'react-select';
 
 import { RouteURL } from '@/App';
+import useAddPost from '@/apis/hooks/posts/useAddPost';
 import AppBar from '@/components/layout/AppBar';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
 import {
@@ -13,8 +14,6 @@ import {
   deadlineOptions,
 } from '@/constants/Options';
 import { userType } from '@/constants/userTypeEnum';
-import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
-import { EndPoint } from '@/dataManager/apiMapper';
 import { uploadFirebase } from '@/dataManager/firebaseManager';
 import { resizeImage } from '@/dataManager/imageResizing';
 import CameraIcon from '@/images/Write/Camera.svg';
@@ -36,11 +35,11 @@ type WriteContentType = {
 type PostWriteContentType = {
   title: string;
   content: string;
-  worryCategoryId: number | undefined;
-  expirationTime?: string;
+  worryCategoryId: number;
+  expirationTime: string | null;
   userId: number;
   choices: { label: string; sequenceNumber: number }[];
-  files?: {
+  files: {
     url: string;
     contentType: string;
   }[];
@@ -49,6 +48,7 @@ type PostWriteContentType = {
 const WritePage = () => {
   const userInfo = useAtomValue(userAtom);
   const navigate = useNavigate();
+  const { addPost, data, error } = useAddPost();
 
   useEffect(() => {
     // HOC로 안잡히는 부분 잡기위함
@@ -66,7 +66,7 @@ const WritePage = () => {
       title: votingContent.title,
       userId: userInfo.userId,
       content: votingContent.content,
-      worryCategoryId: votingContent.category?.value,
+      worryCategoryId: votingContent.category!.value,
       choices: [
         {
           label: pros,
@@ -77,6 +77,8 @@ const WritePage = () => {
           sequenceNumber: 2,
         },
       ],
+      files: [],
+      expirationTime: null,
     };
     // expirationTime 이 있으면 추가. (추후 개발에서 null 인 케이스 발생 예정
     if (expirationTime) {
@@ -96,19 +98,19 @@ const WritePage = () => {
     }
 
     // 포스팅 업로드
-    try {
-      const res = await ApiConfig.request({
-        method: HttpMethod.POST,
-        url: EndPoint.worry.post.WORRY,
-        data: postData,
-      });
-      // console.log(res);
-      navigate(`${RouteURL.feed}/${res?.data.id}`);
-    } catch (e) {
-      console.log(e);
+    await addPost(postData);
+  };
+
+  useEffect(() => {
+    if (data) {
+      navigate(`/feed/${data.id}`);
+    }
+    if (error) {
+      console.error(error);
       alert(alertMessage.error.post.noUploadPermission);
     }
-  };
+  }, [data, error]);
+
   const debouncedHandlePushPost = debounce(handlePostUpload, 3000);
   const handlePushPost = () => {
     debouncedHandlePushPost();
