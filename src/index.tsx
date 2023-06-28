@@ -4,11 +4,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
-import '@/styles/global.css';
-
-import { AppWrapper } from './AppWrapper';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import './styles/global.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +27,7 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <Provider>
         <BrowserRouter>
-          <AppWrapper />
+          <App />
         </BrowserRouter>
       </Provider>
     </QueryClientProvider>

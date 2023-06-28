@@ -1,20 +1,16 @@
 import { useEffect, useState } from 'react';
 
-import { Banner } from '@/components/Banner';
-
-import App from './App';
-
-export const AppWrapper = () => {
+export default function useUpdate() {
   const [showUpdate, setShowUpdate] = useState(false);
 
   const applyUpdate = () => {
-    console.log('새롭게 받아오기');
     navigator.serviceWorker.getRegistrations().then((regs) =>
       regs.forEach((reg) => {
         reg.waiting?.postMessage({ type: 'SKIP_WAITING' });
       })
     );
   };
+
   useEffect(() => {
     if (!navigator.serviceWorker) {
       return;
@@ -29,15 +25,14 @@ export const AppWrapper = () => {
             }
           })
           .catch((e) => {
-            // Fetching SW failed.
+            console.error(e);
           });
       })
     );
   }, []);
-  return (
-    <>
-      <Banner show={showUpdate} applyUpdate={applyUpdate} />
-      <App />
-    </>
-  );
-};
+
+  return {
+    showUpdate,
+    applyUpdate,
+  };
+}

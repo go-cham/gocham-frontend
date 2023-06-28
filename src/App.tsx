@@ -2,9 +2,11 @@ import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { Banner } from '@/components/Banner';
 import GNBHOC from '@/components/layout/GNBHOC';
 import Layout from '@/components/layout/Layout';
 import ModalController from '@/components/modal/ModalController';
+import useUpdate from '@/hooks/useUpdate';
 import AuthCheckPage from '@/pages/auth-check/AuthCheckPage';
 import CollectInformationPage from '@/pages/collect-information/CollectInformationPage';
 import EditProfilePage from '@/pages/edit-profile/EditProfilePage';
@@ -43,6 +45,7 @@ export const RouteURL = {
 
 function App() {
   const [userData, setUserData] = useAtom(userAtom);
+  const { showUpdate, applyUpdate } = useUpdate();
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -58,58 +61,65 @@ function App() {
   }, []);
 
   return (
-    <Layout>
-      <ModalController />
-      <RouteChangeTracker />
-      <Routes>
-        <Route path={RouteURL.home} element={<HomePage />} />
-        <Route
-          path={RouteURL.collect_information}
-          element={<CollectInformationPage />}
-        />
-        <Route
-          path={RouteURL.feed_star}
-          element={<Auth SpecificComponent={FeedPage} requiredLogin={true} />}
-        />
-        <Route
-          path={RouteURL.feed_route_star}
-          element={<Auth SpecificComponent={FeedPage} requiredLogin={true} />}
-        />
-        <Route
-          path={RouteURL.login}
-          element={<Auth SpecificComponent={LoginPage} requiredLogin={false} />}
-        />
-        <Route
-          path={RouteURL.login_oauth_kakao}
-          element={<LoginOauthKakaoPage />}
-        />
-        <Route path={RouteURL.register_term} element={<RegisterTermPage />} />
-        <Route path={RouteURL.onboarding} element={<OnboardingPage />} />
-        <Route
-          path={RouteURL.write}
-          element={<Auth SpecificComponent={WritePage} requiredLogin={true} />}
-        />
-        <Route
-          path={RouteURL.user}
-          element={<Auth SpecificComponent={UserPage} requiredLogin={true} />}
-        />
-        <Route
-          path={RouteURL.edit_profile}
-          element={
-            <Auth SpecificComponent={EditProfilePage} requiredLogin={true} />
-          }
-        />
-        <Route path={RouteURL.settings} element={<SettingsPage />} />
-        <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
-        <Route
-          path={RouteURL.auth_check}
-          element={
-            <Auth SpecificComponent={AuthCheckPage} requiredLogin={true} />
-          }
-        />
-      </Routes>
-      <GNBHOC />
-    </Layout>
+    <>
+      <Banner show={showUpdate} applyUpdate={applyUpdate} />
+      <Layout>
+        <ModalController />
+        <RouteChangeTracker />
+        <Routes>
+          <Route path={RouteURL.home} element={<HomePage />} />
+          <Route
+            path={RouteURL.collect_information}
+            element={<CollectInformationPage />}
+          />
+          <Route
+            path={RouteURL.feed_star}
+            element={<Auth SpecificComponent={FeedPage} requiredLogin={true} />}
+          />
+          <Route
+            path={RouteURL.feed_route_star}
+            element={<Auth SpecificComponent={FeedPage} requiredLogin={true} />}
+          />
+          <Route
+            path={RouteURL.login}
+            element={
+              <Auth SpecificComponent={LoginPage} requiredLogin={false} />
+            }
+          />
+          <Route
+            path={RouteURL.login_oauth_kakao}
+            element={<LoginOauthKakaoPage />}
+          />
+          <Route path={RouteURL.register_term} element={<RegisterTermPage />} />
+          <Route path={RouteURL.onboarding} element={<OnboardingPage />} />
+          <Route
+            path={RouteURL.write}
+            element={
+              <Auth SpecificComponent={WritePage} requiredLogin={true} />
+            }
+          />
+          <Route
+            path={RouteURL.user}
+            element={<Auth SpecificComponent={UserPage} requiredLogin={true} />}
+          />
+          <Route
+            path={RouteURL.edit_profile}
+            element={
+              <Auth SpecificComponent={EditProfilePage} requiredLogin={true} />
+            }
+          />
+          <Route path={RouteURL.settings} element={<SettingsPage />} />
+          <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
+          <Route
+            path={RouteURL.auth_check}
+            element={
+              <Auth SpecificComponent={AuthCheckPage} requiredLogin={true} />
+            }
+          />
+        </Routes>
+        <GNBHOC />
+      </Layout>
+    </>
   );
 }
 
