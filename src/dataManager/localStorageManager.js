@@ -1,4 +1,5 @@
 export function getBearerToken() {
+  console.log('get');
   const token = window.localStorage.getItem('token');
 
   return token ? token : null;

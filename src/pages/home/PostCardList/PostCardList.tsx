@@ -13,7 +13,7 @@ const PostCardList = () => {
       {posts &&
         posts.map((post, index) => (
           <li key={post.id} ref={index === posts.length - 1 ? ref : undefined}>
-            <PostCard userInfo={userInfo} postData={post} />
+            <PostCard postData={post} />
           </li>
         ))}
     </ul>

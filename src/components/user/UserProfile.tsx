@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
-import useMe from '@/apis/hooks/users/useMe';
+import useUser from '@/apis/hooks/users/useUser';
 import { RouteURL } from '@/constants/route-url';
 import DefaultUserIcon from '@/images/Profile/defaultUserIcon.svg';
 import SettingIcon from '@/images/Profile/settings.svg';
@@ -10,7 +10,7 @@ import { ButtonStyle } from '@/styles/common';
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { user } = useMe();
+  const { user } = useUser();
 
   const handleGoEditProfile = () => {
     navigate(RouteURL.edit_profile);
@@ -26,7 +26,7 @@ const UserProfile = () => {
       />
       <div className="mt-[1rem] flex flex-col items-center">
         <img
-          src={user?.profileImageUrl || DefaultUserIcon}
+          src={user?.image || DefaultUserIcon}
           alt={'유저이미지'}
           className="h-40 w-40 rounded-full"
         />

@@ -123,7 +123,7 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┣ 📂constants # 상수 값, enum
 ┃ ┣ 📂dataManager # 외부 서비스로 데이터들을 관리하는 툴
 ┃ ┣ 📂HOC # 고차 검포넌트
-┃ ┃ ┗ 📜Auth.tsx # 페이지에 접속할때 로그인 유무를 파악
+┃ ┃ ┗ 📜WithAuth.tsx # 페이지에 접속할때 로그인 유무를 파악
 ┃ ┣ 📂hooks # 커스텀 훅
 ┃ ┣ 📂images # 이미지
 ┃ ┣ 📂style # 공통으로 관리하는 css

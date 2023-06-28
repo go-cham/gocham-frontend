@@ -4,5 +4,4 @@ export enum userType {
   activatedUser = 'activatedUser',
   dormantUser = 'dormantUser',
   deactivatedUser = 'deactivatedUser',
-  notUser = 'notUser',
 }

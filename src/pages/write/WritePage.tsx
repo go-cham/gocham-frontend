@@ -7,6 +7,7 @@ import Select, { StylesConfig } from 'react-select';
 import useAddPost from '@/apis/hooks/posts/useAddPost';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
 import TopAppBar from '@/components/layout/TopAppBar';
+import withAuth from '@/components/withAuth';
 import {
   OptionType,
   categoryOptions,
@@ -49,11 +50,6 @@ const WritePage = () => {
   const userInfo = useAtomValue(userAtom);
   const navigate = useNavigate();
   const { addPost, data, error } = useAddPost();
-
-  useEffect(() => {
-    // HOC로 안잡히는 부분 잡기위함
-    if (userInfo.userType !== userType.activatedUser) navigate(RouteURL.home);
-  }, [userInfo]);
 
   const handlePostUpload = async () => {
     if (!userInfo.userId) return false;
@@ -355,7 +351,7 @@ const WritePage = () => {
   );
 };
 
-export default WritePage;
+export default withAuth(WritePage, { block: 'unauthenticated' });
 
 function Label({ text }: { text: string }) {
   return <h2 className="text-[1.2rem] font-medium">{text}</h2>;

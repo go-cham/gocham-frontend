@@ -1,18 +1,16 @@
 import { useAtomValue } from 'jotai';
-import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import TopAppBar from '@/components/layout/TopAppBar';
+import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
-import { userType } from '@/constants/userTypeEnum';
 import { userAtom } from '@/states/userData';
 
 import PostDetail from './PostDetail';
 
 const FeedPage = () => {
   const params = useParams();
-  const navigate = useNavigate();
   const userInfo = useAtomValue(userAtom);
   const { route } = useParams();
   const { posts, error, ref, isLoading } = useGetPosts({
@@ -21,13 +19,6 @@ const FeedPage = () => {
     participatingUserId:
       route === 'participating' ? userInfo.userId : undefined,
   });
-
-  useEffect(() => {
-    // HOC로 안잡히는 부분 잡기위함
-    if (userInfo.userId === 0) {
-      if (userInfo.userType !== userType.activatedUser) navigate(RouteURL.home);
-    }
-  }, [userInfo]);
 
   return (
     <div className="flex h-full flex-col">
@@ -60,4 +51,4 @@ const FeedPage = () => {
   );
 };
 
-export default FeedPage;
+export default withAuth(FeedPage, { block: 'unauthenticated' });

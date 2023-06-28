@@ -1,3 +1,4 @@
+import withAuth from '@/components/withAuth';
 import Logo from '@/images/Common/big_logo.svg';
 import GochamCharacter from '@/images/Login/GochamCharacter.svg';
 import KakaoText from '@/images/Login/카카오계정으로_시작하기.svg';
@@ -38,4 +39,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default withAuth(LoginPage, { block: 'activated' });

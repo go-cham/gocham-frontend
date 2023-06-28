@@ -1,21 +1,19 @@
-import { useAtom } from 'jotai';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import useKakaoLogin from '@/apis/hooks/auth/useKakaoLogin';
+import useUser from '@/apis/hooks/users/useUser';
 import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
-import { userAtom } from '@/states/userData';
 import { alertMessage } from '@/utils/alertMessage';
-import getUserInfo from '@/utils/getUserInfo';
 
 const LoginOauthKakaoPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [userData, setUserData] = useAtom(userAtom);
+  const { user } = useUser();
   const code = new URLSearchParams(location.search).get('code') as string;
   const { token, error } = useKakaoLogin(code);
 
-  if (userData.userId) {
+  if (user?.id) {
     navigate(RouteURL.home);
   }
 
@@ -26,16 +24,15 @@ const LoginOauthKakaoPage = () => {
 
   if (token) {
     window.localStorage.setItem('token', token);
-    getUserInfo().then((userData) => setUserData(userData));
 
-    if (userData?.userType === userType.onceUserWithoutTerms) {
+    if (user?.type === userType.onceUserWithoutTerms) {
       navigate(RouteURL.register_term);
-    } else if (userData?.userType === userType.onceUser) {
+    } else if (user?.type === userType.onceUser) {
       navigate(RouteURL.collect_information);
-    } else if (userData?.userType === userType.deactivatedUser) {
+    } else if (user?.type === userType.deactivatedUser) {
       alert(alertMessage.error.user.deactivatedUser);
       navigate(RouteURL.login);
-    } else if (userData?.userType === userType.dormantUser) {
+    } else if (user?.type === userType.dormantUser) {
       alert(alertMessage.error.user.dormantUser);
       navigate(RouteURL.login);
     } else {

@@ -1,26 +1,20 @@
-import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
+import useUser from '@/apis/hooks/users/useUser';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
 import TopAppBar from '@/components/layout/TopAppBar';
 import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender/CollectNicknameAgeGender';
 import CollectRegionJobCategory from '@/components/user/CollectRegionJobCategory/CollectRegionJobCategory';
 import { RouteURL } from '@/constants/route-url';
-import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import { userAtom } from '@/states/userData';
 import palette from '@/styles/color';
-import {
-  PostUserInformationPropsType,
-  userInformationType,
-} from '@/types/user';
-import getUserInfo from '@/utils/getUserInfo';
+import { userInformationType } from '@/types/user';
 
 const CollectInformationPage = () => {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useAtom(userAtom);
+  const { user } = useUser();
 
   const [page, setPage] = useState(1);
   const [readyToNext, setReadyToNext] = useState(false);
@@ -33,10 +27,9 @@ const CollectInformationPage = () => {
     worryCategories: [],
   });
 
-  useEffect(() => {
-    // HOC로 안잡히는 부분 잡기위함
-    if (userInfo.userType === userType.activatedUser) navigate(RouteURL.home);
-  }, [userInfo]);
+  if (!user) {
+    return <Navigate to={RouteURL.login} />;
+  }
 
   useEffect(() => {
     if (
@@ -67,35 +60,17 @@ const CollectInformationPage = () => {
   }, [userInformation]);
 
   const uploadCollectData = async () => {
-    // console.log("시작하기!");
-    let postUserInformation: PostUserInformationPropsType;
-    if (userInfo.userId) {
-      postUserInformation = {
-        userId: userInfo.userId,
-        nickname: userInformation.nickname, // 삭제 예정
-        birthDate: userInformation.birthDay.toString(),
-        sex: userInformation.sex,
-        residenceId: userInformation.residence.value,
-        jobId: userInformation.job.value,
-        worryCategories: userInformation.worryCategories.map(
-          (value) => value.value
-        ),
-      };
-    } else {
-      // console.log("유저정보를 새롭게 조회합니다.");
-      const newUserInfo = await getUserInfo();
-      postUserInformation = {
-        userId: newUserInfo.userId,
-        nickname: userInformation.nickname, // 삭제 예정
-        birthDate: userInformation.birthDay.toString(),
-        sex: userInformation.sex,
-        residenceId: userInformation.residence.value,
-        jobId: userInformation.job.value,
-        worryCategories: userInformation.worryCategories.map(
-          (value) => value.value
-        ),
-      };
-    }
+    const postUserInformation = {
+      userId: user.id,
+      nickname: userInformation.nickname, // 삭제 예정
+      birthDate: userInformation.birthDay.toString(),
+      sex: userInformation.sex,
+      residenceId: userInformation.residence.value,
+      jobId: userInformation.job.value,
+      worryCategories: userInformation.worryCategories.map(
+        (value) => value.value
+      ),
+    };
     // console.log(postUserInformation);
     try {
       const res = await ApiConfig.request({
@@ -103,8 +78,6 @@ const CollectInformationPage = () => {
         url: EndPoint.user.patch.USER,
         data: postUserInformation,
       });
-      const userInfo = await getUserInfo();
-      setUserInfo(userInfo);
       navigate('/');
     } catch (e) {
       console.error(e);

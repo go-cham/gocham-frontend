@@ -11,7 +11,7 @@ export interface GetUserResponse {
   updatedAt: string;
   nickname: string;
   birthDate: string;
-  sex: string;
+  sex: 'male' | 'female';
   marketingAcceptedAt: string | null;
   joinStatus: string;
   vendor: string;

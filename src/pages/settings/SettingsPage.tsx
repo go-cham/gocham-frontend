@@ -1,13 +1,12 @@
-import { useSetAtom } from 'jotai';
+import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 import TopAppBar from '@/components/layout/TopAppBar';
-import { initialUserData, userAtom } from '@/states/userData';
 import { appVersion } from '@/version';
 
 const SettingsPage = () => {
   const navigate = useNavigate();
-  const setUserInfo = useSetAtom(userAtom);
+  const queryClient = useQueryClient();
 
   const SETTINGS_MENU: {
     title: string;
@@ -36,8 +35,8 @@ const SettingsPage = () => {
       title: '로그아웃',
       onClick: () => {
         localStorage.removeItem('token');
+        queryClient.clear();
         navigate('/');
-        setUserInfo(initialUserData);
       },
     },
     {

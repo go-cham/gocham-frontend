@@ -2,6 +2,7 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import useUser from '@/apis/hooks/users/useUser';
 import ChatBottomSheet from '@/components/post/ChatBottomSheet';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import { RouteURL } from '@/constants/route-url';
@@ -13,14 +14,13 @@ import { formatText } from '@/utils/formatText';
 import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
 
 const PostCard = ({
-  userInfo,
   postData,
   routeUrl,
 }: {
-  userInfo: userDataAtomType;
   postData: any;
   routeUrl?: string;
 }) => {
+  const { user } = useUser();
   const navigate = useNavigate();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const handleGoPostDetail = () => {
@@ -31,7 +31,7 @@ const PostCard = ({
     }
   };
   const handleClickPostChat = () => {
-    if (userInfo.userType === userType.activatedUser) {
+    if (user?.type === userType.activatedUser) {
       setOpenBottomSheet((value) => {
         // console.log(value, "->", !value);
         return !value;

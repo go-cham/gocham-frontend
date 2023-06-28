@@ -2,6 +2,19 @@ import { Dispatch } from 'react';
 
 import { OptionType } from '@/constants/Options';
 
+export interface User {
+  id: number;
+  type: string;
+  vendor: string;
+  nickname: string;
+  birthday: string;
+  sex: 'male' | 'female';
+  residence: OptionType;
+  job: OptionType;
+  worryCategories: OptionType[];
+  image: string | null;
+}
+
 export type userInformationType = {
   nickname: string;
   birthDay: string;
