@@ -74,13 +74,13 @@ const UserProfile = ({
   };
   return (
     <>
-      <SettingImg
+      <img
         src={SettingIcon}
         alt={'설정'}
-        className={'설정'}
+        className='absolute right-10 top-6'
         onClick={() => navigate(RouteURL.settings)}
       />
-      <UserProfileWrap>
+      <div className='mt-14 flex flex-col justify-center items-center'>
         <img
           src={
             userInformation.profileImageUrl
@@ -88,9 +88,9 @@ const UserProfile = ({
               : DefaultUserIcon
           }
           alt={'유저이미지'}
-          className={'유저이미지'}
+          className='w-40 h-40 rounded-full'
         />
-        <div className={'유저이름'}>{userInformation.nickname}</div>
+        <div className='font-bold text-4xl mt-5'>{userInformation.nickname}</div>
 
         <ProfileUtilButton
           width={8.3}
@@ -98,40 +98,17 @@ const UserProfile = ({
           borderRadius={0.7}
           border={`0.1rem solid ${palette.Secondary}`}
           size={1.2}
+          className='mt-5'
           onClick={() => handleGoEditProfile()}
         >
           프로필 편집
         </ProfileUtilButton>
-      </UserProfileWrap>
+      </div>
     </>
   );
 };
 
 export default UserProfile;
-
-const UserProfileWrap = styled.div`
-  margin-top: 5.4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  & .유저이미지 {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 10rem;
-  }
-  & .유저이름 {
-    font-weight: 700;
-    font-size: 2.4rem;
-    margin-top: 1.3rem;
-  }
-`;
-
-const SettingImg = styled.img`
-  position: absolute;
-  right: 2.5rem;
-  top: 1.3rem;
-`;
 
 const ProfileUtilButton = styled(ButtonStyle)`
   margin-top: 1.3rem;

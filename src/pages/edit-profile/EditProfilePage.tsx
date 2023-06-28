@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
 import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -104,7 +103,7 @@ const EditProfilePage = () => {
     <>
       <AppBar title={'프로필 편집'} boxShadow={false} />
 
-      <EditProfileWrap>
+      <div className='relative px-20 mx-auto mt-4.6 overflow-y-scroll'>
         {userInformation.birthDay !== '--' && (
           <>
             <CollectNicknameAgeGender
@@ -120,9 +119,9 @@ const EditProfilePage = () => {
             />
           </>
         )}
-      </EditProfileWrap>
+      </div>
 
-      <EditConfirmBottomBar
+      <BottomContinueBar
         title={'변경 완료'}
         clickAction={handleClickProfileChange}
         buttonColor={palette.Primary}
@@ -133,20 +132,3 @@ const EditProfilePage = () => {
 };
 
 export default EditProfilePage;
-
-const EditProfileWrap = styled.div`
-  //display: flex;
-  //flex-direction: column;
-  //align-items: center;
-  position: relative;
-  //width: 85%;
-  padding-left: 5rem;
-  padding-right: 5rem;
-  //height: 85vh;
-  margin: 4.6rem auto 0;
-  overflow-y: scroll;
-`;
-
-const EditConfirmBottomBar = styled(BottomContinueBar)`
-  font-weight: 700;
-`;
