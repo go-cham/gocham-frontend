@@ -2,9 +2,9 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { RouteURL } from '@/App';
 import ChatBottomSheet from '@/components/post/ChatBottomSheet';
 import PostUserProfile from '@/components/post/PostUserProfile';
+import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
 import { refreshChatAtom } from '@/states/postRefreshRequest';
 import { userDataAtomType } from '@/states/userData';

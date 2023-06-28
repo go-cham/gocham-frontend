@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { RouteURL } from '@/App';
+import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
 import { userAtom } from '@/states/userData';
 import getUserInfo from '@/utils/getUserInfo';

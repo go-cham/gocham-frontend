@@ -1,0 +1,17 @@
+export const RouteURL = {
+  home: '/',
+  feed: '/feed',
+  feed_star: '/feed/:id',
+  feed_route_star: '/feed/:id/:route',
+  login: '/login',
+  login_oauth_kakao: '/login/oauth/kakao',
+  register_term: '/register/term',
+  onboarding: '/onboarding',
+  write: '/write',
+  collect_information: '/collect-information',
+  user: '/user',
+  edit_profile: '/edit-profile',
+  settings: '/settings',
+  auth_check: '/auth-check',
+  not_found: '/*',
+};

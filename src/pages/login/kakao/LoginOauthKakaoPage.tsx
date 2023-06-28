@@ -1,8 +1,8 @@
 import { useAtom } from 'jotai';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { RouteURL } from '@/App';
 import useKakaoLogin from '@/apis/hooks/auth/useKakaoLogin';
+import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
 import { userAtom } from '@/states/userData';
 import { alertMessage } from '@/utils/alertMessage';

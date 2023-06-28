@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { RouteURL } from '@/App';
+import { RouteURL } from '@/constants/route-url';
 import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
 import AddPostIcon from '@/images/GNB/add_post_icon.svg';
 import SelectHomeIcon from '@/images/GNB/selected_home_icon.svg';

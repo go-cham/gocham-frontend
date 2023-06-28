@@ -1,12 +1,12 @@
-import {  useAtomValue } from 'jotai';
-import { useEffect,  useState } from 'react';
+import { useAtomValue } from 'jotai';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { RouteURL } from '@/App';
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import PostCard from '@/components/post/PostCard';
 import SelectMyPostType from '@/components/user/SelectMyPostType';
 import UserProfile from '@/components/user/UserProfile';
+import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
 import { userAtom } from '@/states/userData';
 
@@ -57,17 +57,19 @@ const UserPage = () => {
         postingCount={postingCount}
       />
       <ul className="flex flex-1 flex-col items-center space-y-[1.7rem] overflow-y-scroll pb-[16rem]">
-        {posts &&  posts?.map((post, index) => (
-          <li key={post.id}
+        {posts &&
+          posts?.map((post, index) => (
+            <li
+              key={post.id}
               ref={index === posts.length - 1 ? ref : undefined}
-          >
-            <PostCard
-              userInfo={userInfo}
-              postData={post}
-              routeUrl={postType}
-            />
-          </li>
-        ))}
+            >
+              <PostCard
+                userInfo={userInfo}
+                postData={post}
+                routeUrl={postType}
+              />
+            </li>
+          ))}
       </ul>
     </div>
   );

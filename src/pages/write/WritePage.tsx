@@ -4,7 +4,6 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Select, { StylesConfig } from 'react-select';
 
-import { RouteURL } from '@/App';
 import useAddPost from '@/apis/hooks/posts/useAddPost';
 import AppBar from '@/components/layout/AppBar';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
@@ -13,6 +12,7 @@ import {
   categoryOptions,
   deadlineOptions,
 } from '@/constants/Options';
+import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
 import { uploadFirebase } from '@/dataManager/firebaseManager';
 import { resizeImage } from '@/dataManager/imageResizing';

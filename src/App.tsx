@@ -6,6 +6,7 @@ import { Banner } from '@/components/Banner';
 import GNBHOC from '@/components/layout/GNBHOC';
 import Layout from '@/components/layout/Layout';
 import ModalController from '@/components/modal/ModalController';
+import { RouteURL } from '@/constants/route-url';
 import useUpdate from '@/hooks/useUpdate';
 import AuthCheckPage from '@/pages/auth-check/AuthCheckPage';
 import CollectInformationPage from '@/pages/collect-information/CollectInformationPage';
@@ -24,24 +25,6 @@ import { userAtom } from '@/states/userData';
 import Auth from './components/Auth';
 import RouteChangeTracker from './utils/RouteChangeTracker';
 import getUserInfo from './utils/getUserInfo';
-
-export const RouteURL = {
-  home: '/',
-  feed: '/feed',
-  feed_star: '/feed/:id', // 포스트 상세
-  feed_route_star: '/feed/:id/:route', // 포스트 상세
-  login: '/login',
-  login_oauth_kakao: '/login/oauth/kakao',
-  register_term: '/register/term',
-  onboarding: '/onboarding',
-  write: '/write',
-  collect_information: '/collect-information',
-  user: '/user',
-  edit_profile: '/edit-profile',
-  settings: '/settings',
-  auth_check: '/auth-check',
-  not_found: '/*',
-};
 
 function App() {
   const [userData, setUserData] = useAtom(userAtom);
@@ -109,13 +92,13 @@ function App() {
             }
           />
           <Route path={RouteURL.settings} element={<SettingsPage />} />
-          <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
           <Route
             path={RouteURL.auth_check}
             element={
               <Auth SpecificComponent={AuthCheckPage} requiredLogin={true} />
             }
           />
+          <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
         </Routes>
         <GNBHOC />
       </Layout>

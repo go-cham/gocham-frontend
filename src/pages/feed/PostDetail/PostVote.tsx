@@ -1,8 +1,8 @@
 import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
-import { RouteURL } from '@/App';
 import { ModalCase } from '@/constants/modalEnum';
+import { RouteURL } from '@/constants/route-url';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
 import ChatIcon from '@/images/PostComponent/chat.svg';

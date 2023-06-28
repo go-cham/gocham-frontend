@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useLocation } from 'react-router-dom';
 
-import { RouteURL } from '@/App';
+import { RouteURL } from '@/constants/route-url';
 
 import GNB from './GNB';
 

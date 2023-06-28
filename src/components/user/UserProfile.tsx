@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
-import { RouteURL } from '@/App';
 import useMe from '@/apis/hooks/users/useMe';
+import { RouteURL } from '@/constants/route-url';
 import DefaultUserIcon from '@/images/Profile/defaultUserIcon.svg';
 import SettingIcon from '@/images/Profile/settings.svg';
 import palette from '@/styles/color';

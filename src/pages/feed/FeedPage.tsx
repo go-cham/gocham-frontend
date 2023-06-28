@@ -2,9 +2,9 @@ import { useAtomValue } from 'jotai';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { RouteURL } from '@/App';
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import AppBar from '@/components/layout/AppBar';
+import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
 import { userAtom } from '@/states/userData';
 
