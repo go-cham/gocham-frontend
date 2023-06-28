@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
-import AppBar from '@/components/layout/AppBar';
+import TopAppBar from '@/components/layout/TopAppBar';
 import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
 import { userAtom } from '@/states/userData';
@@ -31,7 +31,7 @@ const FeedPage = () => {
 
   return (
     <div className="flex h-full flex-col">
-      <AppBar
+      <TopAppBar
         title={
           params.route === 'my'
             ? '내 게시글'

@@ -2,8 +2,8 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import AppBar from '@/components/layout/AppBar';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
+import TopAppBar from '@/components/layout/TopAppBar';
 import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender/CollectNicknameAgeGender';
 import CollectRegionJobCategory from '@/components/user/CollectRegionJobCategory/CollectRegionJobCategory';
 import { RouteURL } from '@/constants/route-url';
@@ -123,7 +123,7 @@ const CollectInformationPage = () => {
 
   return (
     <div className="flex h-full flex-col">
-      <AppBar
+      <TopAppBar
         title={''}
         boxShadow={false}
         navigateAction={() => navigateBack()}

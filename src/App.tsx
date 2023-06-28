@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Banner } from '@/components/Banner';
-import GNBHOC from '@/components/layout/GNBHOC';
+import BottomAppBar from '@/components/layout/BottomAppBar';
 import Layout from '@/components/layout/Layout';
 import ModalController from '@/components/modal/ModalController';
 import { RouteURL } from '@/constants/route-url';
@@ -100,7 +100,7 @@ function App() {
           />
           <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
         </Routes>
-        <GNBHOC />
+        <BottomAppBar />
       </Layout>
     </>
   );

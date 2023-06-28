@@ -1,7 +1,7 @@
 import { useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 
-import AppBar from '@/components/layout/AppBar';
+import TopAppBar from '@/components/layout/TopAppBar';
 import { initialUserData, userAtom } from '@/states/userData';
 import { appVersion } from '@/version';
 
@@ -56,7 +56,7 @@ const SettingsPage = () => {
 
   return (
     <div>
-      <AppBar title={'설정'} />
+      <TopAppBar title={'설정'} />
       <ul>
         {SETTINGS_MENU.map((menu) => (
           <li

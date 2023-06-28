@@ -7,7 +7,7 @@ import AddPostIcon from '@/images/GNB/add_post_icon.svg';
 import SelectHomeIcon from '@/images/GNB/selected_home_icon.svg';
 import SelectProfileIcon from '@/images/GNB/selected_profile_icon.svg';
 
-const GNB = () => {
+const BottomAppBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -31,6 +31,20 @@ const GNB = () => {
   const handleGoWrite = () => {
     navigate(RouteURL.write);
   };
+
+  if (
+    location.pathname.includes('/login') ||
+    location.pathname.includes('/register') ||
+    location.pathname.includes(RouteURL.onboarding) ||
+    location.pathname.includes(RouteURL.write) ||
+    location.pathname.includes(RouteURL.collect_information) ||
+    location.pathname.includes(RouteURL.settings) ||
+    location.pathname.includes(RouteURL.feed) ||
+    location.pathname.includes(RouteURL.edit_profile)
+  ) {
+    return null;
+  }
+
   return (
     <footer className="absolute -bottom-[0.4rem] mx-auto w-full">
       <img
@@ -71,4 +85,4 @@ const GNB = () => {
   );
 };
 
-export default GNB;
+export default BottomAppBar;

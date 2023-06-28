@@ -142,9 +142,9 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┃ ┃ ┣ 📜MultiPickerComponent.tsx
 ┃ ┃ ┃ ┗ 📜NicknameForm.tsx
 ┃ ┃ ┣ 📂common # 공통 컴포넌트
-┃ ┃ ┃ ┣ 📜AppBar.tsx #상단 앱바
+┃ ┃ ┃ ┣ 📜TopAppBar.tsx #상단 앱바
 ┃ ┃ ┃ ┣ 📜BottomContinueBar.tsx # 하단 컨티뉴 바
-┃ ┃ ┃ ┣ 📜GNB.tsx # 하단 메뉴바
+┃ ┃ ┃ ┣ 📜BottomAppBar.tsx # 하단 메뉴바
 ┃ ┃ ┃ ┣ 📜GNBHOC.tsx # 하단 메뉴바의 HOC 관리 컴포넌트
 ┃ ┃ ┃ ┗ 📜PostUserProfile.tsx #유저 프로필(게시글, 댓글등에 사용)
 ┃ ┃ ┣ 📂login # 로그인

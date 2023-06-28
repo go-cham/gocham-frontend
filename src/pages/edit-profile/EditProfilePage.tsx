@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import useEditProfile from '@/apis/hooks/users/useEditProfile';
 import useMe from '@/apis/hooks/users/useMe';
-import AppBar from '@/components/layout/AppBar';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
+import TopAppBar from '@/components/layout/TopAppBar';
 import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender/CollectNicknameAgeGender';
 import CollectRegionJobCategory from '@/components/user/CollectRegionJobCategory/CollectRegionJobCategory';
 import { RouteURL } from '@/constants/route-url';
@@ -82,7 +82,7 @@ const EditProfilePage = () => {
   console.log(userInformation);
   return (
     <div className="flex h-full flex-col">
-      <AppBar title={'프로필 편집'} boxShadow={false} />
+      <TopAppBar title={'프로필 편집'} boxShadow={false} />
 
       <div className="mt-[4.8rem] flex-1 space-y-[3rem] overflow-y-scroll px-20">
         {userInformation.birthDay !== '--' && (

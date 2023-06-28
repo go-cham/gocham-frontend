@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import Select, { StylesConfig } from 'react-select';
 
 import useAddPost from '@/apis/hooks/posts/useAddPost';
-import AppBar from '@/components/layout/AppBar';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
+import TopAppBar from '@/components/layout/TopAppBar';
 import {
   OptionType,
   categoryOptions,
@@ -208,7 +208,7 @@ const WritePage = () => {
   const [readyUpload, setReadyUpload] = useState(false);
   return (
     <div className="flex h-full flex-col">
-      <AppBar title={'글 작성'} />
+      <TopAppBar title={'글 작성'} />
       <div className="flex-1 overflow-y-scroll px-[2.5rem] pb-[2rem] pt-[4.6rem]">
         <div className="space-y-2">
           <Label text="글 제목" />

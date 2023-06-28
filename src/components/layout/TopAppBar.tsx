@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import BackButton from '@/images/Common/back_button_42X42.svg';
 
-const AppBar = ({
+const TopAppBar = ({
   title,
   boxShadow,
   background,
@@ -50,4 +50,4 @@ const AppBar = ({
   );
 };
 
-export default AppBar;
+export default TopAppBar;

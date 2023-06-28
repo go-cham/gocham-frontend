@@ -2,8 +2,8 @@ import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import AppBar from '@/components/layout/AppBar';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
+import TopAppBar from '@/components/layout/TopAppBar';
 import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
@@ -75,7 +75,7 @@ const RegisterTermPage = () => {
 
   return (
     <div className="flex h-full flex-col items-center">
-      <AppBar boxShadow={false} />
+      <TopAppBar boxShadow={false} />
       <div className="mx-auto w-[90%] flex-1">
         <div className="mt-[3.9rem] text-[2.7rem] font-bold leading-[3.9rem]">
           <p>환영합니다!</p>
