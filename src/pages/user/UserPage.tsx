@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import styled from '@emotion/styled';
 import { useAtom, useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -200,7 +199,7 @@ const UserPage = () => {
   };
 
   return (
-    <UserWrap>
+    <div className="h-screen @supports (-webkit-touch-callout: none) h-fill-available overflow-y-hidden relative w-full">
       {/*프로필 부분*/}
       <UserProfile
         isMyFeed={isMyFeed}
@@ -218,8 +217,8 @@ const UserPage = () => {
       {/*피드 부분*/}
       {/*  여긴 홈 페이지 만드는걸로 적용 */}
 
-      <PostListLayerWrap>
-        <PostListLayerStyle>
+      <div className='overflow-y-scroll h-full pb-38rem'>
+        <div className='w-full flex flex-col items-center my-0.5 mb-40 justify-center'>
           {postingData?.map((value, idx) => (
             <div key={idx} className={'user'}>
               <PostCard
@@ -229,34 +228,10 @@ const UserPage = () => {
               />
             </div>
           ))}
-        </PostListLayerStyle>
-      </PostListLayerWrap>
-    </UserWrap>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default UserPage;
-
-const PostListLayerWrap = styled.div`
-  overflow-y: scroll;
-  height: calc(100vh - 38rem);
-`;
-
-const UserWrap = styled.div`
-  height: 100vh;
-  @supports (-webkit-touch-callout: none) {
-    height: -webkit-fill-available;
-  }
-  overflow-y: hidden;
-  position: relative;
-  width: 100%;
-`;
-
-const PostListLayerStyle = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0.5rem 0 10rem;
-  justify-content: center;
-`;
