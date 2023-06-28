@@ -100,19 +100,16 @@ const EditProfilePage = () => {
     }
   };
   return (
-    <>
+    <div className="flex h-full flex-col">
       <AppBar title={'프로필 편집'} boxShadow={false} />
 
-      <div className='relative px-20 mx-auto mt-4.6 overflow-y-scroll'>
+      <div className="mt-[4.8rem] flex-1 space-y-[3rem] overflow-y-scroll px-20">
         {userInformation.birthDay !== '--' && (
           <>
             <CollectNicknameAgeGender
               userInformation={userInformation}
               setUserInformation={setUserInformation}
             />
-            <br />
-            <br />
-            <br />
             <CollectRegionJobCategory
               userInformation={userInformation}
               setUserInformation={setUserInformation}
@@ -126,8 +123,9 @@ const EditProfilePage = () => {
         clickAction={handleClickProfileChange}
         buttonColor={palette.Primary}
         fontColor={'white'}
+        height={10.5}
       />
-    </>
+    </div>
   );
 };
 

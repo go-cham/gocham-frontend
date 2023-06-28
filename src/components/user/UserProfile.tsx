@@ -73,14 +73,14 @@ const UserProfile = ({
     navigate(RouteURL.edit_profile);
   };
   return (
-    <>
+    <div className="flex flex-col">
       <img
         src={SettingIcon}
         alt={'설정'}
-        className='absolute right-10 top-6'
+        className="mr-[2.5rem] mt-[1.3rem] w-[32px] self-end"
         onClick={() => navigate(RouteURL.settings)}
       />
-      <div className='mt-14 flex flex-col justify-center items-center'>
+      <div className="mt-[1rem] flex flex-col items-center">
         <img
           src={
             userInformation.profileImageUrl
@@ -88,9 +88,11 @@ const UserProfile = ({
               : DefaultUserIcon
           }
           alt={'유저이미지'}
-          className='w-40 h-40 rounded-full'
+          className="h-40 w-40 rounded-full"
         />
-        <div className='font-bold text-4xl mt-5'>{userInformation.nickname}</div>
+        <span className="mt-[0.8rem] text-[2.4rem] font-bold">
+          {userInformation.nickname}
+        </span>
 
         <ProfileUtilButton
           width={8.3}
@@ -98,13 +100,13 @@ const UserProfile = ({
           borderRadius={0.7}
           border={`0.1rem solid ${palette.Secondary}`}
           size={1.2}
-          className='mt-5'
+          className="mt-5"
           onClick={() => handleGoEditProfile()}
         >
           프로필 편집
         </ProfileUtilButton>
       </div>
-    </>
+    </div>
   );
 };
 

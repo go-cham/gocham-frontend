@@ -199,7 +199,7 @@ const UserPage = () => {
   };
 
   return (
-    <div className="h-screen @supports (-webkit-touch-callout: none) h-fill-available overflow-y-hidden relative w-full">
+    <div className="flex h-full flex-col">
       {/*프로필 부분*/}
       <UserProfile
         isMyFeed={isMyFeed}
@@ -217,19 +217,17 @@ const UserPage = () => {
       {/*피드 부분*/}
       {/*  여긴 홈 페이지 만드는걸로 적용 */}
 
-      <div className='overflow-y-scroll h-full pb-38rem'>
-        <div className='w-full flex flex-col items-center my-0.5 mb-40 justify-center'>
-          {postingData?.map((value, idx) => (
-            <div key={idx} className={'user'}>
-              <PostCard
-                userInfo={userInfo}
-                postData={value}
-                routeUrl={postType === '내 게시글' ? 'my' : 'participated'}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+      <ul className="flex flex-1 flex-col items-center space-y-[1.7rem] overflow-y-scroll pb-[16rem]">
+        {postingData?.map((value, idx) => (
+          <li key={idx} className={'user'}>
+            <PostCard
+              userInfo={userInfo}
+              postData={value}
+              routeUrl={postType === '내 게시글' ? 'my' : 'participated'}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
