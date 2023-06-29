@@ -6,15 +6,17 @@ import Dropdown from '@/images/Common/dropdown.svg';
 import XButton from '@/images/Common/x_button.svg';
 import palette from '@/styles/color';
 
-const MultiPickerComponent = ({
-  categoryOptions,
-  selectedValue,
-  clickAction,
-}: {
+interface MultiPickerComponentProps {
   categoryOptions: OptionType[];
   selectedValue: OptionType[];
   clickAction: (item: any) => void;
-}) => {
+}
+
+export default function MultiPickerComponent({
+  categoryOptions,
+  selectedValue,
+  clickAction,
+}: MultiPickerComponentProps) {
   const [openOptionListMenu, setOpenOptionListMenu] = useState(false);
   const handleOption = (value: any, type: string) => {
     if (type === 'add') {
@@ -79,8 +81,7 @@ const MultiPickerComponent = ({
       </SelectedOptionWrap>
     </MultiPickerWrap>
   );
-};
-export default MultiPickerComponent;
+}
 
 const SelectedOptionBox = styled.p`
   //display: inline-block;
@@ -141,9 +142,3 @@ const MultiPickerBox = styled.div<{ openOptionListMenu: boolean }>`
   border-radius: 0;
   transition: border-width 0.1s ease-in-out;
 `;
-
-// { {
-//     openOptionListMenu
-// } = >( {
-//     `openOptionListMenu ? `0.4rem solid ${palette.Gray1}` : `0.2rem solid ${palette.Gray1}})
-//     `

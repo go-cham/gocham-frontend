@@ -148,7 +148,7 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┃ ┃ ┣ 📜GNBHOC.tsx # 하단 메뉴바의 HOC 관리 컴포넌트
 ┃ ┃ ┃ ┗ 📜PostUserProfile.tsx #유저 프로필(게시글, 댓글등에 사용)
 ┃ ┃ ┣ 📂login # 로그인
-┃ ┃ ┃ ┗ 📜CheckBox.tsx
+┃ ┃ ┃ ┗ 📜Checkbox.tsx
 ┃ ┃ ┣ 📂modal # 모달 각자
 ┃ ┃ ┃ ┣ 📜CloseButton.tsx
 ┃ ┃ ┃ ┣ 📜index.tsx

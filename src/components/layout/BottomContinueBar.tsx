@@ -1,12 +1,4 @@
-const BottomContinueBar = ({
-  title,
-  clickAction,
-  fontColor,
-  buttonColor,
-  boxColor,
-  height,
-  boxShadow,
-}: {
+interface BottomContinueBarProps {
   title: string;
   clickAction?: () => void;
   fontColor?: string;
@@ -14,7 +6,17 @@ const BottomContinueBar = ({
   boxColor?: string;
   height?: number;
   boxShadow?: boolean;
-}) => {
+}
+
+export default function BottomContinueBar({
+  title,
+  clickAction,
+  fontColor,
+  buttonColor,
+  boxColor,
+  height,
+  boxShadow,
+}: BottomContinueBarProps) {
   return (
     <div
       className="w-full"
@@ -33,6 +35,4 @@ const BottomContinueBar = ({
       </button>
     </div>
   );
-};
-
-export default BottomContinueBar;
+}

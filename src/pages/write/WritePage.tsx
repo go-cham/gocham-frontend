@@ -44,7 +44,7 @@ type PostWriteContentType = {
   }[];
 };
 
-const WritePage = () => {
+function WritePage() {
   const userInfo = useAtomValue(userAtom);
   const navigate = useNavigate();
   const { addPost, data, error } = useAddPost();
@@ -346,7 +346,7 @@ const WritePage = () => {
       />
     </div>
   );
-};
+}
 
 export default withAuth(WritePage, { block: 'unauthenticated' });
 

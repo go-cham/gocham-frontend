@@ -14,7 +14,10 @@ type BirthDateType = {
   day: string;
 };
 
-function BirthdateForm({ onInputChange, userInformation }: BirthdateFormProps) {
+export default function BirthdateForm({
+  onInputChange,
+  userInformation,
+}: BirthdateFormProps) {
   const yearRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLInputElement>(null);
   const dayRef = useRef<HTMLInputElement>(null);
@@ -174,5 +177,3 @@ function BirthdateForm({ onInputChange, userInformation }: BirthdateFormProps) {
     </InputLayout>
   );
 }
-
-export default BirthdateForm;

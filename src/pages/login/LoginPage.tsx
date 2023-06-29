@@ -6,10 +6,10 @@ import KakaoText from '@/images/Login/카카오계정으로_시작하기.svg';
 declare global {
   interface Window {
     Kakao: any;
-    naver: any;
   }
 }
-const LoginPage = () => {
+
+function LoginPage() {
   if (!window.Kakao.isInitialized()) {
     window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
   }
@@ -37,6 +37,6 @@ const LoginPage = () => {
       <img src={GochamCharacter} className="mt-[6.6rem]" alt={'캐릭터'} />
     </div>
   );
-};
+}
 
 export default withAuth(LoginPage, { block: 'activated' });

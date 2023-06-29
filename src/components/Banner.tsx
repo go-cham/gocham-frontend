@@ -3,9 +3,7 @@ interface BannerProps {
   applyUpdate: () => void;
 }
 
-export const Banner = (props: BannerProps) => {
-  const { show, applyUpdate } = props;
-
+export default function Banner({ show, applyUpdate }: BannerProps) {
   if (!show) {
     return null;
   }
@@ -23,4 +21,4 @@ export const Banner = (props: BannerProps) => {
       </button>
     </div>
   );
-};
+}

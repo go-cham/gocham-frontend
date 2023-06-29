@@ -3,10 +3,10 @@ import { UserInformationPropsType, userInformationType } from '@/types/user';
 import BirthdateForm from './BirthDateForm';
 import NicknameForm from './NicknameForm';
 
-const CollectNicknameAgeGender = ({
+export default function CollectNicknameAgeGender({
   userInformation,
   setUserInformation,
-}: UserInformationPropsType) => {
+}: UserInformationPropsType) {
   const handleSelectGender = (sex: string) => {
     setUserInformation((value: userInformationType) => ({
       ...value,
@@ -67,6 +67,4 @@ const CollectNicknameAgeGender = ({
       </div>
     </div>
   );
-};
-
-export default CollectNicknameAgeGender;
+}

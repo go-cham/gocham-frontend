@@ -6,7 +6,7 @@ import Survey from '@/components/modal/Survey';
 import { ModalCase } from '@/constants/modalEnum';
 import { ModalHanlderAtom } from '@/states/ModalAtom';
 
-const ModalController = () => {
+export default function ModalController() {
   const [modalType, setModalType] = useAtom(ModalHanlderAtom);
 
   const modalHanlder = () => {
@@ -29,12 +29,10 @@ const ModalController = () => {
   }, [modalType]);
 
   return <>{modalHanlder()}</>;
-};
+}
 
-export default ModalController;
-
-const BackDrop = () => {
+function BackDrop() {
   return (
     <div className="absolute left-0 top-0 z-30 h-full w-full bg-[rgba(42,45,55,0.5)]" />
   );
-};
+}

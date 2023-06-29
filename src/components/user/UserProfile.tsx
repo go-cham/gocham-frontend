@@ -8,7 +8,7 @@ import SettingIcon from '@/images/Profile/settings.svg';
 import palette from '@/styles/color';
 import { ButtonStyle } from '@/styles/common';
 
-const UserProfile = () => {
+export default function UserProfile() {
   const navigate = useNavigate();
   const { user } = useUser();
 
@@ -47,9 +47,7 @@ const UserProfile = () => {
       </div>
     </div>
   );
-};
-
-export default UserProfile;
+}
 
 const ProfileUtilButton = styled(ButtonStyle)`
   margin-top: 1.3rem;

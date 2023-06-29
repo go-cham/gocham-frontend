@@ -15,15 +15,17 @@ import { refreshChatAtom } from '@/states/postRefreshRequest';
 import { formatRoundedNumber } from '@/utils/formatRoundedNumber';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 
-const PostVote = ({
-  postData,
-  userId,
-  handleClickPostChat,
-}: {
+interface PostVoteProps {
   postData: any;
   userId: number | null;
   handleClickPostChat: () => void;
-}) => {
+}
+
+export default function PostVote({
+  postData,
+  userId,
+  handleClickPostChat,
+}: PostVoteProps) {
   const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
 
   const handleClickResult = async (choiceId: number) => {
@@ -240,6 +242,4 @@ const PostVote = ({
       </div>
     </>
   );
-};
-
-export default PostVote;
+}

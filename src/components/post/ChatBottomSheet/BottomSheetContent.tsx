@@ -10,15 +10,17 @@ import { formatText } from '@/utils/formatText';
 
 import PostUserProfile from '../PostUserProfile';
 
+interface BottomSheetContentProps {
+  postId: number;
+  userInfo: userDataAtomType;
+  postData: PostDataType;
+}
+
 export default function BottomSheetContent({
   postId,
   userInfo,
   postData,
-}: {
-  postId: number;
-  userInfo: userDataAtomType;
-  postData: PostDataType;
-}) {
+}: BottomSheetContentProps) {
   const [enteredComment, setEnteredComment] = useState('');
   const { comments } = useGetComments(postId);
   const { addComment } = useAddComment();

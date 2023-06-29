@@ -4,7 +4,7 @@ import { ModalCase } from '@/constants/modalEnum';
 import RightArrowButton from '@/images/Modal/right_arrow_icon.svg';
 import { ModalHanlderAtom } from '@/states/ModalAtom';
 
-const Survey = () => {
+export default function Survey() {
   const [modalStatusHanlder, setModalStatusHanlder] = useAtom(ModalHanlderAtom);
 
   const closeModal = () => {
@@ -42,6 +42,4 @@ const Survey = () => {
       </div>
     </div>
   );
-};
-
-export default Survey;
+}

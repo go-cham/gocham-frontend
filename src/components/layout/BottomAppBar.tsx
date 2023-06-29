@@ -7,7 +7,7 @@ import AddPostIcon from '@/images/GNB/add_post_icon.svg';
 import SelectHomeIcon from '@/images/GNB/selected_home_icon.svg';
 import SelectProfileIcon from '@/images/GNB/selected_profile_icon.svg';
 
-const BottomAppBar = () => {
+export default function BottomAppBar() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -83,6 +83,4 @@ const BottomAppBar = () => {
       </div>
     </footer>
   );
-};
-
-export default BottomAppBar;
+}

@@ -1,12 +1,14 @@
 import GrayProfileImg from '@/images/PostComponent/gray_profileImg.png';
 
-const PostUserProfile = ({
-  nickname,
-  profileImage,
-}: {
+interface PostUserProfileProps {
   nickname: string;
   profileImage?: string | null;
-}) => {
+}
+
+export default function PostUserProfile({
+  nickname,
+  profileImage,
+}: PostUserProfileProps) {
   return (
     <div className="flex items-center space-x-2">
       <img
@@ -17,6 +19,4 @@ const PostUserProfile = ({
       <span className="text-[1.2rem]">{nickname || '익명'}</span>
     </div>
   );
-};
-
-export default PostUserProfile;
+}

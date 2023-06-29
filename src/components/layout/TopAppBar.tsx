@@ -2,19 +2,21 @@ import { useNavigate } from 'react-router-dom';
 
 import BackButton from '@/images/Common/back_button_42X42.svg';
 
-const TopAppBar = ({
-  title,
-  boxShadow,
-  background,
-  navigateRoute,
-  navigateAction,
-}: {
+interface TopAppBarProps {
   title?: string;
   boxShadow?: boolean;
   background?: string;
   navigateRoute?: string;
   navigateAction?: () => void;
-}) => {
+}
+
+export default function TopAppBar({
+  title,
+  boxShadow,
+  background,
+  navigateRoute,
+  navigateAction,
+}: TopAppBarProps) {
   const navigate = useNavigate();
 
   const handleClickBackButton = () => {
@@ -48,6 +50,4 @@ const TopAppBar = ({
       {title && <h1 className="text-[1.6rem] font-bold">{title}</h1>}
     </header>
   );
-};
-
-export default TopAppBar;
+}

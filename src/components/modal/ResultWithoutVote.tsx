@@ -5,7 +5,7 @@ import XIcon from '@/images/Modal/x_button.svg';
 import { ModalHanlderAtom } from '@/states/ModalAtom';
 import { justResultWorryHandlerAtom } from '@/states/justResultAtom';
 
-const ResultWithoutVote = () => {
+export default function ResultWithoutVote() {
   const [justResultWorryStatus, setJustResultWorryStatus] = useAtom(
     justResultWorryHandlerAtom
   );
@@ -43,5 +43,4 @@ const ResultWithoutVote = () => {
       </div>
     </div>
   );
-};
-export default ResultWithoutVote;
+}

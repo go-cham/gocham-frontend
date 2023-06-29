@@ -9,8 +9,6 @@ import TopAppBar from '@/components/layout/TopAppBar';
 import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender/CollectNicknameAgeGender';
 import CollectRegionJobCategory from '@/components/user/CollectRegionJobCategory/CollectRegionJobCategory';
 import withAuth from '@/components/withAuth';
-import { RouteURL } from '@/constants/route-url';
-import { userType } from '@/constants/userTypeEnum';
 import { userAtom } from '@/states/userData';
 import palette from '@/styles/color';
 import {
@@ -19,7 +17,7 @@ import {
 } from '@/types/user';
 import { formatISO8601ToNormal } from '@/utils/formatISO8601ToNormal';
 
-const EditProfilePage = () => {
+function EditProfilePage() {
   const userInfo = useAtomValue(userAtom);
   const navigate = useNavigate();
   const { user } = useUser();
@@ -100,6 +98,6 @@ const EditProfilePage = () => {
       />
     </div>
   );
-};
+}
 
 export default withAuth(EditProfilePage, { block: 'unauthenticated' });

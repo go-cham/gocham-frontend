@@ -12,13 +12,12 @@ import { PostDataType } from '@/types/post';
 import { formatText } from '@/utils/formatText';
 import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
 
-const PostCard = ({
-  postData,
-  routeUrl,
-}: {
+interface PostCardProps {
   postData: any;
   routeUrl?: string;
-}) => {
+}
+
+export default function PostCard({ postData, routeUrl }: PostCardProps) {
   const { user } = useUser();
   const navigate = useNavigate();
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
@@ -83,9 +82,7 @@ const PostCard = ({
       />
     </>
   );
-};
-
-export default PostCard;
+}
 
 function PostCardContent({
   title,

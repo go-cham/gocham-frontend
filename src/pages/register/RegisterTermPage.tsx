@@ -5,14 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
 import TopAppBar from '@/components/layout/TopAppBar';
 import { RouteURL } from '@/constants/route-url';
-import { userType } from '@/constants/userTypeEnum';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
 import { userAtom } from '@/states/userData';
 import palette from '@/styles/color';
 import { alertMessage } from '@/utils/alertMessage';
 
-import TermCheckBox from './TermCheckBox';
+import TermCheckbox from './TermCheckbox';
 
 export type AcceptType = {
   gochamTerm: boolean;
@@ -22,7 +21,7 @@ export type AcceptType = {
   allCheck: boolean;
 };
 
-const RegisterTermPage = () => {
+export default function RegisterTermPage() {
   const navigate = useNavigate();
   const userInfo = useAtomValue(userAtom);
   const [accept, setAccept] = useState<AcceptType>({
@@ -77,7 +76,7 @@ const RegisterTermPage = () => {
           <p>동의해주세요.</p>
         </div>
         <section className="mt-[3.9rem] space-y-[0.7rem]">
-          <TermCheckBox
+          <TermCheckbox
             text="모두 동의합니다."
             checked={
               accept.gochamTerm &&
@@ -96,13 +95,13 @@ const RegisterTermPage = () => {
             }
           />
           <div className="h-[1px] w-full bg-black" />
-          <TermCheckBox
+          <TermCheckbox
             text="[필수] 고민의 참견 이용약관 동의"
             link="https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2"
             checked={accept.gochamTerm}
             onCheck={(value) => setAccept({ ...accept, gochamTerm: value })}
           />
-          <TermCheckBox
+          <TermCheckbox
             text="[필수] 개인정보 수집 및 이용 동의"
             link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
             checked={accept.personalInformation}
@@ -110,12 +109,12 @@ const RegisterTermPage = () => {
               setAccept({ ...accept, personalInformation: value })
             }
           />
-          <TermCheckBox
+          <TermCheckbox
             text="[필수] 만 14세 이상 입니다."
             checked={accept.olderThan14}
             onCheck={(value) => setAccept({ ...accept, olderThan14: value })}
           />
-          <TermCheckBox
+          <TermCheckbox
             text="[선택] 마케팅 목적 이용 동의"
             link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
             checked={accept.marketing}
@@ -133,6 +132,4 @@ const RegisterTermPage = () => {
       />
     </div>
   );
-};
-
-export default RegisterTermPage;
+}

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import TopAppBar from '@/components/layout/TopAppBar';
 import { appVersion } from '@/version';
 
-const SettingsPage = () => {
+export default function SettingsPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -80,6 +80,4 @@ const SettingsPage = () => {
       </ul>
     </div>
   );
-};
-
-export default SettingsPage;
+}

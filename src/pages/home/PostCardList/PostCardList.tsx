@@ -1,7 +1,7 @@
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import PostCard from '@/components/post/PostCard';
 
-const PostCardList = () => {
+export default function PostCardList() {
   const { posts, ref } = useGetPosts();
 
   return (
@@ -14,5 +14,4 @@ const PostCardList = () => {
         ))}
     </ul>
   );
-};
-export default PostCardList;
+}

@@ -12,10 +12,10 @@ import { UserInformationPropsType, userInformationType } from '@/types/user';
 
 import MultiPickerComponent from './MultiPickerComponent';
 
-const CollectNicknameAgeGender = ({
+export default function CollectNicknameAgeGender({
   userInformation,
   setUserInformation,
-}: UserInformationPropsType) => {
+}: UserInformationPropsType) {
   const handleInputValue = (e: OnChangeValue<OptionType, any>, key: string) => {
     setUserInformation((value: userInformationType) => ({
       ...value,
@@ -100,6 +100,4 @@ const CollectNicknameAgeGender = ({
       </div>
     </div>
   );
-};
-
-export default CollectNicknameAgeGender;
+}

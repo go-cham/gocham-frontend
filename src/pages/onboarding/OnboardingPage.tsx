@@ -1,4 +1,3 @@
-const OnboardingPage = () => {
+export default function OnboardingPage() {
   return null;
-};
-export default OnboardingPage;
+}

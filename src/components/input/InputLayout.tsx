@@ -1,14 +1,16 @@
 import ErrorMessage from '@/components/input/ErrorMessage';
 
+interface InputLayerProps {
+  label: string;
+  error?: string;
+  children: React.ReactNode;
+}
+
 export default function InputLayout({
   label,
   error,
   children,
-}: {
-  label: string;
-  error?: string;
-  children: React.ReactNode;
-}) {
+}: InputLayerProps) {
   return (
     <div>
       <div

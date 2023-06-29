@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Banner } from '@/components/Banner';
+import Banner from '@/components/Banner';
 import BottomAppBar from '@/components/layout/BottomAppBar';
 import Layout from '@/components/layout/Layout';
 import ModalController from '@/components/modal/ModalController';
@@ -19,7 +19,7 @@ import UserPage from '@/pages/user/UserPage';
 import WritePage from '@/pages/write/WritePage';
 import RouteChangeTracker from '@/utils/RouteChangeTracker';
 
-function App() {
+export default function App() {
   const { showUpdate, applyUpdate } = useUpdate();
 
   return (
@@ -52,5 +52,3 @@ function App() {
     </Layout>
   );
 }
-
-export default App;

@@ -9,7 +9,7 @@ import { userAtom } from '@/states/userData';
 
 import PostDetail from './PostDetail';
 
-const FeedPage = () => {
+function FeedPage() {
   const params = useParams();
   const userInfo = useAtomValue(userAtom);
   const { route } = useParams();
@@ -49,6 +49,6 @@ const FeedPage = () => {
       </ul>
     </div>
   );
-};
+}
 
 export default withAuth(FeedPage, { block: 'unauthenticated' });

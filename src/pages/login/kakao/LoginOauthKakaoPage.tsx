@@ -5,7 +5,7 @@ import useUser from '@/apis/hooks/users/useUser';
 import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
 
-const LoginOauthKakaoPage = () => {
+export default function LoginOauthKakaoPage() {
   const { user } = useUser();
   const [searchParams] = useSearchParams();
   const code = searchParams.get('code');
@@ -33,6 +33,4 @@ const LoginOauthKakaoPage = () => {
   }
 
   return null;
-};
-
-export default LoginOauthKakaoPage;
+}

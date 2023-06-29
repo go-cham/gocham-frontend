@@ -5,15 +5,17 @@ import styled from '@emotion/styled';
 import { PostType } from '@/pages/user/UserPage';
 import palette from '@/styles/color';
 
-const SelectMyPostType = ({
-  postType,
-  switchPostType,
-  postingCount,
-}: {
+interface SelectMyPostTypeProps {
   postType: PostType;
   switchPostType: (postType: PostType) => void;
   postingCount: { written: number; participated: number };
-}) => {
+}
+
+export default function SelectMyPostType({
+  postType,
+  switchPostType,
+  postingCount,
+}: SelectMyPostTypeProps) {
   return (
     <SelectMyPostTypeWrap>
       <SelectMyPostTypeBar>
@@ -38,9 +40,7 @@ const SelectMyPostType = ({
       </SelectMyPostTypeBar>
     </SelectMyPostTypeWrap>
   );
-};
-
-export default SelectMyPostType;
+}
 
 const SelectMyPostTypeWrap = styled.div`
   margin-top: 1.9rem;
@@ -62,10 +62,6 @@ const SelectMyPostTypeBar = styled.div`
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-`;
-
-const fadeIn = keyframes`
-  
 `;
 
 const SelectMyPostTypeBox = styled.div<{ selected?: boolean }>`

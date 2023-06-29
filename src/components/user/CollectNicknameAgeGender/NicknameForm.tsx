@@ -3,8 +3,6 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import InputLayout from '@/components/input/InputLayout';
 import { userInformationType } from '@/types/user';
 
-import ErrorMessage from '../../input/ErrorMessage';
-
 interface NicknameFormProps {
   onInputChange: (nickname: string) => void;
   userInformation: userInformationType;

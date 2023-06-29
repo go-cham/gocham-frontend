@@ -1,21 +1,23 @@
 import DetailArrow from '@/images/Login/detail_arrow.png';
 
-import CheckBox from './CheckBox';
+import Checkbox from './Checkbox';
 
-export default function TermCheckBox({
-  text,
-  checked,
-  onCheck,
-  link,
-}: {
+interface TermCheckboxProps {
   text: string;
   checked: boolean;
   onCheck: (value: boolean) => void;
   link?: string;
-}) {
+}
+
+export default function TermCheckbox({
+  text,
+  checked,
+  onCheck,
+  link,
+}: TermCheckboxProps) {
   return (
     <div className="relative flex items-center">
-      <CheckBox value={checked} setValue={onCheck} />
+      <Checkbox value={checked} setValue={onCheck} />
       <span className="ml-[1rem] text-[1.4rem] font-medium">{text}</span>
       {link && (
         <a href={link} className="absolute right-0">

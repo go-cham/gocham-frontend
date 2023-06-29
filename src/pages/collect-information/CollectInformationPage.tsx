@@ -6,13 +6,14 @@ import BottomContinueBar from '@/components/layout/BottomContinueBar';
 import TopAppBar from '@/components/layout/TopAppBar';
 import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender/CollectNicknameAgeGender';
 import CollectRegionJobCategory from '@/components/user/CollectRegionJobCategory/CollectRegionJobCategory';
+import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
 import palette from '@/styles/color';
 import { userInformationType } from '@/types/user';
 
-const CollectInformationPage = () => {
+function CollectInformationPage() {
   const navigate = useNavigate();
   const { user } = useUser();
 
@@ -166,6 +167,6 @@ const CollectInformationPage = () => {
       )}
     </div>
   );
-};
+}
 
-export default CollectInformationPage;
+export default withAuth(CollectInformationPage, { block: 'activated' });

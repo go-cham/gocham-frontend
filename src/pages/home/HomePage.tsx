@@ -2,7 +2,7 @@ import LogoAndTitle from '@/images/Common/LogoAndTitle.svg';
 
 import PostCardList from './PostCardList';
 
-const HomePage = () => {
+export default function HomePage() {
   return (
     <div className="flex h-full flex-col">
       <header className="border border-gray3 bg-white py-[2rem] pl-[3rem] drop-shadow-[0_0_4px_rgba(42,45,55,0.1)]">
@@ -13,6 +13,4 @@ const HomePage = () => {
       </main>
     </div>
   );
-};
-
-export default HomePage;
+}

@@ -9,7 +9,7 @@ import withAuth from '@/components/withAuth';
 
 export type PostType = 'my' | 'participating';
 
-const UserPage = () => {
+function UserPage() {
   const { user } = useUser();
 
   const [postType, setPostType] = useState<PostType>('my');
@@ -60,6 +60,6 @@ const UserPage = () => {
       </ul>
     </div>
   );
-};
+}
 
 export default withAuth(UserPage, { block: 'unauthenticated' });

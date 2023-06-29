@@ -13,13 +13,12 @@ import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
 
 import PostVote from './PostVote';
 
-const PostDetail = ({
-  userInfo,
-  postData,
-}: {
+interface PostDetailProps {
   userInfo: userDataAtomType;
   postData: PostDataType;
-}) => {
+}
+
+export default function PostDetail({ userInfo, postData }: PostDetailProps) {
   const [openBottomSheet, setOpenBottomSheet] = useState(false);
   const [thisPostData, setThisPostData] = useState<PostDataType>(postData);
   const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
@@ -80,9 +79,7 @@ const PostDetail = ({
       />
     </div>
   );
-};
-
-export default PostDetail;
+}
 
 function PostDetailContent({
   title,
