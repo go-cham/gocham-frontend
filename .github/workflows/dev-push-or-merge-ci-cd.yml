@@ -36,7 +36,7 @@ jobs:
       
       # Dependency들을 설치합니다. yarn도 사용 가능합니다.
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
         
       # 빌드합니다.
       - name: Build React
