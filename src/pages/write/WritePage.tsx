@@ -199,6 +199,7 @@ function WritePage() {
   };
 
   const [readyUpload, setReadyUpload] = useState(false);
+
   return (
     <div className="flex h-full flex-col">
       <TopAppBar title={'글 작성'} />
@@ -343,6 +344,7 @@ function WritePage() {
         fontColor={readyUpload ? palette.Background : palette.Gray1}
         buttonColor={readyUpload ? palette.Primary : palette.Gray2}
         boxColor={palette.Background}
+        height={11.2}
       />
     </div>
   );
