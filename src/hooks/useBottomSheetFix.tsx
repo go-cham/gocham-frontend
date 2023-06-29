@@ -69,7 +69,6 @@ export default function useBottomSheetFix({
 
     const handleTouchStart = (e: TouchEvent) => {
       const { isContentAreaTouched, touchStart } = metrics.current;
-      // console.log(isContentAreaTouched);
       if (!isContentAreaTouched) {
         touchStart.sheetY = sheet.current!.getBoundingClientRect().y;
         touchStart.touchY = e.touches[0].clientY;

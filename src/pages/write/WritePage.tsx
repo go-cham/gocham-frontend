@@ -13,8 +13,6 @@ import {
   categoryOptions,
   deadlineOptions,
 } from '@/constants/Options';
-import { RouteURL } from '@/constants/route-url';
-import { userType } from '@/constants/userTypeEnum';
 import { uploadFirebase } from '@/dataManager/firebaseManager';
 import { resizeImage } from '@/dataManager/imageResizing';
 import CameraIcon from '@/images/Write/Camera.svg';
@@ -89,7 +87,7 @@ const WritePage = () => {
         // postData에 끼워넣기
         postData.files = [{ url: imgUrl, contentType: 'image' }];
       } catch (e) {
-        console.log(e);
+        console.error(e);
       }
     }
 
@@ -134,7 +132,6 @@ const WritePage = () => {
   };
 
   const onLoadFiles = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    // console.log("working");
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files![0]);
     reader.onload = (event: ProgressEvent<FileReader>): void => {

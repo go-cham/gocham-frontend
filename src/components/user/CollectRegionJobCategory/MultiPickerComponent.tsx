@@ -15,7 +15,6 @@ const MultiPickerComponent = ({
   selectedValue: OptionType[];
   clickAction: (item: any) => void;
 }) => {
-  // console.log(categoryOptions);
   const [openOptionListMenu, setOpenOptionListMenu] = useState(false);
   const handleOption = (value: any, type: string) => {
     if (type === 'add') {

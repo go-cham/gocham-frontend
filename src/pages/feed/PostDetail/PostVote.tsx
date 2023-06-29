@@ -123,13 +123,11 @@ const PostVote = ({
         title: '고민의 참견',
         url: `${process.env.REACT_APP_BASE_URL}${RouteURL.feed}/${postId}`,
       });
-      // console.log("링크가 공유되었습니다.");
       // 모바일 경우에만 처리 (pc는 브라우저 자체에서 카피관련 모달이 뜸.
       if (
         navigator.userAgent.indexOf('iPhone') > -1 ||
         navigator.userAgent.indexOf('Android') > -1
       ) {
-        console.log(navigator.userAgent);
         setAlertShare(true);
         setTimeout(() => {
           setAlertShare(false);

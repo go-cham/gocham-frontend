@@ -12,8 +12,6 @@ const RouteChangeTracker = () => {
 
   // localhost는 기록하지 않음
   useEffect(() => {
-    // console.log("실행중");
-    // if (!window.location.href.includes("localhost")) {
     ReactGA.initialize(process.env.REACT_APP_FIREBASE_MEASUREMENT_ID);
     setInitialized(true);
     // }

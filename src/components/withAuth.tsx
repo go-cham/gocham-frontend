@@ -17,7 +17,6 @@ const withAuth =
     const { user, isLoading } = useUser();
 
     if (isLoading) {
-      console.log('here');
       return null;
     }
     if (block === 'unauthenticated') {
@@ -31,7 +30,6 @@ const withAuth =
         navigate(RouteURL.home);
       }
     }
-    console.log('here');
 
     return <WrappedComponent />;
   };

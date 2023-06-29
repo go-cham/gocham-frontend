@@ -1,6 +1,4 @@
-import { useAtomValue } from 'jotai';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
@@ -8,15 +6,11 @@ import PostCard from '@/components/post/PostCard';
 import SelectMyPostType from '@/components/user/SelectMyPostType';
 import UserProfile from '@/components/user/UserProfile';
 import withAuth from '@/components/withAuth';
-import { RouteURL } from '@/constants/route-url';
-import { userType } from '@/constants/userTypeEnum';
-import { userAtom } from '@/states/userData';
 
 export type PostType = 'my' | 'participating';
 
 const UserPage = () => {
   const { user } = useUser();
-  console.log(user);
 
   const [postType, setPostType] = useState<PostType>('my');
   const {

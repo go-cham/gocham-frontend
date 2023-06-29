@@ -71,7 +71,6 @@ const CollectInformationPage = () => {
         (value) => value.value
       ),
     };
-    // console.log(postUserInformation);
     try {
       const res = await ApiConfig.request({
         method: HttpMethod.PATCH,

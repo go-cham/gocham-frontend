@@ -54,14 +54,13 @@ const RegisterTermPage = () => {
         },
       });
       if (res?.data.id) {
-        console.log('동의완료');
         navigate(RouteURL.collect_information);
       } else {
         alert(alertMessage.error.register.didntAgreeTerm);
         navigate(RouteURL.home);
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
