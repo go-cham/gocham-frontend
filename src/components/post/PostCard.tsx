@@ -8,7 +8,6 @@ import PostUserProfile from '@/components/post/PostUserProfile';
 import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
 import { refreshChatAtom } from '@/states/postRefreshRequest';
-import { userDataAtomType } from '@/states/userData';
 import { PostDataType } from '@/types/post';
 import { formatText } from '@/utils/formatText';
 import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
@@ -33,7 +32,6 @@ const PostCard = ({
   const handleClickPostChat = () => {
     if (user?.type === userType.activatedUser) {
       setOpenBottomSheet((value) => {
-        // console.log(value, "->", !value);
         return !value;
       });
     } else {
@@ -49,7 +47,6 @@ const PostCard = ({
   // 댓글이나 투표할 경우 해당 컨텐츠만 리프레시.
   useEffect(() => {
     if (needRefresh.worryIdx === postData.id) {
-      // console.log("needRefresh 작동중");
       setThisPostData(
         handleRefreshPostData(thisPostData, needRefresh.updateObject)
       );
@@ -102,12 +99,10 @@ function PostCardContent({
   onClick: () => void;
 }) {
   return (
-    <div className="mt-[1.5rem] flex" onClick={onClick}>
-      <div className="flex-1 space-y-[0.5rem]">
-        <h1 className="line-clamp-1 text-[1.6rem] font-bold text-text1">
-          {title}
-        </h1>
-        <p className="line-clamp-1 h-[1.6rem] text-[1.2rem] text-text2">
+    <div className="mt-[1.5rem] flex cursor-pointer" onClick={onClick}>
+      <div className="flex-1 space-y-[0.5rem] overflow-hidden">
+        <h1 className="truncate text-[1.6rem] font-bold text-text1">{title}</h1>
+        <p className="h-[1.6rem] truncate text-[1.2rem] text-text2">
           {formatText(content)}
         </p>
       </div>
@@ -134,7 +129,7 @@ function PostCardMeta({
   return (
     <div className="flex items-end justify-between">
       <span
-        className="text-[1.2rem] font-medium text-text2"
+        className="cursor-pointer text-[1.2rem] font-medium text-text2"
         onClick={onClickComment}
       >
         댓글 {numComment}개 모두 보기

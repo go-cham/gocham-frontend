@@ -7,6 +7,7 @@ import ClockIcon from '@/images/PostComponent/clock.svg';
 import { refreshChatAtom } from '@/states/postRefreshRequest';
 import { userDataAtomType } from '@/states/userData';
 import { PostDataType } from '@/types/post';
+import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
 
@@ -95,7 +96,7 @@ function PostDetailContent({
   return (
     <div>
       <h1 className="mt-[2.1rem] text-[1.8rem] font-bold">{title}</h1>
-      <p className="mt-[1.3rem] text-[1.4rem]">{content}</p>
+      <p className="mt-[1.3rem] text-[1.4rem]">{formatText(content)}</p>
       {image && (
         <img
           src={image}
