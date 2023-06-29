@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { KakaoLoginResponse } from '@/apis/dto/auth/kakao-login';
 import { axiosInstance } from '@/libs/axios';
 
-export default function useKakaoLogin(code: string) {
+export default function useKakaoLogin(code: string | null) {
   const { data, isLoading, error } = useQuery({
     queryKey: ['kakaoLogin', code],
     queryFn: async () => {
