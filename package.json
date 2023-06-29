@@ -56,7 +56,7 @@
     "build-dev-window": "set BUILD_PATH=./build-dev&& dotenv -e .env.development craco build",
     "build-stage": "BUILD_PATH='./build-stage' dotenv -e .env.stage craco build",
     "build-prod": "craco build",
-    "start": "craco start",
+    "start": "dotenv -e .env.local craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",

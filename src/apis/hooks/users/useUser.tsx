@@ -5,7 +5,9 @@ import { GetUserTypeResponse } from '@/apis/dto/users/get-user-type';
 import { axiosInstance } from '@/libs/axios';
 import { User } from '@/types/user';
 
-export default function useUser() {
+export default function useUser(
+  { enabled }: { enabled: boolean } = { enabled: true }
+) {
   const { data, error: userTypeError } = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
@@ -13,6 +15,7 @@ export default function useUser() {
       return res.data;
     },
     retry: false,
+    enabled,
   });
 
   const {
