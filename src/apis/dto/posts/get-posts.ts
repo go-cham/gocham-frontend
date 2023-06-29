@@ -1,6 +1,6 @@
 export interface GetPostsResponse {
   data: {
-    expirationTime: string;
+    expirationTime: string | null;
     user: {
       profileImageUrl: string | null;
       id: number;

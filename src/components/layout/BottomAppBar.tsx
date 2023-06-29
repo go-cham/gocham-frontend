@@ -32,19 +32,6 @@ export default function BottomAppBar() {
     navigate(RouteURL.write);
   };
 
-  if (
-    location.pathname.includes('/login') ||
-    location.pathname.includes('/register') ||
-    location.pathname.includes(RouteURL.onboarding) ||
-    location.pathname.includes(RouteURL.write) ||
-    location.pathname.includes(RouteURL.collect_information) ||
-    location.pathname.includes(RouteURL.settings) ||
-    location.pathname.includes(RouteURL.feed) ||
-    location.pathname.includes(RouteURL.edit_profile)
-  ) {
-    return null;
-  }
-
   return (
     <footer className="absolute -bottom-[0.4rem] mx-auto w-full">
       <img

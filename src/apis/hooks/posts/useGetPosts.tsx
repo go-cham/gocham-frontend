@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 
 import { GetPostsResponse } from '@/apis/dto/posts/get-posts';
 import { axiosInstance } from '@/libs/axios';
+import { Post } from '@/types/post';
 
 export default function useGetPosts({
   authorId,
@@ -41,7 +42,22 @@ export default function useGetPosts({
     }
   }, [inView]);
 
-  const posts = data?.pages.map((page) => page.data).flat() || null;
+  const posts: Post[] | null =
+    data?.pages
+      .map((page) => page.data)
+      .flat()
+      .map((post) => ({
+        id: post.id,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt,
+        title: post.title,
+        content: post.content,
+        expirationTime: post.expirationTime,
+        worryFiles: post.worryFiles,
+        user: post.user,
+        replyCount: post.replyCount,
+        userWorryChoiceCount: post.userWorryChoiceCount,
+      })) || null;
 
   return {
     posts,

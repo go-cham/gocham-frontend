@@ -4,7 +4,7 @@ import useAddComment from '@/apis/hooks/posts/useAddComment';
 import useGetComments from '@/apis/hooks/posts/useGetComments';
 import SendIcon from '@/images/PostComponent/send.svg';
 import { userDataAtomType } from '@/states/userData';
-import { PostDataType } from '@/types/post';
+import { Post } from '@/types/post';
 import { formatDate } from '@/utils/formatDate';
 import { formatText } from '@/utils/formatText';
 
@@ -13,7 +13,7 @@ import PostUserProfile from '../PostUserProfile';
 interface BottomSheetContentProps {
   postId: number;
   userInfo: userDataAtomType;
-  postData: PostDataType;
+  postData: Post;
 }
 
 export default function BottomSheetContent({

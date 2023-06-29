@@ -10,7 +10,7 @@ export default function PostUserProfile({
   profileImage,
 }: PostUserProfileProps) {
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-[0.5rem]">
       <img
         src={profileImage || GrayProfileImg}
         alt="프로필"

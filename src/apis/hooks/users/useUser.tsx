@@ -28,6 +28,7 @@ export default function useUser() {
       return res.data;
     },
     retry: 5,
+    enabled: !!data,
   });
 
   if (userTypeError) {

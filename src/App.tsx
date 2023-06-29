@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Banner from '@/components/Banner';
-import BottomAppBar from '@/components/layout/BottomAppBar';
 import Layout from '@/components/layout/Layout';
 import ModalController from '@/components/modal/ModalController';
 import { RouteURL } from '@/constants/route-url';
@@ -48,7 +47,6 @@ export default function App() {
         <Route path={RouteURL.settings} element={<SettingsPage />} />
         <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
       </Routes>
-      <BottomAppBar />
     </Layout>
   );
 }

@@ -12,6 +12,5 @@ export const RouteURL = {
   user: '/user',
   edit_profile: '/edit-profile',
   settings: '/settings',
-  auth_check: '/auth-check',
   not_found: '/*',
 };

@@ -2,10 +2,12 @@ import { useState } from 'react';
 
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
+import BottomAppBar from '@/components/layout/BottomAppBar';
 import PostCard from '@/components/post/PostCard';
 import SelectMyPostType from '@/components/user/SelectMyPostType';
 import UserProfile from '@/components/user/UserProfile';
 import withAuth from '@/components/withAuth';
+import { userType } from '@/constants/userTypeEnum';
 
 export type PostType = 'my' | 'participating';
 
@@ -54,10 +56,15 @@ function UserPage() {
               key={post.id}
               ref={index === posts.length - 1 ? ref : undefined}
             >
-              <PostCard postData={post} routeUrl={postType} />
+              <PostCard
+                post={post}
+                routeUrl={postType}
+                loggedIn={user?.type === userType.activatedUser}
+              />
             </li>
           ))}
       </ul>
+      <BottomAppBar />
     </div>
   );
 }
