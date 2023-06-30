@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Control, useController } from 'react-hook-form';
-import { twMerge } from 'tailwind-merge';
 
 import DownIcon from '@/components/icons/DownIcon';
+import { twMergeCustom } from '@/libs/tw-merge';
 
 interface SelectProps {
   id: string;
@@ -12,6 +12,8 @@ interface SelectProps {
   error?: string | null;
   name: string;
   control: Control<any, any>;
+  labelClassName?: string;
+  wrapperClassName?: string;
 }
 
 export default function Select({
@@ -22,6 +24,8 @@ export default function Select({
   error,
   name,
   control,
+  labelClassName,
+  wrapperClassName,
 }: SelectProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const selectRef = useRef<HTMLSelectElement>(null);
@@ -50,18 +54,25 @@ export default function Select({
   }, [selectedIndex]);
 
   return (
-    <div className="relative flex w-[34rem] flex-col">
-      <span className="text-body1">{label}</span>
+    <div
+      className={twMergeCustom(
+        'relative flex w-[34rem] flex-col',
+        wrapperClassName
+      )}
+    >
+      <span className={twMergeCustom('text-body1', labelClassName)}>
+        {label}
+      </span>
       <div
         onClick={handleMenuToggle}
-        className={twMerge(
+        className={twMergeCustom(
           'mt-[0.3rem] flex cursor-pointer items-center justify-between border-b-[0.2rem] border-custom-text-500 pb-[0.2rem]',
           menuOpen && '-mb-[0.2rem] border-b-[0.4rem] border-custom-gray-800',
           error && 'border-custom-semantic-warn-500'
         )}
       >
         <span
-          className={twMerge(
+          className={twMergeCustom(
             'select-none text-body3 text-custom-text-400',
             selectedIndex !== null && 'text-body4 text-custom-text-900'
           )}
@@ -69,7 +80,10 @@ export default function Select({
           {selectedIndex !== null ? options[selectedIndex].name : placeholder}
         </span>
         <DownIcon
-          className={twMerge('h-[3.2rem] w-[3.2rem]', menuOpen && 'rotate-180')}
+          className={twMergeCustom(
+            'h-[3.2rem] w-[3.2rem]',
+            menuOpen && 'rotate-180'
+          )}
         />
       </div>
       {error && (

@@ -1,7 +1,6 @@
-import { twMerge } from 'tailwind-merge';
-
 import CheckIcon from '@/components/icons/CheckIcon';
 import Button from '@/components/ui/buttons/Button';
+import { twMergeCustom } from '@/libs/tw-merge';
 
 interface VoteButtonProps {
   children: React.ReactNode;
@@ -20,7 +19,7 @@ export default function VoteButton({
 }: VoteButtonProps) {
   return (
     <Button
-      className={twMerge(
+      className={twMergeCustom(
         'border border-custom-background-200 shadow-header',
         image ? 'justify-between overflow-hidden' : 'justify-start',
         selected

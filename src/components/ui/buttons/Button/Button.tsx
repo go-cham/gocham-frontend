@@ -1,4 +1,4 @@
-import { twMerge } from 'tailwind-merge';
+import { twMergeCustom } from '@/libs/tw-merge';
 
 export interface ButtonProps {
   variant?: 'primary' | 'line';
@@ -18,7 +18,7 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={twMerge(
+      className={twMergeCustom(
         'flex h-[4.7rem] w-[34rem] items-center justify-center rounded-[5px] text-body5 transition-all duration-200 disabled:bg-custom-gray-100 disabled:text-gray-400',
         variant === 'primary'
           ? 'bg-custom-main-500 text-white hover:bg-custom-main-600 active:bg-custom-main-600'

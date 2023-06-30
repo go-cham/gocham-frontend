@@ -1,6 +1,5 @@
-import { twMerge } from 'tailwind-merge';
-
 import DeleteIcon from '@/components/icons/DeleteIcon';
+import { twMergeCustom } from '@/libs/tw-merge';
 
 interface ChipProps {
   label: string;
@@ -17,7 +16,7 @@ export default function Chip({
 }: ChipProps) {
   return (
     <button
-      className={twMerge(
+      className={twMergeCustom(
         'flex cursor-auto items-center rounded-[5px] py-[0.7rem] pl-[1rem] text-body2',
         variant === 'gray'
           ? 'bg-custom-gray-100 text-custom-gray-800'
