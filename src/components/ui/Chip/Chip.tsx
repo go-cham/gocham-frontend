@@ -1,3 +1,5 @@
+import { twMerge } from 'tailwind-merge';
+
 import DeleteIcon from '@/components/icons/DeleteIcon';
 
 interface ChipProps {
@@ -15,11 +17,15 @@ export default function Chip({
 }: ChipProps) {
   return (
     <button
-      className={`flex cursor-auto items-center rounded-[5px] py-[0.7rem] pl-[1rem] text-body2 ${
+      className={twMerge(
+        'flex cursor-auto items-center rounded-[5px] py-[0.7rem] pl-[1rem] text-body2',
         variant === 'gray'
           ? 'bg-custom-gray-100 text-custom-gray-800'
-          : 'bg-custom-main-50 text-custom-main-500'
-      } ${variant === 'delete' ? 'pr-[0.6rem]' : 'pr-[1rem]'} ${className}`}
+          : 'bg-custom-main-50 text-custom-main-500',
+
+        variant === 'delete' ? 'pr-[0.6rem]' : 'pr-[1rem]',
+        className
+      )}
     >
       {label}
       {variant === 'delete' && (

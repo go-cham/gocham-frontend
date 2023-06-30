@@ -1,3 +1,5 @@
+import { twMerge } from 'tailwind-merge';
+
 import Button from '@/components/ui/Button';
 
 interface FloatingButtonProps {
@@ -14,7 +16,7 @@ export default function FloatingButton({
   return (
     <Button
       variant="primary"
-      className={`rounded-[2.35rem] ${className}`}
+      className={twMerge('rounded-[2.35rem]', className)}
       onClick={onClick}
     >
       {children}
