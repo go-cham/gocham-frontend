@@ -1,26 +1,35 @@
-import { useState } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
+import { ChangeEvent, useState } from 'react';
+import { Control, UseFormRegisterReturn, useController } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 
 import CheckIcon from '@/components/icons/CheckIcon';
 
 interface CheckboxProps {
   id: string;
-  defaultChecked: boolean;
   register?: UseFormRegisterReturn;
   className?: string;
+  name: string;
+  control: Control<any, any>;
 }
 
 export default function Checkbox({
   id,
-  defaultChecked,
   register,
   className,
+  name,
+  control,
 }: CheckboxProps) {
-  const [checked, setChecked] = useState(defaultChecked);
+  const { field } = useController<Record<string, boolean>>({
+    control,
+    name,
+  });
+  const [checked, setChecked] = useState(field.value || false);
 
-  const handleChange = () => {
+  console.log(field.value);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setChecked((prevChecked) => !prevChecked);
+    field.onChange(e);
   };
 
   return (
