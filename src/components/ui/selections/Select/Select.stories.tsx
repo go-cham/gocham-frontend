@@ -56,7 +56,15 @@ export const Default: Story = {
 
 export const Error: Story = {
   render: () => {
-    const { control, watch } = useForm();
+    type FormData = {
+      select: string;
+    };
+
+    const { control, watch } = useForm<FormData>({
+      defaultValues: {
+        select: 'option2',
+      },
+    });
     const value = watch('select');
 
     return (

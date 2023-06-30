@@ -10,9 +10,8 @@ interface SelectProps {
   placeholder: string;
   options: { value: string; name: string }[];
   error?: string | null;
-  defaultIndex?: number | null;
   name: string;
-  control: Control;
+  control: Control<any, any>;
 }
 
 export default function Select({
@@ -21,19 +20,21 @@ export default function Select({
   placeholder,
   options,
   error,
-  defaultIndex,
   name,
   control,
 }: SelectProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(
-    defaultIndex || null
-  );
   const selectRef = useRef<HTMLSelectElement>(null);
-  const { field } = useController({
+  const { field } = useController<Record<string, string>>({
     control,
     name,
   });
+  const defaultValue = field.value
+    ? options.findIndex((option) => option.value === field.value)
+    : null;
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(
+    defaultValue
+  );
 
   const handleMenuToggle = () => {
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
