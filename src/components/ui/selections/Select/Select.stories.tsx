@@ -85,3 +85,28 @@ export const Error: Story = {
     );
   },
 };
+
+export const PostSelect: Story = {
+  render: () => {
+    const { control, watch } = useForm();
+    const value = watch('select');
+
+    return (
+      <div>
+        {value && <p className="mb-10">선택된 값은 {watch('select')}입니다.</p>}
+        {!value && <p className="mb-10">선택된 값이 없습니다.</p>}
+
+        <Select
+          id="select"
+          label="라벨"
+          options={OPTIONS}
+          placeholder="플레이스 홀더"
+          name="select"
+          control={control}
+          labelClassName="text-subheading"
+          wrapperClassName="w-[15.7rem]"
+        />
+      </div>
+    );
+  },
+};
