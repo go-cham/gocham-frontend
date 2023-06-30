@@ -1,8 +1,8 @@
+import Button from 'src/components/ui/buttons/Button';
 import { twMerge } from 'tailwind-merge';
 
 import PlusIcon from '@/components/icons/PlusIcon';
-import Button from '@/components/ui/Button';
-import { ButtonProps } from '@/components/ui/Button/Button';
+import { ButtonProps } from '@/components/ui/buttons/Button/Button';
 
 export default function EditButton({
   disabled,

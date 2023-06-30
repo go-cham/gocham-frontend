@@ -1,6 +1,5 @@
+import Button from 'src/components/ui/buttons/Button';
 import { twMerge } from 'tailwind-merge';
-
-import Button from '@/components/ui/Button';
 
 interface FloatingButtonProps {
   children: React.ReactNode;
