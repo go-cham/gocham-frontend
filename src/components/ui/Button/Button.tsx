@@ -1,4 +1,4 @@
-interface ButtonProps {
+export interface ButtonProps {
   variant?: 'primary' | 'line';
   children: React.ReactNode;
   disabled?: boolean;

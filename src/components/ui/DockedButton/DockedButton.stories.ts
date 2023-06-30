@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import FloatingButton from '@/components/ui/FloatingButton';
+import DockedButton from '@/components/ui/DockedButton';
 
 const meta = {
-  title: 'UI/Buttons/FloatingButton',
-  component: FloatingButton,
+  title: 'UI/Buttons/DockedButton',
+  component: DockedButton,
   tags: ['autodocs'],
-} satisfies Meta<typeof FloatingButton>;
+} satisfies Meta<typeof DockedButton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
