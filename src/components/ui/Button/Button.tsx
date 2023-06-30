@@ -1,5 +1,5 @@
 interface ButtonProps {
-  variant: 'primary' | 'line';
+  variant?: 'primary' | 'line';
   children: React.ReactNode;
   disabled?: boolean;
   onClick?: () => void;
@@ -7,7 +7,7 @@ interface ButtonProps {
 }
 
 export default function Button({
-  variant,
+  variant = 'primary',
   children,
   disabled = false,
   onClick,
