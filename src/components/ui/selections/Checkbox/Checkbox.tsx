@@ -1,15 +1,19 @@
 import { ChangeEvent, useState } from 'react';
-import { Control, UseFormRegisterReturn, useController } from 'react-hook-form';
+import {
+  Control,
+  RegisterOptions,
+  UseFormRegisterReturn,
+  useController,
+} from 'react-hook-form';
 
 import CheckIcon from '@/components/icons/CheckIcon';
 import { twMergeCustom } from '@/libs/tw-merge';
+import { ReactHookFormInputProps } from '@/types/react-hook-form';
 
-interface CheckboxProps {
+interface CheckboxProps extends ReactHookFormInputProps {
   id: string;
   register?: UseFormRegisterReturn;
   className?: string;
-  name: string;
-  control: Control<any, any>;
 }
 
 export default function Checkbox({
@@ -18,10 +22,12 @@ export default function Checkbox({
   className,
   name,
   control,
+  rules,
 }: CheckboxProps) {
   const { field } = useController<Record<string, boolean>>({
     control,
     name,
+    rules: rules,
   });
   const [checked, setChecked] = useState(field.value || false);
 

@@ -1,17 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { Control, useController } from 'react-hook-form';
+import { Control, RegisterOptions, useController } from 'react-hook-form';
 
 import DownIcon from '@/components/icons/DownIcon';
 import { twMergeCustom } from '@/libs/tw-merge';
+import { ReactHookFormInputProps } from '@/types/react-hook-form';
 
-interface SelectProps {
+interface SelectProps extends ReactHookFormInputProps {
   id: string;
   label: string;
   placeholder: string;
   options: { value: string; name: string }[];
   error?: string | null;
-  name: string;
-  control: Control<any, any>;
   labelClassName?: string;
   wrapperClassName?: string;
 }
@@ -26,12 +25,14 @@ export default function Select({
   control,
   labelClassName,
   wrapperClassName,
+  rules,
 }: SelectProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const selectRef = useRef<HTMLSelectElement>(null);
   const { field } = useController<Record<string, string>>({
     control,
     name,
+    rules,
   });
   const defaultValue = field.value
     ? options.findIndex((option) => option.value === field.value)
