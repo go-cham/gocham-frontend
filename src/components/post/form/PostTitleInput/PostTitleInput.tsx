@@ -11,12 +11,14 @@ interface PostTitleInputProps {
   error?: string | null;
   register?: UseFormRegisterReturn;
   onUploadImage?: () => void;
+  className?: string;
 }
 
 export default function PostTitleInput({
   error,
   register,
   onUploadImage,
+  className,
 }: PostTitleInputProps) {
   const [enteredTitle, setEnteredTitle] = useState('');
   const { ref: inputRef, isFocusing: inputFocused } =
@@ -41,7 +43,7 @@ export default function PostTitleInput({
   const showResetButton = enteredTitle && (isHovering || inputFocused);
 
   return (
-    <div className="flex w-[34rem] flex-col">
+    <div className={twMergeCustom('flex w-[34rem] flex-col', className)}>
       <div className="flex space-x-[0.7rem]">
         <label className="text-subheading">글 제목</label>
         <span className="text-body1 text-[#b0b2b8]">

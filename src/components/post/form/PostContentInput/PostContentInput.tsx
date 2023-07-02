@@ -6,11 +6,13 @@ import { twMergeCustom } from '@/libs/tw-merge';
 interface PostContentInputProps {
   error?: string | null;
   register?: UseFormRegisterReturn;
+  className?: string;
 }
 
 export default function PostContentInput({
   error,
   register,
+  className,
 }: PostContentInputProps) {
   const MAX_LENGTH = 280;
   const [enteredContent, setEnteredContent] = useState('');
@@ -20,7 +22,7 @@ export default function PostContentInput({
   };
 
   return (
-    <div className="flex w-[34rem] flex-col">
+    <div className={twMergeCustom('flex w-[34rem] flex-col', className)}>
       <label className="text-subheading">내용</label>
       <textarea
         {...register}
