@@ -1,0 +1,28 @@
+import type { Meta, StoryObj } from '@storybook/react';
+
+import BirthdayInput from '@/components/register/form/BirthdayInput/BirthdayInput';
+
+const meta: Meta<typeof BirthdayInput> = {
+  title: 'Register/inputs/BirthdayInput',
+  component: BirthdayInput,
+  tags: ['autodocs'],
+};
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {},
+};
+
+export const Success: Story = {
+  args: {
+    successMessage: '성공 메시지',
+  },
+};
+
+export const Error: Story = {
+  args: {
+    errorMessage: '에러 메시지',
+  },
+};

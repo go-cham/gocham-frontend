@@ -65,7 +65,7 @@ export default function NicknameInput({
             error && 'border-custom-semantic-warn-500'
           )}
         />
-        <div className="absolute right-0 top-1/2 flex -translate-y-1/2 cursor-pointer items-center space-x-[0.5rem]">
+        <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center space-x-[0.5rem]">
           <button
             ref={resetRef}
             onClick={handleNicknameReset}
