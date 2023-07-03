@@ -19,7 +19,7 @@ export default function LoginOauthKakaoPage() {
   if (token) {
     localStorage.setItem('token', token);
   }
-
+  console.log(user);
   if (user) {
     switch (user.type) {
       case userType.onceUser:

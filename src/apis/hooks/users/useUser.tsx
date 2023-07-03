@@ -43,6 +43,7 @@ export default function useUser(
     };
   }
 
+  console.log(userData);
   const user: User | null =
     data && userData
       ? {
@@ -52,14 +53,18 @@ export default function useUser(
           nickname: userData.nickname,
           birthday: userData.birthDate,
           sex: userData.sex,
-          residence: {
-            value: userData.residence.id,
-            label: userData.residence.label,
-          },
-          job: {
-            value: userData.job.id,
-            label: userData.job.label,
-          },
+          residence: userData.residence
+            ? {
+                value: userData.residence.id,
+                label: userData.residence.label,
+              }
+            : null,
+          job: userData.job
+            ? {
+                value: userData.job.id,
+                label: userData.job.label,
+              }
+            : null,
           worryCategories: userData.userWorryCategories.map((category) => ({
             value: category.worryCategory.id,
             label: category.worryCategory.label,

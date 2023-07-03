@@ -1,13 +1,12 @@
-import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import useUser from '@/apis/hooks/users/useUser';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
 import TopAppBar from '@/components/layout/TopAppBar';
 import { RouteURL } from '@/constants/route-url';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import { userAtom } from '@/states/userData';
 import palette from '@/styles/color';
 import { alertMessage } from '@/utils/alertMessage';
 
@@ -23,7 +22,8 @@ export type AcceptType = {
 
 export default function RegisterTermPage() {
   const navigate = useNavigate();
-  const userInfo = useAtomValue(userAtom);
+  const { user } = useUser();
+  // const userInfo = useAtomValue(userAtom);
   const [accept, setAccept] = useState<AcceptType>({
     gochamTerm: false,
     personalInformation: false,
@@ -45,7 +45,7 @@ export default function RegisterTermPage() {
         method: HttpMethod.PATCH,
         url: EndPoint.user.patch.USER_ACCEPTANCE_OF_TERMS,
         data: {
-          userId: userInfo.userId,
+          userId: user?.id,
           privacyAcceptedStatus: accept.personalInformation ? 1 : 0,
           termsOfUseAcceptedStatus: accept.gochamTerm ? 1 : 0,
           marketingAcceptedStatus: 0, // 우선 무조건 0으로

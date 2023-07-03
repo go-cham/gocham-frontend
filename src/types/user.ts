@@ -7,11 +7,11 @@ export interface User {
   type: string;
   vendor: string;
   nickname: string;
-  birthday: string;
-  sex: 'male' | 'female';
-  residence: OptionType;
-  job: OptionType;
-  worryCategories: OptionType[];
+  birthday: string | null;
+  sex: 'male' | 'female' | null;
+  residence: OptionType | null;
+  job: OptionType | null;
+  worryCategories: OptionType[] | null;
   image: string | null;
 }
 

@@ -33,7 +33,14 @@ function EditProfilePage() {
   });
 
   useEffect(() => {
-    if (user) {
+    if (
+      user &&
+      user.birthday &&
+      user.sex &&
+      user.residence &&
+      user.job &&
+      user.worryCategories
+    ) {
       setUserInformation({
         nickname: user.nickname,
         birthDay: formatISO8601ToNormal(user.birthday),
