@@ -84,10 +84,7 @@ function EditProfilePage() {
       <div className="mt-[4.8rem] flex-1 space-y-[3rem] overflow-y-scroll px-20">
         {userInformation.birthDay !== '--' && (
           <>
-            <CollectNicknameAgeGender
-              userInformation={userInformation}
-              setUserInformation={setUserInformation}
-            />
+            <CollectNicknameAgeGender onSubmit={() => console.log('temp')} />
             <CollectRegionJobCategory
               userInformation={userInformation}
               setUserInformation={setUserInformation}

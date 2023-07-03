@@ -4,17 +4,18 @@ import AlertIcon from '@/components/icons/AlertIcon';
 import CheckIcon from '@/components/icons/CheckIcon';
 import DeleteIcon from '@/components/icons/DeleteIcon';
 import InputWrapper from '@/components/ui/InputWrapper';
+import { fixDate } from '@/utils/validations/birthday';
 
-interface Birthday {
-  year: number | undefined;
-  month: number | undefined;
-  day: number | undefined;
+export interface Birthday {
+  year?: string;
+  month?: string;
+  day?: string;
 }
 
 interface BirthdayInputProps {
   onChange?: (birthday: Birthday) => void;
-  successMessage?: string;
-  errorMessage?: string;
+  successMessage?: string | null;
+  errorMessage?: string | null;
   className?: string;
 }
 
@@ -42,8 +43,10 @@ export default function BirthdayInput({
       ...birthday,
       [e.target.name]: +e.target.value,
     };
-    setBirthday(newBirthday);
-    onChange && onChange(newBirthday);
+    const { year, month, day } = newBirthday;
+    const fixedBirthday = fixDate(year, month, day);
+    setBirthday(fixedBirthday);
+    onChange && onChange(fixedBirthday);
   };
 
   const handleReset = () => {
@@ -53,6 +56,12 @@ export default function BirthdayInput({
       day: undefined,
     });
     yearRef.current?.focus();
+    onChange &&
+      onChange({
+        year: undefined,
+        month: undefined,
+        day: undefined,
+      });
   };
 
   return (
@@ -79,6 +88,8 @@ export default function BirthdayInput({
         <input
           type="number"
           maxLength={2}
+          min={1}
+          max={12}
           onInput={maxLengthCheck}
           className="w-[1.8rem] bg-transparent text-right"
           onChange={handleChange}
@@ -91,6 +102,8 @@ export default function BirthdayInput({
         <input
           type="number"
           maxLength={2}
+          min={1}
+          max={31}
           onInput={maxLengthCheck}
           className="w-[1.8rem] bg-transparent text-right"
           onChange={handleChange}

@@ -3,12 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 import useUser from '@/apis/hooks/users/useUser';
 import BackIcon from '@/components/icons/BackIcon';
-import BottomContinueBar from '@/components/layout/BottomContinueBar';
 import Button from '@/components/ui/buttons/Button';
 import { RouteURL } from '@/constants/route-url';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
-import palette from '@/styles/color';
 import { alertMessage } from '@/utils/alertMessage';
 
 import TermCheckbox from './TermCheckbox';
@@ -69,7 +67,7 @@ export default function RegisterTermPage() {
   return (
     <div className="flex h-full flex-col bg-white">
       <BackIcon
-        onClick={() => navigate('/login')}
+        onClick={() => navigate(RouteURL.login)}
         className="ml-[0.9rem] cursor-pointer"
         color="#424242"
       />

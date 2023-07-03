@@ -1,3 +1,5 @@
+import { Gender } from '@/types/user';
+
 export interface AddPostRequest {
   userId: number;
   worryCategoryId: number;
@@ -29,7 +31,7 @@ export interface AddPostResponse {
     realName: string | null;
     nickname: string;
     birthDate: string;
-    sex: 'male' | 'female';
+    sex: Gender;
     privacyAcceptedAt: string;
     termsOfUseAcceptedAt: string;
     marketingAcceptedAt: string | null;

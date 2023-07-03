@@ -4,11 +4,12 @@ import AlertIcon from '@/components/icons/AlertIcon';
 import CheckIcon from '@/components/icons/CheckIcon';
 import DeleteIcon from '@/components/icons/DeleteIcon';
 import InputWrapper from '@/components/ui/InputWrapper';
+import { twMergeCustom } from '@/libs/tw-merge';
 
 interface NicknameInputProps {
   onChange?: (nickname: string) => void;
-  successMessage?: string;
-  errorMessage?: string;
+  successMessage?: string | null;
+  errorMessage?: string | null;
   className?: string;
 }
 
@@ -30,6 +31,7 @@ export default function NicknameInput({
   const handleReset = () => {
     setNickname('');
     inputRef.current?.focus();
+    onChange && onChange('');
   };
 
   return (
@@ -46,18 +48,23 @@ export default function NicknameInput({
         onChange={handleNicknameChange}
         value={nickname}
         maxLength={10}
-        className="w-full bg-transparent text-body4 placeholder:text-body3"
+        className="w-full bg-transparent text-body4 text-custom-gray-900 placeholder:text-body3 placeholder:text-custom-gray-400"
       />
       <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center space-x-[0.5rem]">
-        <button
-          onClick={handleReset}
-          className="hidden group-focus-within:block"
-        >
-          <DeleteIcon
-            className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-custom-gray-300"
-            color="white"
-          />
-        </button>
+        {nickname && (
+          <button
+            onClick={handleReset}
+            className="hidden group-focus-within:block"
+          >
+            <DeleteIcon
+              className={twMergeCustom(
+                'h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-custom-gray-300',
+                !successMessage && !errorMessage && 'mr-[1.3rem]'
+              )}
+              color="white"
+            />
+          </button>
+        )}
         {successMessage && <CheckIcon color="#62be4a" />}
         {errorMessage && <AlertIcon />}
       </div>

@@ -8,7 +8,7 @@ export interface User {
   vendor: string;
   nickname: string;
   birthday: string | null;
-  sex: 'male' | 'female' | null;
+  sex: Gender | null;
   residence: OptionType | null;
   job: OptionType | null;
   worryCategories: OptionType[] | null;
@@ -39,3 +39,5 @@ export type PostUserInformationPropsType = {
   jobId: number;
   worryCategories: number[];
 };
+
+export type Gender = 'male' | 'female';
