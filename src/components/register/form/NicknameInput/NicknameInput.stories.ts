@@ -17,12 +17,12 @@ export const Default: Story = {
 
 export const Success: Story = {
   args: {
-    success: '성공 메시지',
+    successMessage: '성공 메시지',
   },
 };
 
 export const Error: Story = {
   args: {
-    error: '에러 메시지',
+    errorMessage: '에러 메시지',
   },
 };
