@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 
 import AlertIcon from '@/components/icons/AlertIcon';
 import CheckIcon from '@/components/icons/CheckIcon';
@@ -29,6 +29,7 @@ export default function BirthdayInput({
     month: undefined,
     day: undefined,
   });
+  const yearRef = useRef<HTMLInputElement>(null);
 
   const maxLengthCheck = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > e.target.maxLength) {
@@ -51,6 +52,7 @@ export default function BirthdayInput({
       month: undefined,
       day: undefined,
     });
+    yearRef.current?.focus();
   };
 
   return (
@@ -62,6 +64,7 @@ export default function BirthdayInput({
     >
       <div className="flex space-x-[0.3rem]">
         <input
+          ref={yearRef}
           type="number"
           maxLength={4}
           onInput={maxLengthCheck}

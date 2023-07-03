@@ -16,6 +16,6 @@ export const Default: Story = {
 
 export const Error: Story = {
   args: {
-    error: '에러 메시지',
+    errorMessage: '에러 메시지',
   },
 };

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 
 import AlertIcon from '@/components/icons/AlertIcon';
 import CheckIcon from '@/components/icons/CheckIcon';
@@ -19,15 +19,17 @@ export default function NicknameInput({
   className,
 }: NicknameInputProps) {
   const [nickname, setNickname] = useState('');
-
-  const handleReset = () => {
-    setNickname('');
-  };
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newNickname = e.target.value;
     setNickname(newNickname);
     onChange && onChange(newNickname);
+  };
+
+  const handleReset = () => {
+    setNickname('');
+    inputRef.current?.focus();
   };
 
   return (
@@ -38,6 +40,7 @@ export default function NicknameInput({
       className={className}
     >
       <input
+        ref={inputRef}
         type="text"
         placeholder="한글, 영어, 숫자 포함 최대 10자"
         onChange={handleNicknameChange}

@@ -2,25 +2,41 @@ import { twMergeCustom } from '@/libs/tw-merge';
 
 interface InputWrapperProps {
   label: string;
-  successMessage?: string;
-  errorMessage?: string;
+  subLabel?: string;
+  successMessage?: string | null;
+  errorMessage?: string | null;
   className?: string;
+  labelClassName?: string;
   children: React.ReactNode;
 }
 
 export default function InputWrapper({
   label,
+  subLabel,
   successMessage,
   errorMessage,
   className,
+  labelClassName,
   children,
 }: InputWrapperProps) {
   return (
     <div className={twMergeCustom('flex w-[34rem] flex-col', className)}>
-      <label className="text-body1 text-gray-800">{label}</label>
+      <div className="flex items-baseline space-x-[0.7rem]">
+        <label
+          className={twMergeCustom(
+            'mb-[0.4rem] text-body1 text-gray-800',
+            labelClassName
+          )}
+        >
+          {label}
+        </label>
+        {subLabel && (
+          <span className="text-body1 text-[#b0b2b8]">{subLabel}</span>
+        )}
+      </div>
       <div
         className={twMergeCustom(
-          'group relative mt-[0.4rem] flex w-full space-x-[0.8rem] border-b-[0.2rem] py-[0.5rem] text-body4 focus-within:-mb-[0.2rem] focus-within:border-b-[0.4rem] focus-within:border-custom-gray-800',
+          'group relative flex w-full space-x-[0.8rem] border-b-[0.2rem] py-[0.5rem] text-body4 focus-within:-mb-[0.2rem] focus-within:border-b-[0.4rem] focus-within:border-custom-gray-800',
           successMessage &&
             'border-custom-semantic-success-600 focus-within:border-custom-semantic-success-600',
           errorMessage &&
