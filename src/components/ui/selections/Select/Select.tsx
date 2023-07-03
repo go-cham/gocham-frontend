@@ -1,45 +1,30 @@
-import { useEffect, useRef, useState } from 'react';
-import { Control, RegisterOptions, useController } from 'react-hook-form';
+import { useState } from 'react';
 
 import DownIcon from '@/components/icons/DownIcon';
 import { twMergeCustom } from '@/libs/tw-merge';
-import { ReactHookFormInputProps } from '@/types/react-hook-form';
 
-interface SelectProps extends ReactHookFormInputProps {
+interface SelectProps {
   id: string;
   label: string;
   placeholder: string;
   options: { value: string; name: string }[];
-  error?: string | null;
+  errorMessage?: string | null;
   labelClassName?: string;
   wrapperClassName?: string;
+  onChange?: (value: string) => void;
 }
 
 export default function Select({
-  id,
   label,
   placeholder,
   options,
-  error,
-  name,
-  control,
+  errorMessage,
   labelClassName,
   wrapperClassName,
-  rules,
+  onChange,
 }: SelectProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const selectRef = useRef<HTMLSelectElement>(null);
-  const { field } = useController<Record<string, string>>({
-    control,
-    name,
-    rules,
-  });
-  const defaultValue = field.value
-    ? options.findIndex((option) => option.value === field.value)
-    : null;
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(
-    defaultValue
-  );
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handleMenuToggle = () => {
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
@@ -48,11 +33,8 @@ export default function Select({
   const handleSelect = (index: number) => {
     setMenuOpen(false);
     setSelectedIndex(index);
+    onChange && onChange(options[index].value);
   };
-
-  useEffect(() => {
-    selectRef.current?.dispatchEvent(new Event('change', { bubbles: true }));
-  }, [selectedIndex]);
 
   return (
     <div
@@ -69,7 +51,7 @@ export default function Select({
         className={twMergeCustom(
           'mt-[0.3rem] flex cursor-pointer items-center justify-between border-b-[0.2rem] border-custom-text-500 pb-[0.2rem]',
           menuOpen && '-mb-[0.2rem] border-b-[0.4rem] border-custom-gray-800',
-          error && 'border-custom-semantic-warn-500'
+          errorMessage && 'border-custom-semantic-warn-500'
         )}
       >
         <span
@@ -87,9 +69,9 @@ export default function Select({
           )}
         />
       </div>
-      {error && (
+      {errorMessage && (
         <span className="mt-[0.5rem] self-end text-body1 text-custom-semantic-warn-500">
-          {error}
+          {errorMessage}
         </span>
       )}
 
@@ -107,22 +89,6 @@ export default function Select({
           ))}
         </ul>
       )}
-
-      <select
-        ref={selectRef}
-        id={id}
-        className="hidden"
-        onChange={field.onChange}
-        value={
-          selectedIndex !== null ? options[selectedIndex].value : undefined
-        }
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.name}
-          </option>
-        ))}
-      </select>
     </div>
   );
 }

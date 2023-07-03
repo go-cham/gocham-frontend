@@ -1,41 +1,27 @@
 import { ChangeEvent, useState } from 'react';
-import {
-  Control,
-  RegisterOptions,
-  UseFormRegisterReturn,
-  useController,
-} from 'react-hook-form';
 
 import CheckIcon from '@/components/icons/CheckIcon';
 import { twMergeCustom } from '@/libs/tw-merge';
-import { ReactHookFormInputProps } from '@/types/react-hook-form';
 
-interface CheckboxProps extends ReactHookFormInputProps {
+interface CheckboxProps {
   id: string;
-  register?: UseFormRegisterReturn;
   className?: string;
+  defaultChecked?: boolean;
+  onChange?: (checked: boolean) => void;
 }
 
 export default function Checkbox({
   id,
-  register,
   className,
-  name,
-  control,
-  rules,
+  defaultChecked = false,
+  onChange,
 }: CheckboxProps) {
-  const { field } = useController<Record<string, boolean>>({
-    control,
-    name,
-    rules: rules,
-  });
-  const [checked, setChecked] = useState(field.value || false);
-
-  console.log(field.value);
+  const [checked, setChecked] = useState(defaultChecked);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setChecked((prevChecked) => !prevChecked);
-    field.onChange(e);
+    const newChecked = e.target.checked;
+    setChecked(newChecked);
+    onChange && onChange(newChecked);
   };
 
   return (
@@ -48,12 +34,11 @@ export default function Checkbox({
       )}
     >
       <input
-        {...register}
         id={id}
-        checked={checked}
         type="checkbox"
         className="hidden"
         onChange={handleChange}
+        checked={checked}
       />
       <CheckIcon color="white" className={checked ? 'visible' : 'hidden'} />
     </label>

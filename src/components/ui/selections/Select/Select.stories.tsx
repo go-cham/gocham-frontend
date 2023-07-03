@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useForm } from 'react-hook-form';
 
 import Select from '@/components/ui/selections/Select';
 
@@ -32,81 +31,34 @@ const OPTIONS = [
 ];
 
 export const Default: Story = {
-  render: () => {
-    const { control, watch } = useForm();
-    const value = watch('select');
-
-    return (
-      <div>
-        {value && <p className="mb-10">선택된 값은 {watch('select')}입니다.</p>}
-        {!value && <p className="mb-10">선택된 값이 없습니다.</p>}
-
-        <Select
-          id="select"
-          label="라벨"
-          options={OPTIONS}
-          placeholder="플레이스 홀더"
-          name="select"
-          control={control}
-        />
-      </div>
-    );
+  args: {
+    id: 'select',
+    label: '라벨',
+    options: OPTIONS,
+    placeholder: '플레이스 홀더',
+    onChange: (value) => console.log(value),
   },
 };
 
 export const Error: Story = {
-  render: () => {
-    type FormData = {
-      select: string;
-    };
-
-    const { control, watch } = useForm<FormData>({
-      defaultValues: {
-        select: 'option2',
-      },
-    });
-    const value = watch('select');
-
-    return (
-      <div>
-        {value && <p className="mb-10">선택된 값은 {watch('select')}입니다.</p>}
-        {!value && <p className="mb-10">선택된 값이 없습니다.</p>}
-
-        <Select
-          id="select"
-          label="라벨"
-          options={OPTIONS}
-          placeholder="플레이스 홀더"
-          error="에러가 발생했습니다"
-          name="select"
-          control={control}
-        />
-      </div>
-    );
+  args: {
+    id: 'select',
+    label: '라벨',
+    options: OPTIONS,
+    placeholder: '플레이스 홀더',
+    errorMessage: '에러 메시지',
+    onChange: (value) => console.log(value),
   },
 };
 
 export const PostSelect: Story = {
-  render: () => {
-    const { control, watch } = useForm();
-    const value = watch('select');
-
-    return (
-      <div>
-        {value && <p className="mb-10">선택된 값은 {watch('select')}입니다.</p>}
-        {!value && <p className="mb-10">선택된 값이 없습니다.</p>}
-
-        <Select
-          id="select"
-          label="라벨"
-          options={OPTIONS}
-          placeholder="플레이스 홀더"
-          name="select"
-          control={control}
-          labelClassName="text-subheading"
-          wrapperClassName="w-[15.7rem]"
-        />
-      </div>
-    );
+  args: {
+    id: 'select',
+    label: '라벨',
+    options: OPTIONS,
+    placeholder: '플레이스 홀더',
+    labelClassName: 'text-subheading',
+    wrapperClassName: 'w-[15.7rem]',
+    onChange: (value) => console.log(value),
   },
 };
