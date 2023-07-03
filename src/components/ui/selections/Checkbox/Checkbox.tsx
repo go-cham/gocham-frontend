@@ -6,24 +6,16 @@ import { twMergeCustom } from '@/libs/tw-merge';
 interface CheckboxProps {
   id: string;
   className?: string;
-  defaultChecked?: boolean;
+  checked: boolean;
   onChange?: (checked: boolean) => void;
 }
 
 export default function Checkbox({
   id,
   className,
-  defaultChecked = false,
+  checked,
   onChange,
 }: CheckboxProps) {
-  const [checked, setChecked] = useState(defaultChecked);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newChecked = e.target.checked;
-    setChecked(newChecked);
-    onChange && onChange(newChecked);
-  };
-
   return (
     <label
       htmlFor={id}
@@ -37,8 +29,8 @@ export default function Checkbox({
         id={id}
         type="checkbox"
         className="hidden"
-        onChange={handleChange}
         checked={checked}
+        onChange={(e) => onChange && onChange(e.target.checked)}
       />
       <CheckIcon color="white" className={checked ? 'visible' : 'hidden'} />
     </label>

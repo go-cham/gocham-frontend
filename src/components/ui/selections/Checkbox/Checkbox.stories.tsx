@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const NotChecked: Story = {
   args: {
     id: 'checkbox1',
-    defaultChecked: false,
+    checked: false,
     onChange: (checked) => console.log(checked ? 'Checked!' : 'Not checked!'),
   },
 };
@@ -22,7 +22,7 @@ export const NotChecked: Story = {
 export const Checked: Story = {
   args: {
     id: 'checkbox2',
-    defaultChecked: true,
+    checked: true,
     onChange: (checked) => console.log(checked ? 'Checked!' : 'Not checked!'),
   },
 };

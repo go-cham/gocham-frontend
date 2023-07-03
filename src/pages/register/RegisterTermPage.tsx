@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useUser from '@/apis/hooks/users/useUser';
+import BackIcon from '@/components/icons/BackIcon';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
-import TopAppBar from '@/components/layout/TopAppBar';
+import Button from '@/components/ui/buttons/Button';
 import { RouteURL } from '@/constants/route-url';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
@@ -23,7 +24,6 @@ export type AcceptType = {
 export default function RegisterTermPage() {
   const navigate = useNavigate();
   const { user } = useUser();
-  // const userInfo = useAtomValue(userAtom);
   const [accept, setAccept] = useState<AcceptType>({
     gochamTerm: false,
     personalInformation: false,
@@ -67,15 +67,19 @@ export default function RegisterTermPage() {
     accept.gochamTerm && accept.personalInformation && accept.olderThan14;
 
   return (
-    <div className="flex h-full flex-col items-center">
-      <TopAppBar boxShadow={false} />
-      <div className="mx-auto w-[90%] flex-1">
-        <div className="mt-[3.9rem] text-[2.7rem] font-bold leading-[3.9rem]">
-          <p>환영합니다!</p>
+    <div className="flex h-full flex-col bg-white">
+      <BackIcon
+        onClick={() => navigate('/login')}
+        className="ml-[0.9rem] cursor-pointer"
+        color="#424242"
+      />
+      <div className="mt-[3.3rem] w-full flex-1 px-[2.5rem]">
+        <div className="text-hero">
+          <p>환영합니다 !</p>
           <p>서비스 이용약관에</p>
           <p>동의해주세요.</p>
         </div>
-        <section className="mt-[3.9rem] space-y-[0.7rem]">
+        <section className="mt-[3.5rem]">
           <TermCheckbox
             text="모두 동의합니다."
             checked={
@@ -94,42 +98,43 @@ export default function RegisterTermPage() {
               })
             }
           />
-          <div className="h-[1px] w-full bg-black" />
-          <TermCheckbox
-            text="[필수] 고민의 참견 이용약관 동의"
-            link="https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2"
-            checked={accept.gochamTerm}
-            onCheck={(value) => setAccept({ ...accept, gochamTerm: value })}
-          />
-          <TermCheckbox
-            text="[필수] 개인정보 수집 및 이용 동의"
-            link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
-            checked={accept.personalInformation}
-            onCheck={(value) =>
-              setAccept({ ...accept, personalInformation: value })
-            }
-          />
-          <TermCheckbox
-            text="[필수] 만 14세 이상 입니다."
-            checked={accept.olderThan14}
-            onCheck={(value) => setAccept({ ...accept, olderThan14: value })}
-          />
-          <TermCheckbox
-            text="[선택] 마케팅 목적 이용 동의"
-            link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
-            checked={accept.marketing}
-            onCheck={(value) => setAccept({ ...accept, marketing: value })}
-          />
+          <div className="relative -left-[2.5rem] my-[1.7rem] h-[1px] w-[calc(100%+5rem)] bg-custom-background-200" />
+          <div className="space-y-[1.3rem]">
+            <TermCheckbox
+              text="[필수] 고민의 참견 이용약관 동의"
+              link="https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2"
+              checked={accept.gochamTerm}
+              onCheck={(value) => setAccept({ ...accept, gochamTerm: value })}
+            />
+            <TermCheckbox
+              text="[필수] 개인정보 수집 및 이용 동의"
+              link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
+              checked={accept.personalInformation}
+              onCheck={(value) =>
+                setAccept({ ...accept, personalInformation: value })
+              }
+            />
+            <TermCheckbox
+              text="[필수] 만 14세 이상 입니다."
+              checked={accept.olderThan14}
+              onCheck={(value) => setAccept({ ...accept, olderThan14: value })}
+            />
+            <TermCheckbox
+              text="[선택] 마케팅 목적 이용 동의"
+              link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
+              checked={accept.marketing}
+              onCheck={(value) => setAccept({ ...accept, marketing: value })}
+            />
+          </div>
         </section>
       </div>
-      <BottomContinueBar
-        title={'다음'}
-        height={11.2}
-        boxShadow={false}
-        buttonColor={nextEnabled ? palette.Primary : 'rgba(42, 45, 55, 0.1)'}
-        fontColor={nextEnabled ? 'white' : 'rgba(42, 45, 55, 0.34)'}
-        clickAction={nextEnabled ? handleRegister : undefined}
-      />
+      <Button
+        className="mb-[4.8rem] self-center"
+        disabled={!nextEnabled}
+        onClick={handleRegister}
+      >
+        다음
+      </Button>
     </div>
   );
 }
