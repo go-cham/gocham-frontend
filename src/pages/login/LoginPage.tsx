@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router-dom';
+
+import BackIcon from '@/components/icons/BackIcon';
 import withAuth from '@/components/withAuth';
 import Logo from '@/images/Common/big_logo.svg';
 import GochamCharacter from '@/images/Login/GochamCharacter.svg';
@@ -10,6 +13,8 @@ declare global {
 }
 
 function LoginPage() {
+  const navigate = useNavigate();
+
   if (!window.Kakao.isInitialized()) {
     window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
   }
@@ -26,15 +31,26 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center bg-primary pt-[5rem]">
-      <img src={Logo} alt={'로고'} />
-      <img
-        src={KakaoText}
-        alt={'카카오 로그인 텍스트'}
-        onClick={handleKakaoLogin}
-        className="mt-[6.4rem]"
+    <div className="flex h-full w-full flex-col items-center bg-custom-main-500">
+      <BackIcon
+        onClick={() => navigate('/')}
+        className="ml-[0.9rem] cursor-pointer self-start"
+        color="white"
       />
-      <img src={GochamCharacter} className="mt-[6.6rem]" alt={'캐릭터'} />
+      <img
+        src={Logo}
+        alt={'로고'}
+        className="mt-[1.6rem] w-full max-w-[39.3rem]"
+      />
+      <button className="mt-[3.5rem]">
+        <img
+          src={KakaoText}
+          alt={'카카오 로그인 텍스트'}
+          onClick={handleKakaoLogin}
+          className="w-full max-w-[30.6rem]"
+        />
+      </button>
+      <img src={GochamCharacter} className="mt-[12.2rem]" alt={'캐릭터'} />
     </div>
   );
 }
