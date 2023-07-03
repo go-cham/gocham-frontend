@@ -24,6 +24,6 @@ export const WithImage: Story = {
 
 export const Error: Story = {
   args: {
-    error: '에러 메시지',
+    hasError: true,
   },
 };
