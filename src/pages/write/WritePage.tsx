@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Select, { StylesConfig } from 'react-select';
 
 import useAddPost from '@/apis/hooks/posts/useAddPost';
+import useUser from '@/apis/hooks/users/useUser';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
 import TopAppBar from '@/components/layout/TopAppBar';
 import withAuth from '@/components/withAuth';
@@ -47,10 +48,11 @@ type PostWriteContentType = {
 function WritePage() {
   const userInfo = useAtomValue(userAtom);
   const navigate = useNavigate();
+  const { user } = useUser();
   const { addPost, data, error } = useAddPost();
 
   const handlePostUpload = async () => {
-    if (!userInfo.userId) return false;
+    if (!user?.id) return false;
     const expirationTime = getFutureDateTime(votingContent.deadline?.value);
     // pros cons 미 입력시
     const pros = votingContent.pros === '' ? '찬성' : votingContent.pros;
@@ -58,7 +60,7 @@ function WritePage() {
 
     const postData: PostWriteContentType = {
       title: votingContent.title,
-      userId: userInfo.userId,
+      userId: user.id,
       content: votingContent.content,
       worryCategoryId: votingContent.category!.value,
       choices: [
