@@ -18,6 +18,7 @@ textarea:focus {
 body {
   margin: 0;
   background-color: #f5f7fb;
+  height: 100vh;
 }
 
 /* Chrome, Safari, Edge, Opera */

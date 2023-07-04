@@ -1,4 +1,6 @@
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { navigate } from '@storybook/addon-links';
+import { useEffect } from 'react';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
 import useKakaoLogin from '@/apis/hooks/auth/useKakaoLogin';
 import useUser from '@/apis/hooks/users/useUser';
@@ -6,6 +8,7 @@ import { RouteURL } from '@/constants/route-url';
 import { userType } from '@/constants/userTypeEnum';
 
 export default function LoginOauthKakaoPage() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const code = searchParams.get('code');
   const { token, error } = useKakaoLogin(code);
@@ -20,18 +23,24 @@ export default function LoginOauthKakaoPage() {
     localStorage.setItem('token', token);
   }
 
-  if (user) {
-    switch (user.type) {
-      case userType.onceUser:
-      case userType.onceUserWithoutTerms:
-        return <Navigate to={RouteURL.register_term} />;
-      case userType.deactivatedUser:
-      case userType.dormantUser:
-        return <Navigate to={RouteURL.login} />;
-      default:
-        return <Navigate to={RouteURL.home} />;
+  useEffect(() => {
+    document.querySelector('body')!.style.height = `${window.innerHeight}px`;
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      switch (user.type) {
+        case userType.onceUser:
+        case userType.onceUserWithoutTerms:
+          return navigate(RouteURL.register_term);
+        case userType.deactivatedUser:
+        case userType.dormantUser:
+          return navigate(RouteURL.login);
+        default:
+          navigate(RouteURL.home);
+      }
     }
-  }
+  }, [user]);
 
   return null;
 }
