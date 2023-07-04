@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
-import BottomAppBar from '@/components/layout/BottomAppBar';
+import BottomAppBar from '@/components/layout/BottomAppBar/BottomAppBar';
 import PostCard from '@/components/post/PostCard';
 import SelectMyPostType from '@/components/user/SelectMyPostType';
 import UserProfile from '@/components/user/UserProfile';

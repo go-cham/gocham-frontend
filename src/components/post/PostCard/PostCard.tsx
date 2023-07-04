@@ -16,7 +16,6 @@ interface PostCardProps {
 
 export default function PostCard({ post, routeUrl, loggedIn }: PostCardProps) {
   const navigate = useNavigate();
-  const [openBottomSheet, setOpenBottomSheet] = useState(false);
 
   const handlePostClick = () => {
     if (routeUrl) {
@@ -30,7 +29,6 @@ export default function PostCard({ post, routeUrl, loggedIn }: PostCardProps) {
     if (!loggedIn) {
       navigate(RouteURL.login);
     }
-    setOpenBottomSheet((value) => !value);
   };
 
   return (
@@ -52,12 +50,6 @@ export default function PostCard({ post, routeUrl, loggedIn }: PostCardProps) {
           onClickComment={handleCommentsOpen}
         />
       </section>
-      <ChatBottomSheet
-        openBottomSheet={openBottomSheet}
-        handleClickPostChat={handleCommentsOpen}
-        postId={post.id}
-        postData={post}
-      />
     </>
   );
 }

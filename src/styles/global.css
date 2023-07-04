@@ -40,3 +40,8 @@ input[type='number'] {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.shadow-dock {
+  -webkit-filter: drop-shadow(0 -4px 16px rgba(34, 34, 34, 0.12));
+  filter: drop-shadow(0 -4px 16px rgba(34, 34, 34, 0.12));
+}

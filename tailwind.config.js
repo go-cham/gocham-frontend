@@ -217,7 +217,6 @@ module.exports = {
       boxShadow: {
         feed: '0 8px 20px 0 rgba(34, 34, 34, 0.10)',
         header: '0 0.33000001311302185px 0 0 rgba(34, 34, 34, 0.30)',
-        dock: '0 -4px 16px 0 rgba(34, 34, 34, 0.12)',
       },
       backgroundImage: {
         'with-character': "url('src/images/background.png')",

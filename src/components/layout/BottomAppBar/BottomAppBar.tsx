@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import HomeIcon from '@/components/icons/HomeIcon';
+import PlusIcon from '@/components/icons/PlusIcon';
+import ProfileIcon from '@/components/icons/ProfileIcon';
 import { RouteURL } from '@/constants/route-url';
 import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
-import AddPostIcon from '@/images/GNB/add_post_icon.svg';
-import SelectHomeIcon from '@/images/GNB/selected_home_icon.svg';
-import SelectProfileIcon from '@/images/GNB/selected_profile_icon.svg';
 
 export default function BottomAppBar() {
   const navigate = useNavigate();
@@ -33,38 +33,38 @@ export default function BottomAppBar() {
   };
 
   return (
-    <footer className="absolute -bottom-[0.4rem] mx-auto w-full">
+    <footer className="absolute bottom-0 z-10 w-full">
       <img
-        className="mx-auto w-full max-w-[43rem] drop-shadow-[0_0_25px_rgba(42,45,55,0.1)]"
+        className="shadow-dock mx-auto w-full"
         src={backgroundImage}
         alt="gnb-background"
       />
-      <div className="absolute bottom-[3.3rem] flex w-full items-baseline justify-evenly">
+      <div className="absolute -top-[0.6rem] flex w-full items-end justify-evenly">
         {/* HomePage */}
         <button
           onClick={handleGoHome}
           className={selectedMenu === 'posting' ? 'pointer-events-none' : ''}
         >
-          <img
-            className={`w-[3.2rem] ${selectedMenu !== 'posting' && 'opacity-20'}
-          `}
-            src={SelectHomeIcon}
-            alt="home"
+          <HomeIcon
+            color={selectedMenu !== 'posting' ? '#bdbdbd' : undefined}
           />
         </button>
+
         {/* Add */}
-        <button onClick={handleGoWrite}>
-          <img className="w-[5.7rem]" src={AddPostIcon} alt="add-post" />
+        <button
+          onClick={handleGoWrite}
+          className="flex h-[5.7rem] w-[5.7rem] items-center justify-center rounded-full bg-custom-main-500"
+        >
+          <PlusIcon color="white" className="h-[3.2rem] w-[3.2rem]" />
         </button>
+
         {/* Profile */}
         <button
           onClick={handleGoUserPage}
           className={selectedMenu === 'user' ? 'pointer-events-none' : ''}
         >
-          <img
-            className={`w-[3.2rem] ${selectedMenu !== 'user' && 'opacity-20'}`}
-            src={SelectProfileIcon}
-            alt="profile"
+          <ProfileIcon
+            color={selectedMenu !== 'user' ? '#bdbdbd' : undefined}
           />
         </button>
       </div>
