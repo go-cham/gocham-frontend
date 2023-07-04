@@ -210,7 +210,7 @@ function WritePage() {
           <Label text="글 제목" />
           <div className="relative">
             <TextArea
-              maxLength={16}
+              maxLength={30}
               placeholder={'제목 작성 또는 이미지 선택'}
               rows={1}
               value={votingContent.title}

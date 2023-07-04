@@ -19,10 +19,8 @@ export default function PostCardContent({
       onClick={onClick}
     >
       <div className="flex-1 space-y-[0.9rem] overflow-hidden">
-        <h1 className="truncate align-middle text-[1.6rem] font-bold text-text1">
-          {title}
-        </h1>
-        <p className="h-[1.6rem] truncate align-middle text-[1.2rem] text-text2">
+        <h1 className="truncate align-middle text-heading3">{title}</h1>
+        <p className="h-[1.6rem] truncate align-middle text-body1 text-custom-text-500">
           {formatText(content)}
         </p>
       </div>
@@ -30,7 +28,7 @@ export default function PostCardContent({
         <img
           src={image}
           alt={'게시글 이미지'}
-          className="aspect-square h-full rounded-[7px] border border-[#f5f7fb] object-cover"
+          className="ml-[1.7rem] aspect-square w-[6.4rem] rounded-[5px] border border-custom-background-200 object-cover"
         />
       )}
     </div>
