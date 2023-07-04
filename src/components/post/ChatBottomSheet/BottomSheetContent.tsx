@@ -46,10 +46,7 @@ export default function BottomSheetContent({
   return (
     <div className="divide-y-[1px] divide-gray3 pb-[10rem]">
       <div className="px-[1.9rem]">
-        <PostUserProfile
-          nickname={postData.user.nickname}
-          profileImage={postData.user.profileImageUrl}
-        />
+        <PostUserProfile nickname={postData.user.nickname} age={20} />
         <h1 className="mt-[2.1rem] text-[1.8rem] font-bold">
           {postData.title}
         </h1>
@@ -86,7 +83,7 @@ export default function BottomSheetContent({
                   <div className="flex">
                     <PostUserProfile
                       nickname={chat.user.nickname}
-                      profileImage={chat.user.profileImageUrl}
+                      age={20} // TODO
                     />
                     {chat.user.worryChoice?.label && (
                       <span className="ml-[0.7rem] flex h-[2.2rem] items-center justify-center rounded-[1.5rem] border px-[1rem] text-[1rem] font-medium">

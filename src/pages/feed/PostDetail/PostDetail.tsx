@@ -47,7 +47,7 @@ export default function PostDetail({ userInfo, postData }: PostDetailProps) {
     <div className="flex flex-col border-b border-gray3 bg-white px-[2.5rem] py-[1.5rem]">
       <PostUserProfile
         nickname={thisPostData.user.nickname}
-        profileImage={thisPostData.user.profileImageUrl}
+        age={20} // TODO
       />
       <PostDetailContent
         title={thisPostData.title}

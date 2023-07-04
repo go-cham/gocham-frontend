@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import ChatBottomSheet from '@/components/post/ChatBottomSheet';
 import PostCardContent from '@/components/post/PostCard/PostCardContent';
 import PostCardMeta from '@/components/post/PostCard/PostCardMeta';
 import PostUserProfile from '@/components/post/PostUserProfile';
@@ -36,7 +34,7 @@ export default function PostCard({ post, routeUrl, loggedIn }: PostCardProps) {
       <section className="flex h-[15rem] w-full flex-col justify-between rounded-[12px] bg-white p-[1.7rem] shadow-feed">
         <PostUserProfile
           nickname={post.user.nickname}
-          profileImage={post.user.profileImageUrl}
+          age={22} // TODO
         />
         <PostCardContent
           title={post.title}
