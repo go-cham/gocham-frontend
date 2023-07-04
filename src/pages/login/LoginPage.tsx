@@ -31,7 +31,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center bg-custom-main-500">
+    <div className="relative flex h-full w-full flex-col items-center bg-custom-main-500">
       <BackIcon
         onClick={() => navigate('/')}
         className="ml-[0.9rem] cursor-pointer self-start"
@@ -40,9 +40,9 @@ function LoginPage() {
       <img
         src={Logo}
         alt={'로고'}
-        className="mt-[1.6rem] w-full max-w-[39.3rem]"
+        className="mt-[2vh] w-full max-w-[39.3rem]"
       />
-      <button className="mt-[3.5rem]">
+      <button className="mt-[4vh]">
         <img
           src={KakaoText}
           alt={'카카오 로그인 텍스트'}
@@ -50,7 +50,11 @@ function LoginPage() {
           className="w-full max-w-[30.6rem]"
         />
       </button>
-      <img src={GochamCharacter} className="mt-[12.2rem]" alt={'캐릭터'} />
+      <img
+        src={GochamCharacter}
+        className="absolute bottom-[12vh]"
+        alt={'캐릭터'}
+      />
     </div>
   );
 }
