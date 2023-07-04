@@ -127,7 +127,7 @@ export default function RegisterTermPage() {
         </section>
       </div>
       <Button
-        className="mb-[4.8rem] self-center"
+        className="absolute bottom-[4.8rem] left-1/2 -translate-x-1/2"
         disabled={!nextEnabled}
         onClick={handleRegister}
       >
