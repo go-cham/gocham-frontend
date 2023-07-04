@@ -1,103 +1,134 @@
-import Select, { OnChangeValue, StylesConfig } from 'react-select';
+import { FormEvent, useState } from 'react';
 
-import InputLayout from '@/components/input/InputLayout';
+import JobInput from '@/components/register/form/JobInput';
+import SelectFix from '@/components/ui/SelectFix';
+import Button from '@/components/ui/buttons/Button';
+import Chip from '@/components/ui/buttons/Chip';
 import {
   OptionType,
-  categoryOptions,
-  jobOptions,
+  categoryOptions as initialCategoryOptions,
   residenceOptions,
 } from '@/constants/Options';
-import palette from '@/styles/color';
-import { UserInformationPropsType, userInformationType } from '@/types/user';
+import { validateJob } from '@/utils/validations/job';
 
-import MultiPickerComponent from './MultiPickerComponent';
+const MAX_CATEGORIES_SELECT = 4;
+
+interface CollectRegionJobCategoryProps {
+  onSubmit: (residenceId: number, job: string, categoryIds: number[]) => void;
+}
 
 export default function CollectNicknameAgeGender({
-  userInformation,
-  setUserInformation,
-}: UserInformationPropsType) {
-  const handleInputValue = (e: OnChangeValue<OptionType, any>, key: string) => {
-    setUserInformation((value: userInformationType) => ({
-      ...value,
-      [key]: e,
-    }));
-  };
-  const handleInputValueWithCustomComponent = (item: number, key: string) => {
-    // 이코드는 item이 리스트여야함
-    setUserInformation((value: userInformationType) => ({
-      ...value,
-      [key]: item,
-    }));
-  };
-  const customStyles: StylesConfig = {
-    option: (baseStyles) => ({
-      ...baseStyles,
-      textAlign: 'left',
-      backgroundColor: undefined,
-      fontSize: '1.2rem',
-      color: 'rgba(42, 45, 55, 0.7)',
-    }),
-    control: (baseStyles) => ({
-      ...baseStyles,
-      background: 'rgba(0,0,0,0)',
-      border: 0,
-      boxSizing: 'border-box',
-      boxShadow: undefined,
-      borderColor: undefined,
-      fontSize: '1.2rem',
-      color: 'rgba(42, 45, 55, 0.7)',
-      borderRadius: 0,
-      transition: 'border-width 0.1s ease-in-out',
-    }),
-    singleValue: (baseStyles) => ({
-      ...baseStyles,
-      color: palette.Secondary,
-      fontSize: '1.2rem',
-      fontWeight: '500',
-    }),
-    menu: (baseStyles) => ({
-      ...baseStyles,
-      borderRadius: '1.2rem',
-      width: '15.5rem',
-      right: 0,
-    }),
+  onSubmit,
+}: CollectRegionJobCategoryProps) {
+  const [residence, setResidence] = useState<OptionType>();
+  const [job, setJob] = useState('');
+  const [categoryOptions, setCategoryOptions] = useState<OptionType[]>(
+    initialCategoryOptions
+  );
+  const [categories, setCategories] = useState<OptionType[]>([]);
+  const [isDirty, setIsDirty] = useState(false); // job
 
-    menuList: (baseStyles) => ({
-      ...baseStyles,
-    }),
-    indicatorSeparator: () => ({ display: 'none' }),
+  const handleResidenceChange = (residence: string) => {
+    const selected = residenceOptions.find(
+      (option) => option.value === +residence
+    );
+    selected && setResidence(selected);
   };
+
+  const handleJobChange = (job: string) => {
+    setIsDirty(true);
+    setJob(job.trimEnd());
+  };
+
+  const handleCategorySelect = (category: string) => {
+    const index = categoryOptions.findIndex(
+      (option) => option.value === +category
+    );
+    if (index !== -1) {
+      setCategories([...categories, categoryOptions[index]]);
+      const newCategoryOptions = [...categoryOptions];
+      newCategoryOptions.splice(index, 1);
+      setCategoryOptions(newCategoryOptions);
+    }
+  };
+
+  const handleCategoryDelete = (category: OptionType) => {
+    const index = categories.findIndex((c) => c.value === category.value);
+    const newCategories = [...categories];
+    newCategories.splice(index, 1);
+    setCategories(newCategories);
+
+    const newCategoryOptions = [...categoryOptions, category];
+    newCategoryOptions.sort((a, b) => a.value - b.value);
+    setCategoryOptions(newCategoryOptions);
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!residence?.value) return;
+
+    onSubmit(
+      residence.value,
+      job,
+      categories.map((cat) => cat.value)
+    );
+  };
+
+  const jobErrorMessage = isDirty ? validateJob(job) : null;
+
+  const nextEnabled = residence && job && !jobErrorMessage;
 
   return (
-    <div className="space-y-[2.4rem]">
-      <InputLayout label="거주지역">
-        <Select
-          isSearchable={false}
-          styles={customStyles}
-          options={residenceOptions}
-          value={userInformation.residence}
-          onChange={(e) => handleInputValue(e as any, 'residence')}
+    <form className="space-y-[2.9rem]" onSubmit={handleSubmit}>
+      <SelectFix
+        id="residence"
+        label="거주 지역"
+        placeholder="지역 선택"
+        options={residenceOptions.map((v) => ({
+          value: v.value + '',
+          name: v.label,
+        }))}
+        wrapperClassName="w-full"
+        onChange={handleResidenceChange}
+        value={residence?.label}
+        highlight={true}
+      />
+      <JobInput
+        className="w-full"
+        onChange={handleJobChange}
+        errorMessage={jobErrorMessage}
+      />
+      <div className="space-y-[1.1rem]">
+        <SelectFix
+          id="worry-category"
+          label="관심 카테고리"
+          placeholder="최대 4개 선택 가능"
+          options={categoryOptions.map((v) => ({
+            value: v.value + '',
+            name: v.label,
+          }))}
+          wrapperClassName="w-full"
+          onChange={handleCategorySelect}
+          readonly={categories.length >= MAX_CATEGORIES_SELECT}
         />
-      </InputLayout>
-      <InputLayout label="직업">
-        <Select
-          isSearchable={false}
-          styles={customStyles}
-          options={jobOptions}
-          value={userInformation.job}
-          onChange={(e) => handleInputValue(e as any, 'job')}
-        />
-      </InputLayout>
-      <div>
-        <label className="text-[1.2rem]">관심 카테고리</label>
-        <MultiPickerComponent
-          categoryOptions={categoryOptions}
-          selectedValue={userInformation.worryCategories}
-          clickAction={(item) =>
-            handleInputValueWithCustomComponent(item, 'worryCategories')
-          }
-        />
+        <div className="flex flex-wrap">
+          {categories.map((category) => (
+            <Chip
+              key={category.value}
+              label={category.label}
+              variant="delete"
+              onDelete={() => handleCategoryDelete(category)}
+              className="mb-[0.6rem] mr-[0.6rem]"
+            />
+          ))}
+        </div>
       </div>
-    </div>
+      <Button
+        disabled={!nextEnabled}
+        className="absolute bottom-[4.8rem] left-1/2 -translate-x-1/2"
+      >
+        고참 시작하기
+      </Button>
+    </form>
   );
 }

@@ -1,3 +1,5 @@
+import { hasSpecialChars } from '@/utils/validations/hasSpecialChars';
+
 export function validateNickname(nickname: string) {
   if (nickname.length > 10) {
     return '10자 이내 입력 가능합니다.';
@@ -5,7 +7,7 @@ export function validateNickname(nickname: string) {
   if (nickname.length < 2) {
     return '최소 2자 이상 입력해야 합니다.';
   }
-  if (/[!@#$%^&*(),.?":{}|<>]/.test(nickname)) {
+  if (hasSpecialChars(nickname)) {
     return '특수 문자 입력이 불가합니다.';
   }
   if (/\s/.test(nickname)) {

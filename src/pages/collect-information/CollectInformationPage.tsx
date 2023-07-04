@@ -7,49 +7,27 @@ import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender
 import CollectRegionJobCategory from '@/components/user/CollectRegionJobCategory/CollectRegionJobCategory';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
-import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
-import { EndPoint } from '@/dataManager/apiMapper';
-import { Gender, userInformationType } from '@/types/user';
+import { Gender } from '@/types/user';
+
+interface RegisterData {
+  nickname?: string;
+  birthDay?: string;
+  sex?: Gender;
+  residenceId?: number;
+  job?: string;
+  worryCategories?: number[];
+}
 
 function CollectInformationPage() {
   const navigate = useNavigate();
   const { user } = useUser();
 
   const [page, setPage] = useState(1);
-  const [registerData, setRegisterData] = useState<userInformationType>({
-    nickname: '',
-    birthDay: '--',
-    sex: '',
-    residence: { value: 0, label: '' },
-    job: { value: 0, label: '' },
-    worryCategories: [],
-  });
+  const [registerData, setRegisterData] = useState<RegisterData>();
 
   if (!user) {
     return <Navigate to={RouteURL.login} />;
   }
-
-  const uploadCollectData = async () => {
-    const postUserInformation = {
-      userId: user.id,
-      nickname: registerData.nickname, // 삭제 예정
-      birthDate: registerData.birthDay.toString(),
-      sex: registerData.sex,
-      residenceId: registerData.residence.value,
-      jobId: registerData.job.value,
-      worryCategories: registerData.worryCategories.map((value) => value.value),
-    };
-    try {
-      const res = await ApiConfig.request({
-        method: HttpMethod.PATCH,
-        url: EndPoint.user.patch.USER,
-        data: postUserInformation,
-      });
-      navigate('/');
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   const handleNicknameAgeGenderSubmit = (
     nickname: string,
@@ -63,6 +41,19 @@ function CollectInformationPage() {
       sex: gender,
     });
     setPage(2);
+  };
+
+  const handleRegionJobCategorySubmit = (
+    residenceId: number,
+    job: string,
+    categoryIds: number[]
+  ) => {
+    setRegisterData({
+      ...registerData,
+      residenceId,
+      job,
+      worryCategories: categoryIds,
+    });
   };
 
   const handleGoBack = () => {
@@ -94,8 +85,7 @@ function CollectInformationPage() {
           )}
           {page === 2 && (
             <CollectRegionJobCategory
-              userInformation={registerData}
-              setUserInformation={setRegisterData}
+              onSubmit={handleRegionJobCategorySubmit}
             />
           )}
         </section>

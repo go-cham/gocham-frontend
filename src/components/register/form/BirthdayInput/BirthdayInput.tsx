@@ -3,7 +3,7 @@ import { ChangeEvent, useRef, useState } from 'react';
 import AlertIcon from '@/components/icons/AlertIcon';
 import CheckIcon from '@/components/icons/CheckIcon';
 import DeleteIcon from '@/components/icons/DeleteIcon';
-import InputWrapper from '@/components/ui/InputWrapper';
+import InputWrapper from '@/components/ui/inputs/InputWrapper';
 import { fixDate } from '@/utils/validations/birthday';
 
 export interface Birthday {

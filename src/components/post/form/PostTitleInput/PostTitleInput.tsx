@@ -3,7 +3,7 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 
 import DeleteIcon from '@/components/icons/DeleteIcon';
 import ImageFileIcon from '@/components/icons/ImageFileIcon';
-import InputWrapper from '@/components/ui/InputWrapper';
+import InputWrapper from '@/components/ui/inputs/InputWrapper';
 
 interface PostTitleInputProps {
   errorMessage?: string | null;
