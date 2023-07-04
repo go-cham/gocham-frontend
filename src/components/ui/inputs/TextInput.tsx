@@ -1,8 +1,8 @@
 import { ChangeEvent, useRef, useState } from 'react';
 
 import AlertIcon from '@/components/icons/AlertIcon';
-import CheckIcon from '@/components/icons/CheckIcon';
 import DeleteIcon from '@/components/icons/DeleteIcon';
+import CheckIcon from '@/components/ui/inputs/CheckIcon';
 import InputWrapper from '@/components/ui/inputs/InputWrapper';
 import { twMergeCustom } from '@/libs/tw-merge';
 
@@ -71,7 +71,7 @@ export default function TextInput({
             />
           </button>
         )}
-        {successMessage && <CheckIcon color="#62be4a" />}
+        {successMessage && <CheckIcon />}
         {errorMessage && <AlertIcon />}
       </div>
     </InputWrapper>
