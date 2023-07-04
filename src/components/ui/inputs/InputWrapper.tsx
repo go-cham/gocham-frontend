@@ -20,7 +20,12 @@ export default function InputWrapper({
   children,
 }: InputWrapperProps) {
   return (
-    <div className={twMergeCustom('flex w-[34rem] flex-col', className)}>
+    <div
+      className={twMergeCustom(
+        're relative flex w-[34rem] flex-col',
+        className
+      )}
+    >
       <div className="flex items-baseline space-x-[0.7rem]">
         <label
           className={twMergeCustom(
@@ -48,7 +53,7 @@ export default function InputWrapper({
       {(successMessage || errorMessage) && (
         <span
           className={twMergeCustom(
-            'mt-[0.7rem] self-end text-body1',
+            'absolute -bottom-[2.1rem] right-0 text-body1',
             successMessage && 'text-custom-semantic-success-600',
             errorMessage && 'text-custom-semantic-warn-500'
           )}
