@@ -19,11 +19,10 @@ export default function LoginOauthKakaoPage() {
   if (token) {
     localStorage.setItem('token', token);
   }
-  console.log(user);
+
   if (user) {
     switch (user.type) {
       case userType.onceUser:
-        return <Navigate to={RouteURL.collect_information} />;
       case userType.onceUserWithoutTerms:
         return <Navigate to={RouteURL.register_term} />;
       case userType.deactivatedUser:
