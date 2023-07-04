@@ -21,7 +21,6 @@ export const Delete: Story = {
   args: {
     label: 'Input',
     variant: 'delete',
-    onDelete: () => console.log('delete!'),
   },
 };
 

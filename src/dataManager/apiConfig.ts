@@ -73,7 +73,7 @@ export default class ApiConfig {
           break;
       }
     } catch (error: any) {
-      console.log('ApiConfig Error : ', error.message);
+      console.error('ApiConfig Error : ', error.message);
     }
   }
 }

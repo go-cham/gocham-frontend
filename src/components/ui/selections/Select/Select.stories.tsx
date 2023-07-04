@@ -36,7 +36,6 @@ export const Default: Story = {
     label: '라벨',
     options: OPTIONS,
     placeholder: '플레이스 홀더',
-    onChange: (value) => console.log(value),
   },
 };
 
@@ -47,7 +46,6 @@ export const Error: Story = {
     options: OPTIONS,
     placeholder: '플레이스 홀더',
     errorMessage: '에러 메시지',
-    onChange: (value) => console.log(value),
   },
 };
 
@@ -59,6 +57,5 @@ export const PostSelect: Story = {
     placeholder: '플레이스 홀더',
     labelClassName: 'text-subheading',
     wrapperClassName: 'w-[15.7rem]',
-    onChange: (value) => console.log(value),
   },
 };

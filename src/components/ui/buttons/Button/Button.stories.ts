@@ -15,7 +15,6 @@ export const Primary: Story = {
   args: {
     variant: 'primary',
     children: 'button',
-    onClick: () => console.log('clicked!'),
   },
 };
 
@@ -23,7 +22,6 @@ export const Line: Story = {
   args: {
     variant: 'line',
     children: 'button',
-    onClick: () => console.log('clicked!'),
   },
 };
 
@@ -32,6 +30,5 @@ export const Disabled: Story = {
     variant: 'primary',
     children: 'button',
     disabled: true,
-    onClick: () => console.log('clicked!'),
   },
 };

@@ -15,7 +15,6 @@ export const NotChecked: Story = {
   args: {
     id: 'checkbox1',
     checked: false,
-    onChange: (checked) => console.log(checked ? 'Checked!' : 'Not checked!'),
   },
 };
 
@@ -23,6 +22,5 @@ export const Checked: Story = {
   args: {
     id: 'checkbox2',
     checked: true,
-    onChange: (checked) => console.log(checked ? 'Checked!' : 'Not checked!'),
   },
 };

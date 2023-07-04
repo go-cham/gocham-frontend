@@ -15,7 +15,6 @@ export const Default: Story = {
   args: {
     children: 'input',
     selected: false,
-    onClick: () => console.log('clicked!'),
   },
 };
 
@@ -23,7 +22,6 @@ export const Selected: Story = {
   args: {
     children: 'input',
     selected: true,
-    onClick: () => console.log('clicked!'),
   },
 };
 
@@ -33,7 +31,6 @@ export const DefaultWithImage: Story = {
     selected: false,
     image:
       'https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLuWhQ%2FbtrYap1Nsaw%2Fet0ArKJd4VrzBjZBGNu6W1%2Fimg.jpg',
-    onClick: () => console.log('clicked!'),
   },
 };
 
@@ -43,6 +40,5 @@ export const SelectedWithImage: Story = {
     selected: true,
     image:
       'https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLuWhQ%2FbtrYap1Nsaw%2Fet0ArKJd4VrzBjZBGNu6W1%2Fimg.jpg',
-    onClick: () => console.log('clicked!'),
   },
 };
