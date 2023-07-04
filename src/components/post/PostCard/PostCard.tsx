@@ -35,7 +35,7 @@ export default function PostCard({ post, routeUrl, loggedIn }: PostCardProps) {
 
   return (
     <>
-      <section className="flex h-[15rem] w-[34rem] flex-col justify-between rounded-[12px] bg-white p-[1.7rem] shadow-[0_0_0.4rem_rgba(42,45,55,0.1)]">
+      <section className="flex h-[15rem] w-full flex-col justify-between rounded-[12px] bg-white p-[1.7rem] shadow-feed">
         <PostUserProfile
           nickname={post.user.nickname}
           profileImage={post.user.profileImageUrl}

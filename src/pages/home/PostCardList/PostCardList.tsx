@@ -23,9 +23,13 @@ export default function PostCardList({
   }
 
   return (
-    <ul className="flex flex-col items-center space-y-[1.7rem]">
+    <ul className="flex w-full flex-col items-center space-y-[1.7rem]">
       {posts.map((post, index) => (
-        <li key={post.id} ref={index === posts.length - 1 ? ref : undefined}>
+        <li
+          key={post.id}
+          ref={index === posts.length - 1 ? ref : undefined}
+          className="w-full"
+        >
           <PostCard
             loggedIn={user?.type === userType.activatedUser}
             post={post}
