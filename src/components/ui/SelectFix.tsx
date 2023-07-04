@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import DownIcon from '@/components/icons/DownIcon';
 import { twMergeCustom } from '@/libs/tw-merge';
@@ -30,6 +30,7 @@ export default function SelectFix({
   highlight,
 }: SelectFixProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   const handleMenuToggle = () => {
     if (readonly) return;
@@ -42,8 +43,23 @@ export default function SelectFix({
     onChange && onChange(options[index].value);
   };
 
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClick, true);
+
+    return () => {
+      document.removeEventListener('click', handleClick, true);
+    };
+  }, []);
+
   return (
     <div
+      ref={ref}
       className={twMergeCustom(
         'relative flex w-[34rem] flex-col',
         wrapperClassName
