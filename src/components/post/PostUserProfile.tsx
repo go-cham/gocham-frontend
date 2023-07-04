@@ -1,15 +1,23 @@
 interface PostUserProfileProps {
   nickname: string;
   age: number;
+  color?: 'primary' | 'gray';
 }
 
 export default function PostUserProfile({
   nickname,
   age,
+  color = 'primary',
 }: PostUserProfileProps) {
   return (
     <div className="flex items-center space-x-[0.5rem]">
-      <span className="flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-full bg-custom-main-100 text-[1.2rem] font-bold tracking-[-0.36px] text-custom-main-500">
+      <span
+        className={`flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-full text-[1.2rem] font-bold tracking-[-0.36px] ${
+          color === 'primary'
+            ? 'bg-custom-main-100 text-custom-main-500'
+            : 'bg-[#f4f4f5] text-[#b0b2b8]'
+        }`}
+      >
         {String(age)[0] + '0'}
       </span>
       <span className="text-body2">{nickname}</span>

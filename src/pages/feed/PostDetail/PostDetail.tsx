@@ -48,6 +48,7 @@ export default function PostDetail({ userInfo, postData }: PostDetailProps) {
       <PostUserProfile
         nickname={thisPostData.user.nickname}
         age={20} // TODO
+        color="gray"
       />
       <PostDetailContent
         title={thisPostData.title}
