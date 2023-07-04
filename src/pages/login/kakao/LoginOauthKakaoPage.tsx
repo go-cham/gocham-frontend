@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Navigate, useSearchParams } from 'react-router-dom';
 
 import useKakaoLogin from '@/apis/hooks/auth/useKakaoLogin';
@@ -19,6 +20,10 @@ export default function LoginOauthKakaoPage() {
   if (token) {
     localStorage.setItem('token', token);
   }
+
+  useEffect(() => {
+    document.querySelector('html')!.style.height = `${window.innerHeight}px`;
+  }, []);
 
   if (user) {
     switch (user.type) {
