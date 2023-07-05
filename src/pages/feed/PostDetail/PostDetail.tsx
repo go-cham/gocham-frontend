@@ -1,83 +1,43 @@
-import { useAtom } from 'jotai';
-import { useEffect, useState } from 'react';
-
-import ChatBottomSheet from '@/components/post/ChatBottomSheet';
+import MessageIcon from '@/components/icons/MessageIcon';
+import MoreIcon from '@/components/icons/MoreIcon';
+import ShareIcon from '@/components/icons/ShareIcon';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import ClockIcon from '@/images/PostComponent/clock.svg';
-import { refreshChatAtom } from '@/states/postRefreshRequest';
-import { userDataAtomType } from '@/states/userData';
 import { Post } from '@/types/post';
 import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
-import { handleRefreshPostData } from '@/utils/handleRefreshPostData';
 
 import PostVote from './PostVote';
 
 interface PostDetailProps {
-  userInfo: userDataAtomType;
-  postData: Post;
+  post: Post;
 }
 
-export default function PostDetail({ userInfo, postData }: PostDetailProps) {
-  const [openBottomSheet, setOpenBottomSheet] = useState(false);
-  const [thisPostData, setThisPostData] = useState<Post>(postData);
-  const [needRefresh, setNeedRefresh] = useAtom(refreshChatAtom);
-
-  const handleClickPostChat = () => {
-    setOpenBottomSheet((value) => {
-      return !value;
-    });
-  };
-
-  useEffect(() => {
-    setThisPostData(postData);
-  }, []);
-
-  // 댓글이나 투표할 경우 해당 컨텐츠만 리프레시.
-  useEffect(() => {
-    if (needRefresh.worryIdx === postData.id) {
-      setThisPostData(
-        handleRefreshPostData(thisPostData, needRefresh.updateObject)
-      );
-      setNeedRefresh({ worryIdx: null, updateObject: '' });
-    }
-  }, [needRefresh]);
-
+export default function PostDetail({ post }: PostDetailProps) {
   return (
-    <div className="flex flex-col border-b border-gray3 bg-white px-[2.5rem] py-[1.5rem]">
-      <PostUserProfile
-        nickname={thisPostData.user.nickname}
-        age={20} // TODO
-        color="gray"
-      />
-      <PostDetailContent
-        title={thisPostData.title}
-        content={thisPostData.content}
-        image={thisPostData.worryFiles[0]?.url}
-      />
-      <PostExpiration expirationTime={thisPostData.expirationTime} />
-      <PostVote
-        postData={thisPostData}
-        userId={userInfo.userId}
-        handleClickPostChat={handleClickPostChat}
-      />
-      <div className="flex justify-between">
-        <span
-          className="text-[1.2rem] text-text3"
-          onClick={handleClickPostChat}
-        >
-          댓글 {thisPostData.replyCount}개 모두 보기
-        </span>
-        <span className="text-[1.2rem] text-text3">
-          현재 투표한 사용자 {thisPostData.userWorryChoiceCount}명
-        </span>
+    <div className="flex flex-col border-b border-custom-background-200 px-[2.5rem] py-[1.3rem]">
+      <div className="flex items-center justify-between">
+        <PostUserProfile
+          nickname={post.user.nickname}
+          age={20} // TODO
+          color="gray"
+        />
+        <MoreIcon />
       </div>
-      <ChatBottomSheet
-        openBottomSheet={openBottomSheet}
-        handleClickPostChat={handleClickPostChat}
-        postId={thisPostData.id}
-        postData={thisPostData}
+      <PostDetailContent
+        title={post.title}
+        content={post.content}
+        image={post.worryFiles[0]?.url}
       />
+      <PostExpiration expirationTime={post.expirationTime} />
+      <PostVote post={post} />
+      <div className="my-[1.3rem] flex space-x-[0.7rem]">
+        <MessageIcon />
+        <ShareIcon />
+      </div>
+      <span className="text-body2 text-custom-gray-800">
+        댓글 {post.replyCount}개 모두 보기
+      </span>
     </div>
   );
 }
@@ -93,8 +53,8 @@ function PostDetailContent({
 }) {
   return (
     <div>
-      <h1 className="mt-[2.1rem] text-[1.8rem] font-bold">{title}</h1>
-      <p className="mt-[1.3rem] break-words text-[1.4rem]">
+      <h1 className="mt-[1.3rem] text-heading2">{title}</h1>
+      <p className="mt-[0.8rem] break-words text-body3 text-custom-gray-800">
         {formatText(content)}
       </p>
       {image && (

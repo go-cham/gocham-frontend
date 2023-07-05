@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import BackButton from '@/images/Common/back_button_42X42.svg';
+import BackIcon from '@/components/icons/BackIcon';
 
 interface TopAppBarProps {
   title?: string;
@@ -34,20 +34,12 @@ export default function TopAppBar({
   };
 
   return (
-    <header
-      className="relative flex h-[4.5rem] items-center justify-center border-b border-[#eaeaeb] bg-background"
-      style={{
-        boxShadow: boxShadow ? '0 0 2.5rem rgba(42,45,55,0.1)' : undefined,
-        backgroundColor: background,
-      }}
-    >
-      <img
-        src={BackButton}
-        alt={'뒤로가기'}
+    <header className="relative flex h-[4.4rem] items-center justify-center bg-white shadow-header">
+      <BackIcon
+        className="absolute left-[0.9rem] h-full cursor-pointer"
         onClick={handleClickBackButton}
-        className="absolute left-0"
       />
-      {title && <h1 className="text-[1.6rem] font-bold">{title}</h1>}
+      {title && <h1 className="text-heading3">{title}</h1>}
     </header>
   );
 }

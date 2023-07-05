@@ -34,7 +34,7 @@ function FeedPage() {
         navigateRoute={params.route ? RouteURL.user : RouteURL.home}
       />
       <ul
-        className="flex-1 overflow-y-scroll"
+        className="flex-1 overflow-y-scroll pt-[0.9rem]"
         style={{ scrollSnapType: 'y proximity', scrollSnapAlign: 'start' }}
       >
         {posts &&
@@ -43,7 +43,7 @@ function FeedPage() {
               key={post.id}
               ref={index === posts.length - 1 ? ref : undefined}
             >
-              <PostDetail userInfo={userInfo} postData={post} />
+              <PostDetail post={post} />
             </li>
           ))}
       </ul>
