@@ -36,7 +36,7 @@ export type PostUserInformationPropsType = {
   birthDate: string;
   sex: string;
   residenceId: number;
-  jobId: number;
+  job: string;
   worryCategories: number[];
 };
 

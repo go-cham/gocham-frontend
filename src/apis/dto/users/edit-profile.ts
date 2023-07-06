@@ -1,7 +1,7 @@
 export interface EditProfileRequest {
   nickname: string;
   birthDate: string;
-  jobId: number;
+  job: string;
   sex: string;
   residenceId: number;
   userId: number;

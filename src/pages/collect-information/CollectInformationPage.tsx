@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
+import useEditProfile from '@/apis/hooks/users/useEditProfile';
 import useUser from '@/apis/hooks/users/useUser';
 import BackIcon from '@/components/icons/BackIcon';
 import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender/CollectNicknameAgeGender';
@@ -10,20 +11,29 @@ import { RouteURL } from '@/constants/route-url';
 import { Gender } from '@/types/user';
 
 interface RegisterData {
-  nickname?: string;
-  birthDay?: string;
-  sex?: Gender;
-  residenceId?: number;
-  job?: string;
-  worryCategories?: number[];
+  userId: number;
+  nickname: string;
+  birthDate: string;
+  sex: string;
+  residenceId: number;
+  job: string;
+  worryCategories: number[];
 }
 
 function CollectInformationPage() {
   const navigate = useNavigate();
   const { user } = useUser();
-
   const [page, setPage] = useState(1);
-  const [registerData, setRegisterData] = useState<RegisterData>();
+  const [registerData, setRegisterData] = useState<RegisterData>({
+    userId: -1,
+    nickname: '',
+    birthDate: '',
+    sex: '',
+    residenceId: -1,
+    job: '',
+    worryCategories: [],
+  });
+  const { editProfile, isSuccess } = useEditProfile();
 
   if (!user) {
     return <Navigate to={RouteURL.login} />;
@@ -37,13 +47,13 @@ function CollectInformationPage() {
     setRegisterData({
       ...registerData,
       nickname,
-      birthDay: birthday,
+      birthDate: birthday,
       sex: gender,
     });
     setPage(2);
   };
 
-  const handleRegionJobCategorySubmit = (
+  const handleRegionJobCategorySubmit = async (
     residenceId: number,
     job: string,
     categoryIds: number[]
@@ -54,6 +64,14 @@ function CollectInformationPage() {
       job,
       worryCategories: categoryIds,
     });
+
+    await editProfile({
+      ...registerData,
+      residenceId,
+      job,
+      worryCategories: categoryIds,
+      userId: user.id,
+    });
   };
 
   const handleGoBack = () => {
@@ -63,6 +81,12 @@ function CollectInformationPage() {
       navigate(RouteURL.register_term);
     }
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/');
+    }
+  }, [isSuccess]);
 
   return (
     <div className="relative flex h-full flex-col bg-white">

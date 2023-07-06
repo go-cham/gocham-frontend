@@ -61,7 +61,7 @@ function EditProfilePage() {
         birthDate: userInformation.birthDay,
         sex: userInformation.sex,
         residenceId: userInformation.residence.value,
-        jobId: userInformation.job.value,
+        job: userInformation.job.label,
         worryCategories: userInformation.worryCategories.map(
           (value) => value.value
         ),
