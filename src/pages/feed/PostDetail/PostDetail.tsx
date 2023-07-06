@@ -6,6 +6,7 @@ import MoreIcon from '@/components/icons/MoreIcon';
 import ShareIcon from '@/components/icons/ShareIcon';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
+import Modal from '@/components/ui/Modal';
 import ClockIcon from '@/images/PostComponent/clock.svg';
 import { Post } from '@/types/post';
 import { formatText } from '@/utils/formatText';
@@ -21,6 +22,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   const { user } = useUser();
   const [showMore, setShowMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const handleClickMore = () => {
     setShowMore((prevShowMore) => !prevShowMore);
@@ -30,7 +32,7 @@ export default function PostDetail({ post }: PostDetailProps) {
     if (value === 'edit') {
       console.log('게시물 수정');
     } else if (value === 'delete') {
-      console.log('게시물 삭제');
+      setDeleteModalOpen(true);
     } else if (value === 'report') {
       console.log('게시물 신고');
     }
@@ -98,6 +100,13 @@ export default function PostDetail({ post }: PostDetailProps) {
       <span className="text-body2 text-custom-gray-800">
         댓글 {post.replyCount}개 모두 보기
       </span>
+      <Modal
+        isOpen={deleteModalOpen}
+        text="게시물을 삭제하시겠습니까?"
+        subText="이 작업은 실행 취소할 수 없습니다."
+        buttonLabel="게시물 삭제"
+        onCancel={() => setDeleteModalOpen(false)}
+      />
     </div>
   );
 }
