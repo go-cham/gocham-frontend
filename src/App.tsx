@@ -8,6 +8,7 @@ import useUpdate from '@/hooks/useUpdate';
 import CollectInformationPage from '@/pages/collect-information/CollectInformationPage';
 import EditProfilePage from '@/pages/edit-profile/EditProfilePage';
 import FeedPage from '@/pages/feed/FeedPage';
+import FeedReportPage from '@/pages/feed/FeedReportPage';
 import HomePage from '@/pages/home/HomePage';
 import LoginPage from '@/pages/login/LoginPage';
 import LoginOauthKakaoPage from '@/pages/login/kakao/LoginOauthKakaoPage';
@@ -33,6 +34,7 @@ export default function App() {
           element={<CollectInformationPage />}
         />
         <Route path={RouteURL.feed_star} element={<FeedPage />} />
+        <Route path={RouteURL.feed_report} element={<FeedReportPage />} />
         <Route path={RouteURL.feed_route_star} element={<FeedPage />} />
         <Route path={RouteURL.login} element={<LoginPage />} />
         <Route

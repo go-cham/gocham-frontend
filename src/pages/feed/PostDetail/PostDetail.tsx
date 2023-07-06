@@ -1,4 +1,6 @@
+import { navigate } from '@storybook/addon-links';
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import useUser from '@/apis/hooks/users/useUser';
 import MessageIcon from '@/components/icons/MessageIcon';
@@ -19,6 +21,7 @@ interface PostDetailProps {
 }
 
 export default function PostDetail({ post }: PostDetailProps) {
+  const navigate = useNavigate();
   const { user } = useUser();
   const [showMore, setShowMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -35,6 +38,7 @@ export default function PostDetail({ post }: PostDetailProps) {
       setDeleteModalOpen(true);
     } else if (value === 'report') {
       console.log('게시물 신고');
+      navigate(`/feed/${post.id}/report`);
     }
 
     setShowMore(false);
