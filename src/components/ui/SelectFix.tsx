@@ -38,10 +38,10 @@ export default function SelectFix({
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
   };
 
-  const handleSelect = (index: number) => {
+  const handleSelect = (value: string) => {
     if (readonly) return;
     setMenuOpen(false);
-    onChange && onChange(options[index].value);
+    onChange && onChange(value);
   };
 
   useEffect(() => {

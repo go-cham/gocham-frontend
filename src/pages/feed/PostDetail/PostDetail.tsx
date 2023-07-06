@@ -1,7 +1,11 @@
+import { useEffect, useRef, useState } from 'react';
+
+import useUser from '@/apis/hooks/users/useUser';
 import MessageIcon from '@/components/icons/MessageIcon';
 import MoreIcon from '@/components/icons/MoreIcon';
 import ShareIcon from '@/components/icons/ShareIcon';
 import PostUserProfile from '@/components/post/PostUserProfile';
+import Dropdown from '@/components/ui/Dropdown';
 import ClockIcon from '@/images/PostComponent/clock.svg';
 import { Post } from '@/types/post';
 import { formatText } from '@/utils/formatText';
@@ -14,6 +18,51 @@ interface PostDetailProps {
 }
 
 export default function PostDetail({ post }: PostDetailProps) {
+  const { user } = useUser();
+  const [showMore, setShowMore] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleClickMore = () => {
+    setShowMore((prevShowMore) => !prevShowMore);
+  };
+
+  const handleMoreSelect = (value: string) => {
+    if (value === 'edit') {
+      console.log('게시물 수정');
+    } else if (value === 'delete') {
+      console.log('게시물 삭제');
+    } else if (value === 'report') {
+      console.log('게시물 신고');
+    }
+
+    setShowMore(false);
+  };
+
+  const isMyPost = user?.id === post.user.id;
+  const options = isMyPost
+    ? [
+        {
+          value: 'edit',
+          name: '게시물 수정',
+        },
+        { value: 'delete', name: '게시물 삭제' },
+      ]
+    : [{ value: 'report', name: '게시물 신고' }];
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setShowMore(false);
+      }
+    };
+
+    document.addEventListener('click', handleClick, true);
+
+    return () => {
+      document.removeEventListener('click', handleClick, true);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col border-b border-custom-background-200 px-[2.5rem] py-[1.3rem]">
       <div className="flex items-center justify-between">
@@ -22,7 +71,18 @@ export default function PostDetail({ post }: PostDetailProps) {
           age={20} // TODO
           color="gray"
         />
-        <MoreIcon />
+        <div ref={ref} className="relative">
+          <MoreIcon onClick={handleClickMore} />
+          {/*<div ref={ref}>*/}
+          {showMore && (
+            <Dropdown
+              options={options}
+              className="right-0 top-[2.9rem] mt-0"
+              onSelect={handleMoreSelect}
+            />
+          )}
+          {/*</div>*/}
+        </div>
       </div>
       <PostDetailContent
         title={post.title}
