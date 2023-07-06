@@ -2,7 +2,7 @@ import { useAtomValue } from 'jotai';
 import { debounce } from 'lodash';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Select, { StylesConfig } from 'react-select';
+import { StylesConfig } from 'react-select';
 
 import useAddPost from '@/apis/hooks/posts/useAddPost';
 import BottomContinueBar from '@/components/layout/BottomContinueBar';
@@ -15,12 +15,18 @@ import {
 } from '@/constants/Options';
 import { uploadFirebase } from '@/dataManager/firebaseManager';
 import { resizeImage } from '@/dataManager/imageResizing';
-import CameraIcon from '@/images/Write/Camera.svg';
 import DeleteIcon from '@/images/Write/delete_icon.svg';
 import { userAtom } from '@/states/userData';
 import palette from '@/styles/color';
 import { alertMessage } from '@/utils/alertMessage';
 import getFutureDateTime from '@/utils/getFutureDateTime';
+import PostContentInput from '@/components/post/form/PostContentInput/PostContentInput';
+import PostTitleInput from '@/components/post/form/PostTitleInput/PostTitleInput';
+import Select from '@/components/ui/selections/Select/Select';
+import EditButton from '@/components/ui/buttons/EditButton/EditButton';
+import VoteButton from '@/components/ui/buttons/VoteButton/VoteButton';
+import PostVoteInput from '@/components/post/form/PostVoteInput/PostVoteInput';
+import Button from '@/components/ui/buttons/Button/Button';
 
 type WriteContentType = {
   title: string;
@@ -48,6 +54,11 @@ function WritePage() {
   const userInfo = useAtomValue(userAtom);
   const navigate = useNavigate();
   const { addPost, data, error } = useAddPost();
+  const [votingNum,setVotingnum] = useState(2);
+
+  const addVotingClicked = () => {
+    setVotingnum(prev => prev + 1);
+  }
 
   const handlePostUpload = async () => {
     if (!userInfo.userId) return false;
@@ -120,6 +131,8 @@ function WritePage() {
   });
 
   const [imageFile, setImageFile] = useState('');
+  const [postInputError, setPostInputError] = useState<string|null>(null);
+  const [postTitleError, setPostTitleError] = useState<string|null>(null);
   const imgRef = useRef<HTMLInputElement>(null);
 
   const handleImageClick = () => {
@@ -143,6 +156,28 @@ function WritePage() {
       }
     };
   };
+
+  const voteBtnClicked = () => {
+    console.log("clicked");
+  }
+
+  const contentInputChanged = (e:string) => {
+    if(e.length<5){
+      setPostInputError("최소 5자 이상 입력해주세요.");
+    }
+    else{
+      setPostInputError(null);
+    }
+  } 
+
+  const postTitleChanged = (e:string) => {
+    if(e.length<2){
+      setPostTitleError("최소 2자 이상 입력해주세요.");
+    }
+    else{
+      setPostTitleError(null);
+    }
+  }
 
   useEffect(() => {
     if (
@@ -205,36 +240,10 @@ function WritePage() {
       <TopAppBar title={'글 작성'} />
       <div className="flex-1 overflow-y-scroll px-[2.5rem] pb-[2rem] pt-[4.6rem]">
         <div className="space-y-2">
-          <Label text="글 제목" />
-          <div className="relative">
-            <TextArea
-              maxLength={16}
-              placeholder={'제목 작성 또는 이미지 선택'}
-              rows={1}
-              value={votingContent.title}
-              onChange={(e) => {
-                setVotingContent((value) => ({
-                  ...value,
-                  title: e.target.value,
-                }));
-              }}
-            />
-            <div className="absolute right-0 top-0">
-              <img
-                src={CameraIcon}
-                alt="이미지선택"
-                onClick={handleImageClick}
-                className="cursor-pointer"
-              />
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                ref={imgRef}
-                onChange={onLoadFiles}
-              />
-            </div>
-          </div>
+          <PostTitleInput 
+            onChange={postTitleChanged}
+            errorMessage={postTitleError}
+          />
         </div>
         {imageFile && (
           <div className="relative mt-4 w-[7rem]">
@@ -252,100 +261,82 @@ function WritePage() {
           </div>
         )}
         <div className="relative mt-8">
-          <Label text="내용" />
-          <TextArea
-            maxLength={280}
-            placeholder={'최대 280자 입력'}
-            rows={7}
-            value={votingContent.content}
-            onChange={(e) => {
-              setVotingContent((value) => ({
-                ...value,
-                content: e.target.value,
-              }));
-            }}
+          <PostContentInput 
+            onChange={contentInputChanged}
+            errorMessage={postInputError}
           />
-          <div className="text-right">
-            <span className="text-[1.2rem] text-text3">
-              {votingContent.content.length}/280
-            </span>
-          </div>
         </div>
         <div className="mt-8 flex justify-between space-x-[4rem]">
           <div className="w-full">
-            <Label text="카테고리" />
             <Select
-              isSearchable={false}
-              styles={customStyles}
-              options={categoryOptions}
-              value={votingContent.category}
-              onChange={(e) =>
-                setVotingContent(
-                  (value): WriteContentType =>
-                    ({ ...value, category: e } as WriteContentType)
-                )
-              }
+              id="1"
+              label="카테고리"
+              placeholder="선택"
+              options={[
+                {value:"0",name:"교육,학문"},
+                {value:"1",name:"컴퓨터,통신"},
+                {value:"2",name:"게임"},
+                {value:"3",name:"예술"},
+                {value:"4",name:"생활"},
+                {value:"5",name:"건강"},
+                {value:"6",name:"사회,정치"},
+                {value:"7",name:"경제"},
+                {value:"8",name:"여행"},
+                {value:"9",name:"스포츠,운동"},
+                {value:"10",name:"쇼핑"},
+                {value:"11",name:"지역"},
+                {value:"12",name:"연애,결혼"},
+                {value:"13",name:"음악,연주"},
+                {value:"14",name:"요리"},
+                {value:"15",name:"방송,연예인"},
+                {value:"16",name:"피부,화장품"},
+                {value:"17",name:"반려동물"}
+              ]}
+              labelClassName='text-subheading'
+              wrapperClassName="w-[15.7rem] z-[1]"
             />
           </div>
           <div className="w-full">
-            <Label text="투표 마감 시간" />
-            <Select
-              isSearchable={false}
-              styles={customStyles}
-              options={deadlineOptions}
-              value={votingContent.deadline}
-              onChange={(e) =>
-                setVotingContent(
-                  (value): WriteContentType =>
-                    ({ ...value, deadline: e } as WriteContentType)
-                )
-              }
+          <Select
+              id="2"
+              label="투표 마감 시간"
+              placeholder="선택"
+              options={[
+                {value:"0",name:"6시간 후"},
+                {value:"1",name:"12시간 후"},
+                {value:"2",name:"24시간 후"},
+                {value:"3",name:"없음"}
+              ]}
+              labelClassName='text-subheading'
+              wrapperClassName="w-[15.7rem] z-[1]"
             />
           </div>
         </div>
         <div className="mt-14 space-y-2">
-          <Label text="옵션 수정" />
-          <p className="text-[1.2rem] text-text3">
-            아래의 옵션을 눌러서 원하는 텍스트로 변경할 수 있어요.
-          </p>
-          <div className="mt-2 flex h-[6rem] justify-between">
-            <div className="flex w-[49%] items-center rounded-[12px] border border-dashed border-primary text-primary">
-              <input
-                className="w-full bg-transparent text-center text-[1.8rem] font-bold"
-                maxLength={6}
-                value={votingContent.pros}
-                onChange={(e) => {
-                  setVotingContent((value) => ({
-                    ...value,
-                    pros: e.target.value,
-                  }));
-                }}
-              />
-            </div>
-            <div className="flex w-[49%] items-center rounded-[12px] border border-dashed border-secondary text-secondary">
-              <input
-                className="w-full bg-transparent text-center text-[1.8rem] font-bold"
-                maxLength={6}
-                value={votingContent.cons}
-                onChange={(e) => {
-                  setVotingContent((value) => ({
-                    ...value,
-                    cons: e.target.value,
-                  }));
-                }}
-              />
-            </div>
+          <div className="text-subheading">투표 항목</div>
+          <PostVoteInput 
+            className='h-[5.3rem] flex justify-center items-center'
+          />
+          <PostVoteInput 
+            className='h-[5.3rem] flex justify-center items-center'
+          />
+          {votingNum >= 3 ? <PostVoteInput className='h-[5.3rem] flex justify-center items-center' /> : null}
+          {votingNum === 4 ? <PostVoteInput className='h-[5.3rem] flex justify-center items-center' /> : null}
+          <EditButton
+            disabled={votingNum === 4 ? true : false}
+            onClick={addVotingClicked}
+          >
+            <span>투표 항목 추가({votingNum}/4)</span>
+          </EditButton>
           </div>
         </div>
-      </div>
-      <BottomContinueBar
-        title={'작성 완료'}
-        clickAction={readyUpload ? handlePushPost : undefined}
-        fontColor={readyUpload ? palette.Background : palette.Gray1}
-        buttonColor={readyUpload ? palette.Primary : palette.Gray2}
-        boxColor={palette.Background}
-        height={11.2}
-      />
+        <div className='flex justify-center items-center mb-[1rem]'>
+          <Button
+              variant = 'line'
+              >
+                <span>작성 완료</span>
+          </Button>
+        </div>
     </div>
   );
 }

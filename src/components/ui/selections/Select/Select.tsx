@@ -77,11 +77,11 @@ export default function Select({
 
       {/* menu dropdown */}
       {menuOpen && (
-        <ul className="absolute top-[6rem] mt-[0.5rem] w-[15.5rem] self-end overflow-hidden rounded-[0.7rem] border bg-white">
+        <ul className="absolute top-[6rem] mt-[0.5rem] w-[15.5rem] h-[15rem] overflow-y-scroll self-end overflow-hidden rounded-[0.7rem] border bg-white">
           {options.map((option, index) => (
             <li
               key={option.value}
-              className="w-full cursor-pointer py-[0.6rem] pr-[1.5rem] text-end text-body2 text-custom-gray-800 hover:bg-custom-background-100"
+              className="w-full cursor-pointer py-[0.6rem] pr-[1.5rem] text-end text-body3 text-custom-gray-800 hover:bg-custom-background-100"
               onClick={() => handleSelect(index)}
             >
               {option.name}
