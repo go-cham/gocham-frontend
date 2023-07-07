@@ -2,6 +2,7 @@ import { navigate } from '@storybook/addon-links';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import useDeletePost from '@/apis/hooks/posts/useDeletePost';
 import useUser from '@/apis/hooks/users/useUser';
 import MessageIcon from '@/components/icons/MessageIcon';
 import MoreIcon from '@/components/icons/MoreIcon';
@@ -26,6 +27,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   const [showMore, setShowMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const { deletePost, error, isSuccess } = useDeletePost();
 
   const handleClickMore = () => {
     setShowMore((prevShowMore) => !prevShowMore);
@@ -35,12 +37,21 @@ export default function PostDetail({ post }: PostDetailProps) {
     if (value === 'edit') {
       console.log('게시물 수정');
     } else if (value === 'delete') {
+      if (getRemainingTime(post.expirationTime) === '마감됨') {
+        alert('투표가 종료된 게시물은 삭제하실 수 없습니다.');
+        setShowMore(false);
+        return;
+      }
       setDeleteModalOpen(true);
     } else if (value === 'report') {
       navigate(`/feed/${post.id}/report`);
     }
 
     setShowMore(false);
+  };
+
+  const handleDeletePost = async () => {
+    await deletePost(post.id);
   };
 
   const isMyPost = user?.id === post.user.id;
@@ -67,6 +78,17 @@ export default function PostDetail({ post }: PostDetailProps) {
       document.removeEventListener('click', handleClick, true);
     };
   }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      alert('게시물이 정상적으로 삭제되었습니다.');
+    }
+    if (error) {
+      alert('오류가 발생하였습니다.');
+    }
+
+    setShowMore(false);
+  }, [error, isSuccess]);
 
   return (
     <div className="flex flex-col border-b border-custom-background-200 px-[2.5rem] py-[1.3rem]">
@@ -109,6 +131,7 @@ export default function PostDetail({ post }: PostDetailProps) {
         subText="이 작업은 실행 취소할 수 없습니다."
         buttonLabel="게시물 삭제"
         onCancel={() => setDeleteModalOpen(false)}
+        onClickButton={handleDeletePost}
       />
     </div>
   );
