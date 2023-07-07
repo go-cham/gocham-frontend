@@ -13,7 +13,7 @@ function FeedPage() {
   const params = useParams();
   const userInfo = useAtomValue(userAtom);
   const { route } = useParams();
-  const { posts, error, ref, isLoading } = useGetPosts({
+  const { posts, ref } = useGetPosts({
     initialPostId: params?.id ? Number(params.id) + 1 : undefined,
     authorId: route === 'my' ? userInfo.userId : undefined,
     participatingUserId:

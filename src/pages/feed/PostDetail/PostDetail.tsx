@@ -37,7 +37,6 @@ export default function PostDetail({ post }: PostDetailProps) {
     } else if (value === 'delete') {
       setDeleteModalOpen(true);
     } else if (value === 'report') {
-      console.log('게시물 신고');
       navigate(`/feed/${post.id}/report`);
     }
 
