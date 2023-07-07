@@ -26,6 +26,8 @@ export default function PostCard({ post, routeUrl, loggedIn }: PostCardProps) {
   const handleCommentsOpen = () => {
     if (!loggedIn) {
       navigate(RouteURL.login);
+    } else {
+      navigate(`/feed/${post.id}/comment`);
     }
   };
 

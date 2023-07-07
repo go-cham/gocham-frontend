@@ -122,7 +122,10 @@ export default function PostDetail({ post }: PostDetailProps) {
         <MessageIcon />
         <ShareIcon />
       </div>
-      <span className="text-body2 text-custom-gray-800">
+      <span
+        className="text-body2 text-custom-gray-800"
+        onClick={() => navigate(`/feed/${post.id}/comment`)}
+      >
         댓글 {post.replyCount}개 모두 보기
       </span>
       <Modal
