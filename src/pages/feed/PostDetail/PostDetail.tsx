@@ -191,9 +191,9 @@ function PostDetailContent({
 
 function PostExpiration({ expirationTime }: { expirationTime: string | null }) {
   return (
-    <div className="mt-[1.9rem] flex space-x-2 px-[2.5rem]">
+    <div className="mt-[1.5rem] flex space-x-[5.67px] px-[2.5rem]">
       <img src={ClockIcon} alt={'마감시간'} />
-      <span className="text-[1.2rem] font-medium text-primary">
+      <span className="text-body2 text-custom-main-500">
         {getRemainingTime(expirationTime)}
       </span>
     </div>

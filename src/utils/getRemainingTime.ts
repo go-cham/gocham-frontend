@@ -14,9 +14,9 @@ export function getRemainingTime(deadline: string | any): string {
   const hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((remainingTime / (1000 * 60)) % 60);
 
-  return `마감까지 ${days}일 ${hours < 10 ? '0' + hours : hours}:${
+  return `마감까지 ${days}일 ${hours < 10 ? '0' + hours : hours}시간 ${
     minutes < 10 ? '0' + minutes : minutes
-  }`;
+  }분`;
 }
 
 // https://yozm.wishket.com/magazine/detail/1695/
