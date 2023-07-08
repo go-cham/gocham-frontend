@@ -1,5 +1,5 @@
-import { navigate } from '@storybook/addon-links';
 import { useEffect, useRef, useState } from 'react';
+import { Carousel } from 'react-responsive-carousel';
 import { useNavigate } from 'react-router-dom';
 
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
@@ -90,9 +90,11 @@ export default function PostDetail({ post }: PostDetailProps) {
     setShowMore(false);
   }, [error, isSuccess]);
 
+  const images = post.worryFiles?.map((file) => file.url);
+
   return (
-    <div className="flex flex-col border-b border-custom-background-200 px-[2.5rem] py-[1.3rem]">
-      <div className="flex items-center justify-between">
+    <div className="flex flex-col border-b border-custom-background-200 py-[1.3rem]">
+      <div className="flex items-center justify-between px-[2.5rem]">
         <PostUserProfile
           nickname={post.user.nickname}
           age={20} // TODO
@@ -100,7 +102,6 @@ export default function PostDetail({ post }: PostDetailProps) {
         />
         <div ref={ref} className="relative">
           <MoreIcon onClick={handleClickMore} />
-          {/*<div ref={ref}>*/}
           {showMore && (
             <Dropdown
               options={options}
@@ -108,22 +109,21 @@ export default function PostDetail({ post }: PostDetailProps) {
               onSelect={handleMoreSelect}
             />
           )}
-          {/*</div>*/}
         </div>
       </div>
       <PostDetailContent
         title={post.title}
         content={post.content}
-        image={post.worryFiles[0]?.url}
+        images={images}
       />
       <PostExpiration expirationTime={post.expirationTime} />
       <PostVote post={post} />
-      <div className="my-[1.3rem] flex space-x-[0.7rem]">
+      <div className="my-[1.3rem] flex space-x-[0.7rem] px-[2.5rem]">
         <MessageIcon />
         <ShareIcon />
       </div>
       <span
-        className="text-body2 text-custom-gray-800"
+        className="px-[2.5rem] text-body2 text-custom-gray-800"
         onClick={() => navigate(`/feed/${post.id}/comment`)}
       >
         댓글 {post.replyCount}개 모두 보기
@@ -143,32 +143,55 @@ export default function PostDetail({ post }: PostDetailProps) {
 function PostDetailContent({
   title,
   content,
-  image,
+  images,
 }: {
   title: string;
   content: string;
-  image?: string | null;
+  images?: string[] | null;
 }) {
   return (
     <div>
-      <h1 className="mt-[1.3rem] text-heading2">{title}</h1>
-      <p className="mt-[0.8rem] break-words text-body3 text-custom-gray-800">
-        {formatText(content)}
-      </p>
-      {image && (
-        <img
-          src={image}
-          alt={'게시글이미지'}
-          className="mx-auto mt-[1.7rem] max-h-[20.25rem] object-contain"
-        />
-      )}
+      <div className="px-[2.5rem]">
+        <h1 className="mt-[1.3rem] text-heading2">{title}</h1>
+        <p className="mt-[0.8rem] break-words text-body3 text-custom-gray-800">
+          {formatText(content)}
+        </p>
+      </div>
+      <div className="mt-[1.7rem]">
+        {images && images.length === 1 && (
+          <img
+            src={images[0]}
+            alt={'게시글이미지'}
+            className="mx-auto h-[29.3rem] w-[36rem] rounded-[0.5rem] object-cover"
+          />
+        )}
+        {images && images.length > 1 && (
+          <Carousel
+            centerMode={true}
+            emulateTouch={true}
+            showStatus={false}
+            showThumbs={false}
+            showArrows={false}
+            showIndicators={false}
+          >
+            {images.map((image) => (
+              <img
+                key={image}
+                src={image}
+                alt={'게시글이미지'}
+                className="h-[29.3rem] max-w-[29.3rem] rounded-[0.5rem] object-cover"
+              />
+            ))}
+          </Carousel>
+        )}
+      </div>
     </div>
   );
 }
 
 function PostExpiration({ expirationTime }: { expirationTime: string | null }) {
   return (
-    <div className="mt-[1.9rem] flex space-x-2">
+    <div className="mt-[1.9rem] flex space-x-2 px-[2.5rem]">
       <img src={ClockIcon} alt={'마감시간'} />
       <span className="text-[1.2rem] font-medium text-primary">
         {getRemainingTime(expirationTime)}

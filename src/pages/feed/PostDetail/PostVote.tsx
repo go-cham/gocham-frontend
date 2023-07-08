@@ -20,7 +20,7 @@ export default function PostVote({ post }: PostVoteProps) {
   const { choiceOptions } = useGetChoiceOptions(post.id);
 
   return (
-    <section>
+    <section className="px-[2.5rem]">
       <div className="mt-[1.2rem] flex flex-col space-y-[1.2rem]">
         {choiceOptions &&
           choiceOptions.slice(0, -1).map((option) => (

@@ -45,3 +45,15 @@ input[type='number'] {
   -webkit-filter: drop-shadow(0 -4px 16px rgba(34, 34, 34, 0.12));
   filter: drop-shadow(0 -4px 16px rgba(34, 34, 34, 0.12));
 }
+
+li.slide {
+  padding: 0 0.65rem;
+  max-width: 30.6rem !important;
+}
+
+li.slide:first-child {
+  padding-left: 1.5rem;
+}
+li.slide:last-child {
+  padding-right: 1.5rem;
+}
