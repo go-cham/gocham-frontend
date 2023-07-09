@@ -16,15 +16,15 @@ export default function SettingsPage() {
   }[] = [
     {
       title: '공지사항',
-      link: 'https://sharechang.notion.site/b422a175512e4710ba4c2ca2ebc8e035',
+      link: 'https://www.notion.so/sharechang/61c9b8f802ca4769b4caca3bc1da5c97?pvs=4',
     },
     {
       title: '이용약관',
-      link: 'https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2',
+      link: 'https://www.notion.so/sharechang/2ad95f818e6a4df29afa5ecdf87e4052?pvs=4',
     },
     {
       title: '개인정보 처리방침',
-      link: 'https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097',
+      link: 'https://www.notion.so/sharechang/47d2c9861a704ef0aadf743856c97335?pvs=4',
     },
     {
       title: '문의하기',
