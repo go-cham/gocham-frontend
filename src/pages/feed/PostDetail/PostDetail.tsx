@@ -222,6 +222,11 @@ function PostDetailContent({
 }
 
 function PostExpiration({ expirationTime }: { expirationTime: string | null }) {
+  const remainingTime = getRemainingTime(expirationTime);
+
+  if (!remainingTime) {
+    return null;
+  }
   return (
     <div className="mt-[1.5rem] flex space-x-[5.67px] px-[2.5rem]">
       <img src={ClockIcon} alt={'마감시간'} />
