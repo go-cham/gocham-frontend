@@ -9,7 +9,7 @@ interface ModalProps {
   onClickButton?: () => void;
 }
 
-export default function Modal({
+export default function Popup({
   isOpen,
   text,
   subText,

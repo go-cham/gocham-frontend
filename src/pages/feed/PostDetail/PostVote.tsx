@@ -1,38 +1,56 @@
 import { useAtom } from 'jotai';
-import { useEffect, useState } from 'react';
 
-import useGetChoiceOptions from '@/apis/hooks/posts/useGetChoiceOptions';
-import useUser from '@/apis/hooks/users/useUser';
 import CheckIcon from '@/components/icons/CheckIcon';
-import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
-import { EndPoint } from '@/dataManager/apiMapper';
-import { justResultWorryHandlerAtom } from '@/states/justResultAtom';
-import { Post } from '@/types/post';
-import { formatRoundedNumber } from '@/utils/formatRoundedNumber';
-import { getRemainingTime } from '@/utils/getRemainingTime';
+import { twMergeCustom } from '@/libs/tw-merge';
+import { selectedVoteOptionAtom } from '@/states/selectedVoteOption';
 
 interface PostVoteProps {
-  post: Post;
+  options?: { id: number; label: string }[];
 }
 
-export default function PostVote({ post }: PostVoteProps) {
-  const { user } = useUser();
-  const { choiceOptions } = useGetChoiceOptions(post.id);
+export default function PostVote({ options }: PostVoteProps) {
+  const [selectedVoteOption, setSelectedVoteOption] = useAtom(
+    selectedVoteOptionAtom
+  );
+
+  const handleButtonSelect = (id: number) => {
+    if (id === selectedVoteOption?.id) {
+      setSelectedVoteOption(null);
+    } else {
+      setSelectedVoteOption({
+        id,
+        inView: true,
+      });
+    }
+  };
 
   return (
     <section className="px-[2.5rem]">
       <div className="mt-[1.2rem] flex flex-col space-y-[1.2rem]">
-        {choiceOptions &&
-          choiceOptions.slice(0, -1).map((option) => (
+        {options &&
+          options.map((option) => (
             <button
-              className="relative flex h-[4.4rem] items-center overflow-hidden rounded-[0.5rem] border border-custom-background-200 text-start shadow-header"
+              className={twMergeCustom(
+                'relative flex h-[4.4rem] items-center overflow-hidden rounded-[0.5rem] border border-custom-background-200 text-start shadow-header',
+                selectedVoteOption?.id === option.id &&
+                  'bg-custom-background-100'
+              )}
               key={option.id}
+              onClick={() => handleButtonSelect(option.id)}
             >
               <CheckIcon
-                color="#757575"
+                color={
+                  selectedVoteOption?.id === option.id ? '#222222' : '#757575'
+                }
                 className="ml-[0.9rem] mr-[0.7rem] h-[2.4rem] w-[2.4rem]"
               />
-              <span className="text-body4 text-custom-gray-600">
+              <span
+                className={`text-body4 ${
+                  selectedVoteOption?.id === option.id
+                    ? 'text-gray-900'
+                    : 'text-custom-gray-600'
+                }`}
+              >
                 {option.label}
               </span>
               {/* temp image*/}

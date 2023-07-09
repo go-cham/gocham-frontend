@@ -1,16 +1,20 @@
+import { useAtom } from 'jotai/index';
 import { useEffect, useRef, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { Carousel } from 'react-responsive-carousel';
 import { useNavigate } from 'react-router-dom';
 
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
+import useGetChoiceOptions from '@/apis/hooks/posts/useGetChoiceOptions';
 import useUser from '@/apis/hooks/users/useUser';
 import MessageIcon from '@/components/icons/MessageIcon';
 import MoreIcon from '@/components/icons/MoreIcon';
 import ShareIcon from '@/components/icons/ShareIcon';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
-import Modal from '@/components/ui/Modal';
+import Popup from '@/components/ui/modal/Popup';
 import ClockIcon from '@/images/PostComponent/clock.svg';
+import { selectedVoteOptionAtom } from '@/states/selectedVoteOption';
 import { Post } from '@/types/post';
 import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
@@ -22,12 +26,19 @@ interface PostDetailProps {
 }
 
 export default function PostDetail({ post }: PostDetailProps) {
+  const { choiceOptions } = useGetChoiceOptions(post.id);
   const navigate = useNavigate();
   const { user } = useUser();
   const [showMore, setShowMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { deletePost, error, isSuccess } = useDeletePost();
+  const [selectedVoteOption, setSelectedVoteOption] = useAtom(
+    selectedVoteOptionAtom
+  );
+  const { ref: inViewRef, inView } = useInView({
+    threshold: 0.3,
+  });
 
   const handleClickMore = () => {
     setShowMore((prevShowMore) => !prevShowMore);
@@ -90,10 +101,27 @@ export default function PostDetail({ post }: PostDetailProps) {
     setShowMore(false);
   }, [error, isSuccess]);
 
+  useEffect(() => {
+    if (selectedVoteOption) {
+      setSelectedVoteOption({ id: selectedVoteOption.id, inView });
+    }
+  }, [inView]);
+
   const images = post.worryFiles?.map((file) => file.url);
+  const isSelected = choiceOptions?.find(
+    (option) => option.id === selectedVoteOption?.id
+  );
+
+  const voteOptions = choiceOptions
+    ?.filter((option) => !!option.label)
+    .map((option) => ({ id: option.id, label: option.label as string }));
 
   return (
-    <div className="flex flex-col border-b border-custom-background-200 py-[1.3rem]">
+    <div
+      className="flex flex-col border-b border-custom-background-200 py-[1.3rem]"
+      ref={isSelected ? inViewRef : undefined}
+      id={isSelected ? 'vote-selected' : ''}
+    >
       <div className="flex items-center justify-between px-[2.5rem]">
         <PostUserProfile
           nickname={post.user.nickname}
@@ -117,7 +145,7 @@ export default function PostDetail({ post }: PostDetailProps) {
         images={images}
       />
       <PostExpiration expirationTime={post.expirationTime} />
-      <PostVote post={post} />
+      <PostVote options={voteOptions} />
       <div className="my-[1.3rem] flex space-x-[0.7rem] px-[2.5rem]">
         <MessageIcon />
         <ShareIcon />
@@ -128,7 +156,7 @@ export default function PostDetail({ post }: PostDetailProps) {
       >
         댓글 {post.replyCount}개 모두 보기
       </span>
-      <Modal
+      <Popup
         isOpen={deleteModalOpen}
         text="게시물을 삭제하시겠습니까?"
         subText="이 작업은 실행 취소할 수 없습니다."
