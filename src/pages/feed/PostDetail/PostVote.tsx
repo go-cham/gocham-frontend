@@ -1,9 +1,11 @@
 import { useAtom } from 'jotai';
+import { useState } from 'react';
 
+import useChooseOption from '@/apis/hooks/posts/useChooseOption';
 import useGetMyChoice from '@/apis/hooks/posts/useGetMyChoice';
 import useGetUsersChoices from '@/apis/hooks/posts/useGetUsersChoices';
-import useUser from '@/apis/hooks/users/useUser';
 import CheckIcon from '@/components/icons/CheckIcon';
+import Popup from '@/components/ui/modal/Popup';
 import { twMergeCustom } from '@/libs/tw-merge';
 import { selectedVoteOptionAtom } from '@/states/selectedVoteOption';
 
@@ -22,6 +24,8 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
   const [selectedVoteOption, setSelectedVoteOption] = useAtom(
     selectedVoteOptionAtom
   );
+  const [onlyReadModalOpen, setOnlyReadModalOpen] = useState(false);
+  const { chooseOption } = useChooseOption();
 
   const handleButtonSelect = (id: number) => {
     if (id === selectedVoteOption?.id) {
@@ -38,11 +42,27 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
     return null;
   }
 
+  const handleAbstention = () => {
+    const choiceId = usersChoices.find(
+      (option) => option.isAbstained === 'yes'
+    )?.id;
+    if (!choiceId) {
+      return;
+    }
+    chooseOption({ userId, worryChoiceId: choiceId });
+    setOnlyReadModalOpen(false);
+  };
+
   const total = usersChoices
     .filter((option) => !!option.label)
     .reduce((acc, cur) => acc + cur.userWorryChoiceCount, 0);
 
   if (choice) {
+    const isAbstained = choice.isAbstained === 'yes';
+    const mostVoted = usersChoices
+      .filter((option) => !!option.label)
+      .sort((a, b) => b.userWorryChoiceCount - a.userWorryChoiceCount)[0].label;
+    console.log(mostVoted);
     return (
       <section className="mt-[1.1rem] px-[2.5rem]">
         <div className="space-y-[2.1rem] rounded-[0.5rem] border px-[1.7rem] py-[1.5rem]">
@@ -50,16 +70,18 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
             const count =
               usersChoices.find((o) => o.label === option.label)
                 ?.userWorryChoiceCount || 0;
-            const percentage = (count / total) * 100;
+            const percentage = total === 0 ? 0 : (count / total) * 100;
 
             return (
               <div key={option.id}>
                 <div key={option.id} className="relative flex">
-                  <CheckIcon
-                    color={
-                      choice.label === option.label ? '#222222' : '#e0e0e0'
-                    }
-                  />
+                  {!isAbstained && (
+                    <CheckIcon
+                      color={
+                        choice.label === option.label ? '#222222' : '#e0e0e0'
+                      }
+                    />
+                  )}
                   <div className="ml-[0.6rem] flex flex-col">
                     <span className="text-body4">{option.label}</span>
                     <span className="text-body1 text-custom-text-500">
@@ -74,11 +96,17 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
                 </div>
                 <div className="relative mt-[0.4rem] h-[4px] w-full rounded-[5px] bg-custom-background-100">
                   <div
-                    className={`absolute left-0 top-0 h-full rounded-[5px] ${
-                      choice.label === option.label
-                        ? 'bg-custom-main-500'
-                        : 'bg-custom-main-200'
-                    }`}
+                    className={twMergeCustom(
+                      `absolute left-0 top-0 h-full rounded-[5px] ${
+                        choice.label === option.label
+                          ? 'bg-custom-main-500'
+                          : 'bg-custom-main-200'
+                      }`,
+                      isAbstained && 'bg-custom-gray-400',
+                      isAbstained &&
+                        mostVoted === option.label &&
+                        'bg-custom-gray-800'
+                    )}
                     style={{
                       width: percentage + '%',
                     }}
@@ -129,9 +157,18 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
         ))}
       </div>
       <div className="mt-[1.5rem] flex justify-between text-body2 text-custom-text-500">
-        <button>결과만 볼래요</button>
+        <button onClick={() => setOnlyReadModalOpen(true)}>
+          결과만 볼래요
+        </button>
         <button>현재 투표한 사용자 {total}명</button>
       </div>
+      <Popup
+        isOpen={onlyReadModalOpen}
+        text={'결과를 열람하시면\n투표에 참여하실 수 없습니다.'}
+        buttonLabel="그래도 볼게요"
+        onCancel={() => setOnlyReadModalOpen(false)}
+        onClickButton={handleAbstention}
+      />
     </section>
   );
 }
