@@ -1,5 +1,4 @@
-import { useAtomValue } from 'jotai';
-import { useAtom } from 'jotai/index';
+import { useAtom } from 'jotai';
 import { useParams } from 'react-router-dom';
 
 import useChooseOption from '@/apis/hooks/posts/useChooseOption';
@@ -10,7 +9,7 @@ import FloatingButton from '@/components/ui/buttons/FloatingButton';
 import Snackbar from '@/components/ui/modal/Snackbar';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
-import { selectedVoteOptionAtom } from '@/states/selectedVoteOption';
+import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 
 import PostDetail from './PostDetail';
 
@@ -24,30 +23,18 @@ function FeedPage() {
     participatingUserId: route === 'participating' ? user?.id : undefined,
   });
   const { chooseOption } = useChooseOption();
-  const [selectedVoteOption, setSelectedVoteOption] = useAtom(
-    selectedVoteOptionAtom
+  const [selectedVoteOptionId, setSelectedVoteOptionId] = useAtom(
+    selectedVoteOptionIdAtom
   );
 
-  const showGoBack = selectedVoteOption?.id && !selectedVoteOption?.inView;
-
-  const handleGoBack = () => {
-    const button = document.querySelector('#vote-selected');
-    if (button) {
-      button.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-    }
-  };
-
   const handleVote = () => {
-    if (user?.id && selectedVoteOption?.id) {
+    if (user?.id && selectedVoteOptionId) {
       chooseOption({
         userId: user.id,
-        worryChoiceId: selectedVoteOption.id,
+        worryChoiceId: selectedVoteOptionId,
       });
     }
-    setSelectedVoteOption(null);
+    setSelectedVoteOptionId(null);
   };
 
   return (
@@ -77,15 +64,7 @@ function FeedPage() {
             </li>
           ))}
       </ul>
-      {showGoBack && (
-        <Snackbar
-          text="다른 게시물에 동시에 투표할 수 없어요."
-          actionText="원위치로 이동"
-          className="fixed bottom-[11rem] left-1/2 -translate-x-1/2"
-          onClick={handleGoBack}
-        />
-      )}
-      {selectedVoteOption && (
+      {selectedVoteOptionId && (
         <FloatingButton
           onClick={handleVote}
           className="fixed bottom-[4.8rem] left-1/2 z-50 -translate-x-1/2"

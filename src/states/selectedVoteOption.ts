@@ -1,6 +1,3 @@
 import { atom } from 'jotai';
 
-export const selectedVoteOptionAtom = atom<{
-  id: number;
-  inView: boolean;
-} | null>(null);
+export const selectedVoteOptionIdAtom = atom<number | null>(null);

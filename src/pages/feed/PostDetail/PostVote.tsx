@@ -6,8 +6,9 @@ import useGetMyChoice from '@/apis/hooks/posts/useGetMyChoice';
 import useGetUsersChoices from '@/apis/hooks/posts/useGetUsersChoices';
 import CheckIcon from '@/components/icons/CheckIcon';
 import Popup from '@/components/ui/modal/Popup';
+import Snackbar from '@/components/ui/modal/Snackbar';
 import { twMergeCustom } from '@/libs/tw-merge';
-import { selectedVoteOptionAtom } from '@/states/selectedVoteOption';
+import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 
 interface PostVoteProps {
   options?: { id: number; label: string }[];
@@ -21,19 +22,39 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
     postId,
   });
   const { usersChoices } = useGetUsersChoices(postId);
-  const [selectedVoteOption, setSelectedVoteOption] = useAtom(
-    selectedVoteOptionAtom
+  const [selectedVoteOptionId, setSelectedVoteOptionId] = useAtom(
+    selectedVoteOptionIdAtom
   );
   const [onlyReadModalOpen, setOnlyReadModalOpen] = useState(false);
   const { chooseOption } = useChooseOption();
+  const optionIds = usersChoices?.map((option) => option.id);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleButtonSelect = (id: number) => {
-    if (id === selectedVoteOption?.id) {
-      setSelectedVoteOption(null);
+    if (!optionIds) {
+      return null;
+    }
+
+    if (!selectedVoteOptionId) {
+      setSelectedVoteOptionId(id);
+    } else if (id === selectedVoteOptionId) {
+      setSelectedVoteOptionId(null);
+    } else if (optionIds?.includes(selectedVoteOptionId)) {
+      setSelectedVoteOptionId(id);
     } else {
-      setSelectedVoteOption({
-        id,
-        inView: true,
+      setOpenSnackbar(true);
+      setTimeout(() => {
+        setOpenSnackbar(false);
+      }, 3000);
+    }
+  };
+
+  const handleGoBack = () => {
+    const button = document.querySelector('#vote-selected');
+    if (button) {
+      button.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
       });
     }
   };
@@ -62,7 +83,6 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
     const mostVoted = usersChoices
       .filter((option) => !!option.label)
       .sort((a, b) => b.userWorryChoiceCount - a.userWorryChoiceCount)[0].label;
-    console.log(mostVoted);
     return (
       <section className="mt-[1.1rem] px-[2.5rem]">
         <div className="space-y-[2.1rem] rounded-[0.5rem] border px-[1.7rem] py-[1.5rem]">
@@ -127,20 +147,18 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
           <button
             className={twMergeCustom(
               'relative flex h-[4.4rem] items-center overflow-hidden rounded-[0.5rem] border border-custom-background-200 text-start shadow-header',
-              selectedVoteOption?.id === option.id && 'bg-custom-background-100'
+              selectedVoteOptionId === option.id && 'bg-custom-background-100'
             )}
             key={option.id}
             onClick={() => handleButtonSelect(option.id)}
           >
             <CheckIcon
-              color={
-                selectedVoteOption?.id === option.id ? '#222222' : '#757575'
-              }
+              color={selectedVoteOptionId === option.id ? '#222222' : '#757575'}
               className="ml-[0.9rem] mr-[0.7rem] h-[2.4rem] w-[2.4rem]"
             />
             <span
               className={`text-body4 ${
-                selectedVoteOption?.id === option.id
+                selectedVoteOptionId === option.id
                   ? 'text-gray-900'
                   : 'text-custom-gray-600'
               }`}
@@ -169,6 +187,14 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
         onCancel={() => setOnlyReadModalOpen(false)}
         onClickButton={handleAbstention}
       />
+      {openSnackbar && (
+        <Snackbar
+          text="다른 게시물에 동시에 투표할 수 없어요."
+          actionText="원위치로 이동"
+          className="fixed bottom-[11rem] left-1/2 -translate-x-1/2"
+          onClick={handleGoBack}
+        />
+      )}
     </section>
   );
 }

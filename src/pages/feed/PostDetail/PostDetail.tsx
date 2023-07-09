@@ -1,6 +1,5 @@
-import { useAtom } from 'jotai/index';
+import { useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
 import { Carousel } from 'react-responsive-carousel';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
 import Popup from '@/components/ui/modal/Popup';
 import ClockIcon from '@/images/PostComponent/clock.svg';
-import { selectedVoteOptionAtom } from '@/states/selectedVoteOption';
+import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { Post } from '@/types/post';
 import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
@@ -33,12 +32,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { deletePost, error, isSuccess } = useDeletePost();
-  const [selectedVoteOption, setSelectedVoteOption] = useAtom(
-    selectedVoteOptionAtom
-  );
-  const { ref: inViewRef, inView } = useInView({
-    threshold: 0.3,
-  });
+  const selectedVoteOptionId = useAtomValue(selectedVoteOptionIdAtom);
 
   const handleClickMore = () => {
     setShowMore((prevShowMore) => !prevShowMore);
@@ -101,15 +95,9 @@ export default function PostDetail({ post }: PostDetailProps) {
     setShowMore(false);
   }, [error, isSuccess]);
 
-  useEffect(() => {
-    if (selectedVoteOption) {
-      setSelectedVoteOption({ id: selectedVoteOption.id, inView });
-    }
-  }, [inView]);
-
   const images = post.worryFiles?.map((file) => file.url);
   const isSelected = choiceOptions?.find(
-    (option) => option.id === selectedVoteOption?.id
+    (option) => option.id === selectedVoteOptionId
   );
 
   const voteOptions = choiceOptions
@@ -123,7 +111,6 @@ export default function PostDetail({ post }: PostDetailProps) {
   return (
     <div
       className="flex flex-col border-b border-custom-background-200 py-[1.3rem]"
-      ref={isSelected ? inViewRef : undefined}
       id={isSelected ? 'vote-selected' : ''}
     >
       <div className="flex items-center justify-between px-[2.5rem]">
