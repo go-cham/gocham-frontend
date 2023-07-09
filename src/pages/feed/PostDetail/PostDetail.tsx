@@ -116,6 +116,10 @@ export default function PostDetail({ post }: PostDetailProps) {
     ?.filter((option) => !!option.label)
     .map((option) => ({ id: option.id, label: option.label as string }));
 
+  if (!user || !post) {
+    return null;
+  }
+
   return (
     <div
       className="flex flex-col border-b border-custom-background-200 py-[1.3rem]"
@@ -145,7 +149,7 @@ export default function PostDetail({ post }: PostDetailProps) {
         images={images}
       />
       <PostExpiration expirationTime={post.expirationTime} />
-      <PostVote options={voteOptions} />
+      <PostVote userId={user.id} postId={post.id} options={voteOptions} />
       <div className="my-[1.3rem] flex space-x-[0.7rem] px-[2.5rem]">
         <MessageIcon />
         <ShareIcon />

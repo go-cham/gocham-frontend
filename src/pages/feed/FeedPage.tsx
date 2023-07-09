@@ -1,28 +1,28 @@
 import { useAtomValue } from 'jotai';
-import { useAtom } from 'jotai/index';
 import { useParams } from 'react-router-dom';
 
+import useChooseOption from '@/apis/hooks/posts/useChooseOption';
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
+import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
 import FloatingButton from '@/components/ui/buttons/FloatingButton';
 import Snackbar from '@/components/ui/modal/Snackbar';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
 import { selectedVoteOptionAtom } from '@/states/selectedVoteOption';
-import { userAtom } from '@/states/userData';
 
 import PostDetail from './PostDetail';
 
 function FeedPage() {
   const params = useParams();
-  const userInfo = useAtomValue(userAtom);
+  const { user } = useUser();
   const { route } = useParams();
   const { posts, ref } = useGetPosts({
     initialPostId: params?.id ? Number(params.id) + 1 : undefined,
-    authorId: route === 'my' ? userInfo.userId : undefined,
-    participatingUserId:
-      route === 'participating' ? userInfo.userId : undefined,
+    authorId: route === 'my' ? user?.id : undefined,
+    participatingUserId: route === 'participating' ? user?.id : undefined,
   });
+  const { chooseOption } = useChooseOption();
   const selectedVoteOption = useAtomValue(selectedVoteOptionAtom);
 
   const showGoBack = selectedVoteOption?.id && !selectedVoteOption?.inView;
@@ -33,6 +33,15 @@ function FeedPage() {
       button.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
+      });
+    }
+  };
+
+  const handleVote = () => {
+    if (user?.id && selectedVoteOption?.id) {
+      chooseOption({
+        userId: user.id,
+        worryChoiceId: selectedVoteOption.id,
       });
     }
   };
@@ -73,7 +82,10 @@ function FeedPage() {
         />
       )}
       {selectedVoteOption && (
-        <FloatingButton className="fixed bottom-[4.8rem] left-1/2 z-50 -translate-x-1/2">
+        <FloatingButton
+          onClick={handleVote}
+          className="fixed bottom-[4.8rem] left-1/2 z-50 -translate-x-1/2"
+        >
           투표하기
         </FloatingButton>
       )}
