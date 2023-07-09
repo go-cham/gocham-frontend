@@ -1,13 +1,15 @@
 import { useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import BackIcon from '@/components/icons/BackIcon';
 import TopAppBar from '@/components/layout/TopAppBar';
-import { appVersion } from '@/version';
+import Popup from '@/components/ui/modal/Popup';
 
 export default function SettingsPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
 
   const SETTINGS_MENU: {
     title: string;
@@ -31,11 +33,7 @@ export default function SettingsPage() {
     },
     {
       title: '로그아웃',
-      onClick: () => {
-        localStorage.removeItem('token');
-        queryClient.clear();
-        navigate('/');
-      },
+      onClick: () => setLogoutModalOpen(true),
     },
     {
       title: '탈퇴하기',
@@ -44,6 +42,12 @@ export default function SettingsPage() {
       },
     },
   ];
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    queryClient.clear();
+    navigate('/');
+  };
 
   return (
     <div>
@@ -71,6 +75,14 @@ export default function SettingsPage() {
           </li>
         ))}
       </ul>
+      <Popup
+        isOpen={logoutModalOpen}
+        text="로그아웃 하시겠습니까?"
+        subText="정말 로그아웃 하시겠나요?"
+        buttonLabel="로그아웃"
+        onCancel={() => setLogoutModalOpen(false)}
+        onClickButton={handleLogout}
+      />
     </div>
   );
 }
