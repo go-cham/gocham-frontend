@@ -1,12 +1,14 @@
-export function getRemainingTime(deadline: string | any) {
-  if (typeof deadline !== 'string') {
+export function getRemainingTime(
+  deadline: string | null
+): null | 'closed' | string {
+  if (!deadline) {
     return null;
   }
   const deadlineDate = new Date(deadline.replace('Z', ''));
   const now = new Date();
 
   if (deadlineDate < now) {
-    return '마감됨';
+    return 'closed';
   }
 
   const remainingTime = Math.abs(deadlineDate.getTime() - now.getTime());

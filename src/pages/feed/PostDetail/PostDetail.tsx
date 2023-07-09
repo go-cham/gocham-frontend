@@ -6,13 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
 import useGetChoiceOptions from '@/apis/hooks/posts/useGetChoiceOptions';
 import useUser from '@/apis/hooks/users/useUser';
+import ClockIcon from '@/components/icons/ClockIcon';
 import MessageIcon from '@/components/icons/MessageIcon';
 import MoreIcon from '@/components/icons/MoreIcon';
 import ShareIcon from '@/components/icons/ShareIcon';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
 import Popup from '@/components/ui/modal/Popup';
-import ClockIcon from '@/images/PostComponent/clock.svg';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { Post } from '@/types/post';
 import { formatText } from '@/utils/formatText';
@@ -108,6 +108,8 @@ export default function PostDetail({ post }: PostDetailProps) {
     return null;
   }
 
+  const remainingTime = getRemainingTime(post.expirationTime);
+
   return (
     <div
       className="flex flex-col border-b border-custom-background-200 py-[1.3rem]"
@@ -135,7 +137,7 @@ export default function PostDetail({ post }: PostDetailProps) {
         content={post.content}
         images={images}
       />
-      <PostExpiration expirationTime={post.expirationTime} />
+      {remainingTime && <PostExpiration remainingTime={remainingTime} />}
       <PostVote userId={user.id} postId={post.id} options={voteOptions} />
       <div className="my-[1.3rem] flex space-x-[0.7rem] px-[2.5rem]">
         <MessageIcon />
@@ -208,18 +210,18 @@ function PostDetailContent({
   );
 }
 
-function PostExpiration({ expirationTime }: { expirationTime: string | null }) {
-  const remainingTime = getRemainingTime(expirationTime);
-
-  if (!remainingTime) {
-    return null;
-  }
+function PostExpiration({ remainingTime }: { remainingTime: string }) {
+  const isClosed = remainingTime === 'closed';
   return (
-    <div className="mt-[1.5rem] flex space-x-[5.67px] px-[2.5rem]">
-      <img src={ClockIcon} alt={'마감시간'} />
-      <span className="text-body2 text-custom-main-500">
-        {getRemainingTime(expirationTime)}
-      </span>
+    <div className="mt-[1.5rem] flex items-center space-x-[5.67px] px-[2.5rem]">
+      <ClockIcon color={isClosed ? '#9e9e9e' : undefined} />
+      {isClosed ? (
+        <span className="text-body2 text-custom-text-500">
+          투표가 마감되었어요
+        </span>
+      ) : (
+        <span className="text-body2 text-custom-main-500">{remainingTime}</span>
+      )}
     </div>
   );
 }

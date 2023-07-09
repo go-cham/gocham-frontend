@@ -6,7 +6,6 @@ import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
 import FloatingButton from '@/components/ui/buttons/FloatingButton';
-import Snackbar from '@/components/ui/modal/Snackbar';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
