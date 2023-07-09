@@ -1,12 +1,8 @@
-import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
 import useUser from '@/apis/hooks/users/useUser';
 import { RouteURL } from '@/constants/route-url';
-import DefaultUserIcon from '@/images/Profile/defaultUserIcon.svg';
-import SettingIcon from '@/images/Profile/settings.svg';
-import palette from '@/styles/color';
-import { ButtonStyle } from '@/styles/common';
+import { calculateAge } from '@/utils/date/calculateAge';
 
 export default function UserProfile() {
   const navigate = useNavigate();
@@ -16,39 +12,31 @@ export default function UserProfile() {
     navigate(RouteURL.edit_profile);
   };
 
+  if (!user || !user.birthday) {
+    return null;
+  }
+
+  const birthday = new Date(user.birthday);
+  const age = calculateAge(
+    birthday.getFullYear(),
+    birthday.getMonth() + 1,
+    birthday.getDay()
+  );
+
   return (
-    <div className="flex flex-col">
-      <img
-        src={SettingIcon}
-        alt={'설정'}
-        className="mr-[2.5rem] mt-[1.3rem] w-[32px] self-end"
-        onClick={() => navigate(RouteURL.settings)}
-      />
-      <div className="mt-[1rem] flex flex-col items-center">
-        <img
-          src={user?.image || DefaultUserIcon}
-          alt={'유저이미지'}
-          className="h-40 w-40 rounded-full"
-        />
-        <span className="mt-[0.8rem] text-[2.4rem] font-bold">
-          {user?.nickname}
+    <div className="mt-[1.7rem] flex items-center justify-between px-[2.5rem]">
+      <div className="flex items-center space-x-[0.8rem]">
+        <span className="rounded-full bg-[#f4f4f5] p-[0.8rem] text-heading3 text-[#b0b2b8]">
+          {String(age)[0] + '0'}
         </span>
-        <ProfileUtilButton
-          width={8.3}
-          height={3.1}
-          borderRadius={0.7}
-          border={`0.1rem solid ${palette.Secondary}`}
-          size={1.2}
-          className="mt-5"
-          onClick={handleGoEditProfile}
-        >
-          프로필 편집
-        </ProfileUtilButton>
+        <span className="text-heading1">{user.nickname}</span>
       </div>
+      <button
+        className="rounded-[0.5rem] bg-custom-background-100 px-[1rem] py-[0.7rem] text-body2"
+        onClick={handleGoEditProfile}
+      >
+        프로필 편집
+      </button>
     </div>
   );
 }
-
-const ProfileUtilButton = styled(ButtonStyle)`
-  margin-top: 1.3rem;
-`;

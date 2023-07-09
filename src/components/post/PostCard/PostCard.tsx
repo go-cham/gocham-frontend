@@ -10,9 +10,15 @@ interface PostCardProps {
   post: Post;
   routeUrl?: string;
   loggedIn: boolean;
+  showProfile?: boolean;
 }
 
-export default function PostCard({ post, routeUrl, loggedIn }: PostCardProps) {
+export default function PostCard({
+  post,
+  routeUrl,
+  loggedIn,
+  showProfile = true,
+}: PostCardProps) {
   const navigate = useNavigate();
 
   const handlePostClick = () => {
@@ -32,11 +38,13 @@ export default function PostCard({ post, routeUrl, loggedIn }: PostCardProps) {
   };
 
   return (
-    <section className="flex h-[15rem] w-full flex-col justify-between rounded-[12px] bg-white p-[1.7rem] shadow-feed">
-      <PostUserProfile
-        nickname={post.user.nickname}
-        age={22} // TODO
-      />
+    <section className="flex w-full flex-col justify-between rounded-[12px] bg-white p-[1.7rem] shadow-feed">
+      {showProfile && (
+        <PostUserProfile
+          nickname={post.user.nickname}
+          age={22} // TODO
+        />
+      )}
       <PostCardContent
         title={post.title}
         content={post.content}

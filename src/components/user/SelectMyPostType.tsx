@@ -1,9 +1,4 @@
-/** @jsxImportSource @emotion/react */
-import { keyframes } from '@emotion/react';
-import styled from '@emotion/styled';
-
 import { PostType } from '@/pages/user/UserPage';
-import palette from '@/styles/color';
 
 interface SelectMyPostTypeProps {
   postType: PostType;
@@ -17,73 +12,31 @@ export default function SelectMyPostType({
   postingCount,
 }: SelectMyPostTypeProps) {
   return (
-    <SelectMyPostTypeWrap>
-      <SelectMyPostTypeBar>
-        {postType === 'my' ? (
-          <SelectMyPostTypeBox selected={true}>
-            내 게시글 {postingCount.written}
-          </SelectMyPostTypeBox>
-        ) : (
-          <SelectMyPostTypeBox onClick={() => switchPostType('my')}>
-            내 게시글 {postingCount.written}
-          </SelectMyPostTypeBox>
-        )}
-        {postType === 'participating' ? (
-          <SelectMyPostTypeBox selected={true}>
-            참여한 게시글 {postingCount.participated}
-          </SelectMyPostTypeBox>
-        ) : (
-          <SelectMyPostTypeBox onClick={() => switchPostType('participating')}>
-            참여한 게시글 {postingCount.participated}
-          </SelectMyPostTypeBox>
-        )}
-      </SelectMyPostTypeBar>
-    </SelectMyPostTypeWrap>
+    <div className="mx-[2.5rem] mb-[2.1rem] flex justify-between space-x-[1.2rem] overflow-hidden rounded-[2.35rem] bg-custom-background-100">
+      {['내 게시글', '참여한 게시글'].map((label) => {
+        const selected =
+          (postType === 'my' && label === '내 게시글') ||
+          (postType === 'participating' && label === '참여한 게시글');
+        return (
+          <div
+            key={label}
+            className={`flex-1 py-[0.8rem] text-center text-body4 ${
+              selected
+                ? 'rounded-[2.35rem] bg-custom-gray-800 text-white'
+                : 'text-custom-text-400'
+            }`}
+            onClick={() =>
+              switchPostType(label === '내 게시글' ? 'my' : 'participating')
+            }
+          >
+            {`${label} ${
+              label === '내 게시글'
+                ? postingCount.written
+                : postingCount.participated
+            }`}
+          </div>
+        );
+      })}
+    </div>
   );
 }
-
-const SelectMyPostTypeWrap = styled.div`
-  margin-top: 1.9rem;
-  border-top: 0.1rem solid ${palette.Gray3};
-  height: 7.7rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SelectMyPostTypeBar = styled.div`
-  width: 34rem;
-  height: 4.1rem;
-  background-color: #eaeaeb;
-  border-radius: 2.35rem;
-  //display: grid;
-  //grid-template-columns: repeat(2, 1fr);
-  display: flex;
-  justify-content: space-between;
-  overflow: hidden;
-`;
-
-const SelectMyPostTypeBox = styled.div<{ selected?: boolean }>`
-  width: 17rem;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: ${({ selected }) => (selected ? 700 : 400)};
-  font-size: 1.4rem;
-  color: ${({ selected }) => (selected ? 'white' : palette.Text3)};
-  border-radius: ${({ selected }) => (selected ? '2.35rem' : '0')};
-  background-color: ${({ selected }) =>
-    selected ? palette.Secondary : 'rgba(0, 0, 0, 0)'};
-  animation: ${({ selected }) => (selected ? `fadeIn .3s linear` : '')};
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-`;

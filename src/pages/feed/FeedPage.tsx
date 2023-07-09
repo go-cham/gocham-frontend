@@ -42,7 +42,7 @@ function FeedPage() {
         title={
           params.route === 'my'
             ? '내 게시글'
-            : params.route === 'participated'
+            : params.route === 'participating'
             ? '참여한 게시글'
             : '최신 게시물'
         }
