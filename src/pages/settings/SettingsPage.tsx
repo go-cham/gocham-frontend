@@ -1,6 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
+import BackIcon from '@/components/icons/BackIcon';
 import TopAppBar from '@/components/layout/TopAppBar';
 import { appVersion } from '@/version';
 
@@ -29,9 +30,6 @@ export default function SettingsPage() {
       title: '문의하기',
     },
     {
-      title: 'FAQ',
-    },
-    {
       title: '로그아웃',
       onClick: () => {
         localStorage.removeItem('token');
@@ -45,22 +43,16 @@ export default function SettingsPage() {
         alert('개발중입니다. 회원탈퇴는 관리자에게 연락해주세요.');
       },
     },
-    {
-      title: `버전: ${appVersion}`,
-    },
-    {
-      title: 'Copyright © go-cham Team. All rights reserved.',
-    },
   ];
 
   return (
     <div>
       <TopAppBar title={'설정'} />
-      <ul>
+      <ul className="divide-y-[1px] divide-custom-gray-300">
         {SETTINGS_MENU.map((menu) => (
           <li
             key={menu.title}
-            className="flex h-[7.4rem] cursor-pointer items-center border-b-[1px] border-gray2 pl-[2.5rem] text-[1.6rem] font-medium"
+            className="flex cursor-pointer items-center justify-between border-gray2 px-[2.5rem] pb-[2.1rem] pt-[2.3rem] text-body5"
             onClick={menu.onClick}
           >
             {menu.link ? (
@@ -75,6 +67,7 @@ export default function SettingsPage() {
             ) : (
               menu.title
             )}
+            <BackIcon className="h-[3.2rem] w-[3.2rem] rotate-180" />
           </li>
         ))}
       </ul>
