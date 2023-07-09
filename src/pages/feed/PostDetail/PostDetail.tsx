@@ -109,6 +109,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   }
 
   const remainingTime = getRemainingTime(post.expirationTime);
+  const isClosed = remainingTime === 'closed';
 
   return (
     <div
@@ -138,7 +139,12 @@ export default function PostDetail({ post }: PostDetailProps) {
         images={images}
       />
       {remainingTime && <PostExpiration remainingTime={remainingTime} />}
-      <PostVote userId={user.id} postId={post.id} options={voteOptions} />
+      <PostVote
+        userId={user.id}
+        postId={post.id}
+        options={voteOptions}
+        isClosed={isClosed}
+      />
       <div className="my-[1.3rem] flex space-x-[0.7rem] px-[2.5rem]">
         <MessageIcon />
         <ShareIcon />

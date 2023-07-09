@@ -14,9 +14,15 @@ interface PostVoteProps {
   options?: { id: number; label: string }[];
   userId: number;
   postId: number;
+  isClosed: boolean;
 }
 
-export default function PostVote({ userId, postId, options }: PostVoteProps) {
+export default function PostVote({
+  userId,
+  postId,
+  options,
+  isClosed,
+}: PostVoteProps) {
   const { choice } = useGetMyChoice({
     userId,
     postId,
@@ -78,8 +84,8 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
     .filter((option) => !!option.label)
     .reduce((acc, cur) => acc + cur.userWorryChoiceCount, 0);
 
-  if (choice) {
-    const isAbstained = choice.isAbstained === 'yes';
+  if (choice || isClosed) {
+    const isAbstained = choice?.isAbstained === 'yes';
     const mostVoted = usersChoices
       .filter((option) => !!option.label)
       .sort((a, b) => b.userWorryChoiceCount - a.userWorryChoiceCount)[0].label;
@@ -95,10 +101,10 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
             return (
               <div key={option.id}>
                 <div key={option.id} className="relative flex">
-                  {!isAbstained && (
+                  {choice && !isAbstained && (
                     <CheckIcon
                       color={
-                        choice.label === option.label ? '#222222' : '#e0e0e0'
+                        choice?.label === option.label ? '#222222' : '#e0e0e0'
                       }
                     />
                   )}
@@ -118,12 +124,18 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
                   <div
                     className={twMergeCustom(
                       `absolute left-0 top-0 h-full rounded-[5px] ${
-                        choice.label === option.label
+                        choice?.label === option.label
                           ? 'bg-custom-main-500'
                           : 'bg-custom-main-200'
                       }`,
-                      isAbstained && 'bg-custom-gray-400',
-                      isAbstained &&
+                      choice && isAbstained && 'bg-custom-gray-400',
+                      choice &&
+                        isAbstained &&
+                        mostVoted === option.label &&
+                        'bg-custom-gray-800',
+                      !choice && isClosed && 'bg-custom-gray-400',
+                      !choice &&
+                        isClosed &&
                         mostVoted === option.label &&
                         'bg-custom-gray-800'
                     )}
