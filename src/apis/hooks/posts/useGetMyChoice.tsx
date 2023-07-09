@@ -11,7 +11,7 @@ export default function useGetMyChoice({
   userId?: number;
 }) {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['my-choice', postId, userId],
+    queryKey: ['myChoice', postId, userId],
     queryFn: async () => {
       const res = await axiosInstance.get<GetMyChoiceResponse>(
         '/user-worry-choice',

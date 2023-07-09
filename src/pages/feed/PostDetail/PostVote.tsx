@@ -38,11 +38,11 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
     return null;
   }
 
-  if (choice) {
-    const total = usersChoices
-      .filter((option) => !!option.label)
-      .reduce((acc, cur) => acc + cur.userWorryChoiceCount, 0);
+  const total = usersChoices
+    .filter((option) => !!option.label)
+    .reduce((acc, cur) => acc + cur.userWorryChoiceCount, 0);
 
+  if (choice) {
     return (
       <section className="mt-[1.1rem] px-[2.5rem]">
         <div className="space-y-[2.1rem] rounded-[0.5rem] border px-[1.7rem] py-[1.5rem]">
@@ -130,7 +130,7 @@ export default function PostVote({ userId, postId, options }: PostVoteProps) {
       </div>
       <div className="mt-[1.5rem] flex justify-between text-body2 text-custom-text-500">
         <button>결과만 볼래요</button>
-        <button>현재 투표한 사용자 {0}명</button>
+        <button>현재 투표한 사용자 {total}명</button>
       </div>
     </section>
   );

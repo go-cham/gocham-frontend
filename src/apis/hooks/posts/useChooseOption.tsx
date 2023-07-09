@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import {
   ChooseOptionRequest,
@@ -7,6 +7,7 @@ import {
 import { axiosInstance } from '@/libs/axios';
 
 export default function useChooseOption() {
+  const queryClient = useQueryClient();
   const { mutate, data, isLoading, isSuccess, error } = useMutation({
     mutationKey: ['deletePost'],
     mutationFn: async ({ userId, worryChoiceId }: ChooseOptionRequest) => {
@@ -18,6 +19,10 @@ export default function useChooseOption() {
         }
       );
       return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['myChoice']);
+      queryClient.invalidateQueries(['usersChoices']);
     },
   });
 

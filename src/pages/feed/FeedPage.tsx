@@ -1,4 +1,5 @@
 import { useAtomValue } from 'jotai';
+import { useAtom } from 'jotai/index';
 import { useParams } from 'react-router-dom';
 
 import useChooseOption from '@/apis/hooks/posts/useChooseOption';
@@ -23,7 +24,9 @@ function FeedPage() {
     participatingUserId: route === 'participating' ? user?.id : undefined,
   });
   const { chooseOption } = useChooseOption();
-  const selectedVoteOption = useAtomValue(selectedVoteOptionAtom);
+  const [selectedVoteOption, setSelectedVoteOption] = useAtom(
+    selectedVoteOptionAtom
+  );
 
   const showGoBack = selectedVoteOption?.id && !selectedVoteOption?.inView;
 
@@ -44,6 +47,7 @@ function FeedPage() {
         worryChoiceId: selectedVoteOption.id,
       });
     }
+    setSelectedVoteOption(null);
   };
 
   return (
