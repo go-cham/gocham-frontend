@@ -37,9 +37,7 @@ export default function SettingsPage() {
     },
     {
       title: '탈퇴하기',
-      onClick: () => {
-        alert('개발중입니다. 회원탈퇴는 관리자에게 연락해주세요.');
-      },
+      onClick: () => navigate('/unregister'),
     },
   ];
 

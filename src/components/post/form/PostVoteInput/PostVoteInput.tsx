@@ -11,6 +11,8 @@ interface PostVoteInputProps {
   onChange?: (item: string) => void;
   className?: string;
   hasError?: boolean;
+  placeholder?: string;
+  maxLength?: number;
 }
 
 export default function PostVoteInput({
@@ -20,6 +22,8 @@ export default function PostVoteInput({
   onChange,
   className,
   hasError,
+  placeholder = '항목 입력',
+  maxLength = 15,
 }: PostVoteInputProps) {
   const [item, setItem] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -32,6 +36,7 @@ export default function PostVoteInput({
 
   const handleReset = () => {
     setItem('');
+    onChange && onChange('');
     inputRef.current?.focus();
   };
 
@@ -40,8 +45,8 @@ export default function PostVoteInput({
       <input
         ref={inputRef}
         type="text"
-        maxLength={15}
-        placeholder="항목 입력"
+        maxLength={maxLength}
+        placeholder={placeholder}
         onChange={handleChange}
         value={item}
         className={twMergeCustom(
@@ -74,7 +79,7 @@ export default function PostVoteInput({
             </button>
           </div>
         )}
-        {!image && (
+        {!image && onUploadImage && (
           <button>
             <ImageFileIcon onClick={onUploadImage} className="cursor-pointer" />
           </button>

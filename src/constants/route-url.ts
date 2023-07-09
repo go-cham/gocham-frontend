@@ -13,5 +13,6 @@ export const RouteURL = {
   user: '/user',
   edit_profile: '/edit-profile',
   settings: '/settings',
+  unregister: '/unregister',
   not_found: '/*',
 };

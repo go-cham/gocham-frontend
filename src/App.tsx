@@ -15,6 +15,7 @@ import LoginOauthKakaoPage from '@/pages/login/kakao/LoginOauthKakaoPage';
 import OnboardingPage from '@/pages/onboarding/OnboardingPage';
 import RegisterTermPage from '@/pages/register/RegisterTermPage';
 import SettingsPage from '@/pages/settings/SettingsPage';
+import UnregisterPage from '@/pages/unregister/UnregisterPage';
 import UserPage from '@/pages/user/UserPage';
 import WritePage from '@/pages/write/WritePage';
 import RouteChangeTracker from '@/utils/RouteChangeTracker';
@@ -47,6 +48,7 @@ export default function App() {
         <Route path={RouteURL.user} element={<UserPage />} />
         <Route path={RouteURL.edit_profile} element={<EditProfilePage />} />
         <Route path={RouteURL.settings} element={<SettingsPage />} />
+        <Route path={RouteURL.unregister} element={<UnregisterPage />} />
         <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
       </Routes>
     </Layout>
