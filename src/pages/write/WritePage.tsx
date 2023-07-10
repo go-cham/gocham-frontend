@@ -495,7 +495,7 @@ function WritePage() {
   return (
     <div className="flex h-full flex-col">
       <TopAppBar title={'글 작성'} navigateRoute="/" />
-      <div className="hide-scrollbar flex-1 overflow-y-scroll px-[2.5rem] py-[3.1rem]">
+      <div className="hide-scrollbar flex-1 overflow-y-scroll px-[2.5rem] pb-[2.1rem] pt-[3.1rem]">
         <input
           onChange={onLoadFiles}
           type="file"
@@ -545,6 +545,9 @@ function WritePage() {
             labelClassName="text-subheading"
             wrapperClassName="w-full"
             onChange={categorySelectChanged}
+            value={
+              categoryOptions.find((o) => o.value === categoryValue)?.label
+            }
           />
           <Select
             id="voteTime"
@@ -555,6 +558,9 @@ function WritePage() {
             labelClassName="text-subheading"
             wrapperClassName="w-full"
             onChange={voteTimeSelectChanged}
+            value={
+              deadlineOptions.find((o) => o.value === voteTimeValue)?.label
+            }
           />
         </div>
         <div className="mt-[3.7rem] space-y-[1.2rem]">
