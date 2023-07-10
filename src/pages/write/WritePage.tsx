@@ -349,7 +349,7 @@ function WritePage() {
     reader.onload = (event: ProgressEvent<FileReader>): void => {
       resizeImage(event.target?.result as string).then(async (result) => {
         imgUrl = await uploadFirebase(user?.id, result, 'posting');
-        setVote3State([vote2State[0], imgUrl]);
+        setVote3State([vote3State[0], imgUrl]);
         return;
       });
     };
@@ -360,7 +360,7 @@ function WritePage() {
     reader.readAsDataURL(e.target.files![0]);
     reader.onload = (event: ProgressEvent<FileReader>): void => {
       resizeImage(event.target?.result as string).then((result) => {
-        setVote4State([vote3State[0], result]);
+        setVote4State([vote4State[0], result]);
         return;
       });
     };
