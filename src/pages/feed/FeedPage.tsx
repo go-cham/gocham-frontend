@@ -50,7 +50,7 @@ function FeedPage() {
         navigateRoute={params.route ? RouteURL.user : RouteURL.home}
       />
       <ul
-        className="flex-1 overflow-y-scroll pt-[0.9rem]"
+        className="hide-scrollbar flex-1 overflow-y-scroll pt-[0.9rem]"
         style={{ scrollSnapType: 'y proximity', scrollSnapAlign: 'start' }}
       >
         {posts &&

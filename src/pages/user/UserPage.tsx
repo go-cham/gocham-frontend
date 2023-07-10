@@ -60,7 +60,7 @@ function UserPage() {
         switchPostType={switchPostType}
         postingCount={postingCount}
       />
-      <ul className="flex flex-1 flex-col items-center space-y-[1.7rem] overflow-y-scroll px-[2.5rem] pb-[16rem]">
+      <ul className="hide-scrollbar flex flex-1 flex-col items-center space-y-[1.7rem] overflow-y-scroll px-[2.5rem] pb-[16rem]">
         {posts &&
           posts?.map((post, index) => (
             <li

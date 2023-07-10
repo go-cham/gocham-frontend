@@ -129,7 +129,7 @@ function EditProfilePage() {
   return (
     <div className="flex h-full flex-col">
       <TopAppBar title={'프로필 편집'} />
-      <div className="mt-[2.5rem] flex-1 space-y-[2.9rem] overflow-y-scroll px-[2.5rem]">
+      <div className="hide-scrollbar mt-[2.5rem] flex-1 space-y-[2.9rem] overflow-y-scroll px-[2.5rem]">
         <CollectNicknameAgeGender
           onChange={handleNicknameAgeGenderChange}
           onValidate={handleNicknameAgeGenderValidate}
