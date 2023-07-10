@@ -108,7 +108,11 @@ export default function PostDetail({ post }: PostDetailProps) {
 
   const voteOptions = choiceOptions
     ?.filter((option) => !!option.label)
-    .map((option) => ({ id: option.id, label: option.label as string }));
+    .map((option) => ({
+      id: option.id,
+      label: option.label as string,
+      image: option.url || null,
+    }));
 
   if (!user || !post) {
     return null;

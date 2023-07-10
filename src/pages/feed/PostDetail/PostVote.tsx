@@ -11,7 +11,7 @@ import { twMergeCustom } from '@/libs/tw-merge';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 
 interface PostVoteProps {
-  options?: { id: number; label: string }[];
+  options?: { id: number; label: string; image: string | null }[];
   userId: number;
   postId: number;
   isClosed: boolean;
@@ -114,11 +114,13 @@ export default function PostVote({
                       {percentage}% ({count}명)
                     </span>
                   </div>
-                  <img
-                    src="https://m.cooksomssi.co.kr/web/product/big/202207/aa3bd6db11d407657ac795fdf9c003b3.jpg"
-                    alt={option.label || ''}
-                    className="absolute right-0 aspect-square h-full"
-                  />
+                  {option.image && (
+                    <img
+                      src={option.image}
+                      alt={option.label}
+                      className="absolute right-0 aspect-square h-full object-cover"
+                    />
+                  )}
                 </div>
                 <div className="relative mt-[0.4rem] h-[4px] w-full rounded-[5px] bg-custom-background-100">
                   <div
@@ -177,12 +179,13 @@ export default function PostVote({
             >
               {option.label}
             </span>
-            {/* temp image*/}
-            <img
-              src="https://m.cooksomssi.co.kr/web/product/big/202207/aa3bd6db11d407657ac795fdf9c003b3.jpg"
-              alt={option.label || ''}
-              className="absolute right-0 aspect-square h-full"
-            />
+            {option.image && (
+              <img
+                src={option.image}
+                alt={option.label}
+                className="absolute right-0 aspect-square h-full object-cover"
+              />
+            )}
           </button>
         ))}
       </div>

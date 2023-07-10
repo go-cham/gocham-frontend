@@ -69,7 +69,11 @@ export default function PostVoteInput({
         )}
         {image && (
           <div className="h-[4rem] w-[4rem]">
-            <img src={image} alt="투표 이미지" className="h-full w-full" />
+            <img
+              src={image}
+              alt="투표 이미지"
+              className="h-full w-full object-cover"
+            />
             <button onClick={onDeleteImage}>
               <DeleteIcon
                 className="absolute right-0 top-0 h-[1.6rem] w-[1.6rem] bg-[#676a72]"
