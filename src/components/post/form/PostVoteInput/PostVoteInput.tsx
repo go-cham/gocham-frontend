@@ -65,18 +65,17 @@ export default function PostVoteInput({
         {image && (
           <div className="h-[4rem] w-[4rem]">
             <img src={image} alt="투표 이미지" className="h-full w-full" />
-            <button>
+            <button onClick={onDeleteImage}>
               <DeleteIcon
-                className="absolute right-0 top-0 h-[1.6rem] w-[1.6rem] cursor-pointer bg-[#676a72]"
+                className="absolute right-0 top-0 h-[1.6rem] w-[1.6rem] bg-[#676a72]"
                 color="white"
-                onClick={onDeleteImage}
               />
             </button>
           </div>
         )}
         {!image && (
-          <button>
-            <ImageFileIcon onClick={onUploadImage} className="cursor-pointer" />
+          <button onClick={onUploadImage}>
+            <ImageFileIcon />
           </button>
         )}
       </div>

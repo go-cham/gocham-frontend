@@ -13,20 +13,20 @@ type Story = StoryObj<typeof meta>;
 
 const OPTIONS = [
   {
-    value: 'option1',
-    name: '옵션 1',
+    value: 0,
+    label: '옵션 1',
   },
   {
-    value: 'option2',
-    name: '옵션 2',
+    value: 1,
+    label: '옵션 2',
   },
   {
-    value: 'option3',
-    name: '옵션 3',
+    value: 2,
+    label: '옵션 3',
   },
   {
-    value: 'option4',
-    name: '옵션 4',
+    value: 3,
+    label: '옵션 4',
   },
 ];
 

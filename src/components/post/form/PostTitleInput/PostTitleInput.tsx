@@ -61,8 +61,8 @@ export default function PostTitleInput({
             />
           </button>
         )}
-        <button>
-          <ImageFileIcon className="cursor-pointer" onClick={onUploadImage} />
+        <button onClick={onUploadImage}>
+          <ImageFileIcon />
         </button>
       </div>
     </InputWrapper>

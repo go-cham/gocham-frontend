@@ -43,7 +43,6 @@ export default function useUser(
     };
   }
 
-  console.log(userData);
   const user: User | null =
     data && userData
       ? {

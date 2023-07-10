@@ -2,8 +2,8 @@
  * n시간을 입력하면 현재로부터 n시간 후가 몇시인지를 알려주는 함수
  * @param hoursToAdd
  */
-function getFutureDateTime(hoursToAdd: number): string | null {
-  if (hoursToAdd === 0) return null;
+function getFutureDateTime(hoursToAdd: number): string {
+  if (hoursToAdd === 0) return '';
   const currentDate = new Date();
   const futureDate = new Date(
     currentDate.getTime() + hoursToAdd * 60 * 60 * 1000

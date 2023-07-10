@@ -27,7 +27,6 @@ export const categoryOptions: OptionType[] = [
 
 export const deadlineOptions: OptionType[] = [
   { value: 0, label: '마감 없음' },
-  { value: 3, label: '3시간 후 마감' },
   { value: 6, label: '6시간 후 마감' },
   { value: 12, label: '12시간 후 마감' },
   { value: 24, label: '24시간 후 마감' },

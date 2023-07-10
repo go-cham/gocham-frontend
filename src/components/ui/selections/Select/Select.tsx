@@ -7,11 +7,11 @@ interface SelectProps {
   id: string;
   label: string;
   placeholder: string;
-  options: { value: string; name: string }[];
+  options: { value: number; label: string }[];
   errorMessage?: string | null;
   labelClassName?: string;
   wrapperClassName?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value: number) => void;
 }
 
 export default function Select({
@@ -60,7 +60,7 @@ export default function Select({
             selectedIndex !== null && 'text-body4 text-custom-text-900'
           )}
         >
-          {selectedIndex !== null ? options[selectedIndex].name : placeholder}
+          {selectedIndex !== null ? options[selectedIndex].label : placeholder}
         </span>
         <DownIcon
           className={twMergeCustom(
@@ -84,7 +84,7 @@ export default function Select({
               className="w-full cursor-pointer py-[0.6rem] pr-[1.5rem] text-end text-body3 text-custom-gray-800 hover:bg-custom-background-100"
               onClick={() => handleSelect(index)}
             >
-              {option.name}
+              {option.label}
             </li>
           ))}
         </ul>
