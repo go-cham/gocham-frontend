@@ -190,7 +190,12 @@ export default function PostVote({
         ))}
       </div>
       <div className="mt-[1.5rem] flex justify-between text-body2 text-custom-text-500">
-        <button onClick={() => setOnlyReadModalOpen(true)}>
+        <button
+          onClick={() => {
+            setSelectedVoteOptionId(null);
+            setOnlyReadModalOpen(true);
+          }}
+        >
           결과만 볼래요
         </button>
         <span>현재 투표한 사용자 {total}명</span>
