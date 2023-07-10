@@ -50,7 +50,7 @@ function UserPage() {
       <img
         src={SettingIcon}
         alt={'설정'}
-        className="mr-[2.5rem] mt-[1.2rem] w-[3.2rem] self-end"
+        className="mr-[2.5rem] mt-[1.2rem] w-[3.2rem] cursor-pointer self-end"
         onClick={() => navigate(RouteURL.settings)}
       />
       <UserProfile />

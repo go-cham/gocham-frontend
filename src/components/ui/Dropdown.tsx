@@ -18,7 +18,7 @@ export default function Dropdown({
   return (
     <ul
       className={twMergeCustom(
-        'absolute top-[6rem] z-10 mt-[0.5rem] max-h-[30rem] w-[15.5rem] space-y-[1.3rem] self-end overflow-y-scroll rounded-[0.7rem] bg-white pb-[0.7rem] pt-[1.1rem] shadow-dropdown',
+        'hide-scrollbar absolute top-[6rem] z-10 mt-[0.5rem] max-h-[30rem] w-[15.5rem] space-y-[1.3rem] self-end overflow-y-scroll rounded-[0.7rem] bg-white pb-[0.7rem] pt-[1.1rem] shadow-dropdown',
         className
       )}
     >

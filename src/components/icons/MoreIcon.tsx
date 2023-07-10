@@ -1,8 +1,9 @@
 interface MoreIconProps {
   onClick?: () => void;
+  className?: string;
 }
 
-export default function MoreIcon({ onClick }: MoreIconProps) {
+export default function MoreIcon({ onClick, className }: MoreIconProps) {
   return (
     <svg
       width="24"
@@ -11,6 +12,7 @@ export default function MoreIcon({ onClick }: MoreIconProps) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       onClick={onClick}
+      className={className}
     >
       <g id="More">
         <path

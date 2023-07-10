@@ -1,7 +1,9 @@
+import { MouseEvent } from 'react';
+
 interface PostCardMetaProps {
   numComment: number;
   numVotes: number;
-  onClickComment: () => void;
+  onClickComment: (e: MouseEvent) => void;
 }
 
 export default function PostCardMeta({

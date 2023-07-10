@@ -123,7 +123,7 @@ export default function PostDetail({ post }: PostDetailProps) {
           color="gray"
         />
         <div ref={ref} className="relative">
-          <MoreIcon onClick={handleClickMore} />
+          <MoreIcon className="cursor-pointer" onClick={handleClickMore} />
           {showMore && (
             <Dropdown
               options={options}
@@ -146,11 +146,15 @@ export default function PostDetail({ post }: PostDetailProps) {
         isClosed={isClosed}
       />
       <div className="my-[1.3rem] flex space-x-[0.7rem] px-[2.5rem]">
-        <MessageIcon />
-        <ShareIcon />
+        <button>
+          <MessageIcon />
+        </button>
+        <button>
+          <ShareIcon />
+        </button>
       </div>
       <span
-        className="px-[2.5rem] text-body2 text-custom-gray-800"
+        className="cursor-pointer px-[2.5rem] text-body2 text-custom-gray-800"
         onClick={() => navigate(`/feed/${post.id}/comment`)}
       >
         댓글 {post.replyCount}개 모두 보기

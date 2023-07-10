@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import PostCardContent from '@/components/post/PostCard/PostCardContent';
@@ -29,7 +30,8 @@ export default function PostCard({
     }
   };
 
-  const handleCommentsOpen = () => {
+  const handleCommentsOpen = (e: MouseEvent) => {
+    e.stopPropagation();
     if (!loggedIn) {
       navigate(RouteURL.login);
     } else {
@@ -38,7 +40,10 @@ export default function PostCard({
   };
 
   return (
-    <section className="flex w-full flex-col justify-between rounded-[12px] bg-white p-[1.7rem] shadow-feed">
+    <section
+      className="flex w-full cursor-pointer flex-col justify-between rounded-[12px] bg-white p-[1.7rem] shadow-feed"
+      onClick={handlePostClick}
+    >
       {showProfile && (
         <PostUserProfile
           nickname={post.user.nickname}
@@ -49,7 +54,6 @@ export default function PostCard({
         title={post.title}
         content={post.content}
         image={post.worryFiles[0]?.url || null}
-        onClick={handlePostClick}
       />
       <PostCardMeta
         numComment={post.replyCount}

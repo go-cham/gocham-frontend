@@ -190,7 +190,7 @@ export default function PostVote({
         <button onClick={() => setOnlyReadModalOpen(true)}>
           결과만 볼래요
         </button>
-        <button>현재 투표한 사용자 {total}명</button>
+        <span>현재 투표한 사용자 {total}명</span>
       </div>
       <Popup
         isOpen={onlyReadModalOpen}
