@@ -5,7 +5,7 @@ import { axiosInstance } from '@/libs/axios';
 
 export default function useAddPost() {
   const queryClient = useQueryClient();
-  const { mutate, data, isLoading, error } = useMutation({
+  const { mutate, data, isLoading, error, isSuccess } = useMutation({
     mutationKey: ['post'],
     mutationFn: async (data: AddPostRequest) => {
       const res = await axiosInstance.post<AddPostResponse>('/worry', data);
@@ -23,5 +23,6 @@ export default function useAddPost() {
     data,
     isLoading,
     error,
+    isSuccess,
   };
 }

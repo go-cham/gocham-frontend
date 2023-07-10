@@ -1,5 +1,10 @@
-import { debounce } from 'lodash';
-import { MouseEventHandler, useEffect, useRef, useState } from 'react';
+import {
+  Fragment,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useAddPost from '@/apis/hooks/posts/useAddPost';
@@ -43,11 +48,14 @@ type PostWriteContentType = {
   }[];
 };
 
+const MIN_NUM_VOTE_OPTIONS = 2;
+const MAX_NUM_VOTE_OPTIONS = 4;
+
 function WritePage() {
   const navigate = useNavigate();
-  const { addPost, data, error } = useAddPost();
+  const { addPost, isSuccess, error, data } = useAddPost();
   const imageInput = useRef<HTMLInputElement | null>(null);
-  const [votingNum, setVotingnum] = useState(2);
+  const [votingNum, setVotingNum] = useState(2);
   const [titleLength, setTitleLength] = useState(0);
   const [postInputError, setPostInputError] = useState<string | null>(null);
   const [postTitleError, setPostTitleError] = useState<string | null>(null);
@@ -61,14 +69,19 @@ function WritePage() {
     string | null
   >(null);
   const [imageFile, setImageFile] = useState<string[]>([]);
-  const [vote1State, setVote1State] = useState(['', '']);
-  const [vote2State, setVote2State] = useState(['', '']);
-  const [vote3State, setVote3State] = useState(['', '']);
-  const [vote4State, setVote4State] = useState(['', '']);
-  const [vote1Error, setVote1Error] = useState(false);
-  const [vote2Error, setVote2Error] = useState(false);
-  const [vote3Error, setVote3Error] = useState(false);
-  const [vote4Error, setVote4Error] = useState(false);
+  const initialVoteState = Array(MAX_NUM_VOTE_OPTIONS)
+    .fill(null)
+    .map(() => ['', '']);
+  const [voteState, setVoteState] = useState(initialVoteState);
+  const [voteError, setVoteError] = useState(
+    Array(MAX_NUM_VOTE_OPTIONS).fill(false)
+  );
+  const [votingContent, setVotingContent] = useState<WriteContentType>({
+    title: '',
+    content: '',
+    category: { value: 0, label: '' },
+    deadline: deadlineOptions[0],
+  });
   const { user } = useUser();
 
   const handlePostUpload = async () => {
@@ -85,76 +98,29 @@ function WritePage() {
       files: [],
     };
 
-    if (vote1State[0] !== '' || vote1State[1] !== '') {
-      postData.choices.push({
-        label: vote1State[0],
-        url: vote1State[1],
-        sequenceNumber: 1,
-      });
-    }
-
-    if (vote2State[0] !== '' || vote2State[1] !== '') {
-      postData.choices.push({
-        label: vote2State[0],
-        url: vote2State[1],
-        sequenceNumber: 2,
-      });
-    }
-
-    if (vote3State[0] !== '' || vote3State[1] !== '') {
-      postData.choices.push({
-        label: vote3State[0],
-        url: vote3State[1],
-        sequenceNumber: 3,
-      });
-    }
-
-    if (vote4State[0] !== '' || vote4State[1] !== '') {
-      postData.choices.push({
-        label: vote4State[0],
-        url: vote4State[1],
-        sequenceNumber: 4,
-      });
-    }
+    voteState.map((state, i) => {
+      if (state[0] || state[1]) {
+        postData.choices.push({
+          label: state[0],
+          url: state[1],
+          sequenceNumber: i + 1,
+        });
+      }
+    });
 
     imageFile.forEach((url) => {
       postData.files.push({ url, contentType: 'image' });
     });
-    // 포스팅 업로드
     await addPost(postData);
   };
 
-  console.log(imageFile);
-  useEffect(() => {
-    if (data) {
-      navigate(`/feed/${data.id}`);
-    }
-    if (error) {
-      console.error(error);
-      alert(alertMessage.error.post.noUploadPermission);
-    }
-  }, [data, error]);
-
-  const debouncedHandlePushPost = debounce(handlePostUpload, 3000);
-  const handlePushPost = () => {
-    debouncedHandlePushPost();
-  };
-
-  const [votingContent, setVotingContent] = useState<WriteContentType>({
-    title: '',
-    content: '',
-    category: { value: 0, label: '' },
-    deadline: deadlineOptions[0],
-  });
-
   const imgRef = useRef<HTMLInputElement>(null);
-  const vote1ImgRef = useRef<HTMLInputElement>(null);
-  const vote2ImgRef = useRef<HTMLInputElement>(null);
-  const vote3ImgRef = useRef<HTMLInputElement>(null);
-  const vote4ImgRef = useRef<HTMLInputElement>(null);
+  const voteImgRef = Array(MAX_NUM_VOTE_OPTIONS)
+    .fill(null)
+    .map(() => useRef<HTMLInputElement>(null));
 
   const addVotingClicked = () => {
-    setVotingnum((prev) => prev + 1);
+    setVotingNum(votingNum + 1);
   };
 
   const handleImageRemove: MouseEventHandler<HTMLImageElement> = (e) => {
@@ -265,226 +231,108 @@ function WritePage() {
     }
   };
 
-  const vote1Changed = (e: string) => {
-    setVote1State((prev) => {
-      return [e, vote1State[1]];
-    });
-    if (setVote1Error) {
-      setVote1Error(false);
-    }
-  };
-  const vote2Changed = (e: string) => {
-    setVote2State([e, vote2State[1]]);
-    if (setVote2Error) {
-      setVote2Error(false);
-    }
-  };
-  const vote3Changed = (e: string) => {
-    setVote3State([e, vote3State[1]]);
-    if (setVote3Error) {
-      setVote3Error(false);
-    }
-  };
-  const vote4Changed = (e: string) => {
-    setVote4State([e, vote4State[1]]);
-    if (setVote4Error) {
-      setVote4Error(false);
+  const voteChanged = (index: number) => (text: string) => {
+    const newVoteState = [...voteState];
+    newVoteState[index][0] = text;
+    setVoteState(newVoteState);
+    if (text) {
+      const newVoteError = [...voteError];
+      newVoteError[index] = false;
+      setVoteError(newVoteError);
     }
   };
 
-  const vote1ImageAddClicked = () => {
-    if (vote1ImgRef.current) {
-      vote1ImgRef.current.click();
-    }
+  const voteImageAddClicked = (index: number) => () => {
+    voteImgRef[index].current?.click();
   };
 
-  const vote2ImageAddClicked = () => {
-    if (vote2ImgRef.current) {
-      vote2ImgRef.current.click();
-    }
-  };
-
-  const vote3ImageAddClicked = () => {
-    if (vote3ImgRef.current) {
-      vote3ImgRef.current.click();
-    }
-  };
-
-  const vote4ImageAddClicked = () => {
-    if (vote4ImgRef.current) {
-      vote4ImgRef.current.click();
-    }
-  };
-
-  const vote1ImgSetted = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files![0]);
-    let imgUrl = '';
-    reader.onload = (event: ProgressEvent<FileReader>): void => {
-      resizeImage(event.target?.result as string).then(async (result) => {
-        imgUrl = await uploadFirebase(user?.id, result, 'posting');
-        setVote1State([vote1State[0], imgUrl]);
-        return;
-      });
+  const voteImgSetted =
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files![0]);
+      let imgUrl = '';
+      reader.onload = (event: ProgressEvent<FileReader>): void => {
+        resizeImage(event.target?.result as string).then(async (result) => {
+          imgUrl = await uploadFirebase(user?.id, result, 'posting');
+          const newVoteState = [...voteState];
+          newVoteState[index][1] = imgUrl;
+          setVoteState(newVoteState);
+          return;
+        });
+      };
     };
+
+  const voteImageDeleteClicked = (index: number) => () => {
+    const newVoteState = [...voteState];
+    newVoteState[index][1] = '';
+    setVoteState(newVoteState);
   };
 
-  const vote2ImgSetted = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files![0]);
-    let imgUrl = '';
-    reader.onload = (event: ProgressEvent<FileReader>): void => {
-      resizeImage(event.target?.result as string).then(async (result) => {
-        imgUrl = await uploadFirebase(user?.id, result, 'posting');
-        setVote2State([vote2State[0], imgUrl]);
-        return;
-      });
-    };
-  };
+  const doneBtnClicked = async () => {
+    const voteNum = voteState.filter((v) => !!v[0]).length;
 
-  const vote3ImgSetted = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files![0]);
-    let imgUrl = '';
-    reader.onload = (event: ProgressEvent<FileReader>): void => {
-      resizeImage(event.target?.result as string).then(async (result) => {
-        imgUrl = await uploadFirebase(user?.id, result, 'posting');
-        setVote3State([vote3State[0], imgUrl]);
-        return;
-      });
-    };
-  };
-
-  const vote4ImgSetted = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const reader = new FileReader();
-    reader.readAsDataURL(e.target.files![0]);
-    reader.onload = (event: ProgressEvent<FileReader>): void => {
-      resizeImage(event.target?.result as string).then((result) => {
-        setVote4State([vote4State[0], result]);
-        return;
-      });
-    };
-  };
-
-  const vote1ImageDeleteClicked = () => {
-    setVote1State((prev) => {
-      return [vote1State[0], ''];
-    });
-  };
-
-  const vote2ImageDeleteClicked = () => {
-    setVote2State((prev) => {
-      return [vote2State[0], ''];
-    });
-  };
-
-  const vote3ImageDeleteClicked = () => {
-    setVote3State((prev) => {
-      return [vote3State[0], ''];
-    });
-  };
-
-  const vote4ImageDeleteClicked = () => {
-    setVote4State((prev) => {
-      return [vote4State[0], ''];
-    });
-  };
-
-  const doneBtnClicked = () => {
-    let voteNum = 0;
-    if (vote1State[0].length > 0) {
-      voteNum += 1;
-    }
-    if (vote2State[0].length > 0) {
-      voteNum += 1;
-    }
-    if (vote3State[0].length > 0) {
-      voteNum += 1;
-    }
-    if (vote4State[0].length > 0) {
-      voteNum += 1;
-    }
     if (titleLength === 0) {
-      alert('제목을 입력해주세요.');
       setPostTitleError('최소 2자 이상 입력해주세요.');
-      return;
+      return alert('제목을 입력해주세요.');
     }
     if (titleLength < 2) {
-      alert('최소 2자 이상 입력해주세요.');
-      return;
+      return alert('최소 2자 이상 입력해주세요.');
     }
     if (contentLength === 0) {
-      alert('내용을 입력해주세요.');
       setPostInputError('최소 5자 이상 입력해주세요.');
-      return;
+      return alert('내용을 입력해주세요.');
     }
     if (contentLength < 5) {
-      alert('최소 5자 이상 입력해주세요.');
-      return;
+      return alert('최소 5자 이상 입력해주세요.');
     }
     if (categoryValue === -1) {
-      alert('내용에 맞는 카테고리를 선택해주세요.');
       setCategorySelectErrorMsg('카테고리를 선택해주세요.');
-      return;
+      return alert('내용에 맞는 카테고리를 선택해주세요.');
     }
     if (voteTimeValue === -1) {
-      alert('투표 마감 시간을 선택해주세요.');
       setVoteTimeSelectErrorMsg('투표 마감 시간을 선택해주세요.');
-      return;
+      return alert('투표 마감 시간을 선택해주세요.');
     }
     if (voteNum < 2) {
-      if (vote1State[0] === '' && vote1State[1] !== '') {
-        alert('투표 항목은 텍스트를 포함해야 합니다.');
-        setVote1Error(true);
-        return;
+      for (let i = 0; i < MAX_NUM_VOTE_OPTIONS; i++) {
+        if (!voteState[i][0] && voteState[i][1]) {
+          const newVoteError = [...voteError];
+          newVoteError[i] = true;
+          setVoteError(newVoteError);
+          return alert('투표 항목은 텍스트를 포함해야 합니다.');
+        }
       }
-      if (vote2State[0] === '' && vote2State[1] !== '') {
-        alert('투표 항목은 텍스트를 포함해야 합니다.');
-        setVote2Error(true);
-        return;
-      }
-      if (vote3State[0] === '' && vote3State[1] !== '') {
-        alert('투표 항목은 텍스트를 포함해야 합니다.');
-        setVote3Error(true);
-        return;
-      }
-      if (vote4State[0] === '' && vote4State[1] !== '') {
-        alert('투표 항목은 텍스트를 포함해야 합니다.');
-        setVote4Error(true);
-        return;
-      }
-      alert('투표 항목을 2개 이상 입력해주세요.');
-      if (vote1State[0].length === 0) {
-        setVote1Error(true);
-        return;
-      }
-      if (vote2State[0].length === 0) {
-        setVote2Error(true);
-        return;
+
+      for (let i = 0; i < MIN_NUM_VOTE_OPTIONS; i++) {
+        if (!voteState[i][0]) {
+          const newVoteError = [...voteError];
+          newVoteError[i] = true;
+          setVoteError(newVoteError);
+          return alert('투표 항목을 2개 이상 입력해주세요.');
+        }
       }
     }
-    if (vote1State[0] === '' && vote1State[1] !== '') {
-      alert('투표 항목은 텍스트를 포함해야 합니다.');
-      setVote1Error(true);
-      return;
+
+    for (let i = 0; i < MAX_NUM_VOTE_OPTIONS; i++) {
+      if (!voteState[i][0] && voteState[i][1]) {
+        const newVoteError = [...voteError];
+        newVoteError[i] = true;
+        setVoteError(newVoteError);
+        return alert('투표 항목은 텍스트를 포함해야 합니다.');
+      }
     }
-    if (vote2State[0] === '' && vote2State[1] !== '') {
-      alert('투표 항목은 텍스트를 포함해야 합니다.');
-      setVote2Error(true);
-      return;
-    }
-    if (vote3State[0] === '' && vote3State[1] !== '') {
-      alert('투표 항목은 텍스트를 포함해야 합니다.');
-      setVote3Error(true);
-      return;
-    }
-    if (vote4State[0] === '' && vote4State[1] !== '') {
-      alert('투표 항목은 텍스트를 포함해야 합니다.');
-      setVote4Error(true);
-      return;
-    }
-    handlePushPost();
+
+    await handlePostUpload();
   };
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      navigate(`/feed/${data.id}`);
+    }
+    if (error) {
+      alert(alertMessage.error.post.noUploadPermission);
+    }
+  }, [isSuccess, error, data]);
 
   return (
     <div className="flex h-full flex-col">
@@ -559,72 +407,30 @@ function WritePage() {
         </div>
         <div className="mt-[3.7rem] space-y-[1.2rem]">
           <div className="text-subheading">투표 항목</div>
-          <input
-            onChange={vote1ImgSetted}
-            type="file"
-            style={{ display: 'none' }}
-            accept="image/*"
-            ref={vote1ImgRef}
-          />
-          <input
-            onChange={vote2ImgSetted}
-            type="file"
-            style={{ display: 'none' }}
-            accept="image/*"
-            ref={vote2ImgRef}
-          />
-          <input
-            onChange={vote3ImgSetted}
-            type="file"
-            style={{ display: 'none' }}
-            accept="image/*"
-            ref={vote3ImgRef}
-          />
-          <input
-            onChange={vote4ImgSetted}
-            type="file"
-            style={{ display: 'none' }}
-            accept="image/*"
-            ref={vote4ImgRef}
-          />
-          <PostVoteInput
-            image={vote1State[1]}
-            onChange={vote1Changed}
-            className="w-full"
-            hasError={vote1Error}
-            onUploadImage={vote1ImageAddClicked}
-            onDeleteImage={vote1ImageDeleteClicked}
-          />
-          <PostVoteInput
-            image={vote2State[1]}
-            onChange={vote2Changed}
-            className="w-full"
-            hasError={vote2Error}
-            onUploadImage={vote2ImageAddClicked}
-            onDeleteImage={vote2ImageDeleteClicked}
-          />
-          {votingNum >= 3 ? (
-            <PostVoteInput
-              image={vote3State[1]}
-              onUploadImage={vote3ImageAddClicked}
-              hasError={vote3Error}
-              onChange={vote3Changed}
-              onDeleteImage={vote3ImageDeleteClicked}
-              className="w-full"
-            />
-          ) : null}
-          {votingNum === 4 ? (
-            <PostVoteInput
-              image={vote4State[1]}
-              onUploadImage={vote4ImageAddClicked}
-              hasError={vote4Error}
-              onChange={vote4Changed}
-              onDeleteImage={vote4ImageDeleteClicked}
-              className="w-full"
-            />
-          ) : null}
+          {Array(votingNum)
+            .fill(null)
+            .map((_, i) => (
+              <Fragment key={i}>
+                <input
+                  onChange={voteImgSetted(i)}
+                  type="file"
+                  style={{ display: 'none' }}
+                  accept="image/*"
+                  ref={voteImgRef[i]}
+                  className="hide"
+                />
+                <PostVoteInput
+                  image={voteState[i][1]}
+                  onChange={voteChanged(i)}
+                  className="w-full"
+                  hasError={voteError[i]}
+                  onUploadImage={voteImageAddClicked(i)}
+                  onDeleteImage={voteImageDeleteClicked(i)}
+                />
+              </Fragment>
+            ))}
           <EditButton
-            disabled={votingNum === 4}
+            disabled={votingNum === MAX_NUM_VOTE_OPTIONS}
             onClick={addVotingClicked}
             className="w-full"
           >
