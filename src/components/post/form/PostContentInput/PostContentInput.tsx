@@ -31,7 +31,7 @@ export default function PostContentInput({
         maxLength={280}
         placeholder={`최대 ${MAX_LENGTH}자 입력`}
         className={twMergeCustom(
-          'mt-[1.1rem] resize-none border-b-[0.2rem] border-custom-gray-500 bg-transparent pb-[0.7rem] text-body4 text-custom-text-900 placeholder:text-body3 placeholder:text-custom-text-400 focus:-mb-[0.2rem] focus:border-b-[0.4rem] focus:border-custom-gray-800',
+          'mt-[1.1rem] resize-none break-all border-b-[0.2rem] border-custom-gray-500 bg-transparent pb-[0.7rem] text-body4 text-custom-text-900 placeholder:text-body3 placeholder:text-custom-text-400 focus:-mb-[0.2rem] focus:border-b-[0.4rem] focus:border-custom-gray-800',
           errorMessage &&
             'border-custom-semantic-warn-500 focus:border-custom-semantic-warn-500'
         )}

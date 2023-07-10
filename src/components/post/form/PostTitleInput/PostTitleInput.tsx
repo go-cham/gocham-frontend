@@ -45,7 +45,7 @@ export default function PostTitleInput({
         type="text"
         placeholder="제목 입력"
         maxLength={30}
-        className="w-full bg-transparent text-body4 placeholder:text-body3 placeholder:text-custom-text-400"
+        className="w-full bg-transparent pr-[7rem] text-body4 placeholder:text-body3 placeholder:text-custom-text-400"
         onChange={handleTitleChange}
         value={title}
       />
