@@ -1,6 +1,5 @@
 import { useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
-import { Carousel } from 'react-responsive-carousel';
 import { useNavigate } from 'react-router-dom';
 
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
@@ -207,23 +206,24 @@ function PostDetailContent({
           />
         )}
         {images && images.length > 1 && (
-          <Carousel
-            centerMode={true}
-            emulateTouch={true}
-            showStatus={false}
-            showThumbs={false}
-            showArrows={false}
-            showIndicators={false}
+          <div
+            className="hide-scrollbar flex space-x-[1.3rem] overflow-x-scroll px-[1.5rem]"
+            style={{
+              scrollSnapType: 'x mandatory',
+            }}
           >
             {images.map((image) => (
               <img
                 key={image}
                 src={image}
                 alt={'게시글이미지'}
-                className="h-[29.3rem] max-w-[29.3rem] rounded-[0.5rem] object-cover"
+                className="pointer-events-none h-[29.3rem] max-w-[29.3rem] rounded-[0.5rem] object-cover"
+                style={{
+                  scrollSnapAlign: 'center',
+                }}
               />
             ))}
-          </Carousel>
+          </div>
         )}
       </div>
     </div>
