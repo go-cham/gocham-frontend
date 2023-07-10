@@ -14,6 +14,7 @@ interface TitleInputProps {
   successMessage?: string | null;
   errorMessage?: string | null;
   className?: string;
+  defaultValue?: string;
 }
 
 export default function TextInput({
@@ -24,8 +25,9 @@ export default function TextInput({
   successMessage,
   errorMessage,
   className,
+  defaultValue,
 }: TitleInputProps) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(defaultValue || '');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

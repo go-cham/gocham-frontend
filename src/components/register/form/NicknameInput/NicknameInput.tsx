@@ -5,6 +5,7 @@ interface NicknameInputProps {
   successMessage?: string | null;
   errorMessage?: string | null;
   className?: string;
+  defaultValue?: string;
 }
 
 export default function NicknameInput({
@@ -12,6 +13,7 @@ export default function NicknameInput({
   successMessage,
   errorMessage,
   className,
+  defaultValue,
 }: NicknameInputProps) {
   return (
     <TextInput
@@ -22,6 +24,7 @@ export default function NicknameInput({
       successMessage={successMessage}
       errorMessage={errorMessage}
       maxLength={10}
+      defaultValue={defaultValue}
     />
   );
 }

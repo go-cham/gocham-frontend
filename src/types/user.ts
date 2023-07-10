@@ -10,7 +10,7 @@ export interface User {
   birthday: string | null;
   sex: Gender | null;
   residence: OptionType | null;
-  job: OptionType | null;
+  job: string;
   worryCategories: OptionType[] | null;
   image: string | null;
 }

@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 import useUser from '@/apis/hooks/users/useUser';
 import BirthdayInput from '@/components/register/form/BirthdayInput';
@@ -12,29 +12,43 @@ import { validateBirthday } from '@/utils/validations/birthday';
 import { validateNickname } from '@/utils/validations/nickname';
 
 interface CollectNicknameAgeGenderProps {
-  onSubmit: (nickname: string, birthday: string, gender: Gender) => void;
+  onSubmit?: (nickname: string, birthday: string, gender: Gender) => void;
+  onChange?: (
+    nickname: string,
+    birthday: { year: string; month: string; day: string },
+    gender: Gender | null
+  ) => void;
 }
 
 export default function CollectNicknameAgeGender({
   onSubmit,
+  onChange,
 }: CollectNicknameAgeGenderProps) {
+  const { user } = useUser();
   const [isDirty, setIsDirty] = useState({
     nickname: false,
     birthday: false,
   });
   const [nickname, setNickname] = useState('');
-  const [birthday, setBirthday] = useState({
-    year: '',
-    month: '',
-    day: '',
-  });
+  const initialBirthday = user?.birthday
+    ? {
+        year: new Date(user.birthday).getFullYear() + '',
+        month: new Date(user.birthday).getMonth() + 1 + '',
+        day: new Date(user.birthday).getDate() + '',
+      }
+    : {
+        year: '',
+        month: '',
+        day: '',
+      };
+  const [birthday, setBirthday] = useState(initialBirthday);
   const [gender, setGender] = useState<Gender | null>(null);
   const [nicknameErrorMessage, setNicknameErrorMessage] = useState<
     string | null
   >(null);
-  const { user } = useUser();
 
   const handleNicknameInputChange = async (nickname: string) => {
+    onChange && onChange(nickname, birthday, gender);
     setIsDirty((prev) => ({ ...prev, nickname: true }));
     setNickname(nickname);
 
@@ -55,11 +69,18 @@ export default function CollectNicknameAgeGender({
 
   //생년월일 관련
   const handleBirthDateInputChange = ({ year, month, day }: Birthday) => {
+    onChange &&
+      onChange(
+        nickname,
+        { year: year || '', month: month || '', day: day || '' },
+        gender
+      );
     setIsDirty((prev) => ({ ...prev, birthday: true }));
     setBirthday({ year: year || '', month: month || '', day: day || '' });
   };
 
   const handleSelectGender = (gender: Gender) => {
+    onChange && onChange(nickname, birthday, gender);
     setGender(gender);
   };
 
@@ -78,7 +99,7 @@ export default function CollectNicknameAgeGender({
       2,
       '0'
     )}-${birthday.day.padStart(2, '0')}`;
-    onSubmit(nickname, formattedBirthday, gender);
+    onSubmit && onSubmit(nickname, formattedBirthday, gender);
   };
 
   const nicknameSuccessMessage =
@@ -98,6 +119,16 @@ export default function CollectNicknameAgeGender({
     !birthdayErrorMessage &&
     gender;
 
+  if (!user) {
+    return null;
+  }
+
+  useEffect(() => {
+    if (user) {
+      setGender(user.sex);
+    }
+  }, []);
+
   return (
     <form className="space-y-[2.9rem]" onSubmit={handleSubmit}>
       <NicknameInput
@@ -105,12 +136,18 @@ export default function CollectNicknameAgeGender({
         onChange={handleNicknameInputChange}
         errorMessage={nicknameErrorMessage}
         successMessage={nicknameSuccessMessage}
+        defaultValue={user.nickname}
       />
       <BirthdayInput
         className="w-full"
         onChange={handleBirthDateInputChange}
         errorMessage={birthdayErrorMessage}
         successMessage={birthdaySuccessMessage}
+        defaultValue={{
+          year: birthday.year,
+          month: birthday.month,
+          day: birthday.day,
+        }}
       />
       <div>
         <span className="text-body1">성별</span>

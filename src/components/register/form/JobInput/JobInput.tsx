@@ -5,6 +5,7 @@ interface JobInputProps {
   successMessage?: string | null;
   errorMessage?: string | null;
   onChange?: (job: string) => void;
+  defaultValue?: string;
 }
 
 export default function JobInput({
@@ -12,6 +13,7 @@ export default function JobInput({
   successMessage,
   errorMessage,
   onChange,
+  defaultValue,
 }: JobInputProps) {
   return (
     <TextInput
@@ -22,6 +24,7 @@ export default function JobInput({
       errorMessage={errorMessage}
       maxLength={20}
       onChange={onChange}
+      defaultValue={defaultValue}
     />
   );
 }

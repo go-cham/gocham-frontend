@@ -20,7 +20,7 @@ export default function UserProfile() {
   const age = calculateAge(
     birthday.getFullYear(),
     birthday.getMonth() + 1,
-    birthday.getDay()
+    birthday.getDate()
   );
 
   return (

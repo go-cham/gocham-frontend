@@ -17,6 +17,7 @@ interface BirthdayInputProps {
   successMessage?: string | null;
   errorMessage?: string | null;
   className?: string;
+  defaultValue?: { year: string; month: string; day: string };
 }
 
 export default function BirthdayInput({
@@ -24,12 +25,15 @@ export default function BirthdayInput({
   successMessage,
   errorMessage,
   className,
+  defaultValue,
 }: BirthdayInputProps) {
-  const [birthday, setBirthday] = useState<Birthday>({
-    year: undefined,
-    month: undefined,
-    day: undefined,
-  });
+  const [birthday, setBirthday] = useState<Birthday>(
+    defaultValue || {
+      year: '',
+      month: '',
+      day: '',
+    }
+  );
   const yearRef = useRef<HTMLInputElement>(null);
 
   const maxLengthCheck = (e: ChangeEvent<HTMLInputElement>) => {

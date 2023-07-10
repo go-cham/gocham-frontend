@@ -58,12 +58,7 @@ export default function useUser(
                 label: userData.residence.label,
               }
             : null,
-          job: userData.job
-            ? {
-                value: userData.job.id,
-                label: userData.job.label,
-              }
-            : null,
+          job: userData.job,
           worryCategories: userData.userWorryCategories.map((category) => ({
             value: category.worryCategory.id,
             label: category.worryCategory.label,
