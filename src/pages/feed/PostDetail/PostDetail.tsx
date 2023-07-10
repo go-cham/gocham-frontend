@@ -24,6 +24,12 @@ interface PostDetailProps {
   post: Post;
 }
 
+enum MENU {
+  Edit,
+  Delete,
+  Report,
+}
+
 export default function PostDetail({ post }: PostDetailProps) {
   const { choiceOptions } = useGetChoiceOptions(post.id);
   const navigate = useNavigate();
@@ -38,17 +44,17 @@ export default function PostDetail({ post }: PostDetailProps) {
     setShowMore((prevShowMore) => !prevShowMore);
   };
 
-  const handleMoreSelect = (value: string) => {
-    if (value === 'edit') {
-      console.log('게시물 수정');
-    } else if (value === 'delete') {
+  const handleMoreSelect = (value: number) => {
+    if (value === MENU.Edit) {
+      console.log('게시글 수정');
+    } else if (value === MENU.Delete) {
       if (getRemainingTime(post.expirationTime) === '마감됨') {
         alert('투표가 종료된 게시물은 삭제하실 수 없습니다.');
         setShowMore(false);
         return;
       }
       setDeleteModalOpen(true);
-    } else if (value === 'report') {
+    } else if (value === MENU.Report) {
       navigate(`/feed/${post.id}/report`);
     }
 
@@ -63,12 +69,12 @@ export default function PostDetail({ post }: PostDetailProps) {
   const options = isMyPost
     ? [
         {
-          value: 'edit',
-          name: '게시물 수정',
+          value: MENU.Edit,
+          label: '게시물 수정',
         },
-        { value: 'delete', name: '게시물 삭제' },
+        { value: MENU.Delete, label: '게시물 삭제' },
       ]
-    : [{ value: 'report', name: '게시물 신고' }];
+    : [{ value: MENU.Report, label: '게시물 신고' }];
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {

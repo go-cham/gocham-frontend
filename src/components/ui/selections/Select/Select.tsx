@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import DownIcon from '@/components/icons/DownIcon';
+import Dropdown from '@/components/ui/Dropdown';
 import { twMergeCustom } from '@/libs/tw-merge';
 
 interface SelectProps {
@@ -12,6 +13,9 @@ interface SelectProps {
   labelClassName?: string;
   wrapperClassName?: string;
   onChange?: (value: number) => void;
+  value?: string;
+  readonly?: boolean;
+  highlight?: boolean;
 }
 
 export default function Select({
@@ -22,22 +26,41 @@ export default function Select({
   labelClassName,
   wrapperClassName,
   onChange,
+  value,
+  readonly,
+  highlight,
 }: SelectProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const handleMenuToggle = () => {
+    if (readonly) return;
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
   };
 
-  const handleSelect = (index: number) => {
+  const handleSelect = (value: number) => {
+    if (readonly) return;
     setMenuOpen(false);
-    setSelectedIndex(index);
-    onChange && onChange(options[index].value);
+    onChange && onChange(value);
   };
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClick, true);
+
+    return () => {
+      document.removeEventListener('click', handleClick, true);
+    };
+  }, []);
 
   return (
     <div
+      ref={ref}
       className={twMergeCustom(
         'relative flex w-[34rem] flex-col',
         wrapperClassName
@@ -57,10 +80,10 @@ export default function Select({
         <span
           className={twMergeCustom(
             'select-none text-body3 text-custom-text-400',
-            selectedIndex !== null && 'text-body4 text-custom-text-900'
+            value && 'text-body4 text-custom-text-900'
           )}
         >
-          {selectedIndex !== null ? options[selectedIndex].label : placeholder}
+          {value || placeholder}
         </span>
         <DownIcon
           className={twMergeCustom(
@@ -77,17 +100,12 @@ export default function Select({
 
       {/* menu dropdown */}
       {menuOpen && (
-        <ul className="absolute top-[6rem] mt-[0.5rem] w-[15.5rem] h-[15rem] overflow-y-scroll self-end overflow-hidden rounded-[0.7rem] border bg-white">
-          {options.map((option, index) => (
-            <li
-              key={option.value}
-              className="w-full cursor-pointer py-[0.6rem] pr-[1.5rem] text-end text-body3 text-custom-gray-800 hover:bg-custom-background-100"
-              onClick={() => handleSelect(index)}
-            >
-              {option.label}
-            </li>
-          ))}
-        </ul>
+        <Dropdown
+          options={options}
+          highlight={highlight}
+          onSelect={handleSelect}
+          value={value}
+        />
       )}
     </div>
   );

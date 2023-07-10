@@ -10,7 +10,7 @@ import PostTitleInput from '@/components/post/form/PostTitleInput/PostTitleInput
 import PostVoteInput from '@/components/post/form/PostVoteInput/PostVoteInput';
 import DockedButton from '@/components/ui/buttons/DockedButton';
 import EditButton from '@/components/ui/buttons/EditButton/EditButton';
-import Select from '@/components/ui/selections/Select/Select';
+import Select from '@/components/ui/selections/Select';
 import withAuth from '@/components/withAuth';
 import {
   OptionType,

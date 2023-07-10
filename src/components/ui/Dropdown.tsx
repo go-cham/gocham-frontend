@@ -1,9 +1,9 @@
 import { twMergeCustom } from '@/libs/tw-merge';
 
 interface DropdownProps {
-  options: { value: string; name: string }[];
+  options: { value: number; label: string }[];
   highlight?: boolean;
-  onSelect?: (value: string) => void;
+  onSelect?: (value: number) => void;
   value?: string;
   className?: string;
 }
@@ -18,7 +18,7 @@ export default function Dropdown({
   return (
     <ul
       className={twMergeCustom(
-        'hide-scrollbar absolute top-[6rem] z-10 mt-[0.5rem] max-h-[30rem] w-[15.5rem] space-y-[1.3rem] self-end overflow-y-scroll rounded-[0.7rem] bg-white pb-[0.7rem] pt-[1.1rem] shadow-dropdown',
+        'hide-scrollbar absolute top-[6rem] z-10 mt-[0.5rem] max-h-[13rem] w-[15.5rem] space-y-[1.3rem] self-end overflow-y-scroll rounded-[0.7rem] bg-white pb-[0.7rem] pt-[1.1rem] shadow-dropdown',
         className
       )}
     >
@@ -27,11 +27,11 @@ export default function Dropdown({
           key={option.value}
           className={twMergeCustom(
             'w-full cursor-pointer pr-[1.5rem] text-end text-body2 text-custom-gray-800',
-            highlight && value === option.name && 'text-custom-main-500'
+            highlight && value === option.label && 'text-custom-main-500'
           )}
           onClick={() => onSelect && onSelect(option.value)}
         >
-          {option.name}
+          {option.label}
         </li>
       ))}
     </ul>

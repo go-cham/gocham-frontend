@@ -2,9 +2,9 @@ import { FormEvent, useEffect, useState } from 'react';
 
 import useUser from '@/apis/hooks/users/useUser';
 import JobInput from '@/components/register/form/JobInput';
-import SelectFix from '@/components/ui/SelectFix';
 import Button from '@/components/ui/buttons/Button';
 import Chip from '@/components/ui/buttons/Chip';
+import Select from '@/components/ui/selections/Select';
 import {
   OptionType,
   categoryOptions as initialCategoryOptions,
@@ -42,10 +42,10 @@ export default function CollectNicknameAgeGender({
     category: false,
   }); // job
 
-  const handleResidenceChange = (residence: string) => {
+  const handleResidenceChange = (residence: number) => {
     setIsDirty({ ...isDirty, residence: true });
     const selected = residenceOptions.find(
-      (option) => option.value === +residence
+      (option) => option.value === residence
     );
     selected && setResidence(selected);
     selected && onChange && onChange(selected, job, categories);
@@ -57,10 +57,10 @@ export default function CollectNicknameAgeGender({
     onChange && onChange(residence, job, categories);
   };
 
-  const handleCategorySelect = (category: string) => {
+  const handleCategorySelect = (category: number) => {
     setIsDirty({ ...isDirty, category: true });
     const index = categoryOptions.findIndex(
-      (option) => option.value === +category
+      (option) => option.value === category
     );
     if (index !== -1) {
       setCategories([...categories, categoryOptions[index]]);
@@ -140,14 +140,11 @@ export default function CollectNicknameAgeGender({
 
   return (
     <form className="space-y-[2.9rem]" onSubmit={handleSubmit}>
-      <SelectFix
+      <Select
         id="residence"
         label="거주 지역"
         placeholder="지역 선택"
-        options={residenceOptions.map((v) => ({
-          value: v.value + '',
-          name: v.label,
-        }))}
+        options={residenceOptions}
         wrapperClassName="w-full"
         onChange={handleResidenceChange}
         value={residence?.label}
@@ -160,14 +157,11 @@ export default function CollectNicknameAgeGender({
         defaultValue={user?.job}
       />
       <div className="space-y-[1.1rem]">
-        <SelectFix
+        <Select
           id="worry-category"
           label="관심 카테고리"
           placeholder="최대 4개 선택 가능"
-          options={categoryOptions.map((v) => ({
-            value: v.value + '',
-            name: v.label,
-          }))}
+          options={categoryOptions}
           wrapperClassName="w-full"
           onChange={handleCategorySelect}
           readonly={categories.length >= MAX_CATEGORIES_SELECT}
