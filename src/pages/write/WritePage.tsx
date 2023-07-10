@@ -353,9 +353,11 @@ function WritePage() {
   const vote3ImgSetted = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files![0]);
+    let imgUrl = '';
     reader.onload = (event: ProgressEvent<FileReader>): void => {
-      resizeImage(event.target?.result as string).then((result) => {
-        setVote3State([vote3State[0], result]);
+      resizeImage(event.target?.result as string).then(async (result) => {
+        imgUrl = await uploadFirebase(user?.id, result, 'posting');
+        setVote3State([vote2State[0], imgUrl]);
         return;
       });
     };
@@ -366,7 +368,7 @@ function WritePage() {
     reader.readAsDataURL(e.target.files![0]);
     reader.onload = (event: ProgressEvent<FileReader>): void => {
       resizeImage(event.target?.result as string).then((result) => {
-        setVote4State([vote4State[0], result]);
+        setVote4State([vote3State[0], result]);
         return;
       });
     };
@@ -569,28 +571,28 @@ function WritePage() {
             onChange={vote1ImgSetted}
             type="file"
             style={{ display: 'none' }}
-            accept="image/jpg,impge/png,image/jpeg"
+            accept="image/*"
             ref={vote1ImgRef}
           />
           <input
             onChange={vote2ImgSetted}
             type="file"
             style={{ display: 'none' }}
-            accept="image/jpg,impge/png,image/jpeg"
+            accept="image/*"
             ref={vote2ImgRef}
           />
           <input
             onChange={vote3ImgSetted}
             type="file"
             style={{ display: 'none' }}
-            accept="image/jpg,impge/png,image/jpeg"
+            accept="image/*"
             ref={vote3ImgRef}
           />
           <input
             onChange={vote4ImgSetted}
             type="file"
             style={{ display: 'none' }}
-            accept="image/jpg,impge/png,image/jpeg"
+            accept="image/*"
             ref={vote4ImgRef}
           />
           <PostVoteInput
