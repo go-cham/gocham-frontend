@@ -5,7 +5,7 @@ export interface EditProfileRequest {
   sex: string;
   residenceId: number;
   userId: number;
-  worryCategories: number[];
+  worryCategories: number[] | null;
 }
 
 export interface EditProfileResponse {

@@ -18,16 +18,19 @@ interface CollectNicknameAgeGenderProps {
     birthday: { year: string; month: string; day: string },
     gender: Gender | null
   ) => void;
+  onValidate?: (isValid: boolean) => void;
 }
 
 export default function CollectNicknameAgeGender({
   onSubmit,
   onChange,
+  onValidate,
 }: CollectNicknameAgeGenderProps) {
   const { user } = useUser();
   const [isDirty, setIsDirty] = useState({
     nickname: false,
     birthday: false,
+    gender: false,
   });
   const [nickname, setNickname] = useState('');
   const initialBirthday = user?.birthday
@@ -82,6 +85,7 @@ export default function CollectNicknameAgeGender({
   const handleSelectGender = (gender: Gender) => {
     onChange && onChange(nickname, birthday, gender);
     setGender(gender);
+    setIsDirty({ ...isDirty, gender: true });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -128,6 +132,12 @@ export default function CollectNicknameAgeGender({
       setGender(user.sex);
     }
   }, []);
+
+  useEffect(() => {
+    (isDirty.nickname || isDirty.birthday || isDirty.gender) &&
+      onValidate &&
+      onValidate(!!nextEnabled);
+  }, [nextEnabled]);
 
   return (
     <form className="space-y-[2.9rem]" onSubmit={handleSubmit}>

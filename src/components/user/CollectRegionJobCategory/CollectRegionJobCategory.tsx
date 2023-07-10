@@ -21,11 +21,13 @@ interface CollectRegionJobCategoryProps {
     job?: string,
     categories?: OptionType[]
   ) => void;
+  onValidate?: (isValid: boolean) => void;
 }
 
 export default function CollectNicknameAgeGender({
   onSubmit,
   onChange,
+  onValidate,
 }: CollectRegionJobCategoryProps) {
   const { user } = useUser();
   const [residence, setResidence] = useState<OptionType>();
@@ -34,9 +36,14 @@ export default function CollectNicknameAgeGender({
     initialCategoryOptions
   );
   const [categories, setCategories] = useState<OptionType[]>([]);
-  const [isDirty, setIsDirty] = useState(false); // job
+  const [isDirty, setIsDirty] = useState({
+    residence: false,
+    job: false,
+    category: false,
+  }); // job
 
   const handleResidenceChange = (residence: string) => {
+    setIsDirty({ ...isDirty, residence: true });
     const selected = residenceOptions.find(
       (option) => option.value === +residence
     );
@@ -45,12 +52,13 @@ export default function CollectNicknameAgeGender({
   };
 
   const handleJobChange = (job: string) => {
-    setIsDirty(true);
+    setIsDirty({ ...isDirty, job: true });
     setJob(job.trimEnd());
     onChange && onChange(residence, job, categories);
   };
 
   const handleCategorySelect = (category: string) => {
+    setIsDirty({ ...isDirty, category: true });
     const index = categoryOptions.findIndex(
       (option) => option.value === +category
     );
@@ -89,7 +97,7 @@ export default function CollectNicknameAgeGender({
       );
   };
 
-  const jobErrorMessage = isDirty ? validateJob(job) : null;
+  const jobErrorMessage = isDirty.job ? validateJob(job) : null;
 
   const nextEnabled = residence && job && !jobErrorMessage;
 
@@ -123,6 +131,12 @@ export default function CollectNicknameAgeGender({
   if (!user) {
     return null;
   }
+
+  useEffect(() => {
+    (isDirty.residence || isDirty.job || isDirty.category) &&
+      onValidate &&
+      onValidate(!!nextEnabled);
+  }, [nextEnabled]);
 
   return (
     <form className="space-y-[2.9rem]" onSubmit={handleSubmit}>

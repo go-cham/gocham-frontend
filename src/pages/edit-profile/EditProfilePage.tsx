@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { has } from 'lodash';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useEditProfile from '@/apis/hooks/users/useEditProfile';
@@ -11,13 +12,15 @@ import withAuth from '@/components/withAuth';
 import { OptionType } from '@/constants/Options';
 import { Gender } from '@/types/user';
 import { formatISO8601ToNormal } from '@/utils/formatISO8601ToNormal';
-import { validateBirthday } from '@/utils/validations/birthday';
-import { validateNickname } from '@/utils/validations/nickname';
 
 function EditProfilePage() {
   const navigate = useNavigate();
   const { user } = useUser();
-  const { editProfile, isSuccess, error } = useEditProfile();
+  const { editProfile, isSuccess } = useEditProfile();
+  const [isNicknameAgeGenderValid, setIsNicknameAgeGenderValid] =
+    useState(true);
+  const [isRegionJobCategoryValid, setIsRegionJobCategoryValid] =
+    useState(true);
 
   const [userInformation, setUserInformation] = useState({
     nickname: user?.nickname,
@@ -28,17 +31,11 @@ function EditProfilePage() {
     worryCategories: user?.worryCategories,
   });
 
-  if (isSuccess) {
-    navigate('/');
-  }
-
   if (!user) {
     return null;
   }
 
   const hasEdited = () => {
-    console.log(userInformation.worryCategories);
-    console.log(user.worryCategories);
     return (
       userInformation.nickname !== user.nickname ||
       (user.birthday &&
@@ -62,7 +59,6 @@ function EditProfilePage() {
     birthday: { year: string; month: string; day: string },
     gender: Gender | null
   ) => {
-    console.log(birthday);
     setUserInformation({
       ...userInformation,
       nickname: nickname || userInformation.nickname,
@@ -90,19 +86,64 @@ function EditProfilePage() {
     });
   };
 
-  const buttonEnabled = hasEdited();
+  const buttonEnabled =
+    isNicknameAgeGenderValid && isRegionJobCategoryValid && hasEdited();
+
+  const handleNicknameAgeGenderValidate = (isValid: boolean) => {
+    setIsNicknameAgeGenderValid(isValid);
+  };
+  const handleRegionJobCategoryValidate = (isValid: boolean) => {
+    setIsRegionJobCategoryValid(isValid);
+  };
+
+  const handleEditProfile = () => {
+    console.log(userInformation.worryCategories);
+    if (
+      userInformation.sex &&
+      userInformation.residence?.value &&
+      userInformation.nickname &&
+      userInformation.job &&
+      userInformation.worryCategories
+    ) {
+      const worryCategories = userInformation.worryCategories.map(
+        (v) => v.value
+      );
+      editProfile({
+        nickname: userInformation.nickname,
+        job: userInformation.job,
+        worryCategories: worryCategories.length > 0 ? worryCategories : null,
+        sex: userInformation.sex,
+        residenceId: userInformation.residence?.value,
+        userId: user.id,
+        birthDate: userInformation.birthday,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate(-1);
+    }
+  }, [isSuccess]);
 
   return (
     <div className="flex h-full flex-col">
       <TopAppBar title={'프로필 편집'} />
       <div className="mt-[2.5rem] flex-1 space-y-[2.9rem] overflow-y-scroll px-[2.5rem]">
-        <CollectNicknameAgeGender onChange={handleNicknameAgeGenderChange} />
-        <CollectRegionJobCategory onChange={handleRegionJobCategoryChange} />
+        <CollectNicknameAgeGender
+          onChange={handleNicknameAgeGenderChange}
+          onValidate={handleNicknameAgeGenderValidate}
+        />
+        <CollectRegionJobCategory
+          onChange={handleRegionJobCategoryChange}
+          onValidate={handleRegionJobCategoryValidate}
+        />
       </div>
       <DockedButton
         disabled={!buttonEnabled}
         className="absolute bottom-0"
-        // onClick={handleEditProfile}
+        backgroundClassName="w-full"
+        onClick={handleEditProfile}
       >
         변경 완료
       </DockedButton>
