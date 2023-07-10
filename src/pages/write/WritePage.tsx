@@ -117,24 +117,14 @@ function WritePage() {
       });
     }
 
-    let imgUrl = null;
-    if (imageFile.length !== 0) {
-      imageFile.forEach(async (file) => {
-        try {
-          // 업로드 과정
-          imgUrl = await uploadFirebase(user.id, file, 'posting');
-          // postData에 끼워넣기
-          postData.files.push({ url: imgUrl, contentType: 'image' });
-        } catch (e) {
-          console.error(e);
-        }
-      });
-    }
-    console.log(postData);
+    imageFile.forEach((url) => {
+      postData.files.push({ url, contentType: 'image' });
+    });
     // 포스팅 업로드
     await addPost(postData);
   };
 
+  console.log(imageFile);
   useEffect(() => {
     if (data) {
       navigate(`/feed/${data.id}`);
@@ -181,12 +171,14 @@ function WritePage() {
     }
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files![0]);
+    let imgUrl = '';
     reader.onload = (event: ProgressEvent<FileReader>): void => {
-      resizeImage(event.target?.result as string).then((result) =>
+      resizeImage(event.target?.result as string).then(async (result) => {
+        imgUrl = await uploadFirebase(user?.id, result, 'posting');
         setImageFile((prev) => {
-          return [...prev, result];
-        })
-      );
+          return [...prev, imgUrl];
+        });
+      });
       if (imgRef.current) {
         imgRef.current.src = event.target?.result as string;
       }
