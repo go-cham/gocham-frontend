@@ -30,6 +30,7 @@ export default function PostTitleInput({
   const handleReset = () => {
     setTitle('');
     inputRef.current?.focus();
+    onChange && onChange('');
   };
 
   return (
