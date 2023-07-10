@@ -12,7 +12,7 @@ export default function useAddPost() {
       return res.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: ['posts'],
       });
     },

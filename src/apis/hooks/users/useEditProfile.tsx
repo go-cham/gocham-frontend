@@ -15,8 +15,11 @@ export default function useEditProfile() {
       return res.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: ['user'],
+      });
+      queryClient.refetchQueries({
+        queryKey: ['posts'],
       });
     },
   });

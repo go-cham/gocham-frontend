@@ -14,7 +14,7 @@ export default function useDeletePost() {
       return res.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: ['posts'],
       });
     },
