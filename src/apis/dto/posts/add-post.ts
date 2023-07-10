@@ -1,56 +1,42 @@
-import { Gender } from '@/types/user';
-
 export interface AddPostRequest {
+  title: string;
+  expirationTime: string|null;
+  content: string;
   userId: number;
   worryCategoryId: number;
-  title: string;
-  files: {
-    contentType: string;
-    url: string;
-  }[];
-  expirationTime: string | null;
-  content: string;
   choices: {
     label: string;
+    url:string;
     sequenceNumber: number;
+  }[];
+  files: {
+    url: string;
+    contentType: string;
   }[];
 }
 
 export interface AddPostResponse {
-  expirationTime: string;
-  user: {
-    email: string;
-    phoneNumber: string | null;
-    profileImageUrl: string | null;
-    id: number;
-    status: string;
-    createdAt: string;
-    updatedAt: string;
-    etc: string | null;
-    kakaoId: number;
-    realName: string | null;
-    nickname: string;
-    birthDate: string;
-    sex: Gender;
-    privacyAcceptedAt: string;
-    termsOfUseAcceptedAt: string;
-    marketingAcceptedAt: string | null;
-    joinStatus: string;
-    joinedAt: string;
-    vendor: string;
-  };
-  title: string;
-  content: string;
-  worryCategory: {
-    id: number;
-    status: string;
-    createdAt: string;
-    updatedAt: string | null;
-    etc: string | null;
-    label: string;
-    description: string;
-  };
-  createdAt: string;
+  id:number;
+  updatedAt: string;
   etc: string | null;
-  id: number;
+  title: string;
+  expirationTime: string | null;
+  content: string;
+  worryFiles: {
+    id: number;
+    status: string;
+    createdAt: string;
+    updatedAt: string |null;
+    etc: string|null;
+    url: string;
+    contentType: string;
+  }[];
+  worryReports: {
+    id: number;
+    status: string;
+    createdAt: string;
+    updatedAt: string |null;
+    etc: string|null;
+    reason: string
+  }[];
 }
