@@ -50,7 +50,7 @@ export default function PostVoteInput({
         onChange={handleChange}
         value={item}
         className={twMergeCustom(
-          'w-full rounded-[0.5rem] border border-custom-background-200 bg-transparent py-[1.2rem] pl-[1.3rem] text-body4 placeholder:text-body3 group-focus-within:border-custom-gray-800',
+          'w-full rounded-[0.5rem] border border-custom-background-200 bg-transparent py-[1.2rem] pl-[1.3rem] text-body4 placeholder:text-body3 placeholder:text-custom-gray-400 group-focus-within:border-custom-gray-800',
           hasError &&
             'border-custom-semantic-warn-500 group-focus-within:border-custom-semantic-warn-500'
         )}
