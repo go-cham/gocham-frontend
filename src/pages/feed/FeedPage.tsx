@@ -6,6 +6,7 @@ import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
 import FloatingButton from '@/components/ui/buttons/FloatingButton';
+import PostDetailSkeleton from '@/components/ui/skeleton/PostDetailSkeleton';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
@@ -49,12 +50,12 @@ function FeedPage() {
         background={'white'}
         navigateRoute={params.route ? RouteURL.user : RouteURL.home}
       />
-      <ul
-        className="hide-scrollbar flex-1 overflow-y-scroll pt-[0.9rem]"
-        style={{ scrollSnapType: 'y proximity', scrollSnapAlign: 'start' }}
-      >
-        {posts &&
-          posts.map((post, index) => (
+      {posts ? (
+        <ul
+          className="hide-scrollbar flex-1 overflow-y-scroll pt-[0.9rem]"
+          style={{ scrollSnapType: 'y proximity', scrollSnapAlign: 'start' }}
+        >
+          {posts.map((post, index) => (
             <li
               key={post.id}
               ref={index === posts.length - 1 ? ref : undefined}
@@ -62,7 +63,19 @@ function FeedPage() {
               <PostDetail post={post} />
             </li>
           ))}
-      </ul>
+        </ul>
+      ) : (
+        <ul
+          className="hide-scrollbar flex-1 overflow-y-scroll pt-[0.9rem]"
+          style={{ scrollSnapType: 'y proximity', scrollSnapAlign: 'start' }}
+        >
+          {Array(5)
+            .fill(null)
+            .map((_, i) => (
+              <PostDetailSkeleton key={i} />
+            ))}
+        </ul>
+      )}
       {selectedVoteOptionId && (
         <FloatingButton
           onClick={handleVote}
