@@ -5,6 +5,7 @@ import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import BottomAppBar from '@/components/layout/BottomAppBar/BottomAppBar';
 import PostCard from '@/components/post/PostCard';
+import PostCardSkeleton from '@/components/ui/skeleton/PostCardSkeleton';
 import SelectMyPostType from '@/components/user/SelectMyPostType';
 import UserProfile from '@/components/user/UserProfile';
 import withAuth from '@/components/withAuth';
@@ -62,21 +63,26 @@ function UserPage() {
         postingCount={postingCount}
       />
       <ul className="hide-scrollbar flex flex-1 flex-col items-center space-y-[1.7rem] overflow-y-scroll px-[2.5rem] pb-[16rem]">
-        {posts &&
-          posts?.map((post, index) => (
-            <li
-              key={post.id}
-              ref={index === posts.length - 1 ? ref : undefined}
-              className="w-full"
-            >
-              <PostCard
-                post={post}
-                routeUrl={postType}
-                loggedIn={user?.type === userType.activatedUser}
-                showProfile={postType !== 'my'}
-              />
-            </li>
-          ))}
+        {posts
+          ? posts.map((post, index) => (
+              <li
+                key={post.id}
+                ref={index === posts.length - 1 ? ref : undefined}
+                className="w-full"
+              >
+                <PostCard
+                  post={post}
+                  routeUrl={postType}
+                  loggedIn={user?.type === userType.activatedUser}
+                  showProfile={postType !== 'my'}
+                />
+              </li>
+            ))
+          : Array(10)
+              .fill(null)
+              .map((_, index) => (
+                <PostCardSkeleton key={index} hasProfile={false} />
+              ))}
       </ul>
       <BottomAppBar />
     </div>
