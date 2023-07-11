@@ -47,12 +47,13 @@ function UserPage() {
 
   return (
     <div className="flex h-full flex-col">
-      <img
-        src={SettingIcon}
-        alt={'설정'}
-        className="mr-[2.5rem] mt-[1.2rem] w-[3.2rem] cursor-pointer self-end"
-        onClick={() => navigate(RouteURL.settings)}
-      />
+      <div className="mr-[2.5rem] mt-[1.2rem] h-[3.2rem] w-[3.2rem] cursor-pointer self-end">
+        <img
+          src={SettingIcon}
+          alt={'설정'}
+          onClick={() => navigate(RouteURL.settings)}
+        />
+      </div>
       <UserProfile />
       <div className="my-[1.9rem] h-[1px] w-full bg-custom-gray-300" />
       <SelectMyPostType
