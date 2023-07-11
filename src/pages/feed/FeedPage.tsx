@@ -66,7 +66,7 @@ function FeedPage() {
       {selectedVoteOptionId && (
         <FloatingButton
           onClick={handleVote}
-          className="fixed bottom-[4.8rem] left-1/2 z-50 -translate-x-1/2"
+          className="absolute bottom-[4.8rem] left-1/2 z-50 -translate-x-1/2"
         >
           투표하기
         </FloatingButton>
