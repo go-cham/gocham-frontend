@@ -12,6 +12,7 @@ export default function useGetPost(postId?: number) {
       );
       return res.data;
     },
+    enabled: !!postId,
   });
 
   return {

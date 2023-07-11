@@ -5,9 +5,10 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import useAddPost from '@/apis/hooks/posts/useAddPost';
+import useGetPost from '@/apis/hooks/posts/useGetPost';
 import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
 import PostContentInput from '@/components/post/form/PostContentInput/PostContentInput';
@@ -52,6 +53,9 @@ const MIN_NUM_VOTE_OPTIONS = 2;
 const MAX_NUM_VOTE_OPTIONS = 4;
 
 function WritePage() {
+  const location = useLocation();
+  const params = useParams();
+  const mode = location.pathname.endsWith('edit') ? 'edit' : 'new';
   const navigate = useNavigate();
   const { addPost, isSuccess, error, data } = useAddPost();
   const imageInput = useRef<HTMLInputElement | null>(null);
@@ -83,6 +87,7 @@ function WritePage() {
     deadline: deadlineOptions[0],
   });
   const { user } = useUser();
+  const { post } = useGetPost(params?.id ? +params.id : undefined);
 
   const handlePostUpload = async () => {
     if (!user) return false;
@@ -325,6 +330,17 @@ function WritePage() {
     await handlePostUpload();
   };
 
+  const handleEditPost = () => {
+    console.log('edit!');
+  };
+
+  // useEffect(() => {
+  //   if(post) {
+  //     setCategoryValue(post.)
+  //   }
+  // }, [post])
+  console.log(post);
+
   useEffect(() => {
     if (isSuccess && data) {
       navigate(`/feed/${data.id}`);
@@ -336,7 +352,10 @@ function WritePage() {
 
   return (
     <div className="flex h-full flex-col">
-      <TopAppBar title={'글 작성'} navigateRoute="/" />
+      <TopAppBar
+        title={mode === 'new' ? '글 작성' : '글 수정'}
+        navigateRoute={mode === 'new' ? '/' : `/feed/${params.id}`}
+      />
       <div className="hide-scrollbar flex-1 overflow-y-scroll px-[2.5rem] pb-[2.1rem] pt-[3.1rem]">
         <input
           onChange={onLoadFiles}
@@ -350,6 +369,7 @@ function WritePage() {
           onUploadImage={postTitleImgBtnClicked}
           errorMessage={postTitleError}
           className="w-full"
+          defaultValue={post?.title}
         />
         <div className="mt-[1.3rem] flex w-full">
           {imageFile &&
@@ -376,6 +396,7 @@ function WritePage() {
           onChange={contentInputChanged}
           errorMessage={postInputError}
           className="mt-[3.7rem] w-full"
+          defaultValue={post?.content}
         />
         <div className="mt-[3.7rem] flex justify-between space-x-[2.6rem]">
           <Select
@@ -439,11 +460,11 @@ function WritePage() {
         </div>
       </div>
       <DockedButton
-        onClick={doneBtnClicked}
+        onClick={mode === 'new' ? doneBtnClicked : handleEditPost}
         backgroundClassName="w-full"
         variant="line"
       >
-        작성 완료
+        {mode === 'new' ? '작성 완료' : '수정 완료'}
       </DockedButton>
     </div>
   );

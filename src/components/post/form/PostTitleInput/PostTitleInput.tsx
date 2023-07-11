@@ -10,6 +10,7 @@ interface PostTitleInputProps {
   onUploadImage?: () => void;
   onChange?: (title: string) => void;
   className?: string;
+  defaultValue?: string;
 }
 
 export default function PostTitleInput({
@@ -17,8 +18,9 @@ export default function PostTitleInput({
   onUploadImage,
   onChange,
   className,
+  defaultValue,
 }: PostTitleInputProps) {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(defaultValue || '');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {

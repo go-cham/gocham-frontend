@@ -4,6 +4,7 @@ export const RouteURL = {
   feed_star: '/feed/:id',
   feed_route_star: '/feed/:id/:route',
   feed_report: '/feed/:id/report',
+  feed_edit: '/feed/:id/edit',
   login: '/login',
   login_oauth_kakao: '/login/oauth/kakao',
   register_term: '/register/term',
