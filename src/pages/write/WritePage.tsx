@@ -136,12 +136,12 @@ function WritePage() {
   };
 
   const onLoadFiles = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    if (imageFile.length === 3) {
-      alert('사진 첨부는 최대 3장까지 가능합니다.');
+    console.log('change');
+    if (!e.target.files || e.target.files.length === 0) {
       return;
     }
     const reader = new FileReader();
-    reader.readAsDataURL(e.target.files![0]);
+    reader.readAsDataURL(e.target.files[0]);
     let imgUrl = '';
     reader.onload = (event: ProgressEvent<FileReader>): void => {
       resizeImage(event.target?.result as string).then(async (result) => {
@@ -154,10 +154,16 @@ function WritePage() {
         imgRef.current.src = event.target?.result as string;
       }
     };
+    e.target.value = '';
   };
 
   const postTitleImgBtnClicked = () => {
     if (imageInput.current) {
+      if (imageFile.length === 3) {
+        alert('사진 첨부는 최대 3장까지 가능합니다.');
+        return;
+      }
+      console.log(imageInput.current?.files);
       imageInput.current.click();
     }
   };
@@ -331,15 +337,34 @@ function WritePage() {
   };
 
   const handleEditPost = () => {
-    console.log('edit!');
+    if (!user || !post) {
+      return;
+    }
+    const data = {
+      title: votingContent.title,
+      content: votingContent.content,
+      worryCategoryId: votingContent.category.value,
+      files: imageFile.map((url) => ({ url, contentType: 'image' })),
+    };
+
+    console.log(data);
   };
 
-  // useEffect(() => {
-  //   if(post) {
-  //     setCategoryValue(post.)
-  //   }
-  // }, [post])
-  console.log(post);
+  useEffect(() => {
+    if (post) {
+      setVotingContent({
+        ...votingContent,
+        title: post.title,
+        content: post.content,
+      });
+      setCategoryValue(post.worryCategory.id);
+      setVoteState(
+        post.worryChoices.map((choice) => [choice.label, choice.url || ''])
+      );
+      setVotingNum(post.worryChoices.length - 1);
+      setImageFile(post.worryFiles.map((file) => file.url));
+    }
+  }, [post]);
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -349,6 +374,10 @@ function WritePage() {
       alert(alertMessage.error.post.noUploadPermission);
     }
   }, [isSuccess, error, data]);
+
+  if (mode === 'edit' && !post) {
+    return null;
+  }
 
   return (
     <div className="flex h-full flex-col">
@@ -424,6 +453,7 @@ function WritePage() {
             value={
               deadlineOptions.find((o) => o.value === voteTimeValue)?.label
             }
+            readOnly={mode === 'edit'}
           />
         </div>
         <div className="mt-[3.7rem] space-y-[1.2rem]">
@@ -441,17 +471,23 @@ function WritePage() {
                   className="hide"
                 />
                 <PostVoteInput
-                  image={voteState[i][1]}
+                  image={
+                    mode === 'new'
+                      ? voteState[i][1]
+                      : post?.worryChoices[i].url || ''
+                  }
                   onChange={voteChanged(i)}
                   className="w-full"
                   hasError={voteError[i]}
                   onUploadImage={voteImageAddClicked(i)}
                   onDeleteImage={voteImageDeleteClicked(i)}
+                  readOnly={mode === 'edit'}
+                  defaultValue={post?.worryChoices[i].label}
                 />
               </Fragment>
             ))}
           <EditButton
-            disabled={votingNum === MAX_NUM_VOTE_OPTIONS}
+            disabled={votingNum === MAX_NUM_VOTE_OPTIONS || mode === 'edit'}
             onClick={addVotingClicked}
             className="w-full"
           >

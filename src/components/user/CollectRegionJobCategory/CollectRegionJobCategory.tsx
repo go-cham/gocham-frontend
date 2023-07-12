@@ -164,7 +164,7 @@ export default function CollectNicknameAgeGender({
           options={categoryOptions}
           wrapperClassName="w-full"
           onChange={handleCategorySelect}
-          readonly={categories.length >= MAX_CATEGORIES_SELECT}
+          readOnly={categories.length >= MAX_CATEGORIES_SELECT}
         />
         <div className="flex flex-wrap">
           {categories.map((category) => (

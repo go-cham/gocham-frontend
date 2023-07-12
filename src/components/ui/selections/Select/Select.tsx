@@ -14,7 +14,7 @@ interface SelectProps {
   wrapperClassName?: string;
   onChange?: (value: number) => void;
   value?: string;
-  readonly?: boolean;
+  readOnly?: boolean;
   highlight?: boolean;
 }
 
@@ -27,19 +27,19 @@ export default function Select({
   wrapperClassName,
   onChange,
   value,
-  readonly,
+  readOnly,
   highlight,
 }: SelectProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   const handleMenuToggle = () => {
-    if (readonly) return;
+    if (readOnly) return;
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
   };
 
   const handleSelect = (value: number) => {
-    if (readonly) return;
+    if (readOnly) return;
     setMenuOpen(false);
     onChange && onChange(value);
   };

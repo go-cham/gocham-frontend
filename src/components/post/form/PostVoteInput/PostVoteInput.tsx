@@ -13,6 +13,8 @@ interface PostVoteInputProps {
   hasError?: boolean;
   placeholder?: string;
   maxLength?: number;
+  readOnly?: boolean;
+  defaultValue?: string;
 }
 
 export default function PostVoteInput({
@@ -24,8 +26,10 @@ export default function PostVoteInput({
   hasError,
   placeholder = '항목 입력',
   maxLength = 15,
+  readOnly,
+  defaultValue,
 }: PostVoteInputProps) {
-  const [item, setItem] = useState('');
+  const [item, setItem] = useState(defaultValue || '');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +45,13 @@ export default function PostVoteInput({
   };
 
   return (
-    <div className={twMergeCustom('group relative w-[34rem]', className)}>
+    <div
+      className={twMergeCustom(
+        'group relative w-[34rem] rounded-[0.5rem]',
+        className,
+        readOnly && 'pointer-events-none bg-custom-background-100'
+      )}
+    >
       <input
         ref={inputRef}
         type="text"
@@ -49,10 +59,12 @@ export default function PostVoteInput({
         placeholder={placeholder}
         onChange={handleChange}
         value={item}
+        readOnly={readOnly}
         className={twMergeCustom(
           'w-full rounded-[0.5rem] border border-custom-background-200 bg-transparent py-[1.2rem] pl-[1.3rem] text-body4 placeholder:text-body3 placeholder:text-custom-gray-400 group-focus-within:border-custom-gray-800',
           hasError &&
-            'border-custom-semantic-warn-500 group-focus-within:border-custom-semantic-warn-500'
+            'border-custom-semantic-warn-500 group-focus-within:border-custom-semantic-warn-500',
+          readOnly && 'text-custom-text-500'
         )}
       />
       <div className="absolute right-[1.2rem] top-1/2 flex -translate-y-1/2 space-x-[0.8rem]">
