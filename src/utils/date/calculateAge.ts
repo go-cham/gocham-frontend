@@ -12,3 +12,8 @@ export function calculateAge(year: number, month: number, day: number) {
 
   return age;
 }
+
+export function calculateAgeFromBirthday(birthday: string) {
+  const date = new Date(birthday);
+  return calculateAge(date.getFullYear(), date.getMonth() + 1, date.getDate());
+}
