@@ -8,6 +8,7 @@ import {
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import useAddPost from '@/apis/hooks/posts/useAddPost';
+import useEditPost from '@/apis/hooks/posts/useEditPost';
 import useGetPost from '@/apis/hooks/posts/useGetPost';
 import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
@@ -88,6 +89,7 @@ function WritePage() {
   });
   const { user } = useUser();
   const { post } = useGetPost(params?.id ? +params.id : undefined);
+  const { editPost, isSuccess: editSuccess } = useEditPost();
 
   const handlePostUpload = async () => {
     if (!user) return false;
@@ -340,14 +342,14 @@ function WritePage() {
     if (!user || !post) {
       return;
     }
-    const data = {
+
+    editPost({
+      id: post.id,
       title: votingContent.title,
       content: votingContent.content,
       worryCategoryId: votingContent.category.value,
-      files: imageFile.map((url) => ({ url, contentType: 'image' })),
-    };
-
-    console.log(data);
+      // files: imageFile.map((url) => ({ url, contentType: 'image' })),
+    });
   };
 
   useEffect(() => {
@@ -374,6 +376,12 @@ function WritePage() {
       alert(alertMessage.error.post.noUploadPermission);
     }
   }, [isSuccess, error, data]);
+
+  useEffect(() => {
+    if (editSuccess) {
+      navigate(-1);
+    }
+  }, [editSuccess]);
 
   if (mode === 'edit' && !post) {
     return null;
