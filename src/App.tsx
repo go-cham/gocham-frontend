@@ -37,6 +37,7 @@ export default function App() {
         <Route path={RouteURL.feed_star} element={<FeedPage />} />
         <Route path={RouteURL.feed_report} element={<FeedReportPage />} />
         <Route path={RouteURL.feed_route_star} element={<FeedPage />} />
+        <Route path={RouteURL.feed_edit} element={<WritePage />} />
         <Route path={RouteURL.login} element={<LoginPage />} />
         <Route
           path={RouteURL.login_oauth_kakao}

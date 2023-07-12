@@ -15,4 +15,25 @@ export type GetPostResponse = {
   };
   replyCount: number;
   userWorryChoiceCount: number;
+  worryChoices: {
+    id: number;
+    isAbstained: 'yes' | 'no';
+    label: string;
+    sequenceNubmer: number;
+    url: string | null;
+  }[];
+  worryCategory: {
+    id: number;
+    label: string;
+    description: string;
+  };
+  worryFiles: {
+    id: number;
+    status: string;
+    createdAt: string;
+    updatedAt: string | null;
+    etc: string | null;
+    url: string;
+    contentType: string;
+  }[];
 };

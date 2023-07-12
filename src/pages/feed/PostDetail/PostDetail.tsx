@@ -45,7 +45,7 @@ export default function PostDetail({ post }: PostDetailProps) {
 
   const handleMoreSelect = (value: number) => {
     if (value === MENU.Edit) {
-      console.log('게시글 수정');
+      navigate(`/feed/${post.id}/edit`);
     } else if (value === MENU.Delete) {
       if (getRemainingTime(post.expirationTime) === '마감됨') {
         alert('투표가 종료된 게시물은 삭제하실 수 없습니다.');

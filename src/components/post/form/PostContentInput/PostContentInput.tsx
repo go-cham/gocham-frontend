@@ -8,14 +8,16 @@ interface PostContentInputProps {
   onChange?: (content: string) => void;
   errorMessage?: string | null;
   className?: string;
+  defaultValue?: string;
 }
 
 export default function PostContentInput({
   onChange,
   errorMessage,
   className,
+  defaultValue,
 }: PostContentInputProps) {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState(defaultValue || '');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newContent = e.target.value;
