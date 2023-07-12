@@ -96,7 +96,8 @@ export default function PostVote({
             const count =
               usersChoices.find((o) => o.label === option.label)
                 ?.userWorryChoiceCount || 0;
-            const percentage = total === 0 ? 0 : (count / total) * 100;
+            const percentage =
+              total === 0 ? 0 : Math.round((count / total) * 100);
 
             return (
               <div key={option.id}>
