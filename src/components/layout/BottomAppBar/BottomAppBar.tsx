@@ -6,6 +6,7 @@ import PlusIcon from '@/components/icons/PlusIcon';
 import ProfileIcon from '@/components/icons/ProfileIcon';
 import { RouteURL } from '@/constants/route-url';
 import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
+import { customColors } from '@/styles/colors';
 
 export default function BottomAppBar() {
   const navigate = useNavigate();
@@ -46,14 +47,18 @@ export default function BottomAppBar() {
           className={selectedMenu === 'posting' ? 'pointer-events-none' : ''}
         >
           <HomeIcon
-            color={selectedMenu !== 'posting' ? '#bdbdbd' : undefined}
+            color={
+              selectedMenu !== 'posting'
+                ? customColors.text.subExplain['400']
+                : customColors.text.subTitle['700']
+            }
           />
         </button>
 
         {/* Add */}
         <button
           onClick={handleGoWrite}
-          className="flex h-[5.7rem] w-[5.7rem] items-center justify-center rounded-full bg-custom-main-500"
+          className="flex h-[5.7rem] w-[5.7rem] items-center justify-center rounded-full bg-mainSub-main-500"
         >
           <PlusIcon color="white" className="h-[3.2rem] w-[3.2rem]" />
         </button>
@@ -64,7 +69,11 @@ export default function BottomAppBar() {
           className={selectedMenu === 'user' ? 'pointer-events-none' : ''}
         >
           <ProfileIcon
-            color={selectedMenu !== 'user' ? '#bdbdbd' : undefined}
+            color={
+              selectedMenu !== 'user'
+                ? customColors.text.subExplain['400']
+                : customColors.text.subTitle['700']
+            }
           />
         </button>
       </div>

@@ -49,7 +49,7 @@ export default function PostVoteInput({
       className={twMergeCustom(
         'group relative w-[34rem] rounded-[0.5rem]',
         className,
-        readOnly && 'pointer-events-none bg-custom-background-100'
+        readOnly && 'pointer-events-none bg-background-voteBg-100'
       )}
     >
       <input
@@ -61,10 +61,10 @@ export default function PostVoteInput({
         value={item}
         readOnly={readOnly}
         className={twMergeCustom(
-          'w-full rounded-[0.5rem] border border-custom-background-200 bg-transparent py-[1.2rem] pl-[1.3rem] text-body4 placeholder:text-body3 placeholder:text-custom-gray-400 group-focus-within:border-custom-gray-800',
+          'w-full rounded-[0.5rem] border border-background-dividerLine-300 bg-transparent py-[1.2rem] pl-[1.3rem] text-body4 placeholder:text-body3 placeholder:text-text-subExplain-400 group-focus-within:border-text-subTitle-700',
           hasError &&
-            'border-custom-semantic-warn-500 group-focus-within:border-custom-semantic-warn-500',
-          readOnly && 'text-custom-text-500'
+            'border-semantic-warn-500 group-focus-within:border-semantic-warn-500',
+          readOnly && 'text-text-explain-500'
         )}
       />
       <div className="absolute right-[1.2rem] top-1/2 flex -translate-y-1/2 space-x-[0.8rem]">
@@ -74,7 +74,7 @@ export default function PostVoteInput({
             className="hidden group-focus-within:block"
           >
             <DeleteIcon
-              className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-custom-gray-300"
+              className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300"
               color="white"
             />
           </button>

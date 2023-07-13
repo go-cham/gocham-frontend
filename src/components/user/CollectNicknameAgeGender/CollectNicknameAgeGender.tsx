@@ -168,8 +168,8 @@ export default function CollectNicknameAgeGender({
               type="button"
               className={`h-[3.9rem] w-[48%] rounded-[0.5rem] border-[1px] text-body4 ${
                 gender === currentGender
-                  ? 'border-custom-main-200 bg-custom-main-100 text-custom-main-500'
-                  : 'border-custom-background-200 bg-white text-custom-text-500'
+                  ? 'border-mainSub-mainPush-200 bg-mainSub-main-100 text-mainSub-main-500'
+                  : 'border-background-dividerLine-300 bg-white text-text-explain-500'
               }`}
               onClick={() => handleSelectGender(currentGender)}
             >

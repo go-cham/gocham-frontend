@@ -12,7 +12,7 @@ export default function HomeHeader() {
   };
 
   return (
-    <header className="h-[6.3rem] bg-white py-[1.2rem] pl-[2.5rem]">
+    <header className="h-[6.3rem] py-[1.2rem] pl-[2.5rem]">
       <img
         src={LogoAndTitle}
         alt={'로고'}

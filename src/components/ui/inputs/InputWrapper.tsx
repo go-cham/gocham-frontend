@@ -29,7 +29,7 @@ export default function InputWrapper({
       <div className="flex items-baseline space-x-[0.7rem]">
         <label
           className={twMergeCustom(
-            'mb-[0.4rem] text-body1 text-gray-800',
+            'mb-[0.4rem] text-body1 text-text-subTitle-700',
             labelClassName
           )}
         >
@@ -41,11 +41,11 @@ export default function InputWrapper({
       </div>
       <div
         className={twMergeCustom(
-          'group relative flex w-full space-x-[0.8rem] border-b-[0.2rem] border-custom-gray-500 py-[0.5rem] text-body4 focus-within:-mb-[0.2rem] focus-within:border-b-[0.4rem] focus-within:border-custom-gray-800',
+          'group relative flex w-full space-x-[0.8rem] border-b-[0.2rem] border-text-explain-500 py-[0.5rem] text-body4 focus-within:-mb-[0.2rem] focus-within:border-b-[0.4rem] focus-within:border-text-subTitle-700',
           successMessage &&
-            'border-custom-semantic-success-600 focus-within:border-custom-semantic-success-600',
+            'border-semantic-success-600 focus-within:border-semantic-success-600',
           errorMessage &&
-            'border-custom-semantic-warn-500 focus-within:border-custom-semantic-warn-500'
+            'border-semantic-warn-500 focus-within:border-semantic-warn-500'
         )}
       >
         {children}
@@ -54,8 +54,8 @@ export default function InputWrapper({
         <span
           className={twMergeCustom(
             'absolute -bottom-[2.1rem] right-0 text-body1',
-            successMessage && 'text-custom-semantic-success-600',
-            errorMessage && 'text-custom-semantic-warn-500'
+            successMessage && 'text-semantic-success-600',
+            errorMessage && 'text-semantic-warn-500'
           )}
         >
           {successMessage || errorMessage}

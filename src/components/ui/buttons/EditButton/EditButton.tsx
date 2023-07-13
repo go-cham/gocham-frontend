@@ -15,7 +15,7 @@ export default function EditButton({
       onClick={onClick}
       disabled={disabled}
       className={twMergeCustom(
-        'border border-custom-background-200 bg-white text-custom-text-500 hover:bg-white active:bg-white disabled:bg-custom-background-100 disabled:text-custom-text-400',
+        'border border-background-dividerLine-300 bg-white text-text-explain-500 hover:bg-white active:bg-white disabled:bg-background-voteBg-100 disabled:text-text-subExplain-400',
         className
       )}
     >

@@ -56,7 +56,7 @@ export default function TextInput({
         onChange={handleChange}
         value={value}
         maxLength={maxLength}
-        className="w-full bg-transparent text-body4 text-custom-gray-900 placeholder:text-body3 placeholder:text-custom-gray-400"
+        className="w-full bg-transparent text-body4 placeholder:text-body3 placeholder:text-text-subExplain-400"
       />
       <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center space-x-[0.5rem]">
         {value && (
@@ -66,7 +66,7 @@ export default function TextInput({
           >
             <DeleteIcon
               className={twMergeCustom(
-                'h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-custom-gray-300',
+                'h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300',
                 !successMessage && !errorMessage && 'mr-[1.3rem]'
               )}
               color="white"

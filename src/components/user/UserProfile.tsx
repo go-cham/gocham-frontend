@@ -29,10 +29,10 @@ export default function UserProfile() {
         <span className="rounded-full bg-[#f4f4f5] p-[0.8rem] text-heading3 text-[#b0b2b8]">
           {String(age)[0] + '0'}
         </span>
-        <span className="text-heading1">{user.nickname}</span>
+        <span className="text-heading1 text-[#2a2d37]">{user.nickname}</span>
       </div>
       <button
-        className="rounded-[0.5rem] bg-custom-background-100 px-[1rem] py-[0.7rem] text-body2"
+        className="rounded-[0.5rem] bg-background-voteBg-100 px-[1rem] py-[0.7rem] text-body2 text-text-subTitle-700"
         onClick={handleGoEditProfile}
       >
         프로필 편집

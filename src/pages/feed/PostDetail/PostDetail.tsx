@@ -13,6 +13,7 @@ import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
 import Popup from '@/components/ui/modal/Popup';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
+import { customColors } from '@/styles/colors';
 import { Post } from '@/types/post';
 import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
@@ -122,7 +123,7 @@ export default function PostDetail({ post }: PostDetailProps) {
 
   return (
     <div
-      className="flex flex-col border-b border-custom-background-200 py-[1.3rem]"
+      className="flex flex-col border-b border-background-dividerLine-300 py-[1.3rem]"
       id={isSelected ? 'vote-selected' : ''}
     >
       <div className="flex items-center justify-between px-[2.5rem]">
@@ -163,7 +164,7 @@ export default function PostDetail({ post }: PostDetailProps) {
         </button>
       </div>
       <span
-        className="cursor-pointer px-[2.5rem] text-body2 text-custom-gray-800"
+        className="cursor-pointer px-[2.5rem] text-body2 text-text-subTitle-700"
         onClick={() => navigate(`/feed/${post.id}/comment`)}
       >
         댓글 {post.replyCount}개 모두 보기
@@ -193,7 +194,7 @@ function PostDetailContent({
     <div>
       <div className="px-[2.5rem]">
         <h1 className="mt-[1.3rem] text-heading2">{title}</h1>
-        <p className="mt-[0.8rem] break-words text-body3 text-custom-gray-800">
+        <p className="mt-[0.8rem] break-words text-body3 text-text-subTitle-700">
           {formatText(content)}
         </p>
       </div>
@@ -234,13 +235,17 @@ function PostExpiration({ remainingTime }: { remainingTime: string }) {
   const isClosed = remainingTime === 'closed';
   return (
     <div className="mt-[1.5rem] flex items-center space-x-[5.67px] px-[2.5rem]">
-      <ClockIcon color={isClosed ? '#9e9e9e' : undefined} />
+      <ClockIcon
+        color={isClosed ? customColors.text.explain['500'] : undefined}
+      />
       {isClosed ? (
-        <span className="text-body2 text-custom-text-500">
+        <span className="text-body2 text-text-explain-500">
           투표가 마감되었어요
         </span>
       ) : (
-        <span className="text-body2 text-custom-main-500">{remainingTime}</span>
+        <span className="text-body2 text-mainSub-main-500">
+          {remainingTime}
+        </span>
       )}
     </div>
   );

@@ -465,7 +465,9 @@ function WritePage() {
           />
         </div>
         <div className="mt-[3.7rem] space-y-[1.2rem]">
-          <div className="text-subheading">투표 항목</div>
+          <div className="text-subheading text-text-subTitle-700">
+            투표 항목
+          </div>
           {Array(votingNum)
             .fill(null)
             .map((_, i) => (

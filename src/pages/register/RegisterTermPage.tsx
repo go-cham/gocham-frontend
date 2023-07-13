@@ -96,7 +96,7 @@ export default function RegisterTermPage() {
               })
             }
           />
-          <div className="relative -left-[2.5rem] my-[1.7rem] h-[1px] w-[calc(100%+5rem)] bg-custom-background-200" />
+          <div className="relative -left-[2.5rem] my-[1.7rem] h-[1px] w-[calc(100%+5rem)] bg-background-dividerLine-300" />
           <div className="space-y-[1.3rem]">
             <TermCheckbox
               text="[필수] 고민의 참견 이용약관 동의"

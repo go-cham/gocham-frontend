@@ -26,8 +26,8 @@ export default function Dropdown({
         <li
           key={option.value}
           className={twMergeCustom(
-            'w-full cursor-pointer pr-[1.5rem] text-end text-body2 text-custom-gray-800',
-            highlight && value === option.label && 'text-custom-main-500'
+            'w-full cursor-pointer pr-[1.5rem] text-end text-body2 text-text-subTitle-700',
+            highlight && value === option.label && 'text-mainSub-main-500'
           )}
           onClick={() => onSelect && onSelect(option.value)}
         >

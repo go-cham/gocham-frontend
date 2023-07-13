@@ -48,7 +48,7 @@ export default function PostTitleInput({
         type="text"
         placeholder="제목 입력"
         maxLength={30}
-        className="w-full bg-transparent pr-[7rem] text-body4 placeholder:text-body3 placeholder:text-custom-text-400"
+        className="w-full bg-transparent pr-[7rem] text-body4 placeholder:text-body3 placeholder:text-text-subExplain-400"
         onChange={handleTitleChange}
         value={title}
       />
@@ -59,7 +59,7 @@ export default function PostTitleInput({
             className="hidden group-focus-within:block"
           >
             <DeleteIcon
-              className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-custom-gray-300"
+              className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300"
               color="white"
             />
           </button>

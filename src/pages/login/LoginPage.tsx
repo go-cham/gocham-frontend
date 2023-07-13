@@ -31,7 +31,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center bg-custom-main-500">
+    <div className="relative flex h-full w-full flex-col items-center bg-mainSub-main-500">
       <BackIcon
         onClick={() => navigate('/')}
         className="ml-[0.9rem] cursor-pointer self-start"

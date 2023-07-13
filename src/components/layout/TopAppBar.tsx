@@ -39,7 +39,9 @@ export default function TopAppBar({
         className="absolute left-[0.9rem] h-full cursor-pointer"
         onClick={handleClickBackButton}
       />
-      {title && <h1 className="text-heading3">{title}</h1>}
+      {title && (
+        <h1 className="text-heading3 text-text-subTitle-700">{title}</h1>
+      )}
     </header>
   );
 }

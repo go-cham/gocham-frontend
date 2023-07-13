@@ -19,8 +19,8 @@ export default function Chip({
       className={twMergeCustom(
         'flex cursor-auto items-center rounded-[5px] py-[0.7rem] pl-[1rem] text-body2',
         variant === 'gray'
-          ? 'bg-custom-gray-100 text-custom-gray-800'
-          : 'bg-custom-main-50 text-custom-main-500',
+          ? 'bg-background-voteBg-100 text-text-subTitle-700'
+          : 'bg-mainSub-main-100 text-mainSub-main-500',
 
         variant === 'delete' ? 'pr-[0.6rem]' : 'pr-[1rem]',
         className

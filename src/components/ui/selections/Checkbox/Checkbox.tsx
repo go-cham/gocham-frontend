@@ -20,8 +20,8 @@ export default function Checkbox({
     <label
       htmlFor={id}
       className={twMergeCustom(
-        'flex h-[2.4rem] w-[2.4rem]  cursor-pointer items-center justify-center rounded-[0.3rem] border border-custom-background-200',
-        checked && 'border-none bg-custom-main-500',
+        'flex h-[2.4rem] w-[2.4rem]  cursor-pointer items-center justify-center rounded-[0.3rem] border border-background-dividerLine-300',
+        checked && 'border-none bg-mainSub-main-500',
         className
       )}
     >
