@@ -11,6 +11,7 @@ import MoreIcon from '@/components/icons/MoreIcon';
 import ShareIcon from '@/components/icons/ShareIcon';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Popup from '@/components/ui/modal/Popup';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { customColors } from '@/styles/colors';
@@ -37,7 +38,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   const [showMore, setShowMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const { deletePost, error, isSuccess } = useDeletePost();
+  const { deletePost, error, isSuccess, isLoading } = useDeletePost();
   const selectedVoteOptionId = useAtomValue(selectedVoteOptionIdAtom);
 
   const handleClickMore = () => {
@@ -126,6 +127,11 @@ export default function PostDetail({ post }: PostDetailProps) {
       className="flex flex-col border-b border-background-dividerLine-300 py-[1.3rem]"
       id={isSelected ? 'vote-selected' : ''}
     >
+      {isLoading && (
+        <div className="absolute left-1/2 top-1/2 z-[1000] -translate-x-1/2 -translate-y-1/2">
+          <LoadingSpinner />
+        </div>
+      )}
       <div className="flex items-center justify-between px-[2.5rem]">
         <PostUserProfile
           nickname={post.user.nickname}
