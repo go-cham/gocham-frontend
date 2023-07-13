@@ -86,12 +86,14 @@ export default function PostVoteInput({
               alt="투표 이미지"
               className="h-full w-full object-cover"
             />
-            <button onClick={onDeleteImage}>
-              <DeleteIcon
-                className="absolute right-0 top-0 h-[1.6rem] w-[1.6rem] bg-[#676a72]"
-                color="white"
-              />
-            </button>
+            {!readOnly && (
+              <button onClick={onDeleteImage}>
+                <DeleteIcon
+                  className="absolute right-0 top-0 h-[1.6rem] w-[1.6rem] bg-[#676a72]"
+                  color="white"
+                />
+              </button>
+            )}
           </div>
         )}
         {!image && onUploadImage && (
