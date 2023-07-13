@@ -27,7 +27,10 @@ function UnregisterPage() {
   };
 
   const handleUnregister = () => {
-    unregister(user.id);
+    unregister({
+      userId: user.id,
+      reason: reason,
+    });
   };
 
   useEffect(() => {

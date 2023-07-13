@@ -5,8 +5,13 @@ import { axiosInstance } from '@/libs/axios';
 export default function useUnregister() {
   const { isLoading, error, mutate, isSuccess } = useMutation({
     mutationKey: ['unregister'],
-    mutationFn: async (userId: number) => {
-      const res = await axiosInstance.patch(`/user/${userId}/soft-delete`);
+    mutationFn: async (data: { userId: number; reason: string }) => {
+      const res = await axiosInstance.patch(
+        `/user/${data.userId}/soft-delete`,
+        {
+          reason: data.reason,
+        }
+      );
       return res.data;
     },
   });
