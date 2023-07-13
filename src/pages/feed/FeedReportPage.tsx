@@ -5,6 +5,7 @@ import useGetPost from '@/apis/hooks/posts/useGetPost';
 import useReportPost from '@/apis/hooks/posts/useReportPost';
 import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
 import { reportOptions } from '@/constants/Options';
@@ -15,7 +16,7 @@ function FeedPage() {
   const { user } = useUser();
   const { post } = useGetPost(id ? +id : undefined);
   const [selectedReasonId, setSelectedReasonId] = useState<number>();
-  const { reportPost, error, isSuccess } = useReportPost();
+  const { reportPost, error, isSuccess, isLoading } = useReportPost();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,6 +54,11 @@ function FeedPage() {
 
   return (
     <div className="flex h-full flex-col">
+      {isLoading && (
+        <div className="absolute left-1/2 top-1/2 z-[1000] -translate-x-1/2 -translate-y-1/2">
+          <LoadingSpinner />
+        </div>
+      )}
       <TopAppBar title="게시물 신고" />
       <h1 className="mt-[3.3rem] border-b border-background-dividerLine-300 pb-[3.5rem] pl-[1.5rem] text-heading2">
         ‘{post.title}’
