@@ -15,6 +15,7 @@ import TopAppBar from '@/components/layout/TopAppBar';
 import PostContentInput from '@/components/post/form/PostContentInput/PostContentInput';
 import PostTitleInput from '@/components/post/form/PostTitleInput/PostTitleInput';
 import PostVoteInput from '@/components/post/form/PostVoteInput/PostVoteInput';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import DockedButton from '@/components/ui/buttons/DockedButton';
 import EditButton from '@/components/ui/buttons/EditButton/EditButton';
 import Select from '@/components/ui/selections/Select';
@@ -27,7 +28,6 @@ import {
 import { uploadFirebase } from '@/dataManager/firebaseManager';
 import { resizeImage } from '@/dataManager/imageResizing';
 import DeleteIcon from '@/images/Write/delete_icon.svg';
-import { alertMessage } from '@/utils/alertMessage';
 import getFutureDateTime from '@/utils/getFutureDateTime';
 
 type WriteContentType = {
@@ -58,7 +58,13 @@ function WritePage() {
   const params = useParams();
   const mode = location.pathname.endsWith('edit') ? 'edit' : 'new';
   const navigate = useNavigate();
-  const { addPost, isSuccess, error, data } = useAddPost();
+  const {
+    addPost,
+    isLoading: addPostLoading,
+    isSuccess: addPostSuccess,
+    error: addPostError,
+    data: addPostResponse,
+  } = useAddPost();
   const imageInput = useRef<HTMLInputElement | null>(null);
   const [votingNum, setVotingNum] = useState(2);
   const [titleLength, setTitleLength] = useState(0);
@@ -89,7 +95,13 @@ function WritePage() {
   });
   const { user } = useUser();
   const { post } = useGetPost(params?.id ? +params.id : undefined);
-  const { editPost, isSuccess: editSuccess } = useEditPost();
+  const {
+    editPost,
+    isLoading: editPostLoading,
+    isSuccess: editPostSuccess,
+    data: editPostResponse,
+    error: editPostError,
+  } = useEditPost();
 
   const handlePostUpload = async () => {
     if (!user) return false;
@@ -369,22 +381,56 @@ function WritePage() {
   }, [post]);
 
   useEffect(() => {
-    if (isSuccess && data) {
-      navigate(`/feed/${data.id}`);
+    if (addPostSuccess || editPostSuccess) {
+      setTimeout(() => {
+        navigate(`/feed/${addPostResponse?.id || editPostResponse?.id}`);
+      }, 1000);
     }
-    if (error) {
-      alert(alertMessage.error.post.noUploadPermission);
+    if (addPostError || editPostError) {
+      alert('오류가 발생하였습니다.');
     }
-  }, [isSuccess, error, data]);
-
-  useEffect(() => {
-    if (editSuccess) {
-      navigate(-1);
-    }
-  }, [editSuccess]);
+  }, [addPostSuccess, editPostSuccess, editPostError, addPostError]);
 
   if (mode === 'edit' && !post) {
     return null;
+  }
+
+  if (addPostLoading || editPostLoading) {
+    return (
+      <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center space-y-[0.7rem]">
+        <LoadingSpinner />
+        <span className="text-subheading text-mainSub-main-500">
+          업로드 중...
+        </span>
+      </div>
+    );
+  }
+
+  if (addPostSuccess || editPostSuccess) {
+    return (
+      <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center space-y-[0.7rem]">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="52"
+          height="52"
+          viewBox="0 0 52 52"
+          fill="none"
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M44.523 12.4745C45.159 13.1071 45.159 14.1329 44.523 14.7655L20.6373 38.5255C20.0013 39.1582 18.9701 39.1582 18.3341 38.5255L7.477 27.7255C6.841 27.0929 6.841 26.0671 7.477 25.4345C8.11299 24.8018 9.14415 24.8018 9.78015 25.4345L19.4857 35.089L42.2199 12.4745C42.8559 11.8418 43.887 11.8418 44.523 12.4745Z"
+            fill="#FF7860"
+            stroke="#FF7860"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <span className="text-subheading text-mainSub-main-500">
+          업로드 완료 !
+        </span>
+      </div>
+    );
   }
 
   return (
@@ -406,7 +452,7 @@ function WritePage() {
           onUploadImage={postTitleImgBtnClicked}
           errorMessage={postTitleError}
           className="w-full"
-          defaultValue={post?.title}
+          defaultValue={votingContent.title || post?.title}
         />
         <div className="mt-[1.3rem] flex w-full">
           {imageFile &&
@@ -433,7 +479,7 @@ function WritePage() {
           onChange={contentInputChanged}
           errorMessage={postInputError}
           className="mt-[3.7rem] w-full"
-          defaultValue={post?.content}
+          defaultValue={votingContent.content || post?.content}
         />
         <div className="mt-[3.7rem] flex justify-between space-x-[2.6rem]">
           <Select
@@ -492,7 +538,7 @@ function WritePage() {
                   onUploadImage={voteImageAddClicked(i)}
                   onDeleteImage={voteImageDeleteClicked(i)}
                   readOnly={mode === 'edit'}
-                  defaultValue={post?.worryChoices[i].label}
+                  defaultValue={voteState[i][0] || post?.worryChoices[i].label}
                 />
               </Fragment>
             ))}

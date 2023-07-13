@@ -22,6 +22,9 @@ export default function useEditPost() {
         queryKey: ['post', data.id],
       });
     },
+    retry: 2,
+    retryDelay: 1000,
+    networkMode: 'online',
   });
 
   return {

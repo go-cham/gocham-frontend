@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Banner from '@/components/Banner';
 import Layout from '@/components/layout/Layout';
 import ModalController from '@/components/modal/ModalController';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { RouteURL } from '@/constants/route-url';
 import useUpdate from '@/hooks/useUpdate';
 import CollectInformationPage from '@/pages/collect-information/CollectInformationPage';

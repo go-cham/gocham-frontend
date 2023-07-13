@@ -16,6 +16,8 @@ export default function useAddPost() {
         queryKey: ['posts'],
       });
     },
+    retry: 2,
+    retryDelay: 1000,
   });
 
   return {
