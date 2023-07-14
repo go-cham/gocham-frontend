@@ -5,6 +5,7 @@ export interface GetPostsResponse {
       profileImageUrl: string | null;
       id: number;
       nickname: string;
+      birthDate: string;
     };
     id: number;
     title: string;

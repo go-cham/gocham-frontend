@@ -18,6 +18,7 @@ export type Post = {
     id: number;
     nickname: string;
     profileImageUrl: string | null;
+    birthday: string;
   };
   replyCount: number;
   userWorryChoiceCount: number;

@@ -16,6 +16,7 @@ import Popup from '@/components/ui/modal/Popup';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { customColors } from '@/styles/colors';
 import { Post } from '@/types/post';
+import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
 import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 
@@ -135,7 +136,7 @@ export default function PostDetail({ post }: PostDetailProps) {
       <div className="flex items-center justify-between px-[2.5rem]">
         <PostUserProfile
           nickname={post.user.nickname}
-          age={20} // TODO
+          age={calculateAgeFromBirthday(post.user.birthday)}
           color="gray"
         />
         <div ref={ref} className="relative">

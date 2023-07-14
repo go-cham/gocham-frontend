@@ -6,6 +6,10 @@ import PostCardMeta from '@/components/post/PostCard/PostCardMeta';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import { RouteURL } from '@/constants/route-url';
 import { Post } from '@/types/post';
+import {
+  calculateAge,
+  calculateAgeFromBirthday,
+} from '@/utils/date/calculateAge';
 
 interface PostCardProps {
   post: Post;
@@ -47,7 +51,7 @@ export default function PostCard({
       {showProfile && (
         <PostUserProfile
           nickname={post.user.nickname}
-          age={22} // TODO
+          age={calculateAgeFromBirthday(post.user.birthday)}
         />
       )}
       <PostCardContent
