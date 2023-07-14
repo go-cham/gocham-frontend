@@ -40,7 +40,7 @@ export default function TopAppBar({
         onClick={handleClickBackButton}
       />
       {title && (
-        <h1 className="text-heading3 text-text-subTitle-700">{title}</h1>
+        <h1 className="text-text-subTitle-700 font-custom-heading2">{title}</h1>
       )}
     </header>
   );

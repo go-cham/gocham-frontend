@@ -45,10 +45,10 @@ function UnregisterPage() {
     <div>
       <TopAppBar title={'탈퇴하기'} />
       <div className="px-[1.5rem]">
-        <p className="mt-[3.3rem] text-heading2">
+        <p className="mt-[3.3rem] font-system-heading1">
           {user.nickname}님이 떠나신다니 너무 아쉬워요.
         </p>
-        <p className="mt-[1.3rem] text-body3 text-text-subTitle-700">
+        <p className="mt-[1.3rem] text-text-subTitle-700 font-system-body3">
           계정을 삭제해도 게시글, 댓글, 투표한 기록 등 모든 활동 정보는 그대로
           유지됩니다. 계정 삭제 후 재가입 할 경우 이전에 활동한 정보를 수정할 수
           없습니다.

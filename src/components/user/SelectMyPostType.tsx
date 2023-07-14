@@ -20,7 +20,7 @@ export default function SelectMyPostType({
         return (
           <div
             key={label}
-            className={`flex-1 cursor-pointer py-[0.8rem] text-center text-body4 ${
+            className={`flex-1 cursor-pointer py-[0.8rem] text-center font-system-body4 ${
               selected
                 ? 'rounded-[2.35rem] bg-text-subTitle-700 text-white'
                 : 'text-text-explain-500'

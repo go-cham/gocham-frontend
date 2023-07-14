@@ -74,6 +74,7 @@ export default function BirthdayInput({
       successMessage={successMessage}
       errorMessage={errorMessage}
       className={className}
+      labelClassName="font-custom-body1"
     >
       <div className="flex space-x-[0.3rem]">
         <input

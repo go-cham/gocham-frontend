@@ -1,5 +1,6 @@
 import { useAtom } from 'jotai';
 import { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import useChooseOption from '@/apis/hooks/posts/useChooseOption';
 import useGetMyChoice from '@/apis/hooks/posts/useGetMyChoice';
@@ -7,7 +8,6 @@ import useGetUsersChoices from '@/apis/hooks/posts/useGetUsersChoices';
 import CheckIcon from '@/components/icons/CheckIcon';
 import Popup from '@/components/ui/modal/Popup';
 import Snackbar from '@/components/ui/modal/Snackbar';
-import { twMergeCustom } from '@/libs/tw-merge';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { customColors } from '@/styles/colors';
 
@@ -111,8 +111,8 @@ export default function PostVote({
                     />
                   )}
                   <div className="ml-[0.6rem] flex flex-col">
-                    <span className="text-body4">{option.label}</span>
-                    <span className="text-body1 text-text-explain-500">
+                    <span className="font-system-body4">{option.label}</span>
+                    <span className="text-text-explain-500 font-system-body1">
                       {percentage}% ({count}명)
                     </span>
                   </div>
@@ -126,7 +126,7 @@ export default function PostVote({
                 </div>
                 <div className="relative mt-[0.4rem] h-[4px] w-full rounded-[5px] bg-background-voteBg-100">
                   <div
-                    className={twMergeCustom(
+                    className={twMerge(
                       `absolute left-0 top-0 h-full rounded-[5px] ${
                         choice?.label === option.label
                           ? 'bg-mainSub-main-500'
@@ -161,7 +161,7 @@ export default function PostVote({
       <div className="mt-[1.2rem] flex flex-col space-y-[1.2rem]">
         {options.map((option) => (
           <button
-            className={twMergeCustom(
+            className={twMerge(
               'relative flex h-[4.4rem] items-center overflow-hidden rounded-[0.5rem] border border-background-dividerLine-300 text-start shadow-header',
               selectedVoteOptionId === option.id && 'bg-background-voteBg-100'
             )}
@@ -177,7 +177,7 @@ export default function PostVote({
               className="ml-[0.9rem] mr-[0.7rem] h-[2.4rem] w-[2.4rem]"
             />
             <span
-              className={`text-body4 ${
+              className={`font-system-body4 ${
                 selectedVoteOptionId !== option.id && 'text-[#757575]'
               }`}
             >
@@ -193,7 +193,7 @@ export default function PostVote({
           </button>
         ))}
       </div>
-      <div className="mt-[1.5rem] flex justify-between text-body2 text-text-explain-500">
+      <div className="mt-[1.5rem] flex justify-between text-text-explain-500 font-system-body2">
         <button
           className="underline"
           onClick={() => {

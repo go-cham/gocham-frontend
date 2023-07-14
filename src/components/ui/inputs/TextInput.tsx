@@ -1,10 +1,10 @@
 import { ChangeEvent, useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import AlertIcon from '@/components/icons/AlertIcon';
 import DeleteIcon from '@/components/icons/DeleteIcon';
 import CheckIcon from '@/components/ui/inputs/CheckIcon';
 import InputWrapper from '@/components/ui/inputs/InputWrapper';
-import { twMergeCustom } from '@/libs/tw-merge';
 
 interface TitleInputProps {
   label: string;
@@ -48,6 +48,7 @@ export default function TextInput({
       successMessage={successMessage}
       errorMessage={errorMessage}
       className={className}
+      labelClassName="font-custom-body1"
     >
       <input
         ref={inputRef}
@@ -56,7 +57,7 @@ export default function TextInput({
         onChange={handleChange}
         value={value}
         maxLength={maxLength}
-        className="w-full bg-transparent text-body4 placeholder:text-body3 placeholder:text-text-subExplain-400"
+        className="w-full bg-transparent font-system-body4 placeholder:text-text-subExplain-400 placeholder:font-system-body3"
       />
       <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center space-x-[0.5rem]">
         {value && (
@@ -65,7 +66,7 @@ export default function TextInput({
             className="hidden group-focus-within:block"
           >
             <DeleteIcon
-              className={twMergeCustom(
+              className={twMerge(
                 'h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300',
                 !successMessage && !errorMessage && 'mr-[1.3rem]'
               )}

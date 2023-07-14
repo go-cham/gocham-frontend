@@ -72,7 +72,7 @@ export default function RegisterTermPage() {
         color="#424242"
       />
       <div className="mt-[3.3rem] w-full flex-1 px-[2.5rem]">
-        <div className="text-hero">
+        <div className="font-custom-hero">
           <p>환영합니다 !</p>
           <p>서비스 이용약관에</p>
           <p>동의해주세요.</p>

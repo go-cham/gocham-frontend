@@ -17,7 +17,7 @@ export default function TermCheckbox({
   return (
     <div className="relative flex items-center">
       <Checkbox id={text} checked={checked} onChange={onCheck} />
-      <span className="ml-[1rem] text-body4">{text}</span>
+      <span className="ml-[1rem] font-system-body4">{text}</span>
       {link && (
         <a
           href={link}

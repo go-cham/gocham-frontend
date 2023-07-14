@@ -20,7 +20,7 @@ export default function PostUserProfile({
       >
         {String(age)[0] + '0'}
       </span>
-      <span className="text-body2">{nickname}</span>
+      <span className="font-system-body2">{nickname}</span>
     </div>
   );
 }

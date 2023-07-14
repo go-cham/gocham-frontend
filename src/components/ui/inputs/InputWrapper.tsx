@@ -1,4 +1,4 @@
-import { twMergeCustom } from '@/libs/tw-merge';
+import { twMerge } from 'tailwind-merge';
 
 interface InputWrapperProps {
   label: string;
@@ -20,28 +20,23 @@ export default function InputWrapper({
   children,
 }: InputWrapperProps) {
   return (
-    <div
-      className={twMergeCustom(
-        're relative flex w-[34rem] flex-col',
-        className
-      )}
-    >
+    <div className={twMerge('re relative flex w-[34rem] flex-col', className)}>
       <div className="flex items-baseline space-x-[0.7rem]">
         <label
-          className={twMergeCustom(
-            'mb-[0.4rem] text-body1 text-text-subTitle-700',
+          className={twMerge(
+            'mb-[0.4rem] text-text-subTitle-700 font-custom-subheading',
             labelClassName
           )}
         >
           {label}
         </label>
         {subLabel && (
-          <span className="text-body1 text-[#b0b2b8]">{subLabel}</span>
+          <span className="text-[#b0b2b8] font-system-body1">{subLabel}</span>
         )}
       </div>
       <div
-        className={twMergeCustom(
-          'group relative flex w-full space-x-[0.8rem] border-b-[0.2rem] border-text-explain-500 py-[0.5rem] text-body4 focus-within:-mb-[0.2rem] focus-within:border-b-[0.4rem] focus-within:border-text-subTitle-700',
+        className={twMerge(
+          'group relative flex w-full space-x-[0.8rem] border-b-[0.2rem] border-text-explain-500 py-[0.5rem] font-system-body4 focus-within:-mb-[0.2rem] focus-within:border-b-[0.4rem] focus-within:border-text-subTitle-700',
           successMessage &&
             'border-semantic-success-600 focus-within:border-semantic-success-600',
           errorMessage &&
@@ -52,8 +47,8 @@ export default function InputWrapper({
       </div>
       {(successMessage || errorMessage) && (
         <span
-          className={twMergeCustom(
-            'absolute -bottom-[2.1rem] right-0 text-body1',
+          className={twMerge(
+            'absolute -bottom-[2.1rem] right-0 font-system-body1',
             successMessage && 'text-semantic-success-600',
             errorMessage && 'text-semantic-warn-500'
           )}

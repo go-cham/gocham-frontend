@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import DownIcon from '@/components/icons/DownIcon';
 import Dropdown from '@/components/ui/Dropdown';
-import { twMergeCustom } from '@/libs/tw-merge';
 
 interface SelectProps {
   id: string;
@@ -61,14 +61,11 @@ export default function Select({
   return (
     <div
       ref={ref}
-      className={twMergeCustom(
-        'relative flex w-[34rem] flex-col',
-        wrapperClassName
-      )}
+      className={twMerge('relative flex w-[34rem] flex-col', wrapperClassName)}
     >
       <span
-        className={twMergeCustom(
-          'text-body1 text-text-subTitle-700',
+        className={twMerge(
+          'text-text-subTitle-700 font-custom-subheading',
           labelClassName
         )}
       >
@@ -76,29 +73,26 @@ export default function Select({
       </span>
       <div
         onClick={handleMenuToggle}
-        className={twMergeCustom(
+        className={twMerge(
           'mt-[0.3rem] flex cursor-pointer items-center justify-between border-b-[0.2rem] border-text-explain-500 pb-[0.2rem]',
           menuOpen && '-mb-[0.2rem] border-b-[0.4rem] border-text-subTitle-700',
           errorMessage && 'border-semantic-warn-500'
         )}
       >
         <span
-          className={twMergeCustom(
-            'select-none text-body3 text-text-subExplain-400',
-            value && 'text-body4 text-text-title-900'
+          className={twMerge(
+            'select-none text-text-subExplain-400 font-system-body4',
+            value && 'text-text-title-900 font-system-body4'
           )}
         >
           {value || placeholder}
         </span>
         <DownIcon
-          className={twMergeCustom(
-            'h-[3.2rem] w-[3.2rem]',
-            menuOpen && 'rotate-180'
-          )}
+          className={twMerge('h-[3.2rem] w-[3.2rem]', menuOpen && 'rotate-180')}
         />
       </div>
       {errorMessage && (
-        <span className="mt-[0.5rem] self-end text-body1 text-semantic-warn-500">
+        <span className="mt-[0.5rem] self-end text-semantic-warn-500 font-system-body1">
           {errorMessage}
         </span>
       )}

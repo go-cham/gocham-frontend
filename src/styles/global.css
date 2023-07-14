@@ -4,6 +4,7 @@
 
 html {
   @apply text-text-title-900;
+  font-family: Pretendard, sans-serif;
 }
 
 img[alt] {

@@ -14,12 +14,12 @@ export default function PostCardMeta({
   return (
     <div className="flex items-end justify-between">
       <span
-        className="cursor-pointer text-body1 text-text-explain-500"
+        className="cursor-pointer text-text-explain-500 font-system-body2"
         onClick={onClickComment}
       >
         댓글 {numComment}개 모두 보기
       </span>
-      <span className="text-caption text-text-explain-500">
+      <span className="text-text-explain-500 font-system-caption">
         현재 투표한 사용자 {numVotes}명
       </span>
     </div>

@@ -37,18 +37,18 @@ export default function PostTitleInput({
 
   return (
     <InputWrapper
-      label="글 제목"
+      label="제목"
       subLabel="사진 최대 3장 첨부 가능"
       errorMessage={errorMessage}
       className={className}
-      labelClassName="text-subheading"
+      labelClassName="font-custom-subheading"
     >
       <input
         ref={inputRef}
         type="text"
         placeholder="제목 입력"
         maxLength={30}
-        className="w-full bg-transparent pr-[7rem] text-body4 placeholder:text-body3 placeholder:text-text-subExplain-400"
+        className="w-full bg-transparent pr-[7rem] font-system-body4 placeholder:text-text-subExplain-400 placeholder:font-system-body3"
         onChange={handleTitleChange}
         value={title}
       />

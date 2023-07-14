@@ -399,7 +399,7 @@ function WritePage() {
     return (
       <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center space-y-[0.7rem]">
         <LoadingSpinner />
-        <span className="text-subheading text-mainSub-main-500">
+        <span className="text-mainSub-main-500 font-custom-subheading">
           업로드 중...
         </span>
       </div>
@@ -426,7 +426,7 @@ function WritePage() {
             strokeLinejoin="round"
           />
         </svg>
-        <span className="text-subheading text-mainSub-main-500">
+        <span className="text-mainSub-main-500 font-custom-subheading">
           업로드 완료 !
         </span>
       </div>
@@ -488,7 +488,7 @@ function WritePage() {
             placeholder="선택"
             options={categoryOptions}
             errorMessage={categorySelectErrorMsg}
-            labelClassName="text-subheading"
+            labelClassName="font-custom-subheading"
             wrapperClassName="w-full"
             onChange={categorySelectChanged}
             value={
@@ -501,7 +501,7 @@ function WritePage() {
             placeholder="선택"
             options={deadlineOptions}
             errorMessage={voteTimeSelectErrorMsg}
-            labelClassName="text-subheading"
+            labelClassName="font-custom-subheading"
             wrapperClassName="w-full"
             onChange={voteTimeSelectChanged}
             value={
@@ -511,7 +511,7 @@ function WritePage() {
           />
         </div>
         <div className="mt-[3.7rem] space-y-[1.2rem]">
-          <div className="text-subheading text-text-subTitle-700">
+          <div className="text-text-subTitle-700 font-custom-subheading">
             투표 항목
           </div>
           {Array(votingNum)
@@ -547,7 +547,9 @@ function WritePage() {
             onClick={addVotingClicked}
             className="w-full"
           >
-            <span className="text-body4">투표 항목 추가({votingNum}/4)</span>
+            <span className="font-system-body4">
+              투표 항목 추가({votingNum}/4)
+            </span>
           </EditButton>
         </div>
       </div>

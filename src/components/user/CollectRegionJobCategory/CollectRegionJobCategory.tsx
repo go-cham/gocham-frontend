@@ -149,6 +149,7 @@ export default function CollectNicknameAgeGender({
         onChange={handleResidenceChange}
         value={residence?.label}
         highlight={true}
+        labelClassName="font-custom-body1"
       />
       <JobInput
         className="w-full"
@@ -165,6 +166,7 @@ export default function CollectNicknameAgeGender({
           wrapperClassName="w-full"
           onChange={handleCategorySelect}
           readOnly={categories.length >= MAX_CATEGORIES_SELECT}
+          labelClassName="font-custom-body1"
         />
         <div className="flex flex-wrap">
           {categories.map((category) => (

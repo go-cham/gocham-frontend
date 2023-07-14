@@ -1,8 +1,8 @@
 import { ChangeEvent, useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import DeleteIcon from '@/components/icons/DeleteIcon';
 import ImageFileIcon from '@/components/icons/ImageFileIcon';
-import { twMergeCustom } from '@/libs/tw-merge';
 
 interface PostVoteInputProps {
   image?: string;
@@ -46,7 +46,7 @@ export default function PostVoteInput({
 
   return (
     <div
-      className={twMergeCustom(
+      className={twMerge(
         'group relative w-[34rem] rounded-[0.5rem]',
         className,
         readOnly && 'pointer-events-none bg-background-voteBg-100'
@@ -60,8 +60,8 @@ export default function PostVoteInput({
         onChange={handleChange}
         value={item}
         readOnly={readOnly}
-        className={twMergeCustom(
-          'w-full rounded-[0.5rem] border border-background-dividerLine-300 bg-transparent py-[1.2rem] pl-[1.3rem] text-body4 placeholder:text-body3 placeholder:text-text-subExplain-400 group-focus-within:border-text-subTitle-700',
+        className={twMerge(
+          'w-full rounded-[0.5rem] border border-background-dividerLine-300 bg-transparent py-[1.2rem] pl-[1.3rem] font-system-body4 placeholder:text-text-subExplain-400 placeholder:font-system-body3 group-focus-within:border-text-subTitle-700',
           hasError &&
             'border-semantic-warn-500 group-focus-within:border-semantic-warn-500',
           readOnly && 'text-text-explain-500'

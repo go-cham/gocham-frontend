@@ -1,4 +1,4 @@
-import { twMergeCustom } from '@/libs/tw-merge';
+import { twMerge } from 'tailwind-merge';
 
 interface PostCardSkeletonProps {
   hasProfile?: boolean;
@@ -11,7 +11,7 @@ export default function PostCardSkeleton({
 }: PostCardSkeletonProps) {
   return (
     <div
-      className={twMergeCustom(
+      className={twMerge(
         'w-full rounded-[7px] border border-background-subBg-100 bg-white px-[1.7rem] py-[1.3rem]',
         className
       )}

@@ -60,7 +60,7 @@ function FeedPage() {
         </div>
       )}
       <TopAppBar title="게시물 신고" />
-      <h1 className="mt-[3.3rem] border-b border-background-dividerLine-300 pb-[3.5rem] pl-[1.5rem] text-heading2">
+      <h1 className="mt-[3.3rem] border-b border-background-dividerLine-300 pb-[3.5rem] pl-[1.5rem] font-system-heading1">
         ‘{post.title}’
         <br />
         게시물을 신고하는 사유를 선택해주세요.
@@ -80,7 +80,7 @@ function FeedPage() {
                 className="h-[2.2rem] w-[2.2rem] appearance-none rounded-full border-white outline outline-background-dividerLine-300 checked:border-[0.2rem] checked:bg-mainSub-main-500 focus:outline focus:outline-background-dividerLine-300"
                 onChange={handleReasonChange}
               />
-              <span className="text-body3">{option.label}</span>
+              <span className="font-system-body3">{option.label}</span>
             </label>
           ))}
         </fieldset>

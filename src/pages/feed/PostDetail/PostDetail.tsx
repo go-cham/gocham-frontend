@@ -170,7 +170,7 @@ export default function PostDetail({ post }: PostDetailProps) {
         </button>
       </div>
       <span
-        className="cursor-pointer px-[2.5rem] text-body2 text-text-subTitle-700"
+        className="cursor-pointer px-[2.5rem] text-text-subTitle-700 font-system-body2"
         onClick={() => navigate(`/feed/${post.id}/comment`)}
       >
         댓글 {post.replyCount}개 모두 보기
@@ -199,8 +199,8 @@ function PostDetailContent({
   return (
     <div>
       <div className="px-[2.5rem]">
-        <h1 className="mt-[1.3rem] text-heading2">{title}</h1>
-        <p className="mt-[0.8rem] break-words text-body3 text-text-subTitle-700">
+        <h1 className="mt-[1.3rem] font-system-heading1">{title}</h1>
+        <p className="mt-[0.8rem] break-words text-text-subTitle-700 font-system-body3">
           {formatText(content)}
         </p>
       </div>
@@ -245,11 +245,11 @@ function PostExpiration({ remainingTime }: { remainingTime: string }) {
         color={isClosed ? customColors.text.explain['500'] : undefined}
       />
       {isClosed ? (
-        <span className="text-body2 text-text-explain-500">
+        <span className="text-text-explain-500 font-system-body2">
           투표가 마감되었어요
         </span>
       ) : (
-        <span className="text-body2 text-mainSub-main-500">
+        <span className="text-mainSub-main-500 font-system-body2">
           {remainingTime}
         </span>
       )}

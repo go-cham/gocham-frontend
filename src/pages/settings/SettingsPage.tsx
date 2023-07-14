@@ -54,7 +54,7 @@ export default function SettingsPage() {
         {SETTINGS_MENU.map((menu) => (
           <li
             key={menu.title}
-            className="border-gray2 flex cursor-pointer items-center justify-between px-[2.5rem] pb-[2.1rem] pt-[2.3rem] text-body5"
+            className="border-gray2 flex cursor-pointer items-center justify-between px-[2.5rem] pb-[2.1rem] pt-[2.3rem] font-system-body5"
             onClick={menu.onClick}
           >
             {menu.link ? (

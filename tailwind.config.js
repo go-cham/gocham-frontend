@@ -1,6 +1,8 @@
 /** @types {import('tailwindcss').Config} */
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const plugin = require('tailwindcss/plugin');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { fontFamily } = require('tailwindcss/defaultTheme');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { customColors } = require('./src/styles/colors');
@@ -115,5 +117,98 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        '.font-system-heading1': {
+          fontFamily: 'Pretendard, sans-serif',
+          fontWeight: '700',
+          fontSize: '1.8rem',
+          lineHeight: '2.7rem',
+          letterSpacing: '-0.54px',
+        },
+        '.font-system-heading2': {
+          fontFamily: 'Pretendard, sans-serif',
+          fontWeight: '700',
+          fontSize: '1.6rem',
+          lineHeight: '2.4rem',
+        },
+        '.font-system-body5': {
+          fontFamily: 'Pretendard, sans-serif',
+          fontWeight: '500',
+          fontSize: '1.6rem',
+          lineHeight: '2.4rem',
+          letterSpacing: '-0.48px',
+        },
+        '.font-system-body4': {
+          fontFamily: 'Pretendard, sans-serif',
+          fontWeight: '500',
+          fontSize: '1.4rem',
+          lineHeight: '2.1rem',
+          letterSpacing: '-0.42px',
+        },
+        '.font-system-body3': {
+          fontFamily: 'Pretendard, sans-serif',
+          fontWeight: '400',
+          fontSize: '1.4rem',
+          lineHeight: '2.1rem',
+          letterSpacing: '-0.42px',
+        },
+        '.font-system-body2': {
+          fontFamily: 'Pretendard, sans-serif',
+          fontWeight: '500',
+          fontSize: '1.2rem',
+          lineHeight: '1.8rem',
+          letterSpacing: '-0.36px',
+        },
+        '.font-system-body1': {
+          fontFamily: 'Pretendard, sans-serif',
+          fontWeight: '400',
+          fontSize: '1.2rem',
+          lineHeight: '1.8rem',
+          letterSpacing: '-0.36px',
+        },
+        '.font-system-caption': {
+          fontFamily: 'Pretendard, sans-serif',
+          fontWeight: '500',
+          fontSize: '1rem',
+          lineHeight: '1.5rem',
+          letterSpacing: '-0.3px',
+        },
+        '.font-custom-hero': {
+          fontFamily: 'Elice, sans-serif',
+          fontWeight: '700',
+          fontSize: '2.6rem',
+          lineHeight: '3.9rem',
+        },
+        '.font-custom-heading1': {
+          fontFamily: 'Elice, sans-serif',
+          fontWeight: '700',
+          fontSize: '2rem',
+          lineHeight: '3rem',
+          letterSpacing: '-0.6px',
+        },
+        '.font-custom-heading2': {
+          fontFamily: 'Elice, sans-serif',
+          fontWeight: '700',
+          fontSize: '1.6rem',
+          lineHeight: '2.4rem',
+          letterSpacing: '-0.48px',
+        },
+        '.font-custom-subheading': {
+          fontFamily: 'Elice, sans-serif',
+          fontWeight: '700',
+          fontSize: '1.4rem',
+          lineHeight: '2.1rem',
+        },
+        '.font-custom-body1': {
+          fontFamily: 'Elice, sans-serif',
+          fontWeight: '400',
+          fontSize: '1.2rem',
+          lineHeight: '1.8rem',
+          letterSpacing: '-0.36px',
+        },
+      });
+    }),
+  ],
 };
