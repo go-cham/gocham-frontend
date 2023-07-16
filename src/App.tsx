@@ -19,6 +19,7 @@ import UnregisterPage from '@/pages/unregister/UnregisterPage';
 import UserPage from '@/pages/user/UserPage';
 import WritePage from '@/pages/write/WritePage';
 import RouteChangeTracker from '@/utils/RouteChangeTracker';
+import FeedCommentPage from './pages/feed/FeedCommentPage';
 
 export default function App() {
   const { showUpdate, applyUpdate } = useUpdate();
@@ -49,6 +50,7 @@ export default function App() {
         <Route path={RouteURL.edit_profile} element={<EditProfilePage />} />
         <Route path={RouteURL.settings} element={<SettingsPage />} />
         <Route path={RouteURL.unregister} element={<UnregisterPage />} />
+        <Route path={RouteURL.feed_comment} element={<FeedCommentPage />} />
         <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
       </Routes>
     </Layout>

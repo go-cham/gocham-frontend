@@ -1,26 +1,38 @@
 export type DeletePostResponse = {
   id: number;
+  status: string;
   createdAt: string;
-  updatedAt: string | null;
-  title: string;
-  expirationTime: string | null;
+  updatedAt: string;
   content: string;
-  worryFiles: [
-    {
+  childReplies: {
+    content:string,
+    createdAt:string,
+    id:number;
+    updatedAt:string;
+    user: {
       id: number;
-      status: string;
-      createdAt: string;
-      updatedAt: string | null;
-      etc: string | null;
-      url: string;
-      contentType: string;
-    }
-  ];
+      nickname: string;
+      birthDate: string;
+      email: string | null;
+      phoneNumber: string | null;
+      worryChoice: {
+        id: number;
+        label: string;
+        sequenceNumber: number;
+        isAbstained: string;
+      } | null;
+    };
+  }[]; // TODO
   user: {
     id: number;
     nickname: string;
+    birthDate: string;
     profileImageUrl: string | null;
+    worryChoice: {
+      id: number;
+      label: string;
+      sequenceNumber: number;
+      isAbstained: string;
+    } | null;
   };
-  replyCount: number;
-  userWorryChoiceCount: number;
-};
+}[];
