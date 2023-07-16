@@ -18,6 +18,7 @@ import PostVoteInput from '@/components/post/form/PostVoteInput/PostVoteInput';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import DockedButton from '@/components/ui/buttons/DockedButton';
 import EditButton from '@/components/ui/buttons/EditButton/EditButton';
+import Popup from '@/components/ui/modal/Popup';
 import Select from '@/components/ui/selections/Select';
 import withAuth from '@/components/withAuth';
 import {
@@ -54,6 +55,7 @@ const MIN_NUM_VOTE_OPTIONS = 2;
 const MAX_NUM_VOTE_OPTIONS = 4;
 
 function WritePage() {
+  const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const location = useLocation();
   const params = useParams();
   const mode = location.pathname.endsWith('edit') ? 'edit' : 'new';
@@ -433,10 +435,15 @@ function WritePage() {
     );
   }
 
+  const handleGoBack = () => {
+    setCancelModalOpen(true);
+  };
+
   return (
     <div className="flex h-full flex-col">
       <TopAppBar
         title={mode === 'new' ? '글 작성' : '글 수정'}
+        navigateAction={handleGoBack}
         navigateRoute={mode === 'new' ? '/' : `/feed/${params.id}`}
       />
       <div className="hide-scrollbar flex-1 overflow-y-scroll px-[2.5rem] pb-[2.1rem] pt-[3.1rem]">
@@ -560,6 +567,16 @@ function WritePage() {
       >
         {mode === 'new' ? '작성 완료' : '수정 완료'}
       </DockedButton>
+      <Popup
+        isOpen={cancelModalOpen}
+        text="글 작성을 취소하겠습니까?"
+        subText="지금까지 작성한 내용이 삭제됩니다."
+        buttonLabel="글 작성 취소"
+        onCancel={() => setCancelModalOpen(false)}
+        onClickButton={() => navigate('/')}
+        useCancelIcon={true}
+        useCancelButton={false}
+      />
     </div>
   );
 }
