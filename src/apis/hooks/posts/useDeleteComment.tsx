@@ -1,27 +1,27 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { DeletePostResponse } from '@/apis/dto/posts/delete-post';
+import { DeleteCommentResponse } from '@/apis/dto/posts/delete-comment';
 import { axiosInstance } from '@/libs/axios';
 
-export default function useDeletePost() {
+export default function useDeleteComment() {
   const queryClient = useQueryClient();
   const { mutate, data, isLoading, isSuccess, error } = useMutation({
-    mutationKey: ['deletePost'],
+    mutationKey: ['deleteComment'],
     mutationFn: async (id: number) => {
-      const res = await axiosInstance.patch<DeletePostResponse>(
-        `/worry/${id}/soft-delete`
+      const res = await axiosInstance.patch<DeleteCommentResponse>(
+        `/worry-reply/${id}/soft-delete`
       );
       return res.data;
     },
     onSuccess: () => {
       queryClient.refetchQueries({
-        queryKey: ['posts'],
+        queryKey: ['comments'],
       });
     },
   });
 
   return {
-    deletePost: mutate,
+    deleteComment: mutate,
     data,
     isLoading,
     error,

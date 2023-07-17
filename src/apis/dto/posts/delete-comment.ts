@@ -1,4 +1,4 @@
-export type DeletePostResponse = {
+export type DeleteCommentResponse = {
   id: number;
   createdAt: string;
   updatedAt: string | null;

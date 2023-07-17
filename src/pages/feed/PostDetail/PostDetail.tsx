@@ -12,13 +12,13 @@ import ShareIcon from '@/components/icons/ShareIcon';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
 import Popup from '@/components/ui/modal/Popup';
+import { twMergeCustom } from '@/libs/tw-merge';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { Post } from '@/types/post';
 import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 
 import PostVote from './PostVote';
-import { twMergeCustom } from '@/libs/tw-merge';
 
 interface PostDetailProps {
   post: Post;
@@ -164,7 +164,9 @@ export default function PostDetail({ post }: PostDetailProps) {
       </div>
       <span
         className="cursor-pointer px-[2.5rem] text-body2 text-custom-gray-800"
-        onClick={() => navigate(`/feed/${post.id}/comment`,{state:post.worryFiles})}
+        onClick={() =>
+          navigate(`/feed/${post.id}/comment`, { state: post.worryFiles })
+        }
       >
         댓글 {post.replyCount}개 모두 보기
       </span>
@@ -189,13 +191,18 @@ export function PostDetailContent({
   title?: string;
   content?: string;
   images?: string[] | null;
-  className?:string;
+  className?: string;
 }) {
   return (
     <div>
       <div className="px-[2.5rem]">
         {title && <h1 className="mt-[1.3rem] text-heading2">{title}</h1>}
-        <p className={twMergeCustom("mt-[0.8rem] break-words text-body3 text-custom-gray-800",className)}>
+        <p
+          className={twMergeCustom(
+            'mt-[0.8rem] break-words text-body3 text-custom-gray-800',
+            className
+          )}
+        >
           {formatText(content)}
         </p>
       </div>

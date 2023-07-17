@@ -19,7 +19,9 @@ import UnregisterPage from '@/pages/unregister/UnregisterPage';
 import UserPage from '@/pages/user/UserPage';
 import WritePage from '@/pages/write/WritePage';
 import RouteChangeTracker from '@/utils/RouteChangeTracker';
+
 import FeedCommentPage from './pages/feed/FeedCommentPage';
+import CommentReportPage from './pages/report/CommentReportPage';
 
 export default function App() {
   const { showUpdate, applyUpdate } = useUpdate();
@@ -37,6 +39,7 @@ export default function App() {
         />
         <Route path={RouteURL.feed_star} element={<FeedPage />} />
         <Route path={RouteURL.feed_report} element={<FeedReportPage />} />
+        <Route path={RouteURL.comment_report} element={<CommentReportPage />} />
         <Route path={RouteURL.feed_route_star} element={<FeedPage />} />
         <Route path={RouteURL.login} element={<LoginPage />} />
         <Route
