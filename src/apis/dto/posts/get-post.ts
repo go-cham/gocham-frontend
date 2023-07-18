@@ -5,6 +5,15 @@ export type GetPostResponse = {
   updatedAt: string | null;
   title: string;
   content: string;
+  worryFiles: {
+    id: number;
+    status: string;
+    createdAt: string;
+    updatedAt: string;
+    etc: string;
+    url: string;
+    contentType: string;
+  }[];
   user: {
     email: null;
     phoneNumber: string | null;
@@ -19,7 +28,7 @@ export type GetPostResponse = {
     id: number;
     isAbstained: 'yes' | 'no';
     label: string;
-    sequenceNubmer: number;
+    sequenceNumber: number;
     url: string | null;
   }[];
   worryCategory: {
@@ -27,13 +36,4 @@ export type GetPostResponse = {
     label: string;
     description: string;
   };
-  worryFiles: {
-    id: number;
-    status: string;
-    createdAt: string;
-    updatedAt: string | null;
-    etc: string | null;
-    url: string;
-    contentType: string;
-  }[];
 };

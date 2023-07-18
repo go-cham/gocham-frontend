@@ -188,7 +188,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   );
 }
 
-function PostDetailContent({
+export function PostDetailContent({
   title,
   content,
   images,

@@ -25,7 +25,6 @@ export default function PostCard({
   showProfile = true,
 }: PostCardProps) {
   const navigate = useNavigate();
-
   const handlePostClick = () => {
     if (routeUrl) {
       navigate(`${RouteURL.feed}/${post.id}/${routeUrl}`);
@@ -42,7 +41,6 @@ export default function PostCard({
       navigate(`/feed/${post.id}/comment`);
     }
   };
-
   return (
     <section
       className="flex w-full cursor-pointer flex-col justify-between rounded-[12px] bg-white p-[1.7rem] shadow-feed"
