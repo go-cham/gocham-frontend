@@ -77,8 +77,8 @@ export default function FeedCommentPage() {
   }
   return (
     <>
-      <TopAppBar title="댓글" background={'white'} />
-      <div className="border-custom-background-200 border-b-custom-gray-300 flex flex-col border-b py-[1.3rem]">
+      <TopAppBar title="댓글" navigateRoute="/" />
+      <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.9rem] pt-[2.1rem]">
         <div className="flex items-center justify-between px-[2.5rem]">
           <PostUserProfile
             nickname={post.user.nickname}
@@ -104,21 +104,19 @@ export default function FeedCommentPage() {
           </div>
         </div>
         <PostDetailContent title={post.title} content={post.content} />
-        <div className="flex w-full px-[2.5rem]">
-          <div className="relative mr-[1rem] flex">
-            {post?.worryFiles &&
-              post.worryFiles.map((image) => (
-                <img
-                  key={image.url}
-                  src={image.url}
-                  alt={'업로드 이미지'}
-                  className="mr-[1rem] h-[7.1rem] w-[7.1rem] object-cover"
-                />
-              ))}
-          </div>
+        <div className="flex space-x-[1.3rem] px-[2.5rem]">
+          {post?.worryFiles &&
+            post.worryFiles.map((image) => (
+              <img
+                key={image.url}
+                src={image.url}
+                alt={'업로드 이미지'}
+                className="h-[7.1rem] w-[7.1rem] rounded-[0.5rem] object-cover"
+              />
+            ))}
         </div>
       </div>
-      <div className="box-border h-3/5 overflow-y-scroll py-[0.5rem]">
+      <div className="box-border h-3/5 overflow-y-scroll pb-[10rem] pt-[0.5rem]">
         {comments?.map((comment) => {
           return (
             <>

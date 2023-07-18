@@ -1,13 +1,8 @@
-import { SetStateAction } from 'jotai';
-import React, { Dispatch, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
-import {
-  AddCommentsRequest,
-  AddCommentsResponse,
-} from '@/apis/dto/posts/add-comments';
 import useAddComment from '@/apis/hooks/posts/useAddComment';
 import AddCommentIcon from '@/components/icons/AddCommentIcon';
-import PlusIcon from '@/components/icons/PlusIcon';
 
 interface addCommentI {
   addChildComment: {
@@ -40,7 +35,7 @@ export default function CommentInputWrapper({
     setContent(e.target.value);
   };
   const commentInputRef = useRef<HTMLInputElement>(null);
-  const { addComment, isLoading, error, data } = useAddComment();
+  const { addComment } = useAddComment();
   const addCommentClicked = () => {
     setContent('');
     if (addChildComment.addChild) {
@@ -59,8 +54,13 @@ export default function CommentInputWrapper({
       setContent((prev) => `@${addChildComment.nickName} ${prev}`);
     commentInputRef.current?.focus();
   }, [addChildComment]);
+
   return (
-    <div className="fixed bottom-0 flex w-full items-center justify-around border-t border-gray-300 bg-white px-4 pb-10 pt-4 shadow-lg">
+    <div
+      className={`${
+        isMobile ? 'fixed' : 'absolute'
+      } bottom-0 flex w-full items-center justify-around border-t border-background-dividerLine-300 bg-white px-4 pb-10 pt-4 shadow-lg`}
+    >
       <input
         ref={commentInputRef}
         className="font-red w-5/6 rounded-lg border border-gray-300 py-4 pl-4 text-[1.4rem] focus:border-black"

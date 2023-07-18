@@ -22,8 +22,7 @@ export default function CommentBox({
   isCommentWriter,
   setAddChildComment,
 }: CommentBoxType) {
-  const { deleteComment, data, isLoading, error, isSuccess } =
-    useDeleteComment();
+  const { deleteComment } = useDeleteComment();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const navigate = useNavigate();
   const addCommentClicked = () => {
@@ -48,13 +47,10 @@ export default function CommentBox({
       },
     });
   };
-  const {
-    choice,
-    isLoading: getMyChoiceLoading,
-    error: getMyChoiceError,
-  } = useGetMyChoice({ postId, userId: comment.user.id });
+  const { choice } = useGetMyChoice({ postId, userId: comment.user.id });
+
   return (
-    <div className="border-custom-background-200 flex flex-col border-b py-[1.3rem]">
+    <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.5rem] pt-[1.7rem]">
       <div
         className={twMerge(
           'flex items-center justify-between px-[2.5rem]',
@@ -69,33 +65,33 @@ export default function CommentBox({
           />
           <div className="bg-gray1 h-[0.3rem] w-[0.3rem] rounded-full"></div>
           {isWriter ? (
-            <div className="border-text2 text-text2 rounded-3xl border px-[0.7rem] py-[0.5rem] text-[1rem] font-medium">
+            <span className="rounded-[15px] border border-[#676A72] px-[0.7rem] py-[0.5rem] text-[#676A72] font-system-caption">
               작성자
-            </div>
+            </span>
           ) : (
-            <div className="text-body1 text-gray-800">
+            <span className="text-body1 text-gray-800">
               {!parentCommentId
                 ? comment.user.worryChoice
                   ? comment.user.worryChoice.label
                   : isWriter
                   ? null
-                  : '투표 항목 없음'
+                  : ''
                 : choice
                 ? choice.label
-                : '투표 항목 없음'}
-            </div>
+                : ''}
+            </span>
           )}
         </div>
         {isCommentWriter ? (
           <div
-            className="text-custom-text-500 text-body2"
+            className="text-text-explain-500 font-system-body2"
             onClick={commentDeleteClicked}
           >
             삭제
           </div>
         ) : (
           <div
-            className="text-custom-text-500 text-body2"
+            className="text-text-explain-500 font-system-body2"
             onClick={commentReportClicked}
           >
             신고
@@ -104,7 +100,7 @@ export default function CommentBox({
       </div>
       <p
         className={twMerge(
-          'text-custom-gray-800 mb-[1.7rem] mt-[0.8rem] break-words text-body3',
+          'mb-[1.7rem] mt-[0.8rem] break-words text-text-subTitle-700 font-system-body4',
           className1
         )}
       >
@@ -116,8 +112,15 @@ export default function CommentBox({
           className1
         )}
       >
-        <span onClick={addCommentClicked}>답글달기</span>
-        <span>{commentTime(comment.createdAt)}</span>
+        <span
+          className="text-text-explain-500 font-system-body2"
+          onClick={addCommentClicked}
+        >
+          답글달기
+        </span>
+        <span className="text-text-explain-500 font-system-body1">
+          {commentTime(comment.createdAt)}
+        </span>
       </div>
       <Popup
         isOpen={deleteModalOpen}
