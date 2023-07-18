@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
@@ -13,7 +13,6 @@ import Popup from '@/components/ui/modal/Popup/Popup';
 import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
 
 import CommentBox from './CommentBox';
-import CommentChildrenBox from './CommentChildrenBox';
 import CommentInputWrapper from './CommentInputWrapper';
 import { PostDetailContent } from './PostDetail/PostDetail';
 
@@ -68,9 +67,25 @@ export default function FeedCommentPage() {
     if (deletePostError) {
       alert('오류가 발생하였습니다.');
     }
-
     setShowMore(false);
   }, [error, isSuccess]);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      // 클릭 이벤트가 Dropdown 내부가 아닌 경우 Dropdown 닫기
+      setShowMore(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside); // 외부 클릭 이벤트 감지
+    return () => {
+      document.removeEventListener('click', handleClickOutside); // 컴포넌트 언마운트 시 이벤트 핸들러 해제
+    };
+  }, []);
   return (
     <>
       <TopAppBar title="댓글" background={'white'} />
@@ -81,7 +96,7 @@ export default function FeedCommentPage() {
             age={age}
             color="gray"
           />
-          <div className="relative">
+          <div className="relative" ref={dropdownRef}>
             <MoreIcon className="cursor-pointer" onClick={handleClickMore} />
             {showMore && (
               <Dropdown
@@ -116,83 +131,33 @@ export default function FeedCommentPage() {
       </div>
       <div className="box-border h-3/5 overflow-y-scroll py-[0.5rem]">
         {comments?.map((comment) => {
-          return comment.user.id === post?.user.id ? (
+          return (
             <>
               <CommentBox
                 key={comment.id}
-                postId={post.id}
-                commentId={comment.id}
-                nickName={comment.user.nickname}
-                content={comment.content}
-                voteContent={
-                  comment.user.worryChoice
-                    ? comment.user.worryChoice.label
-                    : null
-                }
-                isWriter={true}
-                createdAt={comment.createdAt}
-                isCommentWriter={comment.user.id === user?.id ? true : false}
-                setAddChildComment={setAddChildComment}
-              />
-              {comment.childReplies.length > 0 &&
-                comment.childReplies.map((childComment) => (
-                  <CommentChildrenBox
-                    key={childComment.id}
-                    postId={post.id}
-                    userId={childComment.user.id}
-                    parentCommentId={comment.id}
-                    commentId={childComment.id}
-                    content={childComment.content}
-                    createdAt={childComment.createdAt}
-                    nickName={childComment.user.nickname}
-                    birthDate={childComment.user.birthDate}
-                    isCommentWriter={
-                      childComment.user.id === user?.id ? true : false
-                    }
-                    isWriter={childComment.user.id === post.user.id}
-                    setAddChildComment={setAddChildComment}
-                  />
-                ))}
-            </>
-          ) : (
-            <>
-              <CommentBox
-                key={comment.id}
+                className1="pl-[5.5rem] pr-[2.5rem]"
+                comment={comment}
                 postId={post ? post.id : -1}
-                commentId={comment.id}
-                nickName={comment.user.nickname}
-                content={comment.content}
-                voteContent={
-                  comment.user.worryChoice
-                    ? comment.user.worryChoice.label
-                    : null
-                }
-                comment={true}
-                createdAt={comment.createdAt}
+                isWriter={comment.user.id === post?.user.id}
                 isCommentWriter={comment.user.id === user?.id ? true : false}
                 setAddChildComment={setAddChildComment}
               />
               {comment.childReplies.length > 0 &&
                 comment.childReplies.map((childComment) => (
-                  <CommentChildrenBox
+                  <CommentBox
                     key={childComment.id}
-                    parentCommentId={comment.id}
+                    className="pl-[5.5rem]"
+                    className1="pl-[8.5rem] pr-[2.5rem]"
+                    comment={childComment}
                     postId={post ? post.id : -1}
-                    userId={childComment.user.id}
-                    commentId={childComment.id}
-                    content={childComment.content}
-                    createdAt={childComment.createdAt}
-                    nickName={childComment.user.nickname}
-                    birthDate={childComment.user.birthDate}
+                    parentCommentId={comment.id}
+                    isWriter={childComment.user.id === post?.user.id}
                     isCommentWriter={
                       childComment.user.id === user?.id ? true : false
                     }
-                    isWriter={childComment.user.id === post?.user.id}
-                    comment={true}
                     setAddChildComment={setAddChildComment}
                   />
                 ))}
-              ;
             </>
           );
         })}

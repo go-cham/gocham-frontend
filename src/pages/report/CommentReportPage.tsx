@@ -60,12 +60,20 @@ function CommentPage() {
       </h1>
       <div className="pl-[1.5rem]">
         <div>
-          <span className="mr-[0.6rem] text-body2 text-gray-500">작성자</span>
-          <span className="text-body2 text-gray-900">{state.nickName}</span>
+          <span className="mr-[0.6rem] text-body2 text-custom-text-500">
+            작성자
+          </span>
+          <span className="text-body2 text-custom-text-900">
+            {state.nickName}
+          </span>
         </div>
         <div>
-          <span className="mr-[1.2rem] text-body2 text-gray-500">내 용</span>
-          <span className="text-body2 text-gray-900">{state.content}</span>
+          <span className="mr-[1.2rem] text-body2 text-custom-text-500">
+            내 용
+          </span>
+          <span className="text-body2 text-custom-text-900">
+            {state.content}
+          </span>
         </div>
       </div>
       <form onSubmit={handleSubmit}>
