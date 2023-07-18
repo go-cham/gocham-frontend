@@ -1,5 +1,6 @@
 import { useAtom } from 'jotai';
 import { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import useChooseOption from '@/apis/hooks/posts/useChooseOption';
 import useGetMyChoice from '@/apis/hooks/posts/useGetMyChoice';
@@ -7,8 +8,8 @@ import useGetUsersChoices from '@/apis/hooks/posts/useGetUsersChoices';
 import CheckIcon from '@/components/icons/CheckIcon';
 import Popup from '@/components/ui/modal/Popup';
 import Snackbar from '@/components/ui/modal/Snackbar';
-import { twMergeCustom } from '@/libs/tw-merge';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
+import { customColors } from '@/styles/colors';
 
 interface PostVoteProps {
   options?: { id: number; label: string; image: string | null }[];
@@ -91,12 +92,13 @@ export default function PostVote({
       .sort((a, b) => b.userWorryChoiceCount - a.userWorryChoiceCount)[0].label;
     return (
       <section className="mt-[1.1rem] px-[2.5rem]">
-        <div className="space-y-[2.1rem] rounded-[0.5rem] border px-[1.7rem] py-[1.5rem]">
+        <div className="space-y-[2.1rem] rounded-[0.5rem] border border-background-dividerLine-300 px-[1.7rem] py-[1.5rem]">
           {options.map((option) => {
             const count =
               usersChoices.find((o) => o.label === option.label)
                 ?.userWorryChoiceCount || 0;
-            const percentage = total === 0 ? 0 : (count / total) * 100;
+            const percentage =
+              total === 0 ? 0 : Math.round((count / total) * 100);
 
             return (
               <div key={option.id}>
@@ -109,8 +111,8 @@ export default function PostVote({
                     />
                   )}
                   <div className="ml-[0.6rem] flex flex-col">
-                    <span className="text-body4">{option.label}</span>
-                    <span className="text-body1 text-custom-text-500">
+                    <span className="font-system-body4">{option.label}</span>
+                    <span className="text-text-explain-500 font-system-body1">
                       {percentage}% ({count}명)
                     </span>
                   </div>
@@ -122,24 +124,24 @@ export default function PostVote({
                     />
                   )}
                 </div>
-                <div className="relative mt-[0.4rem] h-[4px] w-full rounded-[5px] bg-custom-background-100">
+                <div className="relative mt-[0.4rem] h-[4px] w-full rounded-[5px] bg-background-voteBg-100">
                   <div
-                    className={twMergeCustom(
+                    className={twMerge(
                       `absolute left-0 top-0 h-full rounded-[5px] ${
                         choice?.label === option.label
-                          ? 'bg-custom-main-500'
-                          : 'bg-custom-main-200'
+                          ? 'bg-mainSub-main-500'
+                          : 'bg-mainSub-mainPush-200'
                       }`,
-                      choice && isAbstained && 'bg-custom-gray-400',
+                      choice && isAbstained && 'bg-text-subExplain-400',
                       choice &&
                         isAbstained &&
                         mostVoted === option.label &&
-                        'bg-custom-gray-800',
-                      !choice && isClosed && 'bg-custom-gray-400',
+                        'bg-text-subTitle-700',
+                      !choice && isClosed && 'bg-text-subExplain-400',
                       !choice &&
                         isClosed &&
                         mostVoted === option.label &&
-                        'bg-custom-gray-800'
+                        'bg-text-subTitle-700'
                     )}
                     style={{
                       width: percentage + '%',
@@ -159,22 +161,24 @@ export default function PostVote({
       <div className="mt-[1.2rem] flex flex-col space-y-[1.2rem]">
         {options.map((option) => (
           <button
-            className={twMergeCustom(
-              'relative flex h-[4.4rem] items-center overflow-hidden rounded-[0.5rem] border border-custom-background-200 text-start shadow-header',
-              selectedVoteOptionId === option.id && 'bg-custom-background-100'
+            className={twMerge(
+              'relative flex h-[4.4rem] items-center overflow-hidden rounded-[0.5rem] border border-background-dividerLine-300 text-start shadow-header',
+              selectedVoteOptionId === option.id && 'bg-background-voteBg-100'
             )}
             key={option.id}
             onClick={() => handleButtonSelect(option.id)}
           >
             <CheckIcon
-              color={selectedVoteOptionId === option.id ? '#222222' : '#757575'}
+              color={
+                selectedVoteOptionId === option.id
+                  ? customColors.text.title['900']
+                  : '#757575'
+              }
               className="ml-[0.9rem] mr-[0.7rem] h-[2.4rem] w-[2.4rem]"
             />
             <span
-              className={`text-body4 ${
-                selectedVoteOptionId === option.id
-                  ? 'text-gray-900'
-                  : 'text-custom-gray-600'
+              className={`font-system-body4 ${
+                selectedVoteOptionId !== option.id && 'text-[#757575]'
               }`}
             >
               {option.label}
@@ -189,8 +193,9 @@ export default function PostVote({
           </button>
         ))}
       </div>
-      <div className="mt-[1.5rem] flex justify-between text-body2 text-custom-text-500">
+      <div className="mt-[1.5rem] flex justify-between text-text-explain-500 font-system-body2">
         <button
+          className="underline"
           onClick={() => {
             setSelectedVoteOptionId(null);
             setOnlyReadModalOpen(true);

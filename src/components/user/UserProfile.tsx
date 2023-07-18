@@ -26,13 +26,15 @@ export default function UserProfile() {
   return (
     <div className="mt-[1.7rem] flex items-center justify-between px-[2.5rem]">
       <div className="flex items-center space-x-[0.8rem]">
-        <span className="rounded-full bg-[#f4f4f5] p-[0.8rem] text-heading3 text-[#b0b2b8]">
+        <span className="flex h-[3.6rem] w-[3.6rem] items-center justify-center rounded-full bg-[#f4f4f5] text-[#b0b2b8] font-system-heading2">
           {String(age)[0] + '0'}
         </span>
-        <span className="text-heading1">{user.nickname}</span>
+        <span className="text-[#2a2d37] font-custom-heading1">
+          {user.nickname}
+        </span>
       </div>
       <button
-        className="rounded-[0.5rem] bg-custom-background-100 px-[1rem] py-[0.7rem] text-body2"
+        className="rounded-[0.5rem] bg-background-voteBg-100 px-[1rem] py-[0.7rem] text-text-subTitle-700 font-system-body2"
         onClick={handleGoEditProfile}
       >
         프로필 편집

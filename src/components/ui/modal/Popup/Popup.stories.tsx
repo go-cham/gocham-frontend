@@ -13,21 +13,24 @@ const meta: Meta<typeof Popup> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: () => {
-    const [isOpen, setIsOpen] = useState(false);
+export const CancelButton: Story = {
+  args: {
+    isOpen: true,
+    text: '게시물을 삭제하시겠습니까?',
+    subText: '이 작업은 실행 취소할 수 없습니다.',
+    buttonLabel: '게시물 삭제',
+    useCancelButton: true,
+    useCancelIcon: false,
+  },
+};
 
-    return (
-      <div>
-        <Button onClick={() => setIsOpen(true)}>모달 열기</Button>
-        <Popup
-          isOpen={isOpen}
-          text="게시물을 삭제하시겠습니까?"
-          subText="이 작업은 실행 취소할 수 없습니다."
-          buttonLabel="게시물 삭제"
-          onCancel={() => setIsOpen(false)}
-        />
-      </div>
-    );
+export const CancelIcon: Story = {
+  args: {
+    isOpen: true,
+    text: '게시물을 삭제하시겠습니까?',
+    subText: '이 작업은 실행 취소할 수 없습니다.',
+    buttonLabel: '게시물 삭제',
+    useCancelButton: false,
+    useCancelIcon: true,
   },
 };

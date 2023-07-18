@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import CheckIcon from '@/components/icons/CheckIcon';
-import { twMergeCustom } from '@/libs/tw-merge';
 
 interface CheckboxProps {
   id: string;
@@ -19,9 +19,9 @@ export default function Checkbox({
   return (
     <label
       htmlFor={id}
-      className={twMergeCustom(
-        'flex h-[2.4rem] w-[2.4rem]  cursor-pointer items-center justify-center rounded-[0.3rem] border border-custom-background-200',
-        checked && 'border-none bg-custom-main-500',
+      className={twMerge(
+        'flex h-[2.4rem] w-[2.4rem]  cursor-pointer items-center justify-center rounded-[0.3rem] border border-background-dividerLine-300',
+        checked && 'border-none bg-mainSub-main-500',
         className
       )}
     >

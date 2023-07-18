@@ -5,6 +5,7 @@ import useGetPost from '@/apis/hooks/posts/useGetPost';
 import useReportPost from '@/apis/hooks/posts/useReportPost';
 import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
 import { reportOptions } from '@/constants/Options';
@@ -15,7 +16,7 @@ function FeedPage() {
   const { user } = useUser();
   const { post } = useGetPost(id ? +id : undefined);
   const [selectedReasonId, setSelectedReasonId] = useState<number>();
-  const { reportPost, error, isSuccess } = useReportPost();
+  const { reportPost, error, isSuccess, isLoading } = useReportPost();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,8 +54,13 @@ function FeedPage() {
 
   return (
     <div className="flex h-full flex-col">
+      {isLoading && (
+        <div className="absolute left-1/2 top-1/2 z-[1000] -translate-x-1/2 -translate-y-1/2">
+          <LoadingSpinner />
+        </div>
+      )}
       <TopAppBar title="게시물 신고" />
-      <h1 className="mt-[3.3rem] border-b border-custom-background-200 pb-[3.5rem] pl-[1.5rem] text-heading2">
+      <h1 className="mt-[3.3rem] border-b border-background-dividerLine-300 pb-[3.5rem] pl-[1.5rem] font-system-heading1">
         ‘{post.title}’
         <br />
         게시물을 신고하는 사유를 선택해주세요.
@@ -64,17 +70,17 @@ function FeedPage() {
           {reportOptions.map((option) => (
             <label
               key={option.value}
-              className="mt-[1.7rem] flex items-center space-x-[0.9rem] border-b pb-[1.5rem]"
+              className="mt-[1.7rem] flex items-center space-x-[0.9rem] border-b border-background-dividerLine-300 pb-[1.5rem]"
             >
               <input
                 type="radio"
                 id={option.value + ''}
                 name="report-options"
                 value={option.value}
-                className="h-[2.2rem] w-[2.2rem] appearance-none rounded-full border-white outline outline-custom-background-200 checked:border-[0.2rem] checked:bg-custom-main-500 focus:outline focus:outline-custom-background-200"
+                className="h-[2.2rem] w-[2.2rem] appearance-none rounded-full border-white outline outline-background-dividerLine-300 checked:border-[0.2rem] checked:bg-mainSub-main-500 focus:outline focus:outline-background-dividerLine-300"
                 onChange={handleReasonChange}
               />
-              <span className="text-body3">{option.label}</span>
+              <span className="font-system-body3">{option.label}</span>
             </label>
           ))}
         </fieldset>

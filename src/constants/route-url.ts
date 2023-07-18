@@ -6,6 +6,7 @@ export const RouteURL = {
   feed_report: '/feed/:id/report',
   comment_report: '/comment/:id/report',
   feed_comment: '/feed/:id/comment',
+  feed_edit: '/feed/:id/edit',
   login: '/login',
   login_oauth_kakao: '/login/oauth/kakao',
   register_term: '/register/term',

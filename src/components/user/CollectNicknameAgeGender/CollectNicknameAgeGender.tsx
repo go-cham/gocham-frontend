@@ -160,16 +160,16 @@ export default function CollectNicknameAgeGender({
         }}
       />
       <div>
-        <span className="text-body1">성별</span>
+        <span className="font-custom-body1">성별</span>
         <div className="mt-[0.7rem] flex justify-between">
           {(['male', 'female'] as const).map((currentGender) => (
             <button
               key={currentGender}
               type="button"
-              className={`h-[3.9rem] w-[48%] rounded-[0.5rem] border-[1px] text-body4 ${
+              className={`h-[3.9rem] w-[48%] rounded-[0.5rem] border-[1px] font-system-body4 ${
                 gender === currentGender
-                  ? 'border-custom-main-200 bg-custom-main-100 text-custom-main-500'
-                  : 'border-custom-background-200 bg-white text-custom-text-500'
+                  ? 'border-mainSub-mainPush-200 bg-mainSub-main-100 text-mainSub-main-500'
+                  : 'border-background-dividerLine-300 bg-white text-text-explain-500'
               }`}
               onClick={() => handleSelectGender(currentGender)}
             >

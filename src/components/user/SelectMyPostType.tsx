@@ -12,7 +12,7 @@ export default function SelectMyPostType({
   postingCount,
 }: SelectMyPostTypeProps) {
   return (
-    <div className="mx-[2.5rem] mb-[2.1rem] flex justify-between space-x-[1.2rem] overflow-hidden rounded-[2.35rem] bg-custom-background-100">
+    <div className="mx-[2.5rem] mb-[2.1rem] flex justify-between space-x-[1.2rem] overflow-hidden rounded-[2.35rem] bg-background-subBg-100">
       {['내 게시글', '참여한 게시글'].map((label) => {
         const selected =
           (postType === 'my' && label === '내 게시글') ||
@@ -20,10 +20,10 @@ export default function SelectMyPostType({
         return (
           <div
             key={label}
-            className={`flex-1 cursor-pointer py-[0.8rem] text-center text-body4 ${
+            className={`flex-1 cursor-pointer py-[0.8rem] text-center font-system-body4 ${
               selected
-                ? 'rounded-[2.35rem] bg-custom-gray-800 text-white'
-                : 'text-custom-text-400'
+                ? 'rounded-[2.35rem] bg-text-subTitle-700 text-white'
+                : 'text-text-explain-500'
             }`}
             onClick={() =>
               switchPostType(label === '내 게시글' ? 'my' : 'participating')

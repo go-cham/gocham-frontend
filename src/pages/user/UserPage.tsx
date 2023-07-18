@@ -56,7 +56,7 @@ function UserPage() {
         />
       </div>
       <UserProfile />
-      <div className="my-[1.9rem] h-[1px] w-full bg-custom-gray-300" />
+      <div className="my-[1.9rem] h-[1px] w-full bg-background-dividerLine-300" />
       <SelectMyPostType
         postType={postType}
         switchPostType={switchPostType}

@@ -54,7 +54,10 @@ export default function useGetPosts({
         content: post.content,
         expirationTime: post.expirationTime,
         worryFiles: post.worryFiles,
-        user: post.user,
+        user: {
+          ...post.user,
+          birthday: post.user.birthDate,
+        },
         replyCount: post.replyCount,
         userWorryChoiceCount: post.userWorryChoiceCount,
       })) || null;

@@ -10,43 +10,28 @@ import TopAppBar from '@/components/layout/TopAppBar';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
 import Popup from '@/components/ui/modal/Popup/Popup';
+import { PostDetailContent } from '@/pages/feed/PostDetail/PostDetail';
 import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
 
 import CommentBox from './CommentBox';
 import CommentInputWrapper from './CommentInputWrapper';
-import { PostDetailContent } from './PostDetail/PostDetail';
 
 export default function FeedCommentPage() {
   const [showMore, setShowMore] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const handleClickMore = () => [setShowMore((prev) => !prev)];
+  const handleClickMore = () => setShowMore((prev) => !prev);
   const { id } = useParams();
   const navigate = useNavigate();
-  const {
-    comments,
-    isLoading: commentsLoading,
-    error: commentsError,
-  } = useGetComments(Number(id));
-  const { post, isLoading, error } = useGetPost(Number(id));
-  const {
-    user,
-    isLoading: useUserLoading,
-    error: useUserError,
-    status,
-  } = useUser();
+  const { comments } = useGetComments(Number(id));
+  const { post, error } = useGetPost(Number(id));
+  const { user } = useUser();
   const age = post ? calculateAgeFromBirthday(post?.user.birthDate) : -1;
   const [addChildComment, setAddChildComment] = useState({
     addChild: false,
     nestingReplyId: -1,
     nickName: '',
   });
-  const {
-    deletePost,
-    data,
-    isLoading: deletePostLoading,
-    error: deletePostError,
-    isSuccess,
-  } = useDeletePost();
+  const { deletePost, error: deletePostError, isSuccess } = useDeletePost();
   const dropdownSelected = (value: number) => {
     if (value == MENU.Delete) setDeleteModalOpen(true);
   };
@@ -86,13 +71,17 @@ export default function FeedCommentPage() {
       document.removeEventListener('click', handleClickOutside); // 컴포넌트 언마운트 시 이벤트 핸들러 해제
     };
   }, []);
+
+  if (!post || !user) {
+    return null;
+  }
   return (
     <>
       <TopAppBar title="댓글" background={'white'} />
-      <div className="flex flex-col border-b border-custom-background-200 border-b-custom-gray-300 py-[1.3rem]">
+      <div className="border-custom-background-200 border-b-custom-gray-300 flex flex-col border-b py-[1.3rem]">
         <div className="flex items-center justify-between px-[2.5rem]">
           <PostUserProfile
-            nickname={post ? post.user.nickname : ''}
+            nickname={post.user.nickname}
             age={age}
             color="gray"
           />
@@ -101,7 +90,7 @@ export default function FeedCommentPage() {
             {showMore && (
               <Dropdown
                 options={
-                  user?.id === post?.user.id
+                  user.id === post.user.id
                     ? [
                         { value: MENU.Edit, label: '게시물 수정' },
                         { value: MENU.Delete, label: '게시물 삭제' },
@@ -114,7 +103,7 @@ export default function FeedCommentPage() {
             )}
           </div>
         </div>
-        <PostDetailContent title={post?.title} content={post?.content} />
+        <PostDetailContent title={post.title} content={post.content} />
         <div className="flex w-full px-[2.5rem]">
           <div className="relative mr-[1rem] flex">
             {post?.worryFiles &&
@@ -137,9 +126,9 @@ export default function FeedCommentPage() {
                 key={comment.id}
                 className1="pl-[5.5rem] pr-[2.5rem]"
                 comment={comment}
-                postId={post ? post.id : -1}
-                isWriter={comment.user.id === post?.user.id}
-                isCommentWriter={comment.user.id === user?.id ? true : false}
+                postId={post.id}
+                isWriter={comment.user.id === post.user.id}
+                isCommentWriter={comment.user.id === user.id}
                 setAddChildComment={setAddChildComment}
               />
               {comment.childReplies.length > 0 &&
@@ -152,9 +141,7 @@ export default function FeedCommentPage() {
                     postId={post ? post.id : -1}
                     parentCommentId={comment.id}
                     isWriter={childComment.user.id === post?.user.id}
-                    isCommentWriter={
-                      childComment.user.id === user?.id ? true : false
-                    }
+                    isCommentWriter={childComment.user.id === user.id}
                     setAddChildComment={setAddChildComment}
                   />
                 ))}

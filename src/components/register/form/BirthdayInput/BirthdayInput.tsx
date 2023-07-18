@@ -74,6 +74,7 @@ export default function BirthdayInput({
       successMessage={successMessage}
       errorMessage={errorMessage}
       className={className}
+      labelClassName="font-custom-body1"
     >
       <div className="flex space-x-[0.3rem]">
         <input
@@ -123,7 +124,7 @@ export default function BirthdayInput({
             className="hidden group-focus-within:block"
           >
             <DeleteIcon
-              className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-custom-gray-300"
+              className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300"
               color="white"
             />
           </button>

@@ -1,6 +1,5 @@
 import Button from 'src/components/ui/buttons/Button';
-
-import { twMergeCustom } from '@/libs/tw-merge';
+import { twMerge } from 'tailwind-merge';
 
 interface FloatingButtonProps {
   children: React.ReactNode;
@@ -16,7 +15,7 @@ export default function FloatingButton({
   return (
     <Button
       variant="primary"
-      className={twMergeCustom('rounded-[2.35rem]', className)}
+      className={twMerge('rounded-[2.35rem]', className)}
       onClick={onClick}
     >
       {children}

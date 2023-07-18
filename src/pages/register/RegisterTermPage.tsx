@@ -72,7 +72,7 @@ export default function RegisterTermPage() {
         color="#424242"
       />
       <div className="mt-[3.3rem] w-full flex-1 px-[2.5rem]">
-        <div className="text-hero">
+        <div className="font-custom-hero">
           <p>환영합니다 !</p>
           <p>서비스 이용약관에</p>
           <p>동의해주세요.</p>
@@ -96,7 +96,7 @@ export default function RegisterTermPage() {
               })
             }
           />
-          <div className="relative -left-[2.5rem] my-[1.7rem] h-[1px] w-[calc(100%+5rem)] bg-custom-background-200" />
+          <div className="relative -left-[2.5rem] my-[1.7rem] h-[1px] w-[calc(100%+5rem)] bg-background-dividerLine-300" />
           <div className="space-y-[1.3rem]">
             <TermCheckbox
               text="[필수] 고민의 참견 이용약관 동의"

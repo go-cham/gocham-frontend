@@ -96,7 +96,7 @@ function CollectInformationPage() {
         color="#424242"
       />
       <div className="mt-[3.3rem] flex flex-col px-[2.6rem]">
-        <h1 className="text-hero">
+        <h1 className="font-custom-hero">
           수많은 고민들이 👀
           <br />
           당신을 기다리고 있어요 !

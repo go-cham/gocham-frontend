@@ -11,10 +11,12 @@ import MoreIcon from '@/components/icons/MoreIcon';
 import ShareIcon from '@/components/icons/ShareIcon';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Popup from '@/components/ui/modal/Popup';
-import { twMergeCustom } from '@/libs/tw-merge';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
+import { customColors } from '@/styles/colors';
 import { Post } from '@/types/post';
+import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
 import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 
@@ -37,7 +39,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   const [showMore, setShowMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const { deletePost, error, isSuccess } = useDeletePost();
+  const { deletePost, error, isSuccess, isLoading } = useDeletePost();
   const selectedVoteOptionId = useAtomValue(selectedVoteOptionIdAtom);
 
   const handleClickMore = () => {
@@ -46,7 +48,7 @@ export default function PostDetail({ post }: PostDetailProps) {
 
   const handleMoreSelect = (value: number) => {
     if (value === MENU.Edit) {
-      console.log('게시글 수정');
+      navigate(`/feed/${post.id}/edit`);
     } else if (value === MENU.Delete) {
       if (getRemainingTime(post.expirationTime) === '마감됨') {
         alert('투표가 종료된 게시물은 삭제하실 수 없습니다.');
@@ -120,15 +122,21 @@ export default function PostDetail({ post }: PostDetailProps) {
 
   const remainingTime = getRemainingTime(post.expirationTime);
   const isClosed = remainingTime === 'closed';
+
   return (
     <div
-      className="flex flex-col border-b border-custom-background-200 py-[1.3rem]"
+      className="flex flex-col border-b border-background-dividerLine-300 py-[1.3rem]"
       id={isSelected ? 'vote-selected' : ''}
     >
+      {isLoading && (
+        <div className="absolute left-1/2 top-1/2 z-[1000] -translate-x-1/2 -translate-y-1/2">
+          <LoadingSpinner />
+        </div>
+      )}
       <div className="flex items-center justify-between px-[2.5rem]">
         <PostUserProfile
           nickname={post.user.nickname}
-          age={20} // TODO
+          age={calculateAgeFromBirthday(post.user.birthday)}
           color="gray"
         />
         <div ref={ref} className="relative">
@@ -163,10 +171,8 @@ export default function PostDetail({ post }: PostDetailProps) {
         </button>
       </div>
       <span
-        className="cursor-pointer px-[2.5rem] text-body2 text-custom-gray-800"
-        onClick={() =>
-          navigate(`/feed/${post.id}/comment`, { state: post.worryFiles })
-        }
+        className="cursor-pointer px-[2.5rem] text-text-subTitle-700 font-system-body2"
+        onClick={() => navigate(`/feed/${post.id}/comment`)}
       >
         댓글 {post.replyCount}개 모두 보기
       </span>
@@ -186,23 +192,16 @@ export function PostDetailContent({
   title,
   content,
   images,
-  className,
 }: {
-  title?: string;
-  content?: string;
+  title: string;
+  content: string;
   images?: string[] | null;
-  className?: string;
 }) {
   return (
     <div>
       <div className="px-[2.5rem]">
-        {title && <h1 className="mt-[1.3rem] text-heading2">{title}</h1>}
-        <p
-          className={twMergeCustom(
-            'mt-[0.8rem] break-words text-body3 text-custom-gray-800',
-            className
-          )}
-        >
+        <h1 className="mt-[1.3rem] font-system-heading1">{title}</h1>
+        <p className="mt-[0.8rem] break-words text-text-subTitle-700 font-system-body3">
           {formatText(content)}
         </p>
       </div>
@@ -243,13 +242,17 @@ function PostExpiration({ remainingTime }: { remainingTime: string }) {
   const isClosed = remainingTime === 'closed';
   return (
     <div className="mt-[1.5rem] flex items-center space-x-[5.67px] px-[2.5rem]">
-      <ClockIcon color={isClosed ? '#9e9e9e' : undefined} />
+      <ClockIcon
+        color={isClosed ? customColors.text.explain['500'] : undefined}
+      />
       {isClosed ? (
-        <span className="text-body2 text-custom-text-500">
+        <span className="text-text-explain-500 font-system-body2">
           투표가 마감되었어요
         </span>
       ) : (
-        <span className="text-body2 text-custom-main-500">{remainingTime}</span>
+        <span className="text-mainSub-main-500 font-system-body2">
+          {remainingTime}
+        </span>
       )}
     </div>
   );

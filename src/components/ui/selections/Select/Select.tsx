@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import DownIcon from '@/components/icons/DownIcon';
 import Dropdown from '@/components/ui/Dropdown';
-import { twMergeCustom } from '@/libs/tw-merge';
 
 interface SelectProps {
   id: string;
@@ -14,7 +14,7 @@ interface SelectProps {
   wrapperClassName?: string;
   onChange?: (value: number) => void;
   value?: string;
-  readonly?: boolean;
+  readOnly?: boolean;
   highlight?: boolean;
 }
 
@@ -27,19 +27,19 @@ export default function Select({
   wrapperClassName,
   onChange,
   value,
-  readonly,
+  readOnly,
   highlight,
 }: SelectProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   const handleMenuToggle = () => {
-    if (readonly) return;
+    if (readOnly) return;
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
   };
 
   const handleSelect = (value: number) => {
-    if (readonly) return;
+    if (readOnly) return;
     setMenuOpen(false);
     onChange && onChange(value);
   };
@@ -61,39 +61,38 @@ export default function Select({
   return (
     <div
       ref={ref}
-      className={twMergeCustom(
-        'relative flex w-[34rem] flex-col',
-        wrapperClassName
-      )}
+      className={twMerge('relative flex w-[34rem] flex-col', wrapperClassName)}
     >
-      <span className={twMergeCustom('text-body1', labelClassName)}>
+      <span
+        className={twMerge(
+          'text-text-subTitle-700 font-custom-subheading',
+          labelClassName
+        )}
+      >
         {label}
       </span>
       <div
         onClick={handleMenuToggle}
-        className={twMergeCustom(
-          'mt-[0.3rem] flex cursor-pointer items-center justify-between border-b-[0.2rem] border-custom-text-500 pb-[0.2rem]',
-          menuOpen && '-mb-[0.2rem] border-b-[0.4rem] border-custom-gray-800',
-          errorMessage && 'border-custom-semantic-warn-500'
+        className={twMerge(
+          'mt-[0.3rem] flex cursor-pointer items-center justify-between border-b-[0.2rem] border-text-explain-500 pb-[0.2rem]',
+          menuOpen && '-mb-[0.2rem] border-b-[0.4rem] border-text-subTitle-700',
+          errorMessage && 'border-semantic-warn-500'
         )}
       >
         <span
-          className={twMergeCustom(
-            'select-none text-body3 text-custom-text-400',
-            value && 'text-body4 text-custom-text-900'
+          className={twMerge(
+            'select-none text-text-subExplain-400 font-system-body4',
+            value && 'text-text-title-900 font-system-body4'
           )}
         >
           {value || placeholder}
         </span>
         <DownIcon
-          className={twMergeCustom(
-            'h-[3.2rem] w-[3.2rem]',
-            menuOpen && 'rotate-180'
-          )}
+          className={twMerge('h-[3.2rem] w-[3.2rem]', menuOpen && 'rotate-180')}
         />
       </div>
       {errorMessage && (
-        <span className="mt-[0.5rem] self-end text-body1 text-custom-semantic-warn-500">
+        <span className="mt-[0.5rem] self-end text-semantic-warn-500 font-system-body1">
           {errorMessage}
         </span>
       )}

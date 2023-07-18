@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Banner from '@/components/Banner';
 import Layout from '@/components/layout/Layout';
 import ModalController from '@/components/modal/ModalController';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import { RouteURL } from '@/constants/route-url';
 import useUpdate from '@/hooks/useUpdate';
 import CollectInformationPage from '@/pages/collect-information/CollectInformationPage';
@@ -41,6 +42,7 @@ export default function App() {
         <Route path={RouteURL.feed_report} element={<FeedReportPage />} />
         <Route path={RouteURL.comment_report} element={<CommentReportPage />} />
         <Route path={RouteURL.feed_route_star} element={<FeedPage />} />
+        <Route path={RouteURL.feed_edit} element={<WritePage />} />
         <Route path={RouteURL.login} element={<LoginPage />} />
         <Route
           path={RouteURL.login_oauth_kakao}

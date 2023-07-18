@@ -1,18 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 import useDeleteComment from '@/apis/hooks/posts/useDeleteComment';
-import useDeletePost from '@/apis/hooks/posts/useDeletePost';
 import useGetMyChoice from '@/apis/hooks/posts/useGetMyChoice';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import Popup from '@/components/ui/modal/Popup/Popup';
-import { twMergeCustom } from '@/libs/tw-merge';
 import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
 import commentTime from '@/utils/date/commentTime';
 import { formatText } from '@/utils/formatText';
 
 import { CommentBoxType } from './CommentBoxType';
-import { PostDetailContent } from './PostDetail/PostDetail';
 
 export default function CommentBox({
   comment,
@@ -56,9 +54,9 @@ export default function CommentBox({
     error: getMyChoiceError,
   } = useGetMyChoice({ postId, userId: comment.user.id });
   return (
-    <div className="flex flex-col border-b border-custom-background-200 py-[1.3rem]">
+    <div className="border-custom-background-200 flex flex-col border-b py-[1.3rem]">
       <div
-        className={twMergeCustom(
+        className={twMerge(
           'flex items-center justify-between px-[2.5rem]',
           className
         )}
@@ -69,9 +67,9 @@ export default function CommentBox({
             age={calculateAgeFromBirthday(comment.user.birthDate)}
             color="gray"
           />
-          <div className="h-[0.3rem] w-[0.3rem] rounded-full bg-gray1"></div>
+          <div className="bg-gray1 h-[0.3rem] w-[0.3rem] rounded-full"></div>
           {isWriter ? (
-            <div className="rounded-3xl border border-text2 px-[0.7rem] py-[0.5rem] text-[1rem] font-medium text-text2">
+            <div className="border-text2 text-text2 rounded-3xl border px-[0.7rem] py-[0.5rem] text-[1rem] font-medium">
               작성자
             </div>
           ) : (
@@ -90,14 +88,14 @@ export default function CommentBox({
         </div>
         {isCommentWriter ? (
           <div
-            className="text-body2 text-custom-text-500"
+            className="text-custom-text-500 text-body2"
             onClick={commentDeleteClicked}
           >
             삭제
           </div>
         ) : (
           <div
-            className="text-body2 text-custom-text-500"
+            className="text-custom-text-500 text-body2"
             onClick={commentReportClicked}
           >
             신고
@@ -105,16 +103,16 @@ export default function CommentBox({
         )}
       </div>
       <p
-        className={twMergeCustom(
-          'mb-[1.7rem] mt-[0.8rem] break-words text-body3 text-custom-gray-800',
+        className={twMerge(
+          'text-custom-gray-800 mb-[1.7rem] mt-[0.8rem] break-words text-body3',
           className1
         )}
       >
         {formatText(comment.content)}
       </p>
       <div
-        className={twMergeCustom(
-          'flex justify-between text-body2 text-custom-text-500',
+        className={twMerge(
+          'text-custom-text-500 flex justify-between text-body2',
           className1
         )}
       >

@@ -1,8 +1,8 @@
 import { ChangeEvent, useRef, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import DeleteIcon from '@/components/icons/DeleteIcon';
 import ImageFileIcon from '@/components/icons/ImageFileIcon';
-import { twMergeCustom } from '@/libs/tw-merge';
 
 interface PostVoteInputProps {
   image?: string;
@@ -13,6 +13,8 @@ interface PostVoteInputProps {
   hasError?: boolean;
   placeholder?: string;
   maxLength?: number;
+  readOnly?: boolean;
+  defaultValue?: string;
 }
 
 export default function PostVoteInput({
@@ -24,8 +26,10 @@ export default function PostVoteInput({
   hasError,
   placeholder = '항목 입력',
   maxLength = 15,
+  readOnly,
+  defaultValue,
 }: PostVoteInputProps) {
-  const [item, setItem] = useState('');
+  const [item, setItem] = useState(defaultValue || '');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +45,13 @@ export default function PostVoteInput({
   };
 
   return (
-    <div className={twMergeCustom('group relative w-[34rem]', className)}>
+    <div
+      className={twMerge(
+        'group relative w-[34rem] rounded-[0.5rem]',
+        className,
+        readOnly && 'pointer-events-none bg-background-voteBg-100'
+      )}
+    >
       <input
         ref={inputRef}
         type="text"
@@ -49,10 +59,12 @@ export default function PostVoteInput({
         placeholder={placeholder}
         onChange={handleChange}
         value={item}
-        className={twMergeCustom(
-          'w-full rounded-[0.5rem] border border-custom-background-200 bg-transparent py-[1.2rem] pl-[1.3rem] text-body4 placeholder:text-body3 placeholder:text-custom-gray-400 group-focus-within:border-custom-gray-800',
+        readOnly={readOnly}
+        className={twMerge(
+          'w-full rounded-[0.5rem] border border-background-dividerLine-300 bg-transparent py-[1.2rem] pl-[1.3rem] font-system-body4 placeholder:text-text-subExplain-400 placeholder:font-system-body3 group-focus-within:border-text-subTitle-700',
           hasError &&
-            'border-custom-semantic-warn-500 group-focus-within:border-custom-semantic-warn-500'
+            'border-semantic-warn-500 group-focus-within:border-semantic-warn-500',
+          readOnly && 'text-text-explain-500'
         )}
       />
       <div className="absolute right-[1.2rem] top-1/2 flex -translate-y-1/2 space-x-[0.8rem]">
@@ -62,7 +74,7 @@ export default function PostVoteInput({
             className="hidden group-focus-within:block"
           >
             <DeleteIcon
-              className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-custom-gray-300"
+              className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300"
               color="white"
             />
           </button>
@@ -74,12 +86,14 @@ export default function PostVoteInput({
               alt="투표 이미지"
               className="h-full w-full object-cover"
             />
-            <button onClick={onDeleteImage}>
-              <DeleteIcon
-                className="absolute right-0 top-0 h-[1.6rem] w-[1.6rem] bg-[#676a72]"
-                color="white"
-              />
-            </button>
+            {!readOnly && (
+              <button onClick={onDeleteImage}>
+                <DeleteIcon
+                  className="absolute right-0 top-0 h-[1.6rem] w-[1.6rem] bg-[#676a72]"
+                  color="white"
+                />
+              </button>
+            )}
           </div>
         )}
         {!image && onUploadImage && (

@@ -1,4 +1,4 @@
-import { twMergeCustom } from '@/libs/tw-merge';
+import { twMerge } from 'tailwind-merge';
 
 interface SnackbarProps {
   text: string;
@@ -15,15 +15,18 @@ export default function Snackbar({
 }: SnackbarProps) {
   return (
     <div
-      className={twMergeCustom(
-        'flex h-[4.3rem] w-[34rem] items-center rounded-[0.4rem] bg-custom-gray-800 px-[1.5rem] py-[1.1rem]',
+      className={twMerge(
+        'flex h-[4.3rem] w-[34rem] items-center rounded-[0.4rem] bg-text-subTitle-700 px-[1.5rem] py-[1.1rem]',
         actionText ? 'justify-between' : 'justify-center',
         className
       )}
     >
-      <span className="text-body4 text-white">{text}</span>
+      <span className="text-white font-system-body4">{text}</span>
       {actionText && (
-        <button className="text-body2 text-custom-main-500" onClick={onClick}>
+        <button
+          className="text-mainSub-main-500 font-system-body2"
+          onClick={onClick}
+        >
           {actionText}
         </button>
       )}

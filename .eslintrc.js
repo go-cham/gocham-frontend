@@ -8,7 +8,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
-    // 'plugin:storybook/recommended'
+    'plugin:storybook/recommended',
   ],
   settings: {
     react: {
@@ -21,11 +21,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    // '@tanstack/query'
-  ],
+  plugins: ['react', '@typescript-eslint', '@tanstack/query'],
 
   rules: {
     'react/react-in-jsx-scope': 'off',
