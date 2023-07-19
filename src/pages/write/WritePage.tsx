@@ -436,7 +436,19 @@ function WritePage() {
   }
 
   const handleGoBack = () => {
-    setCancelModalOpen(true);
+    if (
+      mode === 'new' &&
+      (votingContent.title ||
+        votingContent.content ||
+        imageFile.length > 0 ||
+        categoryValue !== -1 ||
+        voteTimeValue !== -1 ||
+        voteState.some((state) => state[0] || state[1]))
+    ) {
+      setCancelModalOpen(true);
+    } else {
+      navigate('/');
+    }
   };
 
   return (
