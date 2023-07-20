@@ -17,6 +17,7 @@ export default function CommentBox({
   postId,
   isWriter,
   parentCommentId,
+  mentionUser,
   className,
   className1,
   isCommentWriter,
@@ -30,6 +31,7 @@ export default function CommentBox({
       addChild: true,
       nestingReplyId: parentCommentId ? parentCommentId : comment.id,
       nickName: comment.user.nickname,
+      mentionUserId: comment.user.id,
     });
   };
   const commentDeleteClicked = () => {
@@ -63,7 +65,7 @@ export default function CommentBox({
             age={calculateAgeFromBirthday(comment.user.birthDate)}
             color="gray"
           />
-          <div className="bg-gray1 h-[0.3rem] w-[0.3rem] rounded-full"></div>
+          <div className="h-[0.3rem] w-[0.3rem] rounded-full bg-[#cccfd4]"></div>
           {isWriter ? (
             <span className="rounded-[15px] border border-[#676A72] px-[0.7rem] py-[0.5rem] text-[#676A72] font-system-caption">
               작성자
@@ -104,6 +106,11 @@ export default function CommentBox({
           className1
         )}
       >
+        {mentionUser ? (
+          <span className="mr-[0.5rem] text-mainSub-main-500">
+            @ {mentionUser.nickname}
+          </span>
+        ) : null}
         {formatText(comment.content)}
       </p>
       <div

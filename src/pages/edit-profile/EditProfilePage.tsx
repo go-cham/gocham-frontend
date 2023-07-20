@@ -96,7 +96,6 @@ function EditProfilePage() {
   };
 
   const handleEditProfile = () => {
-    console.log(userInformation.worryCategories);
     if (
       userInformation.sex &&
       userInformation.residence?.value &&

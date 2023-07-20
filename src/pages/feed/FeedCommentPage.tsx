@@ -30,6 +30,7 @@ export default function FeedCommentPage() {
     addChild: false,
     nestingReplyId: -1,
     nickName: '',
+    mentionUserId: -1,
   });
   const { deletePost, error: deletePostError, isSuccess } = useDeletePost();
   const dropdownSelected = (value: number) => {
@@ -116,7 +117,7 @@ export default function FeedCommentPage() {
             ))}
         </div>
       </div>
-      <div className="box-border h-3/5 overflow-y-scroll pb-[10rem] pt-[0.5rem]">
+      <div className="box-border h-4/6 overflow-y-scroll pb-[10rem] pt-[0.5rem]">
         {comments?.map((comment) => {
           return (
             <>
@@ -135,6 +136,7 @@ export default function FeedCommentPage() {
                     key={childComment.id}
                     className="pl-[5.5rem]"
                     className1="pl-[8.5rem] pr-[2.5rem]"
+                    mentionUser={childComment.mentionUser}
                     comment={childComment}
                     postId={post ? post.id : -1}
                     parentCommentId={comment.id}

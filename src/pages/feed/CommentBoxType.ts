@@ -11,6 +11,13 @@ export interface CommentBoxType {
           createdAt: string;
           id: number;
           updatedAt: string;
+          mentionUser: {
+            email: string | null;
+            id: number;
+            nickname: string;
+            phoneNumer: string | null;
+            profileImageUrl: string | null;
+          };
           user: {
             id: number;
             nickname: string;
@@ -45,6 +52,13 @@ export interface CommentBoxType {
         createdAt: string;
         id: number;
         updatedAt: string;
+        mentionUser: {
+          email: string | null;
+          id: number;
+          nickname: string;
+          phoneNumer: string | null;
+          profileImageUrl: string | null;
+        };
         user: {
           id: number;
           nickname: string;
@@ -59,6 +73,13 @@ export interface CommentBoxType {
           } | null;
         };
       };
+  mentionUser?: {
+    email: string | null;
+    id: number;
+    nickname: string;
+    phoneNumer: string | null;
+    profileImageUrl: string | null;
+  };
   parentCommentId?: number;
   className?: string;
   className1?: string;
@@ -70,6 +91,7 @@ export interface CommentBoxType {
       addChild: boolean;
       nestingReplyId: number;
       nickName: string;
+      mentionUserId: number;
     }>
   >;
 }
