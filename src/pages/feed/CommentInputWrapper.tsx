@@ -105,7 +105,7 @@ export default function CommentInputWrapper({
 
   return (
     <div
-      className={`bottom-0 flex w-full items-center justify-around border-t border-background-dividerLine-300 bg-white px-4 pb-10 pt-4 shadow-lg`}
+      className={`shadow-dock bottom-0 flex w-full items-center justify-around border-t border-background-dividerLine-300 bg-white px-4 pb-10 pt-4`}
     >
       {addChildComment.addChild ? (
         <div
