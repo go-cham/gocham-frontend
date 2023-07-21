@@ -37,7 +37,9 @@ export default function CommentInputWrapper({
   };
   const commentInputRef = useRef<HTMLInputElement>(null);
   const { addComment } = useAddComment();
-  const addCommentClicked = () => {
+  const addCommentClicked = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     setContent('');
     if (addChildComment.addChild) {
       addComment({
@@ -104,7 +106,8 @@ export default function CommentInputWrapper({
   }, [content]);
 
   return (
-    <div
+    <form
+      onSubmit={addCommentClicked}
       className={`shadow-dock bottom-0 flex w-full items-center justify-around border-t border-background-dividerLine-300 bg-white px-4 pb-10 pt-4`}
     >
       {addChildComment.addChild ? (
@@ -123,14 +126,13 @@ export default function CommentInputWrapper({
         onChange={commentInputted}
         value={content}
       />
-      <div
-        onClick={addCommentClicked}
+      <button
         className={`flex h-[3.6rem] w-[3.6rem] items-center justify-center rounded-full ${
           content.trim() !== '' ? 'bg-mainSub-main-500' : 'bg-gray-300'
         }`}
       >
         <AddCommentIcon />
-      </div>
-    </div>
+      </button>
+    </form>
   );
 }
