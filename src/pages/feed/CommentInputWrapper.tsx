@@ -30,34 +30,8 @@ export default function CommentInputWrapper({
   worryId,
 }: addCommentI) {
   const [content, setContent] = useState('');
+  const [spaceLength, setSpaceLength] = useState(0);
   const commentInputted = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const leadingSpaces = content.match(/^\s*/)?.[0];
-    let koreanCount = 0;
-    let englishCount = 0;
-    let numberCount = 0;
-    for (const char of addChildComment.nickName) {
-      if (/[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(char)) {
-        koreanCount++;
-      } else if (/[A-Za-z]/.test(char)) {
-        englishCount++;
-      } else if (/[0-9]/.test(char)) {
-        numberCount++;
-      }
-    }
-    if (
-      leadingSpaces &&
-      leadingSpaces.length <
-        3 + koreanCount * 4 + englishCount * 2 + numberCount * 3
-    ) {
-      setContent('');
-      setAddChildComment({
-        addChild: false,
-        nestingReplyId: -1,
-        nickName: '',
-        mentionUserId: -1,
-      });
-      return;
-    }
     setContent(e.target.value);
   };
   const commentInputRef = useRef<HTMLInputElement>(null);
@@ -89,7 +63,9 @@ export default function CommentInputWrapper({
     }
   };
   useEffect(() => {
-    setContent('');
+    setContent((prev) => {
+      return prev.trim();
+    });
     let koreanCount = 0;
     let englishCount = 0;
     let numberCount = 0;
@@ -103,6 +79,7 @@ export default function CommentInputWrapper({
           numberCount++;
         }
       }
+      setSpaceLength(3 + koreanCount * 4 + englishCount * 2 + numberCount * 3);
       setContent(
         (prev) =>
           ' '.repeat(3 + koreanCount * 4 + englishCount * 2 + numberCount * 3) +
@@ -111,6 +88,19 @@ export default function CommentInputWrapper({
     }
     commentInputRef.current?.focus();
   }, [addChildComment]);
+  useEffect(() => {
+    const leadingSpaces = content.match(/^\s*/)?.[0];
+    if (leadingSpaces && leadingSpaces.length + 1 < spaceLength) {
+      setContent('');
+      setAddChildComment({
+        addChild: false,
+        nestingReplyId: -1,
+        nickName: '',
+        mentionUserId: -1,
+      });
+      return;
+    }
+  }, [content]);
   return (
     <div
       className={`${
@@ -118,7 +108,11 @@ export default function CommentInputWrapper({
       } bottom-0 flex w-full items-center justify-around border-t border-background-dividerLine-300 bg-white px-4 pb-10 pt-4 shadow-lg`}
     >
       {addChildComment.addChild ? (
-        <div className="fixed left-[2.5rem] text-[1.4rem] text-mainSub-main-500">
+        <div
+          className={`${
+            isMobile ? 'fixed' : 'absolute'
+          } left-[2.5rem] text-[1.4rem] text-mainSub-main-500`}
+        >
           @{addChildComment.nickName}
         </div>
       ) : null}
