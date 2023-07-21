@@ -76,8 +76,9 @@ export default function FeedCommentPage() {
   if (!post || !user) {
     return null;
   }
+
   return (
-    <>
+    <div className="flex h-full flex-col">
       <TopAppBar title="댓글" navigateRoute="/" />
       <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.9rem] pt-[2.1rem]">
         <div className="flex items-center justify-between px-[2.5rem]">
@@ -117,7 +118,7 @@ export default function FeedCommentPage() {
             ))}
         </div>
       </div>
-      <div className="box-border h-4/6 divide-y-[1px] divide-background-dividerLine-300 overflow-y-scroll pb-[10rem] pt-[0.5rem]">
+      <div className="flex flex-1 flex-col divide-y-[1px] divide-background-dividerLine-300 overflow-y-scroll pt-[0.5rem]">
         {comments?.map((comment) => (
           <div key={comment.id}>
             <CommentBox
@@ -161,6 +162,6 @@ export default function FeedCommentPage() {
         onCancel={() => setDeleteModalOpen(false)}
         onClickButton={handleDeletePost}
       />
-    </>
+    </div>
   );
 }

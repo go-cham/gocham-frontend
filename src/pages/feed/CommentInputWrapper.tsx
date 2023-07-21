@@ -29,6 +29,7 @@ export default function CommentInputWrapper({
   userId,
   worryId,
 }: addCommentI) {
+  const [isFocused, setIsFocused] = useState(false);
   const [content, setContent] = useState('');
   const [spaceLength, setSpaceLength] = useState(0);
   const commentInputted = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,11 +102,10 @@ export default function CommentInputWrapper({
       return;
     }
   }, [content]);
+
   return (
     <div
-      className={`${
-        isMobile ? 'fixed' : 'absolute'
-      } bottom-0 flex w-full items-center justify-around border-t border-background-dividerLine-300 bg-white px-4 pb-10 pt-4 shadow-lg`}
+      className={`bottom-0 flex w-full items-center justify-around border-t border-background-dividerLine-300 bg-white px-4 pb-10 pt-4 shadow-lg`}
     >
       {addChildComment.addChild ? (
         <div
