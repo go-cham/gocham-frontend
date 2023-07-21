@@ -17,6 +17,7 @@ export default function CommentBox({
   postId,
   isWriter,
   parentCommentId,
+  mentionUser,
   className,
   className1,
   isCommentWriter,
@@ -30,6 +31,7 @@ export default function CommentBox({
       addChild: true,
       nestingReplyId: parentCommentId ? parentCommentId : comment.id,
       nickName: comment.user.nickname,
+      mentionUserId: comment.user.id,
     });
   };
   const commentDeleteClicked = () => {
@@ -49,36 +51,33 @@ export default function CommentBox({
   };
   const { choice } = useGetMyChoice({ postId, userId: comment.user.id });
 
+  const choiceLabel = comment.user.worryChoice?.label || choice?.label;
+
   return (
-    <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.5rem] pt-[1.7rem]">
+    <div className="flex flex-col pb-[1.5rem] pt-[1.7rem]">
       <div
         className={twMerge(
           'flex items-center justify-between px-[2.5rem]',
           className
         )}
       >
-        <div className="flex items-center space-x-[0.5rem]">
+        <div className="flex items-center space-x-[6px]">
           <PostUserProfile
             nickname={comment.user.nickname}
             age={calculateAgeFromBirthday(comment.user.birthDate)}
             color="gray"
           />
-          <div className="bg-gray1 h-[0.3rem] w-[0.3rem] rounded-full"></div>
-          {isWriter ? (
+          {choiceLabel && (
+            <div className="flex items-center space-x-[6px]">
+              <div className="h-[0.3rem] w-[0.3rem] rounded-full bg-[#cccfd4]"></div>
+              <span className="accent-text-subTitle-700 font-system-body1">
+                {choiceLabel}
+              </span>
+            </div>
+          )}
+          {isWriter && (
             <span className="rounded-[15px] border border-[#676A72] px-[0.7rem] py-[0.5rem] text-[#676A72] font-system-caption">
               작성자
-            </span>
-          ) : (
-            <span className="text-body1 text-gray-800">
-              {!parentCommentId
-                ? comment.user.worryChoice
-                  ? comment.user.worryChoice.label
-                  : isWriter
-                  ? null
-                  : ''
-                : choice
-                ? choice.label
-                : ''}
             </span>
           )}
         </div>
@@ -104,6 +103,11 @@ export default function CommentBox({
           className1
         )}
       >
+        {mentionUser ? (
+          <span className="mr-[0.5rem] text-mainSub-main-500">
+            @ {mentionUser.nickname}
+          </span>
+        ) : null}
         {formatText(comment.content)}
       </p>
       <div

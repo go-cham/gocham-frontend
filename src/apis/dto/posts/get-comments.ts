@@ -5,10 +5,17 @@ export type GetCommentsResponse = {
   updatedAt: string;
   content: string;
   childReplies: {
-    content:string,
-    createdAt:string,
-    id:number;
-    updatedAt:string;
+    content: string;
+    createdAt: string;
+    id: number;
+    updatedAt: string;
+    mentionUser: {
+      email: string | null;
+      id: number;
+      nickname: string;
+      phoneNumer: string | null;
+      profileImageUrl: string | null;
+    };
     user: {
       id: number;
       nickname: string;

@@ -30,6 +30,7 @@ export default function FeedCommentPage() {
     addChild: false,
     nestingReplyId: -1,
     nickName: '',
+    mentionUserId: -1,
   });
   const { deletePost, error: deletePostError, isSuccess } = useDeletePost();
   const dropdownSelected = (value: number) => {
@@ -75,8 +76,9 @@ export default function FeedCommentPage() {
   if (!post || !user) {
     return null;
   }
+
   return (
-    <>
+    <div className="flex h-full flex-col">
       <TopAppBar title="댓글" navigateRoute="/" />
       <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.9rem] pt-[2.1rem]">
         <div className="flex items-center justify-between px-[2.5rem]">
@@ -116,36 +118,35 @@ export default function FeedCommentPage() {
             ))}
         </div>
       </div>
-      <div className="box-border h-3/5 overflow-y-scroll pb-[10rem] pt-[0.5rem]">
-        {comments?.map((comment) => {
-          return (
-            <>
-              <CommentBox
-                key={comment.id}
-                className1="pl-[5.5rem] pr-[2.5rem]"
-                comment={comment}
-                postId={post.id}
-                isWriter={comment.user.id === post.user.id}
-                isCommentWriter={comment.user.id === user.id}
-                setAddChildComment={setAddChildComment}
-              />
-              {comment.childReplies.length > 0 &&
-                comment.childReplies.map((childComment) => (
-                  <CommentBox
-                    key={childComment.id}
-                    className="pl-[5.5rem]"
-                    className1="pl-[8.5rem] pr-[2.5rem]"
-                    comment={childComment}
-                    postId={post ? post.id : -1}
-                    parentCommentId={comment.id}
-                    isWriter={childComment.user.id === post?.user.id}
-                    isCommentWriter={childComment.user.id === user.id}
-                    setAddChildComment={setAddChildComment}
-                  />
-                ))}
-            </>
-          );
-        })}
+      <div className="flex flex-1 flex-col divide-y-[1px] divide-background-dividerLine-300 overflow-y-scroll pt-[0.5rem]">
+        {comments?.map((comment) => (
+          <div key={comment.id}>
+            <CommentBox
+              key={comment.id}
+              className1="pl-[5.5rem] pr-[2.5rem]"
+              comment={comment}
+              postId={post.id}
+              isWriter={comment.user.id === post.user.id}
+              isCommentWriter={comment.user.id === user.id}
+              setAddChildComment={setAddChildComment}
+            />
+            {comment.childReplies.length > 0 &&
+              comment.childReplies.map((childComment) => (
+                <CommentBox
+                  key={childComment.id}
+                  className="pl-[5.5rem]"
+                  className1="pl-[8.5rem] pr-[2.5rem]"
+                  mentionUser={childComment.mentionUser}
+                  comment={childComment}
+                  postId={post ? post.id : -1}
+                  parentCommentId={comment.id}
+                  isWriter={childComment.user.id === post?.user.id}
+                  isCommentWriter={childComment.user.id === user.id}
+                  setAddChildComment={setAddChildComment}
+                />
+              ))}
+          </div>
+        ))}
       </div>
       <CommentInputWrapper
         userId={user ? user.id : NaN}
@@ -161,6 +162,6 @@ export default function FeedCommentPage() {
         onCancel={() => setDeleteModalOpen(false)}
         onClickButton={handleDeletePost}
       />
-    </>
+    </div>
   );
 }
