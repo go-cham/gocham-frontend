@@ -54,7 +54,7 @@ export default function CommentBox({
   const choiceLabel = comment.user.worryChoice?.label || choice?.label;
 
   return (
-    <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.5rem] pt-[1.7rem]">
+    <div className="flex flex-col pb-[1.5rem] pt-[1.7rem]">
       <div
         className={twMerge(
           'flex items-center justify-between px-[2.5rem]',

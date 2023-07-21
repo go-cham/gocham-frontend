@@ -117,37 +117,35 @@ export default function FeedCommentPage() {
             ))}
         </div>
       </div>
-      <div className="box-border h-4/6 overflow-y-scroll pb-[10rem] pt-[0.5rem]">
-        {comments?.map((comment) => {
-          return (
-            <>
-              <CommentBox
-                key={comment.id}
-                className1="pl-[5.5rem] pr-[2.5rem]"
-                comment={comment}
-                postId={post.id}
-                isWriter={comment.user.id === post.user.id}
-                isCommentWriter={comment.user.id === user.id}
-                setAddChildComment={setAddChildComment}
-              />
-              {comment.childReplies.length > 0 &&
-                comment.childReplies.map((childComment) => (
-                  <CommentBox
-                    key={childComment.id}
-                    className="pl-[5.5rem]"
-                    className1="pl-[8.5rem] pr-[2.5rem]"
-                    mentionUser={childComment.mentionUser}
-                    comment={childComment}
-                    postId={post ? post.id : -1}
-                    parentCommentId={comment.id}
-                    isWriter={childComment.user.id === post?.user.id}
-                    isCommentWriter={childComment.user.id === user.id}
-                    setAddChildComment={setAddChildComment}
-                  />
-                ))}
-            </>
-          );
-        })}
+      <div className="box-border h-4/6 divide-y-[1px] divide-background-dividerLine-300 overflow-y-scroll pb-[10rem] pt-[0.5rem]">
+        {comments?.map((comment) => (
+          <div key={comment.id}>
+            <CommentBox
+              key={comment.id}
+              className1="pl-[5.5rem] pr-[2.5rem]"
+              comment={comment}
+              postId={post.id}
+              isWriter={comment.user.id === post.user.id}
+              isCommentWriter={comment.user.id === user.id}
+              setAddChildComment={setAddChildComment}
+            />
+            {comment.childReplies.length > 0 &&
+              comment.childReplies.map((childComment) => (
+                <CommentBox
+                  key={childComment.id}
+                  className="pl-[5.5rem]"
+                  className1="pl-[8.5rem] pr-[2.5rem]"
+                  mentionUser={childComment.mentionUser}
+                  comment={childComment}
+                  postId={post ? post.id : -1}
+                  parentCommentId={comment.id}
+                  isWriter={childComment.user.id === post?.user.id}
+                  isCommentWriter={childComment.user.id === user.id}
+                  setAddChildComment={setAddChildComment}
+                />
+              ))}
+          </div>
+        ))}
       </div>
       <CommentInputWrapper
         userId={user ? user.id : NaN}
