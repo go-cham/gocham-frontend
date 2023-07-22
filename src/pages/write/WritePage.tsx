@@ -11,11 +11,12 @@ import useAddPost from '@/apis/hooks/posts/useAddPost';
 import useEditPost from '@/apis/hooks/posts/useEditPost';
 import useGetPost from '@/apis/hooks/posts/useGetPost';
 import useUser from '@/apis/hooks/users/useUser';
+import PostCompleteIcon from '@/components/icons/PostCompleteIcon';
+import PostLoadingIcon from '@/components/icons/PostLoadingIcon';
 import TopAppBar from '@/components/layout/TopAppBar';
 import PostContentInput from '@/components/post/form/PostContentInput/PostContentInput';
 import PostTitleInput from '@/components/post/form/PostTitleInput/PostTitleInput';
 import PostVoteInput from '@/components/post/form/PostVoteInput/PostVoteInput';
-import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import DockedButton from '@/components/ui/buttons/DockedButton';
 import EditButton from '@/components/ui/buttons/EditButton/EditButton';
 import Popup from '@/components/ui/modal/Popup';
@@ -399,10 +400,10 @@ function WritePage() {
 
   if (addPostLoading || editPostLoading) {
     return (
-      <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center space-y-[0.7rem]">
-        <LoadingSpinner />
-        <span className="text-mainSub-main-500 font-custom-subheading">
-          업로드 중...
+      <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+        <PostLoadingIcon />
+        <span className="absolute -bottom-[5.5rem] text-mainSub-mainPush-600 font-custom-heading2">
+          고민 충전하는 중...
         </span>
       </div>
     );
@@ -410,26 +411,10 @@ function WritePage() {
 
   if (addPostSuccess || editPostSuccess) {
     return (
-      <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center space-y-[0.7rem]">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="52"
-          height="52"
-          viewBox="0 0 52 52"
-          fill="none"
-        >
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M44.523 12.4745C45.159 13.1071 45.159 14.1329 44.523 14.7655L20.6373 38.5255C20.0013 39.1582 18.9701 39.1582 18.3341 38.5255L7.477 27.7255C6.841 27.0929 6.841 26.0671 7.477 25.4345C8.11299 24.8018 9.14415 24.8018 9.78015 25.4345L19.4857 35.089L42.2199 12.4745C42.8559 11.8418 43.887 11.8418 44.523 12.4745Z"
-            fill="#FF7860"
-            stroke="#FF7860"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        <span className="text-mainSub-main-500 font-custom-subheading">
-          업로드 완료 !
+      <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+        <PostCompleteIcon />
+        <span className="absolute -bottom-[1.7rem] text-mainSub-mainPush-600 font-custom-heading2">
+          고민 충전 완료 !
         </span>
       </div>
     );
