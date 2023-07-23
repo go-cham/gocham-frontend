@@ -82,7 +82,9 @@ function WritePage() {
   const [voteTimeSelectErrorMsg, setVoteTimeSelectErrorMsg] = useState<
     string | null
   >(null);
-  const [imageFile, setImageFile] = useState<string[]>([]);
+  const [imageFile, setImageFile] = useState<{ id?: number; url: string }[]>(
+    []
+  );
   const initialVoteState = Array(MAX_NUM_VOTE_OPTIONS)
     .fill(null)
     .map(() => ['', '']);
@@ -130,8 +132,8 @@ function WritePage() {
       }
     });
 
-    imageFile.forEach((url) => {
-      postData.files.push({ url, contentType: 'image' });
+    imageFile.forEach((file) => {
+      postData.files.push({ url: file.url, contentType: 'image' });
     });
     await addPost(postData);
   };
@@ -148,7 +150,7 @@ function WritePage() {
   const handleImageRemove: MouseEventHandler<HTMLImageElement> = (e) => {
     const target = e.target as HTMLImageElement | null;
     const imageUrl = target?.parentElement?.querySelector('img')?.src;
-    const newImageFile = imageFile.filter((img) => img !== imageUrl);
+    const newImageFile = imageFile.filter((file) => file.url !== imageUrl);
     setImageFile(newImageFile);
   };
 
@@ -164,7 +166,7 @@ function WritePage() {
       resizeImage(event.target?.result as string).then(async (result) => {
         imgUrl = await uploadFirebase(user?.id, result, 'posting');
         setImageFile((prev) => {
-          return [...prev, imgUrl];
+          return [...prev, { url: imgUrl }];
         });
       });
       if (imgRef.current) {
@@ -363,7 +365,11 @@ function WritePage() {
       title: votingContent.title,
       content: votingContent.content,
       worryCategoryId: votingContent.category.value,
-      // files: imageFile.map((url) => ({ url, contentType: 'image' })),
+      files: imageFile.map((file) => ({
+        id: file.id,
+        url: file.url,
+        contentType: 'image',
+      })),
     });
   };
 
@@ -379,7 +385,9 @@ function WritePage() {
         post.worryChoices.map((choice) => [choice.label, choice.url || ''])
       );
       setVotingNum(post.worryChoices.length - 1);
-      setImageFile(post.worryFiles.map((file) => file.url));
+      setImageFile(
+        post.worryFiles.map((file) => ({ id: file.id, url: file.url }))
+      );
     }
   }, [post]);
 
@@ -460,13 +468,13 @@ function WritePage() {
         />
         <div className="mt-[1.3rem] flex w-full">
           {imageFile &&
-            imageFile.map((imgUrl) => (
+            imageFile.map((file) => (
               <div
-                key={imgUrl}
+                key={file.url}
                 className="relative mr-[1rem] h-[7.1rem] w-[7.1rem]"
               >
                 <img
-                  src={imgUrl}
+                  src={file.url}
                   alt={'업로드 이미지'}
                   className="h-full w-full object-cover"
                 />

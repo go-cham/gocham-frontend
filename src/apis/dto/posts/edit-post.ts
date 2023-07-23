@@ -3,6 +3,11 @@ export type EditPostRequest = {
   title: string;
   content: string;
   worryCategoryId: number;
+  files: {
+    id?: number;
+    url: string;
+    contentType: string;
+  }[];
 };
 
 export type EditPostResponse = {
