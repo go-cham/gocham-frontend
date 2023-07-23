@@ -98,7 +98,7 @@ export default function PostVote({
         <div className="space-y-[2.1rem] rounded-[0.5rem] border border-background-dividerLine-300 px-[1.7rem] py-[1.5rem]">
           {options.map((option) => {
             const count =
-              usersChoices.find((o) => o.label === option.label)
+              usersChoices.find((o) => o.id === option.id)
                 ?.userWorryChoiceCount || 0;
             const percentage =
               total === 0 ? 0 : Math.round((count / total) * 100);
@@ -108,9 +108,7 @@ export default function PostVote({
                 <div key={option.id} className="relative flex">
                   {choice && !isAbstained && (
                     <CheckIcon
-                      color={
-                        choice?.label === option.label ? '#222222' : '#e0e0e0'
-                      }
+                      color={choice?.id === option.id ? '#222222' : '#e0e0e0'}
                     />
                   )}
                   <div className="ml-[0.6rem] flex flex-col">
