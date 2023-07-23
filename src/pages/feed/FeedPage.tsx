@@ -1,4 +1,4 @@
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { useParams } from 'react-router-dom';
 
 import useChooseOption from '@/apis/hooks/posts/useChooseOption';
@@ -10,6 +10,7 @@ import PostDetailSkeleton from '@/components/ui/skeleton/PostDetailSkeleton';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
+import { voteAnimationIdAtom } from '@/states/vote-animation';
 
 import PostDetail from './PostDetail';
 
@@ -26,13 +27,18 @@ function FeedPage() {
   const [selectedVoteOptionId, setSelectedVoteOptionId] = useAtom(
     selectedVoteOptionIdAtom
   );
+  const setVoteAnimationId = useSetAtom(voteAnimationIdAtom);
 
-  const handleVote = () => {
+  const handleVote = async () => {
     if (user?.id && selectedVoteOptionId) {
-      chooseOption({
+      await chooseOption({
         userId: user.id,
         worryChoiceId: selectedVoteOptionId,
       });
+      setVoteAnimationId(selectedVoteOptionId);
+      setTimeout(() => {
+        setVoteAnimationId(null);
+      }, 1400);
     }
     setSelectedVoteOptionId(null);
   };
