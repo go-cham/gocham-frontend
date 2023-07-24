@@ -31,7 +31,12 @@ export default function HomeHeader() {
     <header className="flex items-center py-[1.2rem] pl-[2.5rem]">
       {!uploadedIn24 ? (
         <>
-          <img src={LogoStarve} alt={'배고픈로고'} onClick={handleTitleClick} />
+          <img
+            src={LogoStarve}
+            alt={'배고픈로고'}
+            onClick={handleTitleClick}
+            className="cursor-pointer"
+          />
           <div
             className="ml-[1.5rem] rounded-lg pb-[0.7rem] pl-[1.1rem] pr-[1.7rem] pt-[0.6rem] shadow-dropdown font-custom-subheading"
             style={{
@@ -43,7 +48,12 @@ export default function HomeHeader() {
         </>
       ) : (
         <>
-          <img src={LogoFull} alt={'배부른로고'} onClick={handleTitleClick} />
+          <img
+            src={LogoFull}
+            alt={'배부른로고'}
+            onClick={handleTitleClick}
+            className="cursor-pointer"
+          />
           <div
             className="ml-[1.5rem] rounded-lg pb-[0.7rem] pl-[1.1rem] pr-[1.7rem] pt-[0.6rem] shadow-dropdown font-custom-subheading"
             style={{
