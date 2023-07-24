@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -18,16 +19,28 @@ export default function useGetPosts({
   const { data, isLoading, error, fetchNextPage } = useInfiniteQuery({
     queryKey: ['posts', initialPostId, authorId, participatingUserId],
     queryFn: async ({ pageParam }) => {
-      const res = await axiosInstance.get<GetPostsResponse>('/worries', {
-        params: {
-          sort: 'DESC',
-          take: 5,
-          nextCursorId: pageParam || initialPostId,
-          authorId,
-          participatingUserId,
-        },
-      });
-      return res.data;
+      if (authorId || participatingUserId) {
+        const res = await axiosInstance.get<GetPostsResponse>('/worries', {
+          params: {
+            sort: 'DESC',
+            take: 5,
+            nextCursorId: pageParam || initialPostId,
+            authorId,
+            participatingUserId,
+          },
+        });
+        return res.data;
+      } else {
+        const res = await axios.get<GetPostsResponse>('/worries', {
+          baseURL: process.env.REACT_APP_SERVER_API,
+          params: {
+            sort: 'DESC',
+            take: 5,
+            nextCursorId: pageParam || initialPostId,
+          },
+        });
+        return res.data;
+      }
     },
     getNextPageParam: (lastPage) => lastPage.meta.nextId || undefined,
   });

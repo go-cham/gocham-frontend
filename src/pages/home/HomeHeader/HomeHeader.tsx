@@ -1,5 +1,3 @@
-import { useAtomValue } from 'jotai';
-
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import LogoFull from '@/images/Common/HomeLogoFull.svg';
@@ -20,7 +18,7 @@ export default function HomeHeader() {
     }
   };
   let uploadedIn24 = false;
-  if (posts) {
+  if (user?.id && posts) {
     const latestUploadedAt = new Date(posts[0].createdAt);
     const now = new Date();
 
