@@ -11,6 +11,7 @@ interface PostVoteInputProps {
   onChange?: (item: string) => void;
   className?: string;
   hasError?: boolean;
+  errorMessage?: string;
   placeholder?: string;
   maxLength?: number;
   readOnly?: boolean;
@@ -24,6 +25,7 @@ export default function PostVoteInput({
   onChange,
   className,
   hasError,
+  errorMessage,
   placeholder = '항목 입력',
   maxLength = 15,
   readOnly,
@@ -67,6 +69,13 @@ export default function PostVoteInput({
           readOnly && 'text-text-explain-500'
         )}
       />
+      {errorMessage && (
+        <div className="w-full text-right">
+          <span className="text-semantic-warn-500 font-system-body1">
+            {errorMessage}
+          </span>
+        </div>
+      )}
       <div className="absolute right-[1.2rem] top-1/2 flex -translate-y-1/2 space-x-[0.8rem]">
         {item && (
           <button

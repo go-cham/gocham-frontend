@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import BackIcon from '@/components/icons/BackIcon';
@@ -42,6 +42,7 @@ export default function SettingsPage() {
   ];
 
   const handleLogout = () => {
+    alert('로그아웃 되었습니다.\n고민이 있으면 언제든지 찾아와주세요!');
     localStorage.removeItem('token');
     queryClient.clear();
     navigate('/');

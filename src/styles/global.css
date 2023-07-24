@@ -46,3 +46,15 @@ input[type='number'] {
   -webkit-filter: drop-shadow(0 -4px 16px rgba(34, 34, 34, 0.12));
   filter: drop-shadow(0 -4px 16px rgba(34, 34, 34, 0.12));
 }
+
+@keyframes slide-icon {
+  from {
+    left: 0;
+  }
+}
+
+@keyframes slide-bar {
+  from {
+    width: 0;
+  }
+}
