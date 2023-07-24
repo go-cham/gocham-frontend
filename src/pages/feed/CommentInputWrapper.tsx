@@ -29,6 +29,7 @@ export default function CommentInputWrapper({
   userId,
   worryId,
 }: addCommentI) {
+  const [isFocused, setIsFocused] = useState(false);
   const [content, setContent] = useState('');
   const [spaceLength, setSpaceLength] = useState(0);
   const commentInputted = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +37,9 @@ export default function CommentInputWrapper({
   };
   const commentInputRef = useRef<HTMLInputElement>(null);
   const { addComment } = useAddComment();
-  const addCommentClicked = () => {
+  const addCommentClicked = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     setContent('');
     if (addChildComment.addChild) {
       addComment({
@@ -101,11 +104,11 @@ export default function CommentInputWrapper({
       return;
     }
   }, [content]);
+
   return (
-    <div
-      className={`${
-        isMobile ? 'fixed' : 'absolute'
-      } bottom-0 flex w-full items-center justify-around border-t border-background-dividerLine-300 bg-white px-4 pb-10 pt-4 shadow-lg`}
+    <form
+      onSubmit={addCommentClicked}
+      className={`shadow-dock bottom-0 flex w-full items-center justify-around border-t border-background-dividerLine-300 bg-white px-4 pb-10 pt-4`}
     >
       {addChildComment.addChild ? (
         <div
@@ -123,14 +126,13 @@ export default function CommentInputWrapper({
         onChange={commentInputted}
         value={content}
       />
-      <div
-        onClick={addCommentClicked}
+      <button
         className={`flex h-[3.6rem] w-[3.6rem] items-center justify-center rounded-full ${
           content.trim() !== '' ? 'bg-mainSub-main-500' : 'bg-gray-300'
         }`}
       >
         <AddCommentIcon />
-      </div>
-    </div>
+      </button>
+    </form>
   );
 }
