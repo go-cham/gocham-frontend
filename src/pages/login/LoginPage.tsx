@@ -2,10 +2,10 @@ import { useNavigate } from 'react-router-dom';
 
 import BackIcon from '@/components/icons/BackIcon';
 import withAuth from '@/components/withAuth';
+import Kakao from '@/images/Login/kakao.svg';
 import LoginWrapper from '@/images/Login/loginWrapper.svg';
 import LoginWrapperText2 from '@/images/Login/loginWrapperText2.svg';
 import LoginWrapperText1 from '@/images/Login/loginWrapperText.svg';
-import KakaoText from '@/images/Login/카카오계정으로_시작하기.svg';
 
 declare global {
   interface Window {
@@ -45,20 +45,45 @@ function LoginPage() {
         color="black"
       />
       <div className="ml-[2.5rem] mt-[3.3rem] h-4/6">
-        <img src={LoginWrapperText1} alt={'로그인 화면 텍스트1'} />
-        <img
-          src={LoginWrapperText2}
-          alt={'로그인 화면 텍스트2'}
-          className="mt-[1.5rem]"
-        />
+        <div
+          className="font-custom-body1"
+          style={{
+            fontSize: '2.8rem',
+            lineHeight: '4.2rem',
+            letterSpacing: '-0.3px',
+          }}
+        >
+          일상의 고민부터
+        </div>
+        <div
+          className="font-custom-body1"
+          style={{
+            fontSize: '2.8rem',
+            lineHeight: '4.2rem',
+            letterSpacing: '-0.3px',
+          }}
+        >
+          재미있는 논쟁까지,
+        </div>
+        <div
+          className="font-custom-subheading"
+          style={{
+            fontSize: '3.2rem',
+            lineHeight: '4.2rem',
+            letterSpacing: '-0.3px',
+          }}
+        >
+          고민의참견
+        </div>
       </div>
-      <button className="mt-[4vh] flex w-full justify-center">
-        <img
-          src={KakaoText}
-          alt={'카카오 로그인 텍스트'}
-          onClick={handleKakaoLogin}
-          className="w-full max-w-[30.6rem]"
-        />
+      <button
+        onClick={handleKakaoLogin}
+        className="mx-auto mt-[4vh] flex h-[5.3rem] w-[34rem] items-center justify-center rounded-[3rem] bg-[#FDDC3F]"
+      >
+        <img src={Kakao} alt={'카카오 아이콘'} />
+        <span className="ml-[0.2rem] font-system-body5">
+          카카오 계정으로 시작하기
+        </span>
       </button>
     </div>
   );

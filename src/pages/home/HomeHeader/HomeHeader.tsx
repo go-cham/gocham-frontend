@@ -1,9 +1,7 @@
 import { useAtomValue } from 'jotai';
 
 import LogoFull from '@/images/Common/HomeLogoFull.svg';
-import LogoFullState from '@/images/Common/HomeLogoFullState.svg';
 import LogoStarve from '@/images/Common/HomeLogoStarve.svg';
-import LogoStarveState from '@/images/Common/HomeLogoStarveState.svg';
 import { hasUploadedPost } from '@/pages/write/WritePage';
 
 export default function HomeHeader() {
@@ -19,7 +17,7 @@ export default function HomeHeader() {
   };
 
   return (
-    <header className="flex h-[8rem] py-[1.2rem] pl-[2.5rem]">
+    <header className="flex items-center py-[1.2rem] pl-[2.5rem]">
       {!hasUploaded ? (
         <>
           <img
@@ -28,7 +26,14 @@ export default function HomeHeader() {
             onClick={handleTitleClick}
             className="cursor-pointer"
           />
-          <img src={LogoStarveState} alt={'배고픈상태'} />
+          <div
+            className="ml-[1.5rem] rounded-lg pb-[0.7rem] pl-[1.1rem] pr-[1.7rem] pt-[0.6rem] shadow-dropdown font-custom-subheading"
+            style={{
+              fontWeight: 400,
+            }}
+          >
+            고민을 작성해서 고민이에게 힘을 주세요!
+          </div>
         </>
       ) : (
         <>
@@ -38,7 +43,14 @@ export default function HomeHeader() {
             onClick={handleTitleClick}
             className="cursor-pointer"
           />
-          <img src={LogoFullState} alt={'배부른상태'} />
+          <div
+            className="ml-[1.5rem] rounded-lg pb-[0.7rem] pl-[1.1rem] pr-[1.7rem] pt-[0.6rem] shadow-dropdown font-custom-subheading"
+            style={{
+              fontWeight: 400,
+            }}
+          >
+            오늘도 고민 충전 완료!
+          </div>
         </>
       )}
     </header>

@@ -54,8 +54,19 @@ type PostWriteContentType = {
 
 const MIN_NUM_VOTE_OPTIONS = 2;
 const MAX_NUM_VOTE_OPTIONS = 4;
-export const hasUploadedPost = atom(false);
 let previousTimerId: NodeJS.Timeout | null = null;
+
+const getHasUploadedFromLocalStorage = () => {
+  const hasUploaded = localStorage.getItem('hasUploadedPost');
+  return hasUploaded ? JSON.parse(hasUploaded) : false;
+};
+
+// localStorage에 값을 저장하는 함수
+const setHasUploadedToLocalStorage = (hasUploaded: boolean) => {
+  localStorage.setItem('hasUploadedPost', JSON.stringify(hasUploaded));
+};
+
+export const hasUploadedPost = atom(getHasUploadedFromLocalStorage());
 
 function WritePage() {
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
@@ -136,12 +147,16 @@ function WritePage() {
     imageFile.forEach((url) => {
       postData.files.push({ url, contentType: 'image' });
     });
-    setUploadPost(true);
+    if (!uploadPost) {
+      setUploadPost(true);
+      setHasUploadedToLocalStorage(true);
+    }
     if (previousTimerId) {
       clearTimeout(previousTimerId);
     }
     const currentTimerId = setTimeout(() => {
       setUploadPost(false);
+      setHasUploadedToLocalStorage(false);
     }, 24 * 60 * 60 * 1000);
     previousTimerId = currentTimerId;
     await addPost(postData);
