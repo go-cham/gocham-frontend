@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import useUser from '@/apis/hooks/users/useUser';
 import { RouteURL } from '@/constants/route-url';
@@ -13,21 +13,23 @@ const withAuth =
   (WrappedComponent: React.FC, { block }: AuthOption) =>
   // eslint-disable-next-line react/display-name
   () => {
-    const navigate = useNavigate();
     const { user, isLoading } = useUser();
 
     if (isLoading) {
       return null;
     }
     if (block === 'unauthenticated') {
+      if (user?.type === 'onceUser') {
+        return <Navigate to={RouteURL.collect_information} />;
+      }
       if (!user) {
-        navigate(RouteURL.login);
+        return <Navigate to={RouteURL.login} />;
       }
     }
 
     if (block === 'activated') {
       if (user && user.type === userType.activatedUser) {
-        navigate(RouteURL.home);
+        return <Navigate to={RouteURL.home} />;
       }
     }
 

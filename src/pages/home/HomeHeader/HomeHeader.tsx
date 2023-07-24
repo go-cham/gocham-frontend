@@ -18,7 +18,7 @@ export default function HomeHeader() {
     }
   };
   let uploadedIn24 = false;
-  if (user?.id && posts) {
+  if (user?.id && posts && posts.length > 0) {
     const latestUploadedAt = new Date(posts[0].createdAt);
     const now = new Date();
 
