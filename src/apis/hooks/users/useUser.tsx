@@ -16,6 +16,7 @@ export default function useUser(
     },
     retry: false,
     enabled,
+    refetchInterval: 60 * 1000,
   });
 
   const {

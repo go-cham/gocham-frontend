@@ -1,11 +1,15 @@
 import { useAtomValue } from 'jotai';
 
+import useGetPosts from '@/apis/hooks/posts/useGetPosts';
+import useUser from '@/apis/hooks/users/useUser';
 import LogoFull from '@/images/Common/HomeLogoFull.svg';
 import LogoStarve from '@/images/Common/HomeLogoStarve.svg';
-import { hasUploadedPost } from '@/pages/write/WritePage';
 
 export default function HomeHeader() {
-  const hasUploaded = useAtomValue(hasUploadedPost);
+  const { user } = useUser();
+  const { posts } = useGetPosts({
+    authorId: user?.id,
+  });
   const handleTitleClick = () => {
     const list = document.querySelector('#home-post-list');
     if (list) {
@@ -15,10 +19,19 @@ export default function HomeHeader() {
       });
     }
   };
+  let uploadedIn24 = false;
+  if (posts) {
+    const latestUploadedAt = new Date(posts[0].createdAt);
+    const now = new Date();
+
+    if (now.getTime() - latestUploadedAt.getTime() < 24 * 3600 * 1000) {
+      uploadedIn24 = true;
+    }
+  }
 
   return (
     <header className="flex items-center py-[1.2rem] pl-[2.5rem]">
-      {!hasUploaded ? (
+      {!uploadedIn24 ? (
         <>
           <img src={LogoStarve} alt={'배고픈로고'} onClick={handleTitleClick} />
           <div
