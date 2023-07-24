@@ -1,3 +1,4 @@
+import { atom, useAtom } from 'jotai';
 import {
   Fragment,
   MouseEventHandler,
@@ -54,9 +55,23 @@ type PostWriteContentType = {
 
 const MIN_NUM_VOTE_OPTIONS = 2;
 const MAX_NUM_VOTE_OPTIONS = 4;
+let previousTimerId: NodeJS.Timeout | null = null;
+
+const getHasUploadedFromLocalStorage = () => {
+  const hasUploaded = localStorage.getItem('hasUploadedPost');
+  return hasUploaded ? JSON.parse(hasUploaded) : false;
+};
+
+// localStorage에 값을 저장하는 함수
+const setHasUploadedToLocalStorage = (hasUploaded: boolean) => {
+  localStorage.setItem('hasUploadedPost', JSON.stringify(hasUploaded));
+};
+
+export const hasUploadedPost = atom(getHasUploadedFromLocalStorage());
 
 function WritePage() {
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
+  const [uploadPost, setUploadPost] = useAtom(hasUploadedPost);
   const location = useLocation();
   const params = useParams();
   const mode = location.pathname.endsWith('edit') ? 'edit' : 'new';
@@ -135,6 +150,18 @@ function WritePage() {
     imageFile.forEach((file) => {
       postData.files.push({ url: file.url, contentType: 'image' });
     });
+    if (!uploadPost) {
+      setUploadPost(true);
+      setHasUploadedToLocalStorage(true);
+    }
+    if (previousTimerId) {
+      clearTimeout(previousTimerId);
+    }
+    const currentTimerId = setTimeout(() => {
+      setUploadPost(false);
+      setHasUploadedToLocalStorage(false);
+    }, 24 * 60 * 60 * 1000);
+    previousTimerId = currentTimerId;
     await addPost(postData);
   };
 
