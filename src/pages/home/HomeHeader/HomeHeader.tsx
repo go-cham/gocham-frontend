@@ -28,7 +28,10 @@ export default function HomeHeader() {
   }
 
   return (
-    <header className="flex items-center py-[1.2rem] pl-[2.5rem]">
+    <header
+      className="sticky top-0 z-30 flex w-full items-center py-[1.2rem] pl-[2.5rem]"
+      style={{ backdropFilter: 'blur(8px)' }}
+    >
       {!uploadedIn24 ? (
         <>
           <img
