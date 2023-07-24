@@ -108,7 +108,7 @@ export default function CommentInputWrapper({
   return (
     <form
       onSubmit={addCommentClicked}
-      className={`shadow-dock bottom-0 flex w-full items-center justify-around border-t border-background-dividerLine-300 bg-white px-4 pb-10 pt-4`}
+      className={`shadow-dock bottom-0 flex w-full items-center justify-around bg-white px-4 pb-10 pt-4`}
     >
       {addChildComment.addChild ? (
         <div
@@ -121,7 +121,7 @@ export default function CommentInputWrapper({
       ) : null}
       <input
         ref={commentInputRef}
-        className="font-red w-5/6 rounded-lg border border-gray-300 py-4 pl-4 text-[1.4rem] focus:border-black"
+        className="font-red w-5/6 rounded-lg border border-background-dividerLine-300 py-4 pl-4 text-[1.4rem] focus:border-text-explain-500"
         placeholder="의견을 자유롭게 작성해 주세요."
         onChange={commentInputted}
         value={content}
