@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import BackIcon from '@/components/icons/BackIcon';
 import TopAppBar from '@/components/layout/TopAppBar';
 import Popup from '@/components/ui/modal/Popup';
+import withAuth from '@/components/withAuth';
 
-export default function SettingsPage() {
+function SettingsPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [logoutModalOpen, setLogoutModalOpen] = useState(false);
@@ -85,3 +86,5 @@ export default function SettingsPage() {
     </div>
   );
 }
+
+export default withAuth(SettingsPage, { block: 'unauthenticated' });

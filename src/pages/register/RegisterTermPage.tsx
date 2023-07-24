@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useUser from '@/apis/hooks/users/useUser';
 import BackIcon from '@/components/icons/BackIcon';
 import Button from '@/components/ui/buttons/Button';
+import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
 import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
 import { EndPoint } from '@/dataManager/apiMapper';
@@ -19,7 +20,7 @@ export type AcceptType = {
   allCheck: boolean;
 };
 
-export default function RegisterTermPage() {
+function RegisterTermPage() {
   const navigate = useNavigate();
   const { user } = useUser();
   const [accept, setAccept] = useState<AcceptType>({
@@ -136,3 +137,5 @@ export default function RegisterTermPage() {
     </div>
   );
 }
+
+export default withAuth(RegisterTermPage, { block: 'activated' });
