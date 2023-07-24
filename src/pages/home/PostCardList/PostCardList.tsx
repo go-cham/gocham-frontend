@@ -14,7 +14,7 @@ export default function PostCardList({
   participatingUserId,
 }: PostCardListProps) {
   const { user } = useUser();
-  const { posts, ref, error } = useGetPosts({
+  const { posts, ref, error, isLoading } = useGetPosts({
     authorId,
     participatingUserId,
   });

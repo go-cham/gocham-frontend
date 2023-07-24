@@ -1,3 +1,9 @@
+import Age10Icon from '../icons/age/Age10Icon';
+import Age20Icon from '../icons/age/Age20Icon';
+import Age30Icon from '../icons/age/Age30Icon';
+import Age40Icon from '../icons/age/Age40Icon';
+import Age40PlusIcon from '../icons/age/Age40PlusIcon';
+
 interface PostUserProfileProps {
   nickname: string;
   age: number;
@@ -11,14 +17,12 @@ export default function PostUserProfile({
 }: PostUserProfileProps) {
   return (
     <div className="flex items-center space-x-[0.5rem]">
-      <span
-        className={`flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-full text-[1.2rem] font-bold tracking-[-0.36px] ${
-          color === 'primary'
-            ? 'bg-mainSub-main-100 text-mainSub-main-500'
-            : 'bg-[#f4f4f5] text-[#b0b2b8]'
-        }`}
-      >
-        {String(age)[0] + '0'}
+      <span className="h-[2.5rem] w-[2.5rem] tracking-[-0.36px]">
+        {age < 20 && <Age10Icon />}
+        {age >= 20 && age < 30 && <Age20Icon />}
+        {age >= 30 && age < 40 && <Age30Icon />}
+        {age >= 40 && age < 50 && <Age40Icon />}
+        {age >= 50 && <Age40PlusIcon />}
       </span>
       <span className="font-system-body2">{nickname}</span>
     </div>

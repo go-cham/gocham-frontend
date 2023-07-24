@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import ThumbnailLoading from '@/images/Common/thumbnailLoading.svg';
 import { formatText } from '@/utils/formatText';
 
 interface PostCardContentProps {
@@ -11,6 +14,10 @@ export default function PostCardContent({
   content,
   image,
 }: PostCardContentProps) {
+  const [imageLoading, setImageLoading] = useState(true);
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
   return (
     <div className="relative -top-[0.4rem] flex h-[6.4rem] items-center">
       <div className="flex-1 space-y-[0.9rem] overflow-hidden">
@@ -19,13 +26,21 @@ export default function PostCardContent({
           {formatText(content)}
         </p>
       </div>
-      {image && (
-        <img
-          src={image}
-          alt={'게시글 이미지'}
-          className="ml-[1.7rem] aspect-square w-[6.4rem] rounded-[5px] border border-background-dividerLine-300 object-cover"
-        />
-      )}
+      {image &&
+        (!imageLoading ? (
+          <img
+            src={image}
+            alt={'게시글 이미지'}
+            className="ml-[1.7rem] aspect-square w-[6.4rem] rounded-[5px] border border-background-dividerLine-300 object-cover"
+          />
+        ) : (
+          <img
+            src={ThumbnailLoading}
+            alt={'게시글 이미지 로딩'}
+            onLoad={handleImageLoad}
+            className="ml-[1.7rem] aspect-square w-[6.4rem] rounded-[5px] border border-background-dividerLine-300 object-cover"
+          />
+        ))}
     </div>
   );
 }

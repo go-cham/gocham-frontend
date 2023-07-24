@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router-dom';
 
 import BackIcon from '@/components/icons/BackIcon';
 import withAuth from '@/components/withAuth';
-import Logo from '@/images/Common/big_logo.svg';
-import GochamCharacter from '@/images/Login/GochamCharacter.svg';
+import LoginWrapper from '@/images/Login/loginWrapper.svg';
+import LoginWrapperText2 from '@/images/Login/loginWrapperText2.svg';
+import LoginWrapperText1 from '@/images/Login/loginWrapperText.svg';
 import KakaoText from '@/images/Login/카카오계정으로_시작하기.svg';
 
 declare global {
@@ -31,18 +32,27 @@ function LoginPage() {
   };
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center bg-mainSub-main-500">
+    <div
+      className="relative flex h-full w-full flex-col"
+      style={{
+        backgroundImage: `url(${LoginWrapper})`,
+        backgroundSize: 'cover',
+      }}
+    >
       <BackIcon
         onClick={() => navigate('/')}
         className="ml-[0.9rem] cursor-pointer self-start"
-        color="white"
+        color="black"
       />
-      <img
-        src={Logo}
-        alt={'로고'}
-        className="mt-[2vh] w-full max-w-[39.3rem]"
-      />
-      <button className="mt-[4vh]">
+      <div className="ml-[2.5rem] mt-[3.3rem] h-4/6">
+        <img src={LoginWrapperText1} alt={'로그인 화면 텍스트1'} />
+        <img
+          src={LoginWrapperText2}
+          alt={'로그인 화면 텍스트2'}
+          className="mt-[1.5rem]"
+        />
+      </div>
+      <button className="mt-[4vh] flex w-full justify-center">
         <img
           src={KakaoText}
           alt={'카카오 로그인 텍스트'}
@@ -50,11 +60,6 @@ function LoginPage() {
           className="w-full max-w-[30.6rem]"
         />
       </button>
-      <img
-        src={GochamCharacter}
-        className="absolute bottom-[12vh]"
-        alt={'캐릭터'}
-      />
     </div>
   );
 }

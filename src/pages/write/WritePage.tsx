@@ -1,3 +1,4 @@
+import { atom, useAtom } from 'jotai';
 import {
   Fragment,
   MouseEventHandler,
@@ -53,9 +54,12 @@ type PostWriteContentType = {
 
 const MIN_NUM_VOTE_OPTIONS = 2;
 const MAX_NUM_VOTE_OPTIONS = 4;
+export const hasUploadedPost = atom(false);
+let previousTimerId: NodeJS.Timeout | null = null;
 
 function WritePage() {
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
+  const [uploadPost, setUploadPost] = useAtom(hasUploadedPost);
   const location = useLocation();
   const params = useParams();
   const mode = location.pathname.endsWith('edit') ? 'edit' : 'new';
@@ -132,6 +136,14 @@ function WritePage() {
     imageFile.forEach((url) => {
       postData.files.push({ url, contentType: 'image' });
     });
+    setUploadPost(true);
+    if (previousTimerId) {
+      clearTimeout(previousTimerId);
+    }
+    const currentTimerId = setTimeout(() => {
+      setUploadPost(false);
+    }, 24 * 60 * 60 * 1000);
+    previousTimerId = currentTimerId;
     await addPost(postData);
   };
 
