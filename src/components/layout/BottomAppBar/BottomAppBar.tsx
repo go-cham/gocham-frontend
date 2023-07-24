@@ -33,6 +33,16 @@ export default function BottomAppBar() {
     navigate(RouteURL.write);
   };
 
+  const handleGoUp = () => {
+    const list = document.querySelector('#home-post-list');
+    if (list) {
+      list.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <footer className="absolute bottom-0 z-10 w-full">
       <img
@@ -43,8 +53,7 @@ export default function BottomAppBar() {
       <div className="absolute -top-[0.6rem] flex w-full items-end justify-evenly">
         {/* HomePage */}
         <button
-          onClick={handleGoHome}
-          className={selectedMenu === 'posting' ? 'pointer-events-none' : ''}
+          onClick={selectedMenu === 'posting' ? handleGoUp : handleGoHome}
         >
           <HomeIcon
             color={
