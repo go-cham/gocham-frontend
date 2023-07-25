@@ -26,7 +26,6 @@ function FeedPage() {
     }
     if (error) {
       alert('오류가 발생하였습니다.');
-      navigate(RouteURL.feed);
     }
   }, [isSuccess, error]);
 
