@@ -1,4 +1,5 @@
 import { useAtom, useSetAtom } from 'jotai';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import useChooseOption from '@/apis/hooks/posts/useChooseOption';
@@ -42,6 +43,10 @@ function FeedPage() {
     }
     setSelectedVoteOptionId(null);
   };
+
+  useEffect(() => {
+    setSelectedVoteOptionId(null);
+  }, []);
 
   return (
     <div className="flex h-full flex-col">
