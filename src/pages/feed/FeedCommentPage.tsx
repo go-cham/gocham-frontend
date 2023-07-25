@@ -118,7 +118,7 @@ export default function FeedCommentPage() {
             ))}
         </div>
       </div>
-      <div className="flex flex-1 flex-col divide-y-[1px] divide-background-dividerLine-300 overflow-y-scroll pt-[0.5rem]">
+      <div className="hide-scrollbar flex flex-1 flex-col divide-y-[1px] divide-background-dividerLine-300 overflow-y-scroll pt-[0.5rem]">
         {comments?.map((comment) => (
           <div key={comment.id}>
             <CommentBox
