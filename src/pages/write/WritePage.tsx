@@ -593,9 +593,9 @@ function WritePage() {
       </DockedButton>
       <Popup
         isOpen={cancelModalOpen}
-        text="글 작성을 취소하겠습니까?"
+        text={`글 ${mode === 'new' ? '작성' : '수정'}을 취소하겠습니까?`}
         subText="지금까지 작성한 내용이 삭제됩니다."
-        buttonLabel="글 작성 취소"
+        buttonLabel={`글 ${mode === 'new' ? '작성' : '수정'} 취소`}
         onCancel={() => setCancelModalOpen(false)}
         onClickButton={() => navigate('/')}
         useCancelIcon={true}
