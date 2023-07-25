@@ -431,13 +431,22 @@ function WritePage() {
 
   const handleGoBack = () => {
     if (
-      mode === 'new' &&
-      (votingContent.title ||
-        votingContent.content ||
-        imageFile.length > 0 ||
-        categoryValue !== -1 ||
-        voteTimeValue !== -1 ||
-        voteState.some((state) => state[0] || state[1]))
+      (mode === 'new' &&
+        (votingContent.title ||
+          votingContent.content ||
+          imageFile.length > 0 ||
+          categoryValue !== -1 ||
+          voteTimeValue !== -1 ||
+          voteState.some((state) => state[0] || state[1]))) ||
+      (mode === 'edit' &&
+        post &&
+        (post.title !== votingContent.title ||
+          post.content !== votingContent.content ||
+          post.worryCategory.id !== categoryValue ||
+          post.worryFiles.length !== imageFile.length ||
+          !post.worryFiles
+            .map((f) => f.url)
+            .every((url) => !!imageFile.find((file) => file.url === url))))
     ) {
       setCancelModalOpen(true);
     } else {
