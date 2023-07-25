@@ -18,6 +18,7 @@ import TopAppBar from '@/components/layout/TopAppBar';
 import PostContentInput from '@/components/post/form/PostContentInput/PostContentInput';
 import PostTitleInput from '@/components/post/form/PostTitleInput/PostTitleInput';
 import PostVoteInput from '@/components/post/form/PostVoteInput/PostVoteInput';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import DockedButton from '@/components/ui/buttons/DockedButton';
 import EditButton from '@/components/ui/buttons/EditButton/EditButton';
 import Popup from '@/components/ui/modal/Popup';
@@ -393,7 +394,10 @@ function WritePage() {
   }, [post]);
 
   useEffect(() => {
-    if (addPostSuccess || editPostSuccess) {
+    if (editPostSuccess) {
+      navigate(`/feed/${editPostResponse?.id}`);
+    }
+    if (addPostSuccess) {
       setTimeout(() => {
         navigate(`/feed/${addPostResponse?.id || editPostResponse?.id}`);
       }, 1000);
@@ -407,7 +411,7 @@ function WritePage() {
     return null;
   }
 
-  if (addPostLoading || editPostLoading) {
+  if (addPostLoading) {
     return (
       <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center">
         <PostLoadingIcon />
@@ -418,7 +422,7 @@ function WritePage() {
     );
   }
 
-  if (addPostSuccess || editPostSuccess) {
+  if (addPostSuccess) {
     return (
       <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
         <PostCompleteIcon />
@@ -450,12 +454,17 @@ function WritePage() {
     ) {
       setCancelModalOpen(true);
     } else {
-      navigate('/');
+      navigate(-1);
     }
   };
 
   return (
     <div className="flex h-full flex-col">
+      {editPostLoading && (
+        <div className="absolute left-1/2 top-1/2 z-[1000] -translate-x-1/2 -translate-y-1/2">
+          <LoadingSpinner />
+        </div>
+      )}
       <TopAppBar
         title={mode === 'new' ? '글 작성' : '글 수정'}
         navigateAction={handleGoBack}
