@@ -84,7 +84,7 @@ function UserPage() {
                 <PostCardSkeleton key={index} hasProfile={false} />
               ))}
       </ul>
-      <BottomAppBar />
+      <BottomAppBar currentPage="user" />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import HomeIcon from '@/components/icons/HomeIcon';
 import PlusIcon from '@/components/icons/PlusIcon';
@@ -8,23 +8,31 @@ import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
 import { customColors } from '@/styles/colors';
 
 interface BottomAppBarProps {
+  currentPage: 'home' | 'user';
   onScrollToTop?: () => void;
 }
 
-export default function BottomAppBar({ onScrollToTop }: BottomAppBarProps) {
+export default function BottomAppBar({
+  onScrollToTop,
+  currentPage,
+}: BottomAppBarProps) {
   const navigate = useNavigate();
-  const location = useLocation();
-  const currentPage = location.pathname === RouteURL.home ? 'home' : 'user';
 
-  const handleGoHome = () => {
-    navigate(RouteURL.home);
+  const handleHomeIconClick = () => {
+    if (currentPage === 'home') {
+      onScrollToTop && onScrollToTop();
+    } else {
+      navigate(RouteURL.home);
+    }
   };
 
-  const handleGoUserPage = () => {
-    navigate(RouteURL.user);
+  const handleUserIconClick = () => {
+    if (currentPage !== 'user') {
+      navigate(RouteURL.user);
+    }
   };
 
-  const handleGoWrite = () => {
+  const handleAddIconClick = () => {
     navigate(RouteURL.write);
   };
 
@@ -36,8 +44,7 @@ export default function BottomAppBar({ onScrollToTop }: BottomAppBarProps) {
         alt="gnb-background"
       />
       <div className="absolute -top-[0.6rem] flex w-full items-end justify-evenly">
-        {/* HomePage */}
-        <button onClick={currentPage === 'home' ? onScrollToTop : handleGoHome}>
+        <button onClick={handleHomeIconClick}>
           <HomeIcon
             color={
               currentPage !== 'home'
@@ -47,24 +54,22 @@ export default function BottomAppBar({ onScrollToTop }: BottomAppBarProps) {
           />
         </button>
 
-        {/* Add */}
         <button
-          onClick={handleGoWrite}
-          className="flex h-[5.7rem] w-[5.7rem] items-center justify-center rounded-full bg-mainSub-main-500"
+          onClick={handleAddIconClick}
+          className="flex aspect-square w-[14.5%] items-center justify-center rounded-full bg-mainSub-main-500"
         >
           <PlusIcon color="white" className="h-[3.2rem] w-[3.2rem]" />
         </button>
 
-        {/* Profile */}
         <button
-          onClick={handleGoUserPage}
-          className={currentPage === 'user' ? 'pointer-events-none' : ''}
+          onClick={handleUserIconClick}
+          className={`${currentPage === 'user' ? 'pointer-events-none' : ''}`}
         >
           <ProfileIcon
             color={
-              currentPage !== 'user'
-                ? customColors.text.subExplain['400']
-                : customColors.text.subTitle['700']
+              currentPage === 'user'
+                ? customColors.text.subTitle['700']
+                : customColors.text.subExplain['400']
             }
           />
         </button>

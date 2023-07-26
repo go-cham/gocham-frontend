@@ -9,13 +9,13 @@ export default function HomePage() {
   return (
     <div
       ref={ref}
-      className="hide-scrollbar flex h-full flex-col overflow-y-scroll bg-white"
+      className="hide-scrollbar flex h-full flex-col overflow-y-scroll"
     >
       <HomeHeader onClickLogo={scrollToTop} />
-      <main className="flex-1 px-[2.5rem] pb-40 pt-[0.8rem]">
+      <main className="px-[2.5rem] pb-[10rem] pt-[0.8rem]">
         <PostCardList />
       </main>
-      <BottomAppBar onScrollToTop={scrollToTop} />
+      <BottomAppBar currentPage="home" onScrollToTop={scrollToTop} />
     </div>
   );
 }
