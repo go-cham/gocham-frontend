@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import HomeIcon from '@/components/icons/HomeIcon';
@@ -8,18 +7,14 @@ import { RouteURL } from '@/constants/route-url';
 import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
 import { customColors } from '@/styles/colors';
 
-export default function BottomAppBar() {
+interface BottomAppBarProps {
+  onScrollToTop?: () => void;
+}
+
+export default function BottomAppBar({ onScrollToTop }: BottomAppBarProps) {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [selectedMenu, setSelectedMenu] = useState('posting');
-  useEffect(() => {
-    if (location.pathname.includes('/user')) {
-      setSelectedMenu('user');
-    } else {
-      setSelectedMenu('posting');
-    }
-  }, [location.pathname]);
+  const currentPage = location.pathname === RouteURL.home ? 'home' : 'user';
 
   const handleGoHome = () => {
     navigate(RouteURL.home);
@@ -33,16 +28,6 @@ export default function BottomAppBar() {
     navigate(RouteURL.write);
   };
 
-  const handleGoUp = () => {
-    const list = document.querySelector('#home-post-list');
-    if (list) {
-      list.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    }
-  };
-
   return (
     <footer className="absolute bottom-0 z-10 w-full">
       <img
@@ -52,12 +37,10 @@ export default function BottomAppBar() {
       />
       <div className="absolute -top-[0.6rem] flex w-full items-end justify-evenly">
         {/* HomePage */}
-        <button
-          onClick={selectedMenu === 'posting' ? handleGoUp : handleGoHome}
-        >
+        <button onClick={currentPage === 'home' ? onScrollToTop : handleGoHome}>
           <HomeIcon
             color={
-              selectedMenu !== 'posting'
+              currentPage !== 'home'
                 ? customColors.text.subExplain['400']
                 : customColors.text.subTitle['700']
             }
@@ -75,11 +58,11 @@ export default function BottomAppBar() {
         {/* Profile */}
         <button
           onClick={handleGoUserPage}
-          className={selectedMenu === 'user' ? 'pointer-events-none' : ''}
+          className={currentPage === 'user' ? 'pointer-events-none' : ''}
         >
           <ProfileIcon
             color={
-              selectedMenu !== 'user'
+              currentPage !== 'user'
                 ? customColors.text.subExplain['400']
                 : customColors.text.subTitle['700']
             }

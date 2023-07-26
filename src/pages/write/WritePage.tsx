@@ -1,4 +1,3 @@
-import { atom, useAtom } from 'jotai';
 import {
   Fragment,
   MouseEventHandler,

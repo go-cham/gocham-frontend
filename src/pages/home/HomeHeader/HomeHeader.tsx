@@ -3,20 +3,16 @@ import useUser from '@/apis/hooks/users/useUser';
 import LogoFull from '@/images/Common/HomeLogoFull.svg';
 import LogoStarve from '@/images/Common/HomeLogoStarve.svg';
 
-export default function HomeHeader() {
+interface HomeHeaderProps {
+  onClickLogo: () => void;
+}
+
+export default function HomeHeader({ onClickLogo }: HomeHeaderProps) {
   const { user } = useUser();
   const { posts } = useGetPosts({
     authorId: user?.id,
   });
-  const handleTitleClick = () => {
-    const list = document.querySelector('#home-post-list');
-    if (list) {
-      list.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    }
-  };
+
   let uploadedIn24 = false;
   if (user?.id && posts && posts.length > 0) {
     const latestUploadedAt = new Date(posts[0].createdAt);
@@ -37,7 +33,7 @@ export default function HomeHeader() {
           <img
             src={LogoStarve}
             alt={'배고픈로고'}
-            onClick={handleTitleClick}
+            onClick={onClickLogo}
             className="cursor-pointer"
           />
           <div
@@ -54,7 +50,7 @@ export default function HomeHeader() {
           <img
             src={LogoFull}
             alt={'배부른로고'}
-            onClick={handleTitleClick}
+            onClick={onClickLogo}
             className="cursor-pointer"
           />
           <div
