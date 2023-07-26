@@ -5,6 +5,7 @@ export interface ButtonProps {
   children: React.ReactNode;
   disabled?: boolean;
   onClick?: () => void;
+  type?: 'button' | 'submit';
   className?: string;
 }
 
@@ -13,10 +14,12 @@ export default function Button({
   children,
   disabled = false,
   onClick,
+  type,
   className,
 }: ButtonProps) {
   return (
     <button
+      type={type}
       onClick={onClick}
       className={twMerge(
         'flex h-[4.7rem] w-[34rem] items-center justify-center rounded-[5px] transition-all duration-200 font-system-heading2 disabled:bg-background-voteBg-100 disabled:text-gray-400',

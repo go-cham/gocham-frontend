@@ -15,6 +15,7 @@ export default function DockedButton({
   disabled = false,
   backgroundClassName,
   buttonClassName,
+  type,
 }: DockedButtonProps) {
   return (
     <div
@@ -24,6 +25,7 @@ export default function DockedButton({
       )}
     >
       <Button
+        type={type}
         variant={variant}
         onClick={onClick}
         disabled={disabled}

@@ -1,5 +1,4 @@
 import { ChangeEvent, useRef, useState } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
 
 import DeleteIcon from '@/components/icons/DeleteIcon';
 import ImageFileIcon from '@/components/icons/ImageFileIcon';
@@ -7,7 +6,7 @@ import InputWrapper from '@/components/ui/inputs/InputWrapper';
 
 interface PostTitleInputProps {
   errorMessage?: string | null;
-  onUploadImage?: () => void;
+  onUploadImage?: (file: File) => void;
   onChange?: (title: string) => void;
   className?: string;
   defaultValue?: string;
@@ -33,6 +32,12 @@ export default function PostTitleInput({
     setTitle('');
     inputRef.current?.focus();
     onChange && onChange('');
+  };
+
+  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      onUploadImage && onUploadImage(e.target.files[0]);
+    }
   };
 
   return (
@@ -64,9 +69,15 @@ export default function PostTitleInput({
             />
           </button>
         )}
-        <button onClick={onUploadImage}>
-          <ImageFileIcon />
-        </button>
+        <label>
+          <ImageFileIcon className="cursor-pointer" />
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleImageUpload}
+          />
+        </label>
       </div>
     </InputWrapper>
   );

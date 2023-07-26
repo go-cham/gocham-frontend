@@ -58,7 +58,6 @@ function FeedPage() {
             ? '참여한 게시글'
             : '최신 게시물'
         }
-        background={'white'}
         navigateRoute={params.route ? RouteURL.user : RouteURL.home}
       />
       {posts ? (

@@ -6,7 +6,7 @@ import ImageFileIcon from '@/components/icons/ImageFileIcon';
 
 interface PostVoteInputProps {
   image?: string;
-  onUploadImage?: () => void;
+  onUploadImage?: (file: File) => void;
   onDeleteImage?: () => void;
   onChange?: (item: string) => void;
   className?: string;
@@ -44,6 +44,12 @@ export default function PostVoteInput({
     setItem('');
     onChange && onChange('');
     inputRef.current?.focus();
+  };
+
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      onUploadImage && onUploadImage(e.target.files[0]);
+    }
   };
 
   return (
@@ -106,9 +112,15 @@ export default function PostVoteInput({
           </div>
         )}
         {!image && onUploadImage && (
-          <button onClick={onUploadImage}>
-            <ImageFileIcon />
-          </button>
+          <label>
+            <ImageFileIcon className="cursor-pointer" />
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageChange}
+            />
+          </label>
         )}
       </div>
     </div>
