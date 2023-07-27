@@ -49,6 +49,7 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
   };
   const [formData, setFormData] = useState<PostFormData>(initialFormData);
   const [showError, setShowError] = useState(false);
+  let voteOptionErrorIndex: null | number = null;
   const errorMessage = validate();
 
   function validate() {
@@ -70,9 +71,11 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
     if (typeof deadline !== 'number') {
       errorMessage.deadline = '투표 마감 시간을 선택해주세요.';
     }
-    for (const option of voteOptions) {
+    for (let i = 0; i < voteOptions.length; i++) {
+      const option = voteOptions[i];
       if (option.image && !option.label) {
         errorMessage.voteOptions = '투표 항목은 텍스트를 포함해야 합니다.';
+        voteOptionErrorIndex = i;
         return errorMessage;
       }
     }
@@ -84,13 +87,27 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
     }
     if (count < 2) {
       errorMessage.voteOptions = '투표 항목을 2개 이상 입력해주세요.';
+      for (let i = 0; i < voteOptions.length; i++) {
+        const option = voteOptions[i];
+        if (!option.label) {
+          voteOptionErrorIndex = i;
+          break;
+        }
+      }
     }
-    const labels = voteOptions
-      .map((option) => option.label)
-      .filter((label) => !!label);
-    if (labels.length !== _.uniq(labels).length) {
-      errorMessage.voteOptions =
-        '동일한 투표 항목을 중복으로 작성하실 수 없습니다.';
+
+    const labels: string[] = [];
+    for (let i = 0; i < voteOptions.length; i++) {
+      const option = voteOptions[i];
+      if (labels.includes(option.label)) {
+        errorMessage.voteOptions =
+          '동일한 투표 항목을 중복으로 작성하실 수 없습니다.';
+        voteOptionErrorIndex = i;
+        break;
+      }
+      if (option.label) {
+        labels.push(option.label);
+      }
     }
     return errorMessage;
   }
@@ -188,7 +205,11 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
           break;
         }
       }
-      focusById(`post-form-${focusTo}`);
+      if (focusTo === 'voteOptions') {
+        focusById(`post-form-${focusTo}${voteOptionErrorIndex}`);
+      } else {
+        focusById(`post-form-${focusTo}`);
+      }
     }
   };
 
@@ -282,7 +303,7 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
           {formData.voteOptions.map((_, i) => (
             <PostVoteInput
               key={i}
-              id={`post-form-voteOption${i}`}
+              id={`post-form-voteOptions${i}`}
               image={
                 formData?.voteOptions
                   ? formData.voteOptions[i].image
@@ -293,6 +314,7 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
               onUploadImage={handleVoteOptionImageUpload(i)}
               onDeleteImage={handleVoteOptionImageDelete(i)}
               readOnly={mode === 'edit'}
+              hasError={showError && i === voteOptionErrorIndex}
             />
           ))}
           <EditButton
