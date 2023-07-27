@@ -51,7 +51,11 @@ function EditPage() {
       id: post.id,
       title,
       content,
-      files: images.map((image) => ({ url: image.url, contentType: 'image' })),
+      files: images.map((image) => ({
+        id: image.id,
+        url: image.url,
+        contentType: 'image',
+      })),
       worryCategoryId: categoryId,
     });
   };

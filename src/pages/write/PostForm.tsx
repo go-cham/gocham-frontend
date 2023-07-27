@@ -257,7 +257,10 @@ export default function PostForm({
         />
         <div className="mt-[1.3rem] flex w-full space-x-[2.1rem]">
           {formData.images.map((image, index) => (
-            <div key={index} className="relative h-[7.1rem] w-[7.1rem]">
+            <div
+              key={image.id + image.url}
+              className="relative h-[7.1rem] w-[7.1rem]"
+            >
               <img
                 src={image.url}
                 alt={'업로드 이미지'}
