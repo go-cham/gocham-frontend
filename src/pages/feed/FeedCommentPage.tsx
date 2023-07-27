@@ -34,7 +34,13 @@ export default function FeedCommentPage() {
   });
   const { deletePost, error: deletePostError, isSuccess } = useDeletePost();
   const dropdownSelected = (value: number) => {
-    if (value == MENU.Delete) setDeleteModalOpen(true);
+    if (value === MENU.Report) {
+      navigate(`/feed/${post?.id}/report`);
+    }
+    if (value === MENU.Edit) {
+      navigate(`/feed/${post?.id}/edit`);
+    }
+    if (value === MENU.Delete) setDeleteModalOpen(true);
   };
   const handleDeletePost = () => {
     if (post) deletePost(post.id);
