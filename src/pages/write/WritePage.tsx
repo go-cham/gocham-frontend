@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import useAddPost from '@/apis/hooks/posts/useAddPost';
 import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
-import PostForm, { PostFormData } from '@/components/post/PostForm/PostForm';
+import PostForm from '@/components/post/PostForm/PostForm';
 import Popup from '@/components/ui/modal/Popup';
 import withAuth from '@/components/withAuth';
 import PostUploadSuccess from '@/pages/write/PostUploadSuccess';
 import PostUploading from '@/pages/write/PostUploading';
+import { PostFormData } from '@/types/post';
 import getFutureDateTime from '@/utils/getFutureDateTime';
 
 function WritePage() {
