@@ -5,16 +5,22 @@ import ImageFileIcon from '@/components/icons/ImageFileIcon';
 import InputWrapper from '@/components/ui/inputs/InputWrapper';
 
 interface PostTitleInputProps {
+  id?: string;
   errorMessage?: string | null;
   onUploadImage?: (file: File) => void;
+  uploadDisabled: boolean;
+  uploadDisabledMessage?: string;
   onChange?: (title: string) => void;
   className?: string;
   defaultValue?: string;
 }
 
 export default function PostTitleInput({
+  id,
   errorMessage,
   onUploadImage,
+  uploadDisabled,
+  uploadDisabledMessage,
   onChange,
   className,
   defaultValue,
@@ -37,6 +43,7 @@ export default function PostTitleInput({
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       onUploadImage && onUploadImage(e.target.files[0]);
+      e.target.value = '';
     }
   };
 
@@ -49,6 +56,7 @@ export default function PostTitleInput({
       labelClassName="font-custom-subheading"
     >
       <input
+        id={id}
         ref={inputRef}
         type="text"
         placeholder="제목 입력"
@@ -69,13 +77,14 @@ export default function PostTitleInput({
             />
           </button>
         )}
-        <label>
+        <label onClick={() => uploadDisabled && alert(uploadDisabledMessage)}>
           <ImageFileIcon className="cursor-pointer" />
           <input
             type="file"
             accept="image/*"
             className="hidden"
             onChange={handleImageUpload}
+            disabled={uploadDisabled}
           />
         </label>
       </div>

@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 import useUser from '@/apis/hooks/users/useUser';
 import PostContentInput from '@/components/post/form/PostContentInput';
@@ -31,19 +31,74 @@ export interface PostFormData {
   }[];
 }
 
+const FORM_FIELD = ['title', 'content', 'category', 'deadline', 'voteOptions'];
+
 interface PostFormProps {
-  mode: 'new' | 'edit';
+  mode: 'add' | 'edit';
   onSubmit: (data: PostFormData) => void;
+  onChange: (data: PostFormData) => void;
 }
 
-export default function PostForm({ mode, onSubmit }: PostFormProps) {
+export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
   const { user } = useUser();
-  const [formData, setFormData] = useState<PostFormData>({
+  const initialFormData: PostFormData = {
     title: '',
     content: '',
     images: [],
     voteOptions: _.range(MIN_NUM_VOTE_OPTIONS).map(() => ({ label: '' })),
-  });
+  };
+  const [formData, setFormData] = useState<PostFormData>(initialFormData);
+  const [showError, setShowError] = useState(false);
+  const errorMessage = validate();
+
+  function validate() {
+    const errorMessage: Record<string, string> = {};
+    const { title, content, deadline, categoryId, voteOptions } = formData;
+    if (!title) {
+      errorMessage.title = '제목을 입력해주세요.';
+    } else if (title.length < 2) {
+      errorMessage.title = '제목을 최소 2자 이상 입력해주세요.';
+    }
+    if (!content) {
+      errorMessage.content = '내용을 입력해주세요.';
+    } else if (content.length < 5) {
+      errorMessage.content = '내용을 최소 5자 이상 입력해주세요.';
+    }
+    if (typeof categoryId !== 'number') {
+      errorMessage.category = '카테고리를 선택해주세요.';
+    }
+    if (typeof deadline !== 'number') {
+      errorMessage.deadline = '투표 마감 시간을 선택해주세요.';
+    }
+    for (const option of voteOptions) {
+      if (option.image && !option.label) {
+        errorMessage.voteOptions = '투표 항목은 텍스트를 포함해야 합니다.';
+        return errorMessage;
+      }
+    }
+    let count = 0;
+    for (const option of voteOptions) {
+      if (option.label) {
+        count += 1;
+      }
+    }
+    if (count < 2) {
+      errorMessage.voteOptions = '투표 항목을 2개 이상 입력해주세요.';
+    }
+    const labels = voteOptions
+      .map((option) => option.label)
+      .filter((label) => !!label);
+    if (labels.length !== _.uniq(labels).length) {
+      errorMessage.voteOptions =
+        '동일한 투표 항목을 중복으로 작성하실 수 없습니다.';
+    }
+    return errorMessage;
+  }
+
+  function focusById(id: string) {
+    const el = document.getElementById(id);
+    el && el.focus();
+  }
 
   const handleVoteOptionAdd = () => {
     setFormData({
@@ -58,7 +113,7 @@ export default function PostForm({ mode, onSubmit }: PostFormProps) {
     setFormData({ ...formData, images: newImages });
   };
 
-  const onLoadFiles = (file: File) => {
+  const handleMainImageUpload = (file: File) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       if (!e.target?.result || !user) {
@@ -120,16 +175,52 @@ export default function PostForm({ mode, onSubmit }: PostFormProps) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(formData);
+    setShowError(true);
+
+    if (!hasAnyError()) {
+      onSubmit(formData);
+    } else {
+      let focusTo = '';
+      for (const field of FORM_FIELD) {
+        if (errorMessage[field]) {
+          alert(errorMessage[field]);
+          focusTo = field;
+          break;
+        }
+      }
+      focusById(`post-form-${focusTo}`);
+    }
   };
+
+  const hasAnyError = () => {
+    let hasError = false;
+    Object.values(errorMessage).forEach((value) => {
+      if (value) {
+        hasError = true;
+      }
+    });
+    return hasError;
+  };
+
+  const getErrorMessage = (field: string) => {
+    return showError ? errorMessage[field] : '';
+  };
+
+  useEffect(() => {
+    onChange(formData);
+  }, [formData]);
 
   return (
     <form onSubmit={handleSubmit} className="flex h-full flex-col">
       <div className="hide-scrollbar flex-1 overflow-y-scroll px-[2.5rem] pb-10 pt-[3.1rem]">
         <PostTitleInput
+          id="post-form-title"
           onChange={handleTitleChange}
-          onUploadImage={onLoadFiles}
+          onUploadImage={handleMainImageUpload}
+          uploadDisabled={formData.images.length === 3}
+          uploadDisabledMessage={'사진 첨부는 최대 3장까지 가능합니다.'}
           className="w-full"
+          errorMessage={getErrorMessage('title')}
         />
         <div className="mt-[1.3rem] flex w-full space-x-[2.1rem]">
           {formData.images.map((image, index) => (
@@ -149,12 +240,14 @@ export default function PostForm({ mode, onSubmit }: PostFormProps) {
           ))}
         </div>
         <PostContentInput
+          id="post-form-content"
           onChange={handleContentChange}
           className="mt-[3.7rem] w-full"
+          errorMessage={getErrorMessage('content')}
         />
         <div className="mt-[3.7rem] flex justify-between space-x-[2.6rem]">
           <Select
-            id="category"
+            id="post-form-category"
             label="카테고리"
             placeholder="선택"
             options={categoryOptions}
@@ -165,9 +258,10 @@ export default function PostForm({ mode, onSubmit }: PostFormProps) {
               categoryOptions.find((o) => o.value === formData.categoryId)
                 ?.label
             }
+            errorMessage={getErrorMessage('category')}
           />
           <Select
-            id="voteTime"
+            id="post-form-deadline"
             label="투표 마감 시간"
             placeholder="선택"
             options={deadlineOptions}
@@ -178,6 +272,7 @@ export default function PostForm({ mode, onSubmit }: PostFormProps) {
               deadlineOptions.find((o) => o.value === formData?.deadline)?.label
             }
             readOnly={mode === 'edit'}
+            errorMessage={getErrorMessage('deadline')}
           />
         </div>
         <div className="mt-[3.7rem] space-y-[1.2rem]">
@@ -187,6 +282,7 @@ export default function PostForm({ mode, onSubmit }: PostFormProps) {
           {formData.voteOptions.map((_, i) => (
             <PostVoteInput
               key={i}
+              id={`post-form-voteOption${i}`}
               image={
                 formData?.voteOptions
                   ? formData.voteOptions[i].image
@@ -215,7 +311,7 @@ export default function PostForm({ mode, onSubmit }: PostFormProps) {
         </div>
       </div>
       <DockedButton type="submit" backgroundClassName="w-full" variant="line">
-        {mode === 'new' ? '작성 완료' : '수정 완료'}
+        {mode === 'add' ? '작성 완료' : '수정 완료'}
       </DockedButton>
     </form>
   );

@@ -5,6 +5,7 @@ import DeleteIcon from '@/components/icons/DeleteIcon';
 import ImageFileIcon from '@/components/icons/ImageFileIcon';
 
 interface PostVoteInputProps {
+  id?: string;
   image?: string;
   onUploadImage?: (file: File) => void;
   onDeleteImage?: () => void;
@@ -19,6 +20,7 @@ interface PostVoteInputProps {
 }
 
 export default function PostVoteInput({
+  id,
   image,
   onUploadImage,
   onDeleteImage,
@@ -61,6 +63,7 @@ export default function PostVoteInput({
       )}
     >
       <input
+        id={id}
         ref={inputRef}
         type="text"
         maxLength={maxLength}

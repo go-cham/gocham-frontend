@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import useAddPost from '@/apis/hooks/posts/useAddPost';
 import useUser from '@/apis/hooks/users/useUser';
@@ -9,65 +9,103 @@ import withAuth from '@/components/withAuth';
 import PostForm, { PostFormData } from '@/pages/write/PostForm';
 import PostUploadSuccess from '@/pages/write/PostUploadSuccess';
 import PostUploading from '@/pages/write/PostUploading';
+import getFutureDateTime from '@/utils/getFutureDateTime';
 
 function WritePage() {
-  const [cancelModalOpen, setCancelModalOpen] = useState(false);
-  const location = useLocation();
-  const params = useParams();
-  const mode = location.pathname.endsWith('edit') ? 'edit' : 'new';
+  const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+  const { addPost, isLoading, isSuccess, data } = useAddPost();
+  const [hasChanges, setHasChanges] = useState(false);
   const { user } = useUser();
-  const {
-    addPost,
-    isLoading: addPostLoading,
-    isSuccess: addPostSuccess,
-    error: addPostError,
-    data: addPostResponse,
-  } = useAddPost();
 
-  const handlePostUpload = async (data: PostFormData) => {
-    console.log(data);
-    // console.log(user);
-    // console.log(addPost);
-    // console.log(addPostError);
-    // console.log(addPostResponse);
+  const handleChange = ({
+    title,
+    content,
+    images,
+    deadline,
+    categoryId,
+    voteOptions,
+  }: PostFormData) => {
+    if (
+      title ||
+      content ||
+      categoryId ||
+      typeof deadline === 'number' ||
+      images.length > 0 ||
+      voteOptions.some((option) => !!option.label || !!option.image)
+    ) {
+      setHasChanges(true);
+    } else {
+      setHasChanges(false);
+    }
+  };
+
+  const handleUpload = async (data: PostFormData) => {
+    const { title, content, images, deadline, categoryId, voteOptions } = data;
+    if (!user || typeof deadline !== 'number' || !categoryId) {
+      return;
+    }
+
+    addPost({
+      title,
+      content,
+      files: images.map((image) => ({ url: image.url, contentType: 'image' })),
+      userId: user?.id,
+      expirationTime: getFutureDateTime(deadline),
+      choices: voteOptions
+        .filter((option) => !!option.label)
+        .map((option, i) => ({
+          sequenceNumber: i,
+          label: option.label,
+          url: option.image || null,
+        })),
+      worryCategoryId: categoryId,
+    });
   };
 
   const handleGoBack = () => {
-    if (mode === 'edit' || mode === 'new') {
-      setCancelModalOpen(true);
+    if (hasChanges) {
+      setModalOpen(true);
     } else {
       navigate(-1);
     }
   };
 
-  if (addPostLoading) {
+  useEffect(() => {
+    if (isSuccess && data) {
+      setTimeout(() => {
+        navigate(`/feed/${data.id}`);
+      }, 1000);
+    }
+  }, [isSuccess, data]);
+
+  if (isLoading) {
     return <PostUploading />;
   }
 
-  if (addPostSuccess) {
+  if (isSuccess) {
     return <PostUploadSuccess />;
   }
 
   return (
     <>
       <div className="flex h-full flex-col">
-        <TopAppBar
-          title={mode === 'new' ? '글 작성' : '글 수정'}
-          navigateAction={handleGoBack}
-          navigateRoute={mode === 'new' ? '/' : `/feed/${params.id}`}
-        />
+        <TopAppBar title="글 작성" navigateAction={handleGoBack} />
         <div className="min-h-0 flex-1">
-          <PostForm mode="new" onSubmit={handlePostUpload} />
+          <PostForm
+            mode="add"
+            onSubmit={handleUpload}
+            onChange={handleChange}
+          />
         </div>
       </div>
       <Popup
-        isOpen={cancelModalOpen}
+        isOpen={modalOpen}
         text={`글 작성을 취소하겠습니까?`}
         subText="지금까지 작성한 내용이 삭제됩니다."
         buttonLabel={`글 작성 취소`}
-        onCancel={() => setCancelModalOpen(false)}
-        onClickButton={() => navigate('/')}
+        onCancel={() => setModalOpen(false)}
+        onClickButton={() => navigate(-1)}
         useCancelIcon={true}
         useCancelButton={false}
       />
