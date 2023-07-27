@@ -5,10 +5,10 @@ import useEditPost from '@/apis/hooks/posts/useEditPost';
 import useGetPost from '@/apis/hooks/posts/useGetPost';
 import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
+import PostForm, { PostFormData } from '@/components/post/PostForm/PostForm';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Popup from '@/components/ui/modal/Popup';
 import withAuth from '@/components/withAuth';
-import PostForm, { PostFormData } from '@/pages/write/PostForm';
 
 function EditPage() {
   const params = useParams();

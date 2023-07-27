@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { FormEvent, useEffect, useState } from 'react';
 
 import useUser from '@/apis/hooks/users/useUser';
+import ImagePreview from '@/components/post/PostForm/ImagePreview';
 import PostContentInput from '@/components/post/form/PostContentInput';
 import PostTitleInput from '@/components/post/form/PostTitleInput';
 import PostVoteInput from '@/components/post/form/PostVoteInput';
@@ -12,6 +13,7 @@ import { categoryOptions, deadlineOptions } from '@/constants/Options';
 import { uploadFirebase } from '@/dataManager/firebaseManager';
 import { resizeImage } from '@/dataManager/imageResizing';
 import DeleteIcon from '@/images/Write/delete_icon.svg';
+import { focusById } from '@/utils/dom/focus-by-id';
 
 const MIN_NUM_VOTE_OPTIONS = 2;
 const MAX_NUM_VOTE_OPTIONS = 4;
@@ -31,7 +33,7 @@ export interface PostFormData {
   }[];
 }
 
-const FORM_FIELD = ['title', 'content', 'category', 'deadline', 'voteOptions'];
+const FIELD = ['title', 'content', 'category', 'deadline', 'voteOptions'];
 
 interface PostFormProps {
   mode: 'add' | 'edit';
@@ -47,17 +49,16 @@ export default function PostForm({
   initialData,
 }: PostFormProps) {
   const { user } = useUser();
-  const initialFormData: PostFormData = {
-    title: '',
-    content: '',
-    images: [],
-    voteOptions: _.range(MIN_NUM_VOTE_OPTIONS).map(() => ({
-      label: '',
-      image: null,
-    })),
-  };
   const [formData, setFormData] = useState<PostFormData>(
-    initialData || initialFormData
+    initialData || {
+      title: '',
+      content: '',
+      images: [],
+      voteOptions: _.range(MIN_NUM_VOTE_OPTIONS).map(() => ({
+        label: '',
+        image: null,
+      })),
+    }
   );
   const [showError, setShowError] = useState(false);
   let voteOptionErrorIndex: null | number = null;
@@ -121,11 +122,6 @@ export default function PostForm({
       }
     }
     return errorMessage;
-  }
-
-  function focusById(id: string) {
-    const el = document.getElementById(id);
-    el && el.focus();
   }
 
   const handleVoteOptionAdd = () => {
@@ -209,7 +205,7 @@ export default function PostForm({
       onSubmit(formData);
     } else {
       let focusTo = '';
-      for (const field of FORM_FIELD) {
+      for (const field of FIELD) {
         if (errorMessage[field]) {
           alert(errorMessage[field]);
           focusTo = field;
@@ -255,26 +251,7 @@ export default function PostForm({
           errorMessage={getErrorMessage('title')}
           defaultValue={formData.title}
         />
-        <div className="mt-[1.3rem] flex w-full space-x-[2.1rem]">
-          {formData.images.map((image, index) => (
-            <div
-              key={image.id + image.url}
-              className="relative h-[7.1rem] w-[7.1rem]"
-            >
-              <img
-                src={image.url}
-                alt={'업로드 이미지'}
-                className="h-full w-full object-cover"
-              />
-              <img
-                src={DeleteIcon}
-                alt={'삭제 버튼'}
-                onClick={handleImageDelete(index)}
-                className="absolute right-0 top-0 -translate-y-1/2 translate-x-1/2 cursor-pointer"
-              />
-            </div>
-          ))}
-        </div>
+        <ImagePreview images={formData.images} onDelete={handleImageDelete} />
         <PostContentInput
           id="post-form-content"
           onChange={handleContentChange}
