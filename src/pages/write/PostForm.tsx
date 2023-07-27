@@ -27,7 +27,7 @@ export interface PostFormData {
   deadline?: number;
   voteOptions: {
     label: string;
-    image?: string;
+    image: string | null;
   }[];
 }
 
@@ -37,17 +37,28 @@ interface PostFormProps {
   mode: 'add' | 'edit';
   onSubmit: (data: PostFormData) => void;
   onChange: (data: PostFormData) => void;
+  initialData?: PostFormData;
 }
 
-export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
+export default function PostForm({
+  mode,
+  onSubmit,
+  onChange,
+  initialData,
+}: PostFormProps) {
   const { user } = useUser();
   const initialFormData: PostFormData = {
     title: '',
     content: '',
     images: [],
-    voteOptions: _.range(MIN_NUM_VOTE_OPTIONS).map(() => ({ label: '' })),
+    voteOptions: _.range(MIN_NUM_VOTE_OPTIONS).map(() => ({
+      label: '',
+      image: null,
+    })),
   };
-  const [formData, setFormData] = useState<PostFormData>(initialFormData);
+  const [formData, setFormData] = useState<PostFormData>(
+    initialData || initialFormData
+  );
   const [showError, setShowError] = useState(false);
   let voteOptionErrorIndex: null | number = null;
   const errorMessage = validate();
@@ -120,7 +131,7 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
   const handleVoteOptionAdd = () => {
     setFormData({
       ...formData,
-      voteOptions: [...formData.voteOptions, { label: '' }],
+      voteOptions: [...formData.voteOptions, { label: '', image: null }],
     });
   };
 
@@ -186,7 +197,7 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
 
   const handleVoteOptionImageDelete = (index: number) => () => {
     const newVoteOptions = [...formData.voteOptions];
-    newVoteOptions[index].image = undefined;
+    newVoteOptions[index].image = null;
     setFormData({ ...formData, voteOptions: newVoteOptions });
   };
 
@@ -242,10 +253,11 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
           uploadDisabledMessage={'사진 첨부는 최대 3장까지 가능합니다.'}
           className="w-full"
           errorMessage={getErrorMessage('title')}
+          defaultValue={formData.title}
         />
         <div className="mt-[1.3rem] flex w-full space-x-[2.1rem]">
           {formData.images.map((image, index) => (
-            <div key={image.url} className="relative h-[7.1rem] w-[7.1rem]">
+            <div key={index} className="relative h-[7.1rem] w-[7.1rem]">
               <img
                 src={image.url}
                 alt={'업로드 이미지'}
@@ -265,6 +277,7 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
           onChange={handleContentChange}
           className="mt-[3.7rem] w-full"
           errorMessage={getErrorMessage('content')}
+          defaultValue={formData.content}
         />
         <div className="mt-[3.7rem] flex justify-between space-x-[2.6rem]">
           <Select
@@ -305,9 +318,7 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
               key={i}
               id={`post-form-voteOptions${i}`}
               image={
-                formData?.voteOptions
-                  ? formData.voteOptions[i].image
-                  : undefined
+                formData?.voteOptions ? formData.voteOptions[i].image : null
               }
               onChange={handleVoteOptionChange(i)}
               className="w-full"
@@ -315,6 +326,7 @@ export default function PostForm({ mode, onSubmit, onChange }: PostFormProps) {
               onDeleteImage={handleVoteOptionImageDelete(i)}
               readOnly={mode === 'edit'}
               hasError={showError && i === voteOptionErrorIndex}
+              defaultValue={formData.voteOptions[i].label}
             />
           ))}
           <EditButton

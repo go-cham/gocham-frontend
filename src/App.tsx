@@ -8,6 +8,7 @@ import { RouteURL } from '@/constants/route-url';
 import useUpdate from '@/hooks/useUpdate';
 import CollectInformationPage from '@/pages/collect-information/CollectInformationPage';
 import EditProfilePage from '@/pages/edit-profile/EditProfilePage';
+import EditPage from '@/pages/edit/EditPage';
 import FeedPage from '@/pages/feed/FeedPage';
 import FeedReportPage from '@/pages/feed/FeedReportPage';
 import HomePage from '@/pages/home/HomePage';
@@ -42,7 +43,7 @@ export default function App() {
         <Route path={RouteURL.feed_report} element={<FeedReportPage />} />
         <Route path={RouteURL.comment_report} element={<CommentReportPage />} />
         <Route path={RouteURL.feed_route_star} element={<FeedPage />} />
-        <Route path={RouteURL.feed_edit} element={<WritePage />} />
+        <Route path={RouteURL.feed_edit} element={<EditPage />} />
         <Route path={RouteURL.login} element={<LoginPage />} />
         <Route
           path={RouteURL.login_oauth_kakao}

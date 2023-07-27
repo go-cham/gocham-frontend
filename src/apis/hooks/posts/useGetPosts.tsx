@@ -66,7 +66,9 @@ export default function useGetPosts({
         title: post.title,
         content: post.content,
         expirationTime: post.expirationTime,
-        worryFiles: post.worryFiles,
+        worryFiles: post.worryFiles.filter(
+          (file) => file.status === 'activated'
+        ),
         user: {
           ...post.user,
           birthday: post.user.birthDate,

@@ -6,7 +6,7 @@ import ImageFileIcon from '@/components/icons/ImageFileIcon';
 
 interface PostVoteInputProps {
   id?: string;
-  image?: string;
+  image?: string | null;
   onUploadImage?: (file: File) => void;
   onDeleteImage?: () => void;
   onChange?: (item: string) => void;

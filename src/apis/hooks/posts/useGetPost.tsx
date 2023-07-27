@@ -15,8 +15,17 @@ export default function useGetPost(postId?: number) {
     enabled: !!postId,
   });
 
+  const post = data
+    ? {
+        ...data,
+        worryFiles: data.worryFiles.filter(
+          (file) => file.status === 'activated'
+        ),
+      }
+    : null;
+
   return {
-    post: data,
+    post,
     isLoading,
     error,
   };

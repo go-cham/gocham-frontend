@@ -86,7 +86,8 @@ export default function Select({
         <span
           className={twMerge(
             'select-none text-text-subExplain-400 font-system-body4',
-            value && 'text-text-title-900 font-system-body4'
+            value && 'text-text-title-900 font-system-body4',
+            readOnly && 'text-text-explain-500'
           )}
         >
           {value || placeholder}
