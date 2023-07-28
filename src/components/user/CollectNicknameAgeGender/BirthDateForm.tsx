@@ -1,11 +1,11 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import InputLayout from '@/components/input/InputLayout';
-import { userInformationType } from '@/types/user';
+import { UserInformation } from '@/types/user';
 
 interface BirthdateFormProps {
   onInputChange: (year: string, month: string, day: string) => void;
-  userInformation: userInformationType;
+  userInformation: UserInformation;
 }
 
 type BirthDateType = {

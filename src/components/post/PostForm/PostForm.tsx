@@ -8,7 +8,7 @@ import PostVoteInput from '@/components/post/form/PostVoteInput';
 import DockedButton from '@/components/ui/buttons/DockedButton';
 import EditButton from '@/components/ui/buttons/EditButton';
 import Select from '@/components/ui/selections/Select';
-import { categoryOptions, deadlineOptions } from '@/constants/Options';
+import { categoryOptions, deadlineOptions } from '@/constants/options';
 import { PostFormData } from '@/types/post';
 
 interface PostFormProps {

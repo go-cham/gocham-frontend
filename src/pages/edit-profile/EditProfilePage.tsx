@@ -8,7 +8,7 @@ import DockedButton from '@/components/ui/buttons/DockedButton';
 import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender/CollectNicknameAgeGender';
 import CollectRegionJobCategory from '@/components/user/CollectRegionJobCategory/CollectRegionJobCategory';
 import withAuth from '@/components/withAuth';
-import { OptionType } from '@/constants/Options';
+import { OptionType } from '@/constants/options';
 import { Gender } from '@/types/user';
 import { formatISO8601ToNormal } from '@/utils/formatISO8601ToNormal';
 

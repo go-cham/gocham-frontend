@@ -1,4 +1,4 @@
-export enum userType {
+export enum UserType {
   onceUser = 'onceUser',
   onceUserWithoutTerms = 'onceUserWithoutTerms',
   activatedUser = 'activatedUser',

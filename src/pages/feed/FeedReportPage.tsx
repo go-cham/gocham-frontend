@@ -8,7 +8,7 @@ import TopAppBar from '@/components/layout/TopAppBar';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
-import { reportOptions } from '@/constants/Options';
+import { reportOptions } from '@/constants/options';
 import { RouteURL } from '@/constants/route-url';
 
 function FeedPage() {

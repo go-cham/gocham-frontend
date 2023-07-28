@@ -24,13 +24,6 @@ export type Post = {
   userWorryChoiceCount: number;
 };
 
-export type PostingMetaDataType = {
-  take: number;
-  total?: number;
-  hasNextData?: boolean;
-  nextId?: number;
-};
-
 export interface PostFormData {
   title: string;
   content: string;

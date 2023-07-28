@@ -1,11 +1,11 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import InputLayout from '@/components/input/InputLayout';
-import { userInformationType } from '@/types/user';
+import { UserInformation } from '@/types/user';
 
 interface NicknameFormProps {
   onInputChange: (nickname: string) => void;
-  userInformation: userInformationType;
+  userInformation: UserInformation;
 }
 
 export default function NicknameForm({

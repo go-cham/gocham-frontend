@@ -1,6 +1,4 @@
-import { Dispatch } from 'react';
-
-import { OptionType } from '@/constants/Options';
+import { OptionType } from '@/constants/options';
 
 export interface User {
   id: number;
@@ -15,7 +13,7 @@ export interface User {
   image: string | null;
 }
 
-export type userInformationType = {
+export type UserInformation = {
   nickname: string;
   birthDay: string;
   sex: string;
@@ -23,21 +21,6 @@ export type userInformationType = {
   job: OptionType;
   worryCategories: OptionType[];
   profileImageUrl?: string;
-};
-
-export type UserInformationPropsType = {
-  userInformation: userInformationType;
-  setUserInformation: Dispatch<any>;
-};
-
-export type PostUserInformationPropsType = {
-  userId: number;
-  nickname: string; // 제거 예정
-  birthDate: string;
-  sex: string;
-  residenceId: number;
-  job: string;
-  worryCategories: number[];
 };
 
 export type Gender = 'male' | 'female';
