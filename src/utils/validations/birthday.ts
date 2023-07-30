@@ -26,6 +26,8 @@ export function fixDate(year?: string, month?: string, day?: string) {
   const yearNum = year ? parseInt(year) : undefined;
   let monthNum = month ? parseInt(month) : undefined;
   let dayNum = day ? parseInt(day) : undefined;
+  const isMonthPadded = month && month[0] === '0';
+  const isDayPadded = day && day[0] === '0';
   if (isNumber(monthNum) && monthNum < 1) {
     monthNum = 1;
   }
@@ -42,8 +44,16 @@ export function fixDate(year?: string, month?: string, day?: string) {
     }
   }
   return {
-    year: yearNum ? yearNum + '' : undefined,
-    month: monthNum ? monthNum + '' : undefined,
-    day: dayNum ? dayNum + '' : undefined,
+    year: yearNum ? String(yearNum) : '',
+    month: monthNum
+      ? isMonthPadded
+        ? String(monthNum).padStart(2, '0')
+        : String(monthNum)
+      : '',
+    day: dayNum
+      ? isDayPadded
+        ? String(dayNum).padStart(2, '0')
+        : String(dayNum)
+      : '',
   };
 }

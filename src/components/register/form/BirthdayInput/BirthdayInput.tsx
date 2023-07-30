@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import AlertIcon from '@/components/icons/AlertIcon';
 import CheckIcon from '@/components/icons/CheckIcon';
@@ -45,12 +45,15 @@ export default function BirthdayInput({
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newBirthday = {
       ...birthday,
-      [e.target.name]: +e.target.value,
+      [e.target.name]: e.target.value,
     };
-    const { year, month, day } = newBirthday;
+    setBirthday(newBirthday);
+  };
+
+  const handleBlur = () => {
+    const { year, month, day } = birthday;
     const fixedBirthday = fixDate(year, month, day);
     setBirthday(fixedBirthday);
-    onChange && onChange(fixedBirthday);
   };
 
   const handleReset = () => {
@@ -67,6 +70,10 @@ export default function BirthdayInput({
         day: undefined,
       });
   };
+
+  useEffect(() => {
+    onChange && onChange(birthday);
+  }, [birthday]);
 
   return (
     <InputWrapper
@@ -85,7 +92,8 @@ export default function BirthdayInput({
           className="w-[3.6rem] bg-transparent text-right"
           onChange={handleChange}
           name="year"
-          value={birthday.year || ''}
+          value={birthday.year}
+          onBlur={handleBlur}
         />
         <span>년</span>
       </div>
@@ -93,13 +101,14 @@ export default function BirthdayInput({
         <input
           type="number"
           maxLength={2}
-          min={1}
-          max={12}
+          // min={0}
+          // max={12}
           onInput={maxLengthCheck}
           className="w-[1.8rem] bg-transparent text-right"
           onChange={handleChange}
           name="month"
-          value={birthday.month || ''}
+          value={birthday.month}
+          onBlur={handleBlur}
         />
         <span>월</span>
       </div>
@@ -107,13 +116,14 @@ export default function BirthdayInput({
         <input
           type="number"
           maxLength={2}
-          min={1}
-          max={31}
+          // min={0}
+          // max={31}
           onInput={maxLengthCheck}
           className="w-[1.8rem] bg-transparent text-right"
           onChange={handleChange}
           name="day"
-          value={birthday.day || ''}
+          value={birthday.day}
+          onBlur={handleBlur}
         />
         <span>일</span>
       </div>
