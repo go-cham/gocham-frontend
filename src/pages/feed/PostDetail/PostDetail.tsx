@@ -50,7 +50,7 @@ export default function PostDetail({ post }: PostDetailProps) {
     if (value === MENU.Edit) {
       navigate(`/feed/${post.id}/edit`);
     } else if (value === MENU.Delete) {
-      if (getRemainingTime(post.expirationTime) === '마감됨') {
+      if (getRemainingTime(post.expirationTime) === 'closed') {
         alert('투표가 종료된 게시물은 삭제하실 수 없습니다.');
         setShowMore(false);
         return;
