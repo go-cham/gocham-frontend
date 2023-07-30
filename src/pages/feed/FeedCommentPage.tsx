@@ -12,6 +12,7 @@ import Dropdown from '@/components/ui/Dropdown';
 import Popup from '@/components/ui/modal/Popup/Popup';
 import { PostDetailContent } from '@/pages/feed/PostDetail/PostDetail';
 import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
+import { getRemainingTime } from '@/utils/getRemainingTime';
 
 import CommentBox from './CommentBox';
 import CommentInputWrapper from './CommentInputWrapper';
@@ -40,7 +41,16 @@ export default function FeedCommentPage() {
     if (value === MENU.Edit) {
       navigate(`/feed/${post?.id}/edit`);
     }
-    if (value === MENU.Delete) setDeleteModalOpen(true);
+    if (value == MENU.Delete) {
+      if (post) {
+        if (getRemainingTime(post.expirationTime) === 'closed') {
+          alert('투표가 종료된 게시물은 삭제하실 수 없습니다.');
+          setShowMore(false);
+          return;
+        }
+      }
+      setDeleteModalOpen(true);
+    }
   };
   const handleDeletePost = () => {
     if (post) deletePost(post.id);
