@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import HomeIcon from '@/components/icons/HomeIcon';
 import PlusIcon from '@/components/icons/PlusIcon';
@@ -8,39 +7,33 @@ import { RouteURL } from '@/constants/route-url';
 import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
 import { customColors } from '@/styles/colors';
 
-export default function BottomAppBar() {
+interface BottomAppBarProps {
+  currentPage: 'home' | 'user';
+  onScrollToTop?: () => void;
+}
+
+export default function BottomAppBar({
+  onScrollToTop,
+  currentPage,
+}: BottomAppBarProps) {
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const [selectedMenu, setSelectedMenu] = useState('posting');
-  useEffect(() => {
-    if (location.pathname.includes('/user')) {
-      setSelectedMenu('user');
+  const handleHomeIconClick = () => {
+    if (currentPage === 'home') {
+      onScrollToTop && onScrollToTop();
     } else {
-      setSelectedMenu('posting');
+      navigate(RouteURL.home);
     }
-  }, [location.pathname]);
-
-  const handleGoHome = () => {
-    navigate(RouteURL.home);
   };
 
-  const handleGoUserPage = () => {
-    navigate(RouteURL.user);
+  const handleUserIconClick = () => {
+    if (currentPage !== 'user') {
+      navigate(RouteURL.user);
+    }
   };
 
-  const handleGoWrite = () => {
+  const handleAddIconClick = () => {
     navigate(RouteURL.write);
-  };
-
-  const handleGoUp = () => {
-    const list = document.querySelector('#home-post-list');
-    if (list) {
-      list.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    }
   };
 
   return (
@@ -51,37 +44,32 @@ export default function BottomAppBar() {
         alt="gnb-background"
       />
       <div className="absolute -top-[0.6rem] flex w-full items-end justify-evenly">
-        {/* HomePage */}
-        <button
-          onClick={selectedMenu === 'posting' ? handleGoUp : handleGoHome}
-        >
+        <button onClick={handleHomeIconClick}>
           <HomeIcon
             color={
-              selectedMenu !== 'posting'
+              currentPage !== 'home'
                 ? customColors.text.subExplain['400']
                 : customColors.text.subTitle['700']
             }
           />
         </button>
 
-        {/* Add */}
         <button
-          onClick={handleGoWrite}
-          className="flex h-[5.7rem] w-[5.7rem] items-center justify-center rounded-full bg-mainSub-main-500"
+          onClick={handleAddIconClick}
+          className="flex aspect-square w-[14.5%] items-center justify-center rounded-full bg-mainSub-main-500"
         >
           <PlusIcon color="white" className="h-[3.2rem] w-[3.2rem]" />
         </button>
 
-        {/* Profile */}
         <button
-          onClick={handleGoUserPage}
-          className={selectedMenu === 'user' ? 'pointer-events-none' : ''}
+          onClick={handleUserIconClick}
+          className={`${currentPage === 'user' ? 'pointer-events-none' : ''}`}
         >
           <ProfileIcon
             color={
-              selectedMenu !== 'user'
-                ? customColors.text.subExplain['400']
-                : customColors.text.subTitle['700']
+              currentPage === 'user'
+                ? customColors.text.subTitle['700']
+                : customColors.text.subExplain['400']
             }
           />
         </button>

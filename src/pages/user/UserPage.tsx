@@ -10,7 +10,7 @@ import SelectMyPostType from '@/components/user/SelectMyPostType';
 import UserProfile from '@/components/user/UserProfile';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
-import { userType } from '@/constants/userTypeEnum';
+import { UserType } from '@/constants/user-type';
 import SettingIcon from '@/images/Profile/settings.svg';
 
 export type PostType = 'my' | 'participating';
@@ -73,7 +73,7 @@ function UserPage() {
                 <PostCard
                   post={post}
                   routeUrl={postType}
-                  loggedIn={user?.type === userType.activatedUser}
+                  loggedIn={user?.type === UserType.activatedUser}
                   showProfile={postType !== 'my'}
                 />
               </li>
@@ -84,7 +84,7 @@ function UserPage() {
                 <PostCardSkeleton key={index} hasProfile={false} />
               ))}
       </ul>
-      <BottomAppBar />
+      <BottomAppBar currentPage="user" />
     </div>
   );
 }

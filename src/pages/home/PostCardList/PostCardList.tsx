@@ -2,7 +2,7 @@ import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import PostCard from '@/components/post/PostCard';
 import PostCardSkeleton from '@/components/ui/skeleton/PostCardSkeleton';
-import { userType } from '@/constants/userTypeEnum';
+import { UserType } from '@/constants/user-type';
 
 interface PostCardListProps {
   authorId?: number;
@@ -48,7 +48,7 @@ export default function PostCardList({
           className="w-full"
         >
           <PostCard
-            loggedIn={user?.type === userType.activatedUser}
+            loggedIn={user?.type === UserType.activatedUser}
             post={post}
           />
         </li>

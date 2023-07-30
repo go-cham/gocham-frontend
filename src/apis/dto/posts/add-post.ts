@@ -1,12 +1,12 @@
 export interface AddPostRequest {
   title: string;
-  expirationTime: string|null;
+  expirationTime: string | null;
   content: string;
   userId: number;
   worryCategoryId: number;
   choices: {
     label: string;
-    url:string;
+    url: string | null;
     sequenceNumber: number;
   }[];
   files: {
@@ -16,7 +16,7 @@ export interface AddPostRequest {
 }
 
 export interface AddPostResponse {
-  id:number;
+  id: number;
   updatedAt: string;
   etc: string | null;
   title: string;
@@ -26,8 +26,8 @@ export interface AddPostResponse {
     id: number;
     status: string;
     createdAt: string;
-    updatedAt: string |null;
-    etc: string|null;
+    updatedAt: string | null;
+    etc: string | null;
     url: string;
     contentType: string;
   }[];
@@ -35,8 +35,8 @@ export interface AddPostResponse {
     id: number;
     status: string;
     createdAt: string;
-    updatedAt: string |null;
-    etc: string|null;
-    reason: string
+    updatedAt: string | null;
+    etc: string | null;
+    reason: string;
   }[];
 }

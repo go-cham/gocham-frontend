@@ -8,7 +8,7 @@ import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
-import { reportOptions } from '@/constants/Options';
+import { reportOptions } from '@/constants/options';
 import { RouteURL } from '@/constants/route-url';
 
 function CommentPage() {
@@ -55,23 +55,23 @@ function CommentPage() {
   return (
     <div className="flex h-full flex-col">
       <TopAppBar title="댓글 신고" />
-      <h1 className="mt-[3.3rem] border-custom-background-200 pb-[2rem] pl-[1.5rem] text-heading2">
+      <h1 className="border-custom-background-200 mt-[3.3rem] pb-[2rem] pl-[1.5rem] text-heading2">
         댓글을 신고하는 사유를 선택해주세요.
       </h1>
       <div className="pl-[1.5rem]">
         <div>
-          <span className="mr-[0.6rem] text-body2 text-custom-text-500">
+          <span className="text-custom-text-500 mr-[0.6rem] text-body2">
             작성자
           </span>
-          <span className="text-body2 text-custom-text-900">
+          <span className="text-custom-text-900 text-body2">
             {state.nickName}
           </span>
         </div>
         <div>
-          <span className="mr-[1.2rem] text-body2 text-custom-text-500">
+          <span className="text-custom-text-500 mr-[1.2rem] text-body2">
             내 용
           </span>
-          <span className="text-body2 text-custom-text-900">
+          <span className="text-custom-text-900 text-body2">
             {state.content}
           </span>
         </div>
@@ -88,7 +88,7 @@ function CommentPage() {
                 id={option.value + ''}
                 name="report-options"
                 value={option.value}
-                className="h-[2.2rem] w-[2.2rem] appearance-none rounded-full border-white outline outline-custom-background-200 checked:border-[0.2rem] checked:bg-custom-main-500 focus:outline focus:outline-custom-background-200"
+                className="outline-custom-background-200 checked:bg-custom-main-500 focus:outline-custom-background-200 h-[2.2rem] w-[2.2rem] appearance-none rounded-full border-white outline checked:border-[0.2rem] focus:outline"
                 onChange={handleReasonChange}
               />
               <span className="text-body3">{option.label}</span>

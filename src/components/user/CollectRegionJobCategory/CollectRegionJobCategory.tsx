@@ -9,7 +9,7 @@ import {
   OptionType,
   categoryOptions as initialCategoryOptions,
   residenceOptions,
-} from '@/constants/Options';
+} from '@/constants/options';
 import { validateJob } from '@/utils/validations/job';
 
 const MAX_CATEGORIES_SELECT = 4;

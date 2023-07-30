@@ -4,6 +4,7 @@ import { twMerge } from 'tailwind-merge';
 const MAX_LENGTH = 280;
 
 interface PostContentInputProps {
+  id?: string;
   onChange?: (content: string) => void;
   errorMessage?: string | null;
   className?: string;
@@ -11,6 +12,7 @@ interface PostContentInputProps {
 }
 
 export default function PostContentInput({
+  id,
   onChange,
   errorMessage,
   className,
@@ -28,6 +30,7 @@ export default function PostContentInput({
     <div className={twMerge('flex w-[34rem] flex-col', className)}>
       <label className="font-custom-subheading">내용</label>
       <textarea
+        id={id}
         rows={6}
         maxLength={280}
         placeholder={`최대 ${MAX_LENGTH}자 입력`}

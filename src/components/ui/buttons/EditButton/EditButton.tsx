@@ -9,9 +9,11 @@ export default function EditButton({
   onClick,
   className,
   children,
+  type,
 }: Partial<ButtonProps>) {
   return (
     <Button
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={twMerge(

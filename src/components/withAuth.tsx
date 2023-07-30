@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 
 import useUser from '@/apis/hooks/users/useUser';
 import { RouteURL } from '@/constants/route-url';
-import { userType } from '@/constants/userTypeEnum';
+import { UserType } from '@/constants/user-type';
 
 type AuthOption = {
   block: 'unauthenticated' | 'activated';
@@ -14,11 +14,15 @@ const withAuth =
   // eslint-disable-next-line react/display-name
   () => {
     const { user, isLoading } = useUser();
+    console.log(user?.type);
 
     if (isLoading) {
       return null;
     }
     if (block === 'unauthenticated') {
+      if (user?.type === 'onceUserWithoutTerms') {
+        return <Navigate to={RouteURL.register_term} />;
+      }
       if (user?.type === 'onceUser') {
         return <Navigate to={RouteURL.collect_information} />;
       }
@@ -28,7 +32,7 @@ const withAuth =
     }
 
     if (block === 'activated') {
-      if (user && user.type === userType.activatedUser) {
+      if (user && user.type === UserType.activatedUser) {
         return <Navigate to={RouteURL.home} />;
       }
     }

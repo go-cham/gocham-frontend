@@ -4,16 +4,12 @@ import BackIcon from '@/components/icons/BackIcon';
 
 interface TopAppBarProps {
   title?: string;
-  boxShadow?: boolean;
-  background?: string;
   navigateRoute?: string;
   navigateAction?: () => void;
 }
 
 export default function TopAppBar({
   title,
-  boxShadow,
-  background,
   navigateRoute,
   navigateAction,
 }: TopAppBarProps) {

@@ -1,21 +1,26 @@
 import { ChangeEvent, useRef, useState } from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
 
 import DeleteIcon from '@/components/icons/DeleteIcon';
 import ImageFileIcon from '@/components/icons/ImageFileIcon';
 import InputWrapper from '@/components/ui/inputs/InputWrapper';
 
 interface PostTitleInputProps {
+  id?: string;
   errorMessage?: string | null;
-  onUploadImage?: () => void;
+  onUploadImage?: (file: File) => void;
+  uploadDisabled: boolean;
+  uploadDisabledMessage?: string;
   onChange?: (title: string) => void;
   className?: string;
   defaultValue?: string;
 }
 
 export default function PostTitleInput({
+  id,
   errorMessage,
   onUploadImage,
+  uploadDisabled,
+  uploadDisabledMessage,
   onChange,
   className,
   defaultValue,
@@ -35,6 +40,13 @@ export default function PostTitleInput({
     onChange && onChange('');
   };
 
+  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      onUploadImage && onUploadImage(e.target.files[0]);
+      e.target.value = '';
+    }
+  };
+
   return (
     <InputWrapper
       label="제목"
@@ -44,6 +56,7 @@ export default function PostTitleInput({
       labelClassName="font-custom-subheading"
     >
       <input
+        id={id}
         ref={inputRef}
         type="text"
         placeholder="제목 입력"
@@ -64,9 +77,16 @@ export default function PostTitleInput({
             />
           </button>
         )}
-        <button onClick={onUploadImage}>
-          <ImageFileIcon />
-        </button>
+        <label onClick={() => uploadDisabled && alert(uploadDisabledMessage)}>
+          <ImageFileIcon className="cursor-pointer" />
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleImageUpload}
+            disabled={uploadDisabled}
+          />
+        </label>
       </div>
     </InputWrapper>
   );

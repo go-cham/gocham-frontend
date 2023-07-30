@@ -23,9 +23,6 @@ function LoginPage() {
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_API;
 
   const handleKakaoLogin = async () => {
-    if (navigator.userAgent.indexOf('iPhone') > -1) {
-      alert('iOS의 비공개 릴레이가 켜져있다면 로그인이 되지않습니다.');
-    }
     window.Kakao.Auth.authorize({
       redirectUri: REDIRECT_URI,
     });
