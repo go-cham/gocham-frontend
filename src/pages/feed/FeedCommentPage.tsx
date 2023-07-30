@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
 import useGetComments from '@/apis/hooks/posts/useGetComments';
