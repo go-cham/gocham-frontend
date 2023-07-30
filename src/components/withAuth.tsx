@@ -14,11 +14,15 @@ const withAuth =
   // eslint-disable-next-line react/display-name
   () => {
     const { user, isLoading } = useUser();
+    console.log(user?.type);
 
     if (isLoading) {
       return null;
     }
     if (block === 'unauthenticated') {
+      if (user?.type === 'onceUserWithoutTerms') {
+        return <Navigate to={RouteURL.register_term} />;
+      }
       if (user?.type === 'onceUser') {
         return <Navigate to={RouteURL.collect_information} />;
       }
