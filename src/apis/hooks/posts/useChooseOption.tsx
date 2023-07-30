@@ -21,8 +21,10 @@ export default function useChooseOption() {
       return res.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['myChoice']);
-      queryClient.invalidateQueries(['usersChoices']);
+      console.log('onSuccess');
+      queryClient.refetchQueries(['myChoice']);
+      queryClient.refetchQueries(['usersChoices']);
+      queryClient.refetchQueries(['posts']);
     },
   });
 
