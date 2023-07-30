@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import useAcceptTerms from '@/apis/hooks/auth/useAcceptTerms';
 import useUser from '@/apis/hooks/users/useUser';
 import BackIcon from '@/components/icons/BackIcon';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
-import ApiConfig, { HttpMethod } from '@/dataManager/apiConfig';
-import { EndPoint } from '@/dataManager/apiMapper';
-import { alertMessage } from '@/utils/alertMessage';
 
 import TermCheckbox from './TermCheckbox';
 
@@ -23,6 +21,7 @@ export type AcceptType = {
 function RegisterTermPage() {
   const navigate = useNavigate();
   const { user } = useUser();
+  const { acceptTerms, isSuccess, error } = useAcceptTerms();
   const [accept, setAccept] = useState<AcceptType>({
     gochamTerm: false,
     personalInformation: false,
@@ -31,39 +30,36 @@ function RegisterTermPage() {
     allCheck: false,
   });
 
+  const nextEnabled =
+    accept.gochamTerm && accept.personalInformation && accept.olderThan14;
+
+  const handleRegister = async () => {
+    if (!user) {
+      return;
+    }
+
+    acceptTerms({
+      userId: user.id,
+      privacyAcceptedStatus: accept.personalInformation ? 1 : 0,
+      termsOfUseAcceptedStatus: accept.gochamTerm ? 1 : 0,
+      marketingAcceptedStatus: accept.marketing ? 1 : 0,
+    });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate(RouteURL.collect_information);
+    }
+    if (error) {
+      console.error(error);
+    }
+  }, [isSuccess, error]);
+
   useEffect(() => {
     if (accept.gochamTerm && accept.personalInformation && accept.olderThan14) {
       setAccept((value) => ({ ...value, allCheck: true }));
     }
   }, [accept.allCheck]);
-
-  const handleRegister = async () => {
-    //   회원가입 로직
-    try {
-      const res = await ApiConfig.request({
-        method: HttpMethod.PATCH,
-        url: EndPoint.user.patch.USER_ACCEPTANCE_OF_TERMS,
-        data: {
-          userId: user?.id,
-          privacyAcceptedStatus: accept.personalInformation ? 1 : 0,
-          termsOfUseAcceptedStatus: accept.gochamTerm ? 1 : 0,
-          marketingAcceptedStatus: 0, // 우선 무조건 0으로
-          // marketingAcceptedStatus: accept.marketing ? 1 : 0,
-        },
-      });
-      if (res?.data.id) {
-        navigate(RouteURL.collect_information);
-      } else {
-        alert(alertMessage.error.register.didntAgreeTerm);
-        navigate(RouteURL.home);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const nextEnabled =
-    accept.gochamTerm && accept.personalInformation && accept.olderThan14;
 
   return (
     <div className="flex h-full flex-col bg-white">
