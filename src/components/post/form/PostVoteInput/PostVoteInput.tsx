@@ -12,7 +12,7 @@ interface PostVoteInputProps {
   onChange?: (item: string) => void;
   className?: string;
   hasError?: boolean;
-  errorMessage?: string;
+  errorMessage?: string | null;
   placeholder?: string;
   maxLength?: number;
   readOnly?: boolean;

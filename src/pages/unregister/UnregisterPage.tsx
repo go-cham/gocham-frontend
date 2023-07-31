@@ -17,7 +17,7 @@ function UnregisterPage() {
   const { unregister, isSuccess, error } = useUnregister();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
 
   if (!user) {
     return null;
@@ -25,10 +25,21 @@ function UnregisterPage() {
 
   const handleInputChange = (txt: string) => {
     setReason(txt);
-    if (txt.length >= 5) {
-      setErrorMessage('');
-    }
   };
+
+  const errorMessage = validate();
+
+  function validate() {
+    if (!reason) {
+      return '계정을 삭제하는 이유를 작성해주세요.';
+    }
+    if (reason.length < 5) {
+      return '최소 5자 이상 입력해주세요.';
+    }
+    if (reason.length >= 5) {
+      return null;
+    }
+  }
 
   const handleUnregister = () => {
     unregister({
@@ -38,18 +49,16 @@ function UnregisterPage() {
   };
 
   const handleButtonClick = () => {
-    if (!reason) {
-      const message = '계정을 삭제하는 이유를 작성해주세요.';
-      setErrorMessage(message);
-      return alert(message);
+    setShowError(true);
+    if (errorMessage) {
+      alert(errorMessage);
+      const input = document.getElementById('unregister-input');
+      if (input) {
+        input.focus();
+      }
+    } else {
+      setModalOpen(true);
     }
-    if (reason.length < 5) {
-      const message = '최소 5자 이상 입력해주세요.';
-      setErrorMessage(message);
-      return alert(message);
-    }
-
-    setModalOpen(true);
   };
 
   useEffect(() => {
@@ -79,12 +88,13 @@ function UnregisterPage() {
           없습니다.
         </p>
         <PostVoteInput
+          id={'unregister-input'}
           placeholder="계정을 삭제하는 이유를 작성해주세요."
           maxLength={280}
           className="mt-[2.5rem] w-full"
           onChange={handleInputChange}
-          hasError={!!errorMessage}
-          errorMessage={errorMessage}
+          hasError={showError && !!errorMessage}
+          errorMessage={showError ? errorMessage : ''}
         />
       </div>
       <Button
