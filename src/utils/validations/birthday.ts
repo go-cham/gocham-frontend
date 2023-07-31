@@ -16,6 +16,14 @@ export function validateBirthday({ year, month, day }: Birthday) {
   if (isFuture(yearNum, monthNum, dayNum)) {
     return '생년월일을 다시 확인해주세요.';
   }
+  if (
+    monthNum < 0 ||
+    monthNum > 12 ||
+    dayNum < 0 ||
+    dayNum > getDaysInMonth(monthNum - 1, yearNum)
+  ) {
+    return '생년월일을 다시 확인해주세요.';
+  }
   if (calculateAge(yearNum, monthNum, dayNum) < 14) {
     return '만 14세 이상부터 가입이 가능합니다.';
   }
