@@ -101,6 +101,7 @@ export default function BirthdayInput({
         <input
           ref={yearRef}
           type="number"
+          inputMode="numeric"
           maxLength={4}
           onInput={maxLengthCheck}
           className="w-[3.6rem] bg-transparent text-right"
@@ -115,6 +116,7 @@ export default function BirthdayInput({
       <div className="flex space-x-[0.3rem]">
         <input
           type="number"
+          inputMode="numeric"
           maxLength={2}
           onInput={maxLengthCheck}
           className="w-[1.8rem] bg-transparent text-right"
@@ -129,6 +131,7 @@ export default function BirthdayInput({
       <div className="flex space-x-[0.3rem]">
         <input
           type="number"
+          inputMode="numeric"
           maxLength={2}
           onInput={maxLengthCheck}
           className="w-[1.8rem] bg-transparent text-right"
