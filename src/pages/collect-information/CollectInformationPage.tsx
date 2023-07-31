@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import useEditProfile from '@/apis/hooks/users/useEditProfile';
 import useUser from '@/apis/hooks/users/useUser';
@@ -11,13 +11,12 @@ import { RouteURL } from '@/constants/route-url';
 import { Gender } from '@/types/user';
 
 interface RegisterData {
-  userId: number;
   nickname: string;
-  birthDate: string;
-  sex: string;
-  residenceId: number;
+  birthday: string;
+  gender: Gender | null;
+  residenceId: number | null;
   job: string;
-  worryCategories: number[];
+  categoryIds: number[];
 }
 
 function CollectInformationPage() {
@@ -25,60 +24,36 @@ function CollectInformationPage() {
   const { user } = useUser();
   const [page, setPage] = useState(1);
   const [registerData, setRegisterData] = useState<RegisterData>({
-    userId: -1,
     nickname: '',
-    birthDate: '',
-    sex: '',
-    residenceId: -1,
+    birthday: '',
+    gender: null,
+    residenceId: null,
     job: '',
-    worryCategories: [],
+    categoryIds: [],
   });
   const { editProfile, isSuccess } = useEditProfile();
 
-  if (!user) {
-    return <Navigate to={RouteURL.login} />;
-  }
-
-  const handleNicknameAgeGenderSubmit = (
-    nickname: string,
-    birthday: string,
-    gender: Gender
-  ) => {
-    setRegisterData({
-      ...registerData,
-      nickname,
-      birthDate: birthday,
-      sex: gender,
-    });
-    setPage(2);
-  };
-
-  const handleRegionJobCategorySubmit = async (
-    residenceId: number,
-    job: string,
-    categoryIds: number[]
-  ) => {
-    setRegisterData({
-      ...registerData,
-      residenceId,
-      job,
-      worryCategories: categoryIds,
-    });
-
-    await editProfile({
-      ...registerData,
-      residenceId,
-      job,
-      worryCategories: categoryIds,
-      userId: user.id,
-    });
+  const handleSubmit = () => {
+    const { job, categoryIds, gender, residenceId, nickname, birthday } =
+      registerData;
+    if (user && gender && residenceId) {
+      editProfile({
+        userId: user.id,
+        job,
+        residenceId,
+        nickname,
+        sex: gender,
+        birthDate: birthday,
+        worryCategories: categoryIds,
+      });
+    }
   };
 
   const handleGoBack = () => {
-    if (page === 2) {
-      setPage(1);
-    } else {
+    if (page === 1) {
       navigate(RouteURL.register_term);
+    } else if (page === 2) {
+      setPage(1);
     }
   };
 
@@ -104,12 +79,38 @@ function CollectInformationPage() {
         <section className="mt-[2.9rem]">
           {page === 1 && (
             <CollectNicknameAgeGender
-              onSubmit={handleNicknameAgeGenderSubmit}
+              initialData={{
+                nickname: registerData.nickname,
+                birthday: registerData.birthday,
+                gender: registerData.gender,
+              }}
+              onNext={(nickname, birthday, gender) => {
+                setRegisterData({
+                  ...registerData,
+                  nickname,
+                  birthday,
+                  gender,
+                });
+                setPage(2);
+              }}
             />
           )}
           {page === 2 && (
             <CollectRegionJobCategory
-              onSubmit={handleRegionJobCategorySubmit}
+              initialData={{
+                categoryIds: registerData.categoryIds,
+                job: registerData.job,
+                residenceId: registerData.residenceId,
+              }}
+              onChange={(data) => {
+                setRegisterData({
+                  ...registerData,
+                  residenceId: data.residenceId,
+                  job: data.job,
+                  categoryIds: data.categoryIds,
+                });
+              }}
+              onSubmit={handleSubmit}
             />
           )}
         </section>

@@ -95,7 +95,6 @@ export default function usePostForm({
         const newVoteOptions = formData?.voteOptions
           ? [...formData.voteOptions]
           : [];
-        console.log(newVoteOptions);
         newVoteOptions[index].image = imgUrl;
         setFormData({ ...formData, voteOptions: newVoteOptions });
       });
