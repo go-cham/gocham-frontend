@@ -1,6 +1,8 @@
+import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import useAcceptTerms from '@/apis/hooks/auth/useAcceptTerms';
 import useEditProfile from '@/apis/hooks/users/useEditProfile';
 import useUser from '@/apis/hooks/users/useUser';
 import BackIcon from '@/components/icons/BackIcon';
@@ -8,45 +10,44 @@ import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender
 import CollectRegionJobCategory from '@/components/user/CollectRegionJobCategory/CollectRegionJobCategory';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
-import { Gender } from '@/types/user';
-
-interface RegisterData {
-  nickname: string;
-  birthday: string;
-  gender: Gender | null;
-  residenceId: number | null;
-  job: string;
-  categoryIds: number[];
-}
+import { registerDataAtom } from '@/states/registerData';
 
 function CollectInformationPage() {
   const navigate = useNavigate();
-  const { user } = useUser();
   const [page, setPage] = useState(1);
-  const [registerData, setRegisterData] = useState<RegisterData>({
-    nickname: '',
-    birthday: '',
-    gender: null,
-    residenceId: null,
-    job: '',
-    categoryIds: [],
-  });
+  const [registerData, setRegisterData] = useAtom(registerDataAtom);
+  const { user } = useUser();
+  const { acceptTerms } = useAcceptTerms();
   const { editProfile, isSuccess } = useEditProfile();
 
-  const handleSubmit = () => {
-    const { job, categoryIds, gender, residenceId, nickname, birthday } =
-      registerData;
-    if (user && gender && residenceId) {
-      editProfile({
-        userId: user.id,
-        job,
-        residenceId,
-        nickname,
-        sex: gender,
-        birthDate: birthday,
-        worryCategories: categoryIds,
-      });
-    }
+  const handleSubmit = async () => {
+    const {
+      job,
+      categoryIds,
+      gender,
+      residenceId,
+      nickname,
+      birthday,
+      accept,
+    } = registerData;
+
+    if (!user || !residenceId || !gender) return;
+
+    await acceptTerms({
+      userId: user.id,
+      termsOfUseAcceptedStatus: Number(accept.gochamTerm),
+      privacyAcceptedStatus: Number(accept.personalInformation),
+      marketingAcceptedStatus: Number(accept.marketing),
+    });
+    await editProfile({
+      userId: user.id,
+      job,
+      residenceId,
+      nickname,
+      sex: gender,
+      birthDate: birthday,
+      worryCategories: categoryIds,
+    });
   };
 
   const handleGoBack = () => {
@@ -62,6 +63,12 @@ function CollectInformationPage() {
       navigate('/');
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (!registerData.accept.gochamTerm) {
+      navigate('/register/term');
+    }
+  }, []);
 
   return (
     <div className="relative flex h-full flex-col bg-white">
@@ -84,13 +91,15 @@ function CollectInformationPage() {
                 birthday: registerData.birthday,
                 gender: registerData.gender,
               }}
-              onNext={(nickname, birthday, gender) => {
+              onChange={(nickname, birthday, gender) => {
                 setRegisterData({
                   ...registerData,
                   nickname,
                   birthday,
                   gender,
                 });
+              }}
+              onNext={() => {
                 setPage(2);
               }}
             />

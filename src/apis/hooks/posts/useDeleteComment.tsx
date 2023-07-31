@@ -17,6 +17,9 @@ export default function useDeleteComment() {
       queryClient.refetchQueries({
         queryKey: ['comments'],
       });
+      queryClient.refetchQueries({
+        queryKey: ['posts'],
+      });
     },
   });
 

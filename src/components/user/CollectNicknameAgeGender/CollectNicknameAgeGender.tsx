@@ -12,26 +12,25 @@ interface FormData {
 
 interface CollectNicknameBirthdayGenderProps {
   initialData: FormData;
-  onNext: (nickname: string, birthday: string, gender: Gender) => void;
+  onChange: (nickname: string, birthday: string, gender: Gender | null) => void;
+  onNext: () => void;
 }
 
 export default function CollectNicknameAgeGender({
   initialData,
+  onChange,
   onNext,
 }: CollectNicknameBirthdayGenderProps) {
-  const [formData, setFormData] = useState<FormData>(initialData);
   const [buttonEnabled, setButtonEnabled] = useState(false);
 
   const handleChange = (data: FormData, isValid: boolean) => {
-    setFormData(data);
     setButtonEnabled(isValid);
+    onChange(data.nickname, data.birthday, data.gender);
   };
 
   const handleNext = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (formData.nickname && formData.birthday && formData.gender) {
-      onNext(formData.nickname, formData.birthday, formData.gender);
-    }
+    onNext();
   };
 
   return (

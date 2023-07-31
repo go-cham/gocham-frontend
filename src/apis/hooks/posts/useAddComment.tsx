@@ -18,8 +18,11 @@ export default function useAddComment() {
       return res.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: ['comments'],
+      });
+      queryClient.refetchQueries({
+        queryKey: ['posts'],
       });
     },
   });
