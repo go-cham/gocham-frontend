@@ -83,7 +83,7 @@ export default function BirthdayInput({
     onChange(fixedBirthday);
     setTimeout(() => {
       setShowReset(false);
-    }, 0);
+    }, 100);
   };
 
   const handleReset = () => {

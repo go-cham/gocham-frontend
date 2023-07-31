@@ -67,7 +67,7 @@ export default function TextInput({
         onBlur={() => {
           setTimeout(() => {
             setShowReset(false);
-          }, 0);
+          }, 100);
         }}
       />
       <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center space-x-[0.5rem]">

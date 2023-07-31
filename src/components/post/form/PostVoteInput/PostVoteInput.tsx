@@ -76,7 +76,7 @@ export default function PostVoteInput({
           onBlur={() => {
             setTimeout(() => {
               setShowReset(false);
-            }, 0);
+            }, 100);
           }}
           maxLength={maxLength}
           placeholder={placeholder}
