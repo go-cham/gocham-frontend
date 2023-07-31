@@ -27,17 +27,20 @@ export default function PostTitleInput({
 }: PostTitleInputProps) {
   const [title, setTitle] = useState(defaultValue || '');
   const inputRef = useRef<HTMLInputElement>(null);
+  const [showReset, setShowReset] = useState(false);
 
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
     setTitle(newTitle);
     onChange && onChange(newTitle);
+    setShowReset(!!newTitle);
   };
 
   const handleReset = () => {
     setTitle('');
     inputRef.current?.focus();
     onChange && onChange('');
+    setShowReset(false);
   };
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,13 +67,18 @@ export default function PostTitleInput({
         className="w-full bg-transparent pr-[7rem] font-system-body4 placeholder:text-text-subExplain-400 placeholder:font-system-body3"
         onChange={handleTitleChange}
         value={title}
+        onFocus={() => {
+          if (title) setShowReset(true);
+        }}
+        onBlur={() => {
+          setTimeout(() => {
+            setShowReset(false);
+          }, 0);
+        }}
       />
       <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center space-x-[0.8rem]">
-        {title && (
-          <button
-            onClick={handleReset}
-            className="hidden group-focus-within:block"
-          >
+        {showReset && (
+          <button onClick={handleReset}>
             <DeleteIcon
               className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300"
               color="white"

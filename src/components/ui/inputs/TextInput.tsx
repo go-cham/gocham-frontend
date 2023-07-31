@@ -29,17 +29,20 @@ export default function TextInput({
 }: TitleInputProps) {
   const [value, setValue] = useState(defaultValue || '');
   const inputRef = useRef<HTMLInputElement>(null);
+  const [showReset, setShowReset] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setValue(newValue);
     onChange && onChange(newValue);
+    setShowReset(!!newValue);
   };
 
   const handleReset = () => {
     setValue('');
     inputRef.current?.focus();
     onChange && onChange('');
+    setShowReset(false);
   };
 
   return (
@@ -58,13 +61,18 @@ export default function TextInput({
         value={value}
         maxLength={maxLength}
         className="w-full bg-transparent font-system-body4 placeholder:text-text-subExplain-400 placeholder:font-system-body3"
+        onFocus={() => {
+          if (value) setShowReset(true);
+        }}
+        onBlur={() => {
+          setTimeout(() => {
+            setShowReset(false);
+          }, 0);
+        }}
       />
       <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center space-x-[0.5rem]">
-        {value && (
-          <button
-            onClick={handleReset}
-            className="hidden group-focus-within:block"
-          >
+        {showReset && (
+          <button onClick={handleReset}>
             <DeleteIcon
               className={twMerge(
                 'h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300',

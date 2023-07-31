@@ -35,6 +35,7 @@ export default function BirthdayInput({
     }
   );
   const yearRef = useRef<HTMLInputElement>(null);
+  const [showReset, setShowReset] = useState(false);
 
   const maxLengthCheck = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > e.target.maxLength) {
@@ -49,6 +50,17 @@ export default function BirthdayInput({
     };
     setBirthday(newBirthday);
     onChange(newBirthday);
+    setShowReset(
+      Boolean(newBirthday.year || newBirthday.month || newBirthday.day)
+    );
+  };
+
+  const handleFocus = () => {
+    if (birthday.year || birthday.month || birthday.day) {
+      setTimeout(() => {
+        setShowReset(true);
+      }, 10);
+    }
   };
 
   const handleBlur = () => {
@@ -56,21 +68,25 @@ export default function BirthdayInput({
     const fixedBirthday = fixDate(year, month, day);
     setBirthday(fixedBirthday);
     onChange(fixedBirthday);
+    setTimeout(() => {
+      setShowReset(false);
+    }, 0);
   };
 
   const handleReset = () => {
     setBirthday({
-      year: undefined,
-      month: undefined,
-      day: undefined,
+      year: '',
+      month: '',
+      day: '',
     });
-    yearRef.current?.focus();
     onChange &&
       onChange({
-        year: undefined,
-        month: undefined,
-        day: undefined,
+        year: '',
+        month: '',
+        day: '',
       });
+    setShowReset(false);
+    yearRef.current?.focus();
   };
 
   return (
@@ -92,6 +108,7 @@ export default function BirthdayInput({
           name="year"
           value={birthday.year}
           onBlur={handleBlur}
+          onFocus={handleFocus}
         />
         <span>년</span>
       </div>
@@ -99,14 +116,13 @@ export default function BirthdayInput({
         <input
           type="number"
           maxLength={2}
-          // min={0}
-          // max={12}
           onInput={maxLengthCheck}
           className="w-[1.8rem] bg-transparent text-right"
           onChange={handleChange}
           name="month"
           value={birthday.month}
           onBlur={handleBlur}
+          onFocus={handleFocus}
         />
         <span>월</span>
       </div>
@@ -114,23 +130,19 @@ export default function BirthdayInput({
         <input
           type="number"
           maxLength={2}
-          // min={0}
-          // max={31}
           onInput={maxLengthCheck}
           className="w-[1.8rem] bg-transparent text-right"
           onChange={handleChange}
           name="day"
           value={birthday.day}
           onBlur={handleBlur}
+          onFocus={handleFocus}
         />
         <span>일</span>
       </div>
       <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center space-x-[0.5rem]">
-        {(birthday.year || birthday.month || birthday.day) && (
-          <button
-            onClick={handleReset}
-            className="hidden group-focus-within:block"
-          >
+        {showReset && (
+          <button onClick={handleReset}>
             <DeleteIcon
               className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300"
               color="white"

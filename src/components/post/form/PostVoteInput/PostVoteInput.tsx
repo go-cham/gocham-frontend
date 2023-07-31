@@ -35,17 +35,20 @@ export default function PostVoteInput({
 }: PostVoteInputProps) {
   const [item, setItem] = useState(defaultValue || '');
   const inputRef = useRef<HTMLInputElement>(null);
+  const [showReset, setShowReset] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newItem = e.target.value;
     setItem(newItem);
     onChange && onChange(newItem);
+    setShowReset(!!newItem);
   };
 
   const handleReset = () => {
     setItem('');
     onChange && onChange('');
     inputRef.current?.focus();
+    setShowReset(false);
   };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +69,14 @@ export default function PostVoteInput({
         id={id}
         ref={inputRef}
         type="text"
+        onFocus={() => {
+          if (item) setShowReset(true);
+        }}
+        onBlur={() => {
+          setTimeout(() => {
+            setShowReset(false);
+          }, 0);
+        }}
         maxLength={maxLength}
         placeholder={placeholder}
         onChange={handleChange}
@@ -86,14 +97,12 @@ export default function PostVoteInput({
         </div>
       )}
       <div className="absolute right-[1.2rem] top-1/2 flex -translate-y-1/2 space-x-[0.8rem]">
-        {item && (
-          <button
-            onClick={handleReset}
-            className="hidden group-focus-within:block"
-          >
+        {showReset && (
+          <button onFocus={() => setShowReset(true)}>
             <DeleteIcon
               className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300"
               color="white"
+              onClick={handleReset}
             />
           </button>
         )}
