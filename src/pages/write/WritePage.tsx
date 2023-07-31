@@ -75,7 +75,7 @@ function WritePage() {
   useEffect(() => {
     if (isSuccess && data) {
       setTimeout(() => {
-        navigate(`/feed/${data.id}`);
+        navigate(`/user`);
       }, 1000);
     }
   }, [isSuccess, data]);
