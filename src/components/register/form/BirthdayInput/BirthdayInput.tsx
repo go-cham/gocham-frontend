@@ -35,6 +35,8 @@ export default function BirthdayInput({
     }
   );
   const yearRef = useRef<HTMLInputElement>(null);
+  const monthRef = useRef<HTMLInputElement>(null);
+  const dayRef = useRef<HTMLInputElement>(null);
   const [showReset, setShowReset] = useState(false);
 
   const maxLengthCheck = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,6 +55,17 @@ export default function BirthdayInput({
     setShowReset(
       Boolean(newBirthday.year || newBirthday.month || newBirthday.day)
     );
+
+    if (e.target.name === 'year' && e.target.value.length === 4) {
+      setTimeout(() => {
+        monthRef.current?.focus();
+      }, 0);
+    }
+    if (e.target.name === 'month' && e.target.value.length === 2) {
+      setTimeout(() => {
+        dayRef.current?.focus();
+      }, 0);
+    }
   };
 
   const handleFocus = () => {
@@ -115,6 +128,7 @@ export default function BirthdayInput({
       </div>
       <div className="flex space-x-[0.3rem]">
         <input
+          ref={monthRef}
           type="number"
           inputMode="numeric"
           maxLength={2}
@@ -130,6 +144,7 @@ export default function BirthdayInput({
       </div>
       <div className="flex space-x-[0.3rem]">
         <input
+          ref={dayRef}
           type="number"
           inputMode="numeric"
           maxLength={2}
