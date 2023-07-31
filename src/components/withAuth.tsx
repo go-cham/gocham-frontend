@@ -14,8 +14,6 @@ const withAuth =
   // eslint-disable-next-line react/display-name
   () => {
     const { user, isLoading } = useUser();
-    console.log(user?.type);
-
     if (isLoading) {
       return null;
     }

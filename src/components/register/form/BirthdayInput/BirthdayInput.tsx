@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 
 import AlertIcon from '@/components/icons/AlertIcon';
 import CheckIcon from '@/components/icons/CheckIcon';
@@ -13,11 +13,11 @@ export interface Birthday {
 }
 
 interface BirthdayInputProps {
-  onChange?: (birthday: Birthday) => void;
+  onChange: (birthday: Birthday) => void;
   successMessage?: string | null;
   errorMessage?: string | null;
   className?: string;
-  defaultValue?: { year: string; month: string; day: string };
+  defaultValue?: { year: string; month: string; day: string } | null;
 }
 
 export default function BirthdayInput({
@@ -48,12 +48,14 @@ export default function BirthdayInput({
       [e.target.name]: e.target.value,
     };
     setBirthday(newBirthday);
+    onChange(newBirthday);
   };
 
   const handleBlur = () => {
     const { year, month, day } = birthday;
     const fixedBirthday = fixDate(year, month, day);
     setBirthday(fixedBirthday);
+    onChange(fixedBirthday);
   };
 
   const handleReset = () => {
@@ -70,10 +72,6 @@ export default function BirthdayInput({
         day: undefined,
       });
   };
-
-  useEffect(() => {
-    onChange && onChange(birthday);
-  }, [birthday]);
 
   return (
     <InputWrapper

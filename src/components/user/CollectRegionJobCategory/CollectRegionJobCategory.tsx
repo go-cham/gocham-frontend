@@ -1,190 +1,48 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 
-import useUser from '@/apis/hooks/users/useUser';
-import JobInput from '@/components/register/form/JobInput';
 import Button from '@/components/ui/buttons/Button';
-import Chip from '@/components/ui/buttons/Chip';
-import Select from '@/components/ui/selections/Select';
-import {
-  OptionType,
-  categoryOptions as initialCategoryOptions,
-  residenceOptions,
-} from '@/constants/options';
-import { validateJob } from '@/utils/validations/job';
+import RegionJobCategoryForm from '@/components/user/RegionJobCategoryForm';
 
-const MAX_CATEGORIES_SELECT = 4;
+interface FormData {
+  residenceId: number | null;
+  job: string;
+  categoryIds: number[];
+}
 
 interface CollectRegionJobCategoryProps {
-  onSubmit?: (residenceId: number, job: string, categoryIds: number[]) => void;
-  onChange?: (
-    residence?: OptionType,
-    job?: string,
-    categories?: OptionType[]
-  ) => void;
+  initialData: FormData;
+  onSubmit?: (data: FormData) => void;
+  onChange?: (data: FormData) => void;
   onValidate?: (isValid: boolean) => void;
 }
 
 export default function CollectNicknameAgeGender({
-  onSubmit,
+  initialData,
   onChange,
-  onValidate,
+  onSubmit,
 }: CollectRegionJobCategoryProps) {
-  const { user } = useUser();
-  const [residence, setResidence] = useState<OptionType>();
-  const [job, setJob] = useState('');
-  const [categoryOptions, setCategoryOptions] = useState<OptionType[]>(
-    initialCategoryOptions
-  );
-  const [categories, setCategories] = useState<OptionType[]>([]);
-  const [isDirty, setIsDirty] = useState({
-    residence: false,
-    job: false,
-    category: false,
-  }); // job
+  const [formData, setFormData] = useState<FormData>(initialData);
+  const [buttonEnabled, setButtonEnabled] = useState(false);
 
-  const handleResidenceChange = (residence: number) => {
-    setIsDirty({ ...isDirty, residence: true });
-    const selected = residenceOptions.find(
-      (option) => option.value === residence
-    );
-    selected && setResidence(selected);
-    selected && onChange && onChange(selected, job, categories);
-  };
-
-  const handleJobChange = (job: string) => {
-    setIsDirty({ ...isDirty, job: true });
-    setJob(job.trimEnd());
-    onChange && onChange(residence, job, categories);
-  };
-
-  const handleCategorySelect = (category: number) => {
-    setIsDirty({ ...isDirty, category: true });
-    const index = categoryOptions.findIndex(
-      (option) => option.value === category
-    );
-    if (index !== -1) {
-      setCategories([...categories, categoryOptions[index]]);
-      const newCategoryOptions = [...categoryOptions];
-      newCategoryOptions.splice(index, 1);
-      setCategoryOptions(newCategoryOptions);
-      onChange &&
-        onChange(residence, job, [...categories, categoryOptions[index]]);
-    }
-  };
-
-  const handleCategoryDelete = (category: OptionType) => {
-    const index = categories.findIndex((c) => c.value === category.value);
-    const newCategories = [...categories];
-    newCategories.splice(index, 1);
-    setCategories(newCategories);
-
-    const newCategoryOptions = [...categoryOptions, category];
-    newCategoryOptions.sort((a, b) => a.value - b.value);
-    setCategoryOptions(newCategoryOptions);
-
-    onChange && onChange(residence, job, newCategories);
+  const handleChange = (data: FormData, isValid: boolean) => {
+    setButtonEnabled(isValid);
+    setFormData(data);
+    onChange && onChange(data);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!residence?.value) return;
-
-    onSubmit &&
-      onSubmit(
-        residence.value,
-        job,
-        categories.map((cat) => cat.value)
-      );
+    onSubmit && onSubmit(formData);
   };
 
-  const jobErrorMessage = isDirty.job ? validateJob(job) : null;
-
-  const nextEnabled = residence && job && !jobErrorMessage;
-
-  useEffect(() => {
-    if (!user) {
-      return;
-    }
-    if (user.residence) {
-      setResidence({
-        value: user.residence.value,
-        label: user.residence.label,
-      });
-    }
-    if (user.worryCategories) {
-      setCategories(
-        initialCategoryOptions.filter((o) =>
-          user.worryCategories?.map((cat) => cat.value).includes(o.value)
-        )
-      );
-      const initialCategories =
-        initialCategoryOptions.filter(
-          (option) =>
-            !user.worryCategories
-              ?.map((cat) => cat.value)
-              .includes(option.value)
-        ) || [];
-      setCategoryOptions(initialCategories);
-    }
-  }, []);
-
-  if (!user) {
-    return null;
-  }
-
-  useEffect(() => {
-    (isDirty.residence || isDirty.job || isDirty.category) &&
-      onValidate &&
-      onValidate(!!nextEnabled);
-  }, [nextEnabled]);
-
   return (
-    <form className="space-y-[2.9rem]" onSubmit={handleSubmit}>
-      <Select
-        id="residence"
-        label="거주 지역"
-        placeholder="지역 선택"
-        options={residenceOptions}
-        wrapperClassName="w-full"
-        onChange={handleResidenceChange}
-        value={residence?.label}
-        highlight={true}
-        labelClassName="font-custom-body1"
+    <form onSubmit={handleSubmit}>
+      <RegionJobCategoryForm
+        initialData={initialData}
+        onChange={handleChange}
       />
-      <JobInput
-        className="w-full"
-        onChange={handleJobChange}
-        errorMessage={jobErrorMessage}
-        defaultValue={user?.job}
-      />
-      <div className="space-y-[1.1rem]">
-        <Select
-          id="worry-category"
-          label="관심 카테고리"
-          placeholder="최대 4개 선택 가능"
-          options={categoryOptions}
-          wrapperClassName="w-full"
-          onChange={handleCategorySelect}
-          readOnly={categories.length >= MAX_CATEGORIES_SELECT}
-          labelClassName="font-custom-body1"
-        />
-        <div className="flex flex-wrap">
-          {categories.map((category) => (
-            <Chip
-              key={category.value}
-              label={
-                initialCategoryOptions.find((o) => o.value === category.value)
-                  ?.label || ''
-              }
-              variant="delete"
-              onDelete={() => handleCategoryDelete(category)}
-              className="mb-[0.6rem] mr-[0.6rem]"
-            />
-          ))}
-        </div>
-      </div>
       <Button
-        disabled={!nextEnabled}
+        disabled={!buttonEnabled}
         className="absolute bottom-[4.8rem] left-1/2 -translate-x-1/2"
       >
         고참 시작하기
