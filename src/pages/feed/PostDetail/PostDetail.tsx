@@ -1,9 +1,10 @@
 import { useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
 import useGetChoiceOptions from '@/apis/hooks/posts/useGetChoiceOptions';
+import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import ClockIcon from '@/components/icons/ClockIcon';
 import MessageIcon from '@/components/icons/MessageIcon';
@@ -33,6 +34,7 @@ enum MENU {
 }
 
 export default function PostDetail({ post }: PostDetailProps) {
+  const params = useParams();
   const { choiceOptions } = useGetChoiceOptions(post.id);
   const navigate = useNavigate();
   const { user } = useUser();
@@ -41,6 +43,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { deletePost, error, isSuccess, isLoading } = useDeletePost();
   const selectedVoteOptionId = useAtomValue(selectedVoteOptionIdAtom);
+  const { posts } = useGetPosts({ authorId: user?.id });
 
   const handleClickMore = () => {
     setShowMore((prevShowMore) => !prevShowMore);
@@ -65,6 +68,9 @@ export default function PostDetail({ post }: PostDetailProps) {
 
   const handleDeletePost = async () => {
     await deletePost(post.id);
+    if (params.route === 'my' && posts?.length === 1) {
+      navigate('/user');
+    }
   };
 
   const isMyPost = user?.id === post.user.id;
