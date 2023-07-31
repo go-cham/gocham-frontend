@@ -1,65 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 
-import useAcceptTerms from '@/apis/hooks/auth/useAcceptTerms';
-import useUser from '@/apis/hooks/users/useUser';
 import BackIcon from '@/components/icons/BackIcon';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
+import { registerDataAtom } from '@/states/registerData';
 
 import TermCheckbox from './TermCheckbox';
 
-export type AcceptType = {
-  gochamTerm: boolean;
-  personalInformation: boolean;
-  olderThan14: boolean;
-  marketing: boolean;
-  allCheck: boolean;
-};
-
 function RegisterTermPage() {
   const navigate = useNavigate();
-  const { user } = useUser();
-  const { acceptTerms, isSuccess, error } = useAcceptTerms();
-  const [accept, setAccept] = useState<AcceptType>({
-    gochamTerm: false,
-    personalInformation: false,
-    olderThan14: false,
-    marketing: false,
-    allCheck: false,
-  });
+  const [registerData, setRegisterData] = useAtom(registerDataAtom);
+  const { accept } = registerData;
 
   const nextEnabled =
     accept.gochamTerm && accept.personalInformation && accept.olderThan14;
 
-  const handleRegister = async () => {
-    if (!user) {
-      return;
-    }
-
-    acceptTerms({
-      userId: user.id,
-      privacyAcceptedStatus: accept.personalInformation ? 1 : 0,
-      termsOfUseAcceptedStatus: accept.gochamTerm ? 1 : 0,
-      marketingAcceptedStatus: accept.marketing ? 1 : 0,
-    });
+  const handleNext = () => {
+    navigate('/collect-information');
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      navigate(RouteURL.collect_information);
-    }
-    if (error) {
-      console.error(error);
-    }
-  }, [isSuccess, error]);
-
-  useEffect(() => {
-    if (accept.gochamTerm && accept.personalInformation && accept.olderThan14) {
-      setAccept((value) => ({ ...value, allCheck: true }));
-    }
-  }, [accept.allCheck]);
 
   return (
     <div className="flex h-full flex-col bg-white">
@@ -83,13 +43,16 @@ function RegisterTermPage() {
               accept.olderThan14 &&
               accept.marketing
             }
-            onCheck={(value) =>
-              setAccept({
-                gochamTerm: value,
-                personalInformation: value,
-                olderThan14: value,
-                marketing: value,
-                allCheck: value,
+            onCheck={(checked) =>
+              setRegisterData({
+                ...registerData,
+                accept: {
+                  gochamTerm: checked,
+                  personalInformation: checked,
+                  olderThan14: checked,
+                  marketing: checked,
+                  allCheck: checked,
+                },
               })
             }
           />
@@ -99,26 +62,56 @@ function RegisterTermPage() {
               text="[필수] 고민의 참견 이용약관 동의"
               link="https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2"
               checked={accept.gochamTerm}
-              onCheck={(value) => setAccept({ ...accept, gochamTerm: value })}
+              onCheck={(checked) => {
+                setRegisterData({
+                  ...registerData,
+                  accept: {
+                    ...registerData.accept,
+                    gochamTerm: checked,
+                  },
+                });
+              }}
             />
             <TermCheckbox
               text="[필수] 개인정보 수집 및 이용 동의"
               link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
               checked={accept.personalInformation}
-              onCheck={(value) =>
-                setAccept({ ...accept, personalInformation: value })
-              }
+              onCheck={(checked) => {
+                setRegisterData({
+                  ...registerData,
+                  accept: {
+                    ...registerData.accept,
+                    personalInformation: checked,
+                  },
+                });
+              }}
             />
             <TermCheckbox
               text="[필수] 만 14세 이상 입니다."
               checked={accept.olderThan14}
-              onCheck={(value) => setAccept({ ...accept, olderThan14: value })}
+              onCheck={(checked) => {
+                setRegisterData({
+                  ...registerData,
+                  accept: {
+                    ...registerData.accept,
+                    olderThan14: checked,
+                  },
+                });
+              }}
             />
             <TermCheckbox
               text="[선택] 마케팅 목적 이용 동의"
               link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
               checked={accept.marketing}
-              onCheck={(value) => setAccept({ ...accept, marketing: value })}
+              onCheck={(checked) => {
+                setRegisterData({
+                  ...registerData,
+                  accept: {
+                    ...registerData.accept,
+                    marketing: checked,
+                  },
+                });
+              }}
             />
           </div>
         </section>
@@ -126,7 +119,7 @@ function RegisterTermPage() {
       <Button
         className="absolute bottom-[4.8rem] left-1/2 -translate-x-1/2"
         disabled={!nextEnabled}
-        onClick={handleRegister}
+        onClick={handleNext}
       >
         다음
       </Button>

@@ -1,8 +1,8 @@
 export interface AcceptTermsRequest {
   userId: number;
-  privacyAcceptedStatus: 0 | 1;
-  termsOfUseAcceptedStatus: 0 | 1;
-  marketingAcceptedStatus: 0 | 1;
+  privacyAcceptedStatus: number;
+  termsOfUseAcceptedStatus: number;
+  marketingAcceptedStatus: number;
 }
 
 export interface AcceptTermsResponse {
