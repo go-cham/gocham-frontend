@@ -23,7 +23,7 @@ export default function useGetPosts({
         const res = await axiosInstance.get<GetPostsResponse>('/worries', {
           params: {
             sort: 'DESC',
-            take: 5,
+            take: 20,
             nextCursorId: pageParam || initialPostId,
             authorId,
             participatingUserId,
@@ -35,7 +35,7 @@ export default function useGetPosts({
           baseURL: process.env.REACT_APP_SERVER_API,
           params: {
             sort: 'DESC',
-            take: 5,
+            take: 20,
             nextCursorId: pageParam || initialPostId,
           },
         });
