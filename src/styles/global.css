@@ -5,6 +5,13 @@
 html {
   @apply text-text-title-900;
   font-family: Pretendard, sans-serif;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #f5f7fb;
+  height: 100%;
 }
 
 img[alt] {
@@ -14,12 +21,6 @@ img[alt] {
 input:focus,
 textarea:focus {
   outline: none;
-}
-
-body {
-  margin: 0;
-  background-color: #f5f7fb;
-  height: 100vh;
 }
 
 /* Chrome, Safari, Edge, Opera */
