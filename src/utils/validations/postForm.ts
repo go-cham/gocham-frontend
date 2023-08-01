@@ -27,7 +27,7 @@ export function validatePostForm(
     if (option.image && !option.label) {
       errorMessage.voteOptions = '투표 항목은 텍스트를 포함해야 합니다.';
       voteOptionErrorIndex = i;
-      return [errorMessage, null];
+      return [errorMessage, voteOptionErrorIndex];
     }
   }
   let count = 0;
