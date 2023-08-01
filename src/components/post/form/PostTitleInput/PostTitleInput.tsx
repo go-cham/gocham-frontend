@@ -30,6 +30,10 @@ export default function PostTitleInput({
   const [showReset, setShowReset] = useState(false);
 
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > e.target.maxLength) {
+      e.target.value = e.target.value.slice(0, e.target.maxLength);
+    }
+
     const newTitle = e.target.value;
     setTitle(newTitle);
     onChange && onChange(newTitle);

@@ -21,6 +21,10 @@ export default function PostContentInput({
   const [content, setContent] = useState(defaultValue || '');
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value.length > e.target.maxLength) {
+      e.target.value = e.target.value.slice(0, e.target.maxLength);
+    }
+
     const newContent = e.target.value;
     if (newContent.length <= MAX_LENGTH) {
       setContent(newContent);

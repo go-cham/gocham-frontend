@@ -32,6 +32,9 @@ export default function TextInput({
   const [showReset, setShowReset] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > e.target.maxLength) {
+      e.target.value = e.target.value.slice(0, e.target.maxLength);
+    }
     const newValue = e.target.value;
     setValue(newValue);
     onChange && onChange(newValue);

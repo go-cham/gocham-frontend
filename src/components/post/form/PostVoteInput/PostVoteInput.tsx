@@ -38,6 +38,9 @@ export default function PostVoteInput({
   const [showReset, setShowReset] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > e.target.maxLength) {
+      e.target.value = e.target.value.slice(0, e.target.maxLength);
+    }
     const newItem = e.target.value;
     setItem(newItem);
     onChange && onChange(newItem);
