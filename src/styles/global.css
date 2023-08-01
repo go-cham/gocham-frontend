@@ -58,3 +58,16 @@ input[type='number'] {
     width: 0;
   }
 }
+
+@supports (-webkit-backdrop-filter: none) {
+  .header-blur {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+}
+
+@supports not (-webkit-backdrop-filter: none) {
+  .header-blur {
+    backdrop-filter: blur(8px);
+  }
+}

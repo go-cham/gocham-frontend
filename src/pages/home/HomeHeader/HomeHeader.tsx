@@ -31,8 +31,8 @@ export default function HomeHeader({ onClickLogo }: HomeHeaderProps) {
 
   return (
     <header
-      className="sticky top-0 z-30 flex w-full items-center space-x-[1.121rem] pb-[1.1rem] pl-[2.2rem] pt-[0.3rem]"
-      style={{ backdropFilter: 'blur(8px)' }}
+      className="header-blur sticky top-0 z-30 flex w-full items-center space-x-[1.121rem] pb-[1.1rem] pl-[2.2rem] pt-[0.3rem]"
+      // style={{ backdropFilter: 'blur(8px)' }}
     >
       <button onClick={onClickLogo}>
         <Logo colored={uploadedIn24} />
