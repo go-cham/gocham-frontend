@@ -70,7 +70,6 @@ export default function CommentInput() {
       const el = document.getElementById('comment-input');
       if (el) {
         el.innerHTML = '';
-        el.focus();
         setIsActive(false);
       }
     }
