@@ -44,6 +44,7 @@ function SettingsPage() {
 
   const handleLogout = () => {
     alert('로그아웃 되었습니다.\n고민이 있으면 언제든지 찾아와주세요!');
+    sessionStorage.removeItem('selectMyPostTypeLabel');
     localStorage.removeItem('token');
     queryClient.clear();
     navigate('/');
