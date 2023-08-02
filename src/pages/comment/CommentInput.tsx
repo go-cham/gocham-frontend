@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { FormEvent, KeyboardEvent, useEffect } from 'react';
+import { KeyboardEvent, useEffect } from 'react';
 
 import useAddComment from '@/apis/hooks/posts/useAddComment';
 import useUser from '@/apis/hooks/users/useUser';
@@ -11,13 +11,14 @@ export default function CommentInput() {
   const commentState = useAtomValue(commentStateAtom);
   const { addComment, isSuccess } = useAddComment();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     submit();
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.nativeEvent.isComposing || e.keyCode === 229) return;
     if (e.key === 'Enter' && !e.shiftKey) {
+      console.log('keydown');
       e.preventDefault();
       submit();
     }
@@ -67,7 +68,7 @@ export default function CommentInput() {
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={(e) => e.preventDefault()}
       className="shadow-dock flex w-full items-center space-x-[1.3rem] bg-white px-[1.5rem] pb-[1.1rem] pt-[1.5rem]"
     >
       <div
@@ -76,7 +77,10 @@ export default function CommentInput() {
         className="hide-scrollbar h-[4.4rem] flex-1 overflow-y-scroll whitespace-pre rounded-[0.5rem] border px-[1.3rem] pt-[0.9rem] outline-none focus:border-text-explain-500"
         onKeyDown={handleKeyDown}
       ></div>
-      <button className="h-[3.6rem] w-[3.6rem] rounded-full bg-mainSub-main-500">
+      <button
+        onClick={handleSubmit}
+        className="h-[3.6rem] w-[3.6rem] rounded-full bg-mainSub-main-500"
+      >
         <AddCommentIcon />
       </button>
     </form>
