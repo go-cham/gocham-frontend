@@ -51,10 +51,18 @@ export const residenceOptions: OptionType[] = [
   { value: 17, label: '제주특별자치도' },
 ];
 
-export const reportOptions: OptionType[] = [
+export const reportFeedOption: OptionType[] = [
   { value: 1, label: '개인정보 노출 게시물입니다.' },
   { value: 2, label: '스팸홍보/도배 게시물 입니다.' },
   { value: 3, label: '욕설/혐오/차별적 표현이 포함된 게시물입니다.' },
   { value: 4, label: '음란성 또는 청소년에게 부적합한 게시물입니다.' },
   { value: 5, label: '불법정보가 포함된 게시물입니다.' },
+];
+
+export const reportCommentOption: OptionType[] = [
+  { value: 1, label: '개인정보 노출 댓글입니다.' },
+  { value: 2, label: '스팸홍보/도배글 입니다.' },
+  { value: 3, label: '욕설/혐오/차별적 표현입니다.' },
+  { value: 4, label: '음란성 또는 청소년에게 부적합한 댓글입니다.' },
+  { value: 5, label: '불법정보가 포함된 댓글입니다.' },
 ];

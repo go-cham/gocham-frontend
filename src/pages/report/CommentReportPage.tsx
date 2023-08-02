@@ -4,27 +4,18 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import useReportComment from '@/apis/hooks/posts/useReportComment';
 import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
-import { reportOptions } from '@/constants/options';
+import { reportCommentOption } from '@/constants/options';
 
-function CommentPage() {
+function CommentReportPage() {
   const { id } = useParams();
   const { user } = useUser();
   const [selectedReasonId, setSelectedReasonId] = useState<number>();
   const { state } = useLocation();
-  const { reportComment, isSuccess, error } = useReportComment();
+  const { reportComment, isSuccess, error, isLoading } = useReportComment();
   const navigate = useNavigate();
-  useEffect(() => {
-    if (isSuccess) {
-      alert('신고가 정상적으로 접수되었습니다.');
-      navigate(`/feed/${state.postId}/comment`);
-    }
-    if (error) {
-      alert('오류가 발생하였습니다.');
-      navigate(`/feed/${state.postId}/comment`);
-    }
-  }, [isSuccess, error]);
 
   if (!id || !user) {
     return null;
@@ -48,46 +39,64 @@ function CommentPage() {
     });
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      alert('신고가 정상적으로 접수되었습니다.');
+      navigate(`/feed/${state.postId}/comment`);
+    }
+    if (error) {
+      alert('오류가 발생하였습니다.');
+      navigate(`/feed/${state.postId}/comment`);
+    }
+  }, [isSuccess, error]);
+
   return (
     <div className="flex h-full flex-col">
-      <TopAppBar title="댓글 신고" />
-      <h1 className="border-custom-background-200 mt-[3.3rem] pb-[2rem] pl-[1.5rem] text-heading2">
-        댓글을 신고하는 사유를 선택해주세요.
-      </h1>
-      <div className="pl-[1.5rem]">
-        <div>
-          <span className="text-custom-text-500 mr-[0.6rem] text-body2">
-            작성자
-          </span>
-          <span className="text-custom-text-900 text-body2">
-            {state.nickName}
-          </span>
+      {isLoading && (
+        <div className="absolute left-1/2 top-1/2 z-[1000] -translate-x-1/2 -translate-y-1/2">
+          <LoadingSpinner />
         </div>
-        <div>
-          <span className="text-custom-text-500 mr-[1.2rem] text-body2">
-            내 용
-          </span>
-          <span className="text-custom-text-900 text-body2">
-            {state.content}
-          </span>
+      )}
+      <TopAppBar title="댓글 신고" />
+      <div className="border-b border-background-dividerLine-300 px-[1.5rem] pb-[1.7rem] pt-[3.3rem]">
+        <h1 className="text-text-title-900 font-system-heading1">
+          댓글을 신고하는 사유를 선택해주세요.
+        </h1>
+        <div className="mt-[1.9rem]">
+          <div>
+            <span className="mr-[0.5rem] text-text-explain-500 font-system-body2">
+              작성자
+            </span>
+            <span className="text-text-title-900 font-system-body2">
+              {state.nickName}
+            </span>
+          </div>
+          <div className="flex space-x-[1.3rem]">
+            <span className="whitespace-nowrap text-text-explain-500 font-system-body2">
+              내 용
+            </span>
+            <p className="text-text-title-900 font-system-body2">
+              {state.content}
+            </p>
+          </div>
         </div>
       </div>
       <form onSubmit={handleSubmit}>
         <fieldset className="flex flex-col px-[1.5rem] py-[0.2rem]">
-          {reportOptions.map((option) => (
+          {reportCommentOption.map((option) => (
             <label
               key={option.value}
-              className="mt-[1.7rem] flex items-center space-x-[0.9rem] border-b pb-[1.5rem]"
+              className="mt-[1.7rem] flex items-center space-x-[0.9rem] border-b border-background-dividerLine-300 pb-[1.5rem]"
             >
               <input
                 type="radio"
                 id={option.value + ''}
                 name="report-options"
                 value={option.value}
-                className="outline-custom-background-200 checked:bg-custom-main-500 focus:outline-custom-background-200 h-[2.2rem] w-[2.2rem] appearance-none rounded-full border-white outline checked:border-[0.2rem] focus:outline"
+                className="h-[2.2rem] w-[2.2rem] appearance-none rounded-full border-white outline outline-1 outline-background-dividerLine-300 checked:border-[0.2rem] checked:bg-mainSub-main-500 focus:outline focus:outline-background-dividerLine-300"
                 onChange={handleReasonChange}
               />
-              <span className="text-body3">{option.label}</span>
+              <span className="font-system-body3">{option.label}</span>
             </label>
           ))}
         </fieldset>
@@ -102,4 +111,4 @@ function CommentPage() {
   );
 }
 
-export default withAuth(CommentPage, { block: 'unauthenticated' });
+export default withAuth(CommentReportPage, { block: 'unauthenticated' });

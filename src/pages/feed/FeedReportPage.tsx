@@ -8,7 +8,7 @@ import TopAppBar from '@/components/layout/TopAppBar';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
-import { reportOptions } from '@/constants/options';
+import { reportFeedOption } from '@/constants/options';
 import { RouteURL } from '@/constants/route-url';
 
 function FeedPage() {
@@ -66,7 +66,7 @@ function FeedPage() {
       </h1>
       <form onSubmit={handleSubmit}>
         <fieldset className="flex flex-col px-[1.5rem] py-[0.2rem]">
-          {reportOptions.map((option) => (
+          {reportFeedOption.map((option) => (
             <label
               key={option.value}
               className="mt-[1.7rem] flex items-center space-x-[0.9rem] border-b border-background-dividerLine-300 pb-[1.5rem]"
