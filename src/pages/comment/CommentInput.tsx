@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { KeyboardEvent, useEffect } from 'react';
+import { KeyboardEvent, useEffect, useState } from 'react';
 
 import useAddComment from '@/apis/hooks/posts/useAddComment';
 import useUser from '@/apis/hooks/users/useUser';
@@ -10,9 +10,18 @@ export default function CommentInput() {
   const { user } = useUser();
   const commentState = useAtomValue(commentStateAtom);
   const { addComment, isSuccess } = useAddComment();
+  const [isActive, setIsActive] = useState(false);
 
   const handleSubmit = () => {
     submit();
+  };
+
+  const handleInput = () => {
+    const el = document.getElementById('comment-input');
+
+    if (el) {
+      setIsActive(!!el.textContent?.trimEnd());
+    }
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -62,6 +71,7 @@ export default function CommentInput() {
       if (el) {
         el.innerHTML = '';
         el.focus();
+        setIsActive(false);
       }
     }
   }, [isSuccess]);
@@ -76,10 +86,13 @@ export default function CommentInput() {
         contentEditable={true}
         className="hide-scrollbar h-[4.4rem] flex-1 overflow-y-scroll whitespace-pre rounded-[0.5rem] border px-[1.3rem] pt-[0.9rem] outline-none focus:border-text-explain-500"
         onKeyDown={handleKeyDown}
+        onInput={handleInput}
       ></div>
       <button
         onClick={handleSubmit}
-        className="h-[3.6rem] w-[3.6rem] rounded-full bg-mainSub-main-500"
+        className={`h-[3.6rem] w-[3.6rem] rounded-full ${
+          isActive ? 'bg-mainSub-main-500' : 'bg-background-button-300'
+        }`}
       >
         <AddCommentIcon />
       </button>
