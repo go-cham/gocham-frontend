@@ -169,7 +169,18 @@ export default function PostDetail({ post }: PostDetailProps) {
         isClosed={isClosed}
       />
       <div className="my-[1.3rem] flex space-x-[0.7rem] px-[2.5rem]">
-        <button>
+        <button
+          onClick={() => {
+            setTimeout(() => {
+              let el: HTMLElement | null = null;
+              while (!el) {
+                el = document.getElementById('comment-input');
+              }
+              el.focus();
+            }, 100);
+            navigate(`/feed/${post.id}/comment`);
+          }}
+        >
           <MessageIcon />
         </button>
         <button>
