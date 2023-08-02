@@ -19,7 +19,9 @@ function UserPage() {
   const { user } = useUser();
   const navigate = useNavigate();
 
-  const [postType, setPostType] = useState<PostType>('my');
+  const initialPostType =
+    (sessionStorage.getItem('selectMyPostTypeLabel') as PostType) || 'my';
+  const [postType, setPostType] = useState<PostType>(initialPostType);
   const {
     posts: myPosts,
     totalCount: myPostsTotal,

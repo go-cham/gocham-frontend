@@ -25,9 +25,13 @@ export default function SelectMyPostType({
                 ? 'rounded-[2.35rem] bg-text-subTitle-700 text-white'
                 : 'text-text-explain-500'
             }`}
-            onClick={() =>
-              switchPostType(label === '내 게시글' ? 'my' : 'participating')
-            }
+            onClick={() => {
+              sessionStorage.setItem(
+                'selectMyPostTypeLabel',
+                label === '내 게시글' ? 'my' : 'participating'
+              );
+              switchPostType(label === '내 게시글' ? 'my' : 'participating');
+            }}
           >
             {`${label} ${
               label === '내 게시글'
