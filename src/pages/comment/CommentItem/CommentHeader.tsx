@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import useDeleteComment from '@/apis/hooks/posts/useDeleteComment';
 import PostUserProfile from '@/components/post/PostUserProfile';
@@ -10,6 +9,7 @@ interface CommentHeaderProps {
   age: number;
   choice: string | null;
   isWriter: boolean;
+  isMyComment: boolean;
   commentId: number;
   onReport: () => void;
 }
@@ -19,17 +19,26 @@ export default function CommentHeader({
   age,
   choice,
   isWriter,
+  isMyComment,
   commentId,
   onReport,
 }: CommentHeaderProps) {
-  const navigate = useNavigate();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const { deleteComment } = useDeleteComment();
+  const { deleteComment, isSuccess, error } = useDeleteComment();
 
   const handleDelete = () => {
     deleteComment(commentId);
     setDeleteModalOpen(false);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      alert('댓글이 정상적으로 삭제되었습니다.');
+    }
+    if (error) {
+      alert('오류가 발생하였습니다.');
+    }
+  }, [isSuccess, error]);
 
   return (
     <div className="flex items-center justify-between">
@@ -49,7 +58,7 @@ export default function CommentHeader({
           </span>
         )}
       </div>
-      {isWriter ? (
+      {isMyComment ? (
         <div
           className="cursor-pointer text-text-explain-500 font-system-body2"
           onClick={() => setDeleteModalOpen(true)}

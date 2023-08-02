@@ -2,6 +2,7 @@ import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 
 import useGetMyChoice from '@/apis/hooks/posts/useGetMyChoice';
+import useUser from '@/apis/hooks/users/useUser';
 import CommentContent from '@/pages/comment/CommentItem/CommentContent';
 import CommentFooter from '@/pages/comment/CommentItem/CommentFooter';
 import CommentHeader from '@/pages/comment/CommentItem/CommentHeader';
@@ -37,6 +38,7 @@ export default function CommentItem({
     postId: user.choiceLabel ? undefined : commentState.postId || undefined,
   });
   const navigate = useNavigate();
+  const { user: currentUser } = useUser();
 
   const handleReply = () => {
     setCommentState({
@@ -84,6 +86,7 @@ export default function CommentItem({
         age={user.age}
         choice={user.choiceLabel || choice?.label || null}
         isWriter={isWriter}
+        isMyComment={user.id === currentUser?.id}
         commentId={commentId}
         onReport={handleReport}
       />
