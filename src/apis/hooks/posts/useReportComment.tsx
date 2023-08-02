@@ -6,7 +6,7 @@ import {
 } from '@/apis/dto/posts/report-comment';
 import { axiosInstance } from '@/libs/axios';
 
-export default function userReportComment() {
+export default function useReportComment() {
   const { mutate, data, isLoading, error, isSuccess } = useMutation({
     mutationKey: ['reportComment'],
     mutationFn: async (data: ReportCommentRequest) => {

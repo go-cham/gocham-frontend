@@ -19,7 +19,7 @@ import UserPage from '@/pages/user/UserPage';
 import WritePage from '@/pages/write/WritePage';
 import RouteChangeTracker from '@/utils/routeChangeTracker';
 
-import FeedCommentPage from './pages/feed/FeedCommentPage';
+import CommentPage from './pages/comment/CommentPage';
 import CommentReportPage from './pages/report/CommentReportPage';
 
 export default function App() {
@@ -51,7 +51,7 @@ export default function App() {
         <Route path={RouteURL.edit_profile} element={<EditProfilePage />} />
         <Route path={RouteURL.settings} element={<SettingsPage />} />
         <Route path={RouteURL.unregister} element={<UnregisterPage />} />
-        <Route path={RouteURL.feed_comment} element={<FeedCommentPage />} />
+        <Route path={RouteURL.feed_comment} element={<CommentPage />} />
         <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
       </Routes>
     </Layout>

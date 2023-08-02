@@ -1,0 +1,84 @@
+import { useAtomValue } from 'jotai';
+import { FormEvent, KeyboardEvent, useEffect } from 'react';
+
+import useAddComment from '@/apis/hooks/posts/useAddComment';
+import useUser from '@/apis/hooks/users/useUser';
+import AddCommentIcon from '@/components/icons/AddCommentIcon';
+import { commentStateAtom } from '@/states/comment';
+
+export default function CommentInput() {
+  const { user } = useUser();
+  const commentState = useAtomValue(commentStateAtom);
+  const { addComment, isSuccess } = useAddComment();
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    submit();
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      submit();
+    }
+  };
+
+  const submit = () => {
+    const el = document.getElementById('comment-input');
+    if (el && user) {
+      const rawContent = el.textContent as string;
+
+      const regex = /^@([A-Za-z가-힣0-9]+)\s((.|\n)*)/;
+      const matches = rawContent.match(regex);
+
+      let content = '';
+      let nickname = '';
+      if (matches) {
+        nickname = matches[1].trimEnd();
+        content = matches[2].trimEnd();
+      } else {
+        content = rawContent.trimEnd();
+      }
+
+      const isReply =
+        nickname && nickname === commentState.replyingTo?.nickname;
+
+      if (commentState.postId && content) {
+        addComment({
+          userId: user.id,
+          content,
+          worryId: commentState.postId,
+          mentionUserId: isReply ? commentState.replyingTo?.id || null : null,
+          nestingReplyId: isReply ? commentState.parentCommentId : null,
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      const el = document.getElementById('comment-input');
+      if (el) {
+        el.innerHTML = '';
+        el.focus();
+      }
+    }
+  }, [isSuccess]);
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="shadow-dock flex w-full items-center space-x-[1.3rem] bg-white px-[1.5rem] pb-[1.1rem] pt-[1.5rem]"
+    >
+      <div
+        id="comment-input"
+        contentEditable={true}
+        className="hide-scrollbar h-[4.4rem] flex-1 overflow-y-scroll whitespace-pre rounded-[0.5rem] border px-[1.3rem] pt-[0.9rem] outline-none focus:border-text-explain-500"
+        onKeyDown={handleKeyDown}
+      ></div>
+      <button className="h-[3.6rem] w-[3.6rem] rounded-full bg-mainSub-main-500">
+        <AddCommentIcon />
+      </button>
+    </form>
+  );
+}

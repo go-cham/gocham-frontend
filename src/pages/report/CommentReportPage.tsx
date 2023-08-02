@@ -1,23 +1,19 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import useGetPost from '@/apis/hooks/posts/useGetPost';
-import userReportComment from '@/apis/hooks/posts/useReportComment';
-import useReportPost from '@/apis/hooks/posts/useReportPost';
+import useReportComment from '@/apis/hooks/posts/useReportComment';
 import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
 import { reportOptions } from '@/constants/options';
-import { RouteURL } from '@/constants/route-url';
 
 function CommentPage() {
   const { id } = useParams();
   const { user } = useUser();
   const [selectedReasonId, setSelectedReasonId] = useState<number>();
   const { state } = useLocation();
-  const { reportComment, data, isLoading, isSuccess, error } =
-    userReportComment();
+  const { reportComment, isSuccess, error } = useReportComment();
   const navigate = useNavigate();
   useEffect(() => {
     if (isSuccess) {

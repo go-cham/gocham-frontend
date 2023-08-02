@@ -13,7 +13,7 @@ export type GetCommentsResponse = {
       email: string | null;
       id: number;
       nickname: string;
-      phoneNumer: string | null;
+      phoneNumber: string | null;
       profileImageUrl: string | null;
     };
     user: {

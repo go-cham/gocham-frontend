@@ -8,7 +8,7 @@ import { axiosInstance } from '@/libs/axios';
 
 export default function useAddComment() {
   const queryClient = useQueryClient();
-  const { mutate, data, isLoading, error } = useMutation({
+  const { mutate, data, isLoading, error, isSuccess } = useMutation({
     mutationKey: ['comment'],
     mutationFn: async (data: AddCommentsRequest) => {
       const res = await axiosInstance.post<AddCommentsResponse>(
@@ -30,6 +30,7 @@ export default function useAddComment() {
   return {
     addComment: mutate,
     isLoading,
+    isSuccess,
     error,
     data,
   };

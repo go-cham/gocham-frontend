@@ -21,10 +21,10 @@ export default function useChooseOption() {
       return res.data;
     },
     onSuccess: () => {
-      console.log('onSuccess');
       queryClient.refetchQueries(['myChoice']);
       queryClient.refetchQueries(['usersChoices']);
       queryClient.refetchQueries(['posts']);
+      queryClient.refetchQueries(['comments']);
     },
   });
 
