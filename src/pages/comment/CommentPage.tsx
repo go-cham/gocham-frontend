@@ -107,7 +107,7 @@ export default function CommentPage() {
 
   return (
     <div className="flex h-full flex-col">
-      <TopAppBar title="댓글" navigateRoute="/" />
+      <TopAppBar title="댓글" />
       <div className="hide-scrollbar flex-1 overflow-y-scroll">
         <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.9rem] pt-[2.1rem]">
           <div className="flex items-center justify-between px-[2.5rem]">
