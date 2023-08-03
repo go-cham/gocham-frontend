@@ -12,6 +12,8 @@ import TopAppBar from '@/components/layout/TopAppBar';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
 import Popup from '@/components/ui/modal/Popup/Popup';
+import CommentSkeleton from '@/components/ui/skeleton/CommentSkeleton';
+import PostSummarySkeleton from '@/components/ui/skeleton/PostSummarySkeleton';
 import CommentInput from '@/pages/comment/CommentInput';
 import CommentList from '@/pages/comment/CommentList';
 import ImageList from '@/pages/comment/ImageList';
@@ -32,10 +34,12 @@ export default function CommentPage() {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [showMore, setShowMore] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const { user } = useUser();
+  const { user, isLoading: userLoading } = useUser();
   const { id: postId } = useParams();
-  const { comments } = useGetComments(Number(postId));
-  const { post, error } = useGetPost(Number(postId));
+  const { comments, isLoading: commentLoading } = useGetComments(
+    Number(postId)
+  );
+  const { post, error, isLoading: postLoading } = useGetPost(Number(postId));
   const {
     deletePost,
     error: deletePostError,
@@ -103,68 +107,77 @@ export default function CommentPage() {
     };
   }, [postId]);
 
-  if (!post || !user) {
-    return null;
-  }
-
   return (
     <div className="flex h-full flex-col">
-      {zoomedImageIndex !== null && (
-        <ImageFullScreen
-          images={post.worryFiles.map((file) => file.url)}
-          initialIndex={zoomedImageIndex}
-          onClose={() => setZoomedImageIndex(null)}
-        />
-      )}
       <TopAppBar title="댓글" />
       <div className="hide-scrollbar flex-1 overflow-y-scroll">
         <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.9rem] pt-[2.1rem]">
-          <div className="flex items-center justify-between px-[2.5rem]">
-            <PostUserProfile
-              nickname={post.user.nickname}
-              age={calculateAgeFromBirthday(post.user.birthDate)}
-              color="gray"
-            />
-            <div className="relative" ref={dropdownRef}>
-              <MoreIcon
-                className="cursor-pointer"
-                onClick={() => setShowMore(!showMore)}
+          {post && user ? (
+            <>
+              <div className="flex items-center justify-between px-[2.5rem]">
+                <PostUserProfile
+                  nickname={post.user.nickname}
+                  age={calculateAgeFromBirthday(post.user.birthDate)}
+                  color="gray"
+                />
+                <div className="relative" ref={dropdownRef}>
+                  <MoreIcon
+                    className="cursor-pointer"
+                    onClick={() => setShowMore(!showMore)}
+                  />
+                  {showMore && (
+                    <Dropdown
+                      options={
+                        user.id === post.user.id
+                          ? [
+                              { value: MENU.Edit, label: '게시물 수정' },
+                              { value: MENU.Delete, label: '게시물 삭제' },
+                            ]
+                          : [{ value: MENU.Report, label: '게시물 신고' }]
+                      }
+                      onSelect={handleDropdownSelect}
+                      className="right-0 top-[2.9rem] mt-0"
+                    />
+                  )}
+                </div>
+              </div>
+              <PostDetailContent title={post.title} content={post.content} />
+              <ImageList
+                images={post.worryFiles.map((file) => file.url)}
+                onClick={(index) => setZoomedImageIndex(index)}
               />
-              {showMore && (
-                <Dropdown
-                  options={
-                    user.id === post.user.id
-                      ? [
-                          { value: MENU.Edit, label: '게시물 수정' },
-                          { value: MENU.Delete, label: '게시물 삭제' },
-                        ]
-                      : [{ value: MENU.Report, label: '게시물 신고' }]
-                  }
-                  onSelect={handleDropdownSelect}
-                  className="right-0 top-[2.9rem] mt-0"
+              {zoomedImageIndex !== null && (
+                <ImageFullScreen
+                  images={post.worryFiles.map((file) => file.url)}
+                  initialIndex={zoomedImageIndex}
+                  onClose={() => setZoomedImageIndex(null)}
                 />
               )}
-            </div>
-          </div>
-          <PostDetailContent title={post.title} content={post.content} />
-          <ImageList
-            images={post.worryFiles.map((file) => file.url)}
-            onClick={(index) => setZoomedImageIndex(index)}
-          />
+            </>
+          ) : (
+            <PostSummarySkeleton />
+          )}
         </div>
-        {comments && (
+        {comments && post ? (
           <CommentList writerId={post.user.id} comments={comments} />
+        ) : (
+          commentLoading &&
+          Array(10)
+            .fill(null)
+            .map((_, i) => <CommentSkeleton key={i} />)
         )}
       </div>
       <CommentInput />
-      <Popup
-        isOpen={deleteModalOpen}
-        text="게시물을 삭제하시겠습니까?"
-        subText="이 작업은 실행 취소할 수 없습니다."
-        buttonLabel="게시물 삭제"
-        onCancel={() => setDeleteModalOpen(false)}
-        onClickButton={() => deletePost(post.id)}
-      />
+      {post && (
+        <Popup
+          isOpen={deleteModalOpen}
+          text="게시물을 삭제하시겠습니까?"
+          subText="이 작업은 실행 취소할 수 없습니다."
+          buttonLabel="게시물 삭제"
+          onCancel={() => setDeleteModalOpen(false)}
+          onClickButton={() => deletePost(post.id)}
+        />
+      )}
     </div>
   );
 }
