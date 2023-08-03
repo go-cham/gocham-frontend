@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Banner from '@/components/Banner';
+import IosInstallGuide from '@/components/IosInstallGuide';
 import Layout from '@/components/layout/Layout';
 import { RouteURL } from '@/constants/route-url';
 import useUpdate from '@/hooks/useUpdate';
@@ -29,6 +30,7 @@ export default function App() {
     <Layout>
       <Banner show={showUpdate} applyUpdate={applyUpdate} />
       <RouteChangeTracker />
+      <IosInstallGuide />
       <Routes>
         <Route path={RouteURL.home} element={<HomePage />} />
         <Route
