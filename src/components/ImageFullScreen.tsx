@@ -19,16 +19,16 @@ export default function ImageFullScreen({
   const [index, setIndex] = useState(initialIndex);
 
   useEffect(() => {
+    history.pushState(null, '');
+  }, []);
+
+  useEffect(() => {
     const handlePopState = () => {
-      history.go(1);
       onClose();
     };
 
     window.addEventListener('popstate', handlePopState);
-    return () => {
-      handlePopState();
-      window.removeEventListener('popstate', handlePopState);
-    };
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   return (
