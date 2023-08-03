@@ -6,6 +6,7 @@ import useDeletePost from '@/apis/hooks/posts/useDeletePost';
 import useGetComments from '@/apis/hooks/posts/useGetComments';
 import useGetPost from '@/apis/hooks/posts/useGetPost';
 import useUser from '@/apis/hooks/users/useUser';
+import ImageFullScreen from '@/components/ImageFullScreen';
 import MoreIcon from '@/components/icons/MoreIcon';
 import TopAppBar from '@/components/layout/TopAppBar';
 import PostUserProfile from '@/components/post/PostUserProfile';
@@ -40,6 +41,7 @@ export default function CommentPage() {
     error: deletePostError,
     isSuccess: deletePostSuccess,
   } = useDeletePost();
+  const [zoomedImageIndex, setZoomedImageIndex] = useState<number | null>(null);
 
   const handleDropdownSelect = (value: number) => {
     if (value === MENU.Report) {
@@ -107,6 +109,13 @@ export default function CommentPage() {
 
   return (
     <div className="flex h-full flex-col">
+      {zoomedImageIndex !== null && (
+        <ImageFullScreen
+          images={post.worryFiles.map((file) => file.url)}
+          initialIndex={zoomedImageIndex}
+          onClose={() => setZoomedImageIndex(null)}
+        />
+      )}
       <TopAppBar title="댓글" />
       <div className="hide-scrollbar flex-1 overflow-y-scroll">
         <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.9rem] pt-[2.1rem]">
@@ -138,7 +147,10 @@ export default function CommentPage() {
             </div>
           </div>
           <PostDetailContent title={post.title} content={post.content} />
-          <ImageList images={post.worryFiles.map((file) => file.url)} />
+          <ImageList
+            images={post.worryFiles.map((file) => file.url)}
+            onClick={(index) => setZoomedImageIndex(index)}
+          />
         </div>
         {comments && (
           <CommentList writerId={post.user.id} comments={comments} />

@@ -5,7 +5,9 @@ import { twMerge } from 'tailwind-merge';
 import useChooseOption from '@/apis/hooks/posts/useChooseOption';
 import useGetMyChoice from '@/apis/hooks/posts/useGetMyChoice';
 import useGetUsersChoices from '@/apis/hooks/posts/useGetUsersChoices';
+import ImageFullScreen from '@/components/ImageFullScreen';
 import CheckIcon from '@/components/icons/CheckIcon';
+import DeleteIcon from '@/components/icons/DeleteIcon';
 import Popup from '@/components/ui/modal/Popup';
 import Snackbar from '@/components/ui/modal/Snackbar';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
@@ -39,6 +41,7 @@ export default function PostVote({
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const voteAnimationId = useAtomValue(voteAnimationIdAtom);
   const useAnimation = options?.find((option) => option.id === voteAnimationId);
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
   const handleButtonSelect = (id: number) => {
     if (!optionIds) {
@@ -175,6 +178,13 @@ export default function PostVote({
 
   return (
     <section className="px-[2.5rem]">
+      {zoomedImage && (
+        <ImageFullScreen
+          images={[zoomedImage]}
+          initialIndex={0}
+          onClose={() => setZoomedImage(null)}
+        />
+      )}
       <div className="mt-[1.2rem] flex flex-col space-y-[1.2rem]">
         {options.map((option) => (
           <button
@@ -205,6 +215,7 @@ export default function PostVote({
                 src={option.image}
                 alt={option.label}
                 className="absolute right-0 aspect-square h-full object-cover"
+                onClick={() => setZoomedImage(option.image)}
               />
             )}
           </button>

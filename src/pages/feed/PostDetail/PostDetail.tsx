@@ -7,6 +7,7 @@ import useDeletePost from '@/apis/hooks/posts/useDeletePost';
 import useGetChoiceOptions from '@/apis/hooks/posts/useGetChoiceOptions';
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
+import ImageFullScreen from '@/components/ImageFullScreen';
 import ClockIcon from '@/components/icons/ClockIcon';
 import MessageIcon from '@/components/icons/MessageIcon';
 import MoreIcon from '@/components/icons/MoreIcon';
@@ -248,8 +249,17 @@ export function PostDetailContent({
   content: string;
   images?: string[] | null;
 }) {
+  const [zoomedImageIndex, setZoomedImageIndex] = useState<number | null>(null);
+
   return (
     <div>
+      {zoomedImageIndex !== null && images && (
+        <ImageFullScreen
+          images={images}
+          initialIndex={zoomedImageIndex}
+          onClose={() => setZoomedImageIndex(null)}
+        />
+      )}
       <div className="px-[2.5rem]">
         <h1 className="mt-[1.3rem] font-system-heading1">{title}</h1>
         <p className="mt-[0.8rem] break-words text-text-subTitle-700 font-system-body3">
@@ -271,15 +281,16 @@ export function PostDetailContent({
               scrollSnapType: 'x mandatory',
             }}
           >
-            {images.map((image) => (
+            {images.map((image, index) => (
               <img
                 key={image}
                 src={image}
                 alt={'게시글이미지'}
-                className="h-[29.3rem] max-w-[29.3rem] rounded-[0.5rem] object-cover"
+                className="h-[29.3rem] max-w-[29.3rem] cursor-pointer rounded-[0.5rem] object-cover"
                 style={{
                   scrollSnapAlign: 'center',
                 }}
+                onClick={() => setZoomedImageIndex(index)}
               />
             ))}
           </div>
