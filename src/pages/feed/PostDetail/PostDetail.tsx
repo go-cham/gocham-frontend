@@ -250,6 +250,31 @@ export function PostDetailContent({
   images?: string[] | null;
 }) {
   const [zoomedImageIndex, setZoomedImageIndex] = useState<number | null>(null);
+  const multipleImagesRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!multipleImagesRef.current) return;
+
+    const allImages =
+      multipleImagesRef.current?.querySelectorAll<HTMLImageElement>('img');
+    Promise.all(
+      Array.from(allImages)
+        .filter((img) => !img.complete)
+        .map(
+          (img) =>
+            new Promise((resolve) => {
+              img.onload = img.onerror = resolve;
+            })
+        )
+    ).then(() => {
+      if (multipleImagesRef.current) {
+        multipleImagesRef.current.scrollTo({
+          left: 0,
+        });
+        multipleImagesRef.current.style.opacity = '1';
+      }
+    });
+  }, [multipleImagesRef.current]);
 
   return (
     <div>
@@ -276,7 +301,8 @@ export function PostDetailContent({
         )}
         {images && images.length > 1 && (
           <div
-            className="flex space-x-[1.3rem] overflow-x-auto px-[1.5rem]"
+            ref={multipleImagesRef}
+            className="flex space-x-[1.3rem] overflow-x-auto px-[1.5rem] opacity-0"
             style={{
               scrollSnapType: 'x mandatory',
             }}
