@@ -215,7 +215,10 @@ export default function PostVote({
                 src={option.image}
                 alt={option.label}
                 className="absolute right-0 aspect-square h-full object-cover"
-                onClick={() => setZoomedImage(option.image)}
+                onClick={(e) => {
+                  setZoomedImage(option.image);
+                  e.stopPropagation();
+                }}
               />
             )}
           </button>
