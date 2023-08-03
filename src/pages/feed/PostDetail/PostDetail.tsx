@@ -133,16 +133,24 @@ export default function PostDetail({ post }: PostDetailProps) {
   const isClosed = remainingTime === 'closed';
 
   const handleShare = () => {
+    const url = `${process.env.REACT_APP_BASE_URL}/feed/${post.id}`;
     if (isMobile) {
-      console.log('mobile');
+      if (window.isSecureContext) {
+        const shareData = {
+          title: post.title,
+          text: '공유 테스트',
+          url,
+        };
+        navigator.share(shareData).catch((e) => console.error(e));
+      } else {
+        alert('HTTPS에서만 공유가 가능합니다!');
+      }
     } else {
       if (window.isSecureContext) {
-        navigator.clipboard
-          .writeText(`${process.env.REACT_APP_BASE_URL}/feed/${post.id}`)
-          .then(() => {
-            setShowCopySnackbar(true);
-            setTimeout(() => setShowCopySnackbar(false), 3000);
-          });
+        navigator.clipboard.writeText(url).then(() => {
+          setShowCopySnackbar(true);
+          setTimeout(() => setShowCopySnackbar(false), 3000);
+        });
       } else {
         alert('HTTPS에서만 복사가 가능합니다!');
       }
