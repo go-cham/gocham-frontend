@@ -40,7 +40,7 @@ export default function useScrollRestoration<U extends HTMLElement>(
   useEffect(() => {
     if (!ref.current) return;
 
-    if (scrollRestoration && scrollRestoration[key]) {
+    if (scrollRestoration && scrollRestoration[key] !== undefined) {
       ref.current?.scrollTo(0, scrollRestoration[key]);
     }
   }, [ref.current]);

@@ -1,4 +1,7 @@
+import { useSetAtom } from 'jotai';
+
 import { PostType } from '@/pages/user/UserPage';
+import { scrollRestorationAtom } from '@/states/scroll-restoration';
 
 interface SelectMyPostTypeProps {
   postType: PostType;
@@ -11,6 +14,8 @@ export default function SelectMyPostType({
   switchPostType,
   postingCount,
 }: SelectMyPostTypeProps) {
+  const setScrollRestoration = useSetAtom(scrollRestorationAtom);
+
   return (
     <div className="mx-[2.5rem] mb-[2.1rem] flex justify-between space-x-[1.2rem] overflow-hidden rounded-[2.35rem] bg-background-subBg-100">
       {['내 게시글', '참여한 게시글'].map((label) => {
@@ -26,11 +31,21 @@ export default function SelectMyPostType({
                 : 'text-text-explain-500'
             }`}
             onClick={() => {
-              sessionStorage.setItem(
-                'selectMyPostTypeLabel',
-                label === '내 게시글' ? 'my' : 'participating'
-              );
+              const selectedType =
+                label === '내 게시글' ? 'my' : 'participating';
+              sessionStorage.setItem('selectMyPostTypeLabel', selectedType);
               switchPostType(label === '내 게시글' ? 'my' : 'participating');
+
+              if (postType === selectedType) {
+                const id = `${selectedType}-posts`;
+                const el = document.getElementById(id);
+                if (el) {
+                  el.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                  });
+                }
+              }
             }}
           >
             {`${label} ${

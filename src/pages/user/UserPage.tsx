@@ -71,6 +71,7 @@ function UserPage() {
       <ul
         className="hide-scrollbar flex flex-1 flex-col items-center space-y-[1.7rem] overflow-y-scroll px-[2.5rem] pb-[16rem]"
         ref={postType === 'my' ? myPostsScrollRef : participatingPostsScrollRef}
+        id={postType === 'my' ? 'my-posts' : 'participating-posts'}
       >
         {posts
           ? posts.map((post, index) => (
