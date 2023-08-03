@@ -1,5 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
@@ -14,6 +15,7 @@ import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Popup from '@/components/ui/modal/Popup';
+import Snackbar from '@/components/ui/modal/Snackbar';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { customColors } from '@/styles/colors';
 import { Post } from '@/types/post';
@@ -44,6 +46,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   const { deletePost, error, isSuccess, isLoading } = useDeletePost();
   const selectedVoteOptionId = useAtomValue(selectedVoteOptionIdAtom);
   const { posts } = useGetPosts({ authorId: user?.id });
+  const [showCopySnackbar, setShowCopySnackbar] = useState(false);
 
   const handleClickMore = () => {
     setShowMore((prevShowMore) => !prevShowMore);
@@ -129,6 +132,23 @@ export default function PostDetail({ post }: PostDetailProps) {
   const remainingTime = getRemainingTime(post.expirationTime);
   const isClosed = remainingTime === 'closed';
 
+  const handleShare = () => {
+    if (isMobile) {
+      console.log('mobile');
+    } else {
+      if (window.isSecureContext) {
+        navigator.clipboard
+          .writeText(`${process.env.REACT_APP_BASE_URL}/feed/${post.id}`)
+          .then(() => {
+            setShowCopySnackbar(true);
+            setTimeout(() => setShowCopySnackbar(false), 3000);
+          });
+      } else {
+        alert('HTTPS에서만 복사가 가능합니다!');
+      }
+    }
+  };
+
   return (
     <div
       className="flex flex-col border-b border-background-dividerLine-300 py-[1.3rem]"
@@ -183,7 +203,7 @@ export default function PostDetail({ post }: PostDetailProps) {
         >
           <MessageIcon />
         </button>
-        <button>
+        <button onClick={handleShare}>
           <ShareIcon />
         </button>
       </div>
@@ -201,6 +221,12 @@ export default function PostDetail({ post }: PostDetailProps) {
         onCancel={() => setDeleteModalOpen(false)}
         onClickButton={handleDeletePost}
       />
+      {showCopySnackbar && (
+        <Snackbar
+          className="absolute bottom-[9.5rem] left-1/2 w-[90%] -translate-x-1/2"
+          text="게시물 링크가 복사되었어요!"
+        />
+      )}
     </div>
   );
 }

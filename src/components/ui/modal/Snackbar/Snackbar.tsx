@@ -18,7 +18,7 @@ export default function Snackbar({
   return (
     <div
       className={twMerge(
-        'flex w-[34rem] items-center rounded-[0.4rem] bg-text-subTitle-700 px-[1.5rem] py-[1.1rem]',
+        'z-[1000] flex w-[34rem] items-center rounded-[0.4rem] bg-text-subTitle-700 px-[1.5rem] py-[1.1rem]',
         actionText ? 'justify-between' : 'justify-center',
         className
       )}
