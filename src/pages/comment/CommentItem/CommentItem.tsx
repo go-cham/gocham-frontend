@@ -46,6 +46,7 @@ export default function CommentItem({
       replyingTo: {
         id: user.id,
         nickname: user.nickname,
+        commentId,
       },
       parentCommentId: parentCommentId || commentId || null,
     });
@@ -80,7 +81,10 @@ export default function CommentItem({
   };
 
   return (
-    <div className="mb-[1.5rem] mt-[1.7rem] flex flex-col px-[1.5rem]">
+    <div
+      id={`comment-${commentId}`}
+      className="flex flex-col px-[1.5rem] pb-[1.5rem] pt-[1.7rem]"
+    >
       <CommentHeader
         nickname={user.nickname}
         age={user.age}

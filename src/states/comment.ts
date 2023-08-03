@@ -5,6 +5,7 @@ interface CommentStateAtom {
   replyingTo: {
     id: number;
     nickname: string;
+    commentId: number;
   } | null;
   parentCommentId: number | null;
 }

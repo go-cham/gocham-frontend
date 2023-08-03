@@ -75,8 +75,33 @@ export default function CommentInput() {
     }
   }, [isSuccess]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (commentState.replyingTo?.commentId) {
+        const comment = document.getElementById(
+          `comment-${commentState.replyingTo.commentId}`
+        );
+        const input = document.getElementById('comment-input-wrapper');
+        if (comment && input) {
+          const commentBottom = comment.getBoundingClientRect().bottom;
+          const inputTop = input.getBoundingClientRect().top;
+
+          if (commentBottom > inputTop) {
+            const page = document.getElementById('comment-page');
+            if (page) {
+              page.scrollBy({
+                top: commentBottom - inputTop,
+              });
+            }
+          }
+        }
+      }
+    }, 200);
+  }, [commentState.replyingTo?.commentId]);
+
   return (
     <form
+      id="comment-input-wrapper"
       onSubmit={(e) => e.preventDefault()}
       className="shadow-dock flex w-full items-center space-x-[1.3rem] bg-white px-[1.5rem] pb-[1.1rem] pt-[1.5rem]"
     >

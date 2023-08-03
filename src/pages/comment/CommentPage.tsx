@@ -1,4 +1,4 @@
-import { useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -29,17 +29,17 @@ enum MENU {
 }
 
 export default function CommentPage() {
-  const setCommentState = useSetAtom(commentStateAtom);
+  const [commentState, setCommentState] = useAtom(commentStateAtom);
   const navigate = useNavigate();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [showMore, setShowMore] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const { user, isLoading: userLoading } = useUser();
+  const { user } = useUser();
   const { id: postId } = useParams();
   const { comments, isLoading: commentLoading } = useGetComments(
     Number(postId)
   );
-  const { post, error, isLoading: postLoading } = useGetPost(Number(postId));
+  const { post, error } = useGetPost(Number(postId));
   const {
     deletePost,
     error: deletePostError,
@@ -110,7 +110,10 @@ export default function CommentPage() {
   return (
     <div className="flex h-full flex-col">
       <TopAppBar title="댓글" />
-      <div className="hide-scrollbar flex-1 overflow-y-scroll">
+      <div
+        id="comment-page"
+        className="hide-scrollbar flex-1 overflow-y-scroll"
+      >
         <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.9rem] pt-[2.1rem]">
           {post && user ? (
             <>
