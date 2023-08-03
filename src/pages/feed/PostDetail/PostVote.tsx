@@ -98,6 +98,13 @@ export default function PostVote({
       .sort((a, b) => b.userWorryChoiceCount - a.userWorryChoiceCount)[0].label;
     return (
       <section className="mt-[1.1rem] px-[2.5rem]">
+        {zoomedImage && (
+          <ImageFullScreen
+            images={[zoomedImage]}
+            initialIndex={0}
+            onClose={() => setZoomedImage(null)}
+          />
+        )}
         <div className="space-y-[2.1rem] rounded-[0.5rem] border border-background-dividerLine-300 px-[1.7rem] py-[1.5rem]">
           {options.map((option) => {
             const count =
@@ -124,7 +131,11 @@ export default function PostVote({
                     <img
                       src={option.image}
                       alt={option.label}
-                      className="absolute right-0 aspect-square h-full object-cover"
+                      className="absolute right-0 aspect-square h-full cursor-pointer object-cover"
+                      onClick={(e) => {
+                        setZoomedImage(option.image);
+                        e.stopPropagation();
+                      }}
                     />
                   )}
                 </div>
@@ -157,7 +168,7 @@ export default function PostVote({
                     className={`absolute -top-[4.2rem] ${
                       voteAnimationId === option.id
                         ? 'opacity-100'
-                        : 'opacity-0'
+                        : 'hidden opacity-0'
                     } ${
                       !voteAnimationId && 'opacity-0'
                     } transition-all duration-[3000]`}
