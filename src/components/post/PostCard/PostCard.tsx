@@ -1,3 +1,4 @@
+import { useSetAtom } from 'jotai';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -5,6 +6,7 @@ import PostCardContent from '@/components/post/PostCard/PostCardContent';
 import PostCardMeta from '@/components/post/PostCard/PostCardMeta';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import { RouteURL } from '@/constants/route-url';
+import { scrollRestorationAtom } from '@/states/scroll-restoration';
 import { Post } from '@/types/post';
 import {
   calculateAge,
@@ -25,7 +27,12 @@ export default function PostCard({
   showProfile = true,
 }: PostCardProps) {
   const navigate = useNavigate();
+  const setScrollRestoration = useSetAtom(scrollRestorationAtom);
   const handlePostClick = () => {
+    setScrollRestoration((prevScrollRestoration) => ({
+      ...prevScrollRestoration,
+      feed: 0,
+    }));
     if (routeUrl) {
       navigate(`${RouteURL.feed}/${post.id}/${routeUrl}`);
     } else {

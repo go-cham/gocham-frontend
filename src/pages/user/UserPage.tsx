@@ -11,6 +11,7 @@ import UserProfile from '@/components/user/UserProfile';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
 import { UserType } from '@/constants/user-type';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import SettingIcon from '@/images/Profile/settings.svg';
 
 export type PostType = 'my' | 'participating';
@@ -38,6 +39,9 @@ function UserPage() {
   });
   const posts = postType === 'my' ? myPosts : participatingPosts;
   const ref = postType === 'my' ? myPostsRef : participatingPostsRef;
+  const myPostsScrollRef = useScrollRestoration<HTMLUListElement>('my');
+  const participatingPostsScrollRef =
+    useScrollRestoration<HTMLUListElement>('participating');
 
   const postingCount = {
     written: myPostsTotal,
@@ -64,7 +68,10 @@ function UserPage() {
         switchPostType={switchPostType}
         postingCount={postingCount}
       />
-      <ul className="hide-scrollbar flex flex-1 flex-col items-center space-y-[1.7rem] overflow-y-scroll px-[2.5rem] pb-[16rem]">
+      <ul
+        className="hide-scrollbar flex flex-1 flex-col items-center space-y-[1.7rem] overflow-y-scroll px-[2.5rem] pb-[16rem]"
+        ref={postType === 'my' ? myPostsScrollRef : participatingPostsScrollRef}
+      >
         {posts
           ? posts.map((post, index) => (
               <li

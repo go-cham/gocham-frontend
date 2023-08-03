@@ -10,6 +10,7 @@ import FloatingButton from '@/components/ui/buttons/FloatingButton';
 import PostDetailSkeleton from '@/components/ui/skeleton/PostDetailSkeleton';
 import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { voteAnimationIdAtom } from '@/states/vote-animation';
 
@@ -29,6 +30,7 @@ function FeedPage() {
     selectedVoteOptionIdAtom
   );
   const setVoteAnimationId = useSetAtom(voteAnimationIdAtom);
+  const scrollRef = useScrollRestoration<HTMLUListElement>('feed');
 
   const handleVote = async () => {
     if (user?.id && selectedVoteOptionId) {
@@ -64,6 +66,7 @@ function FeedPage() {
         <ul
           className="hide-scrollbar flex-1 overflow-y-scroll pt-[0.9rem]"
           style={{ scrollSnapType: 'y proximity', scrollSnapAlign: 'start' }}
+          ref={scrollRef}
         >
           {posts.map((post, index) => (
             <li
