@@ -1,3 +1,4 @@
+import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +10,7 @@ import Popup from '@/components/ui/modal/Popup';
 import withAuth from '@/components/withAuth';
 import PostUploadSuccess from '@/pages/write/PostUploadSuccess';
 import PostUploading from '@/pages/write/PostUploading';
+import { scrollRestorationAtom } from '@/states/scroll-restoration';
 import { PostFormData } from '@/types/post';
 import getFutureDateTime from '@/utils/getFutureDateTime';
 
@@ -40,6 +42,7 @@ function WritePage() {
       setHasChanges(false);
     }
   };
+  const setScrollRestoration = useSetAtom(scrollRestorationAtom);
 
   const handleUpload = async (data: PostFormData) => {
     const { title, content, images, deadline, categoryId, voteOptions } = data;
@@ -85,6 +88,12 @@ function WritePage() {
   }
 
   if (isSuccess) {
+    setScrollRestoration((prevScrollRestoration) => ({
+      ...prevScrollRestoration,
+      my: 0,
+    }));
+    sessionStorage.setItem('selectMyPostTypeLabel', 'my');
+
     return <PostUploadSuccess />;
   }
 
