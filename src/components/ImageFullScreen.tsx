@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { useNavigate } from 'react-router-dom';
 
 import DeleteIcon from '@/components/icons/DeleteIcon';
 
@@ -16,6 +17,19 @@ export default function ImageFullScreen({
   onClose,
 }: ImageFullScreenProps) {
   const [index, setIndex] = useState(initialIndex);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      history.go(1);
+      onClose();
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      handlePopState();
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   return (
     <div className="fixed left-0 top-0 z-[100] h-[100dvh] w-screen bg-text-title-900">
