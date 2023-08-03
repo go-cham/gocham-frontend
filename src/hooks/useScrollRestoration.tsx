@@ -12,6 +12,13 @@ export default function useScrollRestoration<U extends HTMLElement>(
   const ref = useRef<U | null>(null);
 
   useEffect(() => {
+    setScrollRestoration((prevScrollRestoration) => ({
+      ...prevScrollRestoration,
+      [key]: 0,
+    }));
+  }, []);
+
+  useEffect(() => {
     if (!ref.current) return;
 
     const handleScroll = () => {
@@ -19,16 +26,10 @@ export default function useScrollRestoration<U extends HTMLElement>(
 
       const height = ref.current.scrollTop;
 
-      if (!scrollRestoration) {
-        setScrollRestoration({
-          [key]: height,
-        });
-      } else {
-        setScrollRestoration((prevScrollRestoration) => ({
-          ...prevScrollRestoration,
-          [key]: height,
-        }));
-      }
+      setScrollRestoration((prevScrollRestoration) => ({
+        ...prevScrollRestoration,
+        [key]: height,
+      }));
     };
 
     ref.current.addEventListener('scroll', handleScroll);
