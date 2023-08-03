@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 
+import useUser from '@/apis/hooks/users/useUser';
 import Snackbar from '@/components/ui/modal/Snackbar';
 import { isInStandaloneMode, isIos, isSafari } from '@/utils/environment';
 
 export default function IosInstallGuide() {
   const [showGuide, setShowGuide] = useState(false);
+  const { user } = useUser();
 
   const localStorageKey = 'visited';
   const isFirstVisit = () => {
@@ -12,19 +14,26 @@ export default function IosInstallGuide() {
   };
 
   useEffect(() => {
-    if (isIos() && !isInStandaloneMode() && isSafari()) {
-      if (isFirstVisit()) {
-        setShowGuide(true);
-        localStorage.setItem(localStorageKey, 'true');
-      }
+    const isUserRegistered = !!user?.nickname;
+    if (
+      isIos() &&
+      !isInStandaloneMode() &&
+      isSafari() &&
+      isUserRegistered &&
+      isFirstVisit()
+    ) {
+      setShowGuide(true);
     }
-  }, []);
+  }, [user]);
 
   return showGuide ? (
     <Snackbar
       className="absolute bottom-[10rem] left-1/2 z-[1000] -translate-x-1/2"
       actionText="확인"
-      onClick={() => setShowGuide(false)}
+      onClick={() => {
+        setShowGuide(false);
+        localStorage.setItem(localStorageKey, 'true');
+      }}
     >
       하단의
       <ShareIcon />
