@@ -2,6 +2,7 @@ import { useAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import useAddComment from '@/apis/hooks/posts/useAddComment';
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
 import useGetComments from '@/apis/hooks/posts/useGetComments';
 import useGetPost from '@/apis/hooks/posts/useGetPost';
@@ -46,6 +47,7 @@ export default function CommentPage() {
     isSuccess: deletePostSuccess,
   } = useDeletePost();
   const [zoomedImageIndex, setZoomedImageIndex] = useState<number | null>(null);
+  const { addComment, isSuccess } = useAddComment();
 
   const handleDropdownSelect = (value: number) => {
     if (value === MENU.Report) {
@@ -63,6 +65,38 @@ export default function CommentPage() {
         }
       }
       setDeleteModalOpen(true);
+    }
+  };
+
+  const handleSubmit = () => {
+    const el = document.getElementById('comment-input');
+    if (el && user) {
+      const rawContent = el.textContent as string;
+
+      const regex = /^@([A-Za-z가-힣0-9]+)\s((.|\n)*)/;
+      const matches = rawContent.match(regex);
+
+      let content = '';
+      let nickname = '';
+      if (matches) {
+        nickname = matches[1].trimEnd();
+        content = matches[2].trimEnd();
+      } else {
+        content = rawContent.trimEnd();
+      }
+
+      const isReply =
+        nickname && nickname === commentState.replyingTo?.nickname;
+
+      if (commentState.postId && content) {
+        addComment({
+          userId: user.id,
+          content,
+          worryId: commentState.postId,
+          mentionUserId: isReply ? commentState.replyingTo?.id || null : null,
+          nestingReplyId: isReply ? commentState.parentCommentId : null,
+        });
+      }
     }
   };
 
@@ -106,6 +140,19 @@ export default function CommentPage() {
       }));
     };
   }, [postId]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      const el = document.getElementById('comment-input');
+      if (el) {
+        el.innerHTML = '';
+        setCommentState((prevCommentState) => ({
+          ...prevCommentState,
+          inputActive: false,
+        }));
+      }
+    }
+  }, [isSuccess]);
 
   return (
     <div className="flex h-full flex-col">
@@ -170,7 +217,7 @@ export default function CommentPage() {
             .map((_, i) => <CommentSkeleton key={i} />)
         )}
       </div>
-      <CommentInput />
+      <CommentInput onSubmit={handleSubmit} />
       {post && (
         <Popup
           isOpen={deleteModalOpen}

@@ -8,10 +8,12 @@ interface CommentStateAtom {
     commentId: number;
   } | null;
   parentCommentId: number | null;
+  inputActive: boolean;
 }
 
 export const commentStateAtom = atom<CommentStateAtom>({
   postId: null,
   replyingTo: null,
   parentCommentId: null,
+  inputActive: false,
 });
