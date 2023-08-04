@@ -1,5 +1,5 @@
-import { useAtom, useAtomValue } from 'jotai';
-import { KeyboardEvent, useEffect, useState } from 'react';
+import { useAtom } from 'jotai';
+import { KeyboardEvent, useEffect } from 'react';
 
 import AddCommentIcon from '@/components/icons/AddCommentIcon';
 import { commentStateAtom } from '@/states/comment';

@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { useAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -13,6 +14,7 @@ import TopAppBar from '@/components/layout/TopAppBar';
 import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
 import Popup from '@/components/ui/modal/Popup/Popup';
+import Snackbar from '@/components/ui/modal/Snackbar';
 import CommentSkeleton from '@/components/ui/skeleton/CommentSkeleton';
 import PostSummarySkeleton from '@/components/ui/skeleton/PostSummarySkeleton';
 import CommentInput from '@/pages/comment/CommentInput';
@@ -40,14 +42,15 @@ export default function CommentPage() {
   const { comments, isLoading: commentLoading } = useGetComments(
     Number(postId)
   );
-  const { post, error } = useGetPost(Number(postId));
+  const { post } = useGetPost(Number(postId));
   const {
     deletePost,
     error: deletePostError,
     isSuccess: deletePostSuccess,
   } = useDeletePost();
   const [zoomedImageIndex, setZoomedImageIndex] = useState<number | null>(null);
-  const { addComment, isSuccess } = useAddComment();
+  const { addComment, isSuccess, error } = useAddComment();
+  const [showErrorSnackbar, setShowErrorSnackbar] = useState(false);
 
   const handleDropdownSelect = (value: number) => {
     if (value === MENU.Report) {
@@ -151,8 +154,19 @@ export default function CommentPage() {
           inputActive: false,
         }));
       }
+    } else if (error) {
+      if (error instanceof AxiosError && error.response?.status === 400) {
+        if (error.response.data.errorCode === 'IS_BAD_WORD') {
+          const el = document.getElementById('comment-input');
+          setShowErrorSnackbar(true);
+          setTimeout(() => {
+            setShowErrorSnackbar(false);
+          }, 3000);
+          el?.focus();
+        }
+      }
     }
-  }, [isSuccess]);
+  }, [isSuccess, error]);
 
   return (
     <div className="flex h-full flex-col">
@@ -218,6 +232,12 @@ export default function CommentPage() {
         )}
       </div>
       <CommentInput onSubmit={handleSubmit} />
+      {showErrorSnackbar && (
+        <Snackbar
+          text="금칙어 입력이 불가합니다."
+          className="absolute bottom-[8rem] left-1/2 -translate-x-1/2"
+        />
+      )}
       {post && (
         <Popup
           isOpen={deleteModalOpen}
