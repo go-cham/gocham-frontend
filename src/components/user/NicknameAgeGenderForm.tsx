@@ -51,12 +51,17 @@ export default function NicknameAgeGenderForm({
     let error = validateNickname(nickname);
     if (!error) {
       try {
-        await axiosInstance.get(`/user/${user?.id}/duplicated-nickname`, {
+        await axiosInstance.get(`/user/${user?.id}/validate-nickname`, {
           params: { nickname },
         });
       } catch (e) {
         if (e instanceof AxiosError && e.response?.status === 400) {
-          error = '이미 존재하는 닉네임입니다.';
+          const errorCode = e.response.data.errorCode;
+          if (errorCode === 'IS_DUPLICATED_NICKNAME') {
+            error = '이미 존재하는 닉네임입니다.';
+          } else if (errorCode === 'IS_BAD_WORD') {
+            error = '금칙어 입력이 불가합니다.';
+          }
         }
       }
     }
