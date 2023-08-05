@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import { KeyboardEvent, useEffect } from 'react';
+import { KeyboardEvent as ReactKeyboardEvent, useEffect } from 'react';
 
 import AddCommentIcon from '@/components/icons/AddCommentIcon';
 import { commentStateAtom } from '@/states/comment';
@@ -15,6 +15,19 @@ export default function CommentInput({ onSubmit }: CommentInputProps) {
     const el = document.getElementById('comment-input');
 
     if (el) {
+      const content =
+        el.childNodes[el.childNodes.length - 1]?.textContent || '';
+
+      if (content.length > 280) {
+        el.textContent = content.slice(0, -1);
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        const selection = window.getSelection()!;
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+
       setCommentState({
         ...commentState,
         inputActive: !!el.textContent?.trimEnd(),
@@ -22,7 +35,7 @@ export default function CommentInput({ onSubmit }: CommentInputProps) {
     }
   };
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     if (e.nativeEvent.isComposing || e.keyCode === 229) return;
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -53,6 +66,26 @@ export default function CommentInput({ onSubmit }: CommentInputProps) {
       }
     }, 200);
   }, [commentState.replyingTo?.commentId]);
+
+  useEffect(() => {
+    const el = document.getElementById('comment-input');
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'Backspace' && el) {
+        const content = el.childNodes[el.childNodes.length - 1]?.textContent;
+        if (!content) {
+          el.innerHTML = '';
+          e.preventDefault();
+        }
+      }
+    };
+
+    if (el) {
+      el.addEventListener('keydown', handleKeydown);
+    }
+    return () => {
+      el?.removeEventListener('keydown', handleKeydown);
+    };
+  }, []);
 
   return (
     <form

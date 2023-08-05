@@ -55,11 +55,13 @@ export default function CommentItem({
     if (el) {
       el.innerHTML = '';
       const tagEl = document.createElement('span');
+      tagEl.style.display = 'inline';
       const text = document.createTextNode(`@${user.nickname}\u00A0`);
       tagEl.appendChild(text);
       tagEl.contentEditable = 'false';
       tagEl.className = 'text-mainSub-main-500';
       el.appendChild(tagEl);
+      el.appendChild(document.createTextNode(''));
 
       const range = document.createRange();
       range.selectNodeContents(el);
