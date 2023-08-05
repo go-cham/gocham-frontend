@@ -200,14 +200,18 @@ export default function PostDetail({ post }: PostDetailProps) {
       <div className="my-[1.3rem] flex space-x-[0.7rem] px-[2.5rem]">
         <button
           onClick={() => {
-            setTimeout(() => {
-              let el: HTMLElement | null = null;
-              while (!el) {
-                el = document.getElementById('comment-input');
-              }
-              el.focus();
-            }, 100);
-            navigate(`/feed/${post.id}/comment`);
+            // setTimeout(() => {
+            //   let el: HTMLElement | null = null;
+            //   while (!el) {
+            //     el = document.getElementById('comment-input');
+            //   }
+            //   el.focus();
+            // }, 100);
+            navigate(`/feed/${post.id}/comment`, {
+              state: {
+                focus: true,
+              },
+            });
           }}
         >
           <MessageIcon />

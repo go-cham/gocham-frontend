@@ -1,5 +1,6 @@
 import { useAtom } from 'jotai';
 import { KeyboardEvent as ReactKeyboardEvent, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import AddCommentIcon from '@/components/icons/AddCommentIcon';
 import { commentStateAtom } from '@/states/comment';
@@ -10,6 +11,7 @@ interface CommentInputProps {
 
 export default function CommentInput({ onSubmit }: CommentInputProps) {
   const [commentState, setCommentState] = useAtom(commentStateAtom);
+  const location = useLocation();
 
   const handleInput = () => {
     const el = document.getElementById('comment-input');
@@ -85,6 +87,13 @@ export default function CommentInput({ onSubmit }: CommentInputProps) {
     return () => {
       el?.removeEventListener('keydown', handleKeydown);
     };
+  }, []);
+
+  useEffect(() => {
+    if (location.state?.focus) {
+      const el = document.getElementById('comment-input');
+      el?.focus();
+    }
   }, []);
 
   return (
