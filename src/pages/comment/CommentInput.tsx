@@ -4,6 +4,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useLocation } from 'react-router-dom';
 
 import AddCommentIcon from '@/components/icons/AddCommentIcon';
@@ -106,7 +107,7 @@ export default function CommentInput({ onSubmit }: CommentInputProps) {
       id="comment-input-wrapper"
       onSubmit={(e) => e.preventDefault()}
       className={`shadow-dock flex w-full touch-none items-center space-x-[1.3rem] bg-white px-[1.5rem] pt-[1.5rem] ${
-        isFocused ? 'pb-[1.1rem]' : 'pb-[5.1rem]'
+        isMobile && isFocused ? 'pb-[1.1rem]' : 'pb-[5.1rem]'
       }`}
     >
       <div
