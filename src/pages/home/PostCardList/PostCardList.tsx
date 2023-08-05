@@ -15,11 +15,11 @@ export default function PostCardList({
   participatingUserId,
 }: PostCardListProps) {
   const { user } = useUser();
-  const { posts, ref, error, isLoading } = useGetPosts({
+  const { posts, ref, error } = useGetPosts({
     authorId,
     participatingUserId,
   });
-  usePullToRefresh();
+  const ptfRef = usePullToRefresh<HTMLUListElement>();
 
   if (error) {
     // TODO: 에러 처리
@@ -30,7 +30,7 @@ export default function PostCardList({
     // 로딩 중
     return (
       <ul
-        id="pull-to-refresh"
+        ref={ptfRef}
         className="flex w-full flex-col items-center space-y-[1.7rem] px-[2.5rem] pt-[8.5rem]"
       >
         {Array(10)
@@ -46,7 +46,7 @@ export default function PostCardList({
 
   return (
     <ul
-      id="pull-to-refresh"
+      ref={ptfRef}
       className="hide-scrollbar flex w-full flex-col items-center space-y-[1.7rem] overflow-y-scroll overscroll-y-none px-[2.5rem] pb-[12rem] pt-[8.5rem]"
     >
       {posts.map((post, index) => (
