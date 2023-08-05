@@ -12,7 +12,7 @@ export default function PostCardMeta({
   onClickComment,
 }: PostCardMetaProps) {
   return (
-    <div className="flex items-end justify-between">
+    <div className="mt-[0.7rem] flex items-end justify-between">
       <span
         className="cursor-pointer text-text-explain-500 font-system-body2"
         onClick={onClickComment}

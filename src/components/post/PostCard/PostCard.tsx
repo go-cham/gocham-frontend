@@ -50,7 +50,7 @@ export default function PostCard({
   };
   return (
     <section
-      className="flex w-full cursor-pointer flex-col justify-between rounded-[12px] bg-white p-[1.7rem] shadow-feed"
+      className="flex w-full cursor-pointer flex-col justify-between rounded-[12px] bg-white px-[1.7rem] py-[1.3rem] shadow-feed"
       onClick={handlePostClick}
     >
       {showProfile && (

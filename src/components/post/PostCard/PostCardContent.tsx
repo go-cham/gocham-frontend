@@ -19,8 +19,8 @@ export default function PostCardContent({
     setImageLoading(false);
   };
   return (
-    <div className="relative -top-[0.4rem] flex h-[6.4rem] items-center">
-      <div className="flex-1 space-y-[0.9rem] overflow-hidden">
+    <div className="relative flex h-[6.4rem] items-center">
+      <div className="flex-1 space-y-[0.7rem] overflow-hidden">
         <h1 className="truncate align-middle font-system-heading2">{title}</h1>
         <p className="h-[1.6rem] truncate align-middle text-text-explain-500 font-system-body1">
           {formatText(content)}
