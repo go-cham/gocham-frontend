@@ -19,7 +19,9 @@ export default function PostCardList({
     authorId,
     participatingUserId,
   });
-  const ptfRef = usePullToRefresh<HTMLUListElement>();
+  const ptfRef = usePullToRefresh<HTMLUListElement>({
+    topOffset: 80,
+  });
 
   if (error) {
     // TODO: 에러 처리

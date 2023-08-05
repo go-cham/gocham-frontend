@@ -4,16 +4,28 @@ import ReactDOMServer from 'react-dom/server';
 
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
-export default function usePullToRefresh<U extends Element>() {
+export default function usePullToRefresh<U extends Element>(
+  {
+    topOffset = 0,
+  }: {
+    topOffset?: number;
+  } = { topOffset: 0 }
+) {
   const ref = useRef<U | null>(null);
 
   useEffect(() => {
     if (!ref.current) return;
 
+    console.log(ref.current?.id);
+    if (!ref.current.id) {
+      ref.current.id = 'ptr';
+    }
+
     PullToRefresh.init({
       iconArrow: ' ',
-      mainElement: ref.current.id,
-      triggerElement: ref.current.id,
+      distMax: 150,
+      mainElement: `#${ref.current.id}`,
+      triggerElement: `#${ref.current.id}`,
       iconRefreshing: ReactDOMServer.renderToString(
         <LoadingSpinner className="mx-auto scale-75" />
       ),
@@ -32,6 +44,7 @@ export default function usePullToRefresh<U extends Element>() {
         location.reload();
       },
       getStyles() {
+        if (!ref.current) return '';
         return `
       .__PREFIX__ptr {
           pointer-events: none;
@@ -47,7 +60,7 @@ export default function usePullToRefresh<U extends Element>() {
           align-items: flex-end;
           align-content: stretch;
           position: absolute;
-          top: 7rem;
+          top: ${ref.current?.getBoundingClientRect().top + 10 + topOffset}px;
           z-index: 9999;
         }
 
@@ -61,7 +74,7 @@ export default function usePullToRefresh<U extends Element>() {
         }
 
       .__PREFIX__text {
-          margin-top: .33em;
+          margin-top: 0.33em;
           color: rgba(0, 0, 0, 0.3);
         }
 
