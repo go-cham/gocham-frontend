@@ -70,11 +70,8 @@ export default function PostDetail({ post }: PostDetailProps) {
     setShowMore(false);
   };
 
-  const handleDeletePost = async () => {
-    await deletePost(post.id);
-    if (params.route === 'my' && posts?.length === 1) {
-      navigate('/user');
-    }
+  const handleDeletePost = () => {
+    deletePost(post.id);
   };
 
   const isMyPost = user?.id === post.user.id;
@@ -105,6 +102,9 @@ export default function PostDetail({ post }: PostDetailProps) {
   useEffect(() => {
     if (isSuccess) {
       alert('게시물이 정상적으로 삭제되었습니다.');
+      if (params.route === 'my' && posts?.length === 1) {
+        navigate('/user');
+      }
     }
     if (error) {
       alert('오류가 발생하였습니다.');
