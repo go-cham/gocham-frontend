@@ -1,5 +1,3 @@
-import PullToRefresh from 'pulltorefreshjs';
-import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Banner from '@/components/Banner';
@@ -28,7 +26,6 @@ import CommentReportPage from './pages/report/CommentReportPage';
 
 export default function App() {
   const { showUpdate, applyUpdate } = useUpdate();
-  usePullToRefresh();
 
   return (
     <Layout>

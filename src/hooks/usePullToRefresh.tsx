@@ -1,13 +1,25 @@
 import PullToRefresh from 'pulltorefreshjs';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 export default function usePullToRefresh() {
+  const ref = useRef<Element | null>(null);
+
   useEffect(() => {
+    if (ref.current) return;
+
+    ref.current = document.querySelector('#pull-to-refresh');
+  }, [ref.current]);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
     PullToRefresh.init({
       iconArrow: ' ',
+      mainElement: '#pull-to-refresh',
+      triggerElement: '#pull-to-refresh',
       iconRefreshing: ReactDOMServer.renderToString(
         <LoadingSpinner className="mx-auto scale-75" />
       ),
@@ -16,6 +28,12 @@ export default function usePullToRefresh() {
       ),
       instructionsPullToRefresh: ' ',
       instructionsRefreshing: ' ',
+      shouldPullToRefresh() {
+        const el = document.querySelector('#pull-to-refresh');
+        if (!el) return false;
+
+        return el.scrollTop <= 0;
+      },
       onRefresh() {
         location.reload();
       },
@@ -34,7 +52,9 @@ export default function usePullToRefresh() {
           display: flex;
           align-items: flex-end;
           align-content: stretch;
-          background-color: white;
+          position: absolute;
+          top: 7rem;
+          z-index: 9999;
         }
 
       .__PREFIX__box {
@@ -67,5 +87,5 @@ export default function usePullToRefresh() {
       `;
       },
     });
-  }, []);
+  }, [ref.current]);
 }

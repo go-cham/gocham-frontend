@@ -6,7 +6,6 @@ html {
   @apply text-text-title-900;
   font-family: Pretendard, sans-serif;
   height: 100%;
-  overscroll-behavior-y: contain;
 }
 
 body {
@@ -37,6 +36,7 @@ input[type='number'] {
 }
 
 .hide-scrollbar {
+  -ms-overflow-style: none;
   scrollbar-width: none;
 }
 

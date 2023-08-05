@@ -14,12 +14,10 @@ export default function HomePage() {
         ref.current = el;
         scrollRef.current = el;
       }}
-      className="hide-scrollbar flex h-full flex-col overflow-y-scroll"
+      className="flex h-full flex-col"
     >
       <HomeHeader onClickLogo={scrollToTop} />
-      <main className="px-[2.5rem] pb-[10rem] pt-[0.8rem]">
-        <PostCardList />
-      </main>
+      <PostCardList />
       <BottomAppBar currentPage="home" onScrollToTop={scrollToTop} />
     </div>
   );
