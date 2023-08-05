@@ -30,7 +30,7 @@ export default function TopAppBar({
   };
 
   return (
-    <header className="relative flex h-[4.4rem] items-center justify-center bg-white shadow-header">
+    <header className="relative flex h-[4.4rem] w-full items-center justify-center bg-white shadow-header">
       <BackIcon
         className="absolute left-[0.9rem] h-full cursor-pointer"
         onClick={handleClickBackButton}

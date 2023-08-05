@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import useUser from '@/apis/hooks/users/useUser';
 import Snackbar from '@/components/ui/modal/Snackbar';
-import { isInStandaloneMode, isIos, isSafari } from '@/utils/environment';
+import { isIOS, isInStandaloneMode, isSafari } from '@/utils/environment';
 
 export default function IosInstallGuide() {
   const [showGuide, setShowGuide] = useState(false);
@@ -16,7 +16,7 @@ export default function IosInstallGuide() {
   useEffect(() => {
     const isUserRegistered = !!user?.nickname;
     if (
-      isIos() &&
+      isIOS() &&
       !isInStandaloneMode() &&
       isSafari() &&
       isUserRegistered &&

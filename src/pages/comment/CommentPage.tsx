@@ -173,7 +173,7 @@ export default function CommentPage() {
       <TopAppBar title="댓글" />
       <div
         id="comment-page"
-        className="hide-scrollbar flex-1 overflow-y-scroll"
+        className="hide-scrollbar flex-1 overflow-y-scroll overscroll-y-auto"
       >
         <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.9rem] pt-[2.1rem]">
           {post && user ? (

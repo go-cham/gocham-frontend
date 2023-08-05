@@ -1,5 +1,9 @@
 import { useAtom } from 'jotai';
-import { KeyboardEvent as ReactKeyboardEvent, useEffect } from 'react';
+import {
+  KeyboardEvent as ReactKeyboardEvent,
+  useEffect,
+  useState,
+} from 'react';
 import { useLocation } from 'react-router-dom';
 
 import AddCommentIcon from '@/components/icons/AddCommentIcon';
@@ -12,6 +16,7 @@ interface CommentInputProps {
 export default function CommentInput({ onSubmit }: CommentInputProps) {
   const [commentState, setCommentState] = useAtom(commentStateAtom);
   const location = useLocation();
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleInput = () => {
     const el = document.getElementById('comment-input');
@@ -100,21 +105,29 @@ export default function CommentInput({ onSubmit }: CommentInputProps) {
     <form
       id="comment-input-wrapper"
       onSubmit={(e) => e.preventDefault()}
-      className="shadow-dock flex w-full items-center space-x-[1.3rem] bg-white px-[1.5rem] pb-[5.1rem] pt-[1.5rem] focus-within:pb-[1.1rem]"
+      className={`shadow-dock flex w-full touch-none items-center space-x-[1.3rem] bg-white px-[1.5rem] pt-[1.5rem] ${
+        isFocused ? 'pb-[1.1rem]' : 'pb-[5.1rem]'
+      }`}
     >
       <div
         id="comment-input"
         contentEditable={true}
-        className="hide-scrollbar h-[4.4rem] flex-1 overflow-y-scroll whitespace-pre rounded-[0.5rem] border px-[1.3rem] pt-[0.9rem] outline-none focus:border-text-explain-500"
+        className="hide-scrollbar h-[4.4rem] flex-1 touch-auto overflow-y-scroll whitespace-pre rounded-[0.5rem] border px-[1.3rem] pt-[0.9rem] outline-none focus:border-text-explain-500"
         onKeyDown={handleKeyDown}
         onInput={handleInput}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() =>
+          setTimeout(() => {
+            setIsFocused(false);
+          }, 10)
+        }
       ></div>
       <button
         onClick={onSubmit}
-        className={`h-[3.6rem] w-[3.6rem] rounded-full ${
+        className={`h-[3.6rem] w-[3.6rem] touch-auto rounded-full ${
           commentState.inputActive
             ? 'bg-mainSub-main-500'
-            : 'bg-background-button-300'
+            : 'pointer-events-none bg-background-button-300'
         }`}
       >
         <AddCommentIcon />
