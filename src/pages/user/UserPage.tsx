@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,9 +19,20 @@ import SettingIcon from '@/images/Profile/settings.svg';
 export type PostType = 'my' | 'participating';
 
 function UserPage() {
+  const queryClient = useQueryClient();
   const { user } = useUser();
   const navigate = useNavigate();
-  const ptrRef = usePullToRefresh<HTMLUListElement>();
+  const [isLoading, setIsLoading] = useState(false);
+  const ptrRef = usePullToRefresh<HTMLUListElement>({
+    onRefresh: () => {
+      setIsLoading(true);
+      queryClient
+        .refetchQueries({
+          queryKey: ['posts'],
+        })
+        .then(() => setIsLoading(false));
+    },
+  });
 
   const initialPostType =
     (sessionStorage.getItem('selectMyPostTypeLabel') as PostType) || 'my';
@@ -82,7 +94,7 @@ function UserPage() {
         }}
         className="hide-scrollbar flex flex-1 flex-col items-center space-y-[1.7rem] overflow-y-scroll px-[2.5rem] pb-[16rem]"
       >
-        {posts
+        {posts && !isLoading
           ? posts.map((post, index) => (
               <li
                 key={post.id}

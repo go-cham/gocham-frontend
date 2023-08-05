@@ -1,3 +1,6 @@
+import { useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import PostCard from '@/components/post/PostCard';
@@ -14,12 +17,22 @@ export default function PostCardList({
   authorId,
   participatingUserId,
 }: PostCardListProps) {
+  const queryClient = useQueryClient();
   const { user } = useUser();
   const { posts, ref, error } = useGetPosts({
     authorId,
     participatingUserId,
   });
+  const [isLoading, setIsLoading] = useState(false);
   const ptfRef = usePullToRefresh<HTMLUListElement>({
+    onRefresh: () => {
+      setIsLoading(true);
+      queryClient
+        .refetchQueries({
+          queryKey: ['posts'],
+        })
+        .then(() => setIsLoading(false));
+    },
     topOffset: 80,
   });
 
@@ -28,7 +41,7 @@ export default function PostCardList({
     return null;
   }
 
-  if (!posts) {
+  if (isLoading || !posts) {
     // 로딩 중
     return (
       <ul

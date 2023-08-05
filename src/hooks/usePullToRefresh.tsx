@@ -4,19 +4,18 @@ import ReactDOMServer from 'react-dom/server';
 
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
-export default function usePullToRefresh<U extends Element>(
-  {
-    topOffset = 0,
-  }: {
-    topOffset?: number;
-  } = { topOffset: 0 }
-) {
+export default function usePullToRefresh<U extends Element>({
+  onRefresh,
+  topOffset = 0,
+}: {
+  onRefresh: () => void;
+  topOffset?: number;
+}) {
   const ref = useRef<U | null>(null);
 
   useEffect(() => {
     if (!ref.current) return;
 
-    console.log(ref.current?.id);
     if (!ref.current.id) {
       ref.current.id = 'ptr';
     }
@@ -41,7 +40,7 @@ export default function usePullToRefresh<U extends Element>(
         return ref.current.scrollTop <= 0;
       },
       onRefresh() {
-        location.reload();
+        onRefresh();
       },
       getStyles() {
         if (!ref.current) return '';
