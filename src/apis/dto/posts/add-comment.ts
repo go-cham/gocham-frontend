@@ -1,4 +1,4 @@
-export interface AddCommentsRequest {
+export interface AddCommentRequest {
   content: string;
   userId: number;
   worryId: number;
@@ -6,7 +6,7 @@ export interface AddCommentsRequest {
   mentionUserId: number | null;
 }
 
-export interface AddCommentsResponse {
+export interface AddCommentResponse {
   id: number;
   status: number;
   createdAt: number;

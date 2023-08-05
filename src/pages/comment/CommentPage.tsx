@@ -49,7 +49,7 @@ export default function CommentPage() {
     isSuccess: deletePostSuccess,
   } = useDeletePost();
   const [zoomedImageIndex, setZoomedImageIndex] = useState<number | null>(null);
-  const { addComment, isSuccess, error } = useAddComment();
+  const { addComment, isSuccess, error, data } = useAddComment();
   const [showErrorSnackbar, setShowErrorSnackbar] = useState(false);
 
   const handleDropdownSelect = (value: number) => {
@@ -145,15 +145,30 @@ export default function CommentPage() {
   }, [postId]);
 
   useEffect(() => {
-    if (isSuccess) {
-      const el = document.getElementById('comment-input');
-      if (el) {
-        el.innerHTML = '';
-        setCommentState((prevCommentState) => ({
-          ...prevCommentState,
-          inputActive: false,
-        }));
-      }
+    if (isSuccess && data) {
+      const commentInput = document.getElementById('comment-input');
+      if (!commentInput) return;
+      commentInput.innerHTML = '';
+      setCommentState((prevCommentState) => ({
+        ...prevCommentState,
+        inputActive: false,
+      }));
+
+      let comment: HTMLElement | null = null;
+      const interval = setInterval(() => {
+        comment = document.getElementById(`comment-${data.id}`);
+        if (
+          comment &&
+          comment.getBoundingClientRect().bottom >
+            commentInput.getBoundingClientRect().top
+        ) {
+          clearInterval(interval);
+          comment.scrollIntoView({
+            block: 'end',
+            behavior: 'smooth',
+          });
+        }
+      }, 50);
     } else if (error) {
       if (error instanceof AxiosError && error.response?.status === 400) {
         if (error.response.data.errorCode === 'IS_BAD_WORD') {
