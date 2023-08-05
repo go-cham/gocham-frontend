@@ -100,7 +100,7 @@ export default function CommentInput({ onSubmit }: CommentInputProps) {
     <form
       id="comment-input-wrapper"
       onSubmit={(e) => e.preventDefault()}
-      className="shadow-dock flex w-full items-center space-x-[1.3rem] bg-white px-[1.5rem] pb-[1.1rem] pt-[1.5rem]"
+      className="shadow-dock flex w-full items-center space-x-[1.3rem] bg-white px-[1.5rem] pb-[5.1rem] pt-[1.5rem] focus-within:pb-[1.1rem]"
     >
       <div
         id="comment-input"
