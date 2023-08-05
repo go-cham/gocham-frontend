@@ -1,3 +1,5 @@
+import PullToRefresh from 'pulltorefreshjs';
+import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Banner from '@/components/Banner';
@@ -18,6 +20,7 @@ import SettingsPage from '@/pages/settings/SettingsPage';
 import UnregisterPage from '@/pages/unregister/UnregisterPage';
 import UserPage from '@/pages/user/UserPage';
 import WritePage from '@/pages/write/WritePage';
+import { isInStandaloneMode } from '@/utils/environment';
 import RouteChangeTracker from '@/utils/routeChangeTracker';
 
 import CommentPage from './pages/comment/CommentPage';
@@ -25,6 +28,18 @@ import CommentReportPage from './pages/report/CommentReportPage';
 
 export default function App() {
   const { showUpdate, applyUpdate } = useUpdate();
+
+  useEffect(() => {
+    if (!isInStandaloneMode()) {
+      return;
+    }
+
+    PullToRefresh.init({
+      onRefresh() {
+        location.reload();
+      },
+    });
+  }, []);
 
   return (
     <Layout>
