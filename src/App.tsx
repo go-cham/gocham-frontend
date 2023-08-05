@@ -6,6 +6,7 @@ import Banner from '@/components/Banner';
 import IosInstallGuide from '@/components/IosInstallGuide';
 import Layout from '@/components/layout/Layout';
 import { RouteURL } from '@/constants/route-url';
+import usePullToRefresh from '@/hooks/usePullToRefresh';
 import useUpdate from '@/hooks/useUpdate';
 import CollectInformationPage from '@/pages/collect-information/CollectInformationPage';
 import EditProfilePage from '@/pages/edit-profile/EditProfilePage';
@@ -20,7 +21,6 @@ import SettingsPage from '@/pages/settings/SettingsPage';
 import UnregisterPage from '@/pages/unregister/UnregisterPage';
 import UserPage from '@/pages/user/UserPage';
 import WritePage from '@/pages/write/WritePage';
-import { isInStandaloneMode } from '@/utils/environment';
 import RouteChangeTracker from '@/utils/routeChangeTracker';
 
 import CommentPage from './pages/comment/CommentPage';
@@ -28,18 +28,7 @@ import CommentReportPage from './pages/report/CommentReportPage';
 
 export default function App() {
   const { showUpdate, applyUpdate } = useUpdate();
-
-  useEffect(() => {
-    if (!isInStandaloneMode()) {
-      return;
-    }
-
-    PullToRefresh.init({
-      onRefresh() {
-        location.reload();
-      },
-    });
-  }, []);
+  usePullToRefresh();
 
   return (
     <Layout>

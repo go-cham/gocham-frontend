@@ -2,9 +2,14 @@ import { FadeLoader } from 'react-spinners';
 
 import { customColors } from '@/styles/colors';
 
-export default function LoadingSpinner() {
+interface LoadingSpinnerProps {
+  className?: string;
+}
+
+export default function LoadingSpinner({ className }: LoadingSpinnerProps) {
   return (
     <FadeLoader
+      className={className}
       color={customColors.mainSub.main['500']}
       height={12}
       margin={2}
