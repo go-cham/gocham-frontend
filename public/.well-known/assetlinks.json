@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "zone.gomin.dev.twa",
+        "sha256_cert_fingerprints": ["74:B5:D0:C4:D1:E4:47:EE:A2:3D:F1:CE:28:0C:F9:DE:D6:40:30:E2:B9:68:A2:D2:9C:77:36:7B:DD:BF:1D:28"]
+      }
+    }]
