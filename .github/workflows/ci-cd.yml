@@ -64,5 +64,5 @@ jobs:
           fields: repo, ref, workflow, message, author
           author_name: Github Actions 서비스 웹
         env:
-          SLACK_WEBHOOK_URL: ${{ github.head_ref == 'main' && secrets.SLACK_WEBHOOK_DEV || secrets.SLACK_WEBHOOK_PROD }}
+          SLACK_WEBHOOK_URL: ${{ github.head_ref == 'main' && secrets.SLACK_WEBHOOK_PROD || secrets.SLACK_WEBHOOK_DEV }}
         if: always()
