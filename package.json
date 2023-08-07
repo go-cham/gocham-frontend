@@ -1,15 +1,37 @@
 {
-  "name": "gocharm-front",
-  "version": "0.1.0",
-  "author": {
-    "name": "Kid-Chang",
-    "email": "pch3310@gmail.com"
-  },
+  "name": "gocham-frontend",
+  "version": "1.0.0",
   "private": true,
+  "contributors": [
+    {
+      "name": "Kid-Chang",
+      "email": "pch3310@gmail.com"
+    },
+    {
+      "name": "Jihoo Kim",
+      "email": "jihoo94@gmail.com"
+    },
+    {
+      "name": "Hyunmin Kim",
+      "email": "brian990614@naver.com"
+    }
+  ],
+  "scripts": {
+    "build-dev": "BUILD_PATH='./build-dev' dotenv -e .env.development craco build",
+    "build-dev-window": "set BUILD_PATH=./build-dev&& dotenv -e .env.development craco build",
+    "build-stage": "BUILD_PATH='./build-stage' dotenv -e .env.stage craco build",
+    "build-prod": "craco build",
+    "start": "dotenv -e .env.local craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "format": "prettier --write src",
+    "lint": "eslint --fix src --ext .js,.ts,.jsx,.tsx",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
   "dependencies": {
     "@craco/craco": "^7.1.0",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
     "@storybook/addon-essentials": "^7.0.24",
     "@storybook/addon-interactions": "^7.0.24",
     "@storybook/addon-links": "^7.0.24",
@@ -36,33 +58,25 @@
     "@typescript-eslint/parser": "^5.59.11",
     "axios": "^1.3.6",
     "babel-plugin-named-exports-order": "^0.0.2",
-    "dotenv": "^16.0.3",
     "dotenv-cli": "^7.2.1",
     "eslint": "^8.42.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-storybook": "^0.6.12",
     "firebase": "^9.20.0",
-    "framer-motion": "^10.12.8",
     "jotai": "^2.0.4",
     "lodash": "^4.17.21",
-    "moment": "^2.29.4",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
-    "prop-types": "^15.8.1",
     "pulltorefreshjs": "^0.1.22",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-ga4": "^2.1.0",
-    "react-hook-form": "^7.45.1",
     "react-intersection-observer": "^9.5.2",
-    "react-moment": "^1.1.3",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
-    "react-select": "^5.7.2",
     "react-spinners": "^0.13.8",
-    "react-transition-group": "^4.4.5",
     "storybook": "^7.0.24",
     "tailwind-merge": "^1.13.2",
     "tailwindcss": "^3.3.2",
@@ -81,20 +95,6 @@
     "workbox-routing": "^6.5.4",
     "workbox-strategies": "^6.5.4",
     "workbox-streams": "^6.5.4"
-  },
-  "scripts": {
-    "build-dev": "BUILD_PATH='./build-dev' dotenv -e .env.development craco build",
-    "build-dev-window": "set BUILD_PATH=./build-dev&& dotenv -e .env.development craco build",
-    "build-stage": "BUILD_PATH='./build-stage' dotenv -e .env.stage craco build",
-    "build-prod": "craco build",
-    "start": "dotenv -e .env.local craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject",
-    "format": "prettier --write src",
-    "lint": "eslint --fix src --ext .js,.ts,.jsx,.tsx",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
