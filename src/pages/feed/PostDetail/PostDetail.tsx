@@ -138,8 +138,8 @@ export default function PostDetail({ post }: PostDetailProps) {
     if (isMobile) {
       if (window.isSecureContext) {
         const shareData = {
-          title: post.title,
-          text: '공유 테스트',
+          title: '스낵 컬쳐 투표 서비스, 고민의 참견',
+          text: post.title,
           url,
         };
         navigator.share(shareData).catch((e) => console.error(e));
