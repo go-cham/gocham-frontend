@@ -62,7 +62,7 @@ export default function PostCardList({
   return (
     <ul
       ref={ptfRef}
-      className="hide-scrollbar flex w-full flex-col items-center space-y-[1.7rem] overflow-y-scroll overscroll-y-none px-[2.5rem] pb-[12rem] pt-[8.5rem]"
+      className="hide-scrollbar flex w-full flex-col items-center space-y-[1.7rem] overflow-y-scroll overscroll-y-none px-[2.5rem] pb-[12rem] pt-[10.3rem]"
     >
       {posts.map((post, index) => (
         <li
