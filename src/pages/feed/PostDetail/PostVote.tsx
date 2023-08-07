@@ -7,7 +7,6 @@ import useGetMyChoice from '@/apis/hooks/posts/useGetMyChoice';
 import useGetUsersChoices from '@/apis/hooks/posts/useGetUsersChoices';
 import ImageFullScreen from '@/components/ImageFullScreen';
 import CheckIcon from '@/components/icons/CheckIcon';
-import DeleteIcon from '@/components/icons/DeleteIcon';
 import Popup from '@/components/ui/modal/Popup';
 import Snackbar from '@/components/ui/modal/Snackbar';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';

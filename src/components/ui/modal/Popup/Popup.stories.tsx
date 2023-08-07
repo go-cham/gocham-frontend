@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
 
-import Button from '@/components/ui/buttons/Button';
 import Popup from '@/components/ui/modal/Popup/Popup';
 
 const meta: Meta<typeof Popup> = {

@@ -17,11 +17,11 @@ export default function NicknameForm({
     over10letter: false,
   });
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     if (value.length > 10) {
-      setErrorCase((data) => ({ over10letter: true }));
+      setErrorCase(() => ({ over10letter: true }));
     } else {
-      setErrorCase((data) => ({ over10letter: false }));
+      setErrorCase(() => ({ over10letter: false }));
     }
     setNickname(value);
   };

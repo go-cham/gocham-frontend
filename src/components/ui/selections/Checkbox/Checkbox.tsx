@@ -1,4 +1,3 @@
-import { ChangeEvent, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import CheckIcon from '@/components/icons/CheckIcon';

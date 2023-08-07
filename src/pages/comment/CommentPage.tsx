@@ -197,7 +197,6 @@ export default function CommentPage() {
                 <PostUserProfile
                   nickname={post.user.nickname}
                   age={calculateAgeFromBirthday(post.user.birthDate)}
-                  color="gray"
                 />
                 <div className="relative" ref={dropdownRef}>
                   <MoreIcon

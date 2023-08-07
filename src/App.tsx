@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Navigate, Route, Routes } from 'react-router-dom';
 

@@ -172,7 +172,6 @@ export default function PostDetail({ post }: PostDetailProps) {
         <PostUserProfile
           nickname={post.user.nickname}
           age={calculateAgeFromBirthday(post.user.birthday)}
-          color="gray"
         />
         <div ref={ref} className="relative">
           <MoreIcon className="cursor-pointer" onClick={handleClickMore} />

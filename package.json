@@ -26,6 +26,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/jest": "^27.5.2",
+    "@types/kakao-js-sdk": "^1.39.1",
     "@types/lodash": "^4.14.194",
     "@types/node": "^17.0.45",
     "@types/pulltorefreshjs": "^0.1.5",

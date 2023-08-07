@@ -43,7 +43,7 @@ export default function CommentHeader({
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center space-x-[6px]">
-        <PostUserProfile nickname={nickname} age={age} color="gray" />
+        <PostUserProfile nickname={nickname} age={age} />
         {choice && (
           <div className="flex items-center space-x-[6px]">
             <div className="h-[0.3rem] w-[0.3rem] rounded-full bg-[#cccfd4]"></div>

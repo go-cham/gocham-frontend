@@ -8,10 +8,7 @@ import PostUserProfile from '@/components/post/PostUserProfile';
 import { RouteURL } from '@/constants/route-url';
 import { scrollRestorationAtom } from '@/states/scroll-restoration';
 import { Post } from '@/types/post';
-import {
-  calculateAge,
-  calculateAgeFromBirthday,
-} from '@/utils/date/calculateAge';
+import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
 
 interface PostCardProps {
   post: Post;

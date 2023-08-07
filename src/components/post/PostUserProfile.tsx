@@ -7,13 +7,11 @@ import Age40PlusIcon from '../icons/age/Age40PlusIcon';
 interface PostUserProfileProps {
   nickname: string;
   age: number;
-  color?: 'primary' | 'gray';
 }
 
 export default function PostUserProfile({
   nickname,
   age,
-  color = 'primary',
 }: PostUserProfileProps) {
   return (
     <div className="flex items-center space-x-[0.5rem]">

@@ -1,4 +1,3 @@
-import { navigate } from '@storybook/addon-links';
 import { useEffect } from 'react';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -24,7 +23,7 @@ export default function LoginOauthKakaoPage() {
   }
 
   useEffect(() => {
-    document.querySelector('body')!.style.height = `${window.innerHeight}px`;
+    document.body.style.height = `${window.innerHeight}px`;
   }, []);
 
   useEffect(() => {

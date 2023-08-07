@@ -4,20 +4,12 @@ import BackIcon from '@/components/icons/BackIcon';
 import withAuth from '@/components/withAuth';
 import Kakao from '@/images/Login/kakao.svg';
 import LoginWrapper from '@/images/Login/loginWrapper.svg';
-import LoginWrapperText2 from '@/images/Login/loginWrapperText2.svg';
-import LoginWrapperText1 from '@/images/Login/loginWrapperText.svg';
-
-declare global {
-  interface Window {
-    Kakao: any;
-  }
-}
 
 function LoginPage() {
   const navigate = useNavigate();
 
   if (!window.Kakao.isInitialized()) {
-    window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
+    window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY || '');
   }
 
   const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_API;
