@@ -1,6 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
@@ -163,6 +164,9 @@ export default function PostDetail({ post }: PostDetailProps) {
       className="flex flex-col border-b border-background-dividerLine-300 py-[1.3rem]"
       id={isSelected ? 'vote-selected' : ''}
     >
+      <Helmet>
+        <meta property="og:description" content={post.title} />
+      </Helmet>
       {isLoading && (
         <div className="absolute left-1/2 top-1/2 z-[1000] -translate-x-1/2 -translate-y-1/2">
           <LoadingSpinner />
