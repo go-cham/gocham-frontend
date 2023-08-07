@@ -13,6 +13,6 @@ permissions:
 
 hooks:
   ApplicationStart:
-    - location: deploy-prod.sh # ApplicationStart 단계에서 deploy.sh 실행
+    - location: deploy.sh
       timeout: 300
       runas: ubuntu

@@ -1,0 +1,68 @@
+name: CI/CD by Push/Merge
+
+on:
+  push:
+    branches: ['main', 'dev']
+
+env:
+  NODE_ENV: production
+  S3_BUCKET_NAME: ${{ github.head_ref == 'main' && 'gocham-files' || 'gocham-dev-files' }}
+  PROJECT_NAME: ${{ github.head_ref == 'main' && 'prod-gocham-service-web-react' || 'dev-gocham-service-web-react' }} # S3 버킷 내 폴더 이름입니다. 임의로 정하면 알아서 생성해줍니다.
+  AWS_CODE_DEPLOY_APPLICATION_NAME: ${{ github.head_ref == 'main' && 'prod-service-web-codedeploy' || 'dev-service-web-codedeploy' }}
+  AWS_CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: ${{ github.head_ref == 'main' && 'prod-service-web-group' || 'dev-service-web-group' }}
+
+
+jobs:
+  ci-cd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Build React app
+        run: ${{ github.head_ref == 'main' && 'yarn run build-prod' || 'yarn run build-dev' }}
+
+      - name: Copy appspec.yml
+        run: \cp -f ./appspec/${{ github.head_ref == 'main' && 'appspec-prod.yml' || 'appspec-dev.yml' }} ./appspec.yml && rm -rf ./appspec
+
+      - name: Copy deploy.sh
+        run: \cp -f ${{ github.head_ref == 'main' && './deploy/deploy-prod.sh' || './deploy/deploy-dev.sh' }} ./deploy.sh && rm -rf ./deploy
+
+      - name: Make zip file
+        run: zip -r build.zip . -x "node_modules/*" "coverage/*" "src/*" "test/*" "README.md" "*.git*"
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ github.head_ref == 'main' && secrets.AWS_ACCESS_KEY_ID || secrets.DEV_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ github.head_ref == 'main' && secrets.AWS_SECRET_ACCESS_KEY || secrets.DEV_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYYMMDD_HH:mm:ss
+          utcOffset: '+09:00'
+
+      - name: Upload to S3
+        run: aws s3 cp --region ${{ secrets.AWS_REGION }} build.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/${{  steps.current-time.outputs.formattedTime  }}.zip
+
+      - name: CodeDeploy
+        run: aws deploy create-deployment --application-name $AWS_CODE_DEPLOY_APPLICATION_NAME --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name $AWS_CODE_DEPLOY_DEPLOYMENT_GROUP_NAME --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/${{steps.current-time.outputs.formattedTime}}.zip
+
+      - name: Slack notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo, ref, workflow, message, author
+          author_name: Github Actions 서비스 웹
+        env:
+          SLACK_WEBHOOK_URL: ${{ github.head_ref == 'main' && secrets.SLACK_WEBHOOK_DEV || secrets.SLACK_WEBHOOK_PROD }}
+        if: always()

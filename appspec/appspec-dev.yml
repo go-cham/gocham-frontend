@@ -1,5 +1,6 @@
 version: 0.0
 os: linux
+
 files:
   - source: /
     destination: /usr/share/nginx/gocham-service-web-react-typescript/dev # 배포될 위치
@@ -13,6 +14,6 @@ permissions:
 
 hooks:
   ApplicationStart:
-    - location: deploy-dev.sh # ApplicationStart 단계에서 deploy.sh 실행
+    - location: deploy.sh
       timeout: 300
       runas: ubuntu
