@@ -19,18 +19,19 @@ function SettingsPage() {
   }[] = [
     {
       title: '공지사항',
-      link: 'https://www.notion.so/sharechang/61c9b8f802ca4769b4caca3bc1da5c97?pvs=4',
+      link: 'https://sharechang.notion.site/61c9b8f802ca4769b4caca3bc1da5c97?pvs=4',
     },
     {
       title: '이용약관',
-      link: 'https://www.notion.so/sharechang/2ad95f818e6a4df29afa5ecdf87e4052?pvs=4',
+      link: 'https://sharechang.notion.site/2ad95f818e6a4df29afa5ecdf87e4052?pvs=4',
     },
     {
       title: '개인정보 처리방침',
-      link: 'https://www.notion.so/sharechang/47d2c9861a704ef0aadf743856c97335?pvs=4',
+      link: 'https://sharechang.notion.site/47d2c9861a704ef0aadf743856c97335?pvs=4',
     },
     {
       title: '문의하기',
+      link: 'https://docs.google.com/forms/d/e/1FAIpQLSc9VqRzefKQqp_kO6lYL92TXfZw8TUhWjcLeBW7CcaLmddPMA/viewform?usp=sf_link'
     },
     {
       title: '로그아웃',
