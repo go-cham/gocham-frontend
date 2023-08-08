@@ -7,8 +7,7 @@ import PostCard from '@/components/post/PostCard';
 import PostCardSkeleton from '@/components/ui/skeleton/PostCardSkeleton';
 import { UserType } from '@/constants/user-type';
 import usePullToRefresh from '@/hooks/usePullToRefresh';
-import BannerLight from '@/images/banner-light.png';
-import BannerDark from '@/images/banner-dark.png';
+import Banner from '@/images/banner.svg';
 import { isMobile } from 'react-device-detect';
 
 interface PostCardListProps {
@@ -73,11 +72,7 @@ export default function PostCardList({
         target="_blank"
         rel="noreferrer"
       >
-        <img
-          src={isMobile ? BannerDark : BannerLight}
-          alt="배너"
-          className="w-full pt-[10.3rem]"
-        />
+        <img src={Banner} alt="배너" className="w-full pt-[10.3rem]" />
       </a>
       <ul className="flex w-full flex-col items-center space-y-[1.7rem] px-[2.5rem] pb-[12rem] pt-[2.1rem]">
         {posts.map((post, index) => (
