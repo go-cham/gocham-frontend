@@ -2,6 +2,7 @@ export interface GetPostsResponse {
   data: {
     expirationTime: string | null;
     user: {
+      email: string;
       profileImageUrl: string | null;
       id: number;
       nickname: string;

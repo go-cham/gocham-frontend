@@ -48,6 +48,7 @@ export default function useUser(
     data && userData
       ? {
           id: userData.id,
+          email: userData.email,
           type: data.userType,
           vendor: data.vendor,
           nickname: userData.nickname,

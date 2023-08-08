@@ -15,7 +15,7 @@ export type GetPostResponse = {
     contentType: string;
   }[];
   user: {
-    email: null;
+    email: string;
     phoneNumber: string | null;
     profileImageUrl: string | null;
     id: number;

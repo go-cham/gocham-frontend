@@ -20,15 +20,23 @@ export default function UserProfile() {
   const age = calculateAge(
     birthday.getFullYear(),
     birthday.getMonth() + 1,
-    birthday.getDate()
+    birthday.getDate(),
   );
 
   return (
     <div className="mt-[1.7rem] flex items-center justify-between px-[2.5rem]">
       <div className="flex items-center space-x-[0.8rem]">
-        <span className="flex h-[3.6rem] w-[3.6rem] items-center justify-center rounded-full bg-[#f4f4f5] text-[#b0b2b8] font-system-heading2">
-          {String(age)[0] + '0'}
-        </span>
+        {user.image ? (
+          <img
+            src={user.image}
+            alt="관리자 계정 이미지"
+            className="h-[3.6rem] w-[3.6rem] rounded-full"
+          />
+        ) : (
+          <span className="flex h-[3.6rem] w-[3.6rem] items-center justify-center rounded-full bg-[#f4f4f5] text-[#b0b2b8] font-system-heading2">
+            {String(age)[0] + '0'}
+          </span>
+        )}
         <span className="text-[#2a2d37] font-custom-heading1">
           {user.nickname}
         </span>

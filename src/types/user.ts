@@ -2,6 +2,7 @@ import { OptionType } from '@/constants/options';
 
 export interface User {
   id: number;
+  email: string;
   type: string;
   vendor: string;
   nickname: string;

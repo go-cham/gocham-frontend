@@ -1,27 +1,30 @@
-import Age10Icon from '../icons/age/Age10Icon';
-import Age20Icon from '../icons/age/Age20Icon';
-import Age30Icon from '../icons/age/Age30Icon';
-import Age40Icon from '../icons/age/Age40Icon';
-import Age40PlusIcon from '../icons/age/Age40PlusIcon';
-
 interface PostUserProfileProps {
+  image?: string | null;
   nickname: string;
   age: number;
 }
 
 export default function PostUserProfile({
+  image,
   nickname,
   age,
 }: PostUserProfileProps) {
   return (
     <div className="flex items-center space-x-[0.5rem]">
-      <span className="h-[2.5rem] w-[2.5rem] tracking-[-0.36px]">
-        {age < 20 && <Age10Icon />}
-        {age >= 20 && age < 30 && <Age20Icon />}
-        {age >= 30 && age < 40 && <Age30Icon />}
-        {age >= 40 && age < 50 && <Age40Icon />}
-        {age >= 50 && <Age40PlusIcon />}
-      </span>
+      {image ? (
+        <img
+          src={image}
+          alt="관리자 계정 이미지"
+          className="h-[2.5rem] w-[2.5rem] rounded-full"
+        />
+      ) : (
+        <span
+          className="flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-full bg-[#f4f4f5] text-[#b0b2b8] font-system-body1"
+          style={{ fontWeight: 'bold' }}
+        >
+          {String(age)[0] + '0'}
+        </span>
+      )}
       <span className="font-system-body2">{nickname}</span>
     </div>
   );

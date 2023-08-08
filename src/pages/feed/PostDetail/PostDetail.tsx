@@ -115,7 +115,7 @@ export default function PostDetail({ post }: PostDetailProps) {
 
   const images = post.worryFiles?.map((file) => file.url);
   const isSelected = choiceOptions?.find(
-    (option) => option.id === selectedVoteOptionId
+    (option) => option.id === selectedVoteOptionId,
   );
 
   const voteOptions = choiceOptions
@@ -170,6 +170,7 @@ export default function PostDetail({ post }: PostDetailProps) {
       )}
       <div className="flex items-center justify-between px-[2.5rem]">
         <PostUserProfile
+          image={post.user.profileImageUrl}
           nickname={post.user.nickname}
           age={calculateAgeFromBirthday(post.user.birthday)}
         />
@@ -267,8 +268,8 @@ export function PostDetailContent({
           (img) =>
             new Promise((resolve) => {
               img.onload = img.onerror = resolve;
-            })
-        )
+            }),
+        ),
     ).then(() => {
       if (multipleImagesRef.current) {
         multipleImagesRef.current.scrollTo({

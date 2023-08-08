@@ -52,6 +52,7 @@ export default function PostCard({
     >
       {showProfile && (
         <PostUserProfile
+          image={post.user.profileImageUrl}
           nickname={post.user.nickname}
           age={calculateAgeFromBirthday(post.user.birthday)}
         />
