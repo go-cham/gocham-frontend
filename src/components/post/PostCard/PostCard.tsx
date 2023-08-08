@@ -9,6 +9,7 @@ import { RouteURL } from '@/constants/route-url';
 import { scrollRestorationAtom } from '@/states/scroll-restoration';
 import { Post } from '@/types/post';
 import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
+import { ADMIN_EMAIL } from '@/constants/admin';
 
 interface PostCardProps {
   post: Post;
@@ -52,6 +53,7 @@ export default function PostCard({
     >
       {showProfile && (
         <PostUserProfile
+          isAdmin={post.user.email === ADMIN_EMAIL}
           image={post.user.profileImageUrl}
           nickname={post.user.nickname}
           age={calculateAgeFromBirthday(post.user.birthday)}

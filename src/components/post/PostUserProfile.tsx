@@ -1,17 +1,19 @@
 interface PostUserProfileProps {
+  isAdmin: boolean;
   image?: string | null;
   nickname: string;
   age: number;
 }
 
 export default function PostUserProfile({
+  isAdmin,
   image,
   nickname,
   age,
 }: PostUserProfileProps) {
   return (
     <div className="flex items-center space-x-[0.5rem]">
-      {image ? (
+      {isAdmin && image ? (
         <img
           src={image}
           alt="관리자 계정 이미지"

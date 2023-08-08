@@ -25,6 +25,7 @@ import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 
 import PostVote from './PostVote';
+import { ADMIN_EMAIL } from '@/constants/admin';
 
 interface PostDetailProps {
   post: Post;
@@ -170,6 +171,7 @@ export default function PostDetail({ post }: PostDetailProps) {
       )}
       <div className="flex items-center justify-between px-[2.5rem]">
         <PostUserProfile
+          isAdmin={post.user.email === ADMIN_EMAIL}
           image={post.user.profileImageUrl}
           nickname={post.user.nickname}
           age={calculateAgeFromBirthday(post.user.birthday)}

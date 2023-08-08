@@ -14,7 +14,7 @@ export default function useGetComments(postId: number) {
           params: {
             worryId: postId,
           },
-        }
+        },
       );
       return res.data;
     },
@@ -27,6 +27,7 @@ export default function useGetComments(postId: number) {
         content,
         user: {
           id: user.id,
+          email: user.email,
           nickname: user.nickname,
           birthday: user.birthDate,
           choice: user.worryChoice
@@ -48,10 +49,11 @@ export default function useGetComments(postId: number) {
             },
             user: {
               id: user.id,
+              email: user.email,
               nickname: user.nickname,
               birthday: user.birthDate,
             },
-          })
+          }),
         ),
       }))
     : null;

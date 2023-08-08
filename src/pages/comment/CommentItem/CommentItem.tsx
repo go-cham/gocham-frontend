@@ -11,6 +11,7 @@ import { commentStateAtom } from '@/states/comment';
 interface CommentItemProps {
   user: {
     id: number;
+    email: string;
     nickname: string;
     age: number;
     choiceLabel: string | null;
@@ -90,6 +91,7 @@ export default function CommentItem({
       className="flex flex-col px-[1.5rem] pb-[1.5rem] pt-[1.7rem]"
     >
       <CommentHeader
+        email={user.email}
         nickname={user.nickname}
         age={user.age}
         choice={user.choiceLabel || choice?.label || null}

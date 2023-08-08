@@ -24,6 +24,7 @@ import { PostDetailContent } from '@/pages/feed/PostDetail/PostDetail';
 import { commentStateAtom } from '@/states/comment';
 import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
 import { getRemainingTime } from '@/utils/getRemainingTime';
+import { ADMIN_EMAIL } from '@/constants/admin';
 
 enum MENU {
   Edit,
@@ -40,7 +41,7 @@ export default function CommentPage() {
   const { user } = useUser();
   const { id: postId } = useParams();
   const { comments, isLoading: commentLoading } = useGetComments(
-    Number(postId)
+    Number(postId),
   );
   const { post } = useGetPost(Number(postId));
   const {
@@ -195,6 +196,7 @@ export default function CommentPage() {
             <>
               <div className="flex items-center justify-between px-[2.5rem]">
                 <PostUserProfile
+                  isAdmin={post.user.email === ADMIN_EMAIL}
                   nickname={post.user.nickname}
                   age={calculateAgeFromBirthday(post.user.birthDate)}
                 />

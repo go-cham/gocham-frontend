@@ -16,6 +16,7 @@ export default function CommentList({ writerId, comments }: CommentListProps) {
             <CommentItem
               user={{
                 id: comment.user.id,
+                email: comment.user.email,
                 nickname: comment.user.nickname,
                 age: calculateAgeFromBirthday(comment.user.birthday),
                 choiceLabel: comment.user.choice?.label || null,
@@ -31,6 +32,7 @@ export default function CommentList({ writerId, comments }: CommentListProps) {
                   <CommentItem
                     user={{
                       id: reply.user.id,
+                      email: reply.user.email,
                       nickname: reply.user.nickname,
                       age: calculateAgeFromBirthday(reply.user.birthday),
                       choiceLabel: null, // TODO: api 응답 변경

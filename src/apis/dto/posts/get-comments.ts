@@ -20,7 +20,7 @@ export type GetCommentsResponse = {
       id: number;
       nickname: string;
       birthDate: string;
-      email: string | null;
+      email: string;
       phoneNumber: string | null;
       worryChoice: {
         id: number;
@@ -34,7 +34,7 @@ export type GetCommentsResponse = {
     id: number;
     nickname: string;
     birthDate: string;
-    email: string | null;
+    email: string;
     phoneNumber: string | null;
     profileImageUrl: string | null;
     worryChoice: {

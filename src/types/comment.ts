@@ -4,6 +4,7 @@ export interface Comment {
   content: string;
   user: {
     id: number;
+    email: string;
     nickname: string;
     birthday: string;
     choice: {
@@ -22,6 +23,7 @@ export interface Comment {
     };
     user: {
       id: number;
+      email: string;
       nickname: string;
       birthday: string;
     };

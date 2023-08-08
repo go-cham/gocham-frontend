@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useUser from '@/apis/hooks/users/useUser';
 import { RouteURL } from '@/constants/route-url';
 import { calculateAge } from '@/utils/date/calculateAge';
+import { ADMIN_EMAIL } from '@/constants/admin';
 
 export default function UserProfile() {
   const navigate = useNavigate();
@@ -23,10 +24,12 @@ export default function UserProfile() {
     birthday.getDate(),
   );
 
+  const isAdmin = user.email === ADMIN_EMAIL;
+
   return (
     <div className="mt-[1.7rem] flex items-center justify-between px-[2.5rem]">
       <div className="flex items-center space-x-[0.8rem]">
-        {user.image ? (
+        {isAdmin && user.image ? (
           <img
             src={user.image}
             alt="관리자 계정 이미지"
