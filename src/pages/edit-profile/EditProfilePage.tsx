@@ -75,7 +75,7 @@ function EditProfilePage() {
         nickname: formData.nickname,
         job: formData.job,
         worryCategories:
-          formData.categoryIds.length > 0 ? formData.categoryIds : null,
+          formData.categoryIds.length > 0 ? formData.categoryIds : [],
         sex: formData.gender,
         residenceId: formData.residenceId,
         birthDate: formData.birthday,

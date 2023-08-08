@@ -30,7 +30,6 @@ export default function RegionJobCategoryForm({
     categoryIds: false,
   });
   const jobErrorMessage = isDirty.job ? validateJob(formData.job) : null;
-
   const handleResidenceChange = (residenceId: number) => {
     setIsDirty({ ...isDirty, residenceId: true });
     const selected = residenceOptions.find(
