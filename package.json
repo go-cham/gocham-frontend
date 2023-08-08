@@ -20,7 +20,7 @@
     "build-dev": "BUILD_PATH='./build-dev' dotenv -e .env.development craco build",
     "build-dev-window": "set BUILD_PATH=./build-dev && dotenv -e .env.development craco build",
     "build-stage": "BUILD_PATH='./build-stage' dotenv -e .env.stage craco build",
-    "build-prod": "craco build",
+    "build-prod": "dotenv -e .env.production craco build",
     "start": "dotenv -e .env.local craco start",
     "build": "craco build",
     "test": "craco test",
