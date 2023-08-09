@@ -37,7 +37,6 @@ function CollectInformationPage() {
       userId: user.id,
       termsOfUseAcceptedStatus: Number(accept.gochamTerm),
       privacyAcceptedStatus: Number(accept.personalInformation),
-      marketingAcceptedStatus: Number(accept.marketing),
     });
     await editProfile({
       userId: user.id,
