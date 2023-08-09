@@ -1,34 +1,31 @@
 import { useEffect, useState } from 'react';
+import * as serviceWorkerRegistration from '../serviceWorkerRegistration';
 
 export default function useUpdate() {
+  const [waitingWorker, setWaitingWorker] = useState<ServiceWorker | null>(
+    null,
+  );
   const [showUpdate, setShowUpdate] = useState(false);
 
+  const handleSWUpdate = (registration: ServiceWorkerRegistration) => {
+    setShowUpdate(true);
+    setWaitingWorker(registration.waiting);
+  };
+
   const applyUpdate = () => {
-    navigator.serviceWorker.getRegistrations().then((regs) =>
-      regs.forEach((reg) => {
-        reg.waiting?.postMessage({ type: 'SKIP_WAITING' });
-      })
-    );
+    waitingWorker?.postMessage({ type: 'SKIP_WAITING' });
+    setShowUpdate(false);
+    window.location.reload();
   };
 
   useEffect(() => {
     if (!navigator.serviceWorker) {
       return;
     }
-    navigator.serviceWorker.getRegistrations().then((regs) =>
-      regs.forEach((reg) => {
-        reg
-          .update()
-          .then(() => {
-            if (reg.waiting) {
-              setShowUpdate(true);
-            }
-          })
-          .catch((e) => {
-            console.error(e);
-          });
-      })
-    );
+
+    serviceWorkerRegistration.register({
+      onUpdate: handleSWUpdate,
+    });
   }, []);
 
   return {
