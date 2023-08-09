@@ -1,7 +1,7 @@
 import BottomAppBar from '@/components/layout/BottomAppBar';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import useScrollToTop from '@/hooks/useScrollToTop';
-// import HomeHeader from '@/pages/home/HomeHeader';
+import HomeHeader from '@/pages/home/HomeHeader';
 import PostCardList from '@/pages/home/PostCardList';
 
 export default function HomePage() {
@@ -16,7 +16,7 @@ export default function HomePage() {
       }}
       className="flex h-full flex-col"
     >
-      {/*<HomeHeader onClickLogo={scrollToTop} />*/}
+      <HomeHeader onClickLogo={scrollToTop} />
       <PostCardList />
       <BottomAppBar currentPage="home" onScrollToTop={scrollToTop} />
     </div>
