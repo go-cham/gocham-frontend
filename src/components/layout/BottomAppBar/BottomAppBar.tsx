@@ -5,8 +5,8 @@ import PlusIcon from '@/components/icons/PlusIcon';
 import ProfileIcon from '@/components/icons/ProfileIcon';
 import { RouteURL } from '@/constants/route-url';
 import { customColors } from '@/styles/colors';
-import BackgroundImage from '@/components/layout/BottomAppBar/BackgroundImage';
 import { isMobile } from 'react-device-detect';
+import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
 
 interface BottomAppBarProps {
   currentPage: 'home' | 'user';
@@ -39,7 +39,12 @@ export default function BottomAppBar({
 
   return (
     <footer className="absolute bottom-0 z-10 w-full">
-      <BackgroundImage className="shadow-dock relative top-[0.5vh] mx-auto scale-[1.15]" />
+      {/*<BackgroundImage className="shadow-dock relative top-[0.5vh] mx-auto scale-[1.15]" />*/}
+      <img
+        src={backgroundImage}
+        alt="background"
+        className="shadow-dock mx-auto w-full"
+      />
       <div className="absolute -top-[0.6rem] flex w-full items-end justify-evenly">
         <button onClick={handleHomeIconClick}>
           <HomeIcon
