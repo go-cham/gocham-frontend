@@ -226,7 +226,7 @@ export default function PostDetail({ post }: PostDetailProps) {
         className="cursor-pointer px-[2.5rem] text-text-subTitle-700 font-system-body2"
         onClick={() => navigate(`/feed/${post.id}/comment`)}
       >
-        댓글 {post.replyCount}개 모두 보기
+        댓글 {post.replyCount < 100 ? post.replyCount : '99+'}개 모두 보기
       </span>
       <Popup
         isOpen={deleteModalOpen}
