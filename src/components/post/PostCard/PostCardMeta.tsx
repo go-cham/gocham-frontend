@@ -17,7 +17,7 @@ export default function PostCardMeta({
         className="cursor-pointer text-text-explain-500 font-system-body2"
         onClick={onClickComment}
       >
-        댓글 {numComment}개 모두 보기
+        댓글 {numComment < 100 ? numComment : '99+'}개 모두 보기
       </span>
       <span className="text-text-explain-500 font-system-caption">
         현재 투표한 사용자 {numVotes}명
