@@ -1,5 +1,3 @@
-import { useEffect, useRef } from 'react';
-import { isMobile } from 'react-device-detect';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Banner from '@/components/Banner';
@@ -20,7 +18,6 @@ import SettingsPage from '@/pages/settings/SettingsPage';
 import UnregisterPage from '@/pages/unregister/UnregisterPage';
 import UserPage from '@/pages/user/UserPage';
 import WritePage from '@/pages/write/WritePage';
-import { isIOS } from '@/utils/environment';
 import RouteChangeTracker from '@/utils/routeChangeTracker';
 
 import CommentPage from './pages/comment/CommentPage';
@@ -28,37 +25,6 @@ import CommentReportPage from './pages/report/CommentReportPage';
 
 export default function App() {
   const { showUpdate, applyUpdate } = useUpdate();
-  const initialSizeRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    if (!initialSizeRef.current && window.visualViewport) {
-      initialSizeRef.current = window.visualViewport.height;
-    }
-
-    const handleResize = () => {
-      if (!isMobile) return;
-      if (!window.visualViewport || !initialSizeRef.current) return;
-
-      if (isIOS()) {
-        const currentHeight = window.visualViewport.height;
-        const diff = initialSizeRef.current - currentHeight;
-        if (currentHeight < initialSizeRef.current) {
-          document.body.style.marginTop = diff + 'px';
-        } else {
-          document.body.style.marginTop = '0px';
-        }
-        document.body.style.height = currentHeight + 'px';
-      } else {
-        const currentHeight = window.visualViewport.height;
-        document.body.style.height = currentHeight + 'px';
-      }
-    };
-
-    window.visualViewport?.addEventListener('resize', handleResize);
-
-    return () =>
-      window.visualViewport?.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <Layout>
