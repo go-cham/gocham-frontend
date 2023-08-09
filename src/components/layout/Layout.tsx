@@ -1,4 +1,5 @@
-import BackgroundText from '@/images//backgroundText.svg';
+import character from '@/images/background/character.svg';
+import text from '@/images/background/text.svg';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -6,13 +7,18 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="flex h-full w-screen overflow-hidden bg-without-character bg-cover bg-center">
+    <div className="flex h-full w-screen overflow-hidden  bg-[#f5f5f5] bg-cover bg-center ">
       <img
-        src={BackgroundText}
-        alt="백그라운드 텍스트"
-        className="fixed left-[10rem] top-[10rem] hidden h-[39.3rem] w-[43.5rem] xl:block"
+        src={text}
+        alt="text"
+        className="fixed left-[5.5%] top-[8rem] z-10 hidden w-[40rem] xl:block"
       />
-      <div className="relative mx-auto h-full w-full max-w-[43rem] bg-background-mainBg-0 xl:left-[25rem]">
+      <img
+        src={character}
+        alt="character"
+        className="fixed bottom-0 left-0 hidden w-[45%] xl:block"
+      />
+      <div className="relative mx-auto h-full w-full max-w-[43rem] bg-background-mainBg-0  xl:left-[25rem]">
         {children}
       </div>
     </div>
