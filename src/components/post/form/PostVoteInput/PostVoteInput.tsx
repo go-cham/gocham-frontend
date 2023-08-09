@@ -65,7 +65,7 @@ export default function PostVoteInput({
       className={twMerge(
         'group relative w-[34rem] rounded-[0.5rem]',
         className,
-        readOnly && 'pointer-events-none bg-background-voteBg-100'
+        readOnly && 'pointer-events-none bg-background-voteBg-100',
       )}
     >
       <div className="relative">
@@ -90,12 +90,12 @@ export default function PostVoteInput({
             'w-full rounded-[0.5rem] border border-background-dividerLine-300 bg-transparent py-[1.2rem] pl-[1.3rem] font-system-body4 placeholder:text-text-subExplain-400 placeholder:font-system-body3 group-focus-within:border-text-subTitle-700',
             hasError &&
               'border-semantic-warn-500 group-focus-within:border-semantic-warn-500',
-            readOnly && 'text-text-explain-500'
+            readOnly && 'text-text-explain-500',
           )}
         />
         <div className="absolute right-[1.2rem] top-1/2 flex -translate-y-1/2 space-x-[0.8rem]">
           {showReset && (
-            <button onFocus={() => setShowReset(true)}>
+            <button tabIndex={-1} onFocus={() => setShowReset(true)}>
               <DeleteIcon
                 className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300"
                 color="white"

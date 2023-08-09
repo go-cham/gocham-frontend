@@ -32,7 +32,7 @@ export default function BirthdayInput({
       year: '',
       month: '',
       day: '',
-    }
+    },
   );
   const yearRef = useRef<HTMLInputElement>(null);
   const monthRef = useRef<HTMLInputElement>(null);
@@ -53,7 +53,7 @@ export default function BirthdayInput({
     setBirthday(newBirthday);
     onChange(newBirthday);
     setShowReset(
-      Boolean(newBirthday.year || newBirthday.month || newBirthday.day)
+      Boolean(newBirthday.year || newBirthday.month || newBirthday.day),
     );
 
     if (e.target.name === 'year' && e.target.value.length === 4) {
@@ -160,7 +160,7 @@ export default function BirthdayInput({
       </div>
       <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center space-x-[0.5rem]">
         {showReset && (
-          <button onClick={handleReset}>
+          <button onClick={handleReset} tabIndex={-1}>
             <DeleteIcon
               className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300"
               color="white"
