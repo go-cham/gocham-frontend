@@ -6,7 +6,7 @@ import { axiosInstance } from '@/libs/axios';
 import { User } from '@/types/user';
 
 export default function useUser(
-  { enabled }: { enabled: boolean } = { enabled: true }
+  { enabled }: { enabled: boolean } = { enabled: true },
 ) {
   const { data, error: userTypeError } = useQuery({
     queryKey: ['user'],
@@ -27,7 +27,7 @@ export default function useUser(
     queryKey: ['user', data?.userId],
     queryFn: async () => {
       const res = await axiosInstance.get<GetUserResponse>(
-        `/user/${data?.userId}`
+        `/user/${data?.userId}`,
       );
       return res.data;
     },
@@ -48,6 +48,7 @@ export default function useUser(
     data && userData
       ? {
           id: userData.id,
+          joinStatus: userData.joinStatus,
           email: userData.email,
           type: data.userType,
           vendor: data.vendor,

@@ -14,7 +14,7 @@ export default function IosInstallGuide() {
   };
 
   useEffect(() => {
-    const isUserRegistered = !!user?.nickname;
+    const isUserRegistered = user?.joinStatus === 'activated';
     if (
       isIOS() &&
       !isInStandaloneMode() &&

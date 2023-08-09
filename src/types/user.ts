@@ -12,6 +12,7 @@ export interface User {
   job: string;
   worryCategories: OptionType[] | null;
   image: string | null;
+  joinStatus: string;
 }
 
 export type UserInformation = {
