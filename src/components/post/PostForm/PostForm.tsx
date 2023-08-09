@@ -93,22 +93,24 @@ export default function PostForm({
           <div className="text-text-subTitle-700 font-custom-subheading">
             투표 항목
           </div>
-          {formData.voteOptions.map((_, i) => (
-            <PostVoteInput
-              key={i}
-              id={`post-form-voteOptions${i}`}
-              image={
-                formData?.voteOptions ? formData.voteOptions[i].image : null
-              }
-              onChange={handlers.voteOptionChange(i)}
-              className="w-full"
-              onUploadImage={handlers.voteOptionImageUpload(i)}
-              onDeleteImage={handlers.voteOptionImageDelete(i)}
-              readOnly={mode === 'edit'}
-              hasError={showError && i === voteOptionErrorIndex}
-              defaultValue={formData.voteOptions[i].label}
-            />
-          ))}
+          {formData.voteOptions
+            .filter((option) => option.label)
+            .map((_, i) => (
+              <PostVoteInput
+                key={i}
+                id={`post-form-voteOptions${i}`}
+                image={
+                  formData?.voteOptions ? formData.voteOptions[i].image : null
+                }
+                onChange={handlers.voteOptionChange(i)}
+                className="w-full"
+                onUploadImage={handlers.voteOptionImageUpload(i)}
+                onDeleteImage={handlers.voteOptionImageDelete(i)}
+                readOnly={mode === 'edit'}
+                hasError={showError && i === voteOptionErrorIndex}
+                defaultValue={formData.voteOptions[i].label}
+              />
+            ))}
           <EditButton
             type="button"
             disabled={

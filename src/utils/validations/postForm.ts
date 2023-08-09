@@ -22,8 +22,9 @@ export function validatePostForm(
   if (typeof deadline !== 'number') {
     errorMessage.deadline = '투표 마감 시간을 선택해주세요.';
   }
-  for (let i = 0; i < voteOptions.length; i++) {
-    const option = voteOptions[i];
+  const options = voteOptions.filter((option) => option.label);
+  for (let i = 0; i < options.length; i++) {
+    const option = options[i];
     if (!option.label.trim() || (option.image && !option.label.trim())) {
       errorMessage.voteOptions = '투표 항목은 텍스트를 포함해야 합니다.';
       voteOptionErrorIndex = i;
@@ -31,15 +32,15 @@ export function validatePostForm(
     }
   }
   let count = 0;
-  for (const option of voteOptions) {
+  for (const option of options) {
     if (option.label.trim()) {
       count += 1;
     }
   }
   if (count < 2) {
     errorMessage.voteOptions = '투표 항목을 2개 이상 입력해주세요.';
-    for (let i = 0; i < voteOptions.length; i++) {
-      const option = voteOptions[i];
+    for (let i = 0; i < options.length; i++) {
+      const option = options[i];
       if (!option.label) {
         voteOptionErrorIndex = i;
         break;
@@ -48,8 +49,8 @@ export function validatePostForm(
   }
 
   const labels: string[] = [];
-  for (let i = 0; i < voteOptions.length; i++) {
-    const option = voteOptions[i];
+  for (let i = 0; i < options.length; i++) {
+    const option = options[i];
     if (labels.includes(option.label)) {
       errorMessage.voteOptions =
         '동일한 투표 항목을 중복으로 작성하실 수 없습니다.';
