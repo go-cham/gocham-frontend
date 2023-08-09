@@ -51,8 +51,8 @@ function WritePage() {
     }
 
     addPost({
-      title,
-      content,
+      title: title.trim(),
+      content: content.trim(),
       files: images.map((image) => ({ url: image.url, contentType: 'image' })),
       userId: user?.id,
       expirationTime: getFutureDateTime(deadline),
@@ -60,7 +60,7 @@ function WritePage() {
         .filter((option) => !!option.label)
         .map((option, i) => ({
           sequenceNumber: i,
-          label: option.label,
+          label: option.label.trim(),
           url: option.image || null,
         })),
       worryCategoryId: categoryId,

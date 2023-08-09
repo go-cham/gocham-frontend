@@ -73,7 +73,7 @@ function EditProfilePage() {
       editProfile({
         userId: user.id,
         nickname: formData.nickname,
-        job: formData.job,
+        job: formData.job.trim(),
         worryCategories:
           formData.categoryIds.length > 0 ? formData.categoryIds : [],
         sex: formData.gender,

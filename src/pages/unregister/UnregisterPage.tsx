@@ -33,7 +33,7 @@ function UnregisterPage() {
     if (!reason) {
       return '계정을 삭제하는 이유를 작성해주세요.';
     }
-    if (reason.length < 5) {
+    if (reason.trim().length < 5) {
       return '최소 5자 이상 입력해주세요.';
     }
     if (reason.length >= 5) {
@@ -44,7 +44,7 @@ function UnregisterPage() {
   const handleUnregister = () => {
     unregister({
       userId: user.id,
-      reason: reason,
+      reason: reason.trim(),
     });
   };
 
@@ -66,7 +66,7 @@ function UnregisterPage() {
       localStorage.removeItem('token');
       queryClient.clear();
       alert(
-        '탈퇴가 정상 처리되었습니다.\n고민이 있으면 언제든지 찾아와주세요!'
+        '탈퇴가 정상 처리되었습니다.\n고민이 있으면 언제든지 찾아와주세요!',
       );
       navigate('/');
     }

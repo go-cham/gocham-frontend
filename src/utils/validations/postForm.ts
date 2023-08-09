@@ -1,19 +1,19 @@
 import { PostFormData } from '@/types/post';
 
 export function validatePostForm(
-  formData: PostFormData
+  formData: PostFormData,
 ): [Record<string, string>, number | null] {
   const errorMessage: Record<string, string> = {};
   let voteOptionErrorIndex: null | number = null;
   const { title, content, deadline, categoryId, voteOptions } = formData;
-  if (!title) {
+  if (!title.trim()) {
     errorMessage.title = '제목을 입력해주세요.';
-  } else if (title.length < 2) {
+  } else if (title.trim().length < 2) {
     errorMessage.title = '제목을 최소 2자 이상 입력해주세요.';
   }
-  if (!content) {
+  if (!content.trim()) {
     errorMessage.content = '내용을 입력해주세요.';
-  } else if (content.length < 5) {
+  } else if (content.trim().length < 5) {
     errorMessage.content = '내용을 최소 5자 이상 입력해주세요.';
   }
   if (typeof categoryId !== 'number') {
@@ -24,7 +24,7 @@ export function validatePostForm(
   }
   for (let i = 0; i < voteOptions.length; i++) {
     const option = voteOptions[i];
-    if (option.image && !option.label) {
+    if (!option.label.trim() || (option.image && !option.label.trim())) {
       errorMessage.voteOptions = '투표 항목은 텍스트를 포함해야 합니다.';
       voteOptionErrorIndex = i;
       return [errorMessage, voteOptionErrorIndex];
@@ -32,7 +32,7 @@ export function validatePostForm(
   }
   let count = 0;
   for (const option of voteOptions) {
-    if (option.label) {
+    if (option.label.trim()) {
       count += 1;
     }
   }
@@ -60,5 +60,6 @@ export function validatePostForm(
       labels.push(option.label);
     }
   }
+  console.log(errorMessage.voteOptions);
   return [errorMessage, voteOptionErrorIndex];
 }
