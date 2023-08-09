@@ -10,6 +10,8 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
 
+import { setIntervalX } from '@/utils/set-interval-x-times';
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -63,11 +65,19 @@ function registerValidSW(swUrl: string, config?: Config) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
-      navigator.serviceWorker.register(swUrl).then((registration) =>
+      navigator.serviceWorker.register(swUrl).then((registration) => {
+        setIntervalX(
+          () => {
+            registration.update();
+          },
+          1000,
+          9,
+        );
+
         setInterval(() => {
           registration.update();
-        }, 1000 * 10),
-      );
+        }, 1000 * 10);
+      });
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
