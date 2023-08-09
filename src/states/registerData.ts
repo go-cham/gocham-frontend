@@ -12,8 +12,6 @@ interface RegisterData {
   accept: {
     gochamTerm: boolean;
     personalInformation: boolean;
-    olderThan14: boolean;
-    marketing: boolean;
     allCheck: boolean;
   };
 }
@@ -28,8 +26,6 @@ export const registerDataAtom = atom<RegisterData>({
   accept: {
     gochamTerm: false,
     personalInformation: false,
-    olderThan14: false,
-    marketing: false,
     allCheck: false,
   },
 });

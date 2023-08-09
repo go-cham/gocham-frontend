@@ -1,38 +1,46 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { GetUserResponse } from '@/apis/dto/users/get-user';
 import { GetUserTypeResponse } from '@/apis/dto/users/get-user-type';
 import { axiosInstance } from '@/libs/axios';
 import { User } from '@/types/user';
+import { useEffect } from 'react';
 
 export default function useUser(
   { enabled }: { enabled: boolean } = { enabled: true },
 ) {
-  const { data, error: userTypeError } = useQuery({
-    queryKey: ['user'],
+  const queryClient = useQueryClient();
+
+  const {
+    data,
+    error: userTypeError,
+    isSuccess,
+  } = useQuery({
+    queryKey: ['userType'],
     queryFn: async () => {
       const res = await axiosInstance.get<GetUserTypeResponse>('/user/type');
       return res.data;
     },
     retry: false,
     enabled,
-    refetchInterval: 60 * 1000,
   });
+
+  const userId = data?.userId;
 
   const {
     data: userData,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['user', data?.userId],
+    queryKey: ['user', userId],
     queryFn: async () => {
       const res = await axiosInstance.get<GetUserResponse>(
-        `/user/${data?.userId}`,
+        `/user/${userId || 'fuck'}`,
       );
       return res.data;
     },
     retry: 5,
-    enabled: !!data,
+    enabled: !!userId,
   });
 
   if (userTypeError) {
@@ -69,6 +77,14 @@ export default function useUser(
           image: userData.profileImageUrl,
         }
       : null;
+
+  useEffect(() => {
+    if (isSuccess) {
+      queryClient.refetchQueries({
+        queryKey: ['user', data.userId],
+      });
+    }
+  }, [isSuccess]);
 
   return {
     user,

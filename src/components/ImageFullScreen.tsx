@@ -31,7 +31,7 @@ export default function ImageFullScreen({
   }, []);
 
   return (
-    <div className="absolute left-0 top-0 z-[100] h-[100dvh] w-full bg-text-title-900">
+    <div className="absolute left-0 top-0 z-[100] h-full w-full bg-text-title-900">
       <div className="absolute top-[1rem] z-[100] flex w-full items-center justify-between px-[1.3rem]">
         <DeleteIcon className="invisible" onClick={onClose} />
         <span
@@ -48,6 +48,7 @@ export default function ImageFullScreen({
         />
       </div>
       <Carousel
+        className="absolute top-1/2 -translate-y-1/2"
         showThumbs={false}
         showIndicators={false}
         selectedItem={initialIndex}

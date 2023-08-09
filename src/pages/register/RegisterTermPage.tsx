@@ -14,8 +14,7 @@ function RegisterTermPage() {
   const [registerData, setRegisterData] = useAtom(registerDataAtom);
   const { accept } = registerData;
 
-  const nextEnabled =
-    accept.gochamTerm && accept.personalInformation && accept.olderThan14;
+  const nextEnabled = accept.gochamTerm && accept.personalInformation;
 
   const handleNext = () => {
     navigate('/collect-information');
@@ -37,20 +36,13 @@ function RegisterTermPage() {
         <section className="mt-[3.5rem]">
           <TermCheckbox
             text="모두 동의합니다."
-            checked={
-              accept.gochamTerm &&
-              accept.personalInformation &&
-              accept.olderThan14 &&
-              accept.marketing
-            }
+            checked={accept.gochamTerm && accept.personalInformation}
             onCheck={(checked) =>
               setRegisterData({
                 ...registerData,
                 accept: {
                   gochamTerm: checked,
                   personalInformation: checked,
-                  olderThan14: checked,
-                  marketing: checked,
                   allCheck: checked,
                 },
               })
@@ -60,7 +52,7 @@ function RegisterTermPage() {
           <div className="space-y-[1.3rem]">
             <TermCheckbox
               text="[필수] 고민의 참견 이용약관 동의"
-              link="https://sharechang.notion.site/ac3f06fe803b497681f807f3df65fbe2"
+              link="https://sharechang.notion.site/2ad95f818e6a4df29afa5ecdf87e4052?pvs=4"
               checked={accept.gochamTerm}
               onCheck={(checked) => {
                 setRegisterData({
@@ -74,7 +66,7 @@ function RegisterTermPage() {
             />
             <TermCheckbox
               text="[필수] 개인정보 수집 및 이용 동의"
-              link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
+              link="https://sharechang.notion.site/47d2c9861a704ef0aadf743856c97335?pvs=4"
               checked={accept.personalInformation}
               onCheck={(checked) => {
                 setRegisterData({
@@ -82,33 +74,6 @@ function RegisterTermPage() {
                   accept: {
                     ...registerData.accept,
                     personalInformation: checked,
-                  },
-                });
-              }}
-            />
-            <TermCheckbox
-              text="[필수] 만 14세 이상 입니다."
-              checked={accept.olderThan14}
-              onCheck={(checked) => {
-                setRegisterData({
-                  ...registerData,
-                  accept: {
-                    ...registerData.accept,
-                    olderThan14: checked,
-                  },
-                });
-              }}
-            />
-            <TermCheckbox
-              text="[선택] 마케팅 목적 이용 동의"
-              link="https://sharechang.notion.site/c18f70f5ee40492fb8cdb89336014097"
-              checked={accept.marketing}
-              onCheck={(checked) => {
-                setRegisterData({
-                  ...registerData,
-                  accept: {
-                    ...registerData.accept,
-                    marketing: checked,
                   },
                 });
               }}

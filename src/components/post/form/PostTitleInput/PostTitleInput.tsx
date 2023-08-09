@@ -82,7 +82,7 @@ export default function PostTitleInput({
       />
       <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center space-x-[0.8rem]">
         {showReset && (
-          <button onClick={handleReset}>
+          <button onClick={handleReset} tabIndex={-1}>
             <DeleteIcon
               className="h-[1.6rem] w-[1.6rem] cursor-pointer rounded-full bg-background-button-300"
               color="white"

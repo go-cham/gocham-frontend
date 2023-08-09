@@ -16,7 +16,7 @@ export default function useEditProfile() {
     },
     onSuccess: () => {
       queryClient.refetchQueries({
-        queryKey: ['user'],
+        queryKey: ['userType'],
       });
       queryClient.refetchQueries({
         queryKey: ['posts'],
