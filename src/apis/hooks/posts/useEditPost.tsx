@@ -10,14 +10,11 @@ export default function useEditPost() {
     mutationFn: async (data: EditPostRequest) => {
       const res = await axiosInstance.patch<EditPostResponse>(
         `/worries/${data.id}`,
-        data
+        data,
       );
       return res.data;
     },
     onSuccess: (data) => {
-      queryClient.refetchQueries({
-        queryKey: ['posts'],
-      });
       queryClient.refetchQueries({
         queryKey: ['post', data.id],
       });

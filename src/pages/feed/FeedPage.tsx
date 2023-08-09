@@ -27,7 +27,7 @@ function FeedPage() {
   });
   const { chooseOption } = useChooseOption();
   const [selectedVoteOptionId, setSelectedVoteOptionId] = useAtom(
-    selectedVoteOptionIdAtom
+    selectedVoteOptionIdAtom,
   );
   const setVoteAnimationId = useSetAtom(voteAnimationIdAtom);
   const scrollRef = useScrollRestoration<HTMLUListElement>('feed');
@@ -48,6 +48,10 @@ function FeedPage() {
 
   useEffect(() => {
     setSelectedVoteOptionId(null);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('navAfterEdit', route || '');
   }, []);
 
   return (
