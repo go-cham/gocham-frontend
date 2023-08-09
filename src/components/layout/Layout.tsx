@@ -30,7 +30,7 @@ export default function Layout({ children }: LayoutProps) {
       <img
         src={text}
         alt="text"
-        className="fixed left-[5.5%] top-[8vh] z-10 hidden w-[20%] xl:block"
+        className="fixed left-[5.5%] top-[8vh] z-10 hidden w-[42rem] xl:block"
       />
       <img
         src={character}
