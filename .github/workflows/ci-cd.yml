@@ -6,10 +6,10 @@ on:
 
 env:
   NODE_ENV: production
-  S3_BUCKET_NAME: ${{ github.head_ref == 'main' && 'gocham-files' || 'gocham-dev-files' }}
-  PROJECT_NAME: ${{ github.head_ref == 'main' && 'prod-gocham-service-web-react' || 'dev-gocham-service-web-react' }} # S3 버킷 내 폴더 이름입니다. 임의로 정하면 알아서 생성해줍니다.
-  AWS_CODE_DEPLOY_APPLICATION_NAME: ${{ github.head_ref == 'main' && 'prod-service-web-codedeploy' || 'dev-service-web-codedeploy' }}
-  AWS_CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: ${{ github.head_ref == 'main' && 'prod-service-web-group' || 'dev-service-web-group' }}
+  S3_BUCKET_NAME: ${{ github.ref == 'refs/heads/main' && 'gocham-files' || 'gocham-dev-files' }}
+  PROJECT_NAME: ${{ github.ref == 'refs/heads/main' && 'prod-gocham-service-web-react' || 'dev-gocham-service-web-react' }} # S3 버킷 내 폴더 이름입니다. 임의로 정하면 알아서 생성해줍니다.
+  AWS_CODE_DEPLOY_APPLICATION_NAME: ${{ github.ref == 'refs/heads/main' && 'prod-service-web-codedeploy' || 'dev-service-web-codedeploy' }}
+  AWS_CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: ${{ github.ref == 'refs/heads/main' && 'prod-service-web-group' || 'dev-service-web-group' }}
 
 
 jobs:
@@ -25,13 +25,13 @@ jobs:
           node-version: 16
 
       - name: Build React app
-        run: ${{ github.head_ref == 'main' && 'yarn run build-prod' || 'yarn run build-dev' }}
+        run: ${{ github.ref == 'refs/heads/main' && 'yarn run build-prod' || 'yarn run build-dev' }}
 
       - name: Copy appspec.yml
-        run: \cp -f ./appspec/${{ github.head_ref == 'main' && 'appspec-prod.yml' || 'appspec-dev.yml' }} ./appspec.yml && rm -rf ./appspec
+        run: \cp -f ./appspec/${{ github.ref == 'refs/heads/main' && 'appspec-prod.yml' || 'appspec-dev.yml' }} ./appspec.yml && rm -rf ./appspec
 
       - name: Copy deploy.sh
-        run: \cp -f ${{ github.head_ref == 'main' && './deploy/deploy-prod.sh' || './deploy/deploy-dev.sh' }} ./deploy.sh && rm -rf ./deploy
+        run: \cp -f ${{ github.ref == 'refs/heads/main' && './deploy/deploy-prod.sh' || './deploy/deploy-dev.sh' }} ./deploy.sh && rm -rf ./deploy
 
       - name: Make zip file
         run: zip -r build.zip . -x "node_modules/*" "coverage/*" "src/*" "test/*" "README.md" "*.git*"
@@ -40,8 +40,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ github.head_ref == 'main' && secrets.AWS_ACCESS_KEY_ID || secrets.DEV_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ github.head_ref == 'main' && secrets.AWS_SECRET_ACCESS_KEY || secrets.DEV_AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ github.ref == 'refs/heads/main' && secrets.AWS_ACCESS_KEY_ID || secrets.DEV_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ github.ref == 'refs/heads/main' && secrets.AWS_SECRET_ACCESS_KEY || secrets.DEV_AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Get current time
@@ -64,5 +64,5 @@ jobs:
           fields: repo, ref, workflow, message, author
           author_name: Github Actions 서비스 웹
         env:
-          SLACK_WEBHOOK_URL: ${{ github.head_ref == 'main' && secrets.SLACK_WEBHOOK_PROD || secrets.SLACK_WEBHOOK_DEV }}
+          SLACK_WEBHOOK_URL: ${{ github.ref == 'refs/heads/main' && secrets.SLACK_WEBHOOK_PROD || secrets.SLACK_WEBHOOK_DEV }}
         if: always()
