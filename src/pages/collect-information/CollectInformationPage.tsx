@@ -41,7 +41,7 @@ function CollectInformationPage() {
     });
     await editProfile({
       userId: user.id,
-      job,
+      job: job.trim(),
       residenceId,
       nickname,
       sex: gender,
