@@ -4,8 +4,9 @@ import HomeIcon from '@/components/icons/HomeIcon';
 import PlusIcon from '@/components/icons/PlusIcon';
 import ProfileIcon from '@/components/icons/ProfileIcon';
 import { RouteURL } from '@/constants/route-url';
-import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
 import { customColors } from '@/styles/colors';
+import BackgroundImage from '@/components/layout/BottomAppBar/BackgroundImage';
+import { isMobile } from 'react-device-detect';
 
 interface BottomAppBarProps {
   currentPage: 'home' | 'user';
@@ -38,11 +39,7 @@ export default function BottomAppBar({
 
   return (
     <footer className="absolute bottom-0 z-10 w-full">
-      <img
-        className="shadow-dock mx-auto w-full"
-        src={backgroundImage}
-        alt="gnb-background"
-      />
+      <BackgroundImage className="shadow-dock relative top-[0.5vh] mx-auto scale-[1.15]" />
       <div className="absolute -top-[0.6rem] flex w-full items-end justify-evenly">
         <button onClick={handleHomeIconClick}>
           <HomeIcon
@@ -51,6 +48,9 @@ export default function BottomAppBar({
                 ? customColors.text.subExplain['400']
                 : customColors.text.subTitle['700']
             }
+            className={`${
+              isMobile ? '' : 'relative bottom-[0.5rem] scale-[1.2]'
+            }`}
           />
         </button>
 
@@ -58,7 +58,12 @@ export default function BottomAppBar({
           onClick={handleAddIconClick}
           className="flex aspect-square w-[14.5%] items-center justify-center rounded-full bg-mainSub-main-500"
         >
-          <PlusIcon color="white" className="h-[3.2rem] w-[3.2rem]" />
+          <PlusIcon
+            color="white"
+            className={`${
+              isMobile ? 'h-[3.2rem] w-[3.2rem]' : 'h-[4.1rem] w-[4.1rem]'
+            }`}
+          />
         </button>
 
         <button
@@ -71,6 +76,9 @@ export default function BottomAppBar({
                 ? customColors.text.subTitle['700']
                 : customColors.text.subExplain['400']
             }
+            className={`${
+              isMobile ? '' : 'relative bottom-[0.5rem] scale-[1.2]'
+            }`}
           />
         </button>
       </div>

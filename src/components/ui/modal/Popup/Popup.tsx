@@ -27,7 +27,7 @@ export default function Popup({
 
   return (
     <>
-      <div className="fixed left-0 top-0 z-[99] h-screen w-screen bg-black opacity-20" />
+      <div className="absolute left-0 top-0 z-[99] h-screen w-screen bg-black opacity-20" />
       <div className="absolute left-1/2 top-1/2 z-[999] flex w-[32.8rem] -translate-x-1/2 -translate-y-1/2 flex-col items-center rounded-[0.7rem] bg-white px-[1.1rem] py-[1.3rem]">
         {useCancelIcon && (
           <CloseIcon
