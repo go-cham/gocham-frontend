@@ -94,7 +94,7 @@ export default function PostForm({
             투표 항목
           </div>
           {formData.voteOptions
-            .filter((option) => option.label)
+            .filter((option) => option.label !== null)
             .map((_, i) => (
               <PostVoteInput
                 key={i}
