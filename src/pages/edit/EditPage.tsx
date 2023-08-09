@@ -10,8 +10,10 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Popup from '@/components/ui/modal/Popup';
 import withAuth from '@/components/withAuth';
 import { PostFormData } from '@/types/post';
+import { useQueryClient } from '@tanstack/react-query';
 
 function EditPage() {
+  const queryClient = useQueryClient();
   const params = useParams();
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ function EditPage() {
         categoryId !== post.worryCategory.id ||
         images.length !== post.worryFiles.length ||
         !post.worryFiles.every((file) =>
-          images.map((image) => image.url).includes(file.url)
+          images.map((image) => image.url).includes(file.url),
         ))
     ) {
       setHasChanges(true);
@@ -71,7 +73,14 @@ function EditPage() {
 
   useEffect(() => {
     if (isSuccess && data) {
-      navigate(`/feed/${data.id}`);
+      queryClient
+        .refetchQueries({
+          queryKey: ['posts'],
+        })
+        .then(() => {
+          const to = localStorage.getItem('navAfterEdit');
+          navigate(`/feed/${data.id}${to ? `/${to}` : ''}`);
+        });
     }
   }, [isSuccess, data]);
 
@@ -84,7 +93,7 @@ function EditPage() {
           1000 -
           new Date(createdAt).getTime()) /
           1000 /
-          3600
+          3600,
       );
     }
   };
