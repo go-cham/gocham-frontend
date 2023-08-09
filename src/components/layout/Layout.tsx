@@ -30,7 +30,7 @@ export default function Layout({ children }: LayoutProps) {
       <img
         src={text}
         alt="text"
-        className="fixed left-[5.5%] top-[8rem] z-10 hidden w-[40rem] xl:block"
+        className="fixed left-[5.5%] top-[8vh] z-10 hidden w-[20%] xl:block"
       />
       <img
         src={character}
@@ -38,7 +38,7 @@ export default function Layout({ children }: LayoutProps) {
         className="fixed bottom-0 left-0 hidden w-[45%] xl:block"
       />
       {isMobile ? (
-        <div className="relative mx-auto h-full w-full bg-background-mainBg-0">
+        <div className="relative mx-auto h-full w-full bg-white">
           {children}
         </div>
       ) : (
@@ -54,7 +54,7 @@ export default function Layout({ children }: LayoutProps) {
           >
             <Frame className="pointer-events-none absolute left-0 top-0 z-[9999]" />
             <div className="absolute left-[24.6%] top-[2.4rem] h-[5rem] w-[83.0%] bg-white" />
-            <div className="absolute left-[24.4%] top-[6.4rem] h-[92.4rem] w-[84%] overflow-hidden bg-white">
+            <div className="absolute left-[24.4%] top-[6.3rem] h-[92.4rem] w-[84%] overflow-hidden bg-white">
               {children}
             </div>
           </div>
