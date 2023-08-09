@@ -37,7 +37,7 @@ export default function UserProfile() {
           />
         ) : (
           <span className="flex h-[3.6rem] w-[3.6rem] items-center justify-center rounded-full bg-[#f4f4f5] text-[#b0b2b8] font-system-heading2">
-            {String(age)[0] + '0'}
+            {String(age).slice(0, -1) + '0'}
           </span>
         )}
         <span className="text-[#2a2d37] font-custom-heading1">
