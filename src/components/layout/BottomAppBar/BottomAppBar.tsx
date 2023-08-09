@@ -4,8 +4,8 @@ import HomeIcon from '@/components/icons/HomeIcon';
 import PlusIcon from '@/components/icons/PlusIcon';
 import ProfileIcon from '@/components/icons/ProfileIcon';
 import { RouteURL } from '@/constants/route-url';
-import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
 import { customColors } from '@/styles/colors';
+import BackgroundImage from '@/components/layout/BottomAppBar/BackgroundImage';
 
 interface BottomAppBarProps {
   currentPage: 'home' | 'user';
@@ -38,11 +38,7 @@ export default function BottomAppBar({
 
   return (
     <footer className="absolute bottom-0 z-10 w-full">
-      <img
-        className="shadow-dock mx-auto w-full"
-        src={backgroundImage}
-        alt="gnb-background"
-      />
+      <BackgroundImage className="shadow-dock relative top-[0.3rem] mx-auto scale-[1.15]" />
       <div className="absolute -top-[0.6rem] flex w-full items-end justify-evenly">
         <button onClick={handleHomeIconClick}>
           <HomeIcon
