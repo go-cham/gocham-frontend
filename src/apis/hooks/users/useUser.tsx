@@ -43,14 +43,13 @@ export default function useUser(
     enabled: !!userId,
   });
 
-  if (userTypeError) {
-    return {
-      user: null,
-      isLoading: false,
-      error: userTypeError,
-      status: 'unauthenticated',
-    };
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      queryClient.refetchQueries({
+        queryKey: ['user', data.userId],
+      });
+    }
+  }, [isSuccess]);
 
   const user: User | null =
     data && userData
@@ -78,13 +77,14 @@ export default function useUser(
         }
       : null;
 
-  useEffect(() => {
-    if (isSuccess) {
-      queryClient.refetchQueries({
-        queryKey: ['user', data.userId],
-      });
-    }
-  }, [isSuccess]);
+  if (userTypeError) {
+    return {
+      user: null,
+      isLoading: false,
+      error: userTypeError,
+      status: 'unauthenticated',
+    };
+  }
 
   return {
     user,
