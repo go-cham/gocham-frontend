@@ -45,8 +45,9 @@ export default function PostCardList({
 
   if (isLoading || !posts) {
     // 로딩 중
+
     return (
-      <ul className="flex w-full flex-col items-center space-y-[1.7rem] px-[2.5rem] pt-[8.5rem]">
+      <ul className="flex w-full flex-col items-center space-y-[1.7rem] px-[2.5rem] pt-[10.5rem]">
         {Array(10)
           .fill(null)
           .map((_, index) => (
