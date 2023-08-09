@@ -235,6 +235,7 @@ export default function CommentPage() {
               <div className="flex items-center justify-between px-[2.5rem]">
                 <PostUserProfile
                   isAdmin={post.user.email === ADMIN_EMAIL}
+                  image={post.user.profileImageUrl}
                   nickname={post.user.nickname}
                   age={calculateAgeFromBirthday(post.user.birthDate)}
                 />
