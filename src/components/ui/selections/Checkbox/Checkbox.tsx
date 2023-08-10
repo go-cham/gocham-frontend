@@ -21,7 +21,7 @@ export default function Checkbox({
       className={twMerge(
         'flex h-[2.4rem] w-[2.4rem]  cursor-pointer items-center justify-center rounded-[0.3rem] border border-background-dividerLine-300',
         checked && 'border-none bg-mainSub-main-500',
-        className
+        className,
       )}
     >
       <input

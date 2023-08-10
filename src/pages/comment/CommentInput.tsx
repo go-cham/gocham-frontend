@@ -57,7 +57,7 @@ export default function CommentInput({ onSubmit }: CommentInputProps) {
     setTimeout(() => {
       if (commentState.replyingTo?.commentId) {
         const comment = document.getElementById(
-          `comment-${commentState.replyingTo.commentId}`
+          `comment-${commentState.replyingTo.commentId}`,
         );
         const input = document.getElementById('comment-input-wrapper');
         if (comment && input) {

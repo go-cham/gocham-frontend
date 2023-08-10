@@ -45,7 +45,7 @@ export default function PostContentInput({
         className={twMerge(
           'mt-[1.1rem] resize-none break-all rounded-[0rem] border-b-[0.2rem] border-text-explain-500 bg-transparent pb-[0.7rem] font-system-body4 placeholder:text-text-subExplain-400 placeholder:font-system-body3 focus:-mb-[0.2rem] focus:border-b-[0.4rem] focus:border-text-subTitle-700',
           errorMessage &&
-            'border-semantic-warn-500 focus:border-semantic-warn-500'
+            'border-semantic-warn-500 focus:border-semantic-warn-500',
         )}
         onChange={handleChange}
         value={content}

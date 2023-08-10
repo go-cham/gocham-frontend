@@ -11,7 +11,7 @@ export default function PostSummarySkeleton({
     <div
       className={twMerge(
         'w-full bg-white px-[2.5rem] pb-[2.3rem] pt-[2.1rem]',
-        className
+        className,
       )}
     >
       <div className="flex items-center space-x-[0.5rem]">

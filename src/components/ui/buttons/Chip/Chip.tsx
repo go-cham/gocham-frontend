@@ -24,7 +24,7 @@ export default function Chip({
           : 'bg-mainSub-main-100 text-mainSub-main-500',
 
         variant === 'delete' ? 'pr-[0.6rem]' : 'pr-[1rem]',
-        className
+        className,
       )}
     >
       {label}

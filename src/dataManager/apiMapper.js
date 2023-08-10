@@ -1,4 +1,4 @@
-const API = process.env.REACT_APP_SERVER_API;
+const API = import.meta.env.VITE_SERVER_API;
 
 export const EndPoint = {
   TEST: `${API}/test`,

@@ -26,10 +26,10 @@ export default function usePullToRefresh<U extends Element>({
       mainElement: `#${ref.current.id}`,
       triggerElement: `#${ref.current.id}`,
       iconRefreshing: ReactDOMServer.renderToString(
-        <LoadingSpinner className="mx-auto scale-75" />
+        <LoadingSpinner className="mx-auto scale-75" />,
       ),
       instructionsReleaseToRefresh: ReactDOMServer.renderToString(
-        <LoadingSpinner className="mx-auto scale-75" />
+        <LoadingSpinner className="mx-auto scale-75" />,
       ),
       instructionsPullToRefresh: ' ',
       instructionsRefreshing: ' ',

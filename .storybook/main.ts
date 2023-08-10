@@ -1,31 +1,28 @@
-import type { StorybookConfig } from '@storybook/react-webpack5';
-// @ts-ignore
-import path from 'path';
+import type { StorybookConfig } from '@storybook/react-vite';
+import { dirname, join } from 'path';
 
+/**
+ * This function is used to resolve the absolute path of a package.
+ * It is needed in projects that use Yarn PnP or are set up within a monorepo.
+ */
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, 'package.json')));
+}
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/preset-create-react-app',
-    '@storybook/addon-interactions',
+    getAbsolutePath('@storybook/addon-links'),
+    getAbsolutePath('@storybook/addon-essentials'),
+    getAbsolutePath('@storybook/addon-onboarding'),
+    getAbsolutePath('@storybook/addon-interactions'),
   ],
   framework: {
-    name: '@storybook/react-webpack5',
+    name: getAbsolutePath('@storybook/react-vite'),
     options: {},
   },
   docs: {
     autodocs: 'tag',
   },
   staticDirs: ['../public'],
-  webpackFinal: async (config, { configType }) => {
-    if (config.resolve) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        '@': path.resolve(__dirname, '../src'),
-      };
-    }
-    return config;
-  },
 };
 export default config;

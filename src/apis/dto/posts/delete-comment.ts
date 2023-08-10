@@ -14,7 +14,7 @@ export type DeleteCommentResponse = {
       etc: string | null;
       url: string;
       contentType: string;
-    }
+    },
   ];
   user: {
     id: number;

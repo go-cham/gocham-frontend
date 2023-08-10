@@ -13,7 +13,7 @@ export default function PostCardSkeleton({
     <div
       className={twMerge(
         'w-full rounded-[7px] border border-background-subBg-100 bg-white px-[1.7rem] py-[1.3rem]',
-        className
+        className,
       )}
     >
       {hasProfile && (

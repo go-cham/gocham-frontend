@@ -1,10 +1,10 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 import { GetUserResponse } from '@/apis/dto/users/get-user';
 import { GetUserTypeResponse } from '@/apis/dto/users/get-user-type';
 import { axiosInstance } from '@/libs/axios';
 import { User } from '@/types/user';
-import { useEffect } from 'react';
 
 export default function useUser(
   { enabled }: { enabled: boolean } = { enabled: true },

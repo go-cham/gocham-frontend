@@ -16,7 +16,7 @@ export default function useChooseOption() {
         {
           userId,
           worryChoiceId,
-        }
+        },
       );
       return res.data;
     },

@@ -12,7 +12,7 @@ export default function useAcceptTerms() {
     mutationFn: async (data: AcceptTermsRequest) => {
       const res = await axiosInstance.patch<AcceptTermsResponse>(
         '/user/acceptance-of-terms',
-        data
+        data,
       );
       return res.data;
     },

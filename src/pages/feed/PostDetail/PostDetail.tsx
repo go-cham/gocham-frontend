@@ -17,6 +17,7 @@ import Dropdown from '@/components/ui/Dropdown';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Popup from '@/components/ui/modal/Popup';
 import Snackbar from '@/components/ui/modal/Snackbar';
+import { ADMIN_EMAIL } from '@/constants/admin';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { customColors } from '@/styles/colors';
 import { Post } from '@/types/post';
@@ -25,7 +26,6 @@ import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 
 import PostVote from './PostVote';
-import { ADMIN_EMAIL } from '@/constants/admin';
 
 interface PostDetailProps {
   post: Post;
@@ -135,7 +135,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   const isClosed = remainingTime === 'closed';
 
   const handleShare = () => {
-    const url = `${process.env.REACT_APP_BASE_URL}/feed/${post.id}`;
+    const url = `${import.meta.env.VITE_BASE_URL}/feed/${post.id}`;
     if (isMobile) {
       if (window.isSecureContext) {
         const shareData = {

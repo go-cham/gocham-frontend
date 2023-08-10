@@ -32,7 +32,7 @@ export default function useGetPosts({
         return res.data;
       } else {
         const res = await axios.get<GetPostsResponse>('/worries', {
-          baseURL: process.env.REACT_APP_SERVER_API,
+          baseURL: import.meta.env.VITE_SERVER_API,
           params: {
             sort: 'DESC',
             take: 10,
@@ -67,7 +67,7 @@ export default function useGetPosts({
         content: post.content,
         expirationTime: post.expirationTime,
         worryFiles: post.worryFiles.filter(
-          (file) => file.status === 'activated'
+          (file) => file.status === 'activated',
         ),
         user: {
           ...post.user,

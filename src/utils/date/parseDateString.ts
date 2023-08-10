@@ -1,5 +1,5 @@
 export function parseDateString(
-  dateString: string
+  dateString: string,
 ): { year: string; month: string; day: string } | null {
   const date = new Date(dateString);
 
