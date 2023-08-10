@@ -1,8 +1,9 @@
-import character from '@/images/background/character.svg';
-import text from '@/images/background/text.svg';
-import Frame from '@/components/layout/Frame';
 import { useEffect, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
+
+import Frame from '@/components/layout/Frame';
+import character from '@/images/background/character.svg';
+import text from '@/images/background/text.svg';
 
 interface LayoutProps {
   children: React.ReactNode;

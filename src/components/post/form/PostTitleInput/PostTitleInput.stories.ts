@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import PostTitleInput from 'src/components/post/form/PostTitleInput';
+
+import PostTitleInput from '@/components/post/form/PostTitleInput';
 
 const meta: Meta<typeof PostTitleInput> = {
   title: 'Post/inputs/PostTitleInput',

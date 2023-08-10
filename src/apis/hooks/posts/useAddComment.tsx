@@ -13,7 +13,7 @@ export default function useAddComment() {
     mutationFn: async (data: AddCommentRequest) => {
       const res = await axiosInstance.post<AddCommentResponse>(
         '/worry-reply',
-        data
+        data,
       );
       return res.data;
     },

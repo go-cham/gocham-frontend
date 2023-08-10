@@ -13,7 +13,7 @@ export default function useGetChoiceOptions(postId: number) {
           params: {
             worryId: postId,
           },
-        }
+        },
       );
       return res.data;
     },

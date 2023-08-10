@@ -33,7 +33,7 @@ export default function RegionJobCategoryForm({
   const handleResidenceChange = (residenceId: number) => {
     setIsDirty({ ...isDirty, residenceId: true });
     const selected = residenceOptions.find(
-      (option) => option.value === residenceId
+      (option) => option.value === residenceId,
     );
     if (selected) {
       setFormData({
@@ -61,14 +61,14 @@ export default function RegionJobCategoryForm({
 
   const handleCategoryDelete = (categoryId: number) => {
     const newCategories = formData.categoryIds.filter(
-      (id) => id !== categoryId
+      (id) => id !== categoryId,
     );
     setFormData({ ...formData, categoryIds: newCategories });
   };
 
   useEffect(() => {
     const isValid = Boolean(
-      formData.residenceId && formData.job && isDirty.job && !jobErrorMessage
+      formData.residenceId && formData.job && isDirty.job && !jobErrorMessage,
     );
 
     onChange(formData, isValid);
@@ -91,7 +91,7 @@ export default function RegionJobCategoryForm({
         onChange={handleResidenceChange}
         value={
           residenceOptions.find(
-            (option) => option.value === formData.residenceId
+            (option) => option.value === formData.residenceId,
           )?.label
         }
         highlight={true}
@@ -109,7 +109,7 @@ export default function RegionJobCategoryForm({
           label="관심 카테고리"
           placeholder="최대 4개 선택 가능"
           options={categoryOptions.filter(
-            (option) => !formData.categoryIds.includes(option.value)
+            (option) => !formData.categoryIds.includes(option.value),
           )}
           wrapperClassName="w-full"
           onChange={handleCategorySelect}

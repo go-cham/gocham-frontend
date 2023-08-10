@@ -67,7 +67,7 @@ export default function Select({
       <span
         className={twMerge(
           'text-text-subTitle-700 font-custom-subheading',
-          labelClassName
+          labelClassName,
         )}
       >
         {label}
@@ -80,14 +80,14 @@ export default function Select({
           'mt-[0.3rem] flex cursor-pointer items-center justify-between border-b-[0.2rem] border-text-explain-500 pb-[0.2rem]',
           menuOpen && '-mb-[0.2rem] border-b-[0.4rem] border-text-subTitle-700',
           'focus:-mb-[0.2rem] focus:border-b-[0.4rem]',
-          errorMessage && 'border-semantic-warn-500'
+          errorMessage && 'border-semantic-warn-500',
         )}
       >
         <span
           className={twMerge(
             'select-none text-text-subExplain-400 font-system-body4',
             value && 'text-text-title-900 font-system-body4',
-            readOnly && 'text-text-explain-500'
+            readOnly && 'text-text-explain-500',
           )}
         >
           {value || placeholder}

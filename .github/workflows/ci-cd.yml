@@ -25,7 +25,7 @@ jobs:
           node-version: 16
 
       - name: Build React app
-        run: ${{ github.ref == 'refs/heads/main' && 'yarn run build-prod' || 'yarn run build-dev' }}
+        run: ${{ github.ref == 'refs/heads/main' && 'yarn run build:prod' || 'yarn run build:staging' }}
 
       - name: Copy appspec.yml
         run: \cp -f ./appspec/${{ github.ref == 'refs/heads/main' && 'appspec-prod.yml' || 'appspec-dev.yml' }} ./appspec.yml && rm -rf ./appspec

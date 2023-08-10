@@ -1,12 +1,12 @@
+import { isMobile } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
 
 import HomeIcon from '@/components/icons/HomeIcon';
 import PlusIcon from '@/components/icons/PlusIcon';
 import ProfileIcon from '@/components/icons/ProfileIcon';
 import { RouteURL } from '@/constants/route-url';
-import { customColors } from '@/styles/colors';
-import { isMobile } from 'react-device-detect';
 import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
+import { customColors } from '@/styles/colors';
 
 interface BottomAppBarProps {
   currentPage: 'home' | 'user';

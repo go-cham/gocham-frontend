@@ -14,7 +14,7 @@ export type DeletePostResponse = {
       etc: string | null;
       url: string;
       contentType: string;
-    }
+    },
   ];
   user: {
     id: number;

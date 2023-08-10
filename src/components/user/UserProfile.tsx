@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
 import useUser from '@/apis/hooks/users/useUser';
+import { ADMIN_EMAIL } from '@/constants/admin';
 import { RouteURL } from '@/constants/route-url';
 import { calculateAge } from '@/utils/date/calculateAge';
-import { ADMIN_EMAIL } from '@/constants/admin';
 
 export default function UserProfile() {
   const navigate = useNavigate();

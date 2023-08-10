@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import * as serviceWorkerRegistration from '../serviceWorkerRegistration';
 
 export default function useUpdate() {

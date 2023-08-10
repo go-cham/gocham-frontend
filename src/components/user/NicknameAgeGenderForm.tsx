@@ -97,7 +97,7 @@ export default function NicknameAgeGenderForm({
         formData.birthday &&
         formData.gender &&
         !errorMessage.nickname &&
-        !errorMessage.birthday
+        !errorMessage.birthday,
     );
 
     onChange(formData, isValid);

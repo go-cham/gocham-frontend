@@ -8,7 +8,7 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
 const { customColors } = require('./src/styles/colors');
 
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {
       xl: '1300px',

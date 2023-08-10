@@ -26,7 +26,7 @@ export default function Button({
         variant === 'primary'
           ? 'bg-mainSub-main-500 text-white hover:bg-mainSub-mainPush-600 active:bg-mainSub-mainPush-600'
           : 'bg-mainSub-main-100 text-mainSub-main-500 hover:bg-mainSub-mainPush-200 active:bg-mainSub-mainPush-200',
-        className
+        className,
       )}
       disabled={disabled}
     >

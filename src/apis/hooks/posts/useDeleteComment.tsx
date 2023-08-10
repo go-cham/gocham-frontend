@@ -9,7 +9,7 @@ export default function useDeleteComment() {
     mutationKey: ['deleteComment'],
     mutationFn: async (id: number) => {
       const res = await axiosInstance.patch<DeleteCommentResponse>(
-        `/worry-reply/${id}/soft-delete`
+        `/worry-reply/${id}/soft-delete`,
       );
       return res.data;
     },

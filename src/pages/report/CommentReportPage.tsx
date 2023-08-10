@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
@@ -8,7 +9,6 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
 import { reportCommentOption } from '@/constants/options';
-import { AxiosError } from 'axios';
 
 function CommentReportPage() {
   const { id } = useParams();

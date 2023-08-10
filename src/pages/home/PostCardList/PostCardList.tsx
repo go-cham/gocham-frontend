@@ -1,5 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
@@ -7,9 +8,8 @@ import PostCard from '@/components/post/PostCard';
 import PostCardSkeleton from '@/components/ui/skeleton/PostCardSkeleton';
 import { UserType } from '@/constants/user-type';
 import usePullToRefresh from '@/hooks/usePullToRefresh';
-import Banner from '@/images/banner.svg';
-import { isMobile } from 'react-device-detect';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
+import Banner from '@/images/banner.svg';
 
 interface PostCardListProps {
   authorId?: number;

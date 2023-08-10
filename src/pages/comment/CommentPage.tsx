@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import { useAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import useAddComment from '@/apis/hooks/posts/useAddComment';
@@ -17,16 +18,15 @@ import Popup from '@/components/ui/modal/Popup/Popup';
 import Snackbar from '@/components/ui/modal/Snackbar';
 import CommentSkeleton from '@/components/ui/skeleton/CommentSkeleton';
 import PostSummarySkeleton from '@/components/ui/skeleton/PostSummarySkeleton';
+import { ADMIN_EMAIL } from '@/constants/admin';
 import CommentInput from '@/pages/comment/CommentInput';
 import CommentList from '@/pages/comment/CommentList';
 import ImageList from '@/pages/comment/ImageList';
 import { PostDetailContent } from '@/pages/feed/PostDetail/PostDetail';
 import { commentStateAtom } from '@/states/comment';
 import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
-import { getRemainingTime } from '@/utils/getRemainingTime';
-import { ADMIN_EMAIL } from '@/constants/admin';
-import { isMobile } from 'react-device-detect';
 import { isIOS } from '@/utils/environment';
+import { getRemainingTime } from '@/utils/getRemainingTime';
 
 enum MENU {
   Edit,

@@ -9,7 +9,7 @@ export default function CommentSkeleton({ className }: CommentSkeletonProps) {
     <div
       className={twMerge(
         'w-full border-b border-background-subBg-100 bg-white px-[1.5rem] pb-[1.5rem] pt-[1.9rem]',
-        className
+        className,
       )}
     >
       <div className="flex items-center space-x-[0.5rem]">

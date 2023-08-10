@@ -12,7 +12,7 @@ export default function useReportPost() {
     mutationFn: async (data: ReportPostRequest) => {
       const res = await axiosInstance.post<ReportPostResponse>(
         '/worry-report',
-        data
+        data,
       );
       return res.data;
     },

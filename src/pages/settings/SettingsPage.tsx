@@ -31,7 +31,7 @@ function SettingsPage() {
     },
     {
       title: '문의하기',
-      link: 'https://docs.google.com/forms/d/e/1FAIpQLSc9VqRzefKQqp_kO6lYL92TXfZw8TUhWjcLeBW7CcaLmddPMA/viewform?usp=sf_link'
+      link: 'https://docs.google.com/forms/d/e/1FAIpQLSc9VqRzefKQqp_kO6lYL92TXfZw8TUhWjcLeBW7CcaLmddPMA/viewform?usp=sf_link',
     },
     {
       title: '로그아웃',

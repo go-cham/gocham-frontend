@@ -25,7 +25,7 @@ export default function InputWrapper({
         <label
           className={twMerge(
             'mb-[0.4rem] text-text-subTitle-700 font-custom-subheading',
-            labelClassName
+            labelClassName,
           )}
         >
           {label}
@@ -40,7 +40,7 @@ export default function InputWrapper({
           successMessage &&
             'border-semantic-success-600 focus-within:border-semantic-success-600',
           errorMessage &&
-            'border-semantic-warn-500 focus-within:border-semantic-warn-500'
+            'border-semantic-warn-500 focus-within:border-semantic-warn-500',
         )}
       >
         {children}
@@ -50,7 +50,7 @@ export default function InputWrapper({
           className={twMerge(
             'absolute -bottom-[2.1rem] right-0 font-system-body1',
             successMessage && 'text-semantic-success-600',
-            errorMessage && 'text-semantic-warn-500'
+            errorMessage && 'text-semantic-warn-500',
           )}
         >
           {successMessage || errorMessage}

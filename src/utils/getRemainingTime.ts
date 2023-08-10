@@ -1,5 +1,5 @@
 export function getRemainingTime(
-  deadline: string | null
+  deadline: string | null,
 ): null | 'closed' | string {
   if (!deadline) {
     return null;

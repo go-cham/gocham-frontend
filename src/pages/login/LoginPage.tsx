@@ -9,10 +9,10 @@ function LoginPage() {
   const navigate = useNavigate();
 
   if (!window.Kakao.isInitialized()) {
-    window.Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY || '');
+    window.Kakao.init(import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY || '');
   }
 
-  const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_API;
+  const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_API;
 
   const handleKakaoLogin = async () => {
     window.Kakao.Auth.authorize({
