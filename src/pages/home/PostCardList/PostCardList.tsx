@@ -9,6 +9,7 @@ import { UserType } from '@/constants/user-type';
 import usePullToRefresh from '@/hooks/usePullToRefresh';
 import Banner from '@/images/banner.svg';
 import { isMobile } from 'react-device-detect';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 
 interface PostCardListProps {
   authorId?: number;
@@ -19,6 +20,7 @@ export default function PostCardList({
   authorId,
   participatingUserId,
 }: PostCardListProps) {
+  const scrollRef = useScrollRestoration<HTMLDivElement>('home');
   const queryClient = useQueryClient();
   const { user } = useUser();
   const { posts, ref, error } = useGetPosts({
@@ -61,7 +63,11 @@ export default function PostCardList({
 
   return (
     <div
-      ref={ptfRef}
+      id="home-post-list"
+      ref={(el) => {
+        ptfRef.current = el;
+        scrollRef.current = el;
+      }}
       className={'hide-scrollbar overflow-scroll overscroll-y-none'}
     >
       <a

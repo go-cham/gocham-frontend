@@ -4,10 +4,10 @@ import { useEffect, useRef } from 'react';
 import { scrollRestorationAtom } from '@/states/scroll-restoration';
 
 export default function useScrollRestoration<U extends HTMLElement>(
-  key: string
+  key: string,
 ) {
   const [scrollRestoration, setScrollRestoration] = useAtom(
-    scrollRestorationAtom
+    scrollRestorationAtom,
   );
   const ref = useRef<U | null>(null);
 
