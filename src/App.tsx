@@ -25,6 +25,7 @@ import CommentReportPage from './pages/report/CommentReportPage';
 
 export default function App() {
   const { showUpdate, applyUpdate } = useUpdate();
+  console.log('test');
 
   return (
     <Layout>
