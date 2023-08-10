@@ -29,6 +29,7 @@ export default function useGetComments(postId: number) {
           id: user.id,
           email: user.email,
           nickname: user.nickname,
+          profileImage: user.profileImageUrl,
           birthday: user.birthDate,
           choice: user.worryChoice
             ? {

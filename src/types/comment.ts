@@ -5,6 +5,7 @@ export interface Comment {
   user: {
     id: number;
     email: string;
+    profileImage: string | null;
     nickname: string;
     birthday: string;
     choice: {

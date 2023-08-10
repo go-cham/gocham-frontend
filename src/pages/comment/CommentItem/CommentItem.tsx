@@ -15,6 +15,7 @@ interface CommentItemProps {
     nickname: string;
     age: number;
     choiceLabel: string | null;
+    profileImage?: string | null;
   };
   mentionNickname?: string;
   isWriter: boolean;
@@ -92,6 +93,7 @@ export default function CommentItem({
     >
       <CommentHeader
         email={user.email}
+        profileImage={user.profileImage}
         nickname={user.nickname}
         age={user.age}
         choice={user.choiceLabel || choice?.label || null}
