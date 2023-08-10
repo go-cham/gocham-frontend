@@ -8,6 +8,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
 import { reportCommentOption } from '@/constants/options';
+import { AxiosError } from 'axios';
 
 function CommentReportPage() {
   const { id } = useParams();
@@ -45,7 +46,14 @@ function CommentReportPage() {
       navigate(`/feed/${state.postId}/comment`);
     }
     if (error) {
-      alert('오류가 발생하였습니다.');
+      if (
+        error instanceof AxiosError &&
+        error.response?.data.errorCode === 'IS_DUPLICATED_WORRY_REPLY_REPORT'
+      ) {
+        alert('이미 신고한 게시글입니다.');
+      } else {
+        alert('오류가 발생하였습니다.');
+      }
       navigate(`/feed/${state.postId}/comment`);
     }
   }, [isSuccess, error]);

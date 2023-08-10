@@ -24,7 +24,7 @@ export default function PostUserProfile({
           className="flex h-[2.5rem] w-[2.5rem] items-center justify-center rounded-full bg-[#f4f4f5] text-[#b0b2b8] font-system-body1"
           style={{ fontWeight: 'bold' }}
         >
-          {String(age).slice(0, -1) + '0'}
+          {age > 40 ? '40+' : String(age).slice(0, -1) + '0'}
         </span>
       )}
       <span className="font-system-body2">{nickname}</span>

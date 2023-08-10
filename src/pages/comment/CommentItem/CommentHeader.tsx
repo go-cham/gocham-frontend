@@ -8,6 +8,7 @@ import { ADMIN_EMAIL } from '@/constants/admin';
 interface CommentHeaderProps {
   email: string;
   nickname: string;
+  profileImage?: string | null;
   age: number;
   choice: string | null;
   isWriter: boolean;
@@ -19,6 +20,7 @@ interface CommentHeaderProps {
 export default function CommentHeader({
   email,
   nickname,
+  profileImage,
   age,
   choice,
   isWriter,
@@ -48,6 +50,7 @@ export default function CommentHeader({
       <div className="flex items-center space-x-[6px]">
         <PostUserProfile
           isAdmin={email === ADMIN_EMAIL}
+          image={profileImage}
           nickname={nickname}
           age={age}
         />

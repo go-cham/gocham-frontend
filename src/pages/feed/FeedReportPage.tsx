@@ -10,6 +10,7 @@ import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
 import { reportFeedOption } from '@/constants/options';
 import { RouteURL } from '@/constants/route-url';
+import { AxiosError } from 'axios';
 
 function FeedPage() {
   const { id } = useParams();
@@ -25,7 +26,14 @@ function FeedPage() {
       navigate(RouteURL.feed);
     }
     if (error) {
-      alert('오류가 발생하였습니다.');
+      if (
+        error instanceof AxiosError &&
+        error.response?.data.errorCode === 'IS_DUPLICATED_WORRY_REPORT'
+      ) {
+        return alert('이미 신고한 게시글입니다.');
+      }
+
+      return alert('오류가 발생하였습니다.');
     }
   }, [isSuccess, error]);
 
