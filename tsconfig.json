@@ -23,7 +23,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vite/client", "@types/kakao-js-sdk"]
+    "types": ["vite/client", "vitest/globals","@types/kakao-js-sdk", ]
   },
   "include": ["src"]
 }
