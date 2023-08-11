@@ -31,4 +31,8 @@ export default defineConfig({
       overlay: false,
     },
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+  },
 });
