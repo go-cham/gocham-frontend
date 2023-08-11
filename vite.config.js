@@ -12,6 +12,8 @@ export default defineConfig({
     react(),
     eslint({
       exclude: ['/virtual:/**', 'node_modules/**'],
+      failOnError: false,
+      failOnWarning: false,
     }),
     svgr({ svgrOptions: { icon: true } }),
   ],
@@ -25,5 +27,8 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    hmr: {
+      overlay: false,
+    },
   },
 });

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import PostCardContent from '@/components/post/PostCard/PostCardContent';
 import PostCardMeta from '@/components/post/PostCard/PostCardMeta';
-import PostUserProfile from '@/components/post/PostUserProfile';
+import UserProfile from '@/components/user/UserProfile';
 import { ADMIN_EMAIL } from '@/constants/admin';
 import { RouteURL } from '@/constants/route-url';
 import { scrollRestorationAtom } from '@/states/scroll-restoration';
@@ -52,11 +52,10 @@ export default function PostCard({
       onClick={handlePostClick}
     >
       {showProfile && (
-        <PostUserProfile
-          isAdmin={post.user.email === ADMIN_EMAIL}
-          image={post.user.profileImageUrl}
+        <UserProfile
           nickname={post.user.nickname}
           age={calculateAgeFromBirthday(post.user.birthday)}
+          isAdmin={post.user.email === ADMIN_EMAIL}
         />
       )}
       <PostCardContent

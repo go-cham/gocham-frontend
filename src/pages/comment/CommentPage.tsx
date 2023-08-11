@@ -12,12 +12,12 @@ import useUser from '@/apis/hooks/users/useUser';
 import ImageFullScreen from '@/components/ImageFullScreen';
 import MoreIcon from '@/components/icons/MoreIcon';
 import TopAppBar from '@/components/layout/TopAppBar';
-import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
 import Popup from '@/components/ui/modal/Popup/Popup';
 import Snackbar from '@/components/ui/modal/Snackbar';
 import CommentSkeleton from '@/components/ui/skeleton/CommentSkeleton';
 import PostSummarySkeleton from '@/components/ui/skeleton/PostSummarySkeleton';
+import UserProfile from '@/components/user/UserProfile';
 import { ADMIN_EMAIL } from '@/constants/admin';
 import CommentInput from '@/pages/comment/CommentInput';
 import CommentList from '@/pages/comment/CommentList';
@@ -233,11 +233,10 @@ export default function CommentPage() {
           {post && user ? (
             <>
               <div className="flex items-center justify-between px-[2.5rem]">
-                <PostUserProfile
-                  isAdmin={post.user.email === ADMIN_EMAIL}
-                  image={post.user.profileImageUrl}
+                <UserProfile
                   nickname={post.user.nickname}
                   age={calculateAgeFromBirthday(post.user.birthDate)}
+                  isAdmin={post.user.email === ADMIN_EMAIL}
                 />
                 <div className="relative" ref={dropdownRef}>
                   <MoreIcon

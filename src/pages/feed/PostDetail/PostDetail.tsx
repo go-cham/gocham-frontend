@@ -12,11 +12,11 @@ import ClockIcon from '@/components/icons/ClockIcon';
 import MessageIcon from '@/components/icons/MessageIcon';
 import MoreIcon from '@/components/icons/MoreIcon';
 import ShareIcon from '@/components/icons/ShareIcon';
-import PostUserProfile from '@/components/post/PostUserProfile';
 import Dropdown from '@/components/ui/Dropdown';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Popup from '@/components/ui/modal/Popup';
 import Snackbar from '@/components/ui/modal/Snackbar';
+import UserProfile from '@/components/user/UserProfile';
 import { ADMIN_EMAIL } from '@/constants/admin';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { customColors } from '@/styles/colors';
@@ -170,11 +170,10 @@ export default function PostDetail({ post }: PostDetailProps) {
         </div>
       )}
       <div className="flex items-center justify-between px-[2.5rem]">
-        <PostUserProfile
-          isAdmin={post.user.email === ADMIN_EMAIL}
-          image={post.user.profileImageUrl}
+        <UserProfile
           nickname={post.user.nickname}
           age={calculateAgeFromBirthday(post.user.birthday)}
+          isAdmin={post.user.email === ADMIN_EMAIL}
         />
         <div ref={ref} className="relative">
           <MoreIcon className="cursor-pointer" onClick={handleClickMore} />

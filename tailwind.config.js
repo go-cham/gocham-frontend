@@ -7,7 +7,7 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { customColors } = require('./src/styles/colors');
 
-module.exports = {
+export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {

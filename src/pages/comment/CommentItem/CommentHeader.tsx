@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import useDeleteComment from '@/apis/hooks/posts/useDeleteComment';
-import PostUserProfile from '@/components/post/PostUserProfile';
 import Popup from '@/components/ui/modal/Popup';
+import UserProfile from '@/components/user/UserProfile';
 import { ADMIN_EMAIL } from '@/constants/admin';
 
 interface CommentHeaderProps {
   email: string;
   nickname: string;
-  profileImage?: string | null;
   age: number;
   choice: string | null;
   isWriter: boolean;
@@ -20,7 +19,6 @@ interface CommentHeaderProps {
 export default function CommentHeader({
   email,
   nickname,
-  profileImage,
   age,
   choice,
   isWriter,
@@ -48,11 +46,10 @@ export default function CommentHeader({
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center space-x-[6px]">
-        <PostUserProfile
-          isAdmin={email === ADMIN_EMAIL}
-          image={profileImage}
+        <UserProfile
           nickname={nickname}
           age={age}
+          isAdmin={email === ADMIN_EMAIL}
         />
         {choice && (
           <div className="flex items-center space-x-[6px]">
