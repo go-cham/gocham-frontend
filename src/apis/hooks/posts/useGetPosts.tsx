@@ -11,39 +11,43 @@ export default function useGetPosts({
   authorId,
   participatingUserId,
   initialPostId,
+  enabled,
 }: {
   authorId?: number | null;
   participatingUserId?: number | null;
   initialPostId?: number;
-} = {}) {
-  const { data, isLoading, error, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['posts', initialPostId, authorId, participatingUserId],
-    queryFn: async ({ pageParam }) => {
-      if (authorId || participatingUserId) {
-        const res = await axiosInstance.get<GetPostsResponse>('/worries', {
-          params: {
-            sort: 'DESC',
-            take: 10,
-            nextCursorId: pageParam || initialPostId,
-            authorId,
-            participatingUserId,
-          },
-        });
-        return res.data;
-      } else {
-        const res = await axios.get<GetPostsResponse>('/worries', {
-          baseURL: import.meta.env.VITE_SERVER_API,
-          params: {
-            sort: 'DESC',
-            take: 10,
-            nextCursorId: pageParam || initialPostId,
-          },
-        });
-        return res.data;
-      }
-    },
-    getNextPageParam: (lastPage) => lastPage.meta.nextId || undefined,
-  });
+  enabled: boolean;
+}) {
+  const { data, isLoading, error, fetchNextPage, isFetching } =
+    useInfiniteQuery({
+      enabled: enabled,
+      queryKey: ['posts', initialPostId, authorId, participatingUserId],
+      queryFn: async ({ pageParam }) => {
+        if (authorId || participatingUserId) {
+          const res = await axiosInstance.get<GetPostsResponse>('/worries', {
+            params: {
+              sort: 'DESC',
+              take: 10,
+              nextCursorId: pageParam || initialPostId,
+              authorId,
+              participatingUserId,
+            },
+          });
+          return res.data;
+        } else {
+          const res = await axios.get<GetPostsResponse>('/worries', {
+            baseURL: import.meta.env.VITE_SERVER_API,
+            params: {
+              sort: 'DESC',
+              take: 10,
+              nextCursorId: pageParam || initialPostId,
+            },
+          });
+          return res.data;
+        }
+      },
+      getNextPageParam: (lastPage) => lastPage.meta.nextId || undefined,
+    });
 
   const { ref, inView } = useInView({
     rootMargin: '100px 0px 0px 0px',
@@ -83,5 +87,6 @@ export default function useGetPosts({
     ref,
     isLoading,
     error,
+    isFetching,
   };
 }

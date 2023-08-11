@@ -45,6 +45,7 @@ function UserPage() {
     ref: myPostsRef,
   } = useGetPosts({
     authorId: user?.id,
+    enabled: !!user,
   });
   const {
     posts: participatingPosts,
@@ -52,6 +53,7 @@ function UserPage() {
     ref: participatingPostsRef,
   } = useGetPosts({
     participatingUserId: user?.id,
+    enabled: !!user,
   });
   const posts = postType === 'my' ? myPosts : participatingPosts;
   const ref = postType === 'my' ? myPostsRef : participatingPostsRef;
@@ -134,7 +136,7 @@ function UserPage() {
                 <PostCardSkeleton key={index} hasProfile={false} />
               ))}
       </ul>
-      <BottomAppBar currentPage="user" />
+      <BottomAppBar />
     </div>
   );
 }

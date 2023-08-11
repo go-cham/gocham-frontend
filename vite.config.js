@@ -15,7 +15,7 @@ export default defineConfig({
       failOnError: false,
       failOnWarning: false,
     }),
-    svgr({ svgrOptions: { icon: true } }),
+    svgr(),
   ],
   resolve: {
     alias: [

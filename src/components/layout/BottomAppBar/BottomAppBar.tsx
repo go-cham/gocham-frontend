@@ -9,15 +9,12 @@ import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
 import { customColors } from '@/styles/colors';
 
 interface BottomAppBarProps {
-  currentPage: 'home' | 'user';
   onScrollToTop?: () => void;
 }
 
-export default function BottomAppBar({
-  onScrollToTop,
-  currentPage,
-}: BottomAppBarProps) {
+export default function BottomAppBar({ onScrollToTop }: BottomAppBarProps) {
   const navigate = useNavigate();
+  const currentPage = location.pathname === '/' ? 'home' : 'user';
 
   const handleHomeIconClick = () => {
     if (currentPage === 'home') {
@@ -39,7 +36,6 @@ export default function BottomAppBar({
 
   return (
     <footer className="absolute bottom-0 z-10 w-full">
-      {/*<BackgroundImage className="shadow-dock relative top-[0.5vh] mx-auto scale-[1.15]" />*/}
       <img
         src={backgroundImage}
         alt="background"
@@ -53,9 +49,7 @@ export default function BottomAppBar({
                 ? customColors.text.subExplain['400']
                 : customColors.text.subTitle['700']
             }
-            className={`${
-              isMobile ? '' : 'relative bottom-[0.5rem] scale-[1.2]'
-            }`}
+            className={`${!isMobile && 'relative bottom-[0.5rem] scale-[1.2]'}`}
           />
         </button>
 
@@ -73,7 +67,7 @@ export default function BottomAppBar({
 
         <button
           onClick={handleUserIconClick}
-          className={`${currentPage === 'user' ? 'pointer-events-none' : ''}`}
+          className={`${currentPage === 'user' && 'pointer-events-none'}`}
         >
           <ProfileIcon
             color={
@@ -81,9 +75,7 @@ export default function BottomAppBar({
                 ? customColors.text.subTitle['700']
                 : customColors.text.subExplain['400']
             }
-            className={`${
-              isMobile ? '' : 'relative bottom-[0.5rem] scale-[1.2]'
-            }`}
+            className={`${!isMobile && 'relative bottom-[0.5rem] scale-[1.2]'}`}
           />
         </button>
       </div>
