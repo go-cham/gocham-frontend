@@ -3,7 +3,3 @@ export function getBearerToken() {
 
   return token ? token : null;
 }
-
-export function deleteBearerToken() {
-  window.localStorage.removeItem('token');
-}

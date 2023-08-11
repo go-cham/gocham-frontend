@@ -93,7 +93,6 @@ export default function CommentItem({
     >
       <CommentHeader
         email={user.email}
-        profileImage={user.profileImage}
         nickname={user.nickname}
         age={user.age}
         choice={user.choiceLabel || choice?.label || null}
