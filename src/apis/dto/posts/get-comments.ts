@@ -19,6 +19,7 @@ export type GetCommentsResponse = {
     user: {
       id: number;
       nickname: string;
+      profileImageUrl: string | null;
       birthDate: string;
       email: string;
       phoneNumber: string | null;
