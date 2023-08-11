@@ -33,7 +33,7 @@ export default function CommentList({ writerId, comments }: CommentListProps) {
                   <CommentItem
                     user={{
                       id: reply.user.id,
-                      profileImage: comment.user.profileImage,
+                      profileImage: reply.user.profileImage,
                       email: reply.user.email,
                       nickname: reply.user.nickname,
                       age: calculateAgeFromBirthday(reply.user.birthday),
