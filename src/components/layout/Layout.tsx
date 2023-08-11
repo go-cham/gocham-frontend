@@ -1,8 +1,9 @@
-import character from '@/images/background/character.svg';
-import text from '@/images/background/text.svg';
-import Frame from '@/components/layout/Frame';
 import { useEffect, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
+
+import Frame from '@/components/layout/Frame';
+import character from '@/images/background/character.svg';
+import text from '@/images/background/text.svg';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -15,7 +16,7 @@ export default function Layout({ children }: LayoutProps) {
       const handleResize = () => {
         if (ref.current) {
           ref.current.style.transform = `scale(${
-            document.body.getBoundingClientRect().height / 1100
+            document.body.getBoundingClientRect().height / 1012
           })`;
         }
       };
@@ -30,7 +31,7 @@ export default function Layout({ children }: LayoutProps) {
       <img
         src={text}
         alt="text"
-        className="fixed left-[5.5%] top-[8vh] z-10 hidden w-[42rem] xl:block"
+        className="fixed left-[5.5%] top-[10vh] z-10 hidden w-[38rem] xl:block"
       />
       <img
         src={character}
@@ -42,12 +43,12 @@ export default function Layout({ children }: LayoutProps) {
           {children}
         </div>
       ) : (
-        <div className="fixed left-1/2 top-[3%] h-[90vh] w-[53rem] -translate-x-[55%] xl:-translate-x-0">
+        <div className="fixed -top-[0.3%] left-1/2 h-[90vh] w-[53rem] -translate-x-[55%] xl:-translate-x-0">
           <div
             ref={ref}
             style={{
               transform: `scale(${
-                document.body.getBoundingClientRect().height / 1100
+                document.body.getBoundingClientRect().height / 1012
               })`,
               transformOrigin: 'top left',
             }}
