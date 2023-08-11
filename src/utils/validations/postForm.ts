@@ -61,6 +61,5 @@ export function validatePostForm(
       labels.push(option.label);
     }
   }
-  console.log(errorMessage.voteOptions);
   return [errorMessage, voteOptionErrorIndex];
 }

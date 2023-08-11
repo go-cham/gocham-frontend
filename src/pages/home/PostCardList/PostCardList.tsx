@@ -1,5 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { ForwardedRef, forwardRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
@@ -16,14 +16,18 @@ interface PostCardListProps {
   participatingUserId?: number;
 }
 
-export default function PostCardList({
-  authorId,
-  participatingUserId,
-}: PostCardListProps) {
+function PostCardList(
+  { authorId, participatingUserId }: PostCardListProps,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
   const scrollRef = useScrollRestoration<HTMLDivElement>('home');
   const queryClient = useQueryClient();
   const { user } = useUser();
-  const { posts, ref, error } = useGetPosts({
+  const {
+    posts,
+    ref: postsRef,
+    error,
+  } = useGetPosts({
     authorId,
     participatingUserId,
   });
@@ -63,8 +67,12 @@ export default function PostCardList({
 
   return (
     <div
-      id="home-post-list"
       ref={(el) => {
+        if (typeof ref === 'function') {
+          ref(el);
+        } else if (ref) {
+          ref.current = el;
+        }
         ptfRef.current = el;
         scrollRef.current = el;
       }}
@@ -85,7 +93,7 @@ export default function PostCardList({
         {posts.map((post, index) => (
           <li
             key={post.id}
-            ref={index === posts.length - 1 ? ref : undefined}
+            ref={index === posts.length - 1 ? postsRef : undefined}
             className="w-full"
           >
             <PostCard
@@ -98,3 +106,5 @@ export default function PostCardList({
     </div>
   );
 }
+
+export default forwardRef<HTMLDivElement, PostCardListProps>(PostCardList);
