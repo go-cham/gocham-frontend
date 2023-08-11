@@ -22,9 +22,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["vite/client", "@types/kakao-js-sdk"]
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

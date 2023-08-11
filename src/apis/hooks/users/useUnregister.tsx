@@ -10,7 +10,7 @@ export default function useUnregister() {
         `/user/${data.userId}/soft-delete`,
         {
           reason: data.reason,
-        }
+        },
       );
       return res.data;
     },

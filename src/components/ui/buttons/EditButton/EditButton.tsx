@@ -1,7 +1,7 @@
-import Button from 'src/components/ui/buttons/Button';
 import { twMerge } from 'tailwind-merge';
 
 import PlusIcon from '@/components/icons/PlusIcon';
+import Button from '@/components/ui/buttons/Button';
 import { ButtonProps } from '@/components/ui/buttons/Button/Button';
 
 export default function EditButton({
@@ -18,7 +18,7 @@ export default function EditButton({
       disabled={disabled}
       className={twMerge(
         'border border-background-dividerLine-300 bg-white text-text-explain-500 hover:bg-white active:bg-white disabled:bg-background-voteBg-100 disabled:text-text-subExplain-400',
-        className
+        className,
       )}
     >
       <PlusIcon

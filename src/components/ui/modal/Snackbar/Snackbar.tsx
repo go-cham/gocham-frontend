@@ -20,7 +20,7 @@ export default function Snackbar({
       className={twMerge(
         'z-[1000] flex w-[34rem] items-center rounded-[0.4rem] bg-text-subTitle-700 px-[1.5rem] py-[1.1rem]',
         actionText ? 'justify-between' : 'justify-center',
-        className
+        className,
       )}
     >
       <span className="text-white font-system-body4">{text || children}</span>

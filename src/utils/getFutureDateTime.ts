@@ -6,7 +6,7 @@ function getFutureDateTime(hoursToAdd: number): string {
   if (hoursToAdd === 0) return '';
   const currentDate = new Date();
   const futureDate = new Date(
-    currentDate.getTime() + hoursToAdd * 60 * 60 * 1000
+    currentDate.getTime() + hoursToAdd * 60 * 60 * 1000,
   );
 
   const year = futureDate.getFullYear();

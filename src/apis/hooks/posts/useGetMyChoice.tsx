@@ -20,7 +20,7 @@ export default function useGetMyChoice({
             worryId: postId,
             userId,
           },
-        }
+        },
       );
       return res.data;
     },

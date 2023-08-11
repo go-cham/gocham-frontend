@@ -32,7 +32,7 @@ export default function PostVote({
   });
   const { usersChoices } = useGetUsersChoices(postId);
   const [selectedVoteOptionId, setSelectedVoteOptionId] = useAtom(
-    selectedVoteOptionIdAtom
+    selectedVoteOptionIdAtom,
   );
   const [onlyReadModalOpen, setOnlyReadModalOpen] = useState(false);
   const { chooseOption } = useChooseOption();
@@ -76,9 +76,8 @@ export default function PostVote({
   }
 
   const handleAbstention = () => {
-    const choiceId = usersChoices.find(
-      (option) => option.isAbstained === 'yes'
-    )?.id;
+    const choiceId = usersChoices.find((option) => option.isAbstained === 'yes')
+      ?.id;
     if (!choiceId) {
       return;
     }
@@ -155,7 +154,7 @@ export default function PostVote({
                       !choice &&
                         isClosed &&
                         mostVoted === option.label &&
-                        'bg-text-subTitle-700'
+                        'bg-text-subTitle-700',
                     )}
                     style={{
                       width: percentage + '%',
@@ -200,7 +199,7 @@ export default function PostVote({
           <button
             className={twMerge(
               'relative flex h-[4.4rem] items-center overflow-hidden rounded-[0.5rem] border border-background-dividerLine-300 text-start shadow-header',
-              selectedVoteOptionId === option.id && 'bg-background-voteBg-100'
+              selectedVoteOptionId === option.id && 'bg-background-voteBg-100',
             )}
             key={option.id}
             onClick={() => handleButtonSelect(option.id)}

@@ -31,7 +31,7 @@ export default function usePostForm({
         label: '',
         image: null,
       })),
-    }
+    },
   );
   const [showError, setShowError] = useState(false);
   const [errorMessage, voteOptionErrorIndex] = validatePostForm(formData);

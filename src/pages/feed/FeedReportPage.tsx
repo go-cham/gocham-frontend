@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -10,7 +11,6 @@ import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
 import { reportFeedOption } from '@/constants/options';
 import { RouteURL } from '@/constants/route-url';
-import { AxiosError } from 'axios';
 
 function FeedPage() {
   const { id } = useParams();

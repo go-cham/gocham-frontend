@@ -9,7 +9,7 @@ export default function useDeletePost() {
     mutationKey: ['deletePost'],
     mutationFn: async (id: number) => {
       const res = await axiosInstance.patch<DeletePostResponse>(
-        `/worry/${id}/soft-delete`
+        `/worry/${id}/soft-delete`,
       );
       return res.data;
     },

@@ -1,4 +1,4 @@
-const customColors = {
+export const customColors = {
   background: {
     button: {
       300: '#e0e0e0',
@@ -80,5 +80,3 @@ const customColors = {
     },
   },
 };
-
-module.exports = { customColors };

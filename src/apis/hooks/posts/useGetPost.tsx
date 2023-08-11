@@ -8,7 +8,7 @@ export default function useGetPost(postId?: number) {
     queryKey: ['post', postId],
     queryFn: async () => {
       const res = await axiosInstance.get<GetPostResponse>(
-        `/worries/${postId}`
+        `/worries/${postId}`,
       );
       return res.data;
     },
@@ -19,7 +19,7 @@ export default function useGetPost(postId?: number) {
     ? {
         ...data,
         worryFiles: data.worryFiles.filter(
-          (file) => file.status === 'activated'
+          (file) => file.status === 'activated',
         ),
       }
     : null;

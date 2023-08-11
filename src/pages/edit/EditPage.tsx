@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -10,7 +11,6 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Popup from '@/components/ui/modal/Popup';
 import withAuth from '@/components/withAuth';
 import { PostFormData } from '@/types/post';
-import { useQueryClient } from '@tanstack/react-query';
 
 function EditPage() {
   const queryClient = useQueryClient();
