@@ -6,16 +6,20 @@ import { scrollRestorationAtom } from '@/states/scroll-restoration';
 export default function useScrollRestoration<U extends HTMLElement>(
   key: string,
 ) {
+  const ref = useRef<U | null>(null);
   const [scrollRestoration, setScrollRestoration] = useAtom(
     scrollRestorationAtom,
   );
-  const ref = useRef<U | null>(null);
 
   useEffect(() => {
-    setScrollRestoration((prevScrollRestoration) => ({
-      ...prevScrollRestoration,
-      [key]: 0,
-    }));
+    if (!Object.keys(scrollRestoration).includes(key)) {
+      setScrollRestoration((prevScrollRestoration) => ({
+        ...prevScrollRestoration,
+        [key]: 0,
+      }));
+    } else {
+      ref.current?.scrollTo(0, scrollRestoration[key]);
+    }
   }, []);
 
   useEffect(() => {
@@ -23,12 +27,11 @@ export default function useScrollRestoration<U extends HTMLElement>(
 
     const handleScroll = () => {
       if (!ref.current) return;
-
-      const height = ref.current.scrollTop;
+      const scrollTop = ref.current.scrollTop;
 
       setScrollRestoration((prevScrollRestoration) => ({
         ...prevScrollRestoration,
-        [key]: height,
+        [key]: scrollTop,
       }));
     };
 
@@ -36,15 +39,7 @@ export default function useScrollRestoration<U extends HTMLElement>(
     return () => {
       ref.current?.removeEventListener('scroll', handleScroll);
     };
-  }, [ref.current]);
-
-  useEffect(() => {
-    if (!ref.current) return;
-
-    if (scrollRestoration && scrollRestoration[key] !== undefined) {
-      ref.current?.scrollTo(0, scrollRestoration[key]);
-    }
-  }, [ref.current]);
+  }, []);
 
   return ref;
 }
