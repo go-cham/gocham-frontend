@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery } from '@suspensive/react-query';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -11,43 +11,39 @@ export default function useGetPosts({
   authorId,
   participatingUserId,
   initialPostId,
-  enabled,
 }: {
   authorId?: number | null;
   participatingUserId?: number | null;
   initialPostId?: number;
-  enabled: boolean;
-}) {
-  const { data, isLoading, error, fetchNextPage, isFetching } =
-    useInfiniteQuery({
-      enabled: enabled,
-      queryKey: ['posts', initialPostId, authorId, participatingUserId],
-      queryFn: async ({ pageParam }) => {
-        if (authorId || participatingUserId) {
-          const res = await axiosInstance.get<GetPostsResponse>('/worries', {
-            params: {
-              sort: 'DESC',
-              take: 10,
-              nextCursorId: pageParam || initialPostId,
-              authorId,
-              participatingUserId,
-            },
-          });
-          return res.data;
-        } else {
-          const res = await axios.get<GetPostsResponse>('/worries', {
-            baseURL: import.meta.env.VITE_SERVER_API,
-            params: {
-              sort: 'DESC',
-              take: 10,
-              nextCursorId: pageParam || initialPostId,
-            },
-          });
-          return res.data;
-        }
-      },
-      getNextPageParam: (lastPage) => lastPage.meta.nextId || undefined,
-    });
+} = {}) {
+  const { data, fetchNextPage } = useSuspenseInfiniteQuery({
+    queryKey: ['posts', initialPostId, authorId, participatingUserId],
+    queryFn: async ({ pageParam }) => {
+      if (authorId || participatingUserId) {
+        const res = await axiosInstance.get<GetPostsResponse>('/worries', {
+          params: {
+            sort: 'DESC',
+            take: 10,
+            nextCursorId: pageParam || initialPostId,
+            authorId,
+            participatingUserId,
+          },
+        });
+        return res.data;
+      } else {
+        const res = await axios.get<GetPostsResponse>('/worries', {
+          baseURL: import.meta.env.VITE_SERVER_API,
+          params: {
+            sort: 'DESC',
+            take: 10,
+            nextCursorId: pageParam || initialPostId,
+          },
+        });
+        return res.data;
+      }
+    },
+    getNextPageParam: (lastPage) => lastPage.meta.nextId || undefined,
+  });
 
   const { ref, inView } = useInView({
     rootMargin: '100px 0px 0px 0px',
@@ -59,34 +55,28 @@ export default function useGetPosts({
     }
   }, [inView]);
 
-  const posts: Post[] | null =
-    data?.pages
-      .map((page) => page.data)
-      .flat()
-      .map((post) => ({
-        id: post.id,
-        createdAt: post.createdAt,
-        updatedAt: post.updatedAt,
-        title: post.title,
-        content: post.content,
-        expirationTime: post.expirationTime,
-        worryFiles: post.worryFiles.filter(
-          (file) => file.status === 'activated',
-        ),
-        user: {
-          ...post.user,
-          birthday: post.user.birthDate,
-        },
-        replyCount: post.replyCount,
-        userWorryChoiceCount: post.userWorryChoiceCount,
-      })) || null;
+  const posts: Post[] = data?.pages
+    .map((page) => page.data)
+    .flat()
+    .map((post) => ({
+      id: post.id,
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+      title: post.title,
+      content: post.content,
+      expirationTime: post.expirationTime,
+      worryFiles: post.worryFiles.filter((file) => file.status === 'activated'),
+      user: {
+        ...post.user,
+        birthday: post.user.birthDate,
+      },
+      replyCount: post.replyCount,
+      userWorryChoiceCount: post.userWorryChoiceCount,
+    }));
 
   return {
     posts,
-    totalCount: data?.pages[0].meta.total || 0,
+    totalCount: data.pages[0].meta.total,
     ref,
-    isLoading,
-    error,
-    isFetching,
   };
 }

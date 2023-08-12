@@ -1,5 +1,3 @@
-import { twJoin } from 'tailwind-merge';
-
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import { ONE_DAY_IN_MILLISECOND } from '@/constants/time';
@@ -12,17 +10,13 @@ interface HomeHeaderProps {
 }
 
 export default function HomeHeader({ onClickLogo }: HomeHeaderProps) {
-  const { user, isLoading: userLoading } = useUser();
-  const userId = user?.id;
-  const { posts, isLoading: postsLoading } = useGetPosts({
-    authorId: userId,
-    enabled: !!userId,
+  const { user, isLoggedIn } = useUser();
+  const { posts } = useGetPosts({
+    authorId: user?.id,
   });
 
-  const isLoading = userLoading || postsLoading;
-
   const hasUploadedIn24 = () => {
-    if (!user || !posts || posts.length === 0) {
+    if (!isLoggedIn || posts.length === 0) {
       return false;
     }
     const latestUploadedAt = new Date(posts[0].createdAt).getTime();
@@ -37,10 +31,9 @@ export default function HomeHeader({ onClickLogo }: HomeHeaderProps) {
 
   return (
     <header
-      className={twJoin(
-        'header-blur absolute top-0 flex w-full items-center space-x-[1.121rem] pb-[1.1rem] pl-[2.2rem] pt-[2.1rem]',
-        isLoading && 'invisible',
-      )}
+      className={
+        'header-blur absolute top-0 flex w-full items-center space-x-[1.121rem] pb-[1.1rem] pl-[2.2rem] pt-[2.1rem]'
+      }
       style={{
         zIndex: Z_INDEX.mainHeader,
       }}

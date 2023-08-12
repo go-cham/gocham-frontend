@@ -1,4 +1,5 @@
-import { lazy } from 'react';
+import { Suspense, lazy } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Banner from '@/components/Banner';
@@ -37,34 +38,47 @@ export default function App() {
 
   return (
     <Layout>
-      <Banner show={showUpdate} applyUpdate={applyUpdate} />
-      <RouteChangeTracker />
-      <IosInstallGuide />
-      <Routes>
-        <Route path={RouteURL.home} element={<HomePage />} />
-        <Route
-          path={RouteURL.collect_information}
-          element={<CollectInformationPage />}
-        />
-        <Route path={RouteURL.feed_star} element={<FeedPage />} />
-        <Route path={RouteURL.feed_report} element={<FeedReportPage />} />
-        <Route path={RouteURL.comment_report} element={<CommentReportPage />} />
-        <Route path={RouteURL.feed_route_star} element={<FeedPage />} />
-        <Route path={RouteURL.feed_edit} element={<EditPage />} />
-        <Route path={RouteURL.login} element={<LoginPage />} />
-        <Route
-          path={RouteURL.login_oauth_kakao}
-          element={<LoginOauthKakaoPage />}
-        />
-        <Route path={RouteURL.register_term} element={<RegisterTermPage />} />
-        <Route path={RouteURL.write} element={<WritePage />} />
-        <Route path={RouteURL.user} element={<UserPage />} />
-        <Route path={RouteURL.edit_profile} element={<EditProfilePage />} />
-        <Route path={RouteURL.settings} element={<SettingsPage />} />
-        <Route path={RouteURL.unregister} element={<UnregisterPage />} />
-        <Route path={RouteURL.feed_comment} element={<CommentPage />} />
-        <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
-      </Routes>
+      <ErrorBoundary
+        fallback={<h1>error!!</h1>}
+        onError={(error) => console.log(error)}
+      >
+        <Banner show={showUpdate} applyUpdate={applyUpdate} />
+        <RouteChangeTracker />
+        <IosInstallGuide />
+        <Suspense fallback={'page loading...'}>
+          <Routes>
+            <Route path={RouteURL.home} element={<HomePage />} />
+            <Route
+              path={RouteURL.collect_information}
+              element={<CollectInformationPage />}
+            />
+            <Route path={RouteURL.feed_star} element={<FeedPage />} />
+            <Route path={RouteURL.feed_report} element={<FeedReportPage />} />
+            <Route
+              path={RouteURL.comment_report}
+              element={<CommentReportPage />}
+            />
+            <Route path={RouteURL.feed_route_star} element={<FeedPage />} />
+            <Route path={RouteURL.feed_edit} element={<EditPage />} />
+            <Route path={RouteURL.login} element={<LoginPage />} />
+            <Route
+              path={RouteURL.login_oauth_kakao}
+              element={<LoginOauthKakaoPage />}
+            />
+            <Route
+              path={RouteURL.register_term}
+              element={<RegisterTermPage />}
+            />
+            <Route path={RouteURL.write} element={<WritePage />} />
+            <Route path={RouteURL.user} element={<UserPage />} />
+            <Route path={RouteURL.edit_profile} element={<EditProfilePage />} />
+            <Route path={RouteURL.settings} element={<SettingsPage />} />
+            <Route path={RouteURL.unregister} element={<UnregisterPage />} />
+            <Route path={RouteURL.feed_comment} element={<CommentPage />} />
+            <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
     </Layout>
   );
 }

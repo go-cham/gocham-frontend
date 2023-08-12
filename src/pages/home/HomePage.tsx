@@ -1,4 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
+import { Suspense } from 'react';
 
 import BottomAppBar from '@/components/layout/BottomAppBar';
 import PageWrapper from '@/components/ui/PageWrapper';
@@ -9,6 +10,7 @@ import useScrollToTop from '@/hooks/useScrollToTop';
 import HomeBanner from '@/pages/home/HomeBanner';
 import HomeHeader from '@/pages/home/HomeHeader';
 import PostCardList from '@/pages/home/PostCardList';
+import PostCardListSkeleton from '@/pages/home/PostCardListSkeleton';
 import { assignMultipleRefs } from '@/utils/assign-multiple-refs';
 
 export default function HomePage() {
@@ -26,7 +28,9 @@ export default function HomePage() {
 
   return (
     <PageWrapper>
-      <HomeHeader onClickLogo={scrollToTop} />
+      <Suspense fallback={null}>
+        <HomeHeader onClickLogo={scrollToTop} />
+      </Suspense>
       <main
         ref={(el) =>
           assignMultipleRefs(el, [
@@ -40,7 +44,9 @@ export default function HomePage() {
         <Spacing size={'10.3rem'} />
         <HomeBanner />
         <Spacing size={'2.1rem'} />
-        <PostCardList />
+        <Suspense fallback={<PostCardListSkeleton />}>
+          <PostCardList />
+        </Suspense>
         <Spacing size={'12rem'} />
       </main>
       <BottomAppBar onScrollToTop={scrollToTop} />

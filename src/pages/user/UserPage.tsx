@@ -1,12 +1,12 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PostCardSkeleton from 'src/components/ui/skeleton/PostCardSkeleton';
 
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import BottomAppBar from '@/components/layout/BottomAppBar/BottomAppBar';
 import PostCard from '@/components/post/PostCard';
-import PostCardSkeleton from '@/components/ui/skeleton/PostCardSkeleton';
 import SelectMyPostType from '@/components/user/SelectMyPostType';
 import UserProfile from '@/components/user/UserProfile';
 import withAuth from '@/components/withAuth';
