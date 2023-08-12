@@ -49,19 +49,7 @@
     "react-spinners": "^0.13.8",
     "tailwind-merge": "^1.14.0",
     "typescript": "^5.1.6",
-    "web-vitals": "^3.4.0",
-    "workbox-background-sync": "^7.0.0",
-    "workbox-broadcast-update": "^7.0.0",
-    "workbox-cacheable-response": "^7.0.0",
-    "workbox-core": "^7.0.0",
-    "workbox-expiration": "^7.0.0",
-    "workbox-google-analytics": "^7.0.0",
-    "workbox-navigation-preload": "^7.0.0",
-    "workbox-precaching": "^7.0.0",
-    "workbox-range-requests": "^7.0.0",
-    "workbox-routing": "^7.0.0",
-    "workbox-strategies": "^7.0.0",
-    "workbox-streams": "^7.0.0"
+    "web-vitals": "^3.4.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.2.2",
@@ -104,8 +92,11 @@
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.9",
     "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-pwa": "^0.16.4",
     "vite-plugin-svgr": "^3.2.0",
-    "vitest": "^0.34.1"
+    "vitest": "^0.34.1",
+    "workbox-precaching": "^7.0.0",
+    "workbox-window": "^7.0.0"
   },
   "eslintConfig": {
     "extends": [

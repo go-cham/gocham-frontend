@@ -9,7 +9,6 @@
     />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="description" content="고민의 참견, 고참" />
-    <link rel="manifest" href="/manifest.json" />
 
     <link rel="apple-touch-icon" sizes="16x16" href="/icon/ios/icon-16.png" />
     <link rel="apple-touch-icon" sizes="24x24" href="/icon/ios/icon-24.png" />
@@ -92,4 +91,16 @@
     <div id="root" class="h-full"></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/my-sw.js')
+        .then(function (registration) {
+          console.log(
+            'ServiceWorker registration successful with scope: ',
+            registration.active,
+          );
+        });
+    }
+  </script>
 </html>
