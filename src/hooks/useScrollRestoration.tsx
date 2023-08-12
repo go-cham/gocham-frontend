@@ -1,4 +1,5 @@
 import { useAtom } from 'jotai';
+import { debounce } from 'lodash';
 import { useEffect, useRef } from 'react';
 
 import { scrollRestorationAtom } from '@/states/scroll-restoration';
@@ -25,7 +26,7 @@ export default function useScrollRestoration<U extends HTMLElement>(
   useEffect(() => {
     if (!ref.current) return;
 
-    const handleScroll = () => {
+    const handleScroll = debounce(() => {
       if (!ref.current) return;
       const scrollTop = ref.current.scrollTop;
 
@@ -33,7 +34,7 @@ export default function useScrollRestoration<U extends HTMLElement>(
         ...prevScrollRestoration,
         [key]: scrollTop,
       }));
-    };
+    }, 100);
 
     ref.current.addEventListener('scroll', handleScroll);
     return () => {
