@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Banner from '@/components/Banner';
@@ -5,23 +6,31 @@ import IosInstallGuide from '@/components/IosInstallGuide';
 import Layout from '@/components/layout/Layout';
 import { RouteURL } from '@/constants/route-url';
 import useUpdate from '@/hooks/useUpdate';
-import CollectInformationPage from '@/pages/collect-information/CollectInformationPage';
-import EditProfilePage from '@/pages/edit-profile/EditProfilePage';
-import EditPage from '@/pages/edit/EditPage';
-import FeedPage from '@/pages/feed/FeedPage';
-import FeedReportPage from '@/pages/feed/FeedReportPage';
-import HomePage from '@/pages/home/HomePage';
-import LoginPage from '@/pages/login/LoginPage';
-import LoginOauthKakaoPage from '@/pages/login/kakao/LoginOauthKakaoPage';
-import RegisterTermPage from '@/pages/register/RegisterTermPage';
-import SettingsPage from '@/pages/settings/SettingsPage';
-import UnregisterPage from '@/pages/unregister/UnregisterPage';
-import UserPage from '@/pages/user/UserPage';
-import WritePage from '@/pages/write/WritePage';
 import RouteChangeTracker from '@/utils/routeChangeTracker';
 
-import CommentPage from './pages/comment/CommentPage';
-import CommentReportPage from './pages/report/CommentReportPage';
+const HomePage = lazy(() => import('@/pages/home/HomePage'));
+const CollectInformationPage = lazy(
+  () => import('@/pages/collect-information/CollectInformationPage'),
+);
+const FeedPage = lazy(() => import('@/pages/feed/FeedPage'));
+const FeedReportPage = lazy(() => import('@/pages/feed/FeedReportPage'));
+const CommentReportPage = lazy(
+  () => import('@/pages/report/CommentReportPage'),
+);
+const EditPage = lazy(() => import('@/pages/edit/EditPage'));
+const LoginPage = lazy(() => import('@/pages/login/LoginPage'));
+const LoginOauthKakaoPage = lazy(
+  () => import('@/pages/login/kakao/LoginOauthKakaoPage'),
+);
+const RegisterTermPage = lazy(
+  () => import('@/pages/register/RegisterTermPage'),
+);
+const WritePage = lazy(() => import('@/pages/write/WritePage'));
+const UserPage = lazy(() => import('@/pages/user/UserPage'));
+const EditProfilePage = lazy(() => import('@/pages/settings/SettingsPage'));
+const SettingsPage = lazy(() => import('@/pages/settings/SettingsPage'));
+const UnregisterPage = lazy(() => import('@/pages/unregister/UnregisterPage'));
+const CommentPage = lazy(() => import('@/pages/comment/CommentPage'));
 
 export default function App() {
   const { showUpdate, applyUpdate } = useUpdate();
