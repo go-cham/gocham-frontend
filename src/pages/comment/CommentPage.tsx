@@ -224,7 +224,7 @@ export default function CommentPage() {
 
   return (
     <div className="flex h-full flex-col">
-      <TopAppBar title="댓글" navigateRoute={`/feed/${postId}`} />
+      <TopAppBar title="댓글" />
       <div
         id="comment-page"
         className="hide-scrollbar flex-1 overflow-y-scroll overscroll-y-auto"
