@@ -81,6 +81,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vite-plugin-svgr", "virtual:8fcb5a2fbe59890b51c7ad6ba3cad9fd035ef837308f097c6aed23dd7aae360307e5abdee96c2128166ed6ba531984aff8b0349fd22f86b4955690a836f6dde3#npm:3.2.0"],\
             ["vitest", "virtual:8fcb5a2fbe59890b51c7ad6ba3cad9fd035ef837308f097c6aed23dd7aae360307e5abdee96c2128166ed6ba531984aff8b0349fd22f86b4955690a836f6dde3#npm:0.34.1"],\
             ["web-vitals", "npm:3.4.0"],\
+            ["workbox-precaching", "npm:7.0.0"],\
             ["workbox-window", "npm:7.0.0"]\
           ],\
           "linkType": "SOFT"\
@@ -13261,6 +13262,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["vite-plugin-svgr", "virtual:8fcb5a2fbe59890b51c7ad6ba3cad9fd035ef837308f097c6aed23dd7aae360307e5abdee96c2128166ed6ba531984aff8b0349fd22f86b4955690a836f6dde3#npm:3.2.0"],\
             ["vitest", "virtual:8fcb5a2fbe59890b51c7ad6ba3cad9fd035ef837308f097c6aed23dd7aae360307e5abdee96c2128166ed6ba531984aff8b0349fd22f86b4955690a836f6dde3#npm:0.34.1"],\
             ["web-vitals", "npm:3.4.0"],\
+            ["workbox-precaching", "npm:7.0.0"],\
             ["workbox-window", "npm:7.0.0"]\
           ],\
           "linkType": "SOFT"\

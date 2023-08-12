@@ -18,6 +18,9 @@ export default defineConfig({
     svgr({ svgrOptions: { icon: true } }),
     VitePWA({
       devOptions: { enabled: true },
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'my-sw.js',
       manifest: {
         short_name: '고민의 참견',
         name: '고민의 참견, 고참',
