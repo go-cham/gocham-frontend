@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PostCardSkeleton from 'src/components/ui/skeleton/PostCardSkeleton';
+import PostCardSkeleton from '@/components/ui/skeleton/PostCardSkeleton';
 
 import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
