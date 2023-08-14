@@ -1,34 +1,36 @@
 import { useAtom } from 'jotai';
 import { debounce } from 'lodash';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { scrollRestorationAtom } from '@/states/scroll-restoration';
 
 export default function useScrollRestoration<U extends HTMLElement>(
   key: string,
 ) {
-  const ref = useRef<U | null>(null);
   const [scrollRestoration, setScrollRestoration] = useAtom(
     scrollRestorationAtom,
   );
-
-  useEffect(() => {
-    if (!Object.keys(scrollRestoration).includes(key)) {
-      setScrollRestoration((prevScrollRestoration) => ({
-        ...prevScrollRestoration,
-        [key]: 0,
-      }));
-    } else {
-      ref.current?.scrollTo(0, scrollRestoration[key]);
+  const [node, setNode] = useState<U | null>(null);
+  const ref = useCallback((node: U | null) => {
+    if (node) {
+      setNode(node);
     }
   }, []);
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (!node) return;
+
+    if (Object.keys(scrollRestoration).includes(key)) {
+      node.scrollTo(0, scrollRestoration[key]);
+    } else {
+      setScrollRestoration((prevScrollRestoration) => ({
+        ...prevScrollRestoration,
+        [key]: 0,
+      }));
+    }
 
     const handleScroll = debounce(() => {
-      if (!ref.current) return;
-      const scrollTop = ref.current.scrollTop;
+      const scrollTop = node.scrollTop;
 
       setScrollRestoration((prevScrollRestoration) => ({
         ...prevScrollRestoration,
@@ -36,11 +38,11 @@ export default function useScrollRestoration<U extends HTMLElement>(
       }));
     }, 100);
 
-    ref.current.addEventListener('scroll', handleScroll);
+    node.addEventListener('scroll', handleScroll);
     return () => {
-      ref.current?.removeEventListener('scroll', handleScroll);
+      node.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [node]);
 
   return ref;
 }

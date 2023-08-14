@@ -14,10 +14,10 @@ import PostCardListSkeleton from '@/pages/home/PostCardListSkeleton';
 import { assignMultipleRefs } from '@/utils/assign-multiple-refs';
 
 export default function HomePage() {
-  const { ref: scrollToTopRef, scrollToTop } = useScrollToTop<HTMLDivElement>();
-  const scrollRestorationRef = useScrollRestoration<HTMLDivElement>('home');
+  const { ref: scrollToTopRef, scrollToTop } = useScrollToTop();
+  const scrollRestorationRef = useScrollRestoration('home');
   const queryClient = useQueryClient();
-  const pullToRefreshRef = usePullToRefresh<HTMLDivElement>({
+  const pullToRefreshRef = usePullToRefresh({
     onRefresh: () => {
       queryClient.refetchQueries({
         queryKey: ['posts'],
@@ -39,15 +39,17 @@ export default function HomePage() {
             pullToRefreshRef,
           ])
         }
-        className={'hide-scrollbar overflow-scroll overscroll-y-none'}
+        className={'hide-scrollbar overflow-y-scroll overscroll-y-none'}
       >
         <Spacing size={'10.3rem'} />
         <HomeBanner />
-        <Spacing size={'2.1rem'} />
-        <Suspense fallback={<PostCardListSkeleton />}>
-          <PostCardList />
-        </Suspense>
-        <Spacing size={'12rem'} />
+        <div className={'mx-[2.5rem]'}>
+          <Spacing size={'2.1rem'} />
+          <Suspense fallback={<PostCardListSkeleton />}>
+            <PostCardList type={'all'} />
+          </Suspense>
+          <Spacing size={'12rem'} />
+        </div>
       </main>
       <BottomAppBar onScrollToTop={scrollToTop} />
     </PageWrapper>

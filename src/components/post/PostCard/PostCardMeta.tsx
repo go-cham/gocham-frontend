@@ -3,19 +3,19 @@ import { MouseEvent } from 'react';
 interface PostCardMetaProps {
   numComment: number;
   numVotes: number;
-  onClickComment: (e: MouseEvent) => void;
+  onCommentShow: (e: MouseEvent) => void;
 }
 
 export default function PostCardMeta({
   numComment,
   numVotes,
-  onClickComment,
+  onCommentShow,
 }: PostCardMetaProps) {
   return (
-    <div className="mt-[0.7rem] flex items-end justify-between">
+    <div className="flex items-end justify-between">
       <span
         className="cursor-pointer text-text-explain-500 font-system-body2"
-        onClick={onClickComment}
+        onClick={onCommentShow}
       >
         댓글 {numComment < 100 ? numComment : '99+'}개 모두 보기
       </span>

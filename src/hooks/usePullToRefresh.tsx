@@ -4,7 +4,7 @@ import ReactDOMServer from 'react-dom/server';
 
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
-export default function usePullToRefresh<U extends Element>({
+export default function usePullToRefresh<U extends HTMLElement>({
   onRefresh,
   topOffset = 0,
 }: {

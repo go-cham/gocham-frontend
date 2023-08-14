@@ -45,7 +45,7 @@ export default function App() {
         <Banner show={showUpdate} applyUpdate={applyUpdate} />
         <RouteChangeTracker />
         <IosInstallGuide />
-        <Suspense fallback={'page loading...'}>
+        <Suspense fallback={null}>
           <Routes>
             <Route path={RouteURL.home} element={<HomePage />} />
             <Route

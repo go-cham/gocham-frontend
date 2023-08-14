@@ -14,7 +14,7 @@ export default function useGetPosts({
 }: {
   authorId?: number | null;
   participatingUserId?: number | null;
-  initialPostId?: number;
+  initialPostId?: number | null;
 } = {}) {
   const { data, fetchNextPage } = useSuspenseInfiniteQuery({
     queryKey: ['posts', initialPostId, authorId, participatingUserId],
