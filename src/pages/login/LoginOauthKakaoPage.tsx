@@ -3,7 +3,7 @@ import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
 import useKakaoLogin from '@/apis/hooks/auth/useKakaoLogin';
 import useUser from '@/apis/hooks/users/useUser';
-import { UserType } from '@/constants/user-type';
+import { USER_TYPE } from '@/constants/user-type';
 
 export default function LoginOauthKakaoPage() {
   const navigate = useNavigate();
@@ -19,11 +19,11 @@ export default function LoginOauthKakaoPage() {
   useEffect(() => {
     if (user) {
       switch (user.type) {
-        case UserType.onceUser:
-        case UserType.onceUserWithoutTerms:
+        case USER_TYPE.ONCE_USER:
+        case USER_TYPE.ONCE_USER_WITHOUT_TERMS:
           return navigate('/register/term');
-        case UserType.deactivatedUser:
-        case UserType.dormantUser:
+        case USER_TYPE.DEACTIVATED_USER:
+        case USER_TYPE.DORMANT_USER:
           return navigate('/login');
         default:
           navigate('/');

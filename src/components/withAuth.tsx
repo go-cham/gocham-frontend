@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 
 import useUser from '@/apis/hooks/users/useUser';
-import { UserType } from '@/constants/user-type';
+import { USER_TYPE } from '@/constants/user-type';
 
 type AuthOption = {
   block: 'unauthenticated' | 'activated';
@@ -29,7 +29,7 @@ const withAuth =
     }
 
     if (block === 'activated') {
-      if (user && user.type === UserType.activatedUser) {
+      if (user && user.type === USER_TYPE.ACTIVATED_USER) {
         return <Navigate to={'/'} />;
       }
     }
