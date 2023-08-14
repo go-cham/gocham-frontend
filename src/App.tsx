@@ -5,8 +5,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Banner from '@/components/Banner';
 import IosInstallGuide from '@/components/IosInstallGuide';
 import Layout from '@/components/layout/Layout';
+import useRouteChangeTracker from '@/hooks/useRouteChangeTracker';
 import useUpdate from '@/hooks/useUpdate';
-import RouteChangeTracker from '@/utils/routeChangeTracker';
 
 const HomePage = lazy(() => import('@/pages/home/HomePage'));
 const CollectInformationPage = lazy(
@@ -34,6 +34,7 @@ const UnregisterPage = lazy(() => import('@/pages/unregister/UnregisterPage'));
 
 export default function App() {
   const { showUpdate, applyUpdate } = useUpdate();
+  useRouteChangeTracker();
 
   return (
     <Layout>
@@ -42,7 +43,6 @@ export default function App() {
         onError={(error) => console.log(error)}
       >
         <Banner show={showUpdate} applyUpdate={applyUpdate} />
-        <RouteChangeTracker />
         <IosInstallGuide />
         <Suspense fallback={null}>
           <Routes>
