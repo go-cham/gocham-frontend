@@ -12,7 +12,7 @@ import HomeBanner from '@/pages/home/components/HomeBanner';
 import HomeHeader from '@/pages/home/components/HomeHeader';
 import PostCardList from '@/pages/home/components/PostCardList';
 import PostCardListSkeleton from '@/pages/home/components/PostCardListSkeleton';
-import { assignMultipleRefs } from '@/utils/assign-multiple-refs';
+import { assignMultipleRefs } from '@/utils/dom/assign-multiple-refs';
 
 export default function HomePage() {
   const { ref: scrollToTopRef, scrollToTop } = useScrollToTop();

@@ -16,7 +16,7 @@ import PostCardList from '@/pages/home/components/PostCardList';
 import PostCardListSkeleton from '@/pages/home/components/PostCardListSkeleton';
 import UserPageHeader from '@/pages/user/components/UserPageHeader';
 import { selectedPostTypeAtom } from '@/states/selected-post-type';
-import { assignMultipleRefs } from '@/utils/assign-multiple-refs';
+import { assignMultipleRefs } from '@/utils/dom/assign-multiple-refs';
 
 function UserPage() {
   const queryClient = useQueryClient();

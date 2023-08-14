@@ -4,8 +4,6 @@ import {
   uploadString,
 } from 'firebase/storage';
 
-import { alertMessage } from '@/utils/alertMessage';
-
 import { firebaseStorage } from './firebaseConfig';
 
 export const uploadFirebase = async (userId, file, dir) => {
@@ -24,7 +22,6 @@ export const uploadFirebase = async (userId, file, dir) => {
     const snapshot = await uploadString(storageRef, file, 'data_url');
     return getDownloadURL(snapshot.ref);
   } catch (e) {
-    alert(alertMessage.error.post.failedUploadImage);
     return '';
   }
 };
