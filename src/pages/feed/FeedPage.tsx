@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import useChooseOption from '@/apis/hooks/posts/useChooseOption';
-import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import TopAppBar from '@/components/layout/TopAppBar';
 import FloatingButton from '@/components/ui/buttons/FloatingButton';
 import PostDetailSkeleton from '@/components/ui/skeleton/PostDetailSkeleton';
 import withAuth from '@/components/withAuth';
+import { POST_TYPE } from '@/constants/post-type';
 import { RouteURL } from '@/constants/route-url';
+import useGetPosts from '@/hooks/useGetPosts';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { voteAnimationIdAtom } from '@/states/vote-animation';
@@ -19,11 +20,11 @@ import PostDetail from './PostDetail';
 function FeedPage() {
   const params = useParams();
   const { user } = useUser();
-  const { route } = useParams();
+  const initialPostId = params.id ? Number(params.id) : undefined;
   const { posts, ref } = useGetPosts({
-    initialPostId: params?.id ? Number(params.id) + 1 : undefined,
-    authorId: route === 'my' ? user?.id : undefined,
-    participatingUserId: route === 'participating' ? user?.id : undefined,
+    initialPostId,
+    userId: user?.id,
+    type: (params.route as POST_TYPE) || POST_TYPE.ALL,
   });
   const { chooseOption } = useChooseOption();
   const [selectedVoteOptionId, setSelectedVoteOptionId] = useAtom(
@@ -51,16 +52,16 @@ function FeedPage() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('navAfterEdit', route || '');
+    localStorage.setItem('navAfterEdit', params.route || '');
   }, []);
 
   return (
     <div className="flex h-full flex-col">
       <TopAppBar
         title={
-          params.route === 'my'
+          params.route === POST_TYPE.MY
             ? '내 게시글'
-            : params.route === 'participating'
+            : params.route === POST_TYPE.PARTICIPATED
             ? '참여한 게시글'
             : '최신 게시물'
         }

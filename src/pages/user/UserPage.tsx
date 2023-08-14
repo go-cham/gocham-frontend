@@ -8,6 +8,7 @@ import PageWrapper from '@/components/ui/PageWrapper';
 import { Spacing } from '@/components/ui/Spacing';
 import PostTypeTabList from '@/components/user/PostTypeTabList';
 import withAuth from '@/components/withAuth';
+import { POST_TYPE } from '@/constants/post-type';
 import usePullToRefresh from '@/hooks/usePullToRefresh';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import useScrollToTop from '@/hooks/useScrollToTop';
@@ -17,8 +18,6 @@ import UserPageHeader from '@/pages/user/UserPageHeader';
 import { selectedPostTypeAtom } from '@/states/selected-post-type';
 import { assignMultipleRefs } from '@/utils/assign-multiple-refs';
 
-export type PostType = 'my' | 'participated';
-
 function UserPage() {
   const queryClient = useQueryClient();
   const [selectedPostType, setSelectedPostType] = useAtom(selectedPostTypeAtom);
@@ -26,7 +25,7 @@ function UserPage() {
   const pullToRefreshRef = usePullToRefresh<HTMLDivElement>({
     onRefresh: () => {
       queryClient.invalidateQueries({
-        queryKey: ['posts'],
+        queryKey: ['posts', { type: selectedPostType }],
       });
     },
   });
@@ -34,7 +33,7 @@ function UserPage() {
   const participatedPostsRef =
     useScrollRestoration<HTMLDivElement>('participated-posts');
 
-  const handlePostTypeSelect = (postType: PostType) => {
+  const handlePostTypeSelect = (postType: POST_TYPE) => {
     setSelectedPostType(postType);
 
     if (postType === selectedPostType) {
@@ -61,7 +60,9 @@ function UserPage() {
             assignMultipleRefs(el, [
               scrollToTopRef,
               pullToRefreshRef,
-              selectedPostType === 'my' ? myPostsRef : participatedPostsRef,
+              selectedPostType === POST_TYPE.MY
+                ? myPostsRef
+                : participatedPostsRef,
             ])
           }
           className={'hide-scrollbar overflow-y-scroll px-[2.5rem]'}

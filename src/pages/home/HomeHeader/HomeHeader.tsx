@@ -1,7 +1,8 @@
-import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
+import { POST_TYPE } from '@/constants/post-type';
 import { ONE_DAY_IN_MILLISECOND } from '@/constants/time';
 import { Z_INDEX } from '@/constants/z-index';
+import useGetPosts from '@/hooks/useGetPosts';
 
 import HeaderLogo from './HeaderLogo';
 
@@ -12,7 +13,8 @@ interface HomeHeaderProps {
 export default function HomeHeader({ onClickLogo }: HomeHeaderProps) {
   const { user, isLoggedIn } = useUser();
   const { posts } = useGetPosts({
-    authorId: user?.id,
+    userId: user?.id,
+    type: POST_TYPE.MY,
   });
 
   const hasUploadedIn24 = () => {

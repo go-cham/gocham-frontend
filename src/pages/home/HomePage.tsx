@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import BottomAppBar from '@/components/layout/BottomAppBar';
 import PageWrapper from '@/components/ui/PageWrapper';
 import { Spacing } from '@/components/ui/Spacing';
+import { POST_TYPE } from '@/constants/post-type';
 import usePullToRefresh from '@/hooks/usePullToRefresh';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import useScrollToTop from '@/hooks/useScrollToTop';
@@ -20,7 +21,7 @@ export default function HomePage() {
   const pullToRefreshRef = usePullToRefresh({
     onRefresh: () => {
       queryClient.refetchQueries({
-        queryKey: ['posts'],
+        queryKey: ['posts', { type: POST_TYPE.ALL }],
       });
     },
     topOffset: 80,
@@ -46,7 +47,7 @@ export default function HomePage() {
         <div className={'mx-[2.5rem]'}>
           <Spacing size={'2.1rem'} />
           <Suspense fallback={<PostCardListSkeleton />}>
-            <PostCardList type={'all'} />
+            <PostCardList type={POST_TYPE.ALL} />
           </Suspense>
           <Spacing size={'12rem'} />
         </div>

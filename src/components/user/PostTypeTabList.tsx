@@ -1,10 +1,10 @@
-import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
-import { PostType } from '@/pages/user/UserPage';
+import { POST_TYPE } from '@/constants/post-type';
+import useGetPosts from '@/hooks/useGetPosts';
 
 interface PostTypeTabListProps {
-  selectedPostType: PostType;
-  onSelect: (postType: PostType) => void;
+  selectedPostType: POST_TYPE;
+  onSelect: (postType: POST_TYPE) => void;
 }
 
 export default function PostTypeTabList({
@@ -13,13 +13,15 @@ export default function PostTypeTabList({
 }: PostTypeTabListProps) {
   const { user } = useUser();
   const { totalCount: myPostsCount } = useGetPosts({
-    authorId: user?.id,
+    userId: user?.id,
+    type: POST_TYPE.MY,
   });
   const { totalCount: participatedPostsCount } = useGetPosts({
-    participatingUserId: user?.id,
+    userId: user?.id,
+    type: POST_TYPE.PARTICIPATED,
   });
 
-  const handleTabSelect = (postType: PostType) => {
+  const handleTabSelect = (postType: POST_TYPE) => {
     onSelect(postType);
   };
 
@@ -28,14 +30,14 @@ export default function PostTypeTabList({
       <PostTypeTab
         label={'내 게시글'}
         count={myPostsCount}
-        selected={selectedPostType === 'my'}
-        onSelect={() => handleTabSelect('my')}
+        selected={selectedPostType === POST_TYPE.MY}
+        onSelect={() => handleTabSelect(POST_TYPE.MY)}
       />
       <PostTypeTab
         label={'참여한 게시글'}
         count={participatedPostsCount}
-        selected={selectedPostType === 'participated'}
-        onSelect={() => handleTabSelect('participated')}
+        selected={selectedPostType === POST_TYPE.PARTICIPATED}
+        onSelect={() => handleTabSelect(POST_TYPE.PARTICIPATED)}
       />
     </div>
   );

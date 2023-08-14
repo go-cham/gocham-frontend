@@ -5,7 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
 import useGetChoiceOptions from '@/apis/hooks/posts/useGetChoiceOptions';
-import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import ImageFullScreen from '@/components/ImageFullScreen';
 import ClockIcon from '@/components/icons/ClockIcon';
@@ -18,6 +17,8 @@ import Popup from '@/components/ui/modal/Popup';
 import Snackbar from '@/components/ui/modal/Snackbar';
 import UserProfile from '@/components/user/UserProfile';
 import { ADMIN_EMAIL } from '@/constants/admin';
+import { POST_TYPE } from '@/constants/post-type';
+import useGetPosts from '@/hooks/useGetPosts';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { customColors } from '@/styles/colors';
 import { Post } from '@/types/post';
@@ -47,7 +48,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { deletePost, error, isSuccess, isLoading } = useDeletePost();
   const selectedVoteOptionId = useAtomValue(selectedVoteOptionIdAtom);
-  const { posts } = useGetPosts({ authorId: user?.id });
+  const { posts } = useGetPosts({ userId: user?.id, type: POST_TYPE.MY });
   const [showCopySnackbar, setShowCopySnackbar] = useState(false);
 
   const handleClickMore = () => {
@@ -103,7 +104,7 @@ export default function PostDetail({ post }: PostDetailProps) {
   useEffect(() => {
     if (isSuccess) {
       alert('게시물이 정상적으로 삭제되었습니다.');
-      if (params.route === 'my' && posts?.length === 1) {
+      if (params.route === POST_TYPE.MY && posts?.length === 1) {
         navigate('/user');
       }
     }

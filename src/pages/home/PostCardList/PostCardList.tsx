@@ -1,16 +1,17 @@
-import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import PostCard from '@/components/post/PostCard';
+import { POST_TYPE } from '@/constants/post-type';
+import useGetPosts from '@/hooks/useGetPosts';
 
 interface PostCardListProps {
-  type: 'all' | 'my' | 'participated';
+  type: POST_TYPE;
 }
 
 export default function PostCardList({ type }: PostCardListProps) {
   const { user } = useUser();
-  const { posts, ref: postsRef } = useGetPosts({
-    authorId: type === 'my' ? user?.id : null,
-    participatingUserId: type === 'participated' ? user?.id : null,
+  const { posts, ref } = useGetPosts({
+    userId: user?.id,
+    type,
   });
 
   return (
@@ -18,7 +19,7 @@ export default function PostCardList({ type }: PostCardListProps) {
       {posts.map((post, index) => (
         <li
           key={post.id}
-          ref={index === posts.length - 1 ? postsRef : undefined}
+          ref={index === posts.length - 1 ? ref : undefined}
           className="w-full"
         >
           <PostCard post={post} type={type} />

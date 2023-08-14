@@ -7,6 +7,7 @@ import PostCardMeta from '@/components/post/PostCard/PostCardMeta';
 import { Spacing } from '@/components/ui/Spacing';
 import UserProfile from '@/components/user/UserProfile';
 import { ADMIN_EMAIL } from '@/constants/admin';
+import { POST_TYPE } from '@/constants/post-type';
 import { RouteURL } from '@/constants/route-url';
 import { scrollRestorationAtom } from '@/states/scroll-restoration';
 import { Post } from '@/types/post';
@@ -14,7 +15,7 @@ import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
 
 interface PostCardProps {
   post: Post;
-  type: 'all' | 'my' | 'participated';
+  type: POST_TYPE;
 }
 
 export default function PostCard({ post, type }: PostCardProps) {
@@ -27,12 +28,10 @@ export default function PostCard({ post, type }: PostCardProps) {
       feed: 0,
     }));
 
-    if (type === 'all') {
+    if (type === POST_TYPE.ALL) {
       navigate(`${RouteURL.feed}/${post.id}`);
-    } else if (type === 'my') {
-      navigate(`${RouteURL.feed}/${post.id}/my`);
-    } else if (type === 'participated') {
-      navigate(`${RouteURL.feed}/${post.id}/participating`);
+    } else {
+      navigate(`${RouteURL.feed}/${post.id}/${type}`);
     }
   };
 
@@ -46,7 +45,7 @@ export default function PostCard({ post, type }: PostCardProps) {
       className="flex w-full cursor-pointer flex-col justify-between rounded-[12px] bg-white px-[1.7rem] py-[1.3rem] shadow-feed"
       onClick={handlePostClick}
     >
-      {type !== 'my' && (
+      {type !== POST_TYPE.MY && (
         <UserProfile
           nickname={post.user.nickname}
           age={calculateAgeFromBirthday(post.user.birthday)}
