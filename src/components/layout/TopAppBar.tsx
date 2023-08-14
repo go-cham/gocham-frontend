@@ -17,10 +17,8 @@ export default function TopAppBar({
 
   const handleClickBackButton = () => {
     if (navigateAction) {
-      // navigateAction 이 있을경우
       navigateAction();
     } else {
-      // navigateAction 이 없을 경우
       if (navigateRoute) {
         navigate(navigateRoute);
       } else {
