@@ -1,7 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { Suspense } from 'react';
-import HomeHeader from 'src/pages/home/components/HomeHeader';
-import PostCardList from 'src/pages/home/components/PostCardList';
 
 import BottomAppBar from '@/components/layout/BottomAppBar';
 import PageWrapper from '@/components/ui/PageWrapper';
@@ -11,6 +9,8 @@ import usePullToRefresh from '@/hooks/usePullToRefresh';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import useScrollToTop from '@/hooks/useScrollToTop';
 import HomeBanner from '@/pages/home/components/HomeBanner';
+import HomeHeader from '@/pages/home/components/HomeHeader';
+import PostCardList from '@/pages/home/components/PostCardList';
 import PostCardListSkeleton from '@/pages/home/components/PostCardListSkeleton';
 import { assignMultipleRefs } from '@/utils/assign-multiple-refs';
 

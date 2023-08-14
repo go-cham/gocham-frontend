@@ -1,5 +1,4 @@
-import CommentItem from 'src/pages/comment/components/CommentItem';
-
+import CommentItem from '@/pages/comment/components/CommentItem';
 import { Comment } from '@/types/comment';
 import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
 

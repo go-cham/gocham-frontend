@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ const CollectInformationPage = lazy(
 );
 const FeedPage = lazy(() => import('@/pages/feed/FeedPage'));
 const FeedReportPage = lazy(() => import('@/pages/feed/FeedReportPage'));
+const CommentPage = lazy(() => import('@/pages/comment/CommentPage'));
 const CommentReportPage = lazy(
   () => import('@/pages/comment/CommentReportPage'),
 );
@@ -31,7 +32,6 @@ const UserPage = lazy(() => import('@/pages/user/UserPage'));
 const EditProfilePage = lazy(() => import('@/pages/settings/SettingsPage'));
 const SettingsPage = lazy(() => import('@/pages/settings/SettingsPage'));
 const UnregisterPage = lazy(() => import('@/pages/unregister/UnregisterPage'));
-const CommentPage = lazy(() => import('@/pages/comment/CommentPage'));
 
 export default function App() {
   const { showUpdate, applyUpdate } = useUpdate();
