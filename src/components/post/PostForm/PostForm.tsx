@@ -8,7 +8,7 @@ import PostVoteInput from '@/components/post/form/PostVoteInput';
 import DockedButton from '@/components/ui/buttons/DockedButton';
 import EditButton from '@/components/ui/buttons/EditButton';
 import Select from '@/components/ui/selections/Select';
-import { categoryOptions, deadlineOptions } from '@/constants/options';
+import { CATEGORY_OPTIONS, DEADLINE_OPTIONS } from '@/constants/options';
 import { PostFormData } from '@/types/post';
 
 interface PostFormProps {
@@ -64,12 +64,12 @@ export default function PostForm({
             id="post-form-category"
             label="카테고리"
             placeholder="선택"
-            options={categoryOptions}
+            options={CATEGORY_OPTIONS}
             labelClassName="font-custom-subheading"
             wrapperClassName="w-full"
             onChange={handlers.categoryChange}
             value={
-              categoryOptions.find((o) => o.value === formData.categoryId)
+              CATEGORY_OPTIONS.find((o) => o.value === formData.categoryId)
                 ?.label
             }
             errorMessage={getErrorMessage('category')}
@@ -78,12 +78,13 @@ export default function PostForm({
             id="post-form-deadline"
             label="투표 마감 시간"
             placeholder="선택"
-            options={deadlineOptions}
+            options={DEADLINE_OPTIONS}
             labelClassName="font-custom-subheading"
             wrapperClassName="w-full"
             onChange={handlers.deadlineChange}
             value={
-              deadlineOptions.find((o) => o.value === formData?.deadline)?.label
+              DEADLINE_OPTIONS.find((o) => o.value === formData?.deadline)
+                ?.label
             }
             readOnly={mode === 'edit'}
             errorMessage={getErrorMessage('deadline')}

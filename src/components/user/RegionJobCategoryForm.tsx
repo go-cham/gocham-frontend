@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import JobInput from '@/components/register/form/JobInput';
 import Chip from '@/components/ui/buttons/Chip';
 import Select from '@/components/ui/selections/Select';
-import { categoryOptions, residenceOptions } from '@/constants/options';
+import { CATEGORY_OPTIONS, RESIDENCE_OPTIONS } from '@/constants/options';
 import { validateJob } from '@/utils/validations/job';
 
 const MAX_CATEGORIES_SELECT = 4;
@@ -32,7 +32,7 @@ export default function RegionJobCategoryForm({
   const jobErrorMessage = isDirty.job ? validateJob(formData.job) : null;
   const handleResidenceChange = (residenceId: number) => {
     setIsDirty({ ...isDirty, residenceId: true });
-    const selected = residenceOptions.find(
+    const selected = RESIDENCE_OPTIONS.find(
       (option) => option.value === residenceId,
     );
     if (selected) {
@@ -86,11 +86,11 @@ export default function RegionJobCategoryForm({
         id="residence"
         label="거주 지역"
         placeholder="지역 선택"
-        options={residenceOptions}
+        options={RESIDENCE_OPTIONS}
         wrapperClassName="w-full"
         onChange={handleResidenceChange}
         value={
-          residenceOptions.find(
+          RESIDENCE_OPTIONS.find(
             (option) => option.value === formData.residenceId,
           )?.label
         }
@@ -108,7 +108,7 @@ export default function RegionJobCategoryForm({
           id="worry-category"
           label="관심 카테고리"
           placeholder="최대 4개 선택 가능"
-          options={categoryOptions.filter(
+          options={CATEGORY_OPTIONS.filter(
             (option) => !formData.categoryIds.includes(option.value),
           )}
           wrapperClassName="w-full"
@@ -121,7 +121,7 @@ export default function RegionJobCategoryForm({
             <Chip
               key={categoryId}
               label={
-                categoryOptions.find((option) => option.value === categoryId)
+                CATEGORY_OPTIONS.find((option) => option.value === categoryId)
                   ?.label || ''
               }
               variant="delete"

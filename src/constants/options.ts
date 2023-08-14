@@ -3,7 +3,7 @@ export type OptionType = {
   label: string;
 };
 
-export const categoryOptions: OptionType[] = [
+export const CATEGORY_OPTIONS: OptionType[] = [
   { value: 1, label: '교육, 학문' },
   { value: 2, label: '컴퓨터, 통신' },
   { value: 3, label: '게임' },
@@ -24,14 +24,14 @@ export const categoryOptions: OptionType[] = [
   { value: 18, label: '반려동물' },
 ];
 
-export const deadlineOptions: OptionType[] = [
+export const DEADLINE_OPTIONS: OptionType[] = [
   { value: 0, label: '마감 없음' },
   { value: 6, label: '6시간 후 마감' },
   { value: 12, label: '12시간 후 마감' },
   { value: 24, label: '24시간 후 마감' },
 ];
 
-export const residenceOptions: OptionType[] = [
+export const RESIDENCE_OPTIONS: OptionType[] = [
   { value: 1, label: '서울특별시' },
   { value: 2, label: '부산광역시' },
   { value: 3, label: '대구광역시' },
@@ -51,7 +51,7 @@ export const residenceOptions: OptionType[] = [
   { value: 17, label: '제주특별자치도' },
 ];
 
-export const reportFeedOption: OptionType[] = [
+export const REPORT_FEED_REASON_OPTIONS: OptionType[] = [
   { value: 1, label: '개인정보 노출 게시물입니다.' },
   { value: 2, label: '스팸홍보/도배 게시물 입니다.' },
   { value: 3, label: '욕설/혐오/차별적 표현이 포함된 게시물입니다.' },
@@ -59,7 +59,7 @@ export const reportFeedOption: OptionType[] = [
   { value: 5, label: '불법정보가 포함된 게시물입니다.' },
 ];
 
-export const reportCommentOption: OptionType[] = [
+export const REPORT_COMMENT_REASON_OPTIONS: OptionType[] = [
   { value: 1, label: '개인정보 노출 댓글입니다.' },
   { value: 2, label: '스팸홍보/도배글 입니다.' },
   { value: 3, label: '욕설/혐오/차별적 표현입니다.' },
