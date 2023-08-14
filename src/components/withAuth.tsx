@@ -1,7 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
 import useUser from '@/apis/hooks/users/useUser';
-import { RouteURL } from '@/constants/route-url';
 import { UserType } from '@/constants/user-type';
 
 type AuthOption = {
@@ -19,19 +18,19 @@ const withAuth =
     }
     if (block === 'unauthenticated') {
       if (user?.type === 'onceUserWithoutTerms') {
-        return <Navigate to={RouteURL.register_term} />;
+        return <Navigate to={'/register/term'} />;
       }
       if (user?.type === 'onceUser') {
-        return <Navigate to={RouteURL.collect_information} />;
+        return <Navigate to={'/collect-information'} />;
       }
       if (!user) {
-        return <Navigate to={RouteURL.login} />;
+        return <Navigate to={'/login'} />;
       }
     }
 
     if (block === 'activated') {
       if (user && user.type === UserType.activatedUser) {
-        return <Navigate to={RouteURL.home} />;
+        return <Navigate to={'/'} />;
       }
     }
 

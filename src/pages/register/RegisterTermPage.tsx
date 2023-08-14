@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import BackIcon from '@/components/icons/BackIcon';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
-import { RouteURL } from '@/constants/route-url';
 import { registerDataAtom } from '@/states/registerData';
 
 import TermCheckbox from './components/TermCheckbox';
@@ -23,7 +22,7 @@ function RegisterTermPage() {
   return (
     <div className="flex h-full flex-col bg-white">
       <BackIcon
-        onClick={() => navigate(RouteURL.login)}
+        onClick={() => navigate('/login')}
         className="ml-[0.9rem] cursor-pointer"
         color="#424242"
       />

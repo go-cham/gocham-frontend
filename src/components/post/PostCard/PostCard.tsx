@@ -8,7 +8,6 @@ import { Spacing } from '@/components/ui/Spacing';
 import UserProfile from '@/components/user/UserProfile';
 import { ADMIN_EMAIL } from '@/constants/admin';
 import { POST_TYPE } from '@/constants/post-type';
-import { RouteURL } from '@/constants/route-url';
 import { scrollRestorationAtom } from '@/states/scroll-restoration';
 import { Post } from '@/types/post';
 import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
@@ -29,9 +28,9 @@ export default function PostCard({ post, type }: PostCardProps) {
     }));
 
     if (type === POST_TYPE.ALL) {
-      navigate(`${RouteURL.feed}/${post.id}`);
+      navigate(`/feed/${post.id}`);
     } else {
-      navigate(`${RouteURL.feed}/${post.id}/${type}`);
+      navigate(`/feed/${post.id}/${type}`);
     }
   };
 

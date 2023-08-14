@@ -9,7 +9,6 @@ import BackIcon from '@/components/icons/BackIcon';
 import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender/CollectNicknameAgeGender';
 import CollectRegionJobCategory from '@/components/user/CollectRegionJobCategory/CollectRegionJobCategory';
 import withAuth from '@/components/withAuth';
-import { RouteURL } from '@/constants/route-url';
 import { registerDataAtom } from '@/states/registerData';
 
 function CollectInformationPage() {
@@ -51,7 +50,7 @@ function CollectInformationPage() {
 
   const handleGoBack = () => {
     if (page === 1) {
-      navigate(RouteURL.register_term);
+      navigate('/register/term');
     } else if (page === 2) {
       setPage(1);
     }

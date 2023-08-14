@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import HomeIcon from '@/components/icons/HomeIcon';
 import PlusIcon from '@/components/icons/PlusIcon';
 import ProfileIcon from '@/components/icons/ProfileIcon';
-import { RouteURL } from '@/constants/route-url';
 import backgroundImage from '@/images/GNB/GNB_bar_icon.svg';
 import { customColors } from '@/styles/colors';
 
@@ -20,18 +19,18 @@ export default function BottomAppBar({ onScrollToTop }: BottomAppBarProps) {
     if (currentPage === 'home') {
       onScrollToTop && onScrollToTop();
     } else {
-      navigate(RouteURL.home);
+      navigate('/');
     }
   };
 
   const handleUserIconClick = () => {
     if (currentPage !== 'user') {
-      navigate(RouteURL.user);
+      navigate('/user');
     }
   };
 
   const handleAddIconClick = () => {
-    navigate(RouteURL.write);
+    navigate('/write');
   };
 
   return (

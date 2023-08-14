@@ -10,7 +10,6 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Button from '@/components/ui/buttons/Button';
 import withAuth from '@/components/withAuth';
 import { REPORT_FEED_REASON_OPTIONS } from '@/constants/options';
-import { RouteURL } from '@/constants/route-url';
 
 function FeedPage() {
   const { id } = useParams();
@@ -23,7 +22,7 @@ function FeedPage() {
   useEffect(() => {
     if (isSuccess) {
       alert('신고가 정상적으로 접수되었습니다.');
-      navigate(RouteURL.feed);
+      navigate('/feed');
     }
     if (error) {
       if (

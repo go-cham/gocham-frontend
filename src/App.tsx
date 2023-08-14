@@ -5,7 +5,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Banner from '@/components/Banner';
 import IosInstallGuide from '@/components/IosInstallGuide';
 import Layout from '@/components/layout/Layout';
-import { RouteURL } from '@/constants/route-url';
 import useUpdate from '@/hooks/useUpdate';
 import RouteChangeTracker from '@/utils/routeChangeTracker';
 
@@ -47,35 +46,32 @@ export default function App() {
         <IosInstallGuide />
         <Suspense fallback={null}>
           <Routes>
-            <Route path={RouteURL.home} element={<HomePage />} />
+            <Route path={'/'} element={<HomePage />} />
+            <Route path={'/feed/:id'} element={<FeedPage />} />
+            <Route path={'/feed/:id/:route'} element={<FeedPage />} />
+            <Route path={'/feed/:id/edit'} element={<EditPage />} />
+            <Route path={'/feed/:id/report'} element={<FeedReportPage />} />
+            <Route path={'/feed/:id/comment'} element={<CommentPage />} />
+            <Route path={'/write'} element={<WritePage />} />
+            <Route path={'/user'} element={<UserPage />} />
+            <Route path={'/edit-profile'} element={<EditProfilePage />} />
+            <Route path={'/settings'} element={<SettingsPage />} />
             <Route
-              path={RouteURL.collect_information}
-              element={<CollectInformationPage />}
-            />
-            <Route path={RouteURL.feed_star} element={<FeedPage />} />
-            <Route path={RouteURL.feed_report} element={<FeedReportPage />} />
-            <Route
-              path={RouteURL.comment_report}
+              path={'/comment/:id/report'}
               element={<CommentReportPage />}
             />
-            <Route path={RouteURL.feed_route_star} element={<FeedPage />} />
-            <Route path={RouteURL.feed_edit} element={<EditPage />} />
-            <Route path={RouteURL.login} element={<LoginPage />} />
+            <Route path={'/login'} element={<LoginPage />} />
             <Route
-              path={RouteURL.login_oauth_kakao}
+              path={'/login/oauth/kakao'}
               element={<LoginOauthKakaoPage />}
             />
             <Route
-              path={RouteURL.register_term}
-              element={<RegisterTermPage />}
+              path={'/collect-information'}
+              element={<CollectInformationPage />}
             />
-            <Route path={RouteURL.write} element={<WritePage />} />
-            <Route path={RouteURL.user} element={<UserPage />} />
-            <Route path={RouteURL.edit_profile} element={<EditProfilePage />} />
-            <Route path={RouteURL.settings} element={<SettingsPage />} />
-            <Route path={RouteURL.unregister} element={<UnregisterPage />} />
-            <Route path={RouteURL.feed_comment} element={<CommentPage />} />
-            <Route path={RouteURL.not_found} element={<Navigate to={'/'} />} />
+            <Route path={'/register/term'} element={<RegisterTermPage />} />
+            <Route path={'/unregister'} element={<UnregisterPage />} />
+            <Route path={'/*'} element={<Navigate to={'/'} />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
