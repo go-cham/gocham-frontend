@@ -1,6 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { Suspense } from 'react';
+import PostCardList from 'src/pages/home/components/PostCardList';
 
 import BottomAppBar from '@/components/layout/BottomAppBar/BottomAppBar';
 import Divider from '@/components/ui/Divider';
@@ -12,9 +13,8 @@ import { POST_TYPE } from '@/constants/post-type';
 import usePullToRefresh from '@/hooks/usePullToRefresh';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import useScrollToTop from '@/hooks/useScrollToTop';
-import PostCardList from '@/pages/home/PostCardList';
-import PostCardListSkeleton from '@/pages/home/PostCardListSkeleton';
-import UserPageHeader from '@/pages/user/UserPageHeader';
+import PostCardListSkeleton from '@/pages/home/components/PostCardListSkeleton';
+import UserPageHeader from '@/pages/user/components/UserPageHeader';
 import { selectedPostTypeAtom } from '@/states/selected-post-type';
 import { assignMultipleRefs } from '@/utils/assign-multiple-refs';
 

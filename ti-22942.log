@@ -1,0 +1,42 @@
+[22:43:01.523] Global cache location '/Users/jihoo/Library/Caches/typescript/5.1', safe file path '/users/jihoo/workspace/project/gocham/gocham-service-web-react-typescript/node_modules/typescript/lib/typingsafelist.json', types map path /users/jihoo/workspace/project/gocham/gocham-service-web-react-typescript/node_modules/typescript/lib/typesmap.json
+[22:43:01.524] Processing cache location '/Users/jihoo/Library/Caches/typescript/5.1'
+[22:43:01.525] Trying to find '/Users/jihoo/Library/Caches/typescript/5.1/package.json'...
+[22:43:01.526] Loaded content of '/Users/jihoo/Library/Caches/typescript/5.1/package.json': {"private":true,"dependencies":{"types-registry":"^0.1.656"},"devDependencies":{"@types/eslint":"^8.44.2","@types/jsdom":"^21.1.1","@types/lodash":"^4.14.197","@types/prop-types":"^15.7.5","@types/pulltorefreshjs":"^0.1.5","@types/react":"^18.2.20","@types/react-dom":"^18.2.7","@types/testing-library__jest-dom":"^5.14.9","@types/webpack":"^5.28.1"}}
+[22:43:01.526] Loaded content of '/Users/jihoo/Library/Caches/typescript/5.1/package-lock.json'
+[22:43:01.526] Finished processing cache location '/Users/jihoo/Library/Caches/typescript/5.1'
+[22:43:01.527] Process id: 22943
+[22:43:01.527] NPM location: /usr/local/bin/npm (explicit '--npmLocation' not  provided)
+[22:43:01.527] validateDefaultNpmLocation: false
+[22:43:01.527] Npm config file: /Users/jihoo/Library/Caches/typescript/5.1/package.json
+[22:43:01.527] Updating types-registry npm package...
+[22:43:01.527] Exec: /usr/local/bin/npm install --ignore-scripts types-registry@latest
+[22:43:02.525]     Succeeded. stdout:
+    
+    up to date, audited 146 packages in 663ms
+
+16 packages are looking for funding
+  run `npm fund` for details
+
+found [32m[1m0[22m[39m vulnerabilities
+
+[22:43:02.526] Updated types-registry npm package
+[22:43:02.560] Closing file watchers for project '/dev/null/inferredProject2*'
+[22:43:02.560] No watchers are registered for project '/dev/null/inferredProject2*'
+[22:43:05.928] Closing file watchers for project '/dev/null/inferredProject3*'
+[22:43:05.929] No watchers are registered for project '/dev/null/inferredProject3*'
+[22:43:05.931] Closing file watchers for project '/dev/null/inferredProject4*'
+[22:43:05.931] No watchers are registered for project '/dev/null/inferredProject4*'
+[22:43:37.229] Closing file watchers for project '/dev/null/inferredProject5*'
+[22:43:37.230] No watchers are registered for project '/dev/null/inferredProject5*'
+[22:43:44.153] Closing file watchers for project '/dev/null/inferredProject6*'
+[22:43:44.153] No watchers are registered for project '/dev/null/inferredProject6*'
+[22:44:30.022] Closing file watchers for project '/dev/null/inferredProject7*'
+[22:44:30.022] No watchers are registered for project '/dev/null/inferredProject7*'
+[22:45:00.306] Closing file watchers for project '/dev/null/inferredProject8*'
+[22:45:00.306] No watchers are registered for project '/dev/null/inferredProject8*'
+[22:46:27.258] Closing file watchers for project '/dev/null/inferredProject9*'
+[22:46:27.258] No watchers are registered for project '/dev/null/inferredProject9*'
+[22:46:32.327] Closing file watchers for project '/dev/null/inferredProject10*'
+[22:46:32.328] No watchers are registered for project '/dev/null/inferredProject10*'
+[22:56:28.763] Closing file watchers for project '/dev/null/inferredProject11*'
+[22:56:28.763] No watchers are registered for project '/dev/null/inferredProject11*'

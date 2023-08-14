@@ -7,7 +7,7 @@ import withAuth from '@/components/withAuth';
 import { RouteURL } from '@/constants/route-url';
 import { registerDataAtom } from '@/states/registerData';
 
-import TermCheckbox from './TermCheckbox';
+import TermCheckbox from './components/TermCheckbox';
 
 function RegisterTermPage() {
   const navigate = useNavigate();

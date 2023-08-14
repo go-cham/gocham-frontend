@@ -15,7 +15,7 @@ import useScrollRestoration from '@/hooks/useScrollRestoration';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { voteAnimationIdAtom } from '@/states/vote-animation';
 
-import PostDetail from './PostDetail';
+import PostDetail from './components/PostDetail';
 
 function FeedPage() {
   const params = useParams();

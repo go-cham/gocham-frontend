@@ -11,17 +11,17 @@ import RouteChangeTracker from '@/utils/routeChangeTracker';
 
 const HomePage = lazy(() => import('@/pages/home/HomePage'));
 const CollectInformationPage = lazy(
-  () => import('@/pages/collect-information/CollectInformationPage'),
+  () => import('@/pages/register/CollectInformationPage'),
 );
 const FeedPage = lazy(() => import('@/pages/feed/FeedPage'));
 const FeedReportPage = lazy(() => import('@/pages/feed/FeedReportPage'));
 const CommentReportPage = lazy(
-  () => import('@/pages/report/CommentReportPage'),
+  () => import('@/pages/comment/CommentReportPage'),
 );
 const EditPage = lazy(() => import('@/pages/edit/EditPage'));
 const LoginPage = lazy(() => import('@/pages/login/LoginPage'));
 const LoginOauthKakaoPage = lazy(
-  () => import('@/pages/login/kakao/LoginOauthKakaoPage'),
+  () => import('@/pages/login/LoginOauthKakaoPage'),
 );
 const RegisterTermPage = lazy(
   () => import('@/pages/register/RegisterTermPage'),

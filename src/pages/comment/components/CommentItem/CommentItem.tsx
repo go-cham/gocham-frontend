@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import useGetMyChoice from '@/apis/hooks/posts/useGetMyChoice';
 import useUser from '@/apis/hooks/users/useUser';
-import CommentContent from '@/pages/comment/CommentItem/CommentContent';
-import CommentFooter from '@/pages/comment/CommentItem/CommentFooter';
-import CommentHeader from '@/pages/comment/CommentItem/CommentHeader';
+import CommentContent from '@/pages/comment/components/CommentItem/CommentContent';
+import CommentFooter from '@/pages/comment/components/CommentItem/CommentFooter';
+import CommentHeader from '@/pages/comment/components/CommentItem/CommentHeader';
 import { commentStateAtom } from '@/states/comment';
 
 interface CommentItemProps {
