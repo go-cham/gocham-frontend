@@ -4,7 +4,7 @@ import useUser from '@/apis/hooks/users/useUser';
 import UserProfile from '@/components/user/UserProfile';
 import { ADMIN_EMAIL } from '@/constants/admin';
 import settingIcon from '@/images/Profile/settings.svg';
-import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
+import { calculateAgeFromBirthDate } from '@/utils/date/calculateAge';
 
 export default function UserPageHeader() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function UserPageHeader() {
       <div className="mt-[1.7rem] flex items-center justify-between">
         <UserProfile
           nickname={user.nickname}
-          age={calculateAgeFromBirthday(user.birthday)}
+          age={calculateAgeFromBirthDate(user.birthDate)}
           isAdmin={user.email === ADMIN_EMAIL}
           size="large"
         />

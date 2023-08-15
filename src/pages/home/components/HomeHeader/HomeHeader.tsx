@@ -1,8 +1,8 @@
+import useGetPosts from '@/apis/hooks/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import { POST_TYPE } from '@/constants/post-type';
 import { ONE_DAY_IN_MILLISECOND } from '@/constants/time';
 import { Z_INDEX } from '@/constants/z-index';
-import useGetPosts from '@/hooks/useGetPosts';
 
 import HeaderLogo from './HeaderLogo';
 

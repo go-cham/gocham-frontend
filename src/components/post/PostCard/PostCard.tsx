@@ -10,7 +10,7 @@ import { ADMIN_EMAIL } from '@/constants/admin';
 import { POST_TYPE } from '@/constants/post-type';
 import { scrollRestorationAtom } from '@/states/scroll-restoration';
 import { Post } from '@/types/post';
-import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
+import { calculateAgeFromBirthDate } from '@/utils/date/calculateAge';
 
 interface PostCardProps {
   post: Post;
@@ -47,7 +47,7 @@ export default function PostCard({ post, type }: PostCardProps) {
       {type !== POST_TYPE.MY && (
         <UserProfile
           nickname={post.user.nickname}
-          age={calculateAgeFromBirthday(post.user.birthday)}
+          age={calculateAgeFromBirthDate(post.user.birthDate)}
           isAdmin={post.user.email === ADMIN_EMAIL}
         />
       )}

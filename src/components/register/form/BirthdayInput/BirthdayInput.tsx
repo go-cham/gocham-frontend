@@ -4,30 +4,30 @@ import AlertIcon from '@/components/icons/AlertIcon';
 import CheckIcon from '@/components/icons/CheckIcon';
 import DeleteIcon from '@/components/icons/DeleteIcon';
 import InputWrapper from '@/components/ui/inputs/InputWrapper';
-import { fixDate } from '@/utils/validations/birthday';
+import { fixDate } from '@/utils/validations/birthDate';
 
-export interface Birthday {
+export interface BirthDate {
   year?: string;
   month?: string;
   day?: string;
 }
 
-interface BirthdayInputProps {
-  onChange: (birthday: Birthday) => void;
+interface BirthDateInputProps {
+  onChange: (birthDate: BirthDate) => void;
   successMessage?: string | null;
   errorMessage?: string | null;
   className?: string;
   defaultValue?: { year: string; month: string; day: string } | null;
 }
 
-export default function BirthdayInput({
+export default function BirthDateInput({
   onChange,
   successMessage,
   errorMessage,
   className,
   defaultValue,
-}: BirthdayInputProps) {
-  const [birthday, setBirthday] = useState<Birthday>(
+}: BirthDateInputProps) {
+  const [birthDate, setBirthDate] = useState<BirthDate>(
     defaultValue || {
       year: '',
       month: '',
@@ -46,14 +46,14 @@ export default function BirthdayInput({
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newBirthday = {
-      ...birthday,
+    const newBirthDate = {
+      ...birthDate,
       [e.target.name]: e.target.value,
     };
-    setBirthday(newBirthday);
-    onChange(newBirthday);
+    setBirthDate(newBirthDate);
+    onChange(newBirthDate);
     setShowReset(
-      Boolean(newBirthday.year || newBirthday.month || newBirthday.day),
+      Boolean(newBirthDate.year || newBirthDate.month || newBirthDate.day),
     );
 
     if (e.target.name === 'year' && e.target.value.length === 4) {
@@ -69,7 +69,7 @@ export default function BirthdayInput({
   };
 
   const handleFocus = () => {
-    if (birthday.year || birthday.month || birthday.day) {
+    if (birthDate.year || birthDate.month || birthDate.day) {
       setTimeout(() => {
         setShowReset(true);
       }, 10);
@@ -77,17 +77,17 @@ export default function BirthdayInput({
   };
 
   const handleBlur = () => {
-    const { year, month, day } = birthday;
-    const fixedBirthday = fixDate(year, month, day);
-    setBirthday(fixedBirthday);
-    onChange(fixedBirthday);
+    const { year, month, day } = birthDate;
+    const fixedBirthDate = fixDate(year, month, day);
+    setBirthDate(fixedBirthDate);
+    onChange(fixedBirthDate);
     setTimeout(() => {
       setShowReset(false);
     }, 100);
   };
 
   const handleReset = () => {
-    setBirthday({
+    setBirthDate({
       year: '',
       month: '',
       day: '',
@@ -120,7 +120,7 @@ export default function BirthdayInput({
           className="w-[3.6rem] bg-transparent text-right"
           onChange={handleChange}
           name="year"
-          value={birthday.year}
+          value={birthDate.year}
           onBlur={handleBlur}
           onFocus={handleFocus}
         />
@@ -136,7 +136,7 @@ export default function BirthdayInput({
           className="w-[1.8rem] bg-transparent text-right"
           onChange={handleChange}
           name="month"
-          value={birthday.month}
+          value={birthDate.month}
           onBlur={handleBlur}
           onFocus={handleFocus}
         />
@@ -152,7 +152,7 @@ export default function BirthdayInput({
           className="w-[1.8rem] bg-transparent text-right"
           onChange={handleChange}
           name="day"
-          value={birthday.day}
+          value={birthDate.day}
           onBlur={handleBlur}
           onFocus={handleFocus}
         />

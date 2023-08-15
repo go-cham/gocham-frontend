@@ -4,7 +4,7 @@ import { Gender } from '@/types/user';
 
 interface RegisterData {
   nickname: string;
-  birthday: string;
+  birthDate: string;
   gender: Gender | null;
   residenceId: number | null;
   job: string;
@@ -18,7 +18,7 @@ interface RegisterData {
 
 export const registerDataAtom = atom<RegisterData>({
   nickname: '',
-  birthday: '',
+  birthDate: '',
   gender: null,
   residenceId: null,
   job: '',

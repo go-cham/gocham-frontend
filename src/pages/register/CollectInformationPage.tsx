@@ -26,7 +26,7 @@ function CollectInformationPage() {
       gender,
       residenceId,
       nickname,
-      birthday,
+      birthDate,
       accept,
     } = registerData;
 
@@ -43,7 +43,7 @@ function CollectInformationPage() {
       residenceId,
       nickname,
       sex: gender,
-      birthDate: birthday,
+      birthDate: birthDate,
       worryCategories: categoryIds,
     });
   };
@@ -86,14 +86,14 @@ function CollectInformationPage() {
             <CollectNicknameAgeGender
               initialData={{
                 nickname: registerData.nickname,
-                birthday: registerData.birthday,
+                birthDate: registerData.birthDate,
                 gender: registerData.gender,
               }}
-              onChange={(nickname, birthday, gender) => {
+              onChange={(nickname, birthDate, gender) => {
                 setRegisterData({
                   ...registerData,
                   nickname,
-                  birthday,
+                  birthDate,
                   gender,
                 });
               }}

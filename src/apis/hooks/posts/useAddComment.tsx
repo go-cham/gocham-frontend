@@ -6,17 +6,19 @@ import {
 } from '@/apis/dto/posts/add-comment';
 import { axiosInstance } from '@/libs/axios';
 
+async function addComment(data: AddCommentRequest) {
+  const res = await axiosInstance.post<AddCommentResponse>(
+    '/worry-reply',
+    data,
+  );
+  return res.data;
+}
+
 export default function useAddComment() {
   const queryClient = useQueryClient();
-  const { mutate, data, isLoading, error, isSuccess } = useMutation({
-    mutationKey: ['comment'],
-    mutationFn: async (data: AddCommentRequest) => {
-      const res = await axiosInstance.post<AddCommentResponse>(
-        '/worry-reply',
-        data,
-      );
-      return res.data;
-    },
+
+  return useMutation({
+    mutationFn: addComment,
     onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: ['comments'],
@@ -26,12 +28,4 @@ export default function useAddComment() {
       });
     },
   });
-
-  return {
-    addComment: mutate,
-    isLoading,
-    isSuccess,
-    error,
-    data,
-  };
 }

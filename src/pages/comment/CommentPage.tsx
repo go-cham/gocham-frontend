@@ -24,7 +24,7 @@ import CommentList from '@/pages/comment/components/CommentList';
 import ImageList from '@/pages/comment/components/ImageList';
 import { PostDetailContent } from '@/pages/feed/components/PostDetail/PostDetail';
 import { commentStateAtom } from '@/states/comment';
-import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
+import { calculateAgeFromBirthDate } from '@/utils/date/calculateAge';
 import { isIOS } from '@/utils/environment';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 
@@ -52,7 +52,7 @@ export default function CommentPage() {
     isSuccess: deletePostSuccess,
   } = useDeletePost();
   const [zoomedImageIndex, setZoomedImageIndex] = useState<number | null>(null);
-  const { addComment, isSuccess, error, data } = useAddComment();
+  const { mutate: addComment, isSuccess, error, data } = useAddComment();
   const [showErrorSnackbar, setShowErrorSnackbar] = useState(false);
   const initialSizeRef = useRef<number | null>(null);
 
@@ -235,7 +235,7 @@ export default function CommentPage() {
               <div className="flex items-center justify-between px-[2.5rem]">
                 <UserProfile
                   nickname={post.user.nickname}
-                  age={calculateAgeFromBirthday(post.user.birthDate)}
+                  age={calculateAgeFromBirthDate(post.user.birthDate)}
                   isAdmin={post.user.email === ADMIN_EMAIL}
                 />
                 <div className="relative" ref={dropdownRef}>

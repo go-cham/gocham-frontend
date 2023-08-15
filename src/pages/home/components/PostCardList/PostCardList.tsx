@@ -1,7 +1,7 @@
+import useGetPosts from '@/apis/hooks/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import PostCard from '@/components/post/PostCard';
 import { POST_TYPE } from '@/constants/post-type';
-import useGetPosts from '@/hooks/useGetPosts';
 
 interface PostCardListProps {
   type: POST_TYPE;

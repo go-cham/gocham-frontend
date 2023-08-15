@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 
+import useGetPosts from '@/apis/hooks/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import { POST_TYPE } from '@/constants/post-type';
-import useGetPosts from '@/hooks/useGetPosts';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import PostDetail from '@/pages/feed/components/PostDetail';
 

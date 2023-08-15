@@ -6,13 +6,17 @@ import { Gender } from '@/types/user';
 
 interface FormData {
   nickname: string;
-  birthday: string;
+  birthDate: string;
   gender: Gender | null;
 }
 
-interface CollectNicknameBirthdayGenderProps {
+interface CollectNicknameBirthDateGenderProps {
   initialData: FormData;
-  onChange: (nickname: string, birthday: string, gender: Gender | null) => void;
+  onChange: (
+    nickname: string,
+    birthDate: string,
+    gender: Gender | null,
+  ) => void;
   onNext: () => void;
 }
 
@@ -20,12 +24,12 @@ export default function CollectNicknameAgeGender({
   initialData,
   onChange,
   onNext,
-}: CollectNicknameBirthdayGenderProps) {
+}: CollectNicknameBirthDateGenderProps) {
   const [buttonEnabled, setButtonEnabled] = useState(false);
 
   const handleChange = (data: FormData, isValid: boolean) => {
     setButtonEnabled(isValid);
-    onChange(data.nickname, data.birthday, data.gender);
+    onChange(data.nickname, data.birthDate, data.gender);
   };
 
   const handleNext = (e: FormEvent<HTMLFormElement>) => {

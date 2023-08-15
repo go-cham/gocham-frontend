@@ -19,7 +19,7 @@ export type Post = {
     email: string;
     nickname: string;
     profileImageUrl: string | null;
-    birthday: string;
+    birthDate: string;
   };
   replyCount: number;
   userWorryChoiceCount: number;

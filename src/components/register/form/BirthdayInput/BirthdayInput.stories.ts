@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import BirthdayInput from '@/components/register/form/BirthdayInput/BirthdayInput';
+import BirthDateInput from '@/components/register/form/BirthDateInput/BirthDateInput';
 
-const meta: Meta<typeof BirthdayInput> = {
-  title: 'Register/inputs/BirthdayInput',
-  component: BirthdayInput,
+const meta: Meta<typeof BirthDateInput> = {
+  title: 'Register/inputs/BirthDateInput',
+  component: BirthDateInput,
   tags: ['autodocs'],
 };
 

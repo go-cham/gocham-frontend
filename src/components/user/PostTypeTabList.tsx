@@ -1,6 +1,6 @@
+import useGetPosts from '@/apis/hooks/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import { POST_TYPE } from '@/constants/post-type';
-import useGetPosts from '@/hooks/useGetPosts';
 
 interface PostTypeTabListProps {
   selectedPostType: POST_TYPE;

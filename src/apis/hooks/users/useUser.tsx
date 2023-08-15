@@ -42,7 +42,7 @@ export default function useUser(): ReturnData {
     type: userType,
     vendor: data.vendor,
     nickname: data.nickname,
-    birthday: data.birthDate,
+    birthDate: data.birthDate,
     sex: data.sex,
     residence: data.residence
       ? {

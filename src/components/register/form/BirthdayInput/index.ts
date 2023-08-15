@@ -1,1 +1,1 @@
-export { default } from './BirthdayInput';
+export { default } from './BirthDateInput';

@@ -6,7 +6,7 @@ export interface User {
   type: string;
   vendor: string;
   nickname: string;
-  birthday: string;
+  birthDate: string;
   sex: Gender | null;
   residence: OptionType | null;
   job: string;

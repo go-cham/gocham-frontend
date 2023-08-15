@@ -12,7 +12,7 @@ import { Gender } from '@/types/user';
 
 interface FormData {
   nickname: string;
-  birthday: string;
+  birthDate: string;
   gender: Gender | null;
   residenceId: number | null;
   job: string;
@@ -29,7 +29,7 @@ function EditProfilePage() {
   });
   const [formData, setFormData] = useState<FormData>({
     nickname: '',
-    birthday: '',
+    birthDate: '',
     gender: null,
     residenceId: null,
     job: '',
@@ -49,7 +49,7 @@ function EditProfilePage() {
   const hasEdited = () => {
     return (
       formData.nickname !== user.nickname ||
-      (user.birthday && formData.birthday !== user.birthday) ||
+      (user.birthDate && formData.birthDate !== user.birthDate) ||
       formData.gender !== user.sex ||
       formData.residenceId !== user.residence?.value ||
       formData.job !== user.job ||
@@ -78,7 +78,7 @@ function EditProfilePage() {
           formData.categoryIds.length > 0 ? formData.categoryIds : [],
         sex: formData.gender,
         residenceId: formData.residenceId,
-        birthDate: formData.birthday,
+        birthDate: formData.birthDate,
       });
     }
   };
@@ -91,7 +91,7 @@ function EditProfilePage() {
       setFormData({
         nickname: user.nickname,
         gender: user.sex,
-        birthday: user.birthday || '',
+        birthDate: user.birthDate || '',
         job: user.job,
         categoryIds: user.worryCategories?.map((cat) => cat.value) || [],
         residenceId: user.residence?.value || null,
@@ -111,14 +111,14 @@ function EditProfilePage() {
             initialData={{
               nickname: user.nickname,
               gender: user.sex,
-              birthday: user.birthday || '',
+              birthDate: user.birthDate || '',
             }}
-            onChange={({ nickname, gender, birthday }, isValid) => {
+            onChange={({ nickname, gender, birthDate }, isValid) => {
               setFormData({
                 ...formData,
                 nickname,
                 gender,
-                birthday,
+                birthDate,
               });
               setIsValid((prevIsValid) => ({
                 ...prevIsValid,

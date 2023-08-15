@@ -30,7 +30,7 @@ export default function useGetComments(postId: number) {
           email: user.email,
           nickname: user.nickname,
           profileImage: user.profileImageUrl,
-          birthday: user.birthDate,
+          birthDate: user.birthDate,
           choice: user.worryChoice
             ? {
                 id: user.worryChoice.id,
@@ -53,7 +53,7 @@ export default function useGetComments(postId: number) {
               email: user.email,
               profileImage: user.profileImageUrl,
               nickname: user.nickname,
-              birthday: user.birthDate,
+              birthDate: user.birthDate,
             },
           }),
         ),

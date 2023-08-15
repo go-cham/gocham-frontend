@@ -1,6 +1,6 @@
 import CommentItem from '@/pages/comment/components/CommentItem';
 import { Comment } from '@/types/comment';
-import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
+import { calculateAgeFromBirthDate } from '@/utils/date/calculateAge';
 
 interface CommentListProps {
   writerId: number;
@@ -19,7 +19,7 @@ export default function CommentList({ writerId, comments }: CommentListProps) {
                 profileImage: comment.user.profileImage,
                 email: comment.user.email,
                 nickname: comment.user.nickname,
-                age: calculateAgeFromBirthday(comment.user.birthday),
+                age: calculateAgeFromBirthDate(comment.user.birthDate),
                 choiceLabel: comment.user.choice?.label || null,
               }}
               isWriter={writerId === comment.user.id}
@@ -36,7 +36,7 @@ export default function CommentList({ writerId, comments }: CommentListProps) {
                       profileImage: reply.user.profileImage,
                       email: reply.user.email,
                       nickname: reply.user.nickname,
-                      age: calculateAgeFromBirthday(reply.user.birthday),
+                      age: calculateAgeFromBirthDate(reply.user.birthDate),
                       choiceLabel: null, // TODO: api 응답 변경
                     }}
                     isWriter={writerId === reply.user.id}

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
 import useGetChoiceOptions from '@/apis/hooks/posts/useGetChoiceOptions';
+import useGetPosts from '@/apis/hooks/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import ImageFullScreen from '@/components/ImageFullScreen';
 import ClockIcon from '@/components/icons/ClockIcon';
@@ -18,11 +19,10 @@ import Snackbar from '@/components/ui/modal/Snackbar';
 import UserProfile from '@/components/user/UserProfile';
 import { ADMIN_EMAIL } from '@/constants/admin';
 import { POST_TYPE } from '@/constants/post-type';
-import useGetPosts from '@/hooks/useGetPosts';
 import { selectedVoteOptionIdAtom } from '@/states/selectedVoteOption';
 import { customColors } from '@/styles/colors';
 import { Post } from '@/types/post';
-import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
+import { calculateAgeFromBirthDate } from '@/utils/date/calculateAge';
 import { formatText } from '@/utils/formatText';
 import { getRemainingTime } from '@/utils/getRemainingTime';
 
@@ -173,7 +173,7 @@ export default function PostDetail({ post }: PostDetailProps) {
       <div className="flex items-center justify-between px-[2.5rem]">
         <UserProfile
           nickname={post.user.nickname}
-          age={calculateAgeFromBirthday(post.user.birthday)}
+          age={calculateAgeFromBirthDate(post.user.birthDate)}
           isAdmin={post.user.email === ADMIN_EMAIL}
         />
         <div ref={ref} className="relative">

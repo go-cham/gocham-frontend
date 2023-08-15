@@ -7,7 +7,7 @@ export interface Comment {
     email: string;
     profileImage: string | null;
     nickname: string;
-    birthday: string;
+    birthDate: string;
     choice: {
       id: number;
       label: string;
@@ -27,7 +27,7 @@ export interface Comment {
       email: string;
       profileImage: string | null;
       nickname: string;
-      birthday: string;
+      birthDate: string;
     };
   }[];
 }

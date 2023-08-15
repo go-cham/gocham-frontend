@@ -1,11 +1,11 @@
 import { isNumber } from 'lodash';
 
-import { Birthday } from '@/components/register/form/BirthdayInput/BirthdayInput';
+import { BirthDate } from '@/components/register/form/BirthDateInput/BirthDateInput';
 import { calculateAge } from '@/utils/date/calculateAge';
 import { getDaysInMonth } from '@/utils/date/getDaysInMonth';
 import { isFuture } from '@/utils/date/isFuture';
 
-export function validateBirthday({ year, month, day }: Birthday) {
+export function validateBirthDate({ year, month, day }: BirthDate) {
   const yearNum = year ? parseInt(year) : null;
   const monthNum = month ? parseInt(month) : null;
   const dayNum = day ? parseInt(day) : null;
