@@ -1,10 +1,8 @@
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
-
 import { commentStateAtom } from '@/features/comments/states/comment';
 import { useUser } from '@/features/user/queries/useUser';
 import { useGetMyChoice } from '@/features/vote/queries';
-
 import CommentContent from './CommentContent';
 import CommentFooter from './CommentFooter';
 import CommentHeader from './CommentHeader';

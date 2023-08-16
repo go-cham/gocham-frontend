@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import PostCardSkeleton from '@/common/components/ui/skeleton/PostCardSkeleton/index';
 
 const meta = {

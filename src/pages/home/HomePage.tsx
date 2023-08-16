@@ -1,6 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { Suspense } from 'react';
-
 import { BottomAppBar } from '@/common/components/layout/BottomAppBar/BottomAppBar';
 import { PageWrapper } from '@/common/components/layout/PageWrapper/PageWrapper';
 import { Spacing } from '@/common/components/ui/Spacing/Spacing';

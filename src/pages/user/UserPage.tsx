@@ -1,7 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { Suspense } from 'react';
-
 import { BottomAppBar } from '@/common/components/layout/BottomAppBar/BottomAppBar';
 import { PageWrapper } from '@/common/components/layout/PageWrapper/PageWrapper';
 import { Divider } from '@/common/components/ui/Divider/Divider';

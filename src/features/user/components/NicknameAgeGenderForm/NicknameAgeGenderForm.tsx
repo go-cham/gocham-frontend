@@ -1,10 +1,9 @@
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
-
 import { axiosInstance } from '@/common/libs/axios';
 import { Gender } from '@/common/types/user';
 import { parseDateString } from '@/common/utils/date/parseDateString';
-import { validateBirthDate } from '@/common/utils/validations/birthday';
+import { validateBirthDate } from '@/common/utils/validations/birth-date';
 import { validateNickname } from '@/common/utils/validations/nickname';
 import {
   BirthDateInput,

@@ -1,5 +1,4 @@
 import { FormEvent, useState } from 'react';
-
 import { Button } from '@/common/components/ui/buttons';
 import { RegionJobCategoryForm } from '@/features/user/components/RegionJobCategoryForm';
 

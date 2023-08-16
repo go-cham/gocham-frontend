@@ -1,6 +1,5 @@
 import { Suspense, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
 import { PageWrapper } from '@/common/components/layout/PageWrapper/PageWrapper';
 import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
 import { POST_TYPE } from '@/common/constants/post-type';

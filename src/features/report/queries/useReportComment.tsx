@@ -1,7 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
-
 import {
   ReportCommentRequest,
   ReportCommentResponse,

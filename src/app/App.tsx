@@ -1,11 +1,9 @@
 import { ErrorBoundary } from 'react-error-boundary';
-
 import { RootLayout } from '@/common/components/layout';
 import { IosInstallGuide } from '@/common/components/system';
 import { UpdateBanner } from '@/common/components/system';
 import { useRouteChangeTracker } from '@/common/hooks/useRouteChangeTracker';
 import { useUpdate } from '@/common/hooks/useUpdate';
-
 import Routes from './Routes';
 
 export function App() {

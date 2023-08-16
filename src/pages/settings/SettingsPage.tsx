@@ -1,7 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import BackIcon from '@/common/components/icons/BackIcon';
 import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
 import { Popup } from '@/common/components/ui/modal/Popup';

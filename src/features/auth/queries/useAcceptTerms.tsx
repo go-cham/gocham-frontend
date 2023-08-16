@@ -1,7 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
-
 import { AcceptTermsRequest, AcceptTermsResponse } from './dto/accept-terms';
 
 async function acceptTerms(data: AcceptTermsRequest) {

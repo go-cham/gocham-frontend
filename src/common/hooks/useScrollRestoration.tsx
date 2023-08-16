@@ -1,7 +1,6 @@
 import { useAtom } from 'jotai';
 import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
-
 import { scrollRestorationAtom } from '@/common/states/scroll-restoration';
 
 export function useScrollRestoration<U extends HTMLElement>(key: string) {

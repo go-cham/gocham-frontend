@@ -3,7 +3,6 @@ import {
   getDownloadURL,
   uploadString,
 } from 'firebase/storage';
-
 import { firebaseStorage } from './firebaseConfig';
 
 export const uploadFirebase = async (userId, file, dir) => {

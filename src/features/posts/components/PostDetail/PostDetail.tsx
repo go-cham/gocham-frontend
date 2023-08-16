@@ -2,7 +2,6 @@ import { useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useNavigate, useParams } from 'react-router-dom';
-
 import ClockIcon from '@/common/components/icons/ClockIcon';
 import MessageIcon from '@/common/components/icons/MessageIcon';
 import MoreIcon from '@/common/components/icons/MoreIcon';
@@ -22,7 +21,6 @@ import { useUser } from '@/features/user/queries/useUser';
 import { useGetChoiceOptions } from '@/features/vote/queries';
 import { selectedVoteOptionIdAtom } from '@/features/vote/states/selected-vote-option';
 import { customColors } from '@/styles/colors';
-
 import { PostVote } from './PostVote';
 
 interface PostDetailProps {

@@ -1,5 +1,4 @@
 import { Navigate } from 'react-router-dom';
-
 import { USER_TYPE } from '@/common/constants/user-type';
 import { useUser } from '@/features/user/queries/useUser';
 

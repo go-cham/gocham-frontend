@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
-
 import { USER_TYPE } from '@/common/constants/user-type';
 import { useKakaoLogin } from '@/features/auth/queries';
 import { useUser } from '@/features/user/queries/useUser';

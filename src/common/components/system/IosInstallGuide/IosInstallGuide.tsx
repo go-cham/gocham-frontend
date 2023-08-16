@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { Snackbar } from '@/common/components/ui/modal';
 import {
   isIOS,

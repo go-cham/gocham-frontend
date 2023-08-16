@@ -1,5 +1,4 @@
 import { twJoin } from 'tailwind-merge';
-
 import adminProfile from '@/common/assets/images/admin.png';
 
 const MAX_AGE_RANGE = 40;

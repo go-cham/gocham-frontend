@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
-
 import { EditProfileRequest, EditProfileResponse } from './dto/edit-profile';
 
 async function editProfile(data: EditProfileRequest) {

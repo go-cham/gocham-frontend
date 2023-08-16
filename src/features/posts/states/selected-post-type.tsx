@@ -1,5 +1,4 @@
 import { atomWithStorage } from 'jotai/utils';
-
 import { POST_TYPE } from '@/common/constants/post-type';
 
 export const selectedPostTypeAtom = atomWithStorage<POST_TYPE>(

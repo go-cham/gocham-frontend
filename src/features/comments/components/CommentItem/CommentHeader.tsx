@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { Popup } from '@/common/components/ui/modal';
 import { ADMIN_EMAIL } from '@/common/constants/admin';
 import { useDeleteComment } from '@/features/comments/queries';

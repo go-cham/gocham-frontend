@@ -1,5 +1,4 @@
 import { twMerge } from 'tailwind-merge';
-
 import CheckIcon from '@/common/components/icons/CheckIcon';
 
 interface CheckboxProps {

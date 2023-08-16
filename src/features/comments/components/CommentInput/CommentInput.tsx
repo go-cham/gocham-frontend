@@ -6,7 +6,6 @@ import {
 } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useLocation } from 'react-router-dom';
-
 import AddCommentIcon from '@/common/components/icons/AddCommentIcon';
 import { commentStateAtom } from '@/features/comments/states/comment';
 

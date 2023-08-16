@@ -1,7 +1,6 @@
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
 import { Popup } from '@/common/components/ui/modal/Popup';
 import { scrollRestorationAtom } from '@/common/states/scroll-restoration';

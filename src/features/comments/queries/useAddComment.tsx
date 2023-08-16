@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
-
 import { AddCommentRequest, AddCommentResponse } from './dto/add-comment';
 
 async function addComment(data: AddCommentRequest) {

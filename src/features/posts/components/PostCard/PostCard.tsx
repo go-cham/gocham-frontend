@@ -1,7 +1,6 @@
 import { useSetAtom } from 'jotai';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { Spacing } from '@/common/components/ui';
 import { ADMIN_EMAIL } from '@/common/constants/admin';
 import { POST_TYPE } from '@/common/constants/post-type';
@@ -9,7 +8,6 @@ import { scrollRestorationAtom } from '@/common/states/scroll-restoration';
 import { Post } from '@/common/types/post';
 import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
 import { UserProfile } from '@/features/user/components/UserProfile';
-
 import { PostCardContent } from './PostCardContent';
 import { PostCardMeta } from './PostCardMeta';
 

@@ -1,7 +1,6 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { CSSProperties, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-
 import CheckIcon from '@/common/components/icons/CheckIcon';
 import { ImageFullScreen } from '@/common/components/ui';
 import { Popup, Snackbar } from '@/common/components/ui/modal';

@@ -1,10 +1,8 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-
 import AlertIcon from '@/common/components/icons/AlertIcon';
 import DeleteIcon from '@/common/components/icons/DeleteIcon';
 import { InputWrapper } from '@/common/components/ui/inputs';
-
 import { CheckIcon } from './CheckIcon';
 
 interface TitleInputProps {

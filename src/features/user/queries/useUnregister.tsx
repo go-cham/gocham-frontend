@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
 
 async function unregister(data: { userId: number; reason: string }) {

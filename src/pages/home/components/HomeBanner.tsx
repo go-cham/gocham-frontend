@@ -1,5 +1,4 @@
 import { isMobile } from 'react-device-detect';
-
 import homeBannerImage from '@/common/assets/images/home/home-banner.svg';
 
 export default function HomeBanner() {

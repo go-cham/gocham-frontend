@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import CommentSkeleton from '@/common/components/ui/skeleton/CommentSkeleton/CommentSkeleton';
 
 const meta = {

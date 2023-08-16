@@ -3,7 +3,6 @@ import { useAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useNavigate, useParams } from 'react-router-dom';
-
 import MoreIcon from '@/common/components/icons/MoreIcon';
 import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
 import { Dropdown } from '@/common/components/ui/Dropdown/Dropdown';
@@ -26,7 +25,6 @@ import { useDeletePost } from '@/features/posts/queries';
 import { useGetPost } from '@/features/posts/queries';
 import { UserProfile } from '@/features/user/components/UserProfile';
 import { useUser } from '@/features/user/queries/useUser';
-
 import { ImageList } from './components/ImageList';
 
 enum MENU {

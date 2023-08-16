@@ -1,7 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
-
 import { GetUsersChoices } from './dto/get-users-choices';
 
 async function getUserChoices(postId?: number) {

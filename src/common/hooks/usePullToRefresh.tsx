@@ -1,7 +1,6 @@
 import PullToRefresh from 'pulltorefreshjs';
 import { useEffect, useRef } from 'react';
 import ReactDOMServer from 'react-dom/server';
-
 import { LoadingSpinner } from '@/common/components/ui/loading';
 
 export function usePullToRefresh<U extends HTMLElement>({

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-
 import DownIcon from '@/common/components/icons/DownIcon';
 import { Dropdown } from '@/common/components/ui';
 

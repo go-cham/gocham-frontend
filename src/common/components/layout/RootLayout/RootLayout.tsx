@@ -1,9 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
-
 import character from '@/common/assets/images/background/character.svg';
 import text from '@/common/assets/images/background/text.svg';
-
 import { PhoneFrame } from './PhoneFrame';
 
 interface RootLayoutProps {

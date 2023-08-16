@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
-
 import { EditPostRequest, EditPostResponse } from './dto/edit-post';
 
 async function editPost(data: EditPostRequest) {

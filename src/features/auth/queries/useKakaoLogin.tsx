@@ -1,7 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
-
 import { KakaoLoginResponse } from './dto/kakao-login';
 
 async function kakaoLogin(code: string | null) {

@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-
 import Kakao from '@/common/assets/images/Login/kakao.svg';
 import LoginWrapper from '@/common/assets/images/Login/loginWrapper.svg';
 import BackIcon from '@/common/components/icons/BackIcon';

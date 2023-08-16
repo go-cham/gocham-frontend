@@ -1,10 +1,9 @@
 import { ChangeEvent, useRef, useState } from 'react';
-
 import AlertIcon from '@/common/components/icons/AlertIcon';
 import CheckIcon from '@/common/components/icons/CheckIcon';
 import DeleteIcon from '@/common/components/icons/DeleteIcon';
 import { InputWrapper } from '@/common/components/ui/inputs';
-import { fixDate } from '@/common/utils/validations/birthday';
+import { fixDate } from '@/common/utils/validations/birth-date';
 
 export interface BirthDate {
   year?: string;

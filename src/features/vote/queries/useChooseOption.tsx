@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
-
 import { ChooseOptionRequest, ChooseOptionResponse } from './dto/choose-option';
 
 async function chooseOption(data: ChooseOptionRequest) {

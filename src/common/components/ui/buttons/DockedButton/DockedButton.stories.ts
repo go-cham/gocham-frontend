@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import { DockedButton } from './DockedButton';
 
 const meta = {

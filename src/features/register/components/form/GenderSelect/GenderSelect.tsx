@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { Gender } from '@/common/types/user';
 
 interface GenderSelectProps {

@@ -1,5 +1,4 @@
 import { Meta, StoryObj } from '@storybook/react';
-
 import { UserProfile } from './UserProfile';
 
 const meta: Meta<typeof UserProfile> = {

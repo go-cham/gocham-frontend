@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import ThumbnailLoading from '@/common/assets/images/Common/thumbnailLoading.svg';
 import { formatText } from '@/common/utils/formatText';
 

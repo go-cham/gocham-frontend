@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import { NicknameInput } from './NicknameInput';
 
 const meta: Meta<typeof NicknameInput> = {

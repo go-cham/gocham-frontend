@@ -1,7 +1,6 @@
 import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import BackIcon from '@/common/components/icons/BackIcon';
 import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { useAcceptTerms } from '@/features/auth/queries';

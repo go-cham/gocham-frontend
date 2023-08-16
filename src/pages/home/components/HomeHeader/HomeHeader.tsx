@@ -3,7 +3,6 @@ import { ONE_DAY_IN_MILLISECOND } from '@/common/constants/time';
 import { Z_INDEX } from '@/common/constants/z-index';
 import { useGetPosts } from '@/features/posts/queries';
 import { useUser } from '@/features/user/queries';
-
 import HeaderLogo from './HeaderLogo';
 
 interface HomeHeaderProps {

@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import { getBearerToken } from '@/common/utils/localStorageManager';
 
 export const axiosInstance = axios.create({

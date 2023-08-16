@@ -1,6 +1,5 @@
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
-
 import BackIcon from '@/common/components/icons/BackIcon';
 import { Button } from '@/common/components/ui/buttons/Button';
 import { withAuth } from '@/features/auth/components/withAuth/withAuth';

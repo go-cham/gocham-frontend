@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
-
 import { DeletePostResponse } from './dto/delete-post';
 
 async function deletePost(id: number) {

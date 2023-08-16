@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-
 import BackIcon from '@/common/components/icons/BackIcon';
 
 interface TopAppBarProps {

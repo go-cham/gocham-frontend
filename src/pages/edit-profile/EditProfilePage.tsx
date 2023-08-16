@@ -1,6 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
 import { DockedButton } from '@/common/components/ui/buttons/DockedButton';
 import { Gender } from '@/common/types/user';

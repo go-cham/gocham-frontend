@@ -1,5 +1,4 @@
 import { twMerge } from 'tailwind-merge';
-
 import DeleteIcon from '@/common/components/icons/DeleteIcon';
 
 interface ChipProps {

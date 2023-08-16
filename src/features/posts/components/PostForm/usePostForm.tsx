@@ -1,6 +1,5 @@
 import { range } from 'lodash';
 import { FormEvent, useEffect, useState } from 'react';
-
 import { uploadFirebase } from '@/common/libs/firebase/firebaseManager';
 import { PostFormData } from '@/common/types/post';
 import { focusById } from '@/common/utils/dom/focus-by-id';

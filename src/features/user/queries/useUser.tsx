@@ -1,8 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
 import { User } from '@/common/types/user';
-
 import { GetUserResponse } from './dto/get-user';
 import { GetUserTypeResponse } from './dto/get-user-type';
 

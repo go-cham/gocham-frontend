@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-
 import settingIcon from '@/common/assets/images/Profile/settings.svg';
 import { ADMIN_EMAIL } from '@/common/constants/admin';
 import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';

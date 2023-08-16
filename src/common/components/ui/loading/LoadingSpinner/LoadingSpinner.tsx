@@ -1,5 +1,4 @@
 import { FadeLoader } from 'react-spinners';
-
 import { customColors } from '@/styles/colors';
 
 interface LoadingSpinnerProps {

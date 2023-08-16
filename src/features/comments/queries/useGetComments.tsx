@@ -1,8 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-
 import { axiosInstance } from '@/common/libs/axios';
 import { Comment } from '@/features/comments/types';
-
 import { GetCommentsResponse } from './dto/get-comments';
 
 async function getComments(postId: number) {
