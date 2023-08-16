@@ -1,10 +1,13 @@
 import { Snackbar } from '@/common/components/ui/modal';
+import { useUpdate } from '@/common/hooks/useUpdate';
 
-interface UpdateBannerProps {
-  applyUpdate: () => void;
-}
+export function UpdateBanner() {
+  const { showUpdate, applyUpdate } = useUpdate();
 
-export function UpdateBanner({ applyUpdate }: UpdateBannerProps) {
+  if (!showUpdate) {
+    return null;
+  }
+
   return (
     <Snackbar
       text="새 버전으로 업데이트합니다."
