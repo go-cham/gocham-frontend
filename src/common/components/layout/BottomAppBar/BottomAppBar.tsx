@@ -1,6 +1,6 @@
 import { isMobile } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
-import backgroundImage from '@/common/assets/images/GNB/GNB_bar_icon.svg';
+import backgroundImage from '@/common/assets/images/bottom-app-bar-background.svg';
 import HomeIcon from '@/common/components/icons/HomeIcon';
 import PlusIcon from '@/common/components/icons/PlusIcon';
 import ProfileIcon from '@/common/components/icons/ProfileIcon';

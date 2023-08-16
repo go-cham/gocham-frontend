@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ThumbnailLoading from '@/common/assets/images/Common/thumbnailLoading.svg';
+import ThumbnailLoading from '@/common/assets/images/thumbnail-loading.svg';
 import { formatText } from '@/common/utils/formatText';
 
 interface PostCardContentProps {

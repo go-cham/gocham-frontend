@@ -1,4 +1,4 @@
-import DeleteIcon from '@/common/assets/images/Write/delete_icon.svg';
+import DeleteIcon from '@/common/assets/images/Write/delete-icon.svg';
 
 interface ImagePreviewProps {
   images: { id?: number; url: string }[];

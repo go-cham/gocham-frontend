@@ -1,4 +1,4 @@
-import DetailArrow from '@/common/assets/images/Login/detail_arrow.png';
+import DetailArrow from '@/common/assets/images/login/detail-arrow.png';
 import { Checkbox } from '@/common/components/ui/selections';
 
 interface TermCheckboxProps {
