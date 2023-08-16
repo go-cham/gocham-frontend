@@ -34,7 +34,7 @@ function FeedPage() {
 
       return alert('오류가 발생하였습니다.');
     }
-  }, [isSuccess, error]);
+  }, [isSuccess, error, navigate]);
 
   if (!post || !user) {
     return null;

@@ -81,7 +81,7 @@ function WritePage() {
         navigate(`/user`);
       }, 1000);
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, navigate]);
 
   if (isLoading) {
     return <PostUploading />;

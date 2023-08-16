@@ -31,7 +31,7 @@ export function VoteButton() {
 
   useEffect(() => {
     setSelectedVoteOptionId(null);
-  }, []);
+  }, [setSelectedVoteOptionId]);
 
   return (
     <FloatingButton

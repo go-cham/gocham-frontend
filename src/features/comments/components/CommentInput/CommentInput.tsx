@@ -102,7 +102,7 @@ export function CommentInput({ onSubmit }: CommentInputProps) {
       const el = document.getElementById('comment-input');
       el?.focus();
     }
-  }, []);
+  }, [location]);
 
   return (
     <form

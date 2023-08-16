@@ -103,7 +103,7 @@ export function NicknameAgeGenderForm({
     );
 
     onChange(formData, isValid);
-  }, [formData, isDirty, errorMessage]);
+  }, [formData, isDirty, errorMessage, onChange]);
 
   return (
     <div className="space-y-[2.9rem]">

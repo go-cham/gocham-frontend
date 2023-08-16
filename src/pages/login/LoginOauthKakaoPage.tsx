@@ -29,7 +29,7 @@ export default function LoginOauthKakaoPage() {
           navigate('/');
       }
     }
-  }, [user]);
+  }, [navigate, user]);
 
   if (token) {
     localStorage.setItem('token', token);

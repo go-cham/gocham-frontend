@@ -40,7 +40,7 @@ export function useScrollRestoration<U extends HTMLElement>(key: string) {
     return () => {
       node.removeEventListener('scroll', handleScroll);
     };
-  }, [node]);
+  }, [key, node, scrollRestoration, setScrollRestoration]);
 
   return ref;
 }

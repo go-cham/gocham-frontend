@@ -25,7 +25,7 @@ export function RootLayout({ children }: RootLayoutProps) {
 
       return () => window.removeEventListener('resize', handleResize);
     }
-  }, [ref.current]);
+  }, []);
 
   return (
     <div className="flex h-full w-screen overflow-hidden bg-[#f5f5f5] bg-cover bg-center">

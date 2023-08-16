@@ -60,13 +60,13 @@ function CollectInformationPage() {
     if (isSuccess) {
       navigate('/');
     }
-  }, [isSuccess]);
+  }, [isSuccess, navigate]);
 
   useEffect(() => {
     if (!registerData.accept.gochamTerm) {
       navigate('/register/term');
     }
-  }, []);
+  }, [navigate, registerData.accept.gochamTerm]);
 
   return (
     <div className="relative flex h-full flex-col bg-white">

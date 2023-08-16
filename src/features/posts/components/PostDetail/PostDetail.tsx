@@ -110,7 +110,7 @@ export function PostDetail({ post }: PostDetailProps) {
     }
 
     setShowMore(false);
-  }, [error, isSuccess]);
+  }, [error, isSuccess, navigate, params.route, posts?.length]);
 
   const images = post.worryFiles?.map((file) => file.url);
   const isSelected = choiceOptions?.find(
@@ -277,7 +277,7 @@ export function PostDetailContent({
         multipleImagesRef.current.style.opacity = '1';
       }
     });
-  }, [multipleImagesRef.current]);
+  }, []);
 
   return (
     <div>

@@ -93,7 +93,7 @@ export function usePullToRefresh<U extends HTMLElement>({
       `;
       },
     });
-  }, [ref.current]);
+  }, [onRefresh, topOffset]);
 
   return ref;
 }

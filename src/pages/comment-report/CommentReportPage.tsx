@@ -23,10 +23,6 @@ function CommentReportPage() {
   } = useReportComment();
   const navigate = useNavigate();
 
-  if (!id || !user) {
-    return null;
-  }
-
   const handleReasonChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedReasonId(+e.target.value);
   };
@@ -38,11 +34,13 @@ function CommentReportPage() {
       return;
     }
 
-    reportComment({
-      userId: user.id,
-      worryReplyId: Number(id),
-      reasonId: selectedReasonId,
-    });
+    if (user) {
+      reportComment({
+        userId: user.id,
+        worryReplyId: Number(id),
+        reasonId: selectedReasonId,
+      });
+    }
   };
 
   useEffect(() => {
@@ -61,7 +59,7 @@ function CommentReportPage() {
       }
       navigate(`/feed/${state.postId}/comment`);
     }
-  }, [isSuccess, error]);
+  }, [isSuccess, error, navigate, state.postId]);
 
   return (
     <div className="flex h-full flex-col">

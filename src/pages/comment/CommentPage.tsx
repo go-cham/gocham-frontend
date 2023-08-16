@@ -118,7 +118,7 @@ export default function CommentPage() {
       alert('오류가 발생하였습니다.');
     }
     setShowMore(false);
-  }, [error, deletePostSuccess]);
+  }, [error, deletePostSuccess, deletePostError, navigate]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -147,7 +147,7 @@ export default function CommentPage() {
         postId: null,
       }));
     };
-  }, [postId]);
+  }, [postId, setCommentState]);
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -186,7 +186,7 @@ export default function CommentPage() {
         }
       }
     }
-  }, [isSuccess, error]);
+  }, [isSuccess, error, data, setCommentState]);
 
   useEffect(() => {
     if (!initialSizeRef.current && window.visualViewport) {

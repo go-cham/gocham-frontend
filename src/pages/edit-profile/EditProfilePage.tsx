@@ -40,13 +40,12 @@ function EditProfilePage() {
     if (isSuccess) {
       navigate(-1);
     }
-  }, [isSuccess]);
-
-  if (!user) {
-    return null;
-  }
+  }, [isSuccess, navigate]);
 
   const hasEdited = () => {
+    if (!user) {
+      return false;
+    }
     return (
       formData.nickname !== user.nickname ||
       (user.birthDate && formData.birthDate !== user.birthDate) ||
@@ -64,6 +63,7 @@ function EditProfilePage() {
   const handleEditProfile = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
+      user &&
       formData.gender &&
       formData.residenceId &&
       formData.nickname &&
@@ -97,7 +97,11 @@ function EditProfilePage() {
         residenceId: user.residence?.value || null,
       });
     }
-  }, []);
+  }, [user]);
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="flex h-full flex-col">

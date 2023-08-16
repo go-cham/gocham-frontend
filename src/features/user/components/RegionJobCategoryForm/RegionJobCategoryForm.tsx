@@ -75,13 +75,13 @@ export function RegionJobCategoryForm({
     );
 
     onChange(formData, isValid);
-  }, [formData, jobErrorMessage, isDirty]);
+  }, [formData, jobErrorMessage, isDirty, onChange]);
 
   useEffect(() => {
     if (formData.job) {
       setIsDirty({ ...isDirty, job: true });
     }
-  }, []);
+  }, [formData.job, isDirty]);
 
   return (
     <div className="space-y-[2.9rem]">

@@ -19,10 +19,6 @@ function UnregisterPage() {
   const queryClient = useQueryClient();
   const [showError, setShowError] = useState(false);
 
-  if (!user) {
-    return null;
-  }
-
   const handleInputChange = (txt: string) => {
     setReason(txt);
   };
@@ -42,10 +38,12 @@ function UnregisterPage() {
   }
 
   const handleUnregister = () => {
-    unregister({
-      userId: user.id,
-      reason: reason.trim(),
-    });
+    if (user) {
+      unregister({
+        userId: user.id,
+        reason: reason.trim(),
+      });
+    }
   };
 
   const handleButtonClick = () => {
@@ -73,14 +71,14 @@ function UnregisterPage() {
     if (error) {
       alert('오류가 발생하였습니다.');
     }
-  }, [isSuccess]);
+  }, [error, isSuccess, navigate, queryClient]);
 
   return (
     <div>
       <TopAppBar title={'탈퇴하기'} />
       <div className="px-[1.5rem]">
         <p className="mt-[3.3rem] font-system-heading1">
-          {user.nickname}님이 떠나신다니 너무 아쉬워요.
+          {user?.nickname}님이 떠나신다니 너무 아쉬워요.
         </p>
         <p className="mt-[1.3rem] text-text-subTitle-700 font-system-body3">
           계정을 삭제해도 게시글, 댓글, 투표한 기록 등 모든 활동 정보는 그대로

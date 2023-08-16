@@ -28,7 +28,7 @@ export function ImageFullScreen({
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+  }, [onClose]);
 
   return (
     <div className="absolute left-0 top-0 z-[100] h-full w-full bg-text-title-900">

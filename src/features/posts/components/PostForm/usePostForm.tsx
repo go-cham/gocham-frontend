@@ -143,7 +143,7 @@ export function usePostForm({
 
   useEffect(() => {
     onChange(formData);
-  }, [formData]);
+  }, [formData, onChange]);
 
   return {
     formData,

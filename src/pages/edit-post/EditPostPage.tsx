@@ -81,7 +81,7 @@ function EditPostPage() {
           navigate(`/feed/${data.id}${to ? `/${to}` : ''}`);
         });
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, queryClient, navigate]);
 
   const getDeadline = (expirationTime: string | null, createdAt: string) => {
     if (!expirationTime) {
