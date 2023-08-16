@@ -6,14 +6,15 @@ import {
 } from '@/apis/dto/users/edit-profile';
 import { axiosInstance } from '@/libs/axios';
 
+async function editProfile(data: EditProfileRequest) {
+  const res = await axiosInstance.patch<EditProfileResponse>('/user', data);
+  return res.data;
+}
+
 export default function useEditProfile() {
   const queryClient = useQueryClient();
-  const { mutate, data, isLoading, isSuccess, error } = useMutation({
-    mutationKey: ['editProfile'],
-    mutationFn: async (data: EditProfileRequest) => {
-      const res = await axiosInstance.patch<EditProfileResponse>('/user', data);
-      return res.data;
-    },
+  return useMutation({
+    mutationFn: editProfile,
     onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: ['userType'],
@@ -23,12 +24,4 @@ export default function useEditProfile() {
       });
     },
   });
-
-  return {
-    editProfile: mutate,
-    data,
-    isLoading,
-    error,
-    isSuccess,
-  };
 }

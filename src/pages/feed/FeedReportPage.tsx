@@ -14,9 +14,9 @@ import { REPORT_FEED_REASON_OPTIONS } from '@/constants/options';
 function FeedPage() {
   const { id } = useParams();
   const { user } = useUser();
-  const { post } = useGetPost(id ? +id : undefined);
+  const { data: post } = useGetPost(id ? +id : undefined);
   const [selectedReasonId, setSelectedReasonId] = useState<number>();
-  const { reportPost, error, isSuccess, isLoading } = useReportPost();
+  const { mutate: reportPost, error, isSuccess, isLoading } = useReportPost();
   const navigate = useNavigate();
 
   useEffect(() => {

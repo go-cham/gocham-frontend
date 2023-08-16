@@ -6,23 +6,17 @@ import {
 } from '@/apis/dto/posts/report-comment';
 import { axiosInstance } from '@/libs/axios';
 
-export default function useReportComment() {
-  const { mutate, data, isLoading, error, isSuccess } = useMutation({
-    mutationKey: ['reportComment'],
-    mutationFn: async (data: ReportCommentRequest) => {
-      const res = await axiosInstance.post<ReportCommentResponse>(
-        '/worry-reply-report',
-        data,
-      );
-      return res.data;
-    },
-  });
-
-  return {
-    reportComment: mutate,
+async function reportComment(data: ReportCommentRequest) {
+  const res = await axiosInstance.post<ReportCommentResponse>(
+    '/worry-reply-report',
     data,
-    isLoading,
-    isSuccess,
-    error,
-  };
+  );
+  return res.data;
+}
+
+export default function useReportComment() {
+  return useMutation({
+    mutationKey: ['reportComment'],
+    mutationFn: reportComment,
+  });
 }

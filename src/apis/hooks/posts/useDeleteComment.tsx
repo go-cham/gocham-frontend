@@ -3,16 +3,18 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { DeleteCommentResponse } from '@/apis/dto/posts/delete-comment';
 import { axiosInstance } from '@/libs/axios';
 
+async function deleteComment(id: number) {
+  const res = await axiosInstance.patch<DeleteCommentResponse>(
+    `/worry-reply/${id}/soft-delete`,
+  );
+  return res.data;
+}
+
 export default function useDeleteComment() {
   const queryClient = useQueryClient();
-  const { mutate, data, isLoading, isSuccess, error } = useMutation({
-    mutationKey: ['deleteComment'],
-    mutationFn: async (id: number) => {
-      const res = await axiosInstance.patch<DeleteCommentResponse>(
-        `/worry-reply/${id}/soft-delete`,
-      );
-      return res.data;
-    },
+
+  return useMutation({
+    mutationFn: deleteComment,
     onSuccess: () => {
       queryClient.refetchQueries({
         queryKey: ['comments'],
@@ -22,12 +24,4 @@ export default function useDeleteComment() {
       });
     },
   });
-
-  return {
-    deleteComment: mutate,
-    data,
-    isLoading,
-    error,
-    isSuccess,
-  };
 }

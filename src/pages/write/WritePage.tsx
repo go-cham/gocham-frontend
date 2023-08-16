@@ -17,7 +17,7 @@ import getFutureDateTime from '@/utils/getFutureDateTime';
 function WritePage() {
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { addPost, isLoading, isSuccess, data } = useAddPost();
+  const { mutate: addPost, isLoading, isSuccess, data } = useAddPost();
   const [hasChanges, setHasChanges] = useState(false);
   const { user } = useUser();
 

@@ -6,23 +6,17 @@ import {
 } from '@/apis/dto/posts/report-post';
 import { axiosInstance } from '@/libs/axios';
 
-export default function useReportPost() {
-  const { mutate, data, isLoading, error, isSuccess } = useMutation({
-    mutationKey: ['report'],
-    mutationFn: async (data: ReportPostRequest) => {
-      const res = await axiosInstance.post<ReportPostResponse>(
-        '/worry-report',
-        data,
-      );
-      return res.data;
-    },
-  });
-
-  return {
-    reportPost: mutate,
+async function reportPost(data: ReportPostRequest) {
+  const res = await axiosInstance.post<ReportPostResponse>(
+    '/worry-report',
     data,
-    isLoading,
-    isSuccess,
-    error,
-  };
+  );
+  return res.data;
+}
+
+export default function useReportPost() {
+  return useMutation({
+    mutationKey: ['report'],
+    mutationFn: reportPost,
+  });
 }

@@ -13,7 +13,7 @@ export default function VoteButton() {
     selectedVoteOptionIdAtom,
   );
   const setVoteAnimationId = useSetAtom(voteAnimationIdAtom);
-  const { chooseOption } = useChooseOption();
+  const { mutate: chooseOption } = useChooseOption();
 
   const handleVote = async () => {
     if (user?.id && selectedVoteOptionId) {

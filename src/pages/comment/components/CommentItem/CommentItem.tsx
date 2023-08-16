@@ -35,7 +35,7 @@ export default function CommentItem({
   parentCommentId,
 }: CommentItemProps) {
   const [commentState, setCommentState] = useAtom(commentStateAtom);
-  const { choice } = useGetMyChoice({
+  const { data: choice } = useGetMyChoice({
     userId: user.id,
     postId: user.choiceLabel ? undefined : commentState.postId || undefined,
   });

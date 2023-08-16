@@ -14,7 +14,7 @@ function UnregisterPage() {
   const { user } = useUser();
   const [reason, setReason] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-  const { unregister, isSuccess, error } = useUnregister();
+  const { mutate: unregister, isSuccess, error } = useUnregister();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [showError, setShowError] = useState(false);

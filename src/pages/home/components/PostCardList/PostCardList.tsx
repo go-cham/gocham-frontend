@@ -1,4 +1,4 @@
-import useGetPosts from '@/apis/hooks/useGetPosts';
+import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import PostCard from '@/components/post/PostCard';
 import { POST_TYPE } from '@/constants/post-type';

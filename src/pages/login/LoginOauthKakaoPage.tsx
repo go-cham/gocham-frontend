@@ -9,7 +9,7 @@ export default function LoginOauthKakaoPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const code = searchParams.get('code');
-  const { token, error } = useKakaoLogin(code);
+  const { data: token, error } = useKakaoLogin(code);
   const { user } = useUser();
 
   useEffect(() => {

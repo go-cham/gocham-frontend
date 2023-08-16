@@ -16,8 +16,8 @@ function CollectInformationPage() {
   const [page, setPage] = useState(1);
   const [registerData, setRegisterData] = useAtom(registerDataAtom);
   const { user } = useUser();
-  const { acceptTerms } = useAcceptTerms();
-  const { editProfile, isSuccess } = useEditProfile();
+  const { mutate: acceptTerms } = useAcceptTerms();
+  const { mutate: editProfile, isSuccess } = useEditProfile();
 
   const handleSubmit = async () => {
     const {

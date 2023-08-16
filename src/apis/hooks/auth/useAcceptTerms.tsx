@@ -6,23 +6,16 @@ import {
 } from '@/apis/dto/auth/accept-terms';
 import { axiosInstance } from '@/libs/axios';
 
-export default function useAcceptTerms() {
-  const { mutate, isSuccess, data, error, isLoading } = useMutation({
-    mutationKey: ['acceptTerms'],
-    mutationFn: async (data: AcceptTermsRequest) => {
-      const res = await axiosInstance.patch<AcceptTermsResponse>(
-        '/user/acceptance-of-terms',
-        data,
-      );
-      return res.data;
-    },
-  });
-
-  return {
-    acceptTerms: mutate,
+async function acceptTerms(data: AcceptTermsRequest) {
+  const res = await axiosInstance.patch<AcceptTermsResponse>(
+    '/user/acceptance-of-terms',
     data,
-    error,
-    isLoading,
-    isSuccess,
-  };
+  );
+  return res.data;
+}
+
+export default function useAcceptTerms() {
+  return useMutation({
+    mutationFn: acceptTerms,
+  });
 }

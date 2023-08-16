@@ -64,7 +64,8 @@ export default function useGetPosts({
     }
   }, [inView, hasNextPage, fetchNextPage]);
 
-  const posts: Post[] = data?.pages.map((page) => page.data).flat() || [];
+  const posts: Post[] | null =
+    data?.pages.map((page) => page.data).flat() || null;
   const totalCount = data?.pages[0].meta.total || 0;
 
   return { posts, ref, totalCount, ...queryInfo };

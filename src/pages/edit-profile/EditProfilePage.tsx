@@ -22,7 +22,7 @@ interface FormData {
 function EditProfilePage() {
   const navigate = useNavigate();
   const { user } = useUser();
-  const { editProfile, isSuccess } = useEditProfile();
+  const { mutate: editProfile, isSuccess } = useEditProfile();
   const [isValid, setIsValid] = useState({
     nicknameAgeGender: true,
     regionJobCategory: true,

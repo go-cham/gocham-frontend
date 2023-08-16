@@ -6,20 +6,22 @@ import {
 } from '@/apis/dto/posts/choose-option';
 import { axiosInstance } from '@/libs/axios';
 
+async function chooseOption(data: ChooseOptionRequest) {
+  const res = await axiosInstance.post<ChooseOptionResponse>(
+    '/user-worry-choice',
+    {
+      userId: data.userId,
+      worryChoiceId: data.worryChoiceId,
+    },
+  );
+  return res.data;
+}
+
 export default function useChooseOption() {
   const queryClient = useQueryClient();
-  const { mutate, data, isLoading, isSuccess, error } = useMutation({
-    mutationKey: ['deletePost'],
-    mutationFn: async ({ userId, worryChoiceId }: ChooseOptionRequest) => {
-      const res = await axiosInstance.post<ChooseOptionResponse>(
-        '/user-worry-choice',
-        {
-          userId,
-          worryChoiceId,
-        },
-      );
-      return res.data;
-    },
+
+  return useMutation({
+    mutationFn: chooseOption,
     onSuccess: () => {
       queryClient.refetchQueries(['myChoice']);
       queryClient.refetchQueries(['usersChoices']);
@@ -27,12 +29,4 @@ export default function useChooseOption() {
       queryClient.refetchQueries(['comments']);
     },
   });
-
-  return {
-    chooseOption: mutate,
-    data,
-    isLoading,
-    error,
-    isSuccess,
-  };
 }

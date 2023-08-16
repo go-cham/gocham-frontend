@@ -15,7 +15,12 @@ function CommentReportPage() {
   const { user } = useUser();
   const [selectedReasonId, setSelectedReasonId] = useState<number>();
   const { state } = useLocation();
-  const { reportComment, isSuccess, error, isLoading } = useReportComment();
+  const {
+    mutate: reportComment,
+    isSuccess,
+    error,
+    isLoading,
+  } = useReportComment();
   const navigate = useNavigate();
 
   if (!id || !user) {

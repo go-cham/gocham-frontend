@@ -4,20 +4,19 @@ import { GetCommentsResponse } from '@/apis/dto/posts/get-comments';
 import { axiosInstance } from '@/libs/axios';
 import { Comment } from '@/types/comment';
 
-export default function useGetComments(postId: number) {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['comments', postId],
-    queryFn: async () => {
-      const res = await axiosInstance.get<GetCommentsResponse>(
-        '/worry-replies',
-        {
-          params: {
-            worryId: postId,
-          },
-        },
-      );
-      return res.data;
+async function getComments(postId: number) {
+  const res = await axiosInstance.get<GetCommentsResponse>('/worry-replies', {
+    params: {
+      worryId: postId,
     },
+  });
+  return res.data;
+}
+
+export default function useGetComments(postId: number) {
+  const { data, ...queryInfo } = useQuery({
+    queryKey: ['comments', postId],
+    queryFn: () => getComments(postId),
   });
 
   const comments: Comment[] | null = data
@@ -61,8 +60,7 @@ export default function useGetComments(postId: number) {
     : null;
 
   return {
-    comments,
-    isLoading,
-    error,
+    ...queryInfo,
+    data: comments,
   };
 }

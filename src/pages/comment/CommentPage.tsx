@@ -42,12 +42,12 @@ export default function CommentPage() {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { user } = useUser();
   const { id: postId } = useParams();
-  const { comments, isLoading: commentLoading } = useGetComments(
+  const { data: comments, isLoading: commentLoading } = useGetComments(
     Number(postId),
   );
-  const { post } = useGetPost(Number(postId));
+  const { data: post } = useGetPost(Number(postId));
   const {
-    deletePost,
+    mutate: deletePost,
     error: deletePostError,
     isSuccess: deletePostSuccess,
   } = useDeletePost();

@@ -26,16 +26,16 @@ export default function PostVote({
   options,
   isClosed,
 }: PostVoteProps) {
-  const { choice } = useGetMyChoice({
+  const { data: choice } = useGetMyChoice({
     userId,
     postId,
   });
-  const { usersChoices } = useGetUsersChoices(postId);
+  const { data: usersChoices } = useGetUsersChoices(postId);
   const [selectedVoteOptionId, setSelectedVoteOptionId] = useAtom(
     selectedVoteOptionIdAtom,
   );
   const [onlyReadModalOpen, setOnlyReadModalOpen] = useState(false);
-  const { chooseOption } = useChooseOption();
+  const { mutate: chooseOption } = useChooseOption();
   const optionIds = usersChoices?.map((option) => option.id);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const voteAnimationId = useAtomValue(voteAnimationIdAtom);

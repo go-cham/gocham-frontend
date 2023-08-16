@@ -17,10 +17,10 @@ function EditPage() {
   const params = useParams();
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { editPost, isLoading, isSuccess, data } = useEditPost();
+  const { mutate: editPost, isLoading, isSuccess, data } = useEditPost();
   const [hasChanges, setHasChanges] = useState(false);
   const { user } = useUser();
-  const { post } = useGetPost(params.id ? +params.id : undefined);
+  const { data: post } = useGetPost(params.id ? +params.id : undefined);
 
   const handleChange = ({
     title,

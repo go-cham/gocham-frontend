@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import useDeletePost from '@/apis/hooks/posts/useDeletePost';
 import useGetChoiceOptions from '@/apis/hooks/posts/useGetChoiceOptions';
-import useGetPosts from '@/apis/hooks/useGetPosts';
+import useGetPosts from '@/apis/hooks/posts/useGetPosts';
 import useUser from '@/apis/hooks/users/useUser';
 import ImageFullScreen from '@/components/ImageFullScreen';
 import ClockIcon from '@/components/icons/ClockIcon';
@@ -40,13 +40,13 @@ enum MENU {
 
 export default function PostDetail({ post }: PostDetailProps) {
   const params = useParams();
-  const { choiceOptions } = useGetChoiceOptions(post.id);
+  const { data: choiceOptions } = useGetChoiceOptions(post.id);
   const navigate = useNavigate();
   const { user } = useUser();
   const [showMore, setShowMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const { deletePost, error, isSuccess, isLoading } = useDeletePost();
+  const { mutate: deletePost, error, isSuccess, isLoading } = useDeletePost();
   const selectedVoteOptionId = useAtomValue(selectedVoteOptionIdAtom);
   const { posts } = useGetPosts({ userId: user?.id, type: POST_TYPE.MY });
   const [showCopySnackbar, setShowCopySnackbar] = useState(false);
