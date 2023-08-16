@@ -1,9 +1,10 @@
-import { ErrorBoundary } from 'react-error-boundary';
 import { RootLayout } from '@/common/components/layout';
 import { IosInstallGuide } from '@/common/components/system';
 import { UpdateBanner } from '@/common/components/system';
 import { useRouteChangeTracker } from '@/common/hooks/useRouteChangeTracker';
 import { useUpdate } from '@/common/hooks/useUpdate';
+import { GlobalErrorBoundary } from './GlobalErrorBoundary';
+import { Provider } from './Provider';
 import Routes from './Routes';
 
 export function App() {
@@ -11,15 +12,14 @@ export function App() {
   useRouteChangeTracker();
 
   return (
-    <RootLayout>
-      <ErrorBoundary
-        fallback={<h1>error!!</h1>}
-        onError={(error) => console.log(error)}
-      >
-        <UpdateBanner show={showUpdate} applyUpdate={applyUpdate} />
-        <IosInstallGuide />
-        <Routes />
-      </ErrorBoundary>
-    </RootLayout>
+    <Provider>
+      <RootLayout>
+        <GlobalErrorBoundary>
+          {showUpdate && <UpdateBanner applyUpdate={applyUpdate} />}
+          <IosInstallGuide />
+          <Routes />
+        </GlobalErrorBoundary>
+      </RootLayout>
+    </Provider>
   );
 }

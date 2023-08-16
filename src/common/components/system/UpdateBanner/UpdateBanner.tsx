@@ -1,15 +1,10 @@
 import { Snackbar } from '@/common/components/ui/modal';
 
 interface UpdateBannerProps {
-  show: boolean;
   applyUpdate: () => void;
 }
 
-export function UpdateBanner({ show, applyUpdate }: UpdateBannerProps) {
-  if (!show) {
-    return null;
-  }
-
+export function UpdateBanner({ applyUpdate }: UpdateBannerProps) {
   return (
     <Snackbar
       text="새 버전으로 업데이트합니다."
