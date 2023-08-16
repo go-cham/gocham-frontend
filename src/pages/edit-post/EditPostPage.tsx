@@ -1,9 +1,9 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
-import { LoadingSpinner } from '@/common/components/ui/loading/LoadingSpinner/LoadingSpinner';
-import { Popup } from '@/common/components/ui/modal/Popup';
+import { TopAppBar } from '@/common/components/layout';
+import { LoadingSpinner } from '@/common/components/ui/loading';
+import { Popup } from '@/common/components/ui/modal';
 import { PostFormData } from '@/common/types/post';
 import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { PostForm } from '@/features/posts/components/PostForm';

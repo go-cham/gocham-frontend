@@ -1,10 +1,8 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { Suspense } from 'react';
-import { BottomAppBar } from '@/common/components/layout/BottomAppBar/BottomAppBar';
-import { PageWrapper } from '@/common/components/layout/PageWrapper/PageWrapper';
-import { Divider } from '@/common/components/ui/Divider/Divider';
-import { Spacing } from '@/common/components/ui/Spacing/Spacing';
+import { BottomAppBar, PageWrapper } from '@/common/components/layout';
+import { Divider, Spacing } from '@/common/components/ui';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { usePullToRefresh } from '@/common/hooks/usePullToRefresh';
 import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';

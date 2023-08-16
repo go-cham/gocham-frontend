@@ -1,9 +1,9 @@
 import { AxiosError } from 'axios';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
+import { TopAppBar } from '@/common/components/layout';
 import { Button } from '@/common/components/ui/buttons/Button';
-import { LoadingSpinner } from '@/common/components/ui/loading/LoadingSpinner/LoadingSpinner';
+import { LoadingSpinner } from '@/common/components/ui/loading';
 import { REPORT_COMMENT_REASON_OPTIONS } from '@/common/constants/options';
 import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { useReportComment } from '@/features/report/queries';

@@ -1,9 +1,9 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
-import { Button } from '@/common/components/ui/buttons/Button';
-import { Popup } from '@/common/components/ui/modal/Popup';
+import { TopAppBar } from '@/common/components/layout';
+import { Button } from '@/common/components/ui/buttons';
+import { Popup } from '@/common/components/ui/modal';
 import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { PostVoteInput } from '@/features/posts/components/form';
 import { useUnregister } from '@/features/user/queries/useUnregister';

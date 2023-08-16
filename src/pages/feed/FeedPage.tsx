@@ -1,7 +1,6 @@
 import { Suspense, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { PageWrapper } from '@/common/components/layout/PageWrapper/PageWrapper';
-import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
+import { PageWrapper, TopAppBar } from '@/common/components/layout';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { PostDetailList } from '@/features/posts/components/PostDetailList';
