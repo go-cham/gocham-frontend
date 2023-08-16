@@ -1,18 +1,18 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { Suspense } from 'react';
 
-import BottomAppBar from '@/components/layout/BottomAppBar';
-import PageWrapper from '@/components/ui/PageWrapper';
-import { Spacing } from '@/components/ui/Spacing';
-import { POST_TYPE } from '@/constants/post-type';
-import usePullToRefresh from '@/hooks/usePullToRefresh';
-import useScrollRestoration from '@/hooks/useScrollRestoration';
-import useScrollToTop from '@/hooks/useScrollToTop';
+import { BottomAppBar } from '@/common/components/layout/BottomAppBar/BottomAppBar';
+import { PageWrapper } from '@/common/components/layout/PageWrapper/PageWrapper';
+import { Spacing } from '@/common/components/ui/Spacing/Spacing';
+import { POST_TYPE } from '@/common/constants/post-type';
+import { usePullToRefresh } from '@/common/hooks/usePullToRefresh';
+import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';
+import { useScrollToTop } from '@/common/hooks/useScrollToTop';
+import { assignMultipleRefs } from '@/common/utils/dom/assign-multiple-refs';
+import { PostCardList } from '@/features/posts/components/PostCardList';
+import { PostCardListSkeleton } from '@/features/posts/components/PostCardListSkeleton';
 import HomeBanner from '@/pages/home/components/HomeBanner';
 import HomeHeader from '@/pages/home/components/HomeHeader';
-import PostCardList from '@/pages/home/components/PostCardList';
-import PostCardListSkeleton from '@/pages/home/components/PostCardListSkeleton';
-import { assignMultipleRefs } from '@/utils/dom/assign-multiple-refs';
 
 export default function HomePage() {
   const { ref: scrollToTopRef, scrollToTop } = useScrollToTop();

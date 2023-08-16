@@ -1,12 +1,11 @@
 import { useAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 
-import BackIcon from '@/components/icons/BackIcon';
-import Button from '@/components/ui/buttons/Button';
-import withAuth from '@/components/withAuth';
-import { registerDataAtom } from '@/states/registerData';
-
-import TermCheckbox from './components/TermCheckbox';
+import BackIcon from '@/common/components/icons/BackIcon';
+import { Button } from '@/common/components/ui/buttons/Button';
+import { withAuth } from '@/features/auth/components/withAuth/withAuth';
+import { registerDataAtom } from '@/features/register/states/register-data';
+import { TermCheckbox } from '@/pages/register/components/TermCheckbox';
 
 function RegisterTermPage() {
   const navigate = useNavigate();

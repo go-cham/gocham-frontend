@@ -2,14 +2,14 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useAcceptTerms from '@/apis/hooks/auth/useAcceptTerms';
-import useEditProfile from '@/apis/hooks/users/useEditProfile';
-import useUser from '@/apis/hooks/users/useUser';
-import BackIcon from '@/components/icons/BackIcon';
-import CollectNicknameAgeGender from '@/components/user/CollectNicknameAgeGender/CollectNicknameAgeGender';
-import CollectRegionJobCategory from '@/components/user/CollectRegionJobCategory/CollectRegionJobCategory';
-import withAuth from '@/components/withAuth';
-import { registerDataAtom } from '@/states/registerData';
+import BackIcon from '@/common/components/icons/BackIcon';
+import { withAuth } from '@/features/auth/components/withAuth/withAuth';
+import { useAcceptTerms } from '@/features/auth/queries';
+import { registerDataAtom } from '@/features/register/states/register-data';
+import CollectNicknameAgeGender from '@/features/user/components/CollectNicknameAgeGender/CollectNicknameAgeGender';
+import CollectRegionJobCategory from '@/features/user/components/CollectRegionJobCategory/CollectRegionJobCategory';
+import { useEditProfile } from '@/features/user/queries/useEditProfile';
+import { useUser } from '@/features/user/queries/useUser';
 
 function CollectInformationPage() {
   const navigate = useNavigate();

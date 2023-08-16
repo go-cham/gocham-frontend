@@ -2,21 +2,21 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { Suspense } from 'react';
 
-import BottomAppBar from '@/components/layout/BottomAppBar/BottomAppBar';
-import Divider from '@/components/ui/Divider';
-import PageWrapper from '@/components/ui/PageWrapper';
-import { Spacing } from '@/components/ui/Spacing';
-import PostTypeTabList from '@/components/user/PostTypeTabList';
-import withAuth from '@/components/withAuth';
-import { POST_TYPE } from '@/constants/post-type';
-import usePullToRefresh from '@/hooks/usePullToRefresh';
-import useScrollRestoration from '@/hooks/useScrollRestoration';
-import useScrollToTop from '@/hooks/useScrollToTop';
-import PostCardList from '@/pages/home/components/PostCardList';
-import PostCardListSkeleton from '@/pages/home/components/PostCardListSkeleton';
-import UserPageHeader from '@/pages/user/components/UserPageHeader';
-import { selectedPostTypeAtom } from '@/states/selected-post-type';
-import { assignMultipleRefs } from '@/utils/dom/assign-multiple-refs';
+import { BottomAppBar } from '@/common/components/layout/BottomAppBar/BottomAppBar';
+import { PageWrapper } from '@/common/components/layout/PageWrapper/PageWrapper';
+import { Divider } from '@/common/components/ui/Divider/Divider';
+import { Spacing } from '@/common/components/ui/Spacing/Spacing';
+import { POST_TYPE } from '@/common/constants/post-type';
+import { usePullToRefresh } from '@/common/hooks/usePullToRefresh';
+import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';
+import { useScrollToTop } from '@/common/hooks/useScrollToTop';
+import { assignMultipleRefs } from '@/common/utils/dom/assign-multiple-refs';
+import { withAuth } from '@/features/auth/components/withAuth/withAuth';
+import { PostCardList } from '@/features/posts/components/PostCardList';
+import { PostCardListSkeleton } from '@/features/posts/components/PostCardListSkeleton';
+import { selectedPostTypeAtom } from '@/features/posts/states/selected-post-type';
+import { PostTypeTabList } from '@/features/user/components/PostTypeTabList';
+import { UserPageHeader } from '@/pages/user/components/UserPageHeader';
 
 function UserPage() {
   const queryClient = useQueryClient();

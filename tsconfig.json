@@ -21,7 +21,7 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
     },
     "types": ["vite/client", "vite-plugin-svgr/client", "vite-plugin-pwa/react", "vitest/globals", "@types/kakao-js-sdk"]
   },

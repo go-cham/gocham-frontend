@@ -1,14 +1,14 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useEditProfile from '@/apis/hooks/users/useEditProfile';
-import useUser from '@/apis/hooks/users/useUser';
-import TopAppBar from '@/components/layout/TopAppBar';
-import DockedButton from '@/components/ui/buttons/DockedButton';
-import NicknameAgeGenderForm from '@/components/user/NicknameAgeGenderForm';
-import RegionJobCategoryForm from '@/components/user/RegionJobCategoryForm';
-import withAuth from '@/components/withAuth';
-import { Gender } from '@/types/user';
+import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
+import { DockedButton } from '@/common/components/ui/buttons/DockedButton';
+import { Gender } from '@/common/types/user';
+import { withAuth } from '@/features/auth/components/withAuth/withAuth';
+import { NicknameAgeGenderForm } from '@/features/user/components/NicknameAgeGenderForm';
+import { RegionJobCategoryForm } from '@/features/user/components/RegionJobCategoryForm';
+import { useEditProfile } from '@/features/user/queries/useEditProfile';
+import { useUser } from '@/features/user/queries/useUser';
 
 interface FormData {
   nickname: string;

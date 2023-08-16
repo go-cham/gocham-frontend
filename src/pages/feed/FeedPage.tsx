@@ -1,13 +1,13 @@
 import { Suspense, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import TopAppBar from '@/components/layout/TopAppBar';
-import PageWrapper from '@/components/ui/PageWrapper';
-import withAuth from '@/components/withAuth';
-import { POST_TYPE } from '@/constants/post-type';
-import PostDetailList from '@/pages/feed/components/PostDetailList';
-import PostDetailListSkeleton from '@/pages/feed/components/PostDetailListSkeleton';
-import VoteButton from '@/pages/feed/components/VoteButton';
+import { PageWrapper } from '@/common/components/layout/PageWrapper/PageWrapper';
+import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
+import { POST_TYPE } from '@/common/constants/post-type';
+import { withAuth } from '@/features/auth/components/withAuth/withAuth';
+import { PostDetailList } from '@/features/posts/components/PostDetailList';
+import { PostDetailListSkeleton } from '@/features/posts/components/PostDetailListSkeleton';
+import { VoteButton } from '@/features/vote/components/VoteButton';
 
 function FeedPage() {
   const params = useParams();

@@ -2,13 +2,13 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useUnregister from '@/apis/hooks/users/useUnregister';
-import useUser from '@/apis/hooks/users/useUser';
-import TopAppBar from '@/components/layout/TopAppBar';
-import PostVoteInput from '@/components/post/form/PostVoteInput';
-import Button from '@/components/ui/buttons/Button';
-import Popup from '@/components/ui/modal/Popup';
-import withAuth from '@/components/withAuth';
+import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
+import { Button } from '@/common/components/ui/buttons/Button';
+import { Popup } from '@/common/components/ui/modal/Popup';
+import { withAuth } from '@/features/auth/components/withAuth/withAuth';
+import { PostVoteInput } from '@/features/posts/components/form';
+import { useUnregister } from '@/features/user/queries/useUnregister';
+import { useUser } from '@/features/user/queries/useUser';
 
 function UnregisterPage() {
   const { user } = useUser();

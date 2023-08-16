@@ -131,7 +131,7 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┣ 📂utils # 유틸리티 함수
 ┃ ┣ 📂_components 컴포넌트
 ┃ ┃ ┣ 📂banner # PWA 업데이트시 사용되는 상단 배너
-┃ ┃ ┃ ┗ 📜Banner.tsx
+┃ ┃ ┃ ┗ 📜UpdateBanner.tsx
 ┃ ┃ ┣ 📂chat # 채팅 
 ┃ ┃ ┃ ┣ 📜BottomSheetContent.tsx
 ┃ ┃ ┃ ┗ 📜ChatBottomSheet.tsx

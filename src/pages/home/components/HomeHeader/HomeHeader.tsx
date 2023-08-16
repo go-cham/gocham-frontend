@@ -1,8 +1,8 @@
-import useGetPosts from '@/apis/hooks/posts/useGetPosts';
-import useUser from '@/apis/hooks/users/useUser';
-import { POST_TYPE } from '@/constants/post-type';
-import { ONE_DAY_IN_MILLISECOND } from '@/constants/time';
-import { Z_INDEX } from '@/constants/z-index';
+import { POST_TYPE } from '@/common/constants/post-type';
+import { ONE_DAY_IN_MILLISECOND } from '@/common/constants/time';
+import { Z_INDEX } from '@/common/constants/z-index';
+import { useGetPosts } from '@/features/posts/queries';
+import { useUser } from '@/features/user/queries';
 
 import HeaderLogo from './HeaderLogo';
 
@@ -18,7 +18,7 @@ export default function HomeHeader({ onClickLogo }: HomeHeaderProps) {
   });
 
   const hasUploadedIn24 = () => {
-    if (!isLoggedIn || posts.length === 0) {
+    if (!isLoggedIn || !posts || posts.length === 0) {
       return false;
     }
     const latestUploadedAt = new Date(posts[0].createdAt).getTime();

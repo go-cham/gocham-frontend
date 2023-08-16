@@ -1,5 +1,5 @@
-import logoChargedImage from '@/images/home/logo-charged.svg';
-import logoDischargedImage from '@/images/home/logo-discharged.svg';
+import logoChargedImage from '@/common/assets/images/home/logo-charged.svg';
+import logoDischargedImage from '@/common/assets/images/home/logo-discharged.svg';
 
 interface HeaderLogoProps {
   charged: boolean;

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 
-import useKakaoLogin from '@/apis/hooks/auth/useKakaoLogin';
-import useUser from '@/apis/hooks/users/useUser';
-import { USER_TYPE } from '@/constants/user-type';
+import { USER_TYPE } from '@/common/constants/user-type';
+import { useKakaoLogin } from '@/features/auth/queries';
+import { useUser } from '@/features/user/queries/useUser';
 
 export default function LoginOauthKakaoPage() {
   const navigate = useNavigate();

@@ -4,29 +4,30 @@ import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import useAddComment from '@/apis/hooks/posts/useAddComment';
-import useDeletePost from '@/apis/hooks/posts/useDeletePost';
-import useGetComments from '@/apis/hooks/posts/useGetComments';
-import useGetPost from '@/apis/hooks/posts/useGetPost';
-import useUser from '@/apis/hooks/users/useUser';
-import ImageFullScreen from '@/components/ImageFullScreen';
-import MoreIcon from '@/components/icons/MoreIcon';
-import TopAppBar from '@/components/layout/TopAppBar';
-import Dropdown from '@/components/ui/Dropdown';
-import Popup from '@/components/ui/modal/Popup/Popup';
-import Snackbar from '@/components/ui/modal/Snackbar';
-import CommentSkeleton from '@/components/ui/skeleton/CommentSkeleton';
-import PostSummarySkeleton from '@/components/ui/skeleton/PostSummarySkeleton';
-import UserProfile from '@/components/user/UserProfile';
-import { ADMIN_EMAIL } from '@/constants/admin';
-import CommentInput from '@/pages/comment/components/CommentInput';
-import CommentList from '@/pages/comment/components/CommentList';
-import ImageList from '@/pages/comment/components/ImageList';
-import { PostDetailContent } from '@/pages/feed/components/PostDetail/PostDetail';
-import { commentStateAtom } from '@/states/comment';
-import { calculateAgeFromBirthDate } from '@/utils/date/calculateAge';
-import { isIOS } from '@/utils/environment';
-import { getRemainingTime } from '@/utils/getRemainingTime';
+import MoreIcon from '@/common/components/icons/MoreIcon';
+import { TopAppBar } from '@/common/components/layout/TopAppBar/TopAppBar';
+import { Dropdown } from '@/common/components/ui/Dropdown/Dropdown';
+import { ImageFullScreen } from '@/common/components/ui/ImageFullScreen/ImageFullScreen';
+import { Popup } from '@/common/components/ui/modal/Popup/Popup';
+import { Snackbar } from '@/common/components/ui/modal/Snackbar';
+import CommentSkeleton from '@/common/components/ui/skeleton/CommentSkeleton';
+import PostSummarySkeleton from '@/common/components/ui/skeleton/PostSummarySkeleton';
+import { ADMIN_EMAIL } from '@/common/constants/admin';
+import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
+import { isIOS } from '@/common/utils/environment';
+import { getRemainingTime } from '@/common/utils/getRemainingTime';
+import { CommentInput } from '@/features/comments/components/CommentInput';
+import { CommentList } from '@/features/comments/components/CommentList';
+import { useAddComment } from '@/features/comments/queries/useAddComment';
+import { useGetComments } from '@/features/comments/queries/useGetComments';
+import { commentStateAtom } from '@/features/comments/states/comment';
+import { PostDetailContent } from '@/features/posts/components/PostDetail/PostDetail';
+import { useDeletePost } from '@/features/posts/queries';
+import { useGetPost } from '@/features/posts/queries';
+import { UserProfile } from '@/features/user/components/UserProfile';
+import { useUser } from '@/features/user/queries/useUser';
+
+import { ImageList } from './components/ImageList';
 
 enum MENU {
   Edit,
