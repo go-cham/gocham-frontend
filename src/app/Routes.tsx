@@ -1,5 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, Routes as ReactRouterRoutes, Route } from 'react-router-dom';
+import { useRouteChangeTracker } from '@/common/hooks/useRouteChangeTracker';
 
 const HomePage = lazy(() => import('@/pages/home/HomePage'));
 const CollectInformationPage = lazy(
@@ -26,6 +27,8 @@ const SettingsPage = lazy(() => import('@/pages/settings/SettingsPage'));
 const UnregisterPage = lazy(() => import('@/pages/unregister/UnregisterPage'));
 
 export default function Routes() {
+  useRouteChangeTracker();
+
   return (
     <Suspense fallback={null}>
       <ReactRouterRoutes>
