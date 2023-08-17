@@ -1,7 +1,6 @@
 /** @types {import('tailwindcss').Config} */
 import { fontFamily } from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
-
 import { customColors } from './src/styles/colors';
 
 export default {
@@ -81,33 +80,33 @@ export default {
           letterSpacing: '-0.3px',
         },
         '.font-custom-hero': {
-          fontFamily: 'Elice, sans-serif',
+          fontFamily: 'Elice Digital Baeum, sans-serif',
           fontWeight: '700',
           fontSize: '2.6rem',
           lineHeight: '3.9rem',
         },
         '.font-custom-heading1': {
-          fontFamily: 'Elice, sans-serif',
+          fontFamily: 'Elice Digital Baeum, sans-serif',
           fontWeight: '700',
           fontSize: '2rem',
           lineHeight: '3rem',
           letterSpacing: '-0.6px',
         },
         '.font-custom-heading2': {
-          fontFamily: 'Elice, sans-serif',
+          fontFamily: 'Elice Digital Baeum, sans-serif',
           fontWeight: '700',
           fontSize: '1.6rem',
           lineHeight: '2.4rem',
           letterSpacing: '-0.48px',
         },
         '.font-custom-subheading': {
-          fontFamily: 'Elice, sans-serif',
+          fontFamily: 'Elice Digital Baeum, sans-serif',
           fontWeight: '700',
           fontSize: '1.4rem',
           lineHeight: '2.1rem',
         },
         '.font-custom-body1': {
-          fontFamily: 'Elice, sans-serif',
+          fontFamily: 'Elice Digital Baeum, sans-serif',
           fontWeight: '400',
           fontSize: '1.2rem',
           lineHeight: '1.8rem',

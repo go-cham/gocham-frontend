@@ -1,39 +1,42 @@
+/* Pretendard */
 @font-face {
   font-family: 'Pretendard';
-  src: url('../common/assets/fonts/pretendard/Pretendard-Bold.otf')
-    format('opentype');
+  src: url('../common/assets/fonts/pretendard/Pretendard-Bold.woff2'),
+    url('../common/assets/fonts/pretendard/Pretendard-Bold.woff'),
+    url('../common/assets/fonts/pretendard/Pretendard-Bold.otf');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Pretendard';
-  src: url('../common/assets/fonts/pretendard/Pretendard-Medium.otf')
-    format('opentype');
+  src: url('../common/assets/fonts/pretendard/Pretendard-Medium.woff2'),
+    url('../common/assets/fonts/pretendard/Pretendard-Medium.woff'),
+    url('../common/assets/fonts/pretendard/Pretendard-Medium.otf');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Pretendard';
-  src: url('../common/assets/fonts/pretendard/Pretendard-Regular.otf')
-    format('opentype');
+  src: url('../common/assets/fonts/pretendard/Pretendard-Regular.woff2'),
+    url('../common/assets/fonts/pretendard/Pretendard-Regular.woff'),
+    url('../common/assets/fonts/pretendard/Pretendard-Regular.otf');
   font-weight: 400;
   font-style: normal;
 }
 
+/* Elice */
 @font-face {
-  font-family: 'Elice';
-  src: url('../common/assets/fonts/elice/EliceDigitalBaeumOTF_Regular.otf')
-    format('opentype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Elice';
-  src: url('../common/assets/fonts/elice/EliceDigitalBaeumOTF_Bold.otf')
-    format('opentype');
+  font-family: 'Elice Digital Baeum';
+  src: url('../common/assets/fonts/elice/EliceDigitalBaeum-Bold.otf');
   font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Elice Digital Baeum';
+  src: url('../common/assets/fonts/elice/EliceDigitalBaeum-Regular.otf');
+  font-weight: 400;
   font-style: normal;
 }
