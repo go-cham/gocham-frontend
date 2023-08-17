@@ -2,32 +2,18 @@ import { useQuery } from '@tanstack/react-query';
 import { axiosInstance } from '@/common/libs/axios';
 import { User } from '@/features/user/types';
 import { GetUserResponse } from './dto/get-user';
-import { GetUserTypeResponse } from './dto/get-user-type';
 
 type ReturnData =
   | { user: User; isLoggedIn: true; isLoading: boolean }
   | { user: null; isLoggedIn: false; isLoading: boolean };
 
 export function useUser(): ReturnData {
-  let userType = '';
   const { data, isLoading } = useQuery({
-    queryKey: ['userType'],
+    queryKey: ['user'],
     queryFn: async () => {
-      try {
-        const userTypeRes = await axiosInstance.get<GetUserTypeResponse>(
-          '/user/type',
-        );
-        userType = userTypeRes.data.userType;
-        const userId = userTypeRes.data.userId;
-        const userRes = await axiosInstance.get<GetUserResponse>(
-          `/user/${userId}`,
-        );
-        return userRes.data;
-      } catch (e) {
-        return null;
-      }
+      const res = await axiosInstance.get<GetUserResponse>('/user');
+      return res.data;
     },
-    retry: false,
   });
 
   if (!data) {
@@ -38,11 +24,11 @@ export function useUser(): ReturnData {
     id: data.id,
     joinStatus: data.joinStatus,
     email: data.email,
-    type: userType,
+    type: data.role,
     vendor: data.vendor,
     nickname: data.nickname,
     birthDate: data.birthDate,
-    sex: data.sex,
+    gender: data.gender,
     residence: data.residence
       ? {
           value: data.residence.id,

@@ -41,7 +41,7 @@ function CollectInformationPage() {
       job: job.trim(),
       residenceId,
       nickname,
-      sex: gender,
+      gender: gender,
       birthDate: birthDate,
       worryCategories: categoryIds,
     });

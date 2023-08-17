@@ -30,7 +30,7 @@ export interface AddCommentResponse {
     profileImageUrl: string;
     realName: string;
     reason: string;
-    sex: string;
+    gender: string;
     status: string;
     termsOfUseAcceptedAt: string;
     updatedAt: string;

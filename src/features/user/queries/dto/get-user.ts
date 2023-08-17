@@ -11,11 +11,12 @@ export interface GetUserResponse {
   updatedAt: string;
   nickname: string;
   birthDate: string;
-  sex: Gender;
+  gender: Gender;
   marketingAcceptedAt: string | null;
   joinStatus: string;
   vendor: string;
   userWorryCategories: WorryCategory[];
   residence: Residence;
   job: string;
+  role: string;
 }

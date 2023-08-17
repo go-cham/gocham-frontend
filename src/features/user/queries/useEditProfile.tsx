@@ -13,7 +13,7 @@ export function useEditProfile() {
     mutationFn: editProfile,
     onSuccess: () => {
       queryClient.refetchQueries({
-        queryKey: ['userType'],
+        queryKey: ['user'],
       });
       queryClient.refetchQueries({
         queryKey: ['posts'],

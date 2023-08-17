@@ -7,7 +7,7 @@ export interface User {
   vendor: string;
   nickname: string;
   birthDate: string;
-  sex: Gender | null;
+  gender: Gender | null;
   residence: OptionType | null;
   job: string;
   worryCategories: OptionType[] | null;
@@ -18,7 +18,7 @@ export interface User {
 export type UserInformation = {
   nickname: string;
   birthDay: string;
-  sex: string;
+  gender: string;
   residence: OptionType;
   job: OptionType;
   worryCategories: OptionType[];

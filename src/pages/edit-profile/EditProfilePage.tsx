@@ -48,7 +48,7 @@ function EditProfilePage() {
     return (
       formData.nickname !== user.nickname ||
       (user.birthDate && formData.birthDate !== user.birthDate) ||
-      formData.gender !== user.sex ||
+      formData.gender !== user.gender ||
       formData.residenceId !== user.residence?.value ||
       formData.job !== user.job ||
       formData.categoryIds?.slice().sort().join(',') !==
@@ -75,7 +75,7 @@ function EditProfilePage() {
         job: formData.job.trim(),
         worryCategories:
           formData.categoryIds.length > 0 ? formData.categoryIds : [],
-        sex: formData.gender,
+        gender: formData.gender,
         residenceId: formData.residenceId,
         birthDate: formData.birthDate,
       });
@@ -89,7 +89,7 @@ function EditProfilePage() {
     if (user) {
       setFormData({
         nickname: user.nickname,
-        gender: user.sex,
+        gender: user.gender,
         birthDate: user.birthDate || '',
         job: user.job,
         categoryIds: user.worryCategories?.map((cat) => cat.value) || [],
@@ -113,7 +113,7 @@ function EditProfilePage() {
           <NicknameAgeGenderForm
             initialData={{
               nickname: user.nickname,
-              gender: user.sex,
+              gender: user.gender,
               birthDate: user.birthDate || '',
             }}
             onChange={({ nickname, gender, birthDate }, isValid) => {

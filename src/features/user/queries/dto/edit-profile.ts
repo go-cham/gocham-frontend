@@ -2,7 +2,7 @@ export interface EditProfileRequest {
   nickname: string;
   birthDate: string;
   job: string;
-  sex: string;
+  gender: string;
   residenceId: number;
   userId: number;
   worryCategories: number[] | null;
