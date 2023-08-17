@@ -1,6 +1,6 @@
 import { Residence } from '@/common/dto/residence';
 import { WorryCategory } from '@/common/dto/worry-category';
-import { Gender } from '@/common/types/user';
+import { Gender } from '@/features/user/types';
 
 export interface GetUserResponse {
   email: string;

@@ -2,12 +2,12 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TopAppBar } from '@/common/components/layout';
 import { DockedButton } from '@/common/components/ui/buttons';
-import { Gender } from '@/common/types/user';
 import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { NicknameAgeGenderForm } from '@/features/user/components/NicknameAgeGenderForm';
 import { RegionJobCategoryForm } from '@/features/user/components/RegionJobCategoryForm';
 import { useEditProfile } from '@/features/user/queries/useEditProfile';
 import { useUser } from '@/features/user/queries/useUser';
+import { Gender } from '@/features/user/types';
 
 interface FormData {
   nickname: string;

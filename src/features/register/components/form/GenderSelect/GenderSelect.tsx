@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Gender } from '@/common/types/user';
+import { Gender } from '@/features/user/types';
 
 interface GenderSelectProps {
   defaultValue: Gender | null;

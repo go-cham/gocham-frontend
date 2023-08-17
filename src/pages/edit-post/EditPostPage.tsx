@@ -4,10 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { TopAppBar } from '@/common/components/layout';
 import { LoadingSpinner } from '@/common/components/ui/loading';
 import { Popup } from '@/common/components/ui/modal';
-import { PostFormData } from '@/common/types/post';
 import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { PostForm } from '@/features/posts/components/PostForm';
 import { useEditPost, useGetPost } from '@/features/posts/queries';
+import { PostFormData } from '@/features/posts/types';
 import { useUser } from '@/features/user/queries/useUser';
 
 function EditPostPage() {

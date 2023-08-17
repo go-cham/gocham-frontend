@@ -1,7 +1,6 @@
 import { DockedButton, EditButton } from '@/common/components/ui/buttons';
 import { Select } from '@/common/components/ui/selections';
 import { CATEGORY_OPTIONS, DEADLINE_OPTIONS } from '@/common/constants/options';
-import { PostFormData } from '@/common/types/post';
 import { ImagePreview } from '@/features/posts/components/PostForm/ImagePreview';
 import {
   MAX_NUM_VOTE_OPTIONS,
@@ -12,6 +11,7 @@ import {
   PostTitleInput,
   PostVoteInput,
 } from '@/features/posts/components/form';
+import { PostFormData } from '@/features/posts/types';
 
 interface PostFormProps {
   mode: 'add' | 'edit';

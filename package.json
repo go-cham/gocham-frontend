@@ -20,7 +20,7 @@
     "build:prod": "vite build",
     "build:staging": "vite build --mode staging",
     "build:dev": "vite build --mode development",
-    "start": "vite",
+    "dev": "vite",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "format": "prettier --write src",

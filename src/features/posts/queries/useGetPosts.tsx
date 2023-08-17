@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { axiosInstance } from '@/common/libs/axios';
-import { Post } from '@/common/types/post';
+import { Post } from '@/features/posts/types';
 import { GetPostsResponse } from './dto/get-posts';
 
 interface getPostsArgs {

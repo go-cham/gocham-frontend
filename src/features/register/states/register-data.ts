@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { Gender } from '@/common/types/user';
+import { Gender } from '@/features/user/types';
 
 interface RegisterData {
   nickname: string;

@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Button } from '@/common/components/ui/buttons';
-import { Gender } from '@/common/types/user';
 import { NicknameAgeGenderForm } from '@/features/user/components/NicknameAgeGenderForm';
+import { Gender } from '@/features/user/types';
 
 interface FormData {
   nickname: string;
