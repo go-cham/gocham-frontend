@@ -8,12 +8,10 @@ interface DockedButtonProps extends ButtonProps {
 
 export function DockedButton({
   variant = 'primary',
-  onClick,
   children,
-  disabled = false,
   backgroundClassName,
   buttonClassName,
-  type,
+  ...props
 }: DockedButtonProps) {
   return (
     <div
@@ -23,11 +21,9 @@ export function DockedButton({
       )}
     >
       <Button
-        type={type}
         variant={variant}
-        onClick={onClick}
-        disabled={disabled}
         className={twMerge('w-[34rem]', buttonClassName)}
+        {...props}
       >
         {children}
       </Button>
