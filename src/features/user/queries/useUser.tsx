@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { axiosInstance } from '@/common/libs/axios';
 import { User } from '@/features/user/types';
 import { GetUserResponse } from './dto/get-user';
@@ -11,8 +12,16 @@ export function useUser(): ReturnData {
   const { data, isLoading } = useQuery({
     queryKey: ['user'],
     queryFn: async () => {
-      const res = await axiosInstance.get<GetUserResponse>('/user');
-      return res.data;
+      try {
+        const res = await axiosInstance.get<GetUserResponse>('/user');
+        return res.data;
+      } catch (e) {
+        if (e instanceof AxiosError && e.response?.status === 401) {
+          return null;
+        } else {
+          throw e;
+        }
+      }
     },
   });
 
