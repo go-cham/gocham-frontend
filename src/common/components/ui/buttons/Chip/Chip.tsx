@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import DeleteIcon from '@/common/components/icons/DeleteIcon';
+import { ReactComponent as Cancel } from './cancel.svg';
 
 interface ChipProps {
   label: string;
@@ -14,26 +14,25 @@ export function Chip({
   onDelete,
   className,
 }: ChipProps) {
-  return (
-    <button
-      className={twMerge(
-        'flex cursor-auto items-center rounded-[5px] py-[0.7rem] pl-[1rem] font-system-body2',
-        variant === 'gray'
-          ? 'bg-background-voteBg-100 text-text-subTitle-700'
-          : 'bg-mainSub-main-100 text-mainSub-main-500',
+  const baseCN =
+    'bg-mainSub-main-100 text-mainSub-main-500 flex items-center rounded-[5px] py-[0.7rem] px-[1rem] font-system-body2 w-fit';
+  const grayCN = 'bg-background-voteBg-100 text-text-subTitle-700';
 
-        variant === 'delete' ? 'pr-[0.6rem]' : 'pr-[1rem]',
+  return (
+    <div
+      className={twMerge(
+        baseCN,
+        variant === 'gray' && grayCN,
+        variant === 'delete' && 'pr-[0.6rem]',
         className,
       )}
     >
       {label}
       {variant === 'delete' && (
-        <DeleteIcon
-          onClick={onDelete}
-          color="#ff7860"
-          className="ml-[0.2rem] h-[1.7rem] w-[1.7rem] cursor-pointer"
-        />
+        <button className={'ml-[0.2rem]'} onClick={onDelete}>
+          <Cancel />
+        </button>
       )}
-    </button>
+    </div>
   );
 }
