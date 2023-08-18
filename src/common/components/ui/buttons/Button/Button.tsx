@@ -1,35 +1,30 @@
+import { ButtonHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-export interface ButtonProps {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'line';
-  children: React.ReactNode;
-  disabled?: boolean;
-  onClick?: () => void;
-  type?: 'button' | 'submit';
-  className?: string;
 }
 
 export function Button({
   variant = 'primary',
-  children,
-  disabled = false,
-  onClick,
-  type,
   className,
+  children,
+  ...props
 }: ButtonProps) {
+  const baseCN =
+    'flex h-[4.7rem] w-[34rem] items-center justify-center rounded-[5px] font-system-heading2 disabled:bg-background-voteBg-100 disabled:text-gray-400';
+  const primaryCN =
+    'bg-mainSub-main-500 text-white hover:bg-mainSub-mainPush-600 active:bg-mainSub-mainPush-600';
+  const lineCN =
+    'bg-mainSub-main-100 text-mainSub-main-500 hover:bg-mainSub-mainPush-200 active:bg-mainSub-mainPush-200';
+  const buttonCN = twMerge(
+    baseCN,
+    variant === 'primary' ? primaryCN : lineCN,
+    className,
+  );
+
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={twMerge(
-        'flex h-[4.7rem] w-[34rem] items-center justify-center rounded-[5px] transition-all duration-200 font-system-heading2 disabled:bg-background-voteBg-100 disabled:text-gray-400',
-        variant === 'primary'
-          ? 'bg-mainSub-main-500 text-white hover:bg-mainSub-mainPush-600 active:bg-mainSub-mainPush-600'
-          : 'bg-mainSub-main-100 text-mainSub-main-500 hover:bg-mainSub-mainPush-200 active:bg-mainSub-mainPush-200',
-        className,
-      )}
-      disabled={disabled}
-    >
+    <button className={buttonCN} {...props}>
       {children}
     </button>
   );
