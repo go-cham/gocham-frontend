@@ -1,18 +1,17 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import useEditProfile from '@/apis/hooks/users/useEditProfile';
-import useUser from '@/apis/hooks/users/useUser';
-import TopAppBar from '@/components/layout/TopAppBar';
-import DockedButton from '@/components/ui/buttons/DockedButton';
-import NicknameAgeGenderForm from '@/components/user/NicknameAgeGenderForm';
-import RegionJobCategoryForm from '@/components/user/RegionJobCategoryForm';
-import withAuth from '@/components/withAuth';
-import { Gender } from '@/types/user';
+import { TopAppBar } from '@/common/components/layout';
+import { DockedButton } from '@/common/components/ui/buttons';
+import { withAuth } from '@/features/auth/components/withAuth/withAuth';
+import { NicknameAgeGenderForm } from '@/features/user/components/NicknameAgeGenderForm';
+import { RegionJobCategoryForm } from '@/features/user/components/RegionJobCategoryForm';
+import { useEditProfile } from '@/features/user/queries/useEditProfile';
+import { useUser } from '@/features/user/queries/useUser';
+import { Gender } from '@/features/user/types';
 
 interface FormData {
   nickname: string;
-  birthday: string;
+  birthDate: string;
   gender: Gender | null;
   residenceId: number | null;
   job: string;
@@ -22,14 +21,14 @@ interface FormData {
 function EditProfilePage() {
   const navigate = useNavigate();
   const { user } = useUser();
-  const { editProfile, isSuccess } = useEditProfile();
+  const { mutate: editProfile, isSuccess } = useEditProfile();
   const [isValid, setIsValid] = useState({
     nicknameAgeGender: true,
     regionJobCategory: true,
   });
   const [formData, setFormData] = useState<FormData>({
     nickname: '',
-    birthday: '',
+    birthDate: '',
     gender: null,
     residenceId: null,
     job: '',
@@ -40,17 +39,16 @@ function EditProfilePage() {
     if (isSuccess) {
       navigate(-1);
     }
-  }, [isSuccess]);
-
-  if (!user) {
-    return null;
-  }
+  }, [isSuccess, navigate]);
 
   const hasEdited = () => {
+    if (!user) {
+      return false;
+    }
     return (
       formData.nickname !== user.nickname ||
-      (user.birthday && formData.birthday !== user.birthday) ||
-      formData.gender !== user.sex ||
+      (user.birthDate && formData.birthDate !== user.birthDate) ||
+      formData.gender !== user.gender ||
       formData.residenceId !== user.residence?.value ||
       formData.job !== user.job ||
       formData.categoryIds?.slice().sort().join(',') !==
@@ -64,6 +62,7 @@ function EditProfilePage() {
   const handleEditProfile = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
+      user &&
       formData.gender &&
       formData.residenceId &&
       formData.nickname &&
@@ -76,9 +75,9 @@ function EditProfilePage() {
         job: formData.job.trim(),
         worryCategories:
           formData.categoryIds.length > 0 ? formData.categoryIds : [],
-        sex: formData.gender,
+        gender: formData.gender,
         residenceId: formData.residenceId,
-        birthDate: formData.birthday,
+        birthDate: formData.birthDate,
       });
     }
   };
@@ -90,14 +89,18 @@ function EditProfilePage() {
     if (user) {
       setFormData({
         nickname: user.nickname,
-        gender: user.sex,
-        birthday: user.birthday || '',
+        gender: user.gender,
+        birthDate: user.birthDate || '',
         job: user.job,
         categoryIds: user.worryCategories?.map((cat) => cat.value) || [],
         residenceId: user.residence?.value || null,
       });
     }
-  }, []);
+  }, [user]);
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="flex h-full flex-col">
@@ -110,15 +113,15 @@ function EditProfilePage() {
           <NicknameAgeGenderForm
             initialData={{
               nickname: user.nickname,
-              gender: user.sex,
-              birthday: user.birthday || '',
+              gender: user.gender,
+              birthDate: user.birthDate || '',
             }}
-            onChange={({ nickname, gender, birthday }, isValid) => {
+            onChange={({ nickname, gender, birthDate }, isValid) => {
               setFormData({
                 ...formData,
                 nickname,
                 gender,
-                birthday,
+                birthDate,
               });
               setIsValid((prevIsValid) => ({
                 ...prevIsValid,

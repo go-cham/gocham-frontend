@@ -1,27 +1,22 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import useUnregister from '@/apis/hooks/users/useUnregister';
-import useUser from '@/apis/hooks/users/useUser';
-import TopAppBar from '@/components/layout/TopAppBar';
-import PostVoteInput from '@/components/post/form/PostVoteInput';
-import Button from '@/components/ui/buttons/Button';
-import Popup from '@/components/ui/modal/Popup';
-import withAuth from '@/components/withAuth';
+import { TopAppBar } from '@/common/components/layout';
+import { Button } from '@/common/components/ui/buttons';
+import { Popup } from '@/common/components/ui/modal';
+import { withAuth } from '@/features/auth/components/withAuth/withAuth';
+import { PostVoteInput } from '@/features/posts/components/form';
+import { useUnregister } from '@/features/user/queries/useUnregister';
+import { useUser } from '@/features/user/queries/useUser';
 
 function UnregisterPage() {
   const { user } = useUser();
   const [reason, setReason] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-  const { unregister, isSuccess, error } = useUnregister();
+  const { mutate: unregister, isSuccess, error } = useUnregister();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [showError, setShowError] = useState(false);
-
-  if (!user) {
-    return null;
-  }
 
   const handleInputChange = (txt: string) => {
     setReason(txt);
@@ -42,10 +37,12 @@ function UnregisterPage() {
   }
 
   const handleUnregister = () => {
-    unregister({
-      userId: user.id,
-      reason: reason.trim(),
-    });
+    if (user) {
+      unregister({
+        userId: user.id,
+        reason: reason.trim(),
+      });
+    }
   };
 
   const handleButtonClick = () => {
@@ -73,14 +70,14 @@ function UnregisterPage() {
     if (error) {
       alert('오류가 발생하였습니다.');
     }
-  }, [isSuccess]);
+  }, [error, isSuccess, navigate, queryClient]);
 
   return (
     <div>
       <TopAppBar title={'탈퇴하기'} />
       <div className="px-[1.5rem]">
         <p className="mt-[3.3rem] font-system-heading1">
-          {user.nickname}님이 떠나신다니 너무 아쉬워요.
+          {user?.nickname}님이 떠나신다니 너무 아쉬워요.
         </p>
         <p className="mt-[1.3rem] text-text-subTitle-700 font-system-body3">
           계정을 삭제해도 게시글, 댓글, 투표한 기록 등 모든 활동 정보는 그대로

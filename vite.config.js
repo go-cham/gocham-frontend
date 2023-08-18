@@ -12,12 +12,11 @@ export default defineConfig({
   plugins: [
     react(),
     eslint({
-      failOnWarning: false,
       failOnError: false,
+      failOnWarning: false,
     }),
-    svgr({ svgrOptions: { icon: true } }),
+    svgr(),
     VitePWA({
-      devOptions: { enabled: true },
       strategies: 'injectManifest',
       srcDir: 'src',
       filename: 'my-sw.js',
@@ -74,6 +73,10 @@ export default defineConfig({
         find: '@',
         replacement: path.resolve(__dirname, 'src'),
       },
+      {
+        find: '@components',
+        replacement: path.resolve(__dirname, 'src/components'),
+      },
     ],
   },
   server: {
@@ -81,5 +84,10 @@ export default defineConfig({
     hmr: {
       overlay: false,
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.js',
   },
 });

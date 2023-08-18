@@ -1,0 +1,1 @@
+export { PostTypeTabList } from './PostTypeTabList';

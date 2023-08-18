@@ -131,7 +131,7 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┣ 📂utils # 유틸리티 함수
 ┃ ┣ 📂_components 컴포넌트
 ┃ ┃ ┣ 📂banner # PWA 업데이트시 사용되는 상단 배너
-┃ ┃ ┃ ┗ 📜Banner.tsx
+┃ ┃ ┃ ┗ 📜UpdateBanner.tsx
 ┃ ┃ ┣ 📂chat # 채팅 
 ┃ ┃ ┃ ┣ 📜BottomSheetContent.tsx
 ┃ ┃ ┃ ┗ 📜ChatBottomSheet.tsx
@@ -151,7 +151,7 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┃ ┃ ┗ 📜Checkbox.tsx
 ┃ ┃ ┣ 📂modal # 모달 각자
 ┃ ┃ ┃ ┣ 📜CloseButton.tsx
-┃ ┃ ┃ ┣ 📜index.tsx
+┃ ┃ ┃ ┣ 📜main.tsx
 ┃ ┃ ┃ ┣ 📜ResultWithoutVote.tsx
 ┃ ┃ ┃ ┣ 📜styles.js
 ┃ ┃ ┃ ┗ 📜Survey.tsx
@@ -198,7 +198,7 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┣ 📜App.tsx # 리액트 라우트. RouteURL 참고.
 ┃ ┣ 📜AppWrapper.tsx
 ┃ ┣ 📜index.css
-┃ ┣ 📜index.tsx
+┃ ┣ 📜main.tsx
 ┃ ┣ 📜logo.svg # 미사용
 ┃ ┣ 📜react-app-env.d.ts # 미사용
 ┃ ┣ 📜reportWebVitals.ts # 미사용

@@ -1,0 +1,1 @@
+export { ImageFullScreen } from './ImageFullScreen';

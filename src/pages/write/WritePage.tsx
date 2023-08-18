@@ -1,23 +1,22 @@
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import useAddPost from '@/apis/hooks/posts/useAddPost';
-import useUser from '@/apis/hooks/users/useUser';
-import TopAppBar from '@/components/layout/TopAppBar';
-import PostForm from '@/components/post/PostForm/PostForm';
-import Popup from '@/components/ui/modal/Popup';
-import withAuth from '@/components/withAuth';
-import PostUploadSuccess from '@/pages/write/PostUploadSuccess';
-import PostUploading from '@/pages/write/PostUploading';
-import { scrollRestorationAtom } from '@/states/scroll-restoration';
-import { PostFormData } from '@/types/post';
-import getFutureDateTime from '@/utils/getFutureDateTime';
+import { TopAppBar } from '@/common/components/layout';
+import { Popup } from '@/common/components/ui/modal';
+import { scrollRestorationAtom } from '@/common/states/scroll-restoration';
+import getFutureDateTime from '@/common/utils/getFutureDateTime';
+import { withAuth } from '@/features/auth/components/withAuth/withAuth';
+import { PostForm } from '@/features/posts/components/PostForm';
+import { useAddPost } from '@/features/posts/queries';
+import { PostFormData } from '@/features/posts/types';
+import { useUser } from '@/features/user/queries';
+import { PostUploadSuccess } from '@/pages/write/components/PostUploadSuccess';
+import { PostUploading } from '@/pages/write/components/PostUploading';
 
 function WritePage() {
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
-  const { addPost, isLoading, isSuccess, data } = useAddPost();
+  const { mutate: addPost, isLoading, isSuccess, data } = useAddPost();
   const [hasChanges, setHasChanges] = useState(false);
   const { user } = useUser();
 
@@ -81,7 +80,7 @@ function WritePage() {
         navigate(`/user`);
       }, 1000);
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, navigate]);
 
   if (isLoading) {
     return <PostUploading />;

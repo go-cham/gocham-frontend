@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-
-import BackIcon from '@/components/icons/BackIcon';
-import withAuth from '@/components/withAuth';
-import Kakao from '@/images/Login/kakao.svg';
-import LoginWrapper from '@/images/Login/loginWrapper.svg';
+import Kakao from '@/common/assets/images/Login/kakao.svg';
+import LoginWrapper from '@/common/assets/images/Login/loginWrapper.svg';
+import BackIcon from '@/common/components/icons/BackIcon';
+import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 
 function LoginPage() {
   const navigate = useNavigate();

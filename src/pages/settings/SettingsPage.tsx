@@ -1,11 +1,10 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import BackIcon from '@/components/icons/BackIcon';
-import TopAppBar from '@/components/layout/TopAppBar';
-import Popup from '@/components/ui/modal/Popup';
-import withAuth from '@/components/withAuth';
+import BackIcon from '@/common/components/icons/BackIcon';
+import { TopAppBar } from '@/common/components/layout';
+import { Popup } from '@/common/components/ui/modal';
+import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 
 function SettingsPage() {
   const navigate = useNavigate();

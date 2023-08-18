@@ -3,30 +3,27 @@ import { useAtom } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useNavigate, useParams } from 'react-router-dom';
-
-import useAddComment from '@/apis/hooks/posts/useAddComment';
-import useDeletePost from '@/apis/hooks/posts/useDeletePost';
-import useGetComments from '@/apis/hooks/posts/useGetComments';
-import useGetPost from '@/apis/hooks/posts/useGetPost';
-import useUser from '@/apis/hooks/users/useUser';
-import ImageFullScreen from '@/components/ImageFullScreen';
-import MoreIcon from '@/components/icons/MoreIcon';
-import TopAppBar from '@/components/layout/TopAppBar';
-import PostUserProfile from '@/components/post/PostUserProfile';
-import Dropdown from '@/components/ui/Dropdown';
-import Popup from '@/components/ui/modal/Popup/Popup';
-import Snackbar from '@/components/ui/modal/Snackbar';
-import CommentSkeleton from '@/components/ui/skeleton/CommentSkeleton';
-import PostSummarySkeleton from '@/components/ui/skeleton/PostSummarySkeleton';
-import { ADMIN_EMAIL } from '@/constants/admin';
-import CommentInput from '@/pages/comment/CommentInput';
-import CommentList from '@/pages/comment/CommentList';
-import ImageList from '@/pages/comment/ImageList';
-import { PostDetailContent } from '@/pages/feed/PostDetail/PostDetail';
-import { commentStateAtom } from '@/states/comment';
-import { calculateAgeFromBirthday } from '@/utils/date/calculateAge';
-import { isIOS } from '@/utils/environment';
-import { getRemainingTime } from '@/utils/getRemainingTime';
+import MoreIcon from '@/common/components/icons/MoreIcon';
+import { TopAppBar } from '@/common/components/layout';
+import { ImageFullScreen } from '@/common/components/ui';
+import { Dropdown } from '@/common/components/ui/Dropdown/Dropdown';
+import { Popup, Snackbar } from '@/common/components/ui/modal';
+import CommentSkeleton from '@/common/components/ui/skeleton/CommentSkeleton';
+import PostSummarySkeleton from '@/common/components/ui/skeleton/PostSummarySkeleton';
+import { ADMIN_EMAIL } from '@/common/constants/admin';
+import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
+import { isIOS } from '@/common/utils/environment';
+import { getRemainingTime } from '@/common/utils/getRemainingTime';
+import { CommentInput } from '@/features/comments/components/CommentInput';
+import { CommentList } from '@/features/comments/components/CommentList';
+import { useAddComment } from '@/features/comments/queries/useAddComment';
+import { useGetComments } from '@/features/comments/queries/useGetComments';
+import { commentStateAtom } from '@/features/comments/states/comment';
+import { PostDetailContent } from '@/features/posts/components/PostDetail/PostDetail';
+import { useDeletePost, useGetPost } from '@/features/posts/queries';
+import { UserProfile } from '@/features/user/components/UserProfile';
+import { useUser } from '@/features/user/queries/useUser';
+import { ImageList } from './components/ImageList';
 
 enum MENU {
   Edit,
@@ -42,17 +39,17 @@ export default function CommentPage() {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { user } = useUser();
   const { id: postId } = useParams();
-  const { comments, isLoading: commentLoading } = useGetComments(
+  const { data: comments, isLoading: commentLoading } = useGetComments(
     Number(postId),
   );
-  const { post } = useGetPost(Number(postId));
+  const { data: post } = useGetPost(Number(postId));
   const {
-    deletePost,
+    mutate: deletePost,
     error: deletePostError,
     isSuccess: deletePostSuccess,
   } = useDeletePost();
   const [zoomedImageIndex, setZoomedImageIndex] = useState<number | null>(null);
-  const { addComment, isSuccess, error, data } = useAddComment();
+  const { mutate: addComment, isSuccess, error, data } = useAddComment();
   const [showErrorSnackbar, setShowErrorSnackbar] = useState(false);
   const initialSizeRef = useRef<number | null>(null);
 
@@ -117,7 +114,7 @@ export default function CommentPage() {
       alert('오류가 발생하였습니다.');
     }
     setShowMore(false);
-  }, [error, deletePostSuccess]);
+  }, [error, deletePostSuccess, deletePostError, navigate]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -146,7 +143,7 @@ export default function CommentPage() {
         postId: null,
       }));
     };
-  }, [postId]);
+  }, [postId, setCommentState]);
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -185,7 +182,7 @@ export default function CommentPage() {
         }
       }
     }
-  }, [isSuccess, error]);
+  }, [isSuccess, error, data, setCommentState]);
 
   useEffect(() => {
     if (!initialSizeRef.current && window.visualViewport) {
@@ -233,11 +230,10 @@ export default function CommentPage() {
           {post && user ? (
             <>
               <div className="flex items-center justify-between px-[2.5rem]">
-                <PostUserProfile
-                  isAdmin={post.user.email === ADMIN_EMAIL}
-                  image={post.user.profileImageUrl}
+                <UserProfile
                   nickname={post.user.nickname}
-                  age={calculateAgeFromBirthday(post.user.birthDate)}
+                  age={calculateAgeFromBirthDate(post.user.birthDate)}
+                  isAdmin={post.user.email === ADMIN_EMAIL}
                 />
                 <div className="relative" ref={dropdownRef}>
                   <MoreIcon

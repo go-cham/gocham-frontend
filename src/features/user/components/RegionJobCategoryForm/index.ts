@@ -1,0 +1,1 @@
+export { RegionJobCategoryForm } from './RegionJobCategoryForm';
