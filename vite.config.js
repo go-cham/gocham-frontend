@@ -14,6 +14,7 @@ export default defineConfig({
     eslint({
       failOnError: false,
       failOnWarning: false,
+      exclude: ['/virtual:/**', 'node_modules/**'],
     }),
     svgr(),
     VitePWA({
