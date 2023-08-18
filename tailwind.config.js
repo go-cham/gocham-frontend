@@ -5,6 +5,7 @@ import { customColors } from './src/styles/colors';
 
 export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
+  darkMode: 'class',
   theme: {
     screens: {
       xl: '1300px',
