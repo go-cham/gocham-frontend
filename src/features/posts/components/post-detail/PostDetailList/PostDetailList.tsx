@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';
-import { PostDetail } from '@/features/posts/components/PostDetail';
+import { PostDetail } from '@/features/posts/components/post-detail';
 import { useGetPosts } from '@/features/posts/queries';
 import { useUser } from '@/features/user/queries/useUser';
 

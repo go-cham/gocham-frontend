@@ -1,5 +1,5 @@
 import { POST_TYPE } from '@/common/constants/post-type';
-import { PostCard } from '@/features/posts/components/PostCard';
+import { PostCard } from '@/features/posts/components/post-card/PostCard';
 import { useGetPosts } from '@/features/posts/queries';
 import { useUser } from '@/features/user/queries/useUser';
 

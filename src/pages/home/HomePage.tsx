@@ -7,8 +7,10 @@ import { usePullToRefresh } from '@/common/hooks/usePullToRefresh';
 import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';
 import { useScrollToTop } from '@/common/hooks/useScrollToTop';
 import { assignMultipleRefs } from '@/common/utils/dom/assign-multiple-refs';
-import { PostCardList } from '@/features/posts/components/PostCardList';
-import { PostCardListSkeleton } from '@/features/posts/components/PostCardListSkeleton';
+import {
+  PostCardList,
+  PostCardListSkeleton,
+} from '@/features/posts/components/post-card';
 import HomeBanner from '@/pages/home/components/HomeBanner';
 import HomeHeader from '@/pages/home/components/HomeHeader';
 

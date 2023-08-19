@@ -3,8 +3,10 @@ import { useParams } from 'react-router-dom';
 import { PageWrapper, TopAppBar } from '@/common/components/layout';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { withAuth } from '@/features/auth/components/withAuth/withAuth';
-import { PostDetailList } from '@/features/posts/components/PostDetailList';
-import { PostDetailListSkeleton } from '@/features/posts/components/PostDetailListSkeleton';
+import {
+  PostDetailList,
+  PostDetailListSkeleton,
+} from '@/features/posts/components/post-detail';
 import { VoteButton } from '@/features/vote/components/VoteButton';
 
 function FeedPage() {

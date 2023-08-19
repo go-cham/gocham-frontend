@@ -2,25 +2,24 @@ import { useAtomValue } from 'jotai';
 import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useNavigate, useParams } from 'react-router-dom';
-import ClockIcon from '@/common/components/icons/ClockIcon';
 import MessageIcon from '@/common/components/icons/MessageIcon';
 import MoreIcon from '@/common/components/icons/MoreIcon';
 import ShareIcon from '@/common/components/icons/ShareIcon';
-import { Dropdown, ImageFullScreen } from '@/common/components/ui';
+import { Dropdown } from '@/common/components/ui';
 import { LoadingSpinner } from '@/common/components/ui/loading';
 import { Popup, Snackbar } from '@/common/components/ui/modal';
 import { ADMIN_EMAIL } from '@/common/constants/admin';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
-import { formatText } from '@/common/utils/formatText';
-import { getRemainingTime } from '@/common/utils/getRemainingTime';
 import { useDeletePost, useGetPosts } from '@/features/posts/queries';
 import { Post } from '@/features/posts/types';
+import { getRemainingTime } from '@/features/posts/utils/get-remaining-time';
 import { UserProfile } from '@/features/user/components/UserProfile';
 import { useUser } from '@/features/user/queries/useUser';
 import { useGetChoiceOptions } from '@/features/vote/queries';
 import { selectedVoteOptionIdAtom } from '@/features/vote/states/selected-vote-option';
-import { customColors } from '@/styles/colors';
+import { PostDetailContent } from './PostDetailContent';
+import { PostExpiration } from './PostExpiration';
 import { PostVote } from './PostVote';
 
 interface PostDetailProps {
@@ -197,13 +196,6 @@ export function PostDetail({ post }: PostDetailProps) {
       <div className="my-[1.3rem] flex space-x-[0.7rem] px-[2.5rem]">
         <button
           onClick={() => {
-            // setTimeout(() => {
-            //   let el: HTMLElement | null = null;
-            //   while (!el) {
-            //     el = document.getElementById('comment-input');
-            //   }
-            //   el.focus();
-            // }, 100);
             navigate(`/feed/${post.id}/comment`, {
               state: {
                 focus: true,
@@ -236,112 +228,6 @@ export function PostDetail({ post }: PostDetailProps) {
           className="absolute bottom-[9.5rem] left-1/2 w-[90%] -translate-x-1/2"
           text="게시물 링크가 복사되었어요!"
         />
-      )}
-    </div>
-  );
-}
-
-export function PostDetailContent({
-  title,
-  content,
-  images,
-}: {
-  title: string;
-  content: string;
-  images?: string[] | null;
-}) {
-  const [zoomedImageIndex, setZoomedImageIndex] = useState<number | null>(null);
-  const multipleImagesRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (!multipleImagesRef.current) return;
-
-    const allImages =
-      multipleImagesRef.current?.querySelectorAll<HTMLImageElement>('img');
-    Promise.all(
-      Array.from(allImages)
-        .filter((img) => !img.complete)
-        .map(
-          (img) =>
-            new Promise((resolve) => {
-              img.onload = img.onerror = resolve;
-            }),
-        ),
-    ).then(() => {
-      if (multipleImagesRef.current) {
-        multipleImagesRef.current.scrollTo({
-          left: 0,
-        });
-        multipleImagesRef.current.style.opacity = '1';
-      }
-    });
-  }, []);
-
-  return (
-    <div>
-      {zoomedImageIndex !== null && images && (
-        <ImageFullScreen
-          images={images}
-          initialIndex={zoomedImageIndex}
-          onClose={() => setZoomedImageIndex(null)}
-        />
-      )}
-      <div className="px-[2.5rem]">
-        <h1 className="mt-[1.3rem] font-system-heading1">{title}</h1>
-        <p className="mt-[0.8rem] break-words text-text-subTitle-700 font-system-body3">
-          {formatText(content)}
-        </p>
-      </div>
-      <div className="mt-[1.7rem]">
-        {images && images.length === 1 && (
-          <img
-            src={images[0]}
-            alt={'게시글이미지'}
-            className="mx-auto h-[29.3rem] w-[36rem] rounded-[0.5rem] object-cover"
-          />
-        )}
-        {images && images.length > 1 && (
-          <div
-            ref={multipleImagesRef}
-            className="flex space-x-[1.3rem] overflow-x-auto px-[1.5rem] opacity-0"
-            style={{
-              scrollSnapType: 'x mandatory',
-            }}
-          >
-            {images.map((image, index) => (
-              <img
-                key={image}
-                src={image}
-                alt={'게시글이미지'}
-                className="h-[29.3rem] max-w-[29.3rem] cursor-pointer rounded-[0.5rem] object-cover"
-                style={{
-                  scrollSnapAlign: 'center',
-                }}
-                onClick={() => setZoomedImageIndex(index)}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function PostExpiration({ remainingTime }: { remainingTime: string }) {
-  const isClosed = remainingTime === 'closed';
-  return (
-    <div className="mt-[1.5rem] flex items-center space-x-[5.67px] px-[2.5rem]">
-      <ClockIcon
-        color={isClosed ? customColors.text.explain['500'] : undefined}
-      />
-      {isClosed ? (
-        <span className="text-text-explain-500 font-system-body2">
-          투표가 마감되었어요
-        </span>
-      ) : (
-        <span className="text-mainSub-main-500 font-system-body2">
-          {remainingTime}
-        </span>
       )}
     </div>
   );

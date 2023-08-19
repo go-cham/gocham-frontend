@@ -1,9 +1,13 @@
 export function getRemainingTime(
   deadline: string | null,
-): null | 'closed' | string {
+): 'closed' | string | null {
   if (!deadline) {
     return null;
   }
+  /*
+  TODO: 현재 DB에 UTC 형식으로 저장되어 있지만 시간은 한국 시간을 사용 중
+        추후 백엔드에서 timezone 에러 해결 시 코드 변경하기
+   */
   const deadlineDate = new Date(deadline.replace('Z', ''));
   const now = new Date();
 
@@ -20,6 +24,3 @@ export function getRemainingTime(
     minutes < 10 ? '0' + minutes : minutes
   }분`;
 }
-
-// https://yozm.wishket.com/magazine/detail/1695/
-// Z가 빠져야한다. 왜? 현지시간이 아닌 UTC 기준으로 측정해서...

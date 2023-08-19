@@ -13,14 +13,14 @@ import PostSummarySkeleton from '@/common/components/ui/skeleton/PostSummarySkel
 import { ADMIN_EMAIL } from '@/common/constants/admin';
 import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
 import { isIOS } from '@/common/utils/environment';
-import { getRemainingTime } from '@/common/utils/getRemainingTime';
 import { CommentInput } from '@/features/comments/components/CommentInput';
 import { CommentList } from '@/features/comments/components/CommentList';
 import { useAddComment } from '@/features/comments/queries/useAddComment';
 import { useGetComments } from '@/features/comments/queries/useGetComments';
 import { commentStateAtom } from '@/features/comments/states/comment';
-import { PostDetailContent } from '@/features/posts/components/PostDetail/PostDetail';
+import { PostDetailContent } from '@/features/posts/components/post-detail/PostDetail/PostDetailContent';
 import { useDeletePost, useGetPost } from '@/features/posts/queries';
+import { getRemainingTime } from '@/features/posts/utils/get-remaining-time';
 import { UserProfile } from '@/features/user/components/UserProfile';
 import { useUser } from '@/features/user/queries/useUser';
 import { ImageList } from './components/ImageList';
