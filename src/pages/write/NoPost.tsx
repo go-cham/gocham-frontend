@@ -12,14 +12,14 @@ export default function NoPost({ text, textLink }: NoPostText) {
     navigate('/write');
   };
   return (
-    <div className="flex h-full items-center justify-center">
-      <div className="mb-[8rem] flex flex-col items-center">
+    <div className={`flex items-end justify-center h-[50%] pb-[${textLink ? '0rem' : '2.1rem'}]`}>
+      <div className="flex flex-col items-center">
         <img
           src={myPageNoneIcon}
           alt={'마이페이지 로고'}
           className={`h-[7.512rem] w-[7.496rem]`}
         />
-        <span className="pb-[0.2rem] pt-[1.2rem] font-system-body3">
+        <span className="mt-[1.688rem] font-system-body3">
           {text}
         </span>
         <span

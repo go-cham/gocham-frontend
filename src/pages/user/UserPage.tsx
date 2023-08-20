@@ -42,7 +42,7 @@ function UserPage() {
     <PageWrapper>
       <UserPageHeader />
       <Divider className={'my-[1.9rem]'} />
-      <main className={'flex h-full min-h-0 w-full flex-col'}>
+      <main className={'flex h-full min-h-0 w-full flex-col h-full'}>
         <Suspense fallback={'fuck'}>
           <PostTypeTabList
             selectedPostType={selectedPostType}
