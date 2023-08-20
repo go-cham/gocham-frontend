@@ -42,7 +42,7 @@ function UserPage() {
     <PageWrapper>
       <UserPageHeader />
       <Divider className={'my-[1.9rem]'} />
-      <main className={'flex min-h-0 w-full flex-col'}>
+      <main className={'flex h-full min-h-0 w-full flex-col'}>
         <Suspense fallback={'fuck'}>
           <PostTypeTabList
             selectedPostType={selectedPostType}
@@ -62,7 +62,7 @@ function UserPage() {
                 : participatedPostsRef,
             ])
           }
-          className={'hide-scrollbar overflow-y-scroll px-[2.5rem]'}
+          className={'hide-scrollbar h-full overflow-y-scroll px-[2.5rem]'}
         >
           <Suspense fallback={<PostCardListSkeleton />}>
             <PostCardList type={selectedPostType} />
