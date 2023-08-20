@@ -50,7 +50,7 @@ export default function CommentHeader({
           age={age}
           isAdmin={email === ADMIN_EMAIL}
         />
-        {choice && (
+        {choice && !isWriter && (
           <div className="flex items-center space-x-[6px]">
             <div className="h-[0.3rem] w-[0.3rem] rounded-full bg-[#cccfd4]"></div>
             <span className="accent-text-subTitle-700 font-system-body1">
