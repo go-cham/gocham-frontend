@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
 import { axiosPrivate } from '@/common/libs/axios';
 import { User } from '@/features/user/types';
@@ -45,6 +45,8 @@ export function useUser() {
               label: category.worryCategory.label,
             })),
             image: data.profileImageUrl,
+            lastUploadedAt:
+              data.worries?.length > 0 ? data.worries[0].createdAt : null,
           }
         : null,
     [data, isError],

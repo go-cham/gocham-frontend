@@ -13,6 +13,7 @@ export interface User {
   worryCategories: OptionType[] | null;
   image: string | null;
   joinStatus: string;
+  lastUploadedAt: string | null;
 }
 
 export type UserInformation = {

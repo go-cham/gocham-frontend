@@ -1,7 +1,5 @@
-import { POST_TYPE } from '@/common/constants/post-type';
 import { ONE_DAY_IN_MILLISECOND } from '@/common/constants/time';
 import { Z_INDEX } from '@/common/constants/z-index';
-import { useGetPosts } from '@/features/posts/queries';
 import { useUser } from '@/features/user/queries';
 import HeaderLogo from './HeaderLogo';
 
@@ -11,18 +9,16 @@ interface HomeHeaderProps {
 
 export default function HomeHeader({ onClickLogo }: HomeHeaderProps) {
   const { user, isLoggedIn } = useUser();
-  const { posts } = useGetPosts({
-    userId: user?.id,
-    type: POST_TYPE.MY,
-  });
 
   const hasUploadedIn24 = () => {
-    if (!isLoggedIn || !posts || posts.length === 0) {
+    if (!isLoggedIn || !user?.lastUploadedAt) {
       return false;
     }
-    const latestUploadedAt = new Date(posts[0].createdAt).getTime();
+    const lastUploadedAt = new Date(
+      user.lastUploadedAt.replace('Z', ''),
+    ).getTime();
     const now = new Date().getTime();
-    return now - latestUploadedAt < ONE_DAY_IN_MILLISECOND;
+    return now - lastUploadedAt < ONE_DAY_IN_MILLISECOND;
   };
 
   const uploadedIn24 = hasUploadedIn24();

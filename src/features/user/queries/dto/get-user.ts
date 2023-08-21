@@ -19,4 +19,14 @@ export interface GetUserResponse {
   residence: Residence;
   job: string;
   role: string;
+  worries: {
+    expirationTime: string;
+    id: number;
+    status: string;
+    createdAt: string;
+    updatedAt: string | null;
+    etc: null;
+    title: string;
+    content: string;
+  }[];
 }
