@@ -82,7 +82,7 @@ export function BirthDateInput({
     onChange(fixedBirthDate);
     setTimeout(() => {
       setShowReset(false);
-    }, 100);
+    }, 200);
   };
 
   const handleReset = () => {

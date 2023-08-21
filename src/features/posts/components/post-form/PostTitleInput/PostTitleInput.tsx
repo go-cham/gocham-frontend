@@ -76,7 +76,7 @@ export function PostTitleInput({
         onBlur={() => {
           setTimeout(() => {
             setShowReset(false);
-          }, 100);
+          }, 200);
         }}
       />
       <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center space-x-[0.8rem]">
