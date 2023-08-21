@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { twJoin } from 'tailwind-merge';
 import adminProfile from '@/common/assets/images/admin-profile.png';
 
@@ -16,6 +17,13 @@ export function UserProfile({
   isAdmin,
   size = 'base',
 }: UserProfileProps) {
+  // 에러 발생 이스터에그
+  const [clickCount, setClickCount] = useState(0);
+
+  if (clickCount === 10) {
+    throw new Error('에러 발생!');
+  }
+
   const ageRange = Math.floor(age / 10) * 10;
   const isOverMaxRange = ageRange > MAX_AGE_RANGE;
 
@@ -37,6 +45,7 @@ export function UserProfile({
         />
       ) : (
         <span
+          onClick={() => setClickCount(clickCount + 1)}
           className={twJoin(
             'flex items-center justify-center rounded-full bg-[#f4f4f5] font-bold text-[#b0b2b8]',
             size === 'base'

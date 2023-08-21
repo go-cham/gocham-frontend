@@ -37,7 +37,7 @@ export function BottomAppBar({ onScrollToTop }: BottomAppBarProps) {
       <img
         src={backgroundImage}
         alt="background"
-        className="mx-auto w-full shadow-dock"
+        className="shadow-dock mx-auto w-full"
       />
       <div className="absolute -top-[0.6rem] flex w-full items-end justify-evenly">
         <button onClick={handleHomeIconClick}>
