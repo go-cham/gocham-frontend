@@ -37,24 +37,25 @@ export function useGetComments(postId: number) {
               }
             : null,
         },
-        replies: childReplies.map(
-          ({ id, createdAt, content, mentionUser, user }) => ({
-            id,
-            createdAt,
-            content,
-            to: {
-              id: mentionUser.id,
-              nickname: mentionUser.nickname,
-            },
-            user: {
-              id: user.id,
-              email: user.email,
-              profileImage: user.profileImageUrl,
-              nickname: user.nickname,
-              birthDate: user.birthDate,
-            },
-          }),
-        ),
+        replies:
+          childReplies?.map(
+            ({ id, createdAt, content, mentionUser, user }) => ({
+              id,
+              createdAt,
+              content,
+              to: {
+                id: mentionUser.id,
+                nickname: mentionUser.nickname,
+              },
+              user: {
+                id: user.id,
+                email: user.email,
+                profileImage: user.profileImageUrl,
+                nickname: user.nickname,
+                birthDate: user.birthDate,
+              },
+            }),
+          ) || [],
       }))
     : null;
 
