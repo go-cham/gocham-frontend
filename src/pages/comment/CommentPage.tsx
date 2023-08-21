@@ -256,7 +256,11 @@ export default function CommentPage() {
                   )}
                 </div>
               </div>
-              <PostDetailContent title={post.title} content={post.content} />
+              <PostDetailContent
+                title={post.title}
+                content={post.content}
+                images={[]}
+              />
               <ImageList
                 images={post.worryFiles.map((file) => file.url)}
                 onClick={(index) => setZoomedImageIndex(index)}
