@@ -1,6 +1,6 @@
 export default function PostDetailSkeleton() {
   return (
-    <div className="bordbg-background-subBg-100 w-full border-b bg-white px-[2.5rem] pb-[1.9rem] pt-[2.1rem]">
+    <div className="w-full bg-white px-[2.5rem] pb-[1.9rem] pt-[2.1rem]">
       <div className="flex items-center space-x-[0.5rem]">
         <div className="h-[2.5rem] w-[2.5rem] rounded-full bg-background-subBg-100" />
         <div className="h-[1.8rem] w-[11rem] rounded-[3px] bg-background-subBg-100" />

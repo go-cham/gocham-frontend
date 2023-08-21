@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
+import PostDetailSkeleton from '@/common/components/ui/skeleton/PostDetailSkeleton';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';
 import { PostDetailItem } from '@/features/posts/components/post-detail';
@@ -28,7 +30,9 @@ export function PostDetailList({ type }: PostDetailListProps) {
     >
       {posts?.map((post, index) => (
         <li key={post.id} ref={index === posts.length - 1 ? ref : undefined}>
-          <PostDetailItem post={post} />
+          <Suspense fallback={<PostDetailSkeleton />}>
+            <PostDetailItem post={post} />
+          </Suspense>
         </li>
       ))}
     </ul>
