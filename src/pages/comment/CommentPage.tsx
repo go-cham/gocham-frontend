@@ -18,7 +18,7 @@ import { CommentList } from '@/features/comments/components/CommentList';
 import { useAddComment } from '@/features/comments/queries/useAddComment';
 import { useGetComments } from '@/features/comments/queries/useGetComments';
 import { commentStateAtom } from '@/features/comments/states/comment';
-import { PostDetailContent } from '@/features/posts/components/post-detail/PostDetail/PostDetailContent';
+import { PostDetailContent } from '@/features/posts/components/post-detail/PostDetailItem/PostDetailContent';
 import { useDeletePost, useGetPost } from '@/features/posts/queries';
 import { getRemainingTime } from '@/features/posts/utils/get-remaining-time';
 import { UserProfile } from '@/features/user/components/UserProfile';
