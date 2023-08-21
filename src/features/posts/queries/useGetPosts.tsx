@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { POST_TYPE } from '@/common/constants/post-type';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate, axiosPublic } from '@/common/libs/axios';
 import { Post } from '@/features/posts/types/post';
 import { GetPostsResponse } from './dto/get-posts';
 
@@ -17,6 +17,8 @@ async function getPosts({
   participatingUserId,
   pageParam,
 }: getPostsArgs) {
+  const axiosInstance =
+    authorId || participatingUserId ? axiosPrivate : axiosPublic;
   const res = await axiosInstance.get<GetPostsResponse>('/worries', {
     params: {
       sort: 'DESC',

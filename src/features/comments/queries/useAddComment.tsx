@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import { GetCommentsResponse } from '@/features/comments/queries/dto/get-comments';
 import { useUser } from '@/features/user/queries';
 import { AddCommentRequest, AddCommentResponse } from './dto/add-comment';
 
 async function addComment(data: AddCommentRequest) {
-  const res = await axiosInstance.post<AddCommentResponse>('/worry-reply', {
+  const res = await axiosPrivate.post<AddCommentResponse>('/worry-reply', {
     ...data,
     mentionUserNickname: undefined,
   });

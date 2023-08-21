@@ -1,28 +1,29 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useMemo } from 'react';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import { User } from '@/features/user/types';
 import { userLocalStorage } from '@/features/user/utils/user-local-storage';
 import { GetUserResponse } from './dto/get-user';
 
 async function getUser() {
-  const res = await axiosInstance.get<GetUserResponse>('/user');
+  const res = await axiosPrivate.get<GetUserResponse>('/user');
   return res.data;
 }
 
 export function useUser() {
   const { data, isLoading, isError } = useQuery({
+    // @ts-ignore
     queryKey: ['user'],
     queryFn: getUser,
-    refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     initialData: userLocalStorage.getUser(),
+    retry: false,
   });
 
   const user: User | null = useMemo(
     () =>
-      data
+      data && !isError
         ? {
             id: data.id,
             joinStatus: data.joinStatus,
@@ -46,7 +47,7 @@ export function useUser() {
             image: data.profileImageUrl,
           }
         : null,
-    [data],
+    [data, isError],
   );
 
   useEffect(() => {
@@ -60,6 +61,7 @@ export function useUser() {
   useEffect(() => {
     if (isError) {
       userLocalStorage.removeUser();
+      localStorage.removeItem('token');
     }
   }, [isError]);
 

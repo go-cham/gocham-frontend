@@ -1,9 +1,9 @@
 import { useSuspenseQuery } from '@suspensive/react-query';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import { GetChoiceOptionsResponse } from './dto/get-choice-options';
 
 async function getChoiceOptions(postId: number) {
-  const res = await axiosInstance.get<GetChoiceOptionsResponse>(
+  const res = await axiosPrivate.get<GetChoiceOptionsResponse>(
     '/worry-choices',
     {
       params: {

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import { ChooseOptionRequest, ChooseOptionResponse } from './dto/choose-option';
 
 async function chooseOption(data: ChooseOptionRequest) {
-  const res = await axiosInstance.post<ChooseOptionResponse>(
+  const res = await axiosPrivate.post<ChooseOptionResponse>(
     '/user-worry-choice',
     {
       userId: data.userId,

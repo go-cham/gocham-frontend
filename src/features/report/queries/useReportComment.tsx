@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import {
   ReportCommentRequest,
   ReportCommentResponse,
 } from './dto/report-comment';
 
 async function reportComment(data: ReportCommentRequest) {
-  const res = await axiosInstance.post<ReportCommentResponse>(
+  const res = await axiosPrivate.post<ReportCommentResponse>(
     '/worry-reply-report',
     data,
   );

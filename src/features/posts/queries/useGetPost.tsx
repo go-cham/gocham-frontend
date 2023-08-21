@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import { GetPostResponse } from './dto/get-post';
 
 async function getPost(postId?: number) {
-  const res = await axiosInstance.get<GetPostResponse>(`/worries/${postId}`);
+  const res = await axiosPrivate.get<GetPostResponse>(`/worries/${postId}`);
   return res.data;
 }
 

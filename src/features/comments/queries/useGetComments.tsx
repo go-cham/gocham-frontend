@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import { GetCommentsResponse } from './dto/get-comments';
 
 async function getComments(postId: number) {
-  const res = await axiosInstance.get<GetCommentsResponse>('/worry-replies', {
+  const res = await axiosPrivate.get<GetCommentsResponse>('/worry-replies', {
     params: {
       worryId: postId,
     },

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import { DeleteCommentResponse } from './dto/delete-comment';
 
 async function deleteComment(id: number) {
-  const res = await axiosInstance.patch<DeleteCommentResponse>(
+  const res = await axiosPrivate.patch<DeleteCommentResponse>(
     `/worry-reply/${id}/soft-delete`,
   );
   return res.data;

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import { AddPostRequest, AddPostResponse } from './dto/add-post';
 
 async function addPost(data: AddPostRequest) {
-  const res = await axiosInstance.post<AddPostResponse>('/worry', data);
+  const res = await axiosPrivate.post<AddPostResponse>('/worry', data);
   return res.data;
 }
 

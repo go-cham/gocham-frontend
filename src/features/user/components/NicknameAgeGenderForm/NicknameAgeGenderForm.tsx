@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import { parseDateString } from '@/common/utils/date/parseDateString';
 import { validateBirthDate } from '@/common/utils/validations/birth-date';
 import { validateNickname } from '@/common/utils/validations/nickname';
@@ -53,7 +53,7 @@ export function NicknameAgeGenderForm({
       let error = validateNickname(nickname);
       if (!error) {
         try {
-          await axiosInstance.get(`/user/${user?.id}/validate-nickname`, {
+          await axiosPrivate.get(`/user/${user?.id}/validate-nickname`, {
             params: { nickname },
           });
         } catch (e) {

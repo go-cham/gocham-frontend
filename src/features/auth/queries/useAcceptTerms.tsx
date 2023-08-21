@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import { AcceptTermsRequest, AcceptTermsResponse } from './dto/accept-terms';
 
 async function acceptTerms(data: AcceptTermsRequest) {
-  const res = await axiosInstance.patch<AcceptTermsResponse>(
+  const res = await axiosPrivate.patch<AcceptTermsResponse>(
     '/user/acceptance-of-terms',
     data,
   );

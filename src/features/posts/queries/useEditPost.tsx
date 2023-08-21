@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { axiosInstance } from '@/common/libs/axios';
+import { axiosPrivate } from '@/common/libs/axios';
 import { EditPostRequest, EditPostResponse } from './dto/edit-post';
 
 async function editPost(data: EditPostRequest) {
-  const res = await axiosInstance.patch<EditPostResponse>(
+  const res = await axiosPrivate.patch<EditPostResponse>(
     `/worries/${data.id}`,
     data,
   );
