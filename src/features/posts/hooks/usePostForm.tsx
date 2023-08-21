@@ -3,7 +3,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { uploadFirebase } from '@/common/libs/firebase/firebaseManager';
 import { focusById } from '@/common/utils/dom/focus-by-id';
 import { resizeImage } from '@/common/utils/imageResizing';
-import { validatePostForm } from '@/common/utils/validations/postForm';
+import { validatePostForm } from '@/common/utils/validations/post-form';
 import { PostFormData } from '@/features/posts/types/post-form';
 import { useUser } from '@/features/user/queries/useUser';
 
