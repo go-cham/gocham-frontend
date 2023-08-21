@@ -4,6 +4,7 @@ export interface AddCommentRequest {
   worryId: number;
   nestingReplyId: number | null;
   mentionUserId: number | null;
+  mentionUserNickname: string | null;
 }
 
 export interface AddCommentResponse {

@@ -16,10 +16,8 @@ export function useGetComments(postId: number) {
   const { data, ...queryInfo } = useQuery({
     queryKey: ['comments', { postId }],
     queryFn: () => getComments(postId),
-  });
-
-  const comments: Comment[] | null = data
-    ? data.map(({ id, createdAt, content, user, childReplies }) => ({
+    select: (data) =>
+      data.map(({ id, createdAt, content, user, childReplies }) => ({
         id,
         createdAt,
         content,
@@ -56,11 +54,11 @@ export function useGetComments(postId: number) {
               },
             }),
           ) || [],
-      }))
-    : null;
+      })),
+  });
 
   return {
     ...queryInfo,
-    data: comments,
+    data,
   };
 }

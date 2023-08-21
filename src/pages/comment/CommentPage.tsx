@@ -38,18 +38,17 @@ export default function CommentPage() {
   const [showMore, setShowMore] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { user } = useUser();
-  const { id: postId } = useParams();
-  const { data: comments, isLoading: commentLoading } = useGetComments(
-    Number(postId),
-  );
-  const { data: post } = useGetPost(Number(postId));
+  const { id } = useParams();
+  const postId = Number(id);
+  const { data: comments, isLoading: commentLoading } = useGetComments(postId);
+  const { data: post } = useGetPost(postId);
   const {
     mutate: deletePost,
     error: deletePostError,
     isSuccess: deletePostSuccess,
   } = useDeletePost();
   const [zoomedImageIndex, setZoomedImageIndex] = useState<number | null>(null);
-  const { mutate: addComment, isSuccess, error, data } = useAddComment();
+  const { mutate: addComment, isSuccess, error, data } = useAddComment(postId);
   const [showErrorSnackbar, setShowErrorSnackbar] = useState(false);
   const initialSizeRef = useRef<number | null>(null);
 
@@ -98,6 +97,9 @@ export default function CommentPage() {
           content,
           worryId: commentState.postId,
           mentionUserId: isReply ? commentState.replyingTo?.id || null : null,
+          mentionUserNickname: isReply
+            ? commentState.replyingTo?.nickname || null
+            : null,
           nestingReplyId: isReply ? commentState.parentCommentId : null,
         });
       }
@@ -134,7 +136,7 @@ export default function CommentPage() {
   useEffect(() => {
     setCommentState((prevState) => ({
       ...prevState,
-      postId: postId ? Number(postId) : null,
+      postId: postId || null,
     }));
 
     return () => {
