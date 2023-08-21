@@ -1,5 +1,4 @@
 import { useAtom, useSetAtom } from 'jotai';
-import { useEffect } from 'react';
 import { FloatingButton } from '@/common/components/ui/buttons';
 import { useUser } from '@/features/user/queries';
 import { useChooseOption } from '@/features/vote/queries';

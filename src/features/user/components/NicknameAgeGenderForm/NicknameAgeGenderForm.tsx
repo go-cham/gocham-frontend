@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { axiosInstance } from '@/common/libs/axios';
 import { parseDateString } from '@/common/utils/date/parseDateString';
 import { validateBirthDate } from '@/common/utils/validations/birth-date';
@@ -45,29 +45,35 @@ export function NicknameAgeGenderForm({
     birthDate: null,
   });
 
-  const handleNicknameChange = async (nickname: string) => {
-    setIsDirty({ ...isDirty, nickname: true });
-    setFormData({ ...formData, nickname });
+  const handleNicknameChange = useCallback(
+    async (nickname: string) => {
+      setIsDirty((prevIsDirty) => ({ ...prevIsDirty, nickname: true }));
+      setFormData((prevFormData) => ({ ...prevFormData, nickname }));
 
-    let error = validateNickname(nickname);
-    if (!error) {
-      try {
-        await axiosInstance.get(`/user/${user?.id}/validate-nickname`, {
-          params: { nickname },
-        });
-      } catch (e) {
-        if (e instanceof AxiosError && e.response?.status === 400) {
-          const errorCode = e.response.data.errorCode;
-          if (errorCode === 'IS_DUPLICATED_NICKNAME') {
-            error = '이미 존재하는 닉네임입니다.';
-          } else if (errorCode === 'IS_BAD_WORD') {
-            error = '금칙어 입력이 불가합니다.';
+      let error = validateNickname(nickname);
+      if (!error) {
+        try {
+          await axiosInstance.get(`/user/${user?.id}/validate-nickname`, {
+            params: { nickname },
+          });
+        } catch (e) {
+          if (e instanceof AxiosError && e.response?.status === 400) {
+            const errorCode = e.response.data.errorCode;
+            if (errorCode === 'IS_DUPLICATED_NICKNAME') {
+              error = '이미 존재하는 닉네임입니다.';
+            } else if (errorCode === 'IS_BAD_WORD') {
+              error = '금칙어 입력이 불가합니다.';
+            }
           }
         }
       }
-    }
-    setErrorMessage({ ...errorMessage, nickname: error });
-  };
+      setErrorMessage((prevErrorMessage) => ({
+        ...prevErrorMessage,
+        nickname: error,
+      }));
+    },
+    [user?.id],
+  );
 
   const nicknameSuccessMessage =
     isDirty.nickname && !errorMessage.nickname
@@ -76,21 +82,26 @@ export function NicknameAgeGenderForm({
   const birthDateSuccessMessage =
     isDirty.birthDate && !errorMessage.birthDate ? ' ' : null;
 
-  const handleBirthDateChange = ({ year, month, day }: BirthDate) => {
-    setIsDirty({ ...isDirty, birthDate: true });
-    setFormData({ ...formData, birthDate: `${year}-${month}-${day}` });
+  const handleBirthDateChange = useCallback(
+    ({ year, month, day }: BirthDate) => {
+      setIsDirty((prevIsDirty) => ({ ...prevIsDirty, birthDate: true }));
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        birthDate: `${year}-${month}-${day}`,
+      }));
+      setErrorMessage((prevErrorMessage) => ({
+        ...prevErrorMessage,
+        birthDate: isDirty.birthDate
+          ? validateBirthDate({ year, month, day })
+          : null,
+      }));
+    },
+    [isDirty.birthDate],
+  );
 
-    setErrorMessage({
-      ...errorMessage,
-      birthDate: isDirty.birthDate
-        ? validateBirthDate({ year, month, day })
-        : null,
-    });
-  };
-
-  const handleGenderChange = (gender: Gender) => {
-    setFormData({ ...formData, gender });
-  };
+  const handleGenderChange = useCallback((gender: Gender) => {
+    setFormData((prevFormData) => ({ ...prevFormData, gender }));
+  }, []);
 
   useEffect(() => {
     const isValid = Boolean(
@@ -101,7 +112,7 @@ export function NicknameAgeGenderForm({
         !errorMessage.birthDate,
     );
     onChange(formData, isValid);
-  }, [formData, errorMessage]);
+  }, [formData, errorMessage, onChange]);
 
   return (
     <div className="space-y-[2.9rem]">

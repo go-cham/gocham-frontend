@@ -17,7 +17,7 @@ export function GenderSelect({ defaultValue, onChange }: GenderSelectProps) {
     if (gender) {
       onChange(gender);
     }
-  }, [gender]);
+  }, [gender, onChange]);
 
   return (
     <div>

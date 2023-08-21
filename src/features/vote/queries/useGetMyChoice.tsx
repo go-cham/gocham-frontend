@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { isNumber } from 'lodash';
 import { axiosInstance } from '@/common/libs/axios';
 import { GetMyChoiceResponse } from './dto/get-my-choice';
 

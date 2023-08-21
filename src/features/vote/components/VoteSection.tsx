@@ -1,5 +1,4 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import { useAtom } from 'jotai/index';
 import { useEffect } from 'react';
 import { Spacing } from '@/common/components/ui';
 import { getRemainingTime } from '@/features/posts/utils/get-remaining-time';

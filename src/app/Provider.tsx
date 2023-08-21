@@ -18,7 +18,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
       <JotaiProvider>
         <BrowserRouter>{children}</BrowserRouter>
       </JotaiProvider>
-      {/*<ReactQueryDevtools initialIsOpen={false} />*/}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

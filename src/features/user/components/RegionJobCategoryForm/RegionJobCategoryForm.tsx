@@ -74,7 +74,7 @@ export function RegionJobCategoryForm({
     );
 
     onChange(formData, isValid);
-  }, [formData, jobErrorMessage, isDirty]);
+  }, [formData, jobErrorMessage, isDirty, onChange]);
 
   useEffect(() => {
     if (formData.job) {
