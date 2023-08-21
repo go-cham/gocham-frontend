@@ -1,4 +1,5 @@
 import { POST_TYPE } from '@/common/constants/post-type';
+import { NoPost } from '@/features/posts/components/NoPost';
 import { PostCard } from '@/features/posts/components/post-card/PostCard';
 import { useGetPosts } from '@/features/posts/queries';
 import { useUser } from '@/features/user/queries/useUser';
@@ -13,6 +14,10 @@ export function PostCardList({ type }: PostCardListProps) {
     userId: user?.id,
     type,
   });
+
+  if (type !== POST_TYPE.ALL && posts?.length === 0) {
+    return <NoPost type={type} />;
+  }
 
   return (
     <ul className={'flex w-full flex-col items-center space-y-[1.7rem]'}>
