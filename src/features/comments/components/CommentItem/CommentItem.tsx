@@ -1,4 +1,5 @@
 import { useAtom } from 'jotai';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { commentStateAtom } from '@/features/comments/states/comment';
 import { useUser } from '@/features/user/queries/useUser';
@@ -22,6 +23,7 @@ interface CommentItemProps {
   createdAt: string;
   commentId: number;
   parentCommentId?: number;
+  scrollEnabled: boolean;
 }
 
 export function CommentItem({
@@ -32,6 +34,7 @@ export function CommentItem({
   createdAt,
   commentId,
   parentCommentId,
+  scrollEnabled,
 }: CommentItemProps) {
   const [commentState, setCommentState] = useAtom(commentStateAtom);
   const { data: choice } = useGetMyChoice({
@@ -40,6 +43,7 @@ export function CommentItem({
   });
   const navigate = useNavigate();
   const { user: currentUser } = useUser();
+  const ref = useRef<HTMLDivElement | null>(null);
 
   const handleReply = () => {
     setCommentState({
@@ -85,10 +89,23 @@ export function CommentItem({
     });
   };
 
+  useEffect(() => {
+    if (!ref.current || !scrollEnabled) {
+      return;
+    }
+
+    ref.current.scrollIntoView({
+      block: 'nearest',
+      behavior: 'smooth',
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div
       id={`comment-${commentId}`}
       className="flex flex-col px-[1.5rem] pb-[1.5rem] pt-[1.7rem]"
+      ref={ref}
     >
       <CommentHeader
         email={user.email}

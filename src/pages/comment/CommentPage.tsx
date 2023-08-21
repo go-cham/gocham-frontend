@@ -156,22 +156,6 @@ export default function CommentPage() {
         ...prevCommentState,
         inputActive: false,
       }));
-
-      let comment: HTMLElement | null = null;
-      const interval = setInterval(() => {
-        comment = document.getElementById(`comment-${data.id}`);
-        if (
-          comment &&
-          comment.getBoundingClientRect().bottom >
-            commentInput.getBoundingClientRect().top
-        ) {
-          clearInterval(interval);
-          comment.scrollIntoView({
-            block: 'end',
-            behavior: 'smooth',
-          });
-        }
-      }, 50);
     } else if (error) {
       if (error instanceof AxiosError && error.response?.status === 400) {
         if (error.response.data.errorCode === 'IS_BAD_WORD') {

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
 import { CommentItem } from '@/features/comments/components/CommentItem';
 import { Comment } from '@/features/comments/types';
@@ -8,6 +9,12 @@ interface CommentListProps {
 }
 
 export function CommentList({ writerId, comments }: CommentListProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <div className="flex flex-col divide-y-[1px] divide-background-dividerLine-300">
       {comments &&
@@ -26,6 +33,7 @@ export function CommentList({ writerId, comments }: CommentListProps) {
               content={comment.content}
               commentId={comment.id}
               createdAt={comment.createdAt}
+              scrollEnabled={mounted}
             />
             <div>
               {comment.replies.map((reply) => (
@@ -45,6 +53,7 @@ export function CommentList({ writerId, comments }: CommentListProps) {
                     mentionNickname={reply.to.nickname}
                     commentId={reply.id}
                     parentCommentId={comment.id}
+                    scrollEnabled={mounted}
                   />
                 </div>
               ))}
