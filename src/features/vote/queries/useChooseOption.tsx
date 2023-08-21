@@ -13,16 +13,24 @@ async function chooseOption(data: ChooseOptionRequest) {
   return res.data;
 }
 
-export function useChooseOption() {
+export function useChooseOption({
+  postId,
+  userId,
+}: {
+  postId: number;
+  userId?: number;
+}) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: chooseOption,
     onSuccess: () => {
-      queryClient.refetchQueries(['myChoice']);
-      queryClient.refetchQueries(['usersChoices']);
-      queryClient.refetchQueries(['posts']);
-      queryClient.refetchQueries(['comments']);
+      Promise.all([
+        queryClient.invalidateQueries(['myChoice', { postId, userId }]),
+        queryClient.invalidateQueries(['usersChoices', { postId }]),
+        queryClient.invalidateQueries(['posts']),
+        queryClient.invalidateQueries(['comments', { postId }]),
+      ]);
     },
   });
 }

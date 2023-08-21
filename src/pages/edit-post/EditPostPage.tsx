@@ -5,20 +5,20 @@ import { TopAppBar } from '@/common/components/layout';
 import { LoadingSpinner } from '@/common/components/ui/loading';
 import { Popup } from '@/common/components/ui/modal';
 import { withAuth } from '@/features/auth/components/withAuth/withAuth';
-import { PostForm } from '@/features/posts/components/PostForm';
+import { PostForm } from '@/features/posts/components/post-form/PostForm';
 import { useEditPost, useGetPost } from '@/features/posts/queries';
-import { PostFormData } from '@/features/posts/types';
+import { PostFormData } from '@/features/posts/types/post-form';
 import { useUser } from '@/features/user/queries/useUser';
 
 function EditPostPage() {
   const queryClient = useQueryClient();
-  const params = useParams();
+  const { id } = useParams();
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const { mutate: editPost, isLoading, isSuccess, data } = useEditPost();
   const [hasChanges, setHasChanges] = useState(false);
   const { user } = useUser();
-  const { data: post } = useGetPost(params.id ? +params.id : undefined);
+  const { data: post } = useGetPost(Number(id));
 
   const handleChange = ({
     title,

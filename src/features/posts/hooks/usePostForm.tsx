@@ -4,7 +4,7 @@ import { uploadFirebase } from '@/common/libs/firebase/firebaseManager';
 import { focusById } from '@/common/utils/dom/focus-by-id';
 import { resizeImage } from '@/common/utils/imageResizing';
 import { validatePostForm } from '@/common/utils/validations/postForm';
-import { PostFormData } from '@/features/posts/types';
+import { PostFormData } from '@/features/posts/types/post-form';
 import { useUser } from '@/features/user/queries/useUser';
 
 const MIN_NUM_VOTE_OPTIONS = 2;

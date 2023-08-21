@@ -24,7 +24,9 @@ const RegisterTermPage = lazy(
 );
 const WritePage = lazy(() => import('@/pages/write/WritePage'));
 const UserPage = lazy(() => import('@/pages/user/UserPage'));
-const EditProfilePage = lazy(() => import('@/pages/settings/SettingsPage'));
+const EditProfilePage = lazy(
+  () => import('@/pages/edit-profile/EditProfilePage'),
+);
 const SettingsPage = lazy(() => import('@/pages/settings/SettingsPage'));
 const UnregisterPage = lazy(() => import('@/pages/unregister/UnregisterPage'));
 

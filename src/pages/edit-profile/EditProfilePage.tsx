@@ -2,7 +2,6 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TopAppBar } from '@/common/components/layout';
 import { DockedButton } from '@/common/components/ui/buttons';
-import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { NicknameAgeGenderForm } from '@/features/user/components/NicknameAgeGenderForm';
 import { RegionJobCategoryForm } from '@/features/user/components/RegionJobCategoryForm';
 import { useEditProfile } from '@/features/user/queries/useEditProfile';
@@ -18,7 +17,7 @@ interface FormData {
   categoryIds: number[];
 }
 
-function EditProfilePage() {
+export default function EditProfilePage() {
   const navigate = useNavigate();
   const { user } = useUser();
   const { mutate: editProfile, isSuccess } = useEditProfile();
@@ -34,12 +33,6 @@ function EditProfilePage() {
     job: '',
     categoryIds: [],
   });
-
-  useEffect(() => {
-    if (isSuccess) {
-      navigate(-1);
-    }
-  }, [isSuccess, navigate]);
 
   const hasEdited = () => {
     if (!user) {
@@ -84,6 +77,12 @@ function EditProfilePage() {
 
   const buttonEnabled =
     isValid.nicknameAgeGender && isValid.regionJobCategory && hasEdited();
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate(-1);
+    }
+  }, [isSuccess, navigate]);
 
   useEffect(() => {
     if (user) {
@@ -156,5 +155,3 @@ function EditProfilePage() {
     </div>
   );
 }
-
-export default withAuth(EditProfilePage, { block: 'unauthenticated' });

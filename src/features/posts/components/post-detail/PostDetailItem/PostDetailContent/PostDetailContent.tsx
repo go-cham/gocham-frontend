@@ -9,7 +9,7 @@ export function PostDetailContent({
 }: {
   title: string;
   content: string;
-  images?: string[] | null;
+  images: string[];
 }) {
   const [zoomedImageIndex, setZoomedImageIndex] = useState<number | null>(null);
   const multipleImagesRef = useRef<HTMLDivElement | null>(null);
@@ -47,7 +47,7 @@ export function PostDetailContent({
           onClose={() => setZoomedImageIndex(null)}
         />
       )}
-      <div className="px-[2.5rem]">
+      <div>
         <h1 className="mt-[1.3rem] font-system-heading1">{title}</h1>
         <p className="mt-[0.8rem] break-words text-text-subTitle-700 font-system-body3">
           {formatText(content)}

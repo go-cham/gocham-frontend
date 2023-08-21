@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { getRemainingTime } from '@/features/posts/utils/get-remaining-time';
-import { PostExpiration } from './PostExpiration';
+import { VoteExpiration } from './VoteExpiration';
 
 const meta = {
   title: 'Post/PostDetail/PostExpiration',
-  component: PostExpiration,
+  component: VoteExpiration,
   tags: ['autodocs'],
-} satisfies Meta<typeof PostExpiration>;
+} satisfies Meta<typeof VoteExpiration>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

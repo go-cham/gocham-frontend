@@ -21,6 +21,43 @@ export default {
       fontFamily: {
         pretendard: ['Pretendard', ...fontFamily.sans],
       },
+      keyframes: {
+        'slide-bar': {
+          '0%': {
+            transform: 'scaleX(0)',
+            transformOrigin: 'left',
+          },
+          '90%': {
+            transform: 'scaleX(1)',
+            transformOrigin: 'left',
+          },
+          '100%': {
+            transform: 'scaleX(1)',
+            transformOrigin: 'left',
+          },
+        },
+        'slide-character': {
+          '0%': {
+            transform: 'translateX(0)',
+            opacity: 0,
+          },
+          '10%': {
+            opacity: 1,
+          },
+          '90%': {
+            transform: 'translateX(100%)',
+            opacity: 1,
+          },
+          '100%': {
+            transform: 'translateX(100%)',
+            opacity: 0,
+          },
+        },
+      },
+      animation: {
+        'slide-bar': 'slide-bar 1.6s ease-in-out forwards',
+        'slide-character': 'slide-character 1.6s ease-in-out forwards',
+      },
     },
   },
   plugins: [

@@ -24,9 +24,17 @@ export function useGetMyChoice({
   userId?: number;
 }) {
   return useQuery({
-    queryKey: ['myChoice', postId, userId],
+    queryKey: ['myChoice', { postId, userId }],
     queryFn: () => getMyChoice(postId, userId),
-    select: (data) => data.worryChoice,
-    enabled: isNumber(postId) && isNumber(userId),
+    select: (data) => {
+      if (!data) {
+        return null;
+      }
+
+      return {
+        ...data.worryChoice,
+        isAbstained: data.worryChoice.isAbstained === 'yes',
+      };
+    },
   });
 }

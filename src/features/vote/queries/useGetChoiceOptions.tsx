@@ -1,3 +1,4 @@
+import { useSuspenseQuery } from '@suspensive/react-query';
 import { useQuery } from '@tanstack/react-query';
 import { axiosInstance } from '@/common/libs/axios';
 import { GetChoiceOptionsResponse } from './dto/get-choice-options';
@@ -15,8 +16,21 @@ async function getChoiceOptions(postId: number) {
 }
 
 export function useGetChoiceOptions(postId: number) {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['choiceOptions', postId],
     queryFn: () => getChoiceOptions(postId),
+    select: (data) => {
+      const options = [];
+      for (const option of data) {
+        if (option.label) {
+          options.push({
+            id: option.id,
+            label: option.label,
+            image: option.url,
+          });
+        }
+      }
+      return options;
+    },
   });
 }

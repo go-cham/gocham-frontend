@@ -8,7 +8,7 @@ async function getPost(postId?: number) {
   return res.data;
 }
 
-export function useGetPost(postId?: number) {
+export function useGetPost(postId: number) {
   return useQuery({
     queryKey: ['post', postId],
     queryFn: () => getPost(postId),
@@ -16,6 +16,5 @@ export function useGetPost(postId?: number) {
       ...data,
       worryFiles: data.worryFiles.filter((file) => file.status === 'activated'),
     }),
-    enabled: isNumber(postId),
   });
 }

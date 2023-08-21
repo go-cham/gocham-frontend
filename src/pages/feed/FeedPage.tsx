@@ -1,3 +1,4 @@
+import { useSetAtom } from 'jotai';
 import { Suspense, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { PageWrapper, TopAppBar } from '@/common/components/layout';
@@ -7,15 +8,20 @@ import {
   PostDetailList,
   PostDetailListSkeleton,
 } from '@/features/posts/components/post-detail';
-import { VoteButton } from '@/features/vote/components/VoteButton';
+import { selectedVoteOptionIdAtom } from '@/features/vote/states/selected-vote-option';
 
 function FeedPage() {
   const params = useParams();
   const postType = (params.route as POST_TYPE) || POST_TYPE.ALL;
+  const setSelectedVoteOptionId = useSetAtom(selectedVoteOptionIdAtom);
 
   useEffect(() => {
     localStorage.setItem('navAfterEdit', params.route || '');
   }, [params.route]);
+
+  useEffect(() => {
+    return () => setSelectedVoteOptionId(null);
+  }, [setSelectedVoteOptionId]);
 
   const topAppBarTitle =
     postType === POST_TYPE.MY
@@ -30,7 +36,6 @@ function FeedPage() {
       <Suspense fallback={<PostDetailListSkeleton />}>
         <PostDetailList type={postType} />
       </Suspense>
-      <VoteButton />
     </PageWrapper>
   );
 }

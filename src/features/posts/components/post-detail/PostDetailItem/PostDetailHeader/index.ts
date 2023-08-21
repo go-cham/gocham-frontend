@@ -1,0 +1,1 @@
+export { PostDetailHeader } from './PostDetailHeader';

@@ -9,7 +9,7 @@ import {
   GenderSelect,
   NicknameInput,
 } from '@/features/register/components/form';
-import { BirthDate } from '@/features/register/components/form/BirthdayInput/BirthDateInput';
+import { BirthDate } from '@/features/register/components/form';
 import { useUser } from '@/features/user/queries';
 import { Gender } from '@/features/user/types';
 
@@ -100,9 +100,8 @@ export function NicknameAgeGenderForm({
         !errorMessage.nickname &&
         !errorMessage.birthDate,
     );
-
     onChange(formData, isValid);
-  }, [formData, isDirty, errorMessage, onChange]);
+  }, [formData, errorMessage]);
 
   return (
     <div className="space-y-[2.9rem]">

@@ -6,7 +6,7 @@ import { ADMIN_EMAIL } from '@/common/constants/admin';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { scrollRestorationAtom } from '@/common/states/scroll-restoration';
 import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
-import { Post } from '@/features/posts/types';
+import { Post } from '@/features/posts/types/post';
 import { UserProfile } from '@/features/user/components/UserProfile';
 import { PostCardContent } from './PostCardContent';
 import { PostCardMeta } from './PostCardMeta';

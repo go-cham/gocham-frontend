@@ -1,0 +1,1 @@
+export { VoteExpiration } from './VoteExpiration';

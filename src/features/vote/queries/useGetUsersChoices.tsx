@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@suspensive/react-query';
 import { axiosInstance } from '@/common/libs/axios';
 import { GetUsersChoices } from './dto/get-users-choices';
 
@@ -12,8 +12,13 @@ async function getUserChoices(postId?: number) {
 }
 
 export function useGetUsersChoices(postId?: number) {
-  return useQuery({
-    queryKey: ['usersChoices', postId],
+  return useSuspenseQuery({
+    queryKey: ['usersChoices', { postId }],
     queryFn: () => getUserChoices(postId),
+    select: (data) =>
+      data.map((choice) => ({
+        ...choice,
+        isAbstained: choice.isAbstained === 'yes',
+      })),
   });
 }

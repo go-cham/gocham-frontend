@@ -4,7 +4,13 @@ import { Provider as JotaiProvider } from 'jotai';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export function Provider({ children }: { children: React.ReactNode }) {
   return (
@@ -12,7 +18,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
       <JotaiProvider>
         <BrowserRouter>{children}</BrowserRouter>
       </JotaiProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/*<ReactQueryDevtools initialIsOpen={false} />*/}
     </QueryClientProvider>
   );
 }

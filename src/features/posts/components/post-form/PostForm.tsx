@@ -1,17 +1,15 @@
 import { DockedButton, EditButton } from '@/common/components/ui/buttons';
 import { Select } from '@/common/components/ui/selections';
 import { CATEGORY_OPTIONS, DEADLINE_OPTIONS } from '@/common/constants/options';
-import { ImagePreview } from '@/features/posts/components/form/ImagePreview';
-import {
-  PostContentInput,
-  PostTitleInput,
-  PostVoteInput,
-} from '@/features/posts/components/form/index';
+import { ImagePreview } from '@/features/posts/components/post-form/ImagePreview';
+import { PostContentInput } from '@/features/posts/components/post-form/PostContentInput';
+import { PostTitleInput } from '@/features/posts/components/post-form/PostTitleInput';
+import { PostVoteInput } from '@/features/posts/components/post-form/PostVoteInput';
 import {
   MAX_NUM_VOTE_OPTIONS,
   usePostForm,
 } from '@/features/posts/hooks/usePostForm';
-import { PostFormData } from '@/features/posts/types';
+import { PostFormData } from '@/features/posts/types/post-form';
 
 interface PostFormProps {
   mode: 'add' | 'edit';

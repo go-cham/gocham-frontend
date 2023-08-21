@@ -16,7 +16,7 @@ export function DockedButton({
   return (
     <div
       className={twMerge(
-        'shadow-dock flex h-[11.2rem] w-[39rem] justify-center bg-white pt-[1.7rem]',
+        'flex h-[11.2rem] w-[39rem] justify-center bg-white pt-[1.7rem] shadow-dock',
         backgroundClassName,
       )}
     >

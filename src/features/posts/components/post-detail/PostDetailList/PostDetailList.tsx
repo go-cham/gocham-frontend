@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';
-import { PostDetail } from '@/features/posts/components/post-detail';
+import { PostDetailItem } from '@/features/posts/components/post-detail';
 import { useGetPosts } from '@/features/posts/queries';
 import { useUser } from '@/features/user/queries/useUser';
 
@@ -22,13 +22,13 @@ export function PostDetailList({ type }: PostDetailListProps) {
 
   return (
     <ul
-      className="hide-scrollbar flex-1 overflow-y-scroll pt-[0.9rem]"
+      className="hide-scrollbar flex-1 divide-y divide-background-dividerLine-300 overflow-y-scroll pt-[0.9rem]"
       style={{ scrollSnapType: 'y proximity', scrollSnapAlign: 'start' }}
       ref={scrollRef}
     >
       {posts?.map((post, index) => (
         <li key={post.id} ref={index === posts.length - 1 ? ref : undefined}>
-          <PostDetail post={post} />
+          <PostDetailItem post={post} />
         </li>
       ))}
     </ul>

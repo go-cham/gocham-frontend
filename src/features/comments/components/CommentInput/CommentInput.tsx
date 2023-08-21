@@ -107,7 +107,7 @@ export function CommentInput({ onSubmit }: CommentInputProps) {
     <form
       id="comment-input-wrapper"
       onSubmit={(e) => e.preventDefault()}
-      className={`shadow-dock flex w-full touch-none items-center space-x-[1.3rem] bg-white px-[1.5rem] pt-[1.5rem] ${
+      className={`flex w-full touch-none items-center space-x-[1.3rem] bg-white px-[1.5rem] pt-[1.5rem] shadow-dock ${
         isMobile && isFocused ? 'pb-[1.1rem]' : 'pb-[5.1rem]'
       }`}
     >

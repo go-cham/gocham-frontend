@@ -13,7 +13,7 @@ import { useUser } from '@/features/user/queries/useUser';
 function FeedPage() {
   const { id } = useParams();
   const { user } = useUser();
-  const { data: post } = useGetPost(id ? +id : undefined);
+  const { data: post } = useGetPost(Number(id));
   const [selectedReasonId, setSelectedReasonId] = useState<number>();
   const { mutate: reportPost, error, isSuccess, isLoading } = useReportPost();
   const navigate = useNavigate();

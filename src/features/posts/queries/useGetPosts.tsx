@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { axiosInstance } from '@/common/libs/axios';
-import { Post } from '@/features/posts/types';
+import { Post } from '@/features/posts/types/post';
 import { GetPostsResponse } from './dto/get-posts';
 
 interface getPostsArgs {
@@ -49,7 +49,6 @@ export function useGetPosts({
       }),
     getNextPageParam: (lastPage) => lastPage.meta.nextId,
     suspense: true,
-    enabled: type === POST_TYPE.ALL || !!userId,
   });
   const { hasNextPage, fetchNextPage } = queryInfo;
 

@@ -47,18 +47,6 @@ input[type='number'] {
   display: none;
 }
 
-@keyframes slide-icon {
-  from {
-    left: 0;
-  }
-}
-
-@keyframes slide-bar {
-  from {
-    width: 0;
-  }
-}
-
 @supports (-webkit-backdrop-filter: none) {
   .header-blur {
     -webkit-backdrop-filter: blur(8px);

@@ -1,10 +1,14 @@
 import ClockIcon from './ClockIcon';
 
-export function PostExpiration({ remainingTime }: { remainingTime: string }) {
+interface VoteExpirationProps {
+  remainingTime: string;
+}
+
+export function VoteExpiration({ remainingTime }: VoteExpirationProps) {
   const isClosed = remainingTime === 'closed';
 
   return (
-    <div className="mt-[1.5rem] flex items-center space-x-[5.67px] px-[2.5rem]">
+    <div className="flex items-center space-x-[5.67px]">
       <ClockIcon colored={!isClosed} />
       {isClosed ? (
         <span className="text-text-explain-500 font-system-body2">

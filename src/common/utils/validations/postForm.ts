@@ -1,4 +1,4 @@
-import { PostFormData } from '@/features/posts/types';
+import { PostFormData } from '@/features/posts/types/post-form';
 
 export function validatePostForm(
   formData: PostFormData,
