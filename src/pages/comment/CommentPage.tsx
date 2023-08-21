@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useNavigate, useParams } from 'react-router-dom';
 import MoreIcon from '@/common/components/icons/MoreIcon';
-import { TopAppBar } from '@/common/components/layout';
-import { ImageFullScreen } from '@/common/components/ui';
+import { PageWrapper, TopAppBar } from '@/common/components/layout';
+import { Divider, ImageFullScreen } from '@/common/components/ui';
 import { Dropdown } from '@/common/components/ui/Dropdown/Dropdown';
 import { Popup, Snackbar } from '@/common/components/ui/modal';
 import CommentSkeleton from '@/common/components/ui/skeleton/CommentSkeleton';
@@ -220,16 +220,16 @@ export default function CommentPage() {
   }, []);
 
   return (
-    <div className="flex h-full flex-col">
+    <PageWrapper>
       <TopAppBar title="댓글" />
       <div
         id="comment-page"
         className="hide-scrollbar flex-1 overflow-y-scroll overscroll-y-auto"
       >
-        <div className="flex flex-col border-b border-background-dividerLine-300 pb-[1.9rem] pt-[2.1rem]">
+        <div className="flex flex-col px-[2.5rem] pb-[1.9rem] pt-[2.1rem]">
           {post && user ? (
             <>
-              <div className="flex items-center justify-between px-[2.5rem]">
+              <div className="flex items-center justify-between">
                 <UserProfile
                   nickname={post.user.nickname}
                   age={calculateAgeFromBirthDate(post.user.birthDate)}
@@ -277,6 +277,7 @@ export default function CommentPage() {
             <PostSummarySkeleton />
           )}
         </div>
+        <Divider />
         {comments && post ? (
           <CommentList writerId={post.user.id} comments={comments} />
         ) : (
@@ -303,6 +304,6 @@ export default function CommentPage() {
           onClickButton={() => deletePost(post.id)}
         />
       )}
-    </div>
+    </PageWrapper>
   );
 }
