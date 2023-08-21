@@ -5,7 +5,6 @@ import { TopAppBar } from '@/common/components/layout';
 import { Popup } from '@/common/components/ui/modal';
 import { scrollRestorationAtom } from '@/common/states/scroll-restoration';
 import getFutureDateTime from '@/common/utils/getFutureDateTime';
-import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { PostForm } from '@/features/posts/components/post-form/PostForm';
 import { useAddPost } from '@/features/posts/queries';
 import { PostFormData } from '@/features/posts/types/post-form';
@@ -13,7 +12,7 @@ import { useUser } from '@/features/user/queries';
 import { PostUploadSuccess } from '@/pages/write/components/PostUploadSuccess';
 import { PostUploading } from '@/pages/write/components/PostUploading';
 
-function WritePage() {
+export default function WritePage() {
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const { mutate: addPost, isLoading, isSuccess, data } = useAddPost();
@@ -121,5 +120,3 @@ function WritePage() {
     </>
   );
 }
-
-export default withAuth(WritePage, { block: 'unauthenticated' });

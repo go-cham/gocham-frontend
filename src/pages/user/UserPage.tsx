@@ -8,14 +8,13 @@ import { usePullToRefresh } from '@/common/hooks/usePullToRefresh';
 import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';
 import { useScrollToTop } from '@/common/hooks/useScrollToTop';
 import { assignMultipleRefs } from '@/common/utils/dom/assign-multiple-refs';
-import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { PostCardList } from '@/features/posts/components/post-card/PostCardList';
 import { PostCardListSkeleton } from '@/features/posts/components/post-card/PostCardListSkeleton';
 import { selectedPostTypeAtom } from '@/features/posts/states/selected-post-type';
 import { PostTypeTabList } from '@/features/user/components/PostTypeTabList';
 import { UserPageHeader } from '@/pages/user/components/UserPageHeader';
 
-function UserPage() {
+export default function UserPage() {
   const queryClient = useQueryClient();
   const [selectedPostType, setSelectedPostType] = useAtom(selectedPostTypeAtom);
   const { ref: scrollToTopRef, scrollToTop } = useScrollToTop<HTMLDivElement>();
@@ -74,5 +73,3 @@ function UserPage() {
     </PageWrapper>
   );
 }
-
-export default withAuth(UserPage, { block: 'unauthenticated' });

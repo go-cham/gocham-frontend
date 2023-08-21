@@ -5,11 +5,10 @@ import { TopAppBar } from '@/common/components/layout';
 import { Button } from '@/common/components/ui/buttons';
 import { LoadingSpinner } from '@/common/components/ui/loading';
 import { REPORT_COMMENT_REASON_OPTIONS } from '@/common/constants/options';
-import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { useReportComment } from '@/features/report/queries';
 import { useUser } from '@/features/user/queries/useUser';
 
-function CommentReportPage() {
+export default function CommentReportPage() {
   const { id } = useParams();
   const { user } = useUser();
   const [selectedReasonId, setSelectedReasonId] = useState<number>();
@@ -120,5 +119,3 @@ function CommentReportPage() {
     </div>
   );
 }
-
-export default withAuth(CommentReportPage, { block: 'unauthenticated' });

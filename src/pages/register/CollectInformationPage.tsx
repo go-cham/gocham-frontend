@@ -2,7 +2,6 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackIcon from '@/common/components/icons/BackIcon';
-import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { useAcceptTerms } from '@/features/auth/queries';
 import { registerDataAtom } from '@/features/register/states/register-data';
 import CollectNicknameAgeGender from '@/features/user/components/CollectNicknameAgeGender/CollectNicknameAgeGender';
@@ -10,7 +9,7 @@ import CollectRegionJobCategory from '@/features/user/components/CollectRegionJo
 import { useEditProfile } from '@/features/user/queries/useEditProfile';
 import { useUser } from '@/features/user/queries/useUser';
 
-function CollectInformationPage() {
+export default function CollectInformationPage() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [registerData, setRegisterData] = useAtom(registerDataAtom);
@@ -124,5 +123,3 @@ function CollectInformationPage() {
     </div>
   );
 }
-
-export default withAuth(CollectInformationPage, { block: 'activated' });

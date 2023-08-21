@@ -5,12 +5,11 @@ import { TopAppBar } from '@/common/components/layout';
 import { Button } from '@/common/components/ui/buttons';
 import { LoadingSpinner } from '@/common/components/ui/loading';
 import { REPORT_FEED_REASON_OPTIONS } from '@/common/constants/options';
-import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { useGetPost } from '@/features/posts/queries';
 import { useReportPost } from '@/features/report/queries';
 import { useUser } from '@/features/user/queries/useUser';
 
-function FeedPage() {
+export default function FeedPage() {
   const { id } = useParams();
   const { user } = useUser();
   const { data: post } = useGetPost(Number(id));
@@ -99,5 +98,3 @@ function FeedPage() {
     </div>
   );
 }
-
-export default withAuth(FeedPage, { block: 'unauthenticated' });

@@ -14,7 +14,7 @@ const CommentPage = lazy(() => import('@/pages/comment/CommentPage'));
 const CommentReportPage = lazy(
   () => import('@/pages/comment-report/CommentReportPage'),
 );
-const EditPage = lazy(() => import('@/pages/edit-post/EditPostPage'));
+const EditPostPage = lazy(() => import('@/pages/edit-post/EditPostPage'));
 const LoginPage = lazy(() => import('@/pages/login/LoginPage'));
 const LoginOauthKakaoPage = lazy(
   () => import('@/pages/login/LoginOauthKakaoPage'),
@@ -37,15 +37,20 @@ export default function Routes() {
   return (
     <Suspense fallback={null}>
       <ReactRouterRoutes>
+        {/* 공개 페이지 */}
         <Route path={'/'} element={<HomePage />} />
+        {/* 로그인한 유저만 접근 가능한 페이지 */}
         <Route
           element={
-            <ProtectedRoute isAllowed={!!user} redirectPath={'/login'} />
+            <ProtectedRoute
+              isAllowed={user?.joinStatus === 'activated'}
+              redirectPath={!user ? '/login' : '/register/term'}
+            />
           }
         >
           <Route path={'/feed/:id'} element={<FeedPage />} />
           <Route path={'/feed/:id/:route'} element={<FeedPage />} />
-          <Route path={'/feed/:id/edit'} element={<EditPage />} />
+          <Route path={'/feed/:id/edit'} element={<EditPostPage />} />
           <Route path={'/feed/:id/report'} element={<FeedReportPage />} />
           <Route path={'/feed/:id/comment'} element={<CommentPage />} />
           <Route path={'/write'} element={<WritePage />} />
@@ -55,27 +60,30 @@ export default function Routes() {
           <Route path={'/comment/:id/report'} element={<CommentReportPage />} />
           <Route path={'/unregister'} element={<UnregisterPage />} />
         </Route>
+        {/* 로그인 안한 유저만 접근 가능한 페이지 */}
         <Route
           element={<ProtectedRoute isAllowed={!user} redirectPath={'/'} />}
         >
           <Route path={'/login'} element={<LoginPage />} />
-        </Route>
-        <Route
-          element={<ProtectedRoute isAllowed={!user} redirectPath={'/login'} />}
-        >
           <Route
             path={'/login/oauth/kakao'}
             element={<LoginOauthKakaoPage />}
           />
         </Route>
+        {/* 가입이 완료되지 않은 유저만 접근 가능한 페이지 */}
         <Route
-          element={<ProtectedRoute isAllowed={!user?.job} redirectPath={'/'} />}
+          element={
+            <ProtectedRoute
+              isAllowed={user?.joinStatus === 'deactivated'}
+              redirectPath={'/'}
+            />
+          }
         >
+          <Route path={'/register/term'} element={<RegisterTermPage />} />
           <Route
             path={'/collect-information'}
             element={<CollectInformationPage />}
           />
-          <Route path={'/register/term'} element={<RegisterTermPage />} />
         </Route>
         <Route path={'/*'} element={<Navigate to={'/'} />} />
       </ReactRouterRoutes>

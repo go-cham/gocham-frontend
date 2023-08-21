@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { TopAppBar } from '@/common/components/layout';
 import { Button } from '@/common/components/ui/buttons';
 import { Popup } from '@/common/components/ui/modal';
-import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import { PostVoteInput } from '@/features/posts/components/post-form';
 import { useUnregister } from '@/features/user/queries/useUnregister';
 import { useUser } from '@/features/user/queries/useUser';
 
-function UnregisterPage() {
+export default function UnregisterPage() {
   const { user } = useUser();
   const [reason, setReason] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -112,4 +111,3 @@ function UnregisterPage() {
     </div>
   );
 }
-export default withAuth(UnregisterPage, { block: 'unauthenticated' });

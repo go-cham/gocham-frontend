@@ -2,9 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import Kakao from '@/common/assets/images/login/kakao.svg';
 import LoginWrapper from '@/common/assets/images/login/loginWrapper.svg';
 import BackIcon from '@/common/components/icons/BackIcon';
-import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 
-function LoginPage() {
+export default function LoginPage() {
   const navigate = useNavigate();
 
   if (!window.Kakao.isInitialized()) {
@@ -76,5 +75,3 @@ function LoginPage() {
     </div>
   );
 }
-
-export default withAuth(LoginPage, { block: 'activated' });

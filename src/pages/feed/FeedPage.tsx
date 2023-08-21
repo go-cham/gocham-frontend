@@ -3,14 +3,13 @@ import { Suspense, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { PageWrapper, TopAppBar } from '@/common/components/layout';
 import { POST_TYPE } from '@/common/constants/post-type';
-import { withAuth } from '@/features/auth/components/withAuth/withAuth';
 import {
   PostDetailList,
   PostDetailListSkeleton,
 } from '@/features/posts/components/post-detail';
 import { selectedVoteOptionIdAtom } from '@/features/vote/states/selected-vote-option';
 
-function FeedPage() {
+export default function FeedPage() {
   const params = useParams();
   const postType = (params.route as POST_TYPE) || POST_TYPE.ALL;
   const setSelectedVoteOptionId = useSetAtom(selectedVoteOptionIdAtom);
@@ -39,5 +38,3 @@ function FeedPage() {
     </PageWrapper>
   );
 }
-
-export default withAuth(FeedPage, { block: 'unauthenticated' });

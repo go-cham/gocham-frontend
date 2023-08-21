@@ -1,26 +1,23 @@
 import { useQuery } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { axiosInstance } from '@/common/libs/axios';
 import { User } from '@/features/user/types';
+import { userLocalStorage } from '@/features/user/utils/user-local-storage';
 import { GetUserResponse } from './dto/get-user';
 
+async function getUser() {
+  const res = await axiosInstance.get<GetUserResponse>('/user');
+  return res.data;
+}
+
 export function useUser() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['user'],
-    queryFn: async () => {
-      try {
-        const res = await axiosInstance.get<GetUserResponse>('/user');
-        return res.data;
-      } catch (e) {
-        if (e instanceof AxiosError && e.response?.status === 401) {
-          return null;
-        } else {
-          throw e;
-        }
-      }
-    },
-    staleTime: 1000 * 60 * 60, // 1시간
+    queryFn: getUser,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    initialData: userLocalStorage.getUser(),
   });
 
   const user: User | null = useMemo(
@@ -42,7 +39,7 @@ export function useUser() {
                 }
               : null,
             job: data.job,
-            worryCategories: data.userWorryCategories.map((category) => ({
+            worryCategories: data.userWorryCategories?.map((category) => ({
               value: category.worryCategory.id,
               label: category.worryCategory.label,
             })),
@@ -51,6 +48,20 @@ export function useUser() {
         : null,
     [data],
   );
+
+  useEffect(() => {
+    if (!user) {
+      userLocalStorage.removeUser();
+    } else {
+      userLocalStorage.saveUser(user);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (isError) {
+      userLocalStorage.removeUser();
+    }
+  }, [isError]);
 
   return {
     user,
