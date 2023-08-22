@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TopAppBar } from '@/common/components/layout';
 import { Popup } from '@/common/components/ui/modal';
-import { uploadFirebase } from '@/common/libs/firebase/firebaseManager';
+import { uploadImage } from '@/common/libs/cloudinary';
 import { scrollRestorationAtom } from '@/common/states/scroll-restoration';
 import getFutureDateTime from '@/common/utils/getFutureDateTime';
 import { PostForm } from '@/features/posts/components/post-form/PostForm';
@@ -52,16 +52,16 @@ export default function WritePage() {
 
     setUploadLoading(true);
     const uploadPromises = [
-      ...images.map((image) => uploadFirebase(user.id, image.file)),
+      ...images.map((image) => uploadImage(image.file)),
       ...voteOptions.map(
-        (option) => option.image && uploadFirebase(user.id, option.image.file),
+        (option) => option.image && uploadImage(option.image.file),
       ),
     ];
     const result = (await Promise.all(uploadPromises)).filter(
       (url) => !!url,
     ) as string[];
-    setUploadLoading(false);
     const numOfMainImages = images.length;
+    setUploadLoading(false);
 
     addPost({
       title: title.trim(),
