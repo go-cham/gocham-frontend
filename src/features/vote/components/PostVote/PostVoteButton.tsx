@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import CheckIcon from '@/common/components/icons/CheckIcon';
 import { Snackbar } from '@/common/components/ui/modal';
+import { resizeImage } from '@/common/libs/cloudinary';
 import { useGetUsersChoices } from '@/features/vote/queries';
 import { selectedVoteOptionIdAtom } from '@/features/vote/states/selected-vote-option';
 import { customColors } from '@/styles/colors';
@@ -80,8 +81,8 @@ export function PostVoteButton({
         </span>
         {option.image && (
           <img
-            src={option.image}
-            alt={option.label}
+            src={resizeImage(option.image, 200)}
+            alt={'투표 이미지'}
             className="absolute right-0 aspect-square h-full object-cover"
             onClick={(e) => {
               onClickImage(option.image);

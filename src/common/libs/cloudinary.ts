@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const uploadImage = async (file: File) => {
   const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
-  const PRESET = import.meta.env.VITE_CLOUDINARY_PRESET;
+  const PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 
   const data = new FormData();
   data.append('file', file);
@@ -14,8 +14,16 @@ export const uploadImage = async (file: File) => {
       `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
       data,
     );
-    return res.data.url as string;
+    const url = res.data.url as string;
+    return url.replace('http', 'https');
   } catch (e) {
     console.error(e);
   }
+};
+
+export const resizeImage = (url: string, width: number) => {
+  const splits = url.split('/');
+  return (
+    splits.slice(0, -2).join('/') + `/w_${width}/` + splits.slice(-2).join('/')
+  );
 };

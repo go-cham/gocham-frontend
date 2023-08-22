@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ThumbnailLoading from '@/common/assets/images/thumbnail-loading.svg';
+import { resizeImage } from '@/common/libs/cloudinary';
 import { formatText } from '@/common/utils/formatText';
 
 interface PostCardContentProps {
@@ -17,6 +18,7 @@ export function PostCardContent({
   const handleImageLoad = () => {
     setImageLoading(false);
   };
+
   return (
     <div className="relative flex h-[6.4rem] items-center">
       <div className="flex-1 space-y-[0.7rem] overflow-hidden">
@@ -28,7 +30,7 @@ export function PostCardContent({
       {image &&
         (!imageLoading ? (
           <img
-            src={image}
+            src={resizeImage(image, 200)}
             alt={'게시글 이미지'}
             className="ml-[1.7rem] aspect-square w-[6.4rem] rounded-[5px] border border-background-dividerLine-300 object-cover"
           />
