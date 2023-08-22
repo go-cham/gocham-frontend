@@ -1,11 +1,8 @@
 import { range } from 'lodash';
 import { FormEvent, useEffect, useState } from 'react';
-import { uploadFirebase } from '@/common/libs/firebase/firebaseManager';
 import { focusById } from '@/common/utils/dom/focus-by-id';
-import { resizeImage } from '@/common/utils/imageResizing';
 import { validatePostForm } from '@/common/utils/validations/post-form';
 import { PostFormData } from '@/features/posts/types/post-form';
-import { useUser } from '@/features/user/queries/useUser';
 
 const MIN_NUM_VOTE_OPTIONS = 2;
 export const MAX_NUM_VOTE_OPTIONS = 4;
@@ -20,7 +17,6 @@ export function usePostForm({
   onSubmit: (data: PostFormData) => void;
   onChange: (data: PostFormData) => void;
 }) {
-  const { user } = useUser();
   const [formData, setFormData] = useState<PostFormData>(
     initialData || {
       title: '',
@@ -49,20 +45,10 @@ export function usePostForm({
   };
 
   const handleMainImageUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      if (!e.target?.result || !user) {
-        return;
-      }
-      resizeImage(e.target.result.toString()).then(async (result) => {
-        const imgUrl = await uploadFirebase(user.id, result, 'posting');
-        setFormData({
-          ...formData,
-          images: [...formData.images, { url: imgUrl }],
-        });
-      });
-    };
-    reader.readAsDataURL(file);
+    setFormData({
+      ...formData,
+      images: [...formData.images, { file, url: URL.createObjectURL(file) }],
+    });
   };
 
   const handleTitleChange = (title: string) => {
@@ -84,21 +70,15 @@ export function usePostForm({
   };
 
   const handleVoteOptionImageUpload = (index: number) => (file: File) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      if (!e.target?.result || !user) {
-        return;
-      }
-      resizeImage(e.target.result.toString()).then(async (result) => {
-        const imgUrl = await uploadFirebase(user.id, result, 'posting');
-        const newVoteOptions = formData?.voteOptions
-          ? [...formData.voteOptions]
-          : [];
-        newVoteOptions[index].image = imgUrl;
-        setFormData({ ...formData, voteOptions: newVoteOptions });
-      });
-    };
-    reader.readAsDataURL(file);
+    const newVoteOptions = formData?.voteOptions
+      ? [...formData.voteOptions]
+      : [];
+    newVoteOptions[index].image = { file, url: URL.createObjectURL(file) };
+
+    setFormData({
+      ...formData,
+      voteOptions: newVoteOptions,
+    });
   };
 
   const handleVoteOptionImageDelete = (index: number) => () => {

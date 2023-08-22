@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TopAppBar } from '@/common/components/layout';
 import { Popup } from '@/common/components/ui/modal';
+import { uploadFirebase } from '@/common/libs/firebase/firebaseManager';
 import { scrollRestorationAtom } from '@/common/states/scroll-restoration';
 import getFutureDateTime from '@/common/utils/getFutureDateTime';
 import { PostForm } from '@/features/posts/components/post-form/PostForm';
@@ -17,6 +18,7 @@ export default function WritePage() {
   const navigate = useNavigate();
   const { mutate: addPost, isLoading, isSuccess, data } = useAddPost();
   const [hasChanges, setHasChanges] = useState(false);
+  const [uploadLoading, setUploadLoading] = useState(false);
   const { user } = useUser();
 
   const handleChange = ({
@@ -48,10 +50,25 @@ export default function WritePage() {
       return;
     }
 
+    setUploadLoading(true);
+    const uploadPromises = [
+      ...images.map((image) => uploadFirebase(user.id, image.file)),
+      ...voteOptions.map(
+        (option) => option.image && uploadFirebase(user.id, option.image.file),
+      ),
+    ];
+    const result = (await Promise.all(uploadPromises)).filter(
+      (url) => !!url,
+    ) as string[];
+    setUploadLoading(false);
+    const numOfMainImages = images.length;
+
     addPost({
       title: title.trim(),
       content: content.trim(),
-      files: images.map((image) => ({ url: image.url, contentType: 'image' })),
+      files: result
+        .slice(0, numOfMainImages)
+        .map((url) => ({ url, contentType: 'image' })),
       userId: user?.id,
       expirationTime: getFutureDateTime(deadline),
       choices: voteOptions
@@ -59,7 +76,7 @@ export default function WritePage() {
         .map((option, i) => ({
           sequenceNumber: i,
           label: option.label.trim(),
-          url: option.image || null,
+          url: result[numOfMainImages + i],
         })),
       worryCategoryId: categoryId,
     });
@@ -81,7 +98,7 @@ export default function WritePage() {
     }
   }, [isSuccess, data, navigate]);
 
-  if (isLoading) {
+  if (isLoading || uploadLoading) {
     return <PostUploading />;
   }
 

@@ -1,7 +1,7 @@
 import DeleteIcon from '@/common/assets/images/write/delete-icon.svg';
 
 interface ImagePreviewProps {
-  images: { id?: number; url: string }[];
+  images: string[];
   onDelete: (index: number) => () => void;
 }
 
@@ -9,12 +9,9 @@ export function ImagePreview({ images, onDelete }: ImagePreviewProps) {
   return (
     <div className="mt-[1.3rem] flex w-full space-x-[2.1rem]">
       {images.map((image, index) => (
-        <div
-          key={image.id + image.url}
-          className="relative h-[7.1rem] w-[7.1rem]"
-        >
+        <div key={image} className="relative h-[7.1rem] w-[7.1rem]">
           <img
-            src={image.url}
+            src={image}
             alt={'업로드 이미지'}
             className="h-full w-full object-cover"
           />

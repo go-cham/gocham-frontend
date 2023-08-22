@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { DockedButton, EditButton } from '@/common/components/ui/buttons';
 import { Select } from '@/common/components/ui/selections';
 import { CATEGORY_OPTIONS, DEADLINE_OPTIONS } from '@/common/constants/options';
@@ -49,7 +50,7 @@ export function PostForm({
           defaultValue={formData.title}
         />
         <ImagePreview
-          images={formData.images}
+          images={formData.images.map((image) => image.url)}
           onDelete={handlers.imageDelete}
         />
         <PostContentInput
@@ -100,9 +101,7 @@ export function PostForm({
               <PostVoteInput
                 key={i}
                 id={`post-form-voteOptions${i}`}
-                image={
-                  formData?.voteOptions ? formData.voteOptions[i].image : null
-                }
+                image={formData?.voteOptions[i]?.image?.url || null}
                 onChange={handlers.voteOptionChange(i)}
                 className="w-full"
                 onUploadImage={handlers.voteOptionImageUpload(i)}

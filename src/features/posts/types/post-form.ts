@@ -3,12 +3,16 @@ export interface PostFormData {
   content: string;
   images: {
     id?: number;
+    file: File;
     url: string;
   }[];
   categoryId?: number;
   deadline?: number;
   voteOptions: {
     label: string;
-    image: string | null;
+    image: {
+      file: File;
+      url: string;
+    } | null;
   }[];
 }
