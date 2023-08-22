@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { commentStateAtom } from '@/features/comments/states/comment';
 import { useUser } from '@/features/user/queries/useUser';
-import { useGetMyChoice } from '@/features/vote/queries';
 import CommentContent from './CommentContent';
 import CommentFooter from './CommentFooter';
 import CommentHeader from './CommentHeader';
@@ -37,10 +36,6 @@ export function CommentItem({
   scrollEnabled,
 }: CommentItemProps) {
   const [commentState, setCommentState] = useAtom(commentStateAtom);
-  const { data: choice } = useGetMyChoice({
-    userId: user.id,
-    postId: user.choiceLabel ? undefined : commentState.postId || undefined,
-  });
   const navigate = useNavigate();
   const { user: currentUser } = useUser();
   const ref = useRef<HTMLDivElement | null>(null);
@@ -111,7 +106,7 @@ export function CommentItem({
         email={user.email}
         nickname={user.nickname}
         age={user.age}
-        choice={user.choiceLabel || choice?.label || null}
+        choice={user.choiceLabel}
         isWriter={isWriter}
         isMyComment={user.id === currentUser?.id}
         commentId={commentId}

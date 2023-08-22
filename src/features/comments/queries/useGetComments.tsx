@@ -50,6 +50,13 @@ export function useGetComments(postId: number) {
                 profileImage: user.profileImageUrl,
                 nickname: user.nickname,
                 birthDate: user.birthDate,
+                worryChoice: user.worryChoice
+                  ? {
+                      id: user.worryChoice.id,
+                      label: user.worryChoice.label,
+                      isAbstained: user.worryChoice.isAbstained === 'yes',
+                    }
+                  : null,
               },
             }),
           ) || [],

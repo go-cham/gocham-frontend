@@ -45,7 +45,7 @@ export function CommentList({ writerId, comments }: CommentListProps) {
                       email: reply.user.email,
                       nickname: reply.user.nickname,
                       age: calculateAgeFromBirthDate(reply.user.birthDate),
-                      choiceLabel: null, // TODO: api 응답 변경
+                      choiceLabel: reply.user.choice?.label || null,
                     }}
                     isWriter={writerId === reply.user.id}
                     content={reply.content}

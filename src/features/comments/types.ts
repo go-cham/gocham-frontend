@@ -28,6 +28,11 @@ export interface Comment {
       profileImage: string | null;
       nickname: string;
       birthDate: string;
+      choice: {
+        id: number;
+        label: string;
+        isAbstained: boolean;
+      } | null;
     };
   }[];
 }
