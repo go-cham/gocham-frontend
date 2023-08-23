@@ -6,6 +6,7 @@
     url('../common/assets/fonts/pretendard/Pretendard-Bold.otf');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -15,6 +16,7 @@
     url('../common/assets/fonts/pretendard/Pretendard-Medium.otf');
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -24,6 +26,7 @@
     url('../common/assets/fonts/pretendard/Pretendard-Regular.otf');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 /* Elice */
@@ -32,6 +35,7 @@
   src: url('../common/assets/fonts/elice/EliceDigitalBaeum-Bold.otf');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -39,4 +43,5 @@
   src: url('../common/assets/fonts/elice/EliceDigitalBaeum-Regular.otf');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
