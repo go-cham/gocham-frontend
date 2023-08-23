@@ -16,9 +16,9 @@ export function useUser() {
     queryKey: ['user'],
     queryFn: getUser,
     refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    initialData: userLocalStorage.getUser(),
-    retry: false,
+    initialData: userLocalStorage.getUser() || undefined,
+    initialDataUpdatedAt: userLocalStorage.getUserUpdatedAt(),
+    staleTime: 1000 * 60 * 5, // 5분
   });
 
   const user: User | null = useMemo(
@@ -53,12 +53,12 @@ export function useUser() {
   );
 
   useEffect(() => {
-    if (!user) {
+    if (!data) {
       userLocalStorage.removeUser();
     } else {
-      userLocalStorage.saveUser(user);
+      userLocalStorage.saveUser(data);
     }
-  }, [user]);
+  }, [data]);
 
   useEffect(() => {
     if (isError) {

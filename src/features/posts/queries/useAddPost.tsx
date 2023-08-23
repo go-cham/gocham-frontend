@@ -13,9 +13,14 @@ export function useAddPost() {
   return useMutation({
     mutationFn: addPost,
     onSuccess: () => {
-      queryClient.refetchQueries({
-        queryKey: ['posts'],
-      });
+      Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: ['posts'],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ['user'],
+        }),
+      ]);
     },
   });
 }
