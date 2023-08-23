@@ -32,7 +32,7 @@ export function validatePostForm(
   }
   let count = 0;
   for (const option of voteOptions) {
-    if (option.label.trim()) {
+    if (option.label?.trim()) {
       count += 1;
     }
   }
