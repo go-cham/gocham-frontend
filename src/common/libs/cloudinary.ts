@@ -22,6 +22,10 @@ export const uploadImage = async (file: File) => {
 };
 
 export const resizeImage = (url: string, width: number) => {
+  if (!url.includes('cloudinary')) {
+    return url;
+  }
+
   const splits = url.split('/');
   return (
     splits.slice(0, -2).join('/') + `/w_${width}/` + splits.slice(-2).join('/')
