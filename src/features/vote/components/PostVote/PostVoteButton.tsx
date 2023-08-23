@@ -1,5 +1,6 @@
 import { useAtom } from 'jotai';
 import { useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { twMerge } from 'tailwind-merge';
 import CheckIcon from '@/common/components/icons/CheckIcon';
 import { Snackbar } from '@/common/components/ui/modal';
@@ -80,7 +81,7 @@ export function PostVoteButton({
           {option.label}
         </span>
         {option.image && (
-          <img
+          <LazyLoadImage
             src={resizeImage(option.image, 200)}
             alt={'투표 이미지'}
             className="absolute right-0 aspect-square h-full object-cover"

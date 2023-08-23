@@ -1,5 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import CheckIcon from '@/common/components/icons/CheckIcon';
 import { ImageFullScreen, Spacing } from '@/common/components/ui';
 import { useUser } from '@/features/user/queries';
@@ -64,7 +65,7 @@ export function VoteResult({ postId, options }: VoteResultProps) {
                 </span>
               </div>
               {option.image && (
-                <img
+                <LazyLoadImage
                   src={option.image}
                   alt={option.label}
                   className="absolute right-0 aspect-square h-full cursor-pointer object-cover"

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { ImageFullScreen } from '@/common/components/ui';
 import { formatText } from '@/common/utils/formatText';
 
@@ -55,7 +56,7 @@ export function PostDetailContent({
       </div>
       <div className="mt-[1.7rem]">
         {images && images.length === 1 && (
-          <img
+          <LazyLoadImage
             src={images[0]}
             alt={'게시글이미지'}
             className="mx-auto h-[29.3rem] w-[36rem] rounded-[0.5rem] object-cover"
@@ -70,7 +71,7 @@ export function PostDetailContent({
             }}
           >
             {images.map((image, index) => (
-              <img
+              <LazyLoadImage
                 key={image}
                 src={image}
                 alt={'게시글이미지'}

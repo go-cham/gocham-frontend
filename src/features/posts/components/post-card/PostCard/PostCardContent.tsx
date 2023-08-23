@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import ThumbnailLoading from '@/common/assets/images/thumbnail-loading.svg';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { ReactComponent as ThumbnailPlaceholder } from '@/common/assets/images/thumbnail-placeholder.svg';
 import { resizeImage } from '@/common/libs/cloudinary';
 import { formatText } from '@/common/utils/formatText';
 
@@ -14,11 +14,6 @@ export function PostCardContent({
   content,
   image,
 }: PostCardContentProps) {
-  const [imageLoading, setImageLoading] = useState(true);
-  const handleImageLoad = () => {
-    setImageLoading(false);
-  };
-
   return (
     <div className="relative flex h-[6.4rem] items-center">
       <div className="flex-1 space-y-[0.7rem] overflow-hidden">
@@ -27,21 +22,14 @@ export function PostCardContent({
           {formatText(content)}
         </p>
       </div>
-      {image &&
-        (!imageLoading ? (
-          <img
-            src={resizeImage(image, 200)}
-            alt={'게시글 이미지'}
-            className="ml-[1.7rem] aspect-square w-[6.4rem] rounded-[5px] border border-background-dividerLine-300 object-cover"
-          />
-        ) : (
-          <img
-            src={ThumbnailLoading}
-            alt={'게시글 이미지 로딩'}
-            onLoad={handleImageLoad}
-            className="ml-[1.7rem] aspect-square w-[6.4rem] rounded-[5px] border border-background-dividerLine-300 object-cover"
-          />
-        ))}
+      {image && (
+        <LazyLoadImage
+          src={resizeImage(image, 200)}
+          alt={'게시글 이미지'}
+          className="ml-[1.7rem] aspect-square w-[6.4rem] rounded-[5px] border border-background-dividerLine-300 object-cover"
+          placeholder={<ThumbnailPlaceholder />}
+        />
+      )}
     </div>
   );
 }
