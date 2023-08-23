@@ -51,6 +51,7 @@ export function useGetPosts({
       }),
     getNextPageParam: (lastPage) => lastPage.meta.nextId,
     suspense: true,
+    staleTime: 1000 * 60 * 5, // 5분
   });
   const { hasNextPage, fetchNextPage } = queryInfo;
 

@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MoreIcon from '@/common/components/icons/MoreIcon';
 import { Dropdown } from '@/common/components/ui';
 import { LoadingSpinner } from '@/common/components/ui/loading';
 import { Popup } from '@/common/components/ui/modal';
 import { ADMIN_EMAIL } from '@/common/constants/admin';
-import { POST_TYPE } from '@/common/constants/post-type';
 import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
-import { useDeletePost, useGetPosts } from '@/features/posts/queries';
+import { useDeletePost } from '@/features/posts/queries';
 import { Post } from '@/features/posts/types/post';
 import { getRemainingTime } from '@/features/posts/utils/get-remaining-time';
 import { UserProfile } from '@/features/user/components/UserProfile';
@@ -25,10 +24,8 @@ interface PostDetailHeaderProps {
 
 export function PostDetailHeader({ post }: PostDetailHeaderProps) {
   const { user } = useUser();
-  const { posts } = useGetPosts({ userId: user?.id, type: POST_TYPE.MY });
   const [showMore, setShowMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const params = useParams();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const { mutate: deletePost, error, isSuccess, isLoading } = useDeletePost();
   const navigate = useNavigate();
@@ -87,16 +84,13 @@ export function PostDetailHeader({ post }: PostDetailHeaderProps) {
   useEffect(() => {
     if (isSuccess) {
       alert('게시물이 정상적으로 삭제되었습니다.');
-      if (params.route === POST_TYPE.MY && posts?.length === 1) {
-        navigate('/user');
-      }
     }
     if (error) {
       alert('오류가 발생하였습니다.');
     }
 
     setShowMore(false);
-  }, [error, isSuccess, navigate, params.route, posts?.length]);
+  }, [error, isSuccess]);
 
   return (
     <div className="flex items-center justify-between">

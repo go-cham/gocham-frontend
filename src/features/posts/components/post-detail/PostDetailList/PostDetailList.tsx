@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import PostDetailSkeleton from '@/common/components/ui/skeleton/PostDetailSkeleton';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';
@@ -16,11 +16,17 @@ export function PostDetailList({ type }: PostDetailListProps) {
   const params = useParams();
   const initialPostId = params.id ? Number(params.id) : undefined;
   const { posts, ref } = useGetPosts({
-    initialPostId,
     userId: user?.id,
     type,
   });
   const scrollRef = useScrollRestoration<HTMLUListElement>('feed');
+
+  const firstIndex = posts?.findIndex((post) => post.id === initialPostId);
+  const postsFiltered = posts?.slice(firstIndex === -1 ? 0 : firstIndex);
+
+  if (type === POST_TYPE.MY && posts?.length === 0) {
+    return <Navigate to={'/user'} />;
+  }
 
   return (
     <ul
@@ -28,8 +34,11 @@ export function PostDetailList({ type }: PostDetailListProps) {
       style={{ scrollSnapType: 'y proximity', scrollSnapAlign: 'start' }}
       ref={scrollRef}
     >
-      {posts?.map((post, index) => (
-        <li key={post.id} ref={index === posts.length - 1 ? ref : undefined}>
+      {postsFiltered?.map((post, index) => (
+        <li
+          key={post.id}
+          ref={index === postsFiltered.length - 1 ? ref : undefined}
+        >
           <Suspense fallback={<PostDetailSkeleton />}>
             <PostDetailItem post={post} />
           </Suspense>
