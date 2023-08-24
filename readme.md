@@ -202,7 +202,7 @@ auth_check: "/auth-check", // HOC적용이 힘든 케이스에 사용할 검증 
 ┃ ┣ 📜logo.svg # 미사용
 ┃ ┣ 📜react-app-env.d.ts # 미사용
 ┃ ┣ 📜reportWebVitals.ts # 미사용
-┃ ┣ 📜my-sw.js # PWA를 위한 서비스 워커
+┃ ┣ 📜sw.ts # PWA를 위한 서비스 워커
 ┃ ┣ 📜serviceWorkerRegistration.ts # PWA를 위한 서비스 워커
 ┃ ┣ 📜setupTests.ts # 미사용
 ┃ ┗ 📜version.js # 버전 커밋

@@ -137,16 +137,4 @@
     <div id="root" class="h-full"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('/my-sw.js')
-        .then(function (registration) {
-          console.log(
-            'ServiceWorker registration successful with scope: ',
-            registration.active,
-          );
-        });
-    }
-  </script>
 </html>

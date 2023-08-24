@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
+import { Online } from 'react-detect-offline';
 import { useNavigate } from 'react-router-dom';
 import { TopAppBar } from '@/common/components/layout';
 import { DockedButton } from '@/common/components/ui/buttons';
@@ -104,54 +105,57 @@ export default function EditProfilePage() {
   return (
     <div className="flex h-full flex-col">
       <TopAppBar title={'프로필 편집'} />
-      <form
-        className="mt-[2.5rem] flex min-h-0 w-full flex-1 flex-col space-y-[2.9rem]"
-        onSubmit={handleEditProfile}
-      >
-        <div className="hide-scrollbar flex-1 space-y-[2.9rem] overflow-y-scroll px-[2.5rem]">
-          <NicknameAgeGenderForm
-            initialData={{
-              nickname: user.nickname,
-              gender: user.gender,
-              birthDate: user.birthDate || '',
-            }}
-            onChange={({ nickname, gender, birthDate }, isValid) => {
-              setFormData({
-                ...formData,
-                nickname,
-                gender,
-                birthDate,
-              });
-              setIsValid((prevIsValid) => ({
-                ...prevIsValid,
-                nicknameAgeGender: isValid,
-              }));
-            }}
-          />
-          <RegionJobCategoryForm
-            initialData={{
-              categoryIds: user.worryCategories?.map((cat) => cat.value) || [],
-              job: user.job,
-              residenceId: user.residence?.value || null,
-            }}
-            onChange={({ job, categoryIds, residenceId }, isValid) => {
-              setFormData({
-                ...formData,
-                job,
-                categoryIds,
-                residenceId,
-              });
-              setIsValid((prevIsValid) => ({
-                ...prevIsValid,
-                regionJobCategory: isValid,
-              }));
-            }}
-          />
-        </div>
-        <DockedButton disabled={!buttonEnabled} backgroundClassName="w-full">
-          변경 완료
-        </DockedButton>
-      </form>
+      <Online>
+        <form
+          className="mt-[2.5rem] flex min-h-0 w-full flex-1 flex-col space-y-[2.9rem]"
+          onSubmit={handleEditProfile}
+        >
+          <div className="hide-scrollbar flex-1 space-y-[2.9rem] overflow-y-scroll px-[2.5rem]">
+            <NicknameAgeGenderForm
+              initialData={{
+                nickname: user.nickname,
+                gender: user.gender,
+                birthDate: user.birthDate || '',
+              }}
+              onChange={({ nickname, gender, birthDate }, isValid) => {
+                setFormData({
+                  ...formData,
+                  nickname,
+                  gender,
+                  birthDate,
+                });
+                setIsValid((prevIsValid) => ({
+                  ...prevIsValid,
+                  nicknameAgeGender: isValid,
+                }));
+              }}
+            />
+            <RegionJobCategoryForm
+              initialData={{
+                categoryIds:
+                  user.worryCategories?.map((cat) => cat.value) || [],
+                job: user.job,
+                residenceId: user.residence?.value || null,
+              }}
+              onChange={({ job, categoryIds, residenceId }, isValid) => {
+                setFormData({
+                  ...formData,
+                  job,
+                  categoryIds,
+                  residenceId,
+                });
+                setIsValid((prevIsValid) => ({
+                  ...prevIsValid,
+                  regionJobCategory: isValid,
+                }));
+              }}
+            />
+          </div>
+          <DockedButton disabled={!buttonEnabled} backgroundClassName="w-full">
+            변경 완료
+          </DockedButton>
+        </form>
+      </Online>
     </div>
   );
 }

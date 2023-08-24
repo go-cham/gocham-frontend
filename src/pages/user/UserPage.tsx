@@ -1,6 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { Suspense } from 'react';
+import { Online } from 'react-detect-offline';
 import { BottomAppBar, PageWrapper } from '@/common/components/layout';
 import { Divider, Spacing } from '@/common/components/ui';
 import { POST_TYPE } from '@/common/constants/post-type';
@@ -41,34 +42,36 @@ export default function UserPage() {
     <PageWrapper>
       <UserPageHeader />
       <Divider className={'my-[1.9rem]'} />
-      <main className={'flex h-full min-h-0 w-full flex-col'}>
-        <Suspense fallback={'fuck'}>
-          <PostTypeTabList
-            selectedPostType={selectedPostType}
-            onSelect={handlePostTypeSelect}
-          />
-        </Suspense>
-        <Spacing size={'2.1rem'} />
-        <div
-          id={selectedPostType}
-          key={selectedPostType}
-          ref={(el) =>
-            assignMultipleRefs(el, [
-              scrollToTopRef,
-              pullToRefreshRef,
-              selectedPostType === POST_TYPE.MY
-                ? myPostsRef
-                : participatedPostsRef,
-            ])
-          }
-          className={'hide-scrollbar h-full overflow-y-scroll px-[2.5rem]'}
-        >
-          <Suspense fallback={<PostCardListSkeleton />}>
-            <PostCardList type={selectedPostType} />
-            <Spacing size={'12rem'} />
+      <Online>
+        <main className={'flex h-full min-h-0 w-full flex-col'}>
+          <Suspense fallback={'fuck'}>
+            <PostTypeTabList
+              selectedPostType={selectedPostType}
+              onSelect={handlePostTypeSelect}
+            />
           </Suspense>
-        </div>
-      </main>
+          <Spacing size={'2.1rem'} />
+          <div
+            id={selectedPostType}
+            key={selectedPostType}
+            ref={(el) =>
+              assignMultipleRefs(el, [
+                scrollToTopRef,
+                pullToRefreshRef,
+                selectedPostType === POST_TYPE.MY
+                  ? myPostsRef
+                  : participatedPostsRef,
+              ])
+            }
+            className={'hide-scrollbar h-full overflow-y-scroll px-[2.5rem]'}
+          >
+            <Suspense fallback={<PostCardListSkeleton />}>
+              <PostCardList type={selectedPostType} />
+              <Spacing size={'12rem'} />
+            </Suspense>
+          </div>
+        </main>
+      </Online>
       <BottomAppBar />
     </PageWrapper>
   );
