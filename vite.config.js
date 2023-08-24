@@ -24,7 +24,7 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,otf}'],
       },
       srcDir: 'src',
-      filename: 'sw.ts',
+      filename: 'my-sw.ts',
       manifestFilename: 'manifest.json',
     }),
   ],
