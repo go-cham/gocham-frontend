@@ -8,6 +8,7 @@ export function useUpdate() {
   const { updateServiceWorker } = useRegisterSW({
     onRegistered: (r) => {
       if (!r) return;
+
       r.update();
       setInterval(() => {
         r.update();
