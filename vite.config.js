@@ -19,6 +19,7 @@ export default defineConfig({
     svgr(),
     VitePWA({
       registerType: 'prompt',
+      injectRegister: 'script',
       strategies: 'injectManifest',
       injectManifest: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2,otf}'],

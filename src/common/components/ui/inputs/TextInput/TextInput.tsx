@@ -41,7 +41,6 @@ export function TextInput({
   };
 
   const handleReset = () => {
-    console.log('here');
     setValue('');
     inputRef.current?.focus();
     onChange && onChange('');
