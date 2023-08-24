@@ -30,9 +30,9 @@ export default function HomePage() {
 
   return (
     <PageWrapper>
-      {/*<Suspense fallback={null}>*/}
-      {/*  <HomeHeader onClickLogo={scrollToTop} />*/}
-      {/*</Suspense>*/}
+      <Suspense fallback={null}>
+        <HomeHeader onClickLogo={scrollToTop} />
+      </Suspense>
       <main
         ref={(el) =>
           assignMultipleRefs(el, [
