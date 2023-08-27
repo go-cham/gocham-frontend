@@ -15,10 +15,12 @@ export function PostTypeTabList({
   const { totalCount: myPostsCount } = useGetPosts({
     userId: user?.id,
     type: POST_TYPE.MY,
+    suspense: false,
   });
   const { totalCount: participatedPostsCount } = useGetPosts({
     userId: user?.id,
     type: POST_TYPE.PARTICIPATED,
+    suspense: false,
   });
 
   const handleTabSelect = (postType: POST_TYPE) => {

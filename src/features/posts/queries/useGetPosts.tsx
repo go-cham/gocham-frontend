@@ -35,10 +35,12 @@ export function useGetPosts({
   initialPostId,
   userId,
   type,
+  suspense = true,
 }: {
   initialPostId?: number;
   userId?: number;
   type: POST_TYPE;
+  suspense?: boolean;
 }) {
   const { data, ...queryInfo } = useInfiniteQuery({
     queryKey: ['posts', { initialPostId, userId, type }],
@@ -50,7 +52,7 @@ export function useGetPosts({
           type === POST_TYPE.PARTICIPATED ? userId : undefined,
       }),
     getNextPageParam: (lastPage) => lastPage.meta.nextId,
-    suspense: true,
+    suspense,
     staleTime: 1000 * 60 * 5, // 5분
   });
   const { hasNextPage, fetchNextPage } = queryInfo;

@@ -42,12 +42,10 @@ export default function UserPage() {
       <UserPageHeader />
       <Divider className={'my-[1.9rem]'} />
       <main className={'flex h-full min-h-0 w-full flex-col'}>
-        <Suspense fallback={'fuck'}>
-          <PostTypeTabList
-            selectedPostType={selectedPostType}
-            onSelect={handlePostTypeSelect}
-          />
-        </Suspense>
+        <PostTypeTabList
+          selectedPostType={selectedPostType}
+          onSelect={handlePostTypeSelect}
+        />
         <Spacing size={'2.1rem'} />
         <div
           id={selectedPostType}
