@@ -9,7 +9,7 @@ import { useGetPost } from '@/features/posts/queries';
 import { useReportPost } from '@/features/report/queries';
 import { useUser } from '@/features/user/queries/useUser';
 
-export default function FeedPage() {
+export default function FeedReportPage() {
   const { id } = useParams();
   const { user } = useUser();
   const { data: post } = useGetPost(Number(id));
