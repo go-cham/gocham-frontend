@@ -1,9 +1,7 @@
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
-import { Offline, Online } from 'react-detect-offline';
 import { useNavigate } from 'react-router-dom';
 import { PageWrapper, TopAppBar } from '@/common/components/layout';
-import { AlertOffline } from '@/common/components/system';
 import { Popup } from '@/common/components/ui/modal';
 import { uploadImage } from '@/common/libs/cloudinary';
 import { scrollRestorationAtom } from '@/common/states/scroll-restoration';
@@ -117,15 +115,10 @@ export default function WritePage() {
   return (
     <PageWrapper>
       <TopAppBar title="글 작성" navigateAction={handleGoBack} />
-      <Online>
-        <div className="min-h-0 flex-1">
-          <PostForm
-            mode="add"
-            onSubmit={handleUpload}
-            onChange={handleChange}
-          />
-        </div>
-      </Online>
+      <div className="min-h-0 flex-1">
+        <PostForm mode="add" onSubmit={handleUpload} onChange={handleChange} />
+      </div>
+
       <Popup
         isOpen={modalOpen}
         text={`글 작성을 취소하겠습니까?`}

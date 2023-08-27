@@ -1,6 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { Suspense } from 'react';
-import { Online } from 'react-detect-offline';
 import { BottomAppBar, PageWrapper } from '@/common/components/layout';
 import { Spacing } from '@/common/components/ui';
 import { POST_TYPE } from '@/common/constants/post-type';
@@ -45,15 +44,13 @@ export default function HomePage() {
       >
         <Spacing size={'10.3rem'} />
         <HomeBanner />
-        <Online>
-          <div className={'mx-[2.5rem]'}>
-            <Spacing size={'2.1rem'} />
-            <Suspense fallback={<PostCardListSkeleton />}>
-              <PostCardList type={POST_TYPE.ALL} />
-            </Suspense>
-            <Spacing size={'12rem'} />
-          </div>
-        </Online>
+        <div className={'mx-[2.5rem]'}>
+          <Spacing size={'2.1rem'} />
+          <Suspense fallback={<PostCardListSkeleton />}>
+            <PostCardList type={POST_TYPE.ALL} />
+          </Suspense>
+          <Spacing size={'12rem'} />
+        </div>
       </main>
       <BottomAppBar onScrollToTop={scrollToTop} />
     </PageWrapper>
