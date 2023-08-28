@@ -1,1 +1,1 @@
-export { TermCheckbox } from './TermCheckbox';
+export { default } from './TermCheckbox';

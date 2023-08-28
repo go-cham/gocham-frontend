@@ -1,1 +1,1 @@
-export { PostDetailFooter } from './PostDetailFooter';
+export { default } from './PostDetailFooter';

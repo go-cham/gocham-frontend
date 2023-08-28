@@ -8,7 +8,7 @@ interface DropdownProps {
   className?: string;
 }
 
-export function Dropdown({
+export default function Dropdown({
   options,
   highlight,
   onSelect,

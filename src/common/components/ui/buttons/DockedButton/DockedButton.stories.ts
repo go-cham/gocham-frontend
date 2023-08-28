@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { DockedButton } from './DockedButton';
+import DockedButton from '@/common/components/ui/buttons/DockedButton';
 
 const meta = {
   title: 'UI/Buttons/DockedButton',

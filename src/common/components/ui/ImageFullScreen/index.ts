@@ -1,1 +1,1 @@
-export { ImageFullScreen } from './ImageFullScreen';
+export { default } from './ImageFullScreen';

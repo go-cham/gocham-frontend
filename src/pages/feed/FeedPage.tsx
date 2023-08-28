@@ -1,12 +1,11 @@
 import { useSetAtom } from 'jotai';
 import { Suspense, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { PageWrapper, TopAppBar } from '@/common/components/layout';
+import PageWrapper from '@/common/components/layout/PageWrapper';
+import TopAppBar from '@/common/components/layout/TopAppBar';
 import { POST_TYPE } from '@/common/constants/post-type';
-import {
-  PostDetailList,
-  PostDetailListSkeleton,
-} from '@/features/posts/components/post-detail';
+import PostDetailList from '@/features/posts/components/post-detail/PostDetailList';
+import PostDetailListSkeleton from '@/features/posts/components/post-detail/PostDetailListSkeleton';
 import { selectedVoteOptionIdAtom } from '@/features/vote/states/selected-vote-option';
 
 export default function FeedPage() {

@@ -1,1 +1,1 @@
-export { NoPost } from './NoPost';
+export { default } from './NoPost';

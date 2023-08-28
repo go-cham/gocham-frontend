@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
+import UserProfile from '@/features/user/components/UserProfile';
 import { render, screen } from '@/test/test-utils';
-import { UserProfile } from './UserProfile';
 
 it('나이대와 닉네임 표시', () => {
   render(<UserProfile nickname={'테스트닉네임'} age={24} isAdmin={false} />);

@@ -2,7 +2,7 @@ interface FrameProps {
   className: string;
 }
 
-export function PhoneFrame({ className }: FrameProps) {
+export default function PhoneFrame({ className }: FrameProps) {
   return (
     <svg
       width="606"

@@ -1,7 +1,7 @@
 import { Navigate, Routes as ReactRouterRoutes, Route } from 'react-router-dom';
-import { useRouteChangeTracker } from '@/common/hooks/useRouteChangeTracker';
-import { ProtectedRoute } from '@/features/auth/components/ProtectedRoute';
-import { useUser } from '@/features/user/queries';
+import useRouteChangeTracker from '@/common/hooks/useRouteChangeTracker';
+import ProtectedRoute from '@/features/auth/components/ProtectedRoute';
+import useUser from '@/features/user/queries/useUser';
 import CommentReportPage from '@/pages/comment-report/CommentReportPage';
 import CommentPage from '@/pages/comment/CommentPage';
 import EditPostPage from '@/pages/edit-post/EditPostPage';

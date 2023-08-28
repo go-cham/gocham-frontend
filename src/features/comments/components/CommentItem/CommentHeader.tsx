@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Popup } from '@/common/components/ui/modal';
+import Popup from '@/common/components/ui/modal/Popup';
 import { ADMIN_EMAIL } from '@/common/constants/admin';
-import { useDeleteComment } from '@/features/comments/queries';
-import { UserProfile } from '@/features/user/components/UserProfile';
+import useDeleteComment from '@/features/comments/queries/useDeleteComment';
+import UserProfile from '@/features/user/components/UserProfile';
 
 interface CommentHeaderProps {
   email: string;

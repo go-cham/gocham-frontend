@@ -1,15 +1,13 @@
-import { useMemo } from 'react';
-import { DockedButton, EditButton } from '@/common/components/ui/buttons';
-import { Select } from '@/common/components/ui/selections';
+import DockedButton from '@/common/components/ui/buttons/DockedButton';
+import EditButton from '@/common/components/ui/buttons/EditButton';
+import Select from '@/common/components/ui/selections/Select';
 import { CATEGORY_OPTIONS, DEADLINE_OPTIONS } from '@/common/constants/options';
-import { ImagePreview } from '@/features/posts/components/post-form/ImagePreview';
-import { PostContentInput } from '@/features/posts/components/post-form/PostContentInput';
-import { PostTitleInput } from '@/features/posts/components/post-form/PostTitleInput';
-import { PostVoteInput } from '@/features/posts/components/post-form/PostVoteInput';
-import {
-  MAX_NUM_VOTE_OPTIONS,
-  usePostForm,
-} from '@/features/posts/hooks/usePostForm';
+import ImagePreview from '@/features/posts/components/post-form/ImagePreview';
+import PostContentInput from '@/features/posts/components/post-form/PostContentInput';
+import PostTitleInput from '@/features/posts/components/post-form/PostTitleInput';
+import PostVoteInput from '@/features/posts/components/post-form/PostVoteInput';
+import { MAX_NUM_VOTE_OPTIONS } from '@/features/posts/hooks/usePostForm';
+import usePostForm from '@/features/posts/hooks/usePostForm';
 import { PostFormData } from '@/features/posts/types/post-form';
 
 interface PostFormProps {
@@ -19,7 +17,7 @@ interface PostFormProps {
   initialData?: PostFormData;
 }
 
-export function PostForm({
+export default function PostForm({
   mode,
   onSubmit,
   onChange,

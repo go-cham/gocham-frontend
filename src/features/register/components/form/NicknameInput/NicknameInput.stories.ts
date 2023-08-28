@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { NicknameInput } from './NicknameInput';
+import NicknameInput from '@/features/register/components/form/NicknameInput';
 
 const meta: Meta<typeof NicknameInput> = {
   title: 'Register/inputs/NicknameInput',

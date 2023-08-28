@@ -1,8 +1,8 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { Navigate, useSearchParams } from 'react-router-dom';
-import { useKakaoLogin } from '@/features/auth/queries';
-import { useUser } from '@/features/user/queries/useUser';
+import useKakaoLogin from '@/features/auth/queries/useKakaoLogin';
+import useUser from '@/features/user/queries/useUser';
 
 export default function LoginOauthKakaoPage() {
   const queryClient = useQueryClient();

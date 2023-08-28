@@ -1,4 +1,4 @@
-import { TextInput } from '@/common/components/ui/inputs';
+import TextInput from '@/common/components/ui/inputs/TextInput';
 
 interface JobInputProps {
   className?: string;
@@ -8,7 +8,7 @@ interface JobInputProps {
   defaultValue?: string;
 }
 
-export function JobInput({
+export default function JobInput({
   className,
   successMessage,
   errorMessage,

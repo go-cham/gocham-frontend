@@ -1,1 +1,1 @@
-export { PostVoteInput } from './PostVoteInput';
+export { default } from './PostVoteInput';

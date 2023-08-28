@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { useLocation } from 'react-router-dom';
 
-export function useRouteChangeTracker() {
+export default function useRouteChangeTracker() {
   const location = useLocation();
   const [initialized, setInitialized] = useState(false);
 

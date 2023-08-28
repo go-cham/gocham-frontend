@@ -1,1 +1,1 @@
-export { PostDetailListSkeleton } from './PostDetailListSkeleton';
+export { default } from './PostDetailListSkeleton';

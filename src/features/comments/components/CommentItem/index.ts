@@ -1,1 +1,1 @@
-export { CommentItem } from './CommentItem';
+export { default } from './CommentItem';

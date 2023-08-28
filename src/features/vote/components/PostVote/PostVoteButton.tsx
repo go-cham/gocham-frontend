@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { twMerge } from 'tailwind-merge';
 import CheckIcon from '@/common/components/icons/CheckIcon';
-import { Snackbar } from '@/common/components/ui/modal';
+import Snackbar from '@/common/components/ui/modal/Snackbar';
 import { resizeImage } from '@/common/libs/cloudinary';
-import { useGetUsersChoices } from '@/features/vote/queries';
+import useGetUsersChoices from '@/features/vote/queries/useGetUsersChoices';
 import { selectedVoteOptionIdAtom } from '@/features/vote/states/selected-vote-option';
 import { customColors } from '@/styles/colors';
 
@@ -15,7 +15,7 @@ interface PostVoteButtonProps {
   onClickImage: (image: string | null) => void;
 }
 
-export function PostVoteButton({
+export default function PostVoteButton({
   postId,
   option,
   onClickImage,

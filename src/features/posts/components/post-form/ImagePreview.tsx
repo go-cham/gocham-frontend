@@ -5,7 +5,7 @@ interface ImagePreviewProps {
   onDelete: (index: number) => () => void;
 }
 
-export function ImagePreview({ images, onDelete }: ImagePreviewProps) {
+export default function ImagePreview({ images, onDelete }: ImagePreviewProps) {
   return (
     <div className="mt-[1.3rem] flex w-full space-x-[2.1rem]">
       {images.map((image, index) => (

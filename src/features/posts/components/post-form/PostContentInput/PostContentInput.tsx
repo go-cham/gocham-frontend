@@ -11,7 +11,7 @@ interface PostContentInputProps {
   defaultValue?: string;
 }
 
-export function PostContentInput({
+export default function PostContentInput({
   id,
   onChange,
   errorMessage,

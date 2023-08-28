@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import DownIcon from '@/common/components/icons/DownIcon';
-import { Dropdown } from '@/common/components/ui';
+import Dropdown from '@/common/components/ui/Dropdown';
 
 interface SelectProps {
   id: string;
@@ -17,7 +17,7 @@ interface SelectProps {
   highlight?: boolean;
 }
 
-export function Select({
+export default function Select({
   id,
   label,
   placeholder,

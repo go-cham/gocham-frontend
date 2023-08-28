@@ -1,1 +1,1 @@
-export { PostUploadSuccess } from './PostUploadSuccess';
+export { default } from './PostUploadSuccess';

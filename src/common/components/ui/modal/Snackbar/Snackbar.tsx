@@ -8,7 +8,7 @@ interface SnackbarProps {
   className?: string;
 }
 
-export function Snackbar({
+export default function Snackbar({
   text,
   children,
   actionText,

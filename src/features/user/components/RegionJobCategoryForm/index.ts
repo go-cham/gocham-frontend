@@ -1,1 +1,1 @@
-export { RegionJobCategoryForm } from './RegionJobCategoryForm';
+export { default } from './RegionJobCategoryForm';

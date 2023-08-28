@@ -10,7 +10,7 @@ async function acceptTerms(data: AcceptTermsRequest) {
   return res.data;
 }
 
-export function useAcceptTerms() {
+export default function useAcceptTerms() {
   return useMutation({
     mutationFn: acceptTerms,
   });

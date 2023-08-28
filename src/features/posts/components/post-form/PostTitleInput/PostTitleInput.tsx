@@ -1,7 +1,7 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import DeleteIcon from '@/common/components/icons/DeleteIcon';
 import ImageFileIcon from '@/common/components/icons/ImageFileIcon';
-import { InputWrapper } from '@/common/components/ui/inputs';
+import InputWrapper from '@/common/components/ui/inputs/InputWrapper';
 
 interface PostTitleInputProps {
   id?: string;
@@ -14,7 +14,7 @@ interface PostTitleInputProps {
   defaultValue?: string;
 }
 
-export function PostTitleInput({
+export default function PostTitleInput({
   id,
   errorMessage,
   onUploadImage,

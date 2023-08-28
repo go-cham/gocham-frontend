@@ -1,17 +1,18 @@
 import { useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PageWrapper, TopAppBar } from '@/common/components/layout';
-import { Popup } from '@/common/components/ui/modal';
+import PageWrapper from '@/common/components/layout/PageWrapper';
+import TopAppBar from '@/common/components/layout/TopAppBar';
+import Popup from '@/common/components/ui/modal/Popup';
 import { uploadImage } from '@/common/libs/cloudinary';
 import { scrollRestorationAtom } from '@/common/states/scroll-restoration';
 import getFutureDateTime from '@/common/utils/getFutureDateTime';
-import { PostForm } from '@/features/posts/components/post-form/PostForm';
-import { useAddPost } from '@/features/posts/queries';
+import PostForm from '@/features/posts/components/post-form/PostForm';
+import useAddPost from '@/features/posts/queries/useAddPost';
 import { PostFormData } from '@/features/posts/types/post-form';
-import { useUser } from '@/features/user/queries';
-import { PostUploadSuccess } from '@/pages/write/components/PostUploadSuccess';
-import { PostUploading } from '@/pages/write/components/PostUploading';
+import useUser from '@/features/user/queries/useUser';
+import PostUploadSuccess from '@/pages/write/components/PostUploadSuccess';
+import PostUploading from '@/pages/write/components/PostUploading';
 
 export default function WritePage() {
   const [modalOpen, setModalOpen] = useState(false);

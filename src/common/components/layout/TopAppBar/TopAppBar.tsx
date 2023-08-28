@@ -7,7 +7,7 @@ interface TopAppBarProps {
   navigateAction?: () => void;
 }
 
-export function TopAppBar({
+export default function TopAppBar({
   title,
   navigateRoute,
   navigateAction,

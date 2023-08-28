@@ -1,4 +1,4 @@
-import { Button } from '@/common/components/ui/buttons';
+import Button from '@/common/components/ui/buttons/Button';
 
 interface ModalProps {
   isOpen: boolean;
@@ -11,7 +11,7 @@ interface ModalProps {
   useCancelButton?: boolean;
 }
 
-export function Popup({
+export default function Popup({
   isOpen,
   text,
   subText,

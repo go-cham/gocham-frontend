@@ -10,7 +10,7 @@ async function editPost(data: EditPostRequest) {
   return res.data;
 }
 
-export function useEditPost() {
+export default function useEditPost() {
   const queryClient = useQueryClient();
 
   return useMutation({

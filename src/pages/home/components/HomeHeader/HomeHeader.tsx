@@ -1,6 +1,6 @@
 import { ONE_DAY_IN_MILLISECOND } from '@/common/constants/time';
 import { Z_INDEX } from '@/common/constants/z-index';
-import { useUser } from '@/features/user/queries';
+import useUser from '@/features/user/queries/useUser';
 import HeaderLogo from './HeaderLogo';
 
 interface HomeHeaderProps {

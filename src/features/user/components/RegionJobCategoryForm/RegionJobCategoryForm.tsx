@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Chip } from '@/common/components/ui/buttons';
-import { Select } from '@/common/components/ui/selections';
+import Chip from '@/common/components/ui/buttons/Chip';
+import Select from '@/common/components/ui/selections/Select';
 import {
   CATEGORY_OPTIONS,
   RESIDENCE_OPTIONS,
 } from '@/common/constants/options';
 import { validateJob } from '@/common/utils/validations/job';
-import { JobInput } from '@/features/register/components/form';
+import JobInput from '@/features/register/components/form/JobInput';
 
 const MAX_CATEGORIES_SELECT = 4;
 
@@ -21,7 +21,7 @@ interface RegionJobCategoryFormProps {
   onChange: (data: FormData, isValid: boolean) => void;
 }
 
-export function RegionJobCategoryForm({
+export default function RegionJobCategoryForm({
   initialData,
   onChange,
 }: RegionJobCategoryFormProps) {

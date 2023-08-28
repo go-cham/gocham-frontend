@@ -1,1 +1,1 @@
-export { NicknameAgeGenderForm } from './NicknameAgeGenderForm';
+export { default } from './NicknameAgeGenderForm';

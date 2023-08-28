@@ -8,7 +8,7 @@ async function unregister(data: { userId: number; reason: string }) {
   return res.data;
 }
 
-export function useUnregister() {
+export default function useUnregister() {
   return useMutation({
     mutationFn: unregister,
   });

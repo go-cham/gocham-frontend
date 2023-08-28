@@ -1,1 +1,1 @@
-export { PostVote } from './PostVote';
+export { default } from './PostVote';

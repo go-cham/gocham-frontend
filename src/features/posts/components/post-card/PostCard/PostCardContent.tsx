@@ -9,7 +9,7 @@ interface PostCardContentProps {
   image: string | null;
 }
 
-export function PostCardContent({
+export default function PostCardContent({
   title,
   content,
   image,

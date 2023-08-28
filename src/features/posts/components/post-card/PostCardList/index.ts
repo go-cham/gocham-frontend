@@ -1,1 +1,1 @@
-export { PostCardList } from './PostCardList';
+export { default } from './PostCardList';

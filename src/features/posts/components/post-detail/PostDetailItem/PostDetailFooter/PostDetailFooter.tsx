@@ -3,14 +3,14 @@ import { isMobile } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
 import MessageIcon from '@/common/components/icons/MessageIcon';
 import ShareIcon from '@/common/components/icons/ShareIcon';
-import { Snackbar } from '@/common/components/ui/modal';
+import Snackbar from '@/common/components/ui/modal/Snackbar';
 import { Post } from '@/features/posts/types/post';
 
 interface PostDetailFooterProps {
   post: Post;
 }
 
-export function PostDetailFooter({ post }: PostDetailFooterProps) {
+export default function PostDetailFooter({ post }: PostDetailFooterProps) {
   const [showCopySnackbar, setShowCopySnackbar] = useState(false);
   const navigate = useNavigate();
 

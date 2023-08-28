@@ -1,10 +1,10 @@
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
-import { PageWrapper } from '@/common/components/layout';
-import { Button } from '@/common/components/ui/buttons';
+import PageWrapper from '@/common/components/layout/PageWrapper';
+import Button from '@/common/components/ui/buttons/Button';
 import { ReactComponent as ErrorPageLogo } from './error-logo.svg';
 
-export function GlobalErrorBoundary({
+export default function GlobalErrorBoundary({
   children,
 }: {
   children: React.ReactNode;

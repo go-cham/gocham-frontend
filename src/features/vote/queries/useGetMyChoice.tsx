@@ -15,7 +15,7 @@ async function getMyChoice(postId?: number, userId?: number) {
   return res.data;
 }
 
-export function useGetMyChoice({
+export default function useGetMyChoice({
   postId,
   userId,
 }: {

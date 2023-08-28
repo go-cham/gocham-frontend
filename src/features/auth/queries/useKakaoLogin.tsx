@@ -14,7 +14,7 @@ async function kakaoLogin(code: string | null) {
   return res.data;
 }
 
-export function useKakaoLogin(code: string | null) {
+export default function useKakaoLogin(code: string | null) {
   return useQuery({
     queryKey: ['kakaoLogin', code],
     queryFn: () => kakaoLogin(code),

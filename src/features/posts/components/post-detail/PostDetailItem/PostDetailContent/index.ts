@@ -1,1 +1,1 @@
-export { PostDetailContent } from './PostDetailContent';
+export { default } from './PostDetailContent';

@@ -1,1 +1,1 @@
-export { PostUploading } from './PostUploading';
+export { default } from './PostUploading';

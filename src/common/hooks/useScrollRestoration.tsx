@@ -3,7 +3,9 @@ import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { scrollRestorationAtom } from '@/common/states/scroll-restoration';
 
-export function useScrollRestoration<U extends HTMLElement>(key: string) {
+export default function useScrollRestoration<U extends HTMLElement>(
+  key: string,
+) {
   const [scrollRestoration, setScrollRestoration] = useAtom(
     scrollRestorationAtom,
   );

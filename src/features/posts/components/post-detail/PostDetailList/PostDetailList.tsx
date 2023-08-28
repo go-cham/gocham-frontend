@@ -2,16 +2,16 @@ import { Suspense } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import PostDetailSkeleton from '@/common/components/ui/skeleton/PostDetailSkeleton';
 import { POST_TYPE } from '@/common/constants/post-type';
-import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';
-import { PostDetailItem } from '@/features/posts/components/post-detail';
-import { useGetPosts } from '@/features/posts/queries';
-import { useUser } from '@/features/user/queries/useUser';
+import useScrollRestoration from '@/common/hooks/useScrollRestoration';
+import PostDetailItem from '@/features/posts/components/post-detail/PostDetailItem';
+import useGetPosts from '@/features/posts/queries/useGetPosts';
+import useUser from '@/features/user/queries/useUser';
 
 interface PostDetailListProps {
   type: POST_TYPE;
 }
 
-export function PostDetailList({ type }: PostDetailListProps) {
+export default function PostDetailList({ type }: PostDetailListProps) {
   const { user } = useUser();
   const params = useParams();
   const initialPostId = params.id ? Number(params.id) : undefined;

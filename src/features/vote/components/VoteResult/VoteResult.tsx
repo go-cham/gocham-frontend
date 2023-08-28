@@ -2,10 +2,12 @@ import { useAtomValue } from 'jotai';
 import { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import CheckIcon from '@/common/components/icons/CheckIcon';
-import { ImageFullScreen, Spacing } from '@/common/components/ui';
-import { useUser } from '@/features/user/queries';
+import ImageFullScreen from '@/common/components/ui/ImageFullScreen';
+import Spacing from '@/common/components/ui/Spacing';
+import useUser from '@/features/user/queries/useUser';
 import { PercentageBar } from '@/features/vote/components/VoteResult/PercentageBar';
-import { useGetMyChoice, useGetUsersChoices } from '@/features/vote/queries';
+import useGetMyChoice from '@/features/vote/queries/useGetMyChoice';
+import useGetUsersChoices from '@/features/vote/queries/useGetUsersChoices';
 import { voteAnimationIdAtom } from '@/features/vote/states/vote-animation';
 
 interface VoteResultProps {
@@ -13,7 +15,7 @@ interface VoteResultProps {
   postId: number;
 }
 
-export function VoteResult({ postId, options }: VoteResultProps) {
+export default function VoteResult({ postId, options }: VoteResultProps) {
   const { user } = useUser();
   const { data: usersChoices } = useGetUsersChoices(postId);
   const voteAnimationId = useAtomValue(voteAnimationIdAtom);

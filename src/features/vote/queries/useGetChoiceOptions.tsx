@@ -14,7 +14,7 @@ async function getChoiceOptions(postId: number) {
   return res.data;
 }
 
-export function useGetChoiceOptions(postId: number) {
+export default function useGetChoiceOptions(postId: number) {
   return useSuspenseQuery({
     queryKey: ['choiceOptions', postId],
     queryFn: () => getChoiceOptions(postId),

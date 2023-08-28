@@ -5,7 +5,7 @@ interface PageWrapperProps {
   className?: string;
 }
 
-export function PageWrapper({ children, className }: PageWrapperProps) {
+export default function PageWrapper({ children, className }: PageWrapperProps) {
   return (
     <div className={twMerge('flex h-full flex-col', className)}>{children}</div>
   );

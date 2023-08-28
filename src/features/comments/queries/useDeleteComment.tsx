@@ -9,7 +9,7 @@ async function deleteComment(id: number) {
   return res.data;
 }
 
-export function useDeleteComment() {
+export default function useDeleteComment() {
   const queryClient = useQueryClient();
 
   return useMutation({

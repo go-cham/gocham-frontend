@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { ImageFullScreen } from '@/common/components/ui';
+import ImageFullScreen from '@/common/components/ui/ImageFullScreen';
 import { formatText } from '@/common/utils/formatText';
 
-export function PostDetailContent({
+export default function PostDetailContent({
   title,
   content,
   images,

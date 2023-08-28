@@ -8,7 +8,7 @@ interface ChipProps {
   className?: string;
 }
 
-export function Chip({
+export default function Chip({
   label,
   variant = 'default',
   onDelete,

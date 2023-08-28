@@ -5,7 +5,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'line';
 }
 
-export function Button({
+export default function Button({
   variant = 'primary',
   className,
   children,

@@ -10,7 +10,7 @@ async function getUser() {
   return res.data;
 }
 
-export function useUser() {
+export default function useUser() {
   const { data, isLoading, isError } = useQuery({
     // @ts-ignore
     queryKey: ['user'],

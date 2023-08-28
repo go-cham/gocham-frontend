@@ -2,7 +2,7 @@ import { useAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { commentStateAtom } from '@/features/comments/states/comment';
-import { useUser } from '@/features/user/queries/useUser';
+import useUser from '@/features/user/queries/useUser';
 import CommentContent from './CommentContent';
 import CommentFooter from './CommentFooter';
 import CommentHeader from './CommentHeader';
@@ -25,7 +25,7 @@ interface CommentItemProps {
   scrollEnabled: boolean;
 }
 
-export function CommentItem({
+export default function CommentItem({
   user,
   mentionNickname,
   isWriter,

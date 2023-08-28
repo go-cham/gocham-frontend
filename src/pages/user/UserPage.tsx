@@ -1,17 +1,19 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import { Suspense } from 'react';
-import { BottomAppBar, PageWrapper } from '@/common/components/layout';
-import { Divider, Spacing } from '@/common/components/ui';
+import BottomAppBar from '@/common/components/layout/BottomAppBar';
+import PageWrapper from '@/common/components/layout/PageWrapper';
+import Divider from '@/common/components/ui/Divider';
+import Spacing from '@/common/components/ui/Spacing';
 import { POST_TYPE } from '@/common/constants/post-type';
-import { usePullToRefresh } from '@/common/hooks/usePullToRefresh';
-import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';
-import { useScrollToTop } from '@/common/hooks/useScrollToTop';
+import usePullToRefresh from '@/common/hooks/usePullToRefresh';
+import useScrollRestoration from '@/common/hooks/useScrollRestoration';
+import useScrollToTop from '@/common/hooks/useScrollToTop';
 import { assignMultipleRefs } from '@/common/utils/dom/assign-multiple-refs';
-import { PostCardList } from '@/features/posts/components/post-card/PostCardList';
-import { PostCardListSkeleton } from '@/features/posts/components/post-card/PostCardListSkeleton';
+import PostCardList from '@/features/posts/components/post-card/PostCardList';
+import PostCardListSkeleton from '@/features/posts/components/post-card/PostCardListSkeleton';
 import { selectedPostTypeAtom } from '@/features/posts/states/selected-post-type';
-import { PostTypeTabList } from '@/features/user/components/PostTypeTabList';
+import PostTypeTabList from '@/features/user/components/PostTypeTabList';
 import { UserPageHeader } from '@/pages/user/components/UserPageHeader';
 
 export default function UserPage() {

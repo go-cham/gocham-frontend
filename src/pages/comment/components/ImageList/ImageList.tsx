@@ -3,7 +3,7 @@ interface ImageListProps {
   onClick: (index: number) => void;
 }
 
-export function ImageList({ images, onClick }: ImageListProps) {
+export default function ImageList({ images, onClick }: ImageListProps) {
   return (
     <div className="flex space-x-[1.3rem] px-[2.5rem]">
       {images.map((image, index) => (

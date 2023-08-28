@@ -2,12 +2,12 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackIcon from '@/common/components/icons/BackIcon';
-import { useAcceptTerms } from '@/features/auth/queries';
+import useAcceptTerms from '@/features/auth/queries/useAcceptTerms';
 import { registerDataAtom } from '@/features/register/states/register-data';
 import CollectNicknameAgeGender from '@/features/user/components/CollectNicknameAgeGender/CollectNicknameAgeGender';
 import CollectRegionJobCategory from '@/features/user/components/CollectRegionJobCategory/CollectRegionJobCategory';
-import { useEditProfile } from '@/features/user/queries/useEditProfile';
-import { useUser } from '@/features/user/queries/useUser';
+import useEditProfile from '@/features/user/queries/useEditProfile';
+import useUser from '@/features/user/queries/useUser';
 
 export default function CollectInformationPage() {
   const navigate = useNavigate();

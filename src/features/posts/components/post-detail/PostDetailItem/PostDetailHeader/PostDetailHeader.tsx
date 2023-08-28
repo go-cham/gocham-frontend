@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MoreIcon from '@/common/components/icons/MoreIcon';
-import { Dropdown } from '@/common/components/ui';
-import { LoadingSpinner } from '@/common/components/ui/loading';
-import { Popup } from '@/common/components/ui/modal';
+import Dropdown from '@/common/components/ui/Dropdown';
+import LoadingSpinner from '@/common/components/ui/loading/LoadingSpinner';
+import Popup from '@/common/components/ui/modal/Popup';
 import { ADMIN_EMAIL } from '@/common/constants/admin';
 import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
-import { useDeletePost } from '@/features/posts/queries';
+import useDeletePost from '@/features/posts/queries/useDeletePost';
 import { Post } from '@/features/posts/types/post';
 import { getRemainingTime } from '@/features/posts/utils/get-remaining-time';
-import { UserProfile } from '@/features/user/components/UserProfile';
-import { useUser } from '@/features/user/queries';
+import UserProfile from '@/features/user/components/UserProfile';
+import useUser from '@/features/user/queries/useUser';
 
 enum MENU {
   Edit,
@@ -22,7 +22,7 @@ interface PostDetailHeaderProps {
   post: Post;
 }
 
-export function PostDetailHeader({ post }: PostDetailHeaderProps) {
+export default function PostDetailHeader({ post }: PostDetailHeaderProps) {
   const { user } = useUser();
   const [showMore, setShowMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);

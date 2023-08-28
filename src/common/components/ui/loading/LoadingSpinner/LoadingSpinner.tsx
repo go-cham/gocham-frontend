@@ -5,7 +5,7 @@ interface LoadingSpinnerProps {
   className?: string;
 }
 
-export function LoadingSpinner({ className }: LoadingSpinnerProps) {
+export default function LoadingSpinner({ className }: LoadingSpinnerProps) {
   return (
     <FadeLoader
       className={className}

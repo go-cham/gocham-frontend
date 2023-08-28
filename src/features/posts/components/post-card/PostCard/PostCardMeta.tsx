@@ -6,7 +6,7 @@ interface PostCardMetaProps {
   onCommentShow: (e: MouseEvent) => void;
 }
 
-export function PostCardMeta({
+export default function PostCardMeta({
   numComment,
   numVotes,
   onCommentShow,

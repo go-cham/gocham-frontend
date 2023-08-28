@@ -9,7 +9,7 @@ async function deletePost(id: number) {
   return res.data;
 }
 
-export function useDeletePost() {
+export default function useDeletePost() {
   const queryClient = useQueryClient();
 
   return useMutation({

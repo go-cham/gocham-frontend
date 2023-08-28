@@ -31,7 +31,7 @@ async function getPosts({
   return res.data;
 }
 
-export function useGetPosts({
+export default function useGetPosts({
   initialPostId,
   userId,
   type,

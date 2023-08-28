@@ -1,7 +1,7 @@
 import { useAtom, useSetAtom } from 'jotai';
-import { FloatingButton } from '@/common/components/ui/buttons';
-import { useUser } from '@/features/user/queries';
-import { useChooseOption } from '@/features/vote/queries';
+import FloatingButton from '@/common/components/ui/buttons/FloatingButton';
+import useUser from '@/features/user/queries/useUser';
+import useChooseOption from '@/features/vote/queries/useChooseOption';
 import { selectedVoteOptionIdAtom } from '@/features/vote/states/selected-vote-option';
 import { voteAnimationIdAtom } from '@/features/vote/states/vote-animation';
 
@@ -9,7 +9,7 @@ interface VoteButtonProps {
   postId: number;
 }
 
-export function VoteButton({ postId }: VoteButtonProps) {
+export default function VoteButton({ postId }: VoteButtonProps) {
   const { user } = useUser();
   const [selectedVoteOptionId, setSelectedVoteOptionId] = useAtom(
     selectedVoteOptionIdAtom,

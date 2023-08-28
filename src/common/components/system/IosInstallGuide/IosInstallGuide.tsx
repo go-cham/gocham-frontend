@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Snackbar } from '@/common/components/ui/modal';
+import Snackbar from '@/common/components/ui/modal/Snackbar';
 import {
   isIOS,
   isInStandaloneMode,
   isSafari,
 } from '@/common/utils/environment';
-import { useUser } from '@/features/user/queries';
+import useUser from '@/features/user/queries/useUser';
 
-export function IosInstallGuide() {
+export default function IosInstallGuide() {
   const [showGuide, setShowGuide] = useState(false);
   const { user } = useUser();
 

@@ -1,18 +1,18 @@
 import { useAtomValue } from 'jotai';
-import { Spacing } from '@/common/components/ui';
+import Spacing from '@/common/components/ui/Spacing';
+import PostDetailContent from '@/features/posts/components/post-detail/PostDetailItem/PostDetailContent';
+import PostDetailFooter from '@/features/posts/components/post-detail/PostDetailItem/PostDetailFooter';
+import PostDetailHeader from '@/features/posts/components/post-detail/PostDetailItem/PostDetailHeader';
 import { Post } from '@/features/posts/types/post';
-import { VoteSection } from '@/features/vote/components/VoteSection';
-import { useGetChoiceOptions } from '@/features/vote/queries';
+import VoteSection from '@/features/vote/components/VoteSection';
+import useGetChoiceOptions from '@/features/vote/queries/useGetChoiceOptions';
 import { selectedVoteOptionIdAtom } from '@/features/vote/states/selected-vote-option';
-import { PostDetailContent } from './PostDetailContent';
-import { PostDetailFooter } from './PostDetailFooter';
-import { PostDetailHeader } from './PostDetailHeader';
 
 interface PostDetailProps {
   post: Post;
 }
 
-export function PostDetailItem({ post }: PostDetailProps) {
+export default function PostDetailItem({ post }: PostDetailProps) {
   const selectedVoteOptionId = useAtomValue(selectedVoteOptionIdAtom);
   const { data: choiceOptions } = useGetChoiceOptions(post.id);
 

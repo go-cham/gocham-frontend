@@ -7,7 +7,7 @@ async function addPost(data: AddPostRequest) {
   return res.data;
 }
 
-export function useAddPost() {
+export default function useAddPost() {
   const queryClient = useQueryClient();
 
   return useMutation({

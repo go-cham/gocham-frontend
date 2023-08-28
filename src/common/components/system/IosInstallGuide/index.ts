@@ -1,1 +1,1 @@
-export { IosInstallGuide } from './IosInstallGuide';
+export { default } from './IosInstallGuide';

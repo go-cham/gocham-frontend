@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge';
-import { Button } from '@/common/components/ui/buttons';
+import Button from '@/common/components/ui/buttons/Button';
 
 interface FloatingButtonProps {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface FloatingButtonProps {
   onClick?: () => void;
 }
 
-export function FloatingButton({
+export default function FloatingButton({
   children,
   className,
   onClick,

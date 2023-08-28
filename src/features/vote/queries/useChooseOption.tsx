@@ -13,7 +13,7 @@ async function chooseOption(data: ChooseOptionRequest) {
   return res.data;
 }
 
-export function useChooseOption({
+export default function useChooseOption({
   postId,
   userId,
 }: {

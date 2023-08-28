@@ -5,7 +5,7 @@ interface ProtectedRouteProps {
   redirectPath: string;
 }
 
-export function ProtectedRoute({
+export default function ProtectedRoute({
   isAllowed,
   redirectPath,
 }: ProtectedRouteProps) {

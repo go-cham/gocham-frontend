@@ -2,13 +2,13 @@ import { useEffect, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 import character from '@/common/assets/images/background/character.svg';
 import text from '@/common/assets/images/background/text.svg';
-import { PhoneFrame } from './PhoneFrame';
+import PhoneFrame from '@/common/components/layout/RootLayout/PhoneFrame';
 
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-export function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children }: RootLayoutProps) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (ref.current) {

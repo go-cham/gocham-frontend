@@ -8,7 +8,7 @@ const MIN_NUM_VOTE_OPTIONS = 2;
 export const MAX_NUM_VOTE_OPTIONS = 4;
 const FIELD = ['title', 'content', 'category', 'deadline', 'voteOptions'];
 
-export function usePostForm({
+export default function usePostForm({
   initialData,
   onSubmit,
   onChange,

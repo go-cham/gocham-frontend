@@ -7,7 +7,7 @@ async function getPost(postId?: number) {
   return res.data;
 }
 
-export function useGetPost(postId: number) {
+export default function useGetPost(postId: number) {
   return useQuery({
     queryKey: ['post', postId],
     queryFn: () => getPost(postId),

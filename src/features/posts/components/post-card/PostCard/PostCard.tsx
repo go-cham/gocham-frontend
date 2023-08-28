@@ -1,22 +1,22 @@
 import { useSetAtom } from 'jotai';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Spacing } from '@/common/components/ui';
+import Spacing from '@/common/components/ui/Spacing';
 import { ADMIN_EMAIL } from '@/common/constants/admin';
 import { POST_TYPE } from '@/common/constants/post-type';
 import { scrollRestorationAtom } from '@/common/states/scroll-restoration';
 import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
+import PostCardContent from '@/features/posts/components/post-card/PostCard/PostCardContent';
+import PostCardMeta from '@/features/posts/components/post-card/PostCard/PostCardMeta';
 import { Post } from '@/features/posts/types/post';
-import { UserProfile } from '@/features/user/components/UserProfile';
-import { PostCardContent } from './PostCardContent';
-import { PostCardMeta } from './PostCardMeta';
+import UserProfile from '@/features/user/components/UserProfile';
 
 interface PostCardProps {
   post: Post;
   type: POST_TYPE;
 }
 
-export function PostCard({ post, type }: PostCardProps) {
+export default function PostCard({ post, type }: PostCardProps) {
   const navigate = useNavigate();
   const setScrollRestoration = useSetAtom(scrollRestorationAtom);
 

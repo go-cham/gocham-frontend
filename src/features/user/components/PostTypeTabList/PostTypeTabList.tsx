@@ -1,13 +1,13 @@
 import { POST_TYPE } from '@/common/constants/post-type';
-import { useGetPosts } from '@/features/posts/queries';
-import { useUser } from '@/features/user/queries';
+import useGetPosts from '@/features/posts/queries/useGetPosts';
+import useUser from '@/features/user/queries/useUser';
 
 interface PostTypeTabListProps {
   selectedPostType: POST_TYPE;
   onSelect: (postType: POST_TYPE) => void;
 }
 
-export function PostTypeTabList({
+export default function PostTypeTabList({
   selectedPostType,
   onSelect,
 }: PostTypeTabListProps) {

@@ -4,13 +4,11 @@ import { axiosPrivate } from '@/common/libs/axios';
 import { parseDateString } from '@/common/utils/date/parseDateString';
 import { validateBirthDate } from '@/common/utils/validations/birth-date';
 import { validateNickname } from '@/common/utils/validations/nickname';
-import {
-  BirthDateInput,
-  GenderSelect,
-  NicknameInput,
-} from '@/features/register/components/form';
-import { BirthDate } from '@/features/register/components/form';
-import { useUser } from '@/features/user/queries';
+import { BirthDate } from '@/features/register/components/form/BirthDateInput';
+import BirthDateInput from '@/features/register/components/form/BirthDateInput';
+import GenderSelect from '@/features/register/components/form/GenderSelect';
+import NicknameInput from '@/features/register/components/form/NicknameInput';
+import useUser from '@/features/user/queries/useUser';
 import { Gender } from '@/features/user/types';
 
 interface FormData {
@@ -24,7 +22,7 @@ interface NicknameAgeGenderFormProps {
   onChange: (data: FormData, isValid: boolean) => void;
 }
 
-export function NicknameAgeGenderForm({
+export default function NicknameAgeGenderForm({
   initialData,
   onChange,
 }: NicknameAgeGenderFormProps) {

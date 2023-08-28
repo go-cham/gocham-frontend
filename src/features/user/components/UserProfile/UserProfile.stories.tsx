@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { UserProfile } from './UserProfile';
+import UserProfile from '@/features/user/components/UserProfile';
 
 const meta: Meta<typeof UserProfile> = {
   title: 'UserProfile',

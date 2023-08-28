@@ -1,7 +1,7 @@
-import { Snackbar } from '@/common/components/ui/modal';
-import { useUpdate } from '@/common/hooks/useUpdate';
+import Snackbar from '@/common/components/ui/modal/Snackbar';
+import useUpdate from '@/common/hooks/useUpdate';
 
-export function UpdateBanner() {
+export default function UpdateBanner() {
   const { showUpdate, applyUpdate } = useUpdate();
 
   if (!showUpdate) {

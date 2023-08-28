@@ -6,7 +6,10 @@ interface GenderSelectProps {
   onChange: (gender: Gender) => void;
 }
 
-export function GenderSelect({ defaultValue, onChange }: GenderSelectProps) {
+export default function GenderSelect({
+  defaultValue,
+  onChange,
+}: GenderSelectProps) {
   const [gender, setGender] = useState<Gender | null>(defaultValue);
 
   const handleClick = (selected: Gender) => () => {

@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
-import { Button } from '@/common/components/ui/buttons';
-import { RegionJobCategoryForm } from '@/features/user/components/RegionJobCategoryForm';
+import Button from '@/common/components/ui/buttons/Button';
+import RegionJobCategoryForm from '@/features/user/components/RegionJobCategoryForm';
 
 interface FormData {
   residenceId: number | null;

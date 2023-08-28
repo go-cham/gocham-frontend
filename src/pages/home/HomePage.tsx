@@ -1,16 +1,15 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { Suspense } from 'react';
-import { BottomAppBar, PageWrapper } from '@/common/components/layout';
-import { Spacing } from '@/common/components/ui';
+import BottomAppBar from '@/common/components/layout/BottomAppBar';
+import PageWrapper from '@/common/components/layout/PageWrapper';
+import Spacing from '@/common/components/ui/Spacing';
 import { POST_TYPE } from '@/common/constants/post-type';
-import { usePullToRefresh } from '@/common/hooks/usePullToRefresh';
-import { useScrollRestoration } from '@/common/hooks/useScrollRestoration';
-import { useScrollToTop } from '@/common/hooks/useScrollToTop';
+import usePullToRefresh from '@/common/hooks/usePullToRefresh';
+import useScrollRestoration from '@/common/hooks/useScrollRestoration';
+import useScrollToTop from '@/common/hooks/useScrollToTop';
 import { assignMultipleRefs } from '@/common/utils/dom/assign-multiple-refs';
-import {
-  PostCardList,
-  PostCardListSkeleton,
-} from '@/features/posts/components/post-card';
+import PostCardList from '@/features/posts/components/post-card/PostCardList';
+import PostCardListSkeleton from '@/features/posts/components/post-card/PostCardListSkeleton';
 import HomeBanner from '@/pages/home/components/HomeBanner';
 import HomeHeader from '@/pages/home/components/HomeHeader';
 

@@ -1,4 +1,4 @@
-import { TextInput } from '@/common/components/ui/inputs';
+import TextInput from '@/common/components/ui/inputs/TextInput';
 
 interface NicknameInputProps {
   onChange?: (nickname: string) => void;
@@ -8,7 +8,7 @@ interface NicknameInputProps {
   defaultValue?: string;
 }
 
-export function NicknameInput({
+export default function NicknameInput({
   onChange,
   successMessage,
   errorMessage,

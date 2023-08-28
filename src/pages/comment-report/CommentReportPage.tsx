@@ -1,12 +1,12 @@
 import { AxiosError } from 'axios';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { TopAppBar } from '@/common/components/layout';
-import { Button } from '@/common/components/ui/buttons';
-import { LoadingSpinner } from '@/common/components/ui/loading';
+import TopAppBar from '@/common/components/layout/TopAppBar';
+import Button from '@/common/components/ui/buttons/Button';
+import LoadingSpinner from '@/common/components/ui/loading/LoadingSpinner';
 import { REPORT_COMMENT_REASON_OPTIONS } from '@/common/constants/options';
-import { useReportComment } from '@/features/report/queries';
-import { useUser } from '@/features/user/queries/useUser';
+import useReportComment from '@/features/report/queries/useReportComment';
+import useUser from '@/features/user/queries/useUser';
 
 export default function CommentReportPage() {
   const { id } = useParams();

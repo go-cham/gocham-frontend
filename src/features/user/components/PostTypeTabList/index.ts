@@ -1,1 +1,1 @@
-export { PostTypeTabList } from './PostTypeTabList';
+export { default } from './PostTypeTabList';

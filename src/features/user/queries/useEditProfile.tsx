@@ -7,7 +7,7 @@ async function editProfile(data: EditProfileRequest) {
   return res.data;
 }
 
-export function useEditProfile() {
+export default function useEditProfile() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: editProfile,

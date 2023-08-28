@@ -1,1 +1,1 @@
-export { VoteResult } from './VoteResult';
+export { default } from './VoteResult';

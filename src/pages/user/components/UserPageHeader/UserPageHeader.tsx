@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import settingIcon from '@/common/assets/images/settings.svg';
 import { ADMIN_EMAIL } from '@/common/constants/admin';
 import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
-import { UserProfile } from '@/features/user/components/UserProfile';
-import { useUser } from '@/features/user/queries/useUser';
+import UserProfile from '@/features/user/components/UserProfile';
+import useUser from '@/features/user/queries/useUser';
 
 export function UserPageHeader() {
   const navigate = useNavigate();

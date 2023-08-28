@@ -9,7 +9,7 @@ interface ImageFullScreenProps {
   onClose: () => void;
 }
 
-export function ImageFullScreen({
+export default function ImageFullScreen({
   images,
   initialIndex,
   onClose,

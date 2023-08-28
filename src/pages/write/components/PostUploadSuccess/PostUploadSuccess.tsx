@@ -1,6 +1,6 @@
 import PostCompleteIcon from '@/common/components/icons/PostCompleteIcon';
 
-export function PostUploadSuccess() {
+export default function PostUploadSuccess() {
   return (
     <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
       <PostCompleteIcon />

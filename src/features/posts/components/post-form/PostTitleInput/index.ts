@@ -1,1 +1,1 @@
-export { PostTitleInput } from './PostTitleInput';
+export { default } from './PostTitleInput';

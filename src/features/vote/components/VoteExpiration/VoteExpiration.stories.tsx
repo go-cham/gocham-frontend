@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { getRemainingTime } from '@/features/posts/utils/get-remaining-time';
-import { VoteExpiration } from './VoteExpiration';
+import VoteExpiration from '@/features/vote/components/VoteExpiration';
 
 const meta = {
   title: 'Post/PostDetail/PostExpiration',

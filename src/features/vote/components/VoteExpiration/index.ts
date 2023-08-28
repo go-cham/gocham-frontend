@@ -1,1 +1,1 @@
-export { VoteExpiration } from './VoteExpiration';
+export { default } from './VoteExpiration';

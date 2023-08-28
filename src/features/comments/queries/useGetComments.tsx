@@ -11,7 +11,7 @@ async function getComments(postId: number) {
   return res.data;
 }
 
-export function useGetComments(postId: number) {
+export default function useGetComments(postId: number) {
   const { data, ...queryInfo } = useQuery({
     queryKey: ['comments', { postId }],
     queryFn: () => getComments(postId),

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-export function useScrollToTop<U extends HTMLElement>() {
+export default function useScrollToTop<U extends HTMLElement>() {
   const ref = useRef<U | null>(null);
   const scrollToTop = () => {
     if (ref.current) {

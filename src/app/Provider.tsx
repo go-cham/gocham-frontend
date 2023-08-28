@@ -12,7 +12,7 @@ const queryClient = new QueryClient({
   },
 });
 
-export function Provider({ children }: { children: React.ReactNode }) {
+export default function Provider({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <JotaiProvider>

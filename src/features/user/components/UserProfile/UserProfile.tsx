@@ -11,7 +11,7 @@ interface UserProfileProps {
   size?: 'base' | 'large';
 }
 
-export function UserProfile({
+export default function UserProfile({
   nickname,
   age,
   isAdmin,

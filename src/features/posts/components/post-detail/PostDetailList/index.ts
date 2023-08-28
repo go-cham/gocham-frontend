@@ -1,1 +1,1 @@
-export { PostDetailList } from './PostDetailList';
+export { default } from './PostDetailList';

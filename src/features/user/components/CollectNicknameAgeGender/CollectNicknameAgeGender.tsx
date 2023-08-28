@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
-import { Button } from '@/common/components/ui/buttons';
-import { NicknameAgeGenderForm } from '@/features/user/components/NicknameAgeGenderForm';
+import Button from '@/common/components/ui/buttons/Button';
+import NicknameAgeGenderForm from '@/features/user/components/NicknameAgeGenderForm';
 import { Gender } from '@/features/user/types';
 
 interface FormData {

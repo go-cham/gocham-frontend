@@ -4,7 +4,7 @@ interface VoteExpirationProps {
   remainingTime: string;
 }
 
-export function VoteExpiration({ remainingTime }: VoteExpirationProps) {
+export default function VoteExpiration({ remainingTime }: VoteExpirationProps) {
   const isClosed = remainingTime === 'closed';
 
   return (

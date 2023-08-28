@@ -10,7 +10,7 @@ interface BottomAppBarProps {
   onScrollToTop?: () => void;
 }
 
-export function BottomAppBar({ onScrollToTop }: BottomAppBarProps) {
+export default function BottomAppBar({ onScrollToTop }: BottomAppBarProps) {
   const navigate = useNavigate();
   const currentPage = location.pathname === '/' ? 'home' : 'user';
 

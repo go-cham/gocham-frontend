@@ -1,1 +1,1 @@
-export { GenderSelect } from './GenderSelect';
+export { default } from './GenderSelect';

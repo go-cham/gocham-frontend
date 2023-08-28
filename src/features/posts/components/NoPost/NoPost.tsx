@@ -6,7 +6,7 @@ interface NoPostText {
   type: POST_TYPE;
 }
 
-export function NoPost({ type }: NoPostText) {
+export default function NoPost({ type }: NoPostText) {
   const navigate = useNavigate();
 
   const text =

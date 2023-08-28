@@ -8,7 +8,12 @@ interface CheckboxProps {
   onChange?: (checked: boolean) => void;
 }
 
-export function Checkbox({ id, className, checked, onChange }: CheckboxProps) {
+export default function Checkbox({
+  id,
+  className,
+  checked,
+  onChange,
+}: CheckboxProps) {
   return (
     <label
       htmlFor={id}

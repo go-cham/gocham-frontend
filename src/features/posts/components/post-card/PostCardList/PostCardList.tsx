@@ -1,14 +1,14 @@
 import { POST_TYPE } from '@/common/constants/post-type';
-import { NoPost } from '@/features/posts/components/NoPost';
-import { PostCard } from '@/features/posts/components/post-card/PostCard';
-import { useGetPosts } from '@/features/posts/queries';
-import { useUser } from '@/features/user/queries/useUser';
+import NoPost from '@/features/posts/components/NoPost';
+import PostCard from '@/features/posts/components/post-card/PostCard';
+import useGetPosts from '@/features/posts/queries/useGetPosts';
+import useUser from '@/features/user/queries/useUser';
 
 interface PostCardListProps {
   type: POST_TYPE;
 }
 
-export function PostCardList({ type }: PostCardListProps) {
+export default function PostCardList({ type }: PostCardListProps) {
   const { user } = useUser();
   const { posts, ref } = useGetPosts({
     userId: user?.id,

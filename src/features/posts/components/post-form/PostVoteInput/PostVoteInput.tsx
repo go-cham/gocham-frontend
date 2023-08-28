@@ -2,7 +2,6 @@ import { ChangeEvent, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import DeleteIcon from '@/common/components/icons/DeleteIcon';
 import ImageFileIcon from '@/common/components/icons/ImageFileIcon';
-import { resizeImage } from '@/common/libs/cloudinary';
 
 interface PostVoteInputProps {
   id?: string;
@@ -19,7 +18,7 @@ interface PostVoteInputProps {
   defaultValue?: string;
 }
 
-export function PostVoteInput({
+export default function PostVoteInput({
   id,
   image,
   onUploadImage,

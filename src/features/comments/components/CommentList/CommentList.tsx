@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { calculateAgeFromBirthDate } from '@/common/utils/date/calculateAge';
-import { CommentItem } from '@/features/comments/components/CommentItem';
+import CommentItem from '@/features/comments/components/CommentItem';
 import { Comment } from '@/features/comments/types';
 
 interface CommentListProps {
@@ -8,7 +8,7 @@ interface CommentListProps {
   comments: Comment[];
 }
 
-export function CommentList({ writerId, comments }: CommentListProps) {
+export default function CommentList({ writerId, comments }: CommentListProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

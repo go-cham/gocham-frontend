@@ -1,1 +1,1 @@
-export { DockedButton } from './DockedButton';
+export { default } from './DockedButton';

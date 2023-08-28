@@ -1,10 +1,11 @@
 import { useSetAtom } from 'jotai';
 import { useState } from 'react';
-import { ImageFullScreen } from '@/common/components/ui';
-import { Popup } from '@/common/components/ui/modal';
-import { useUser } from '@/features/user/queries';
-import { PostVoteButton } from '@/features/vote/components/PostVote/PostVoteButton';
-import { useChooseOption, useGetUsersChoices } from '@/features/vote/queries';
+import ImageFullScreen from '@/common/components/ui/ImageFullScreen';
+import Popup from '@/common/components/ui/modal/Popup';
+import useUser from '@/features/user/queries/useUser';
+import PostVoteButton from '@/features/vote/components/PostVote/PostVoteButton';
+import useChooseOption from '@/features/vote/queries/useChooseOption';
+import useGetUsersChoices from '@/features/vote/queries/useGetUsersChoices';
 import { selectedVoteOptionIdAtom } from '@/features/vote/states/selected-vote-option';
 
 interface PostVoteProps {
@@ -12,7 +13,7 @@ interface PostVoteProps {
   postId: number;
 }
 
-export function PostVote({ postId, options }: PostVoteProps) {
+export default function PostVote({ postId, options }: PostVoteProps) {
   const { user } = useUser();
   const setSelectedVoteOptionId = useSetAtom(selectedVoteOptionIdAtom);
   const { data: usersChoices } = useGetUsersChoices(postId);

@@ -10,7 +10,7 @@ interface InputWrapperProps {
   children: React.ReactNode;
 }
 
-export function InputWrapper({
+export default function InputWrapper({
   label,
   subLabel,
   successMessage,

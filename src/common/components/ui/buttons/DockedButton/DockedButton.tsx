@@ -1,12 +1,13 @@
 import { twMerge } from 'tailwind-merge';
-import { Button, ButtonProps } from '@/common/components/ui/buttons';
+import { ButtonProps } from '@/common/components/ui/buttons/Button';
+import Button from '@/common/components/ui/buttons/Button';
 
 interface DockedButtonProps extends ButtonProps {
   backgroundClassName?: string;
   buttonClassName?: string;
 }
 
-export function DockedButton({
+export default function DockedButton({
   variant = 'primary',
   children,
   backgroundClassName,
@@ -16,7 +17,7 @@ export function DockedButton({
   return (
     <div
       className={twMerge(
-        'flex h-[11.2rem] w-[39rem] justify-center bg-white pt-[1.7rem] shadow-dock',
+        'shadow-dock flex h-[11.2rem] w-[39rem] justify-center bg-white pt-[1.7rem]',
         backgroundClassName,
       )}
     >

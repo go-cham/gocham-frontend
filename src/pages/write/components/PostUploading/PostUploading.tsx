@@ -1,6 +1,6 @@
 import PostLoadingIcon from '@/common/components/icons/PostLoadingIcon';
 
-export function PostUploading() {
+export default function PostUploading() {
   return (
     <div className="absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center">
       <PostLoadingIcon />

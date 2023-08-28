@@ -1,13 +1,14 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { TopAppBar } from '@/common/components/layout';
-import { LoadingSpinner } from '@/common/components/ui/loading';
-import { Popup } from '@/common/components/ui/modal';
-import { PostForm } from '@/features/posts/components/post-form/PostForm';
-import { useEditPost, useGetPost } from '@/features/posts/queries';
+import TopAppBar from '@/common/components/layout/TopAppBar';
+import LoadingSpinner from '@/common/components/ui/loading/LoadingSpinner';
+import Popup from '@/common/components/ui/modal/Popup';
+import PostForm from '@/features/posts/components/post-form/PostForm';
+import useEditPost from '@/features/posts/queries/useEditPost';
+import useGetPost from '@/features/posts/queries/useGetPost';
 import { PostFormData } from '@/features/posts/types/post-form';
-import { useUser } from '@/features/user/queries/useUser';
+import useUser from '@/features/user/queries/useUser';
 
 export default function EditPostPage() {
   const queryClient = useQueryClient();

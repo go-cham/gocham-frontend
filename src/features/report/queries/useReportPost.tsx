@@ -10,7 +10,7 @@ async function reportPost(data: ReportPostRequest) {
   return res.data;
 }
 
-export function useReportPost() {
+export default function useReportPost() {
   return useMutation({
     mutationKey: ['report'],
     mutationFn: reportPost,

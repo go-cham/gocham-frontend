@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { BirthDateInput } from './BirthDateInput';
+import BirthDateInput from '@/features/register/components/form/BirthDateInput';
 
 const meta: Meta<typeof BirthDateInput> = {
   title: 'Register/inputs/BirthDateInput',

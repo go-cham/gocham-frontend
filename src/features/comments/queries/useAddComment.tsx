@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosPrivate } from '@/common/libs/axios';
 import { GetCommentsResponse } from '@/features/comments/queries/dto/get-comments';
-import { useUser } from '@/features/user/queries';
+import useUser from '@/features/user/queries/useUser';
 import { AddCommentRequest, AddCommentResponse } from './dto/add-comment';
 
 async function addComment(data: AddCommentRequest) {
@@ -12,7 +12,7 @@ async function addComment(data: AddCommentRequest) {
   return res.data;
 }
 
-export function useAddComment(postId: number) {
+export default function useAddComment(postId: number) {
   const { user } = useUser();
   const queryClient = useQueryClient();
 

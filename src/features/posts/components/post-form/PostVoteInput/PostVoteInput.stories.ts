@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { PostVoteInput } from './PostVoteInput';
+import PostVoteInput from './PostVoteInput';
 
 const meta: Meta<typeof PostVoteInput> = {
   title: 'Post/inputs/PostVoteInput',

@@ -5,7 +5,11 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   size: string;
 }
 
-export function Spacing({ direction = 'vertical', size, ...props }: Props) {
+export default function Spacing({
+  direction = 'vertical',
+  size,
+  ...props
+}: Props) {
   return (
     <div
       style={{

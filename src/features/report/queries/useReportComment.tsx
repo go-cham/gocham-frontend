@@ -13,7 +13,7 @@ async function reportComment(data: ReportCommentRequest) {
   return res.data;
 }
 
-export function useReportComment() {
+export default function useReportComment() {
   return useMutation({
     mutationKey: ['reportComment'],
     mutationFn: reportComment,

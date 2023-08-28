@@ -1,5 +1,5 @@
 import DetailArrow from '@/common/assets/images/login/detail-arrow.png';
-import { Checkbox } from '@/common/components/ui/selections';
+import Checkbox from '@/common/components/ui/selections/Checkbox';
 
 interface TermCheckboxProps {
   text: string;
@@ -8,7 +8,7 @@ interface TermCheckboxProps {
   link?: string;
 }
 
-export function TermCheckbox({
+export default function TermCheckbox({
   text,
   checked,
   onCheck,

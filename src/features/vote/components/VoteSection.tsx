@@ -1,13 +1,14 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
-import { Spacing } from '@/common/components/ui';
+import Spacing from '@/common/components/ui/Spacing';
 import { getRemainingTime } from '@/features/posts/utils/get-remaining-time';
-import { useUser } from '@/features/user/queries';
-import { PostVote } from '@/features/vote/components/PostVote';
-import { VoteButton } from '@/features/vote/components/VoteButton';
-import { VoteExpiration } from '@/features/vote/components/VoteExpiration';
-import { VoteResult } from '@/features/vote/components/VoteResult';
-import { useGetChoiceOptions, useGetMyChoice } from '@/features/vote/queries';
+import useUser from '@/features/user/queries/useUser';
+import PostVote from '@/features/vote/components/PostVote';
+import VoteButton from '@/features/vote/components/VoteButton';
+import VoteExpiration from '@/features/vote/components/VoteExpiration';
+import VoteResult from '@/features/vote/components/VoteResult';
+import useGetChoiceOptions from '@/features/vote/queries/useGetChoiceOptions';
+import useGetMyChoice from '@/features/vote/queries/useGetMyChoice';
 import { selectedVoteOptionIdAtom } from '@/features/vote/states/selected-vote-option';
 import { voteAnimationIdAtom } from '@/features/vote/states/vote-animation';
 
@@ -16,7 +17,10 @@ interface VoteSectionProps {
   expirationTime: string | null;
 }
 
-export function VoteSection({ postId, expirationTime }: VoteSectionProps) {
+export default function VoteSection({
+  postId,
+  expirationTime,
+}: VoteSectionProps) {
   const { user } = useUser();
   const { data: choiceOptions } = useGetChoiceOptions(postId);
   const { data: myChoice } = useGetMyChoice({

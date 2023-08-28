@@ -2,7 +2,7 @@ import { ChangeEvent, useRef, useState } from 'react';
 import AlertIcon from '@/common/components/icons/AlertIcon';
 import CheckIcon from '@/common/components/icons/CheckIcon';
 import DeleteIcon from '@/common/components/icons/DeleteIcon';
-import { InputWrapper } from '@/common/components/ui/inputs';
+import InputWrapper from '@/common/components/ui/inputs/InputWrapper';
 import { fixDate } from '@/common/utils/validations/birth-date';
 
 export interface BirthDate {
@@ -19,7 +19,7 @@ interface BirthDateInputProps {
   defaultValue?: { year: string; month: string; day: string } | null;
 }
 
-export function BirthDateInput({
+export default function BirthDateInput({
   onChange,
   successMessage,
   errorMessage,
