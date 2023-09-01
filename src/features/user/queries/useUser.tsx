@@ -12,6 +12,7 @@ async function getUser() {
 
 export default function useUser() {
   const { data, isLoading, isError } = useQuery({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     queryKey: ['user'],
     queryFn: getUser,
