@@ -17,10 +17,6 @@ export default function ImageFullScreen({
   const [index, setIndex] = useState(initialIndex);
 
   useEffect(() => {
-    history.pushState(null, '');
-  }, []);
-
-  useEffect(() => {
     const handlePopState = () => {
       onClose();
     };
