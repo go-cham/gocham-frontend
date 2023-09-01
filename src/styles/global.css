@@ -2,10 +2,6 @@
 @import 'responsive.css';
 @import 'tailwind.css';
 
-* {
-  overscroll-behavior-y: none;
-}
-
 html {
   @apply text-text-title-900;
   font-family: Pretendard, sans-serif;
