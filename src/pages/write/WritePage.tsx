@@ -53,9 +53,9 @@ export default function WritePage() {
 
     setUploadLoading(true);
     const uploadPromises = [
-      ...images.map((image) => uploadImage(image.file)),
+      ...images.map((image) => image.file && uploadImage(image.file)),
       ...voteOptions.map(
-        (option) => option.image && uploadImage(option.image.file),
+        (option) => option.image?.file && uploadImage(option.image.file),
       ),
     ];
     const result = (await Promise.all(uploadPromises)).filter(

@@ -121,12 +121,16 @@ export default function EditPostPage() {
                 .map((file) => ({
                   id: file.id,
                   url: file.url,
+                  file: null,
                 }))
                 .sort((a, b) => a.id - b.id),
               categoryId: post.worryCategory.id,
               voteOptions: post.worryChoices.map((choice) => ({
                 label: choice.label,
-                image: choice.url,
+                image: {
+                  url: choice.url,
+                  file: null,
+                },
               })),
               deadline: getDeadline(post.expirationTime, post.createdAt),
             }}

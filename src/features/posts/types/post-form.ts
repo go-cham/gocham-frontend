@@ -3,7 +3,7 @@ export interface PostFormData {
   content: string;
   images: {
     id?: number;
-    file: File;
+    file: File | null;
     url: string;
   }[];
   categoryId?: number;
@@ -11,8 +11,8 @@ export interface PostFormData {
   voteOptions: {
     label: string;
     image: {
-      file: File;
-      url: string;
+      file: File | null;
+      url: string | null;
     } | null;
   }[];
 }
