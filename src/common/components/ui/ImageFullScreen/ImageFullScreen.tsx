@@ -26,7 +26,10 @@ export default function ImageFullScreen({
   }, [onClose]);
 
   return (
-    <div className="absolute left-0 top-0 z-[100] h-full w-full bg-text-title-900">
+    <div
+      className="absolute left-0 top-0 z-[100] h-full w-full bg-text-title-900"
+      style={{ marginTop: '0' }}
+    >
       <div className="absolute top-[1rem] z-[100] flex w-full items-center justify-between px-[1.3rem]">
         <DeleteIcon className="invisible" onClick={onClose} />
         <span
