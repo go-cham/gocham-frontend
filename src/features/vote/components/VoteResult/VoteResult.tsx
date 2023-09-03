@@ -75,6 +75,7 @@ export default function VoteResult({ postId, options }: VoteResultProps) {
                     setZoomedImage(option.image);
                     e.stopPropagation();
                   }}
+                  threshold={300}
                 />
               )}
             </div>

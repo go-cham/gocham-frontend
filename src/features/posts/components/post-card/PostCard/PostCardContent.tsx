@@ -28,6 +28,7 @@ export default function PostCardContent({
           alt={'게시글 이미지'}
           className="ml-[1.7rem] aspect-square w-[6.4rem] rounded-[5px] border border-background-dividerLine-300 object-cover"
           placeholder={<ThumbnailPlaceholder />}
+          threshold={300}
         />
       )}
     </div>

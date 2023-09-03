@@ -89,6 +89,7 @@ export default function PostVoteButton({
               onClickImage(option.image);
               e.stopPropagation();
             }}
+            threshold={300}
           />
         )}
       </button>

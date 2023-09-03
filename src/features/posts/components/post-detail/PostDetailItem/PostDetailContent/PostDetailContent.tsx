@@ -60,6 +60,7 @@ export default function PostDetailContent({
             src={images[0]}
             alt={'게시글이미지'}
             className="mx-auto h-[29.3rem] w-[36rem] rounded-[0.5rem] object-cover"
+            threshold={300}
           />
         )}
         {images && images.length > 1 && (
@@ -80,6 +81,7 @@ export default function PostDetailContent({
                   scrollSnapAlign: 'center',
                 }}
                 onClick={() => setZoomedImageIndex(index)}
+                threshold={300}
               />
             ))}
           </div>
