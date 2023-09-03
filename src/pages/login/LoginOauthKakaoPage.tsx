@@ -29,13 +29,13 @@ export default function LoginOauthKakaoPage() {
     return <Navigate to={'/'} />;
   }
 
+  if (!user) {
+    return null;
+  }
+
   if (user?.job) {
     return <Navigate to={'/'} />;
-  }
-
-  if (user && !user.job) {
+  } else {
     return <Navigate to={'/register/term'} />;
   }
-
-  return null;
 }

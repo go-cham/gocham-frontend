@@ -48,7 +48,9 @@ export default function Routes() {
         <Route path={'/unregister'} element={<UnregisterPage />} />
       </Route>
       {/* 로그인 안한 유저만 접근 가능한 페이지 */}
-      <Route element={<ProtectedRoute isAllowed={!user} redirectPath={'/'} />}>
+      <Route
+        element={<ProtectedRoute isAllowed={!user?.job} redirectPath={'/'} />}
+      >
         <Route path={'/login'} element={<LoginPage />} />
         <Route path={'/login/oauth/kakao'} element={<LoginOauthKakaoPage />} />
       </Route>

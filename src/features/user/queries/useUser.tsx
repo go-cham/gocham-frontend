@@ -54,7 +54,7 @@ export default function useUser() {
   );
 
   useEffect(() => {
-    if (!data) {
+    if (!data || !data.job) {
       userLocalStorage.removeUser();
     } else {
       userLocalStorage.saveUser(data);
