@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import BackIcon from '@/common/components/icons/BackIcon';
 import TopAppBar from '@/common/components/layout/TopAppBar';
 import Popup from '@/common/components/ui/modal/Popup';
+import {
+  USER_LOCAL_STORAGE_KEY,
+  USER_UPDATED_AT_STORAGE_KEY,
+} from '@/features/user/utils/user-local-storage';
 
 export default function SettingsPage() {
   const navigate = useNavigate();
@@ -45,6 +49,8 @@ export default function SettingsPage() {
     alert('로그아웃 되었습니다.\n고민이 있으면 언제든지 찾아와주세요!');
     sessionStorage.removeItem('selectMyPostTypeLabel');
     localStorage.removeItem('token');
+    localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
+    localStorage.removeItem(USER_UPDATED_AT_STORAGE_KEY);
     queryClient.clear();
     navigate('/');
   };

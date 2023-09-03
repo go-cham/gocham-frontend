@@ -1,7 +1,7 @@
 import { GetUserResponse } from '@/features/user/queries/dto/get-user';
 
-const USER_LOCAL_STORAGE_KEY = 'GOCHAM-USER';
-const USER_UPDATED_AT_STORAGE_KEY = 'GOCHAM-USER-UPDATED-AT';
+export const USER_LOCAL_STORAGE_KEY = 'GOCHAM-USER';
+export const USER_UPDATED_AT_STORAGE_KEY = 'GOCHAM-USER-UPDATED-AT';
 
 export const userLocalStorage = {
   saveUser: (user: GetUserResponse) => {
