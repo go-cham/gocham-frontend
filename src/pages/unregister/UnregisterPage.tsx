@@ -5,8 +5,13 @@ import TopAppBar from '@/common/components/layout/TopAppBar';
 import Button from '@/common/components/ui/buttons/Button';
 import Popup from '@/common/components/ui/modal/Popup';
 import PostVoteInput from '@/features/posts/components/post-form/PostVoteInput';
+import useLogout from '@/features/user/hooks/useLogout';
 import useUnregister from '@/features/user/queries/useUnregister';
 import useUser from '@/features/user/queries/useUser';
+import {
+  USER_LOCAL_STORAGE_KEY,
+  USER_UPDATED_AT_STORAGE_KEY,
+} from '@/features/user/utils/user-local-storage';
 
 export default function UnregisterPage() {
   const { user } = useUser();
@@ -16,6 +21,7 @@ export default function UnregisterPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [showError, setShowError] = useState(false);
+  const { logout } = useLogout();
 
   const handleInputChange = (txt: string) => {
     setReason(txt);
@@ -59,8 +65,7 @@ export default function UnregisterPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      localStorage.removeItem('token');
-      queryClient.clear();
+      logout();
       alert(
         '탈퇴가 정상 처리되었습니다.\n고민이 있으면 언제든지 찾아와주세요!',
       );
